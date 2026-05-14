@@ -35,9 +35,12 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 #stage{
   position:fixed;
   top:55px;       /* below HUD */
-  bottom:88px;    /* above nav-bar */
+  bottom:88px;    /* nav-bar bottom:20px + height≈50px + safe gap */
   left:0;right:0;
   overflow:hidden;
+  /* dvh accounts for mobile browser chrome collapse */
+  height:calc(100svh - 55px - 88px);
+  height:calc(100dvh - 55px - 88px);
 }
 
 /* ════════════════════════════════
@@ -142,6 +145,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 [dir="rtl"] .sub{text-align:right}
 
 /* ── BILINGUAL BLOCK ── */
+/* language visibility controlled by lesson-responsive.css via html[lang] */
 .bilingual{
   display:flex;flex-direction:column;gap:10px;
   width:100%;max-width:560px;
@@ -185,6 +189,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 [dir="rtl"] .aline{margin-left:auto;margin-right:0}
 
 /* ── CAPTION BILINGUAL ── */
+/* language visibility controlled by lesson-responsive.css via html[lang] */
 .cap-block{
   margin-top:14px;
   display:flex;flex-direction:column;gap:4px;
@@ -403,6 +408,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   border:1.5px solid rgba(255,255,255,.15);
   font-size:.85rem;
 }
+/* language visibility controlled by lesson-responsive.css via html[lang] */
 .timer-sub-he{
   font-family:'Heebo',sans-serif;
   font-size:.88rem;color:var(--tm);
@@ -423,6 +429,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   width:100%;max-width:540px;
   align-items:center;
 }
+/* language visibility controlled by lesson-responsive.css via html[lang] */
 .close-he{
   font-family:'Heebo',sans-serif;
   font-size:clamp(1.5rem,4vw,2.6rem);
@@ -551,6 +558,8 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   transform:translateX(-50%);
   z-index:300;
   display:flex;align-items:center;gap:12px;
+  /* safe-area for notch/home-bar devices */
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 [dir="rtl"] #nav-bar{flex-direction:row-reverse}
 
