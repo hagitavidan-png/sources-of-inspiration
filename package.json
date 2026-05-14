@@ -6,7 +6,8 @@
     "build": "vite build",
     "preview": "wrangler pages dev",
     "deploy": "npm run build && wrangler pages deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "qa": "node tools/qa-validator.js"
   },
   "dependencies": {
     "hono": "^4.12.12"
