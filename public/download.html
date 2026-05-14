@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>הורדת קבצי 7 Diamonds לגיטהאב</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Heebo', sans-serif; background: #1a1a2e; color: #eee; direction: rtl; }
+.header { background: linear-gradient(135deg, #c9a96e, #e8c97a); color: #1a1a2e; padding: 32px 24px; text-align: center; }
+.header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+.header p { font-size: 1.05rem; opacity: 0.8; }
+.container { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+.instructions {
+  background: #16213e;
+  border: 1px solid #c9a96e44;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+.instructions h2 { color: #c9a96e; margin-bottom: 16px; font-size: 1.2rem; }
+.instructions ol { padding-right: 20px; line-height: 2.2; color: #ccc; }
+.instructions li strong { color: #e8c97a; }
+.instructions code { background: #0f3460; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #7ec8e3; }
+
+.file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.file-card {
+  background: #16213e;
+  border: 1px solid #ffffff11;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.file-card:hover { border-color: #c9a96e66; }
+.file-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #0f3460;
+  cursor: pointer;
+  user-select: none;
+}
+.file-icon { font-size: 1.3rem; }
+.file-name { font-size: 0.9rem; font-weight: 600; color: #e8c97a; flex: 1; font-family: monospace; }
+.file-size { font-size: 0.75rem; color: #888; }
+.copy-btn {
+  background: #c9a96e;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.copy-btn:hover { background: #e8c97a; }
+.copy-btn.copied { background: #4a9c6d; color: #fff; }
+.file-content {
+  display: none;
+  padding: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.file-content.open { display: block; }
+.file-content pre {
+  margin: 0;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #a8d8a8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #0a0a1a;
+}
+
+.section-title {
+  color: #c9a96e;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::after { content: ''; flex: 1; height: 1px; background: #c9a96e44; }
+
+.download-all-btn {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #c9a96e, #e8c97a);
+  color: #1a1a2e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  margin-bottom: 16px;
+  transition: opacity 0.2s;
+}
+.download-all-btn:hover { opacity: 0.9; }
+
+.github-steps {
+  background: #0f3460;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 32px;
+}
+.github-steps h3 { color: #e8c97a; margin-bottom: 16px; }
+.step { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+.step-num { background: #c9a96e; color: #1a1a2e; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+.step-text { color: #ccc; line-height: 1.7; }
+.step-text code { background: #1a1a2e; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #7ec8e3; }
+
+#toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #4a9c6d;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.3s;
+  z-index: 999;
+  pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>◆◆◆ 7 Diamonds – הורדת קבצים לגיטהאב</h1>
+  <p>כל הקבצים של הפרויקט – לחצי על כל קובץ כדי לראות ולהעתיק</p>
+</div>
+
+<div class="container">
+
+  <div class="instructions">
+    <h2>📋 איך מעלים לגיטהאב</h2>
+    <ol>
+      <li>פתחי <strong>github.com</strong> וצרי ריפו חדש: <code>7-diamonds</code></li>
+      <li>לחצי על <strong>Add file → Create new file</strong></li>
+      <li>הדביקי את שם הקובץ (כולל תיקייה, למשל <code>css/style.css</code>)</li>
+      <li>לחצי על <strong>העתק</strong> ליד הקובץ שלמטה ← הדביקי בגיטהאב</li>
+      <li>לחצי <strong>Commit changes</strong> – חזרי על כל הקבצים</li>
+      <li>לאחר מכן הפעילי <strong>GitHub Pages</strong> מ-Settings → Pages</li>
+    </ol>
+  </div>
+
+  <div id="files-container"></div>
+
+  <div class="github-steps">
+    <h3>🚀 הפעלת GitHub Pages</h3>
+    <div class="step"><div class="step-num">1</div><div class="step-text">היכנסי לריפו ב-GitHub → <code>Settings</code></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">גללי לחלק <code>Pages</code> בתפריט הצדדי</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">תחת <strong>Source</strong> בחרי <code>Deploy from a branch</code> → <code>main</code> → <code>/ (root)</code></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">לחצי <strong>Save</strong> – אחרי כמה דקות האתר יהיה חי בכתובת <code>https://USERNAME.github.io/7-diamonds</code></div></div>
+  </div>
+
+</div>
+
+<div id="toast">✅ הועתק ללוח!</div>
+
+<script>
+// ── רשימת כל הקבצים בפרויקט ──
+const FILES = [
+  { path: 'index.html',                  icon: '🏠', category: 'דף בית' },
+  { path: 'README.md',                   icon: '📖', category: 'דף בית' },
+  { path: 'css/style.css',               icon: '🎨', category: 'CSS' },
+  { path: 'js/main.js',                  icon: '⚙️', category: 'JavaScript' },
+  { path: 'js/lesson-builder.js',        icon: '⚙️', category: 'JavaScript' },
+  { path: 'data/unit-0.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-1.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-2.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-3.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-4.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-5.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/unit-6.js',              icon: '📦', category: 'נתוני יחידות' },
+  { path: 'data/lesson-01.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-02.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-03.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-04.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-05.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-06.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-07.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-08.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-09.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-10.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-11.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-12.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-13.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'data/lesson-14.js',           icon: '📝', category: 'נתוני שיעורים' },
+  { path: 'lessons/lesson-01.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-02.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-03.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-04.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-05.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-06.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-07.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-08.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-09.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-10.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-11.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-12.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-13.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-14.html',      icon: '📄', category: 'דפי שיעורים' },
+  { path: 'lessons/lesson-template.html',icon: '📄', category: 'דפי שיעורים' },
+];
+
+const fileContents = {};
+const container = document.getElementById('files-container');
+const toast = document.getElementById('toast');
+
+function showToast() {
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ הועתק';
+    btn.classList.add('copied');
+    showToast();
+    setTimeout(() => { btn.textContent = 'העתק'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ הועתק';
+    btn.classList.add('copied');
+    showToast();
+    setTimeout(() => { btn.textContent = 'העתק'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+async function loadFile(path) {
+  if (fileContents[path]) return fileContents[path];
+  try {
+    const res = await fetch(path);
+    const text = await res.text();
+    fileContents[path] = text;
+    return text;
+  } catch (e) {
+    return '// שגיאה בטעינת הקובץ';
+  }
+}
+
+function buildUI() {
+  const categories = [...new Set(FILES.map(f => f.category))];
+
+  categories.forEach(cat => {
+    const catFiles = FILES.filter(f => f.category === cat);
+
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.textContent = '📁 ' + cat;
+    container.appendChild(title);
+
+    const grid = document.createElement('div');
+    grid.className = 'file-grid';
+    container.appendChild(grid);
+
+    catFiles.forEach(file => {
+      const card = document.createElement('div');
+      card.className = 'file-card';
+
+      const header = document.createElement('div');
+      header.className = 'file-card-header';
+      header.innerHTML = `
+        <span class="file-icon">${file.icon}</span>
+        <span class="file-name">${file.path}</span>
+        <button class="copy-btn">העתק</button>
+      `;
+
+      const content = document.createElement('div');
+      content.className = 'file-content';
+      const pre = document.createElement('pre');
+      pre.textContent = 'לחצי כדי לטעון...';
+      content.appendChild(pre);
+
+      const copyBtn = header.querySelector('.copy-btn');
+      let loaded = false;
+
+      // פתיחה/סגירה של תוכן
+      header.addEventListener('click', async (e) => {
+        if (e.target === copyBtn) return;
+        if (!loaded) {
+          pre.textContent = 'טוען...';
+          const text = await loadFile(file.path);
+          pre.textContent = text;
+          loaded = true;
+        }
+        content.classList.toggle('open');
+      });
+
+      // כפתור העתקה
+      copyBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!loaded) {
+          pre.textContent = 'טוען...';
+          const text = await loadFile(file.path);
+          pre.textContent = text;
+          loaded = true;
+        }
+        copyText(pre.textContent, copyBtn);
+      });
+
+      card.appendChild(header);
+      card.appendChild(content);
+      grid.appendChild(card);
+    });
+  });
+}
+
+buildUI();
+</script>
+</body>
+</html>

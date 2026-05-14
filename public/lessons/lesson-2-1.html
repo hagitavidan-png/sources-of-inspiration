@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lesson-type="regular">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lesson 2.1 — Patterns in Nature and Art — Sources of Inspiration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f10;--rose:#FF4D4D;--gold:#c9a96e;
+  --blue:#4a7fa5;--teal:#3dbcaa;--violet:#7c5cbf;
+  --amber:#e8a030;--green:#4caf82;--white:#ffffff;
+  --muted:#8a8a8a;
+  --tp:#ffffff;--ts:#cfcfcf;--tm:#8a8a8a;
+  --u2:#4caf7d;
+  --font-en:'Sora',sans-serif;--font-he:'Heebo',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(--tp)}
+body{font-family:var(--font-en)}
+body.he{font-family:var(--font-he)}
+
+/* ── HUD ── */
+#hud{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;
+  background:rgba(13,13,26,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;gap:12px;padding:0 20px}
+body.rtl #hud{flex-direction:row-reverse}
+#hud-back{display:flex;align-items:center;gap:6px;font-size:.75rem;
+  color:var(--tm);text-decoration:none;transition:color .2s}
+#hud-back:hover{color:var(--tp)}
+#hud-badge{padding:3px 11px;border-radius:20px;
+  background:rgba(76,175,125,.12);border:1px solid rgba(76,175,125,.28);
+  font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--u2)}
+#hud-spacer{flex:1}
+#hud-lang{display:flex;gap:4px}
+.lang-btn{padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:var(--tm);font-size:.7rem;
+  letter-spacing:.06em;cursor:pointer;transition:.2s;font-family:inherit}
+.lang-btn.active{background:rgba(201,169,110,.15);border-color:rgba(201,169,110,.45);color:var(--gold)}
+#hud-step{font-size:.7rem;color:var(--tm);letter-spacing:.04em}
+
+/* ── PROGRESS DOTS ── */
+#progress{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  z-index:100;display:flex;gap:7px;align-items:center}
+.pdot{width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:.3s var(--ease)}
+.pdot.now{background:var(--u2);border-color:var(--u2);
+  box-shadow:0 0 10px rgba(76,175,125,.4);width:22px;border-radius:4px}
+
+/* ── STAGE / SCREENS ── */
+#stage{position:fixed;inset:52px 0 80px 0;overflow:hidden}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:32px 28px 40px;
+  opacity:0;pointer-events:none;transform:translateY(32px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);text-align:center}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.leaving{opacity:0;transform:translateY(-28px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.18;
+  pointer-events:none;animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,20px) scale(1.08)}}
+
+/* ── OPENING PATTERN CANVAS ── */
+#s0-pattern{
+  position:absolute;inset:0;pointer-events:none;
+  opacity:.07;overflow:hidden;
+}
+#s0-pattern svg{
+  width:100%;height:100%;
+  animation:pattern-drift 28s ease-in-out infinite alternate;
+}
+@keyframes pattern-drift{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(-18px,12px) scale(1.04)}
+}
+
+/* ── TYPOGRAPHY ── */
+.label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tm);margin-bottom:32px}
+.big{font-size:clamp(1.7rem,4.5vw,3.2rem);font-weight:700;line-height:1.28;
+  letter-spacing:-.018em;color:var(--tp);max-width:700px;margin-bottom:0}
+.big em{color:var(--gold);font-style:normal}
+.sub{font-size:clamp(.9rem,2vw,1.06rem);font-weight:300;
+  color:var(--tm);max-width:480px;margin-top:28px;line-height:2.1}
+.body-text{font-size:clamp(.98rem,2.2vw,1.18rem);font-weight:300;
+  color:var(--ts);max-width:540px;line-height:1.9;margin-top:0}
+.body-text + .body-text{margin-top:22px}
+
+/* ── DUAL ARTWORKS ── */
+.dual-artworks{display:flex;flex-wrap:wrap;gap:20px;
+  justify-content:center;align-items:flex-start;
+  max-width:780px;width:100%;margin-top:18px}
+.artwork-wrap{display:flex;flex-direction:column;align-items:center;
+  gap:10px;max-width:340px;flex:1;min-width:220px}
+.artwork-frame{border-radius:12px;overflow:visible;
+  box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 60px rgba(201,169,110,.07);
+  animation:glow-pulse 4s ease-in-out infinite alternate;width:100%}
+@keyframes glow-pulse{
+  from{box-shadow:0 0 40px rgba(255,255,255,.06)}
+  to{box-shadow:0 0 90px rgba(255,255,255,.14)}}
+.artwork-img{display:block;width:100%;height:auto;
+  max-width:90vw;max-height:55vh;
+  border-radius:12px;object-fit:contain;background:#0d0d1a}
+.artwork-meta{text-align:center}
+.artwork-artist{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tm);margin-bottom:3px}
+.artwork-title-line{font-size:.82rem;color:var(--ts);font-style:italic}
+.artwork-note{font-size:.82rem;color:var(--ts);
+  margin-top:8px;max-width:300px;line-height:1.65;text-align:center}
+
+/* ── CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;max-width:660px;margin-top:24px}
+.chip{padding:12px 22px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);
+  font-size:.93rem;color:var(--ts);cursor:pointer;
+  transition:.25s var(--ease);user-select:none;font-family:inherit}
+.chip:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:var(--tp)}
+.chip.picked{background:var(--u2);border-color:var(--u2);
+  color:#fff;box-shadow:0 4px 24px rgba(76,175,125,.32)}
+
+/* ── OBSERVATION / OPTION LIST ── */
+.obs-list{display:flex;flex-direction:column;gap:14px;
+  max-width:480px;width:100%;margin-top:22px}
+.obs-item{padding:14px 22px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
+  font-size:clamp(.9rem,2vw,1.05rem);color:var(--ts);
+  line-height:1.5;text-align:center}
+
+/* ── INSTRUCTION NOTE ── */
+.instr-note{font-size:clamp(.88rem,1.9vw,1rem);color:var(--ts);
+  max-width:500px;margin-top:20px;line-height:1.85;font-weight:300}
+.instr-note em{color:var(--gold);font-style:normal}
+
+/* ── CLOSE SCREEN ── */
+.close-badge{width:76px;height:76px;border-radius:50%;
+  background:var(--u2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:22px;box-shadow:0 8px 32px rgba(76,175,125,.3)}
+.close-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.btn-outline{padding:12px 26px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.18);background:transparent;
+  color:var(--ts);font-family:inherit;font-size:.88rem;
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;
+  gap:6px;transition:.2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.4);color:var(--tp)}
+
+/* ── NAV BAR ── */
+#nav-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;height:80px;
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:0 24px;
+  background:rgba(13,13,26,.95);border-top:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px)}
+#back-btn{width:48px;height:48px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);font-size:1.2rem;transition:.2s;flex-shrink:0}
+#back-btn:hover{background:rgba(255,255,255,.14);color:var(--tp)}
+#back-btn:disabled{opacity:.18;cursor:default;pointer-events:none}
+#next-btn{padding:15px 52px;background:#FF4D4D;
+  border:none;border-radius:50px;color:#fff;font-family:inherit;
+  font-size:1rem;font-weight:800;letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);transition:.25s var(--ease);white-space:nowrap}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+#fs-btn{position:fixed;top:60px;right:16px;z-index:200;width:36px;height:36px;
+  border-radius:8px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;color:var(--tm);
+  font-size:.85rem;transition:.2s}
+#fs-btn:hover{color:var(--tp);background:rgba(255,255,255,.12)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .big{font-size:clamp(1.45rem,7vw,2rem)}
+  #next-btn{padding:14px 36px;font-size:.95rem}
+  .chips{gap:8px}
+  .chip{padding:10px 16px}
+  .dual-artworks{flex-direction:column;align-items:center;gap:16px}
+  .artwork-wrap{max-width:min(90vw,360px)}
+  .artwork-img{max-height:38vh}
+}
+
+/* ── RTL ── */
+body.rtl{direction:rtl}
+body.rtl .label,body.rtl .big,body.rtl .sub,
+body.rtl .body-text,body.rtl .artwork-note,
+body.rtl .instr-note,body.rtl .close-btns{text-align:right}
+body.rtl .artwork-meta{text-align:center}
+body.rtl .big{text-align:center}
+body.rtl #hud{flex-direction:row-reverse}
+body.rtl #back-btn svg{transform:scaleX(-1)}
+body.rtl #progress{flex-direction:row-reverse;direction:rtl}
+body.rtl .chips{flex-direction:row-reverse;flex-wrap:wrap}
+body.rtl .close-btns{flex-direction:row-reverse}
+body.rtl #hud-lang{flex-direction:row-reverse}
+body.rtl .obs-list{text-align:right}
+body.rtl .dual-artworks{flex-direction:row-reverse}
+</style>
+</head>
+<body class="dark">
+<script src="../js/app-init.js"></script>
+
+<nav id="hud">
+  <a id="hud-back" href="../course.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="t-back">Back to Course</span>
+  </a>
+  <span id="hud-badge"><span id="t-unit">Lesson 2.1</span></span>
+  <div id="hud-spacer"></div>
+  <div id="hud-lang">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">עברית</button>
+  </div>
+  <span id="hud-step">1 / 9</span>
+</nav>
+
+<button id="fs-btn" title="Classroom mode" onclick="toggleFS()">⛶</button>
+
+<main id="stage">
+
+  <!-- s0 — Opening -->
+  <section class="screen active" id="s0" data-bg="#0a0f0d">
+    <div class="blob" style="width:480px;height:480px;background:var(--u2);top:-100px;left:-80px;opacity:.15"></div>
+    <div class="blob" style="width:300px;height:300px;background:var(--teal);bottom:0;right:-60px;opacity:.12;animation-delay:5s"></div>
+
+    <!-- Subtle wave-pattern background — pure SVG, no images, no emojis -->
+    <div id="s0-pattern" aria-hidden="true">
+      <svg viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice"
+           xmlns="http://www.w3.org/2000/svg">
+        <!-- Row 1 -->
+        <path d="M-20 80 Q45 50 110 80 Q175 110 240 80 Q305 50 370 80 Q435 110 500 80 Q565 50 630 80 Q695 110 760 80 Q825 50 920 80" fill="none" stroke="#c9a96e" stroke-width="1.4"/>
+        <path d="M-20 110 Q45 80 110 110 Q175 140 240 110 Q305 80 370 110 Q435 140 500 110 Q565 80 630 110 Q695 140 760 110 Q825 80 920 110" fill="none" stroke="#4caf7d" stroke-width="0.9"/>
+        <!-- Row 2 -->
+        <path d="M-20 180 Q45 150 110 180 Q175 210 240 180 Q305 150 370 180 Q435 210 500 180 Q565 150 630 180 Q695 210 760 180 Q825 150 920 180" fill="none" stroke="#c9a96e" stroke-width="1.4"/>
+        <path d="M-20 210 Q45 180 110 210 Q175 240 240 210 Q305 180 370 210 Q435 240 500 210 Q565 180 630 210 Q695 240 760 210 Q825 180 920 210" fill="none" stroke="#4caf7d" stroke-width="0.9"/>
+        <!-- Row 3 -->
+        <path d="M-20 280 Q45 250 110 280 Q175 310 240 280 Q305 250 370 280 Q435 310 500 280 Q565 250 630 280 Q695 310 760 280 Q825 250 920 280" fill="none" stroke="#c9a96e" stroke-width="1.4"/>
+        <path d="M-20 310 Q45 280 110 310 Q175 340 240 310 Q305 280 370 310 Q435 340 500 310 Q565 280 630 310 Q695 340 760 310 Q825 280 920 310" fill="none" stroke="#4caf7d" stroke-width="0.9"/>
+        <!-- Row 4 -->
+        <path d="M-20 380 Q45 350 110 380 Q175 410 240 380 Q305 350 370 380 Q435 410 500 380 Q565 350 630 380 Q695 410 760 380 Q825 350 920 380" fill="none" stroke="#c9a96e" stroke-width="1.4"/>
+        <path d="M-20 410 Q45 380 110 410 Q175 440 240 410 Q305 380 370 410 Q435 440 500 410 Q565 380 630 410 Q695 440 760 410 Q825 380 920 410" fill="none" stroke="#4caf7d" stroke-width="0.9"/>
+        <!-- Row 5 -->
+        <path d="M-20 480 Q45 450 110 480 Q175 510 240 480 Q305 450 370 480 Q435 510 500 480 Q565 450 630 480 Q695 510 760 480 Q825 450 920 480" fill="none" stroke="#c9a96e" stroke-width="1.4"/>
+        <path d="M-20 510 Q45 480 110 510 Q175 540 240 510 Q305 480 370 510 Q435 540 500 510 Q565 480 630 510 Q695 540 760 510 Q825 480 920 510" fill="none" stroke="#4caf7d" stroke-width="0.9"/>
+        <!-- Vertical cross-lines to form a lattice of repetition -->
+        <path d="M110 60 Q125 90 110 120 Q95 150 110 180 Q125 210 110 240 Q95 270 110 300 Q125 330 110 360 Q95 390 110 420 Q125 450 110 480 Q95 510 110 540" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.5"/>
+        <path d="M370 60 Q385 90 370 120 Q355 150 370 180 Q385 210 370 240 Q355 270 370 300 Q385 330 370 360 Q355 390 370 420 Q385 450 370 480 Q355 510 370 540" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.5"/>
+        <path d="M630 60 Q645 90 630 120 Q615 150 630 180 Q645 210 630 240 Q615 270 630 300 Q645 330 630 360 Q615 390 630 420 Q645 450 630 480 Q615 510 630 540" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <p class="label" id="t0-label">Lesson 2.1</p>
+    <h1 class="big" id="t0-big">Look around you.<br>Do you see <em>repetition</em>?</h1>
+    <p class="sub" id="t0-sub">Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet.</p>
+  </section>
+
+  <!-- s1 — Find a pattern -->
+  <section class="screen" id="s1" data-bg="#0a100e">
+    <div class="blob" style="width:440px;height:440px;background:var(--green);top:-80px;right:-60px;opacity:.14"></div>
+    <div class="blob" style="width:280px;height:280px;background:var(--teal);bottom:-40px;left:-40px;opacity:.1;animation-delay:3s"></div>
+    <p class="label" id="t1-label">Step 1</p>
+    <h2 class="big" id="t1-big">Find one pattern<br>near you right now.</h2>
+    <p class="sub" id="t1-sub">Not in an image — in reality.<br>Look at fabric, floor, wall, skin, a plant.</p>
+  </section>
+
+  <!-- s2 — What repeats? (chips, multi-select) -->
+  <section class="screen" id="s2" data-bg="#0d0d1a">
+    <div class="blob" style="width:420px;height:420px;background:var(--violet);bottom:-60px;left:-50px;opacity:.14"></div>
+    <p class="label" id="t2-label">Step 2</p>
+    <h2 class="big" id="t2-big">Move closer.<br>What exactly repeats?</h2>
+    <p class="sub" id="t2-sub">Select all that apply.</p>
+    <div class="chips" id="pattern-chips">
+      <button class="chip" onclick="pickMulti(this,'pattern-chips')" id="pc0">Shape</button>
+      <button class="chip" onclick="pickMulti(this,'pattern-chips')" id="pc1">Line</button>
+      <button class="chip" onclick="pickMulti(this,'pattern-chips')" id="pc2">Space</button>
+      <button class="chip" onclick="pickMulti(this,'pattern-chips')" id="pc3">Direction</button>
+    </div>
+  </section>
+
+  <!-- s3 — References (dual artworks) -->
+  <section class="screen" id="s3" data-bg="#080c0a">
+    <div class="blob" style="width:500px;height:500px;background:var(--u2);top:-120px;right:-80px;opacity:.1"></div>
+    <p class="label" id="t3-label">References</p>
+    <div class="dual-artworks" id="dual-wrap">
+
+      <div class="artwork-wrap">
+        <div class="artwork-frame">
+          <img class="artwork-img" id="art0-img"
+               src="images/hokusai-great-wave-1831.jpg"
+               alt="Hokusai — The Great Wave off Kanagawa, 1831"
+               loading="lazy"/>
+        </div>
+        <div class="artwork-meta">
+          <p class="artwork-artist">Katsushika Hokusai</p>
+          <p class="artwork-title-line" id="art0-title">The Great Wave off Kanagawa, 1831</p>
+        </div>
+        <p class="artwork-note" id="art0-note">Hokusai did not copy waves. He broke the wave into rhythm and built it again.</p>
+      </div>
+
+      <div class="artwork-wrap">
+        <div class="artwork-frame">
+          <img class="artwork-img" id="art1-img"
+               src="images/morris-strawberry-thief-1883.jpg"
+               alt="William Morris — Strawberry Thief, 1883"
+               loading="lazy"/>
+        </div>
+        <div class="artwork-meta">
+          <p class="artwork-artist">William Morris</p>
+          <p class="artwork-title-line" id="art1-title">Strawberry Thief, 1883</p>
+        </div>
+        <p class="artwork-note" id="art1-note">Morris found the principle behind the plant. Changes in direction and color prevent mechanical repetition.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- s4 — Draw the pattern -->
+  <section class="screen" id="s4" data-bg="#0a0e0c">
+    <div class="blob" style="width:460px;height:460px;background:var(--green);bottom:-80px;right:-60px;opacity:.13"></div>
+    <div class="blob" style="width:320px;height:320px;background:var(--teal);top:-40px;left:-40px;opacity:.1;animation-delay:6s"></div>
+    <p class="label" id="t4-label">Step 3</p>
+    <h2 class="big" id="t4-big">Take a page.<br>Draw the pattern you found.</h2>
+    <p class="instr-note" id="t4-note">Not the object —<br>only the <em>repetition</em>.</p>
+  </section>
+
+  <!-- s5 — Rhythm check (chips, single/multi) -->
+  <section class="screen" id="s5" data-bg="#0d0d1a">
+    <div class="blob" style="width:400px;height:400px;background:var(--violet);top:-60px;right:-50px;opacity:.13"></div>
+    <p class="label" id="t5-label">Step 4</p>
+    <h2 class="big" id="t5-big">Pause.<br>Is the repetition even or changing?</h2>
+    <div class="chips" id="rhythm-chips">
+      <button class="chip" onclick="pickOne(this,'rhythm-chips')" id="rc0">Even</button>
+      <button class="chip" onclick="pickOne(this,'rhythm-chips')" id="rc1">Changing</button>
+    </div>
+    <p class="instr-note" id="t5-note">Let the rhythm change —<br>speed up, slow down, expand.</p>
+  </section>
+
+  <!-- s6 — Change one rule -->
+  <section class="screen" id="s6" data-bg="#0a0e10">
+    <div class="blob" style="width:440px;height:440px;background:var(--blue);bottom:-70px;left:-50px;opacity:.13"></div>
+    <p class="label" id="t6-label">Step 5</p>
+    <h2 class="big" id="t6-big">Change only <em>one thing</em><br>on the page.</h2>
+    <div class="obs-list">
+      <div class="obs-item" id="t6-opt0">Size</div>
+      <div class="obs-item" id="t6-opt1">Direction</div>
+      <div class="obs-item" id="t6-opt2">Space</div>
+    </div>
+    <p class="instr-note" id="t6-note">Notice what happens to the pattern when one rule changes.</p>
+  </section>
+
+  <!-- s7 — Understanding (+ optional Escher reference) -->
+  <section class="screen" id="s7" data-bg="#09090f">
+    <div class="blob" style="width:500px;height:500px;background:var(--violet);bottom:-80px;right:-60px;opacity:.12"></div>
+    <div class="blob" style="width:280px;height:280px;background:var(--gold);top:-40px;left:-30px;opacity:.08;animation-delay:4s"></div>
+    <p class="label" id="t7-label">Observe</p>
+    <h2 class="big" id="t7-big">Pause.<br>Look.</h2>
+    <p class="sub" id="t7-sub">The pattern changed —<br>but it is still recognizable.</p>
+    <div class="artwork-wrap" style="margin-top:22px;max-width:320px">
+      <div class="artwork-frame">
+        <img class="artwork-img" id="art2-img"
+             src="images/escher-sky-water-1938.jpg"
+             alt="M.C. Escher — Sky and Water I, 1938"
+             loading="lazy"
+             style="max-height:36vh"/>
+      </div>
+      <div class="artwork-meta">
+        <p class="artwork-artist">M.C. Escher</p>
+        <p class="artwork-title-line" id="art2-title">Sky and Water I, 1938</p>
+      </div>
+    </div>
+    <p class="instr-note" id="t7-note">This is what artists do.<br>They do not copy — they break apart and build again.</p>
+  </section>
+
+  <!-- s8 — Closing -->
+  <section class="screen" id="s8" data-bg="#080d0a">
+    <div class="blob" style="width:460px;height:460px;background:var(--u2);bottom:-80px;left:-60px;opacity:.15"></div>
+    <div class="blob" style="width:300px;height:300px;background:var(--teal);top:-40px;right:-30px;opacity:.1;animation-delay:3s"></div>
+    <div class="close-badge">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <path d="M8 17 Q13 9 17 13 Q21 17 25 10" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <circle cx="17" cy="17" r="11" stroke="white" stroke-width="1.5" opacity=".4" fill="none"/>
+      </svg>
+    </div>
+    <h2 class="big" id="t8-big">Pattern is a language.<br>Now you are <em>speaking</em> it.</h2>
+    <p class="sub" id="t8-sub">You are not only reading it —<br>you are building with it.</p>
+    <div class="close-btns">
+      <a class="btn-outline" href="../course.html" id="t8-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="t8-back-lbl">Back to Course</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<div id="progress"></div>
+
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Continue →</button>
+</div>
+
+<script src="js/lesson-system.js"></script>
+<script>
+/* ══════════════════════════════════════════════
+   LESSON 2.1 — Patterns in Nature and Art
+   9 screens (indices 0–8), TOTAL = 9
+══════════════════════════════════════════════ */
+
+/* ── STATE ── */
+const TOTAL = 9;
+let cur    = 0;
+let busy   = false;
+let he     = (localStorage.getItem('sourcesLang') || 'en') === 'he';
+let touchX = 0;
+
+/* ── CONTENT STRINGS ── */
+const T = {
+  en: {
+    back: 'Back to Course',
+    unit: 'Lesson 2.1',
+    s: [
+      /* s0 — Opening */
+      { label: 'Lesson 2.1',
+        big: 'Look around you.<br>Do you see <em>repetition</em>?',
+        sub: 'Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet.' },
+      /* s1 — Find a pattern */
+      { label: 'Step 1',
+        big: 'Find one pattern<br>near you right now.',
+        sub: 'Not in an image — in reality.<br>Look at fabric, floor, wall, skin, a plant.' },
+      /* s2 — What repeats? */
+      { label: 'Step 2',
+        big: 'Move closer.<br>What exactly repeats?',
+        sub: 'Select all that apply.',
+        chips: ['Shape', 'Line', 'Space', 'Direction'] },
+      /* s3 — References */
+      { label: 'References',
+        art0title: 'The Great Wave off Kanagawa, 1831',
+        art0note: 'Hokusai did not copy waves. He broke the wave into rhythm and built it again.',
+        art1title: 'Strawberry Thief, 1883',
+        art1note: 'Morris found the principle behind the plant. Changes in direction and color prevent mechanical repetition.' },
+      /* s4 — Draw */
+      { label: 'Step 3',
+        big: 'Take a page.<br>Draw the pattern you found.',
+        note: 'Not the object —\nonly the <em>repetition</em>.' },
+      /* s5 — Rhythm check */
+      { label: 'Step 4',
+        big: 'Pause.<br>Is the repetition even or changing?',
+        chips: ['Even', 'Changing'],
+        note: 'Let the rhythm change —\nspeed up, slow down, expand.' },
+      /* s6 — Change one rule */
+      { label: 'Step 5',
+        big: 'Change only <em>one thing</em><br>on the page.',
+        opts: ['Size', 'Direction', 'Space'],
+        note: 'Notice what happens to the pattern when one rule changes.' },
+      /* s7 — Understanding */
+      { label: 'Observe',
+        big: 'Pause.<br>Look.',
+        sub: 'The pattern changed —<br>but it is still recognizable.',
+        art2title: 'Sky and Water I, 1938',
+        note: 'This is what artists do.<br>They do not copy — they break apart and build again.' },
+      /* s8 — Closing */
+      { label: 'Done',
+        big: 'Pattern is a language.<br>Now you are <em>speaking</em> it.',
+        sub: 'You are not only reading it —<br>you are building with it.',
+        back: 'Back to Course' }
+    ],
+    btn: ['continue','continue','choose','continue','continue','choose','continue','continue','finish']
+  },
+
+  he: {
+    back: 'חזרה לקורס',
+    unit: 'שיעור 2.1',
+    s: [
+      /* s0 — Opening */
+      { label: 'שיעור 2.1',
+        big: 'הסתכלו סביבכם.<br>האם אתם רואים <em>חזרה</em>?',
+        sub: 'דפוסים נמצאים בכל מקום. בקליפת העץ, בעורקי העלה, באריח שמתחת לרגליכם.' },
+      /* s1 — Find a pattern */
+      { label: 'שלב 1',
+        big: 'מצאו דפוס אחד<br>שנמצא לידכם עכשיו.',
+        sub: 'לא בתמונה — במציאות.<br>הסתכלו על בד, רצפה, קיר, עור, צמח.' },
+      /* s2 — What repeats? */
+      { label: 'שלב 2',
+        big: 'התקרבו אליו.<br>מה בדיוק חוזר?',
+        sub: 'בחרו את כל מה שמתאים.',
+        chips: ['צורה', 'קו', 'מרווח', 'כיוון'] },
+      /* s3 — References */
+      { label: 'מקורות השראה',
+        art0title: 'הגל הגדול מול קנאגאווה, 1831',
+        art0note: 'הוקוסאי לא העתיק גלים. הוא פירק את הגל לקצב ובנה אותו מחדש.',
+        art1title: 'גנב התות, 1883',
+        art1note: 'מוריס מצא את העיקרון שמאחורי הצמח. שינוי כיוון וצבע מונע חזרה מכנית.' },
+      /* s4 — Draw */
+      { label: 'שלב 3',
+        big: 'קחו דף.<br>ציירו את הדפוס שמצאתם.',
+        note: 'לא את האובייקט —\nרק את ה<em>חזרה</em>.' },
+      /* s5 — Rhythm check */
+      { label: 'שלב 4',
+        big: 'עצרו.<br>האם החזרה אחידה או משתנה?',
+        chips: ['אחידה', 'משתנה'],
+        note: 'תנו לקצב להשתנות —\nהאיצו, האטו, הרחיבו.' },
+      /* s6 — Change one rule */
+      { label: 'שלב 5',
+        big: 'שנו <em>דבר אחד בלבד</em><br>על הדף.',
+        opts: ['גודל', 'כיוון', 'מרווח'],
+        note: 'ראו מה קורה לדפוס כשמשנים כלל אחד.' },
+      /* s7 — Understanding */
+      { label: 'התבוננות',
+        big: 'עצרו.<br>התבוננו.',
+        sub: 'הדפוס השתנה —<br>אבל עדיין מזוהה.',
+        art2title: 'שמים ומים I, 1938',
+        note: 'זה מה שאמנים עושים.<br>לא מעתיקים — מפרקים ובונים מחדש.' },
+      /* s8 — Closing */
+      { label: 'סיום',
+        big: 'דפוס הוא שפה.<br>עכשיו אתם <em>מדברים</em> בה.',
+        sub: 'לא רק קוראים אותה —<br>בונים איתה.',
+        back: 'חזרה לקורס' }
+    ],
+    btn: ['continue','continue','choose','continue','continue','choose','continue','continue','finish']
+  }
+};
+
+/* ── LANGUAGE ── */
+function setLang(l) {
+  he = (l === 'he');
+  localStorage.setItem('sourcesLang', l);
+  document.documentElement.lang = l;
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.body.dir = he ? 'rtl' : 'ltr';
+  document.body.classList.toggle('he', he);
+  document.body.classList.toggle('rtl', he);
+  const pg = document.getElementById('progress');
+  if (pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
+  });
+  applyStrings();
+  updateBtn();
+  updateHud();
+}
+
+function applyStrings() {
+  const d = T[he ? 'he' : 'en'];
+
+  /* HUD */
+  document.getElementById('t-back').textContent = d.back;
+  document.getElementById('t-unit').textContent = d.unit;
+
+  d.s.forEach((s, i) => {
+    const el = document.getElementById('s' + i);
+    if (!el) return;
+
+    /* label */
+    const lbl = el.querySelector('.label');
+    if (lbl && s.label) lbl.textContent = s.label;
+
+    /* big heading */
+    const big = el.querySelector('.big');
+    if (big && s.big !== undefined) big.innerHTML = s.big;
+
+    /* sub */
+    const sub = el.querySelector('.sub');
+    if (sub && s.sub !== undefined) sub.innerHTML = s.sub;
+
+    /* instr-note */
+    const note = el.querySelector('.instr-note');
+    if (note && s.note !== undefined) note.innerHTML = s.note.replace(/\n/g, '<br>');
+
+    /* chips */
+    if (s.chips) {
+      const wrap = el.querySelector('.chips');
+      if (wrap) {
+        const btns = wrap.querySelectorAll('.chip');
+        s.chips.forEach((c, j) => { if (btns[j]) btns[j].textContent = c; });
+      }
+    }
+
+    /* obs-list options (s6) */
+    if (s.opts) {
+      ['t6-opt0','t6-opt1','t6-opt2'].forEach((id, j) => {
+        const opt = document.getElementById(id);
+        if (opt && s.opts[j] !== undefined) opt.textContent = s.opts[j];
+      });
+    }
+
+    /* artwork titles & notes */
+    if (s.art0title) {
+      const el0 = document.getElementById('art0-title');
+      if (el0) el0.textContent = s.art0title;
+    }
+    if (s.art0note) {
+      const el0n = document.getElementById('art0-note');
+      if (el0n) el0n.textContent = s.art0note;
+    }
+    if (s.art1title) {
+      const el1 = document.getElementById('art1-title');
+      if (el1) el1.textContent = s.art1title;
+    }
+    if (s.art1note) {
+      const el1n = document.getElementById('art1-note');
+      if (el1n) el1n.textContent = s.art1note;
+    }
+    if (s.art2title) {
+      const el2 = document.getElementById('art2-title');
+      if (el2) el2.textContent = s.art2title;
+    }
+
+    /* close back button label */
+    if (s.back) {
+      const bl = el.querySelector('#t8-back-lbl');
+      if (bl) bl.textContent = s.back;
+    }
+  });
+}
+
+/* ── HUD STEP COUNTER ── */
+function updateHud() {
+  const display = cur < TOTAL - 1 ? (cur + 1) + ' / ' + TOTAL : '✓';
+  document.getElementById('hud-step').textContent = display;
+}
+
+/* ── DOTS + BUTTON ── */
+function buildDots()   { LS_buildDots(TOTAL, go); }
+function refreshDots() { LS_refreshDots(cur); }
+function updateBtn()   {
+  updateLessonBtn(
+    document.getElementById('next-btn'),
+    T[he ? 'he' : 'en'].btn,
+    cur,
+    TOTAL - 1, /* goldFrom: last screen gets gold-btn class */
+    he
+  );
+}
+
+/* ── BACKGROUND ── */
+function setBg(idx) {
+  const el = document.getElementById('s' + idx);
+  if (el) document.body.style.background = el.dataset.bg || '#0f0f10';
+}
+
+/* ── NAVIGATION ── */
+function go(n) {
+  if (n < 0 || n >= TOTAL || busy) return;
+  busy = true;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.add('leaving');
+  setTimeout(() => {
+    prev.classList.remove('active', 'leaving');
+    cur = n;
+    const next = document.getElementById('s' + cur);
+    next.classList.add('active');
+    next.scrollTop = 0;
+    setBg(cur);
+    refreshDots();
+    updateBtn();
+    updateHud();
+    updateBackBtn();
+    busy = false;
+  }, 380);
+}
+function advance()      { if (busy) return; if (cur === TOTAL - 1) finishLesson(); else go(cur + 1); }
+function goBack()       { if (!busy && cur > 0) go(cur - 1); }
+function updateBackBtn(){ document.getElementById('back-btn').disabled = (cur === 0); }
+
+/* ── CHIP INTERACTION ── */
+/* Multi-select (s2) */
+function pickMulti(btn, groupId) {
+  btn.classList.toggle('picked');
+}
+/* Single-select (s5) */
+function pickOne(btn, groupId) {
+  document.querySelectorAll('#' + groupId + ' .chip')
+    .forEach(c => c.classList.remove('picked'));
+  btn.classList.add('picked');
+}
+
+/* ── FULLSCREEN ── */
+function toggleFS() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen();
+}
+
+/* ── KEYBOARD ── */
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA') return;
+  if (e.key === ' ')          { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); he ? goBack() : advance(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); he ? advance() : goBack(); }
+  if (e.key === 'f' || e.key === 'F') toggleFS();
+});
+
+/* ── TOUCH SWIPE ── */
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (he) { if (dx >  60) advance(); if (dx < -60) goBack(); }
+  else    { if (dx < -60) advance(); if (dx >  60) goBack(); }
+});
+
+/* ── INIT ── (setLang BEFORE buildDots — per system rules) */
+setLang(he ? 'he' : 'en');
+document.body.classList.remove('lang-loading'); /* reveal after lang applied */
+buildDots();
+refreshDots();
+updateBtn();
+</script>
+</body>
+</html>

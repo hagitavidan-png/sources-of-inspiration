@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lesson-type="regular">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Emotion, Color and Mark — Sources of Inspiration</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════
+   RESET & ROOT
+══════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+
+:root {
+  --bg:        #0f0f10;
+  --rose:      #FF4D4D;
+  --gold:      #c9a96e;
+  --violet:    #7c5cbf;
+  --amber:     #e8a030;
+  --green:     #4caf82;
+  --blue:      #4a7fa5;
+  --teal:      #3dbcaa;
+  --tp:        #ffffff;
+  --ts:        #cfcfcf;
+  --tm:        rgba(255,255,255,.62);  /* was #8a8a8a — lifted for readability */
+  --font-en:   'Sora',  sans-serif;
+  --font-he:   'Heebo', sans-serif;
+  --ease:      cubic-bezier(.4,0,.2,1);
+  --nav-h:     52px;
+  --bar-h:     78px;
+  /* safe-bot = nav-bar height + progress-dots zone + breathing room */
+  --safe-bot:  calc(var(--bar-h) + 48px);
+  /* safe-area insets for notch/home-bar devices */
+  --sa-top:    env(safe-area-inset-top,    0px);
+  --sa-bot:    env(safe-area-inset-bottom, 0px);
+}
+
+html, body {
+  height:100%; width:100%;
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--tp);
+  -webkit-tap-highlight-color:transparent;
+}
+body     { font-family:var(--font-en) }
+body.he  { font-family:var(--font-he) }
+body.rtl { direction:rtl }
+
+/* ══════════════════════════════════════
+   HUD — top bar
+══════════════════════════════════════ */
+#hud {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:var(--nav-h);
+  background:rgba(13,13,26,.97);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.055);
+  display:flex; align-items:center; gap:8px; padding:0 16px;
+}
+body.rtl #hud { flex-direction:row-reverse }
+
+#hud-back {
+  display:flex; align-items:center; gap:5px;
+  font-size:.72rem; color:var(--tm); text-decoration:none;
+  transition:color .2s; flex-shrink:0; white-space:nowrap;
+}
+#hud-back:hover { color:var(--tp) }
+body.rtl #hud-back svg { transform:scaleX(-1) }
+
+#hud-badge {
+  padding:3px 10px; border-radius:20px;
+  background:rgba(255,77,77,.1); border:1px solid rgba(255,77,77,.2);
+  font-size:.58rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--rose); white-space:nowrap; flex-shrink:0;
+}
+
+#hud-spacer { flex:1; min-width:0 }
+
+#hud-lang {
+  display:flex; gap:4px; flex-shrink:0; min-width:fit-content;
+}
+body.rtl #hud-lang { flex-direction:row-reverse }
+
+.lang-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:5px 11px; border-radius:20px;
+  border:1px solid rgba(255,255,255,.18);
+  background:transparent; color:rgba(255,255,255,.5);
+  font-size:.67rem; letter-spacing:.04em; cursor:pointer;
+  transition:.2s; font-family:inherit; white-space:nowrap;
+  flex-shrink:0; min-width:30px; min-height:30px;
+}
+.lang-btn.active {
+  background:rgba(201,169,110,.16);
+  border-color:rgba(201,169,110,.5);
+  color:var(--gold);
+}
+.lang-btn:hover:not(.active) {
+  color:rgba(255,255,255,.85);
+  border-color:rgba(255,255,255,.35);
+}
+
+#hud-step {
+  font-size:.64rem; color:var(--tm); letter-spacing:.04em;
+  flex-shrink:0; white-space:nowrap; min-width:38px; text-align:center;
+}
+
+/* ══════════════════════════════════════
+   PROGRESS DOTS
+══════════════════════════════════════ */
+#progress {
+  position:fixed;
+  bottom:calc(var(--bar-h) + 10px);
+  left:50%; transform:translateX(-50%);
+  z-index:150; display:flex; gap:7px; align-items:center;
+  pointer-events:none;
+}
+body.rtl #progress { flex-direction:row-reverse }
+
+.pdot {
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.15);
+  transition:.32s var(--ease);
+}
+.pdot.now {
+  background:var(--rose); border-color:var(--rose);
+  box-shadow:0 0 9px rgba(255,77,77,.38);
+  width:22px; border-radius:4px;
+}
+
+/* ══════════════════════════════════════
+   STAGE & SCREENS
+══════════════════════════════════════ */
+#stage {
+  position:fixed;
+  top:var(--nav-h);
+  bottom:var(--bar-h);
+  left:0; right:0;
+  /* overflow:visible so flex centering never clips content */
+  overflow:hidden;
+  /* dvh fallback chain for mobile browsers with collapsing chrome */
+  height:calc(100svh - var(--nav-h) - var(--bar-h));
+  height:calc(100dvh - var(--nav-h) - var(--bar-h));
+}
+
+.screen {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  /* horizontal pad generous; vertical pad minimal — let flex-gap breathe */
+  padding:clamp(12px,2.5vh,32px) clamp(16px,4vw,40px);
+  opacity:0; pointer-events:none;
+  transform:translateY(28px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease);
+  text-align:center;
+  /* no overflow:hidden here — clipping is handled by #stage */
+  overflow:visible;
+  /* gap between flex children scales with viewport height */
+  gap:clamp(6px,1.4vh,18px);
+}
+.screen.active  { opacity:1; pointer-events:all; transform:translateY(0) }
+.screen.leaving {
+  opacity:0; transform:translateY(-24px);
+  transition:opacity .32s var(--ease), transform .32s var(--ease);
+}
+
+/* scrollable screens */
+.screen--scroll {
+  justify-content:flex-start;
+  overflow-y:auto; overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding-top:clamp(16px,2.5vh,28px);
+  padding-bottom:var(--safe-bot);
+  scrollbar-width:none;
+  overscroll-behavior:contain;
+  scroll-behavior:smooth;
+  gap:0;
+}
+.screen--scroll::-webkit-scrollbar { display:none }
+
+/* color-grid screen — non-scrolling, flex-start so grid can grow */
+.screen--grid {
+  justify-content:flex-start;
+  overflow:hidden;
+  /* tighter top padding so grid gets more vertical room */
+  padding-top:clamp(14px,2vh,24px);
+  padding-bottom:clamp(14px,2vh,24px);
+}
+
+/* ── ambient blobs ── */
+.blob {
+  position:absolute; border-radius:50%; filter:blur(90px);
+  opacity:.14; pointer-events:none;
+  animation:drift 15s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform:translate(0,0)       scale(1)    }
+  to   { transform:translate(24px,14px) scale(1.06) }
+}
+
+/* ══════════════════════════════════════
+   TYPOGRAPHY
+══════════════════════════════════════ */
+.label {
+  /* min 14px → comfortable 16px eyebrow on mobile */
+  font-size:clamp(.82rem,1.6vw,.95rem);
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--tm); flex-shrink:1;
+  /* margin replaced by parent gap — keep a small bottom nudge */
+  margin-bottom:0;
+}
+.big {
+  font-size:clamp(1.5rem,4.2vw,3rem);
+  font-weight:700; line-height:1.26; letter-spacing:-.018em;
+  color:var(--tp); max-width:700px;
+  /* allow the title to shrink on very short viewports */
+  flex-shrink:1; min-height:0;
+}
+.big em { font-style:normal; color:var(--gold) }
+
+.sub {
+  font-size:clamp(.9rem,1.8vw,1.02rem); font-weight:300;
+  color:var(--tm); max-width:440px;
+  /* margin-top handled by parent gap */
+  margin-top:0; line-height:1.85; flex-shrink:1;
+}
+
+.aline {
+  width:24px; height:1.5px; border-radius:2px;
+  background:var(--accent-line, var(--gold)); opacity:.5;
+  /* margin handled by parent gap */
+  margin:0 auto; flex-shrink:1;
+}
+
+/* RTL typography */
+body.rtl .big   { letter-spacing:0; line-height:1.38 }
+body.rtl .sub   { line-height:2.0 }
+body.rtl .label,
+body.rtl .big,
+body.rtl .sub   { text-align:center }
+body.rtl .aline { margin-left:auto; margin-right:auto }
+
+/* ══════════════════════════════════════
+   SCREEN 2 — ARTWORK MOMENT
+   Four artworks, stacked vertically.
+   Two artist sections with divider.
+   object-fit:contain, no cropping.
+══════════════════════════════════════ */
+.artwork-stack {
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:100%;
+  max-width:640px;
+  margin-top:16px;
+  flex-shrink:0;
+}
+
+/* artist section groups two cards */
+.artist-section {
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* artist name above each section */
+.artist-section-name {
+  font-size:.78rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--tm);
+  padding:0 2px;
+  margin-bottom:4px;
+  flex-shrink:0;
+}
+body.rtl .artist-section-name { letter-spacing:.04em; text-align:right }
+
+/* divider between Rothko and Kandinsky */
+.artist-divider {
+  width:100%;
+  height:1px;
+  background:rgba(255,255,255,.07);
+  margin:24px 0;
+  flex-shrink:0;
+  position:relative;
+}
+.artist-divider::after {
+  content:'';
+  position:absolute;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  width:48px; height:1px;
+  background:rgba(255,255,255,.22);
+}
+
+.artwork-card {
+  width:100%;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.artwork-img-wrap {
+  width:100%;
+  /* 4:3 ratio — consistent across all cards */
+  aspect-ratio:4/3;
+  background:#0a0a0e;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+
+.artwork-img {
+  width:100%; height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* graceful fallback: colored placeholder when image 404 */
+.artwork-img-wrap.fallback {
+  background:linear-gradient(135deg,#1a1028,#0d1a28);
+}
+
+.artwork-meta {
+  padding:12px 16px 14px;
+  text-align:left;
+}
+body.rtl .artwork-meta { text-align:right }
+
+.artwork-artist {
+  /* raised from .72rem: readable on mobile without squinting */
+  font-size:clamp(.8rem,1.6vw,.92rem); font-weight:600;
+  color:var(--ts); letter-spacing:.02em;
+  margin-bottom:5px;
+}
+
+.artwork-caption {
+  /* raised from .8rem: easier to read italics */
+  font-size:clamp(.85rem,1.7vw,.96rem); font-weight:300;
+  color:rgba(255,255,255,.58); line-height:1.65;
+  font-style:italic;
+}
+body.rtl .artwork-caption { line-height:1.85 }
+
+/* ══════════════════════════════════════
+   SCREEN 3 — 2×3 COLOR GRID
+   Six equal squares. No text. No horizontal scroll.
+   Grid grows to fill all remaining vertical space after
+   label + subtitle. Never scrolls, never clips.
+══════════════════════════════════════ */
+.color-grid-wrap {
+  /* expand to fill all vertical space after label + subtitle + gaps */
+  flex:1 1 0;
+  min-height:0;                /* let it shrink below natural content height */
+  width:100%;
+  max-width:520px;             /* comfortable ceiling on large screens */
+  display:flex;
+  flex-direction:column;
+}
+
+.color-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:repeat(3, 1fr);
+  gap:clamp(8px,1.6vh,14px);
+  /* fill the full height of the wrapper so tiles use all available space */
+  flex:1 1 0;
+  min-height:0;
+  width:100%;
+}
+
+.color-sq {
+  width:100%; height:100%;
+  border-radius:12px;
+  border:none;
+  min-height:48px;             /* comfortable touch target floor */
+  flex-shrink:0;
+  transition:transform .18s var(--ease), opacity .18s;
+}
+.color-sq:hover { transform:scale(1.025); opacity:.88 }
+
+/* ══════════════════════════════════════
+   SCREEN 4 — EMOTION CHIPS
+══════════════════════════════════════ */
+.chips {
+  display:flex; flex-wrap:wrap; gap:9px;
+  justify-content:center; max-width:560px;
+  /* margin-top via parent gap */
+  margin-top:0; flex-shrink:1;
+}
+body.rtl .chips { flex-direction:row-reverse; flex-wrap:wrap }
+
+.chip {
+  padding:11px 20px; border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);
+  font-size:.88rem; color:var(--ts);
+  cursor:pointer; transition:.22s var(--ease);
+  user-select:none; font-family:inherit;
+  min-height:44px; display:inline-flex; align-items:center;
+}
+.chip:hover {
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.3); color:var(--tp);
+}
+.chip.picked {
+  background:var(--rose); border-color:var(--rose);
+  color:#fff; box-shadow:0 4px 18px rgba(255,77,77,.3);
+}
+body.rtl .chip { letter-spacing:0 }
+
+/* ══════════════════════════════════════
+   SCREENS 5–7 — CREATE (breathable)
+══════════════════════════════════════ */
+.screen--create .big {
+  font-size:clamp(1.7rem,4.8vw,3.2rem);
+  letter-spacing:-.022em;
+}
+.screen--create .sub { line-height:2.0 }
+
+/* ══════════════════════════════════════
+   SCREEN 8 — PAUSE visual
+══════════════════════════════════════ */
+.pause-visual {
+  width:clamp(44px,6vh,56px); height:clamp(44px,6vh,56px); border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.13);
+  display:flex; align-items:center; justify-content:center;
+  /* margin handled by parent gap */
+  margin-bottom:0; flex-shrink:0;
+  animation:pulse-ring 3.2s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%,100% { box-shadow:0 0 0 0    rgba(255,255,255,.08) }
+  50%      { box-shadow:0 0 0 16px rgba(255,255,255,.0)  }
+}
+
+/* ══════════════════════════════════════
+   SCREEN 9 — CLOSING
+══════════════════════════════════════ */
+.close-badge {
+  width:clamp(54px,7vh,68px); height:clamp(54px,7vh,68px); border-radius:50%;
+  background:var(--rose);
+  display:flex; align-items:center; justify-content:center;
+  /* margin handled by parent gap */
+  margin-bottom:0; flex-shrink:0;
+  box-shadow:0 8px 34px rgba(255,77,77,.34);
+}
+.close-btns {
+  display:flex; gap:12px; flex-wrap:wrap;
+  justify-content:center; margin-top:0;
+  flex-direction:column; align-items:center; flex-shrink:0;
+}
+@media(min-width:440px) { .close-btns { flex-direction:row } }
+body.rtl .close-btns {
+  flex-direction:row-reverse; flex-wrap:wrap; justify-content:center;
+}
+.btn-outline {
+  padding:13px 28px; border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.2); background:transparent;
+  color:var(--ts); font-family:inherit; font-size:.9rem;
+  cursor:pointer; text-decoration:none;
+  display:inline-flex; align-items:center; gap:6px;
+  transition:.2s; min-height:48px;
+}
+.btn-outline:hover { border-color:rgba(255,255,255,.44); color:var(--tp) }
+
+/* ══════════════════════════════════════
+   NAV BAR — sticky CTA
+══════════════════════════════════════ */
+#nav-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:200;
+  height:var(--bar-h);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:0 20px;
+  background:rgba(13,13,26,.98);
+  border-top:1px solid rgba(255,255,255,.055);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+}
+
+#back-btn {
+  width:46px; height:46px; border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.17);
+  background:rgba(255,255,255,.055);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--tm); transition:.2s; flex-shrink:0;
+}
+#back-btn:hover  { background:rgba(255,255,255,.13); color:var(--tp) }
+#back-btn:disabled { opacity:.17; cursor:default; pointer-events:none }
+body.rtl #back-btn svg { transform:scaleX(-1) }
+
+#next-btn {
+  padding:14px 44px; background:var(--rose);
+  border:none; border-radius:50px; color:#fff;
+  font-family:inherit; font-size:.96rem; font-weight:800;
+  letter-spacing:.03em; cursor:pointer;
+  box-shadow:0 8px 26px rgba(255,77,77,.3);
+  transition:.25s var(--ease); white-space:nowrap;
+  flex:1; max-width:272px;
+}
+#next-btn:hover  { background:#e03333; transform:translateY(-2px); box-shadow:0 12px 34px rgba(255,77,77,.4) }
+#next-btn:active { transform:translateY(0) }
+#next-btn.gold-btn {
+  background:var(--gold); color:#0f0f10;
+  box-shadow:0 8px 26px rgba(201,169,110,.3);
+}
+#next-btn.gold-btn:hover { background:#b8943a; transform:translateY(-2px) }
+
+/* fullscreen btn */
+#fs-btn {
+  position:fixed; top:calc(var(--nav-h) + 8px); right:12px; z-index:300;
+  width:32px; height:32px; border-radius:8px;
+  border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--tm); font-size:.8rem; transition:.2s;
+}
+#fs-btn:hover { color:var(--tp); background:rgba(255,255,255,.11) }
+body.rtl #fs-btn { right:auto; left:12px }
+
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET 769–1180px
+══════════════════════════════════════ */
+@media(min-width:769px) and (max-width:1180px) {
+  :root { --nav-h:52px; --bar-h:78px; --safe-bot:calc(var(--bar-h) + 48px) }
+  #hud  { gap:10px; padding:0 18px }
+  .screen { gap:clamp(8px,1.6vh,20px) }
+  .big  { font-size:clamp(1.6rem,3.8vw,2.6rem) }
+  .chips { max-width:640px }
+  .artwork-stack { max-width:680px }
+  .color-grid-wrap { max-width:520px }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE ≤768px
+══════════════════════════════════════ */
+@media(max-width:768px) {
+  :root {
+    --nav-h:48px;
+    --bar-h:66px;
+    --safe-bot:calc(var(--bar-h) + 44px);
+  }
+  #hud  { gap:6px; padding:0 12px }
+  #hud-badge { display:none }
+  .screen { gap:clamp(6px,1.2vh,14px) }
+  .label  { font-size:clamp(.78rem,3.5vw,.9rem); letter-spacing:.14em }
+  .big    { font-size:clamp(1.35rem,6.5vw,2rem) }
+  .sub    { font-size:clamp(.86rem,3.8vw,.97rem); line-height:1.75 }
+  #next-btn { padding:13px 28px; font-size:.91rem }
+  .chip   { padding:9px 14px; font-size:.83rem; min-height:40px }
+  .chips  { gap:7px }
+  .artwork-stack  { gap:16px; margin-top:12px }
+  .artwork-meta   { padding:10px 14px 12px }
+  .artwork-artist { font-size:clamp(.78rem,3.2vw,.88rem) }
+  .artwork-caption{ font-size:clamp(.82rem,3.4vw,.92rem) }
+  .color-grid-wrap { max-width:100%; margin-top:10px }
+  .color-grid { gap:8px }
+  .color-sq { border-radius:8px }
+  #progress { bottom:calc(var(--bar-h) + 6px) }
+  .screen--create .big { font-size:clamp(1.5rem,7vw,2.4rem) }
+  .artist-divider { margin:18px 0 }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL PHONE ≤480px
+══════════════════════════════════════ */
+@media(max-width:480px) {
+  :root {
+    --nav-h:46px;
+    --bar-h:62px;
+    --safe-bot:calc(var(--bar-h) + 40px);
+  }
+  #hud  { gap:4px; padding:0 10px }
+  .screen { gap:clamp(5px,1vh,10px) }
+  .label  { font-size:clamp(.76rem,3.8vw,.88rem); letter-spacing:.12em }
+  .big    { font-size:clamp(1.25rem,7vw,1.85rem) }
+  .sub    { font-size:clamp(.84rem,4vw,.94rem); line-height:1.65 }
+  .chip   { padding:8px 12px; font-size:.8rem; min-height:38px }
+  .chips  { gap:6px }
+  .artwork-stack  { gap:14px; margin-top:10px }
+  .artwork-meta   { padding:9px 12px 10px }
+  .color-grid { gap:6px }
+  .screen--create .big { font-size:clamp(1.3rem,8vw,1.9rem) }
+  .artist-divider { margin:14px 0 }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — EXTRA-SMALL ≤380px
+══════════════════════════════════════ */
+@media(max-width:380px) {
+  :root { --nav-h:44px; --bar-h:60px; --safe-bot:calc(var(--bar-h) + 36px) }
+  #hud-step { display:none }
+  .lang-btn { padding:4px 8px; font-size:.62rem }
+  .big { font-size:clamp(1.15rem,8.5vw,1.65rem) }
+  .chips { gap:5px }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SHORT VIEWPORT ≤680px tall
+   Landscape phone, split-screen tablet.
+   Gap-based spacing already helps; this
+   tightens the floor further.
+══════════════════════════════════════ */
+@media(max-height:680px) {
+  .screen { gap:clamp(4px,.9vh,10px) }
+  .big    { font-size:clamp(1.15rem,4.5vw,1.75rem); line-height:1.22 }
+  .sub    { line-height:1.6 }
+  .artwork-img-wrap { aspect-ratio:16/9 }  /* shorter image on short screens */
+  .color-grid-wrap { margin-top:6px }
+  .pause-visual    { width:40px; height:40px }
+  .close-badge     { width:48px; height:48px }
+}
+@media(max-height:520px) {
+  .screen { gap:clamp(3px,.7vh,7px) }
+  .big    { font-size:clamp(1.05rem,4vw,1.5rem); line-height:1.18 }
+  .sub    { line-height:1.5; font-size:clamp(.8rem,3.5vw,.9rem) }
+  .label  { font-size:clamp(.72rem,3vw,.82rem) }
+}
+
+/* ══════════════════════════════════════
+   RTL EXTRAS
+══════════════════════════════════════ */
+body.rtl #hud          { flex-direction:row-reverse }
+body.rtl #back-btn svg { transform:scaleX(-1) }
+body.rtl #progress     { flex-direction:row-reverse; direction:rtl }
+body.rtl #hud-lang     { flex-direction:row-reverse }
+</style>
+</head>
+<body class="dark">
+<script src="../js/app-init.js"></script>
+
+<!-- ══ HUD ══ -->
+<nav id="hud">
+  <a id="hud-back" href="../course.html">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="t-back">Back to Course</span>
+  </a>
+  <span id="hud-badge"><span id="t-unit">Personal Experience</span></span>
+  <div id="hud-spacer"></div>
+  <div id="hud-lang">
+    <button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button>
+    <button class="lang-btn"        onclick="setLang('he')" aria-label="עברית">עברית</button>
+  </div>
+  <span id="hud-step">1&thinsp;/&thinsp;9</span>
+</nav>
+
+<button id="fs-btn" title="Classroom mode" onclick="toggleFS()">⛶</button>
+
+<!-- ════════════════════ STAGE ════════════════════ -->
+<main id="stage">
+
+  <!-- ══ S0 — ENTER ══
+       Phase 1: atmosphere only, no tasks -->
+  <section class="screen active" id="s0" data-bg="#0d0d1a">
+    <div class="blob" style="width:500px;height:500px;background:var(--rose);top:-130px;left:-100px;opacity:.12"></div>
+    <div class="blob" style="width:340px;height:340px;background:var(--violet);bottom:-60px;right:-60px;opacity:.11;animation-delay:5s"></div>
+    <p class="label" id="t0-label">Personal Experience</p>
+    <h1 class="big" id="t0-big">Emotion, Color<br>and Mark</h1>
+    <div class="aline"></div>
+    <p class="sub" id="t0-sub">What color is an emotion?</p>
+  </section>
+
+  <!-- ══ S1 — ARTIST INSPIRATION ══
+       Phase 2: three artworks stacked vertically (Matisse, Van Gogh, Picasso).
+       No swipe — only CTA advances. Museum-pace vertical scroll. -->
+  <section class="screen screen--scroll" id="s1" data-bg="#0a0c10" data-no-swipe="true">
+    <div class="blob" style="width:360px;height:360px;background:var(--blue);top:-80px;right:-50px;opacity:.09;position:fixed;pointer-events:none"></div>
+
+    <p class="label" id="t1-label">A moment with art</p>
+
+    <div class="artwork-stack" id="artwork-stack">
+
+      <!-- Artwork 0: Matisse – The Red Room -->
+      <article class="artwork-card" id="aw0">
+        <div class="artwork-img-wrap" id="aw0-wrap">
+          <img
+            class="artwork-img"
+            src="images/matisse-red-room.jpg"
+            alt="Henri Matisse — The Red Room (Harmony in Red), 1908"
+            loading="lazy"
+            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
+          />
+        </div>
+        <div class="artwork-meta">
+          <p class="artwork-artist" id="aw0-artist">Henri Matisse &nbsp;·&nbsp; 1908</p>
+          <p class="artwork-caption" id="aw0-caption">Color can fill an entire room — and change everything you feel.</p>
+        </div>
+      </article>
+
+      <!-- Artwork 1: Van Gogh – Sunflowers -->
+      <article class="artwork-card" id="aw1">
+        <div class="artwork-img-wrap" id="aw1-wrap">
+          <img
+            class="artwork-img"
+            src="images/vangogh-sunflowers.jpg"
+            alt="Vincent van Gogh — Sunflowers, 1888"
+            loading="lazy"
+            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
+          />
+        </div>
+        <div class="artwork-meta">
+          <p class="artwork-artist" id="aw1-artist">Vincent van Gogh &nbsp;·&nbsp; 1888</p>
+          <p class="artwork-caption" id="aw1-caption">Energy and life — through a single color.</p>
+        </div>
+      </article>
+
+      <!-- Artwork 2: Picasso – The Old Guitarist -->
+      <article class="artwork-card" id="aw2">
+        <div class="artwork-img-wrap" id="aw2-wrap">
+          <img
+            class="artwork-img"
+            src="images/picasso-old-guitarist.jpg"
+            alt="Pablo Picasso — The Old Guitarist, 1903–1904"
+            loading="lazy"
+            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
+          />
+        </div>
+        <div class="artwork-meta">
+          <p class="artwork-artist" id="aw2-artist">Pablo Picasso &nbsp;·&nbsp; 1903–1904</p>
+          <p class="artwork-caption" id="aw2-caption">When one color dominates — it becomes a complete emotion.</p>
+        </div>
+      </article>
+
+    </div><!-- /artwork-stack -->
+  </section>
+
+  <!-- ══ S2 — COLOR GRID ══
+       Phase 2: pure color, 2×3 grid. No text. No swipe. -->
+  <section class="screen screen--grid" id="s2" data-bg="#0c0b09" data-no-swipe="true">
+    <div class="blob" style="width:400px;height:400px;background:var(--amber);top:-90px;right:-60px;opacity:.08;position:fixed;pointer-events:none"></div>
+
+    <p class="label" id="t2-label">Color is a language</p>
+    <p class="sub" id="t2-sub" style="margin-top:0;margin-bottom:0;color:var(--ts);font-size:clamp(.92rem,2.1vw,1.05rem);font-weight:400">Look. What do you feel?</p>
+
+    <div class="color-grid-wrap">
+      <div class="color-grid" id="color-grid" aria-label="Color fields">
+        <!-- Row 1 -->
+        <div class="color-sq" style="background:linear-gradient(145deg,#6e0d0d,#bf2020)" role="img" aria-label="Deep red"></div>
+        <div class="color-sq" style="background:linear-gradient(145deg,#091530,#1a3470)" role="img" aria-label="Deep blue"></div>
+        <!-- Row 2 -->
+        <div class="color-sq" style="background:linear-gradient(145deg,#876000,#c8a000)" role="img" aria-label="Yellow"></div>
+        <div class="color-sq" style="background:linear-gradient(145deg,#060608,#141418)" role="img" aria-label="Black"></div>
+        <!-- Row 3 -->
+        <div class="color-sq" style="background:linear-gradient(145deg,#6e1535,#b85070)" role="img" aria-label="Pink"></div>
+        <div class="color-sq" style="background:linear-gradient(145deg,#073a1e,#0f6634)" role="img" aria-label="Deep green"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S3 — EMOTION SELECTION ══
+       Phase 3: connect — after viewing art and color. -->
+  <section class="screen screen--scroll" id="s3" data-bg="#0d0d1a">
+    <div class="blob" style="width:420px;height:420px;background:var(--violet);bottom:-80px;left:-60px;opacity:.13"></div>
+    <p class="label" id="t3-label">What comes up?</p>
+    <h2 class="big" id="t3-big">Which emotions<br>are present right now?</h2>
+    <p class="sub" id="t3-sub">After what you saw — what comes up?</p>
+    <div class="chips" id="emo-chips">
+      <button class="chip" onclick="pickMulti(this)" id="ec0">Angry</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec1">Tender</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec2">Anxious</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec3">Calm</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec4">Heavy</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec5">Sad</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec6">Pride</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec7">Confused</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec8">Hope</button>
+      <button class="chip" onclick="pickMulti(this)" id="ec9">Lonely</button>
+    </div>
+  </section>
+
+  <!-- ══ S4 — FIRST MARK ══
+       Phase 4 Create — one breath per screen. -->
+  <section class="screen screen--create" id="s4" data-bg="#120f0a">
+    <div class="blob" style="width:460px;height:460px;background:var(--amber);bottom:-80px;right:-60px;opacity:.12"></div>
+    <p class="label" id="t4-label">First mark</p>
+    <h2 class="big" id="t4-big">Take a color that feels<br>right for your emotion.</h2>
+    <div class="aline" style="--accent-line:var(--amber)"></div>
+    <p class="sub" id="t4-sub">Place one mark on the page.<br>Don't think about placement.</p>
+  </section>
+
+  <!-- ══ S5 — EXPAND ══ -->
+  <section class="screen screen--create" id="s5" data-bg="#0a100d">
+    <div class="blob" style="width:420px;height:420px;background:var(--green);top:-70px;left:-60px;opacity:.11"></div>
+    <p class="label" id="t5-label">Expand</p>
+    <h2 class="big" id="t5-big">Add more marks.</h2>
+    <div class="aline" style="--accent-line:var(--green)"></div>
+    <p class="sub" id="t5-sub">Let them touch.<br>Move apart. Change.</p>
+  </section>
+
+  <!-- ══ S6 — MOVEMENT ══ -->
+  <section class="screen screen--create" id="s6" data-bg="#090e10">
+    <div class="blob" style="width:480px;height:480px;background:var(--teal);bottom:-90px;right:-65px;opacity:.1"></div>
+    <div class="blob" style="width:260px;height:260px;background:var(--violet);top:10%;left:5%;opacity:.09;animation-delay:6s"></div>
+    <p class="label" id="t6-label">Movement</p>
+    <h2 class="big" id="t6-big">Let the color move.</h2>
+    <div class="aline" style="--accent-line:var(--teal)"></div>
+    <p class="sub" id="t6-sub">Spread. Stop. Mix.</p>
+  </section>
+
+  <!-- ══ S7 — PAUSE ══
+       Strongest screen — keep almost unchanged. -->
+  <section class="screen" id="s7" data-bg="#0d0d1a">
+    <div class="blob" style="width:540px;height:540px;background:rgba(255,255,255,.016);top:-100px;right:-70px"></div>
+    <div class="blob" style="width:300px;height:300px;background:var(--violet);bottom:-50px;left:10%;opacity:.09;animation-delay:5s"></div>
+    <div class="pause-visual">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.28)" stroke-width="1.2" fill="none"/>
+        <line x1="9"  y1="8"  x2="9"  y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <line x1="15" y1="8"  x2="15" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="label" id="t7-label">Pause</p>
+    <h2 class="big" id="t7-big" style="font-size:clamp(1.8rem,5vw,3.4rem)">Pause for a moment.</h2>
+    <div class="aline"></div>
+    <p class="sub" id="t7-sub">Look at what was created.</p>
+  </section>
+
+  <!-- ══ S8 — CLOSING ══ -->
+  <section class="screen" id="s8" data-bg="#1a0a12">
+    <div class="blob" style="width:440px;height:440px;background:var(--rose);bottom:-80px;left:-60px;opacity:.13"></div>
+    <div class="blob" style="width:260px;height:260px;background:var(--gold);top:-45px;right:8%;opacity:.09;animation-delay:3s"></div>
+    <div class="close-badge">
+      <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
+        <path d="M6 17 Q11 9 17 17 Q23 25 28 17" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <circle cx="17" cy="17" r="11" stroke="white" stroke-width="1.4" opacity=".4" fill="none"/>
+      </svg>
+    </div>
+    <h2 class="big" id="t8-big">The painting doesn't<br>describe something.</h2>
+    <div class="aline" style="--accent-line:var(--rose)"></div>
+    <p class="sub" id="t8-sub">It creates a feeling.</p>
+    <div class="close-btns">
+      <a class="btn-outline" href="../course.html" id="t8-back-link">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="t8-back-lbl">Back to Course</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<div id="progress"></div>
+
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled aria-label="Previous">
+    <svg width="17" height="17" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Continue →</button>
+</div>
+
+<script src="js/lesson-system.js"></script>
+<script>
+/* ════════════════════════════════════════
+   STATE
+════════════════════════════════════════ */
+const TOTAL     = 9;
+const GOLD_FROM = 99;  /* gold CTA disabled — all screens use standard red */
+let cur    = 0;
+let busy   = false;
+let he     = (localStorage.getItem('sourcesLang') || 'en') === 'he';
+let touchX = 0;
+let touchY = 0;
+
+/* ════════════════════════════════════════
+   BILINGUAL STRINGS
+════════════════════════════════════════ */
+const T = {
+  en: {
+    back: 'Back to Course',
+    unit: 'Personal Experience',
+    s: [
+      /* s0 — Enter */
+      {
+        label:   'Personal Experience',
+        big:     'Emotion, Color<br>and Mark',
+        sub:     'What color is an emotion?'
+      },
+      /* s1 — Artist inspiration */
+      {
+        label:    'A moment with art',
+        artworks: [
+          {
+            artist:  'Henri Matisse · 1908',
+            caption: 'Color can fill an entire room — and change everything you feel.'
+          },
+          {
+            artist:  'Vincent van Gogh · 1888',
+            caption: 'Energy and life — through a single color.'
+          },
+          {
+            artist:  'Pablo Picasso · 1903–1904',
+            caption: 'When one color dominates — it becomes a complete emotion.'
+          }
+        ]
+      },
+      /* s2 — Color grid */
+      {
+        label: 'Color is a language',
+        sub:   'Look. What do you feel?'
+      },
+      /* s3 — Emotion selection */
+      {
+        label: 'What comes up?',
+        big:   'Which emotions<br>are present right now?',
+        sub:   'After what you saw — what comes up?',
+        chips: ['Angry','Tender','Anxious','Calm','Heavy','Sad','Pride','Confused','Hope','Lonely']
+      },
+      /* s4 — First mark */
+      {
+        label: 'First mark',
+        big:   'Take a color that feels<br>right for your emotion.',
+        sub:   "Place one mark on the page.<br>Don't think about placement."
+      },
+      /* s5 — Expand */
+      {
+        label: 'Expand',
+        big:   'Add more marks.',
+        sub:   'Let them touch.<br>Move apart. Change.'
+      },
+      /* s6 — Movement */
+      {
+        label: 'Movement',
+        big:   'Let the color move.',
+        sub:   'Spread. Stop. Mix.'
+      },
+      /* s7 — Pause */
+      {
+        label: 'Pause',
+        big:   'Pause for a moment.',
+        sub:   'Look at what was created.'
+      },
+      /* s8 — Closing */
+      {
+        big:     "The painting doesn't<br>describe something.",
+        sub:     'It creates a feeling.',
+        backLbl: 'Back to Course'
+      }
+    ],
+    btn: ['Continue','Continue','Continue','Choose','Continue','Continue','Continue','Continue','Finish']
+  },
+
+  he: {
+    back: 'חזרה לקורס',
+    unit: 'חוויה אישית',
+    s: [
+      /* s0 */
+      {
+        label: 'חוויה אישית',
+        big:   'רגש, צבע וכתם',
+        sub:   'איזה צבע הוא רגש?'
+      },
+      /* s1 */
+      {
+        label:    'רגע עם יצירה',
+        artworks: [
+          {
+            artist:  'אנרי מאטיס · 1908',
+            caption: 'צבע יכול למלא חדר שלם — ולשנות את כל התחושה.'
+          },
+          {
+            artist:  'וינסנט ואן גוך · 1888',
+            caption: 'אנרגיה וחיות — דרך צבע אחד בלבד.'
+          },
+          {
+            artist:  'פבלו פיקאסו · 1903–1904',
+            caption: 'כשצבע אחד שולט — הוא הופך לרגש שלם.'
+          }
+        ]
+      },
+      /* s2 */
+      {
+        label: 'צבע הוא שפה',
+        sub:   'הסתכלו. מה אתם מרגישים?'
+      },
+      /* s3 */
+      {
+        label: 'מה עולה?',
+        big:   'איזה רגשות נוכחים עכשיו?',
+        sub:   'אחרי מה שראיתם — מה עולה?',
+        chips: ['כועס','עדין','חרדה','רגוע','כבד','עצוב','גאווה','מבולבל','תקווה','בודד']
+      },
+      /* s4 */
+      {
+        label: 'כתם ראשון',
+        big:   'קחו צבע שמרגיש נכון<br>לרגש שבחרתם.',
+        sub:   'הניחו כתם אחד על הדף.<br>בלי לחשוב על מיקום.'
+      },
+      /* s5 */
+      {
+        label: 'הרחבה',
+        big:   'הוסיפו כתמים נוספים.',
+        sub:   'תנו להם לגעת.<br>להתרחק. להשתנות.'
+      },
+      /* s6 */
+      {
+        label: 'תנועה',
+        big:   'תנו לצבע לנוע.',
+        sub:   'להתפשט. להיעצר. להתערבב.'
+      },
+      /* s7 */
+      {
+        label: 'עצרו',
+        big:   'עצרו רגע.',
+        sub:   'הסתכלו על מה שנוצר.'
+      },
+      /* s8 */
+      {
+        big:     'הציור לא מתאר משהו.',
+        sub:     'הוא יוצר תחושה.',
+        backLbl: 'חזרה לקורס'
+      }
+    ],
+    btn: ['המשך','המשך','המשך','בחר','המשך','המשך','המשך','המשך','סיום']
+  }
+};
+
+/* ════════════════════════════════════════
+   LANGUAGE
+════════════════════════════════════════ */
+function setLang(l) {
+  he = (l === 'he');
+  localStorage.setItem('sourcesLang', l);
+  document.documentElement.lang = l;
+  document.body.classList.toggle('he',  he);
+  document.body.classList.toggle('rtl', he);
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.body.dir             = he ? 'rtl' : 'ltr';
+  const pg = document.getElementById('progress');
+  if (pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
+  });
+  applyStrings();
+  updateBtn();
+  updateHud();
+}
+
+function applyStrings() {
+  const d = T[he ? 'he' : 'en'];
+
+  /* HUD */
+  const bEl = document.getElementById('t-back');
+  if (bEl) bEl.textContent = d.back;
+  const uEl = document.getElementById('t-unit');
+  if (uEl) uEl.textContent = d.unit;
+
+  d.s.forEach((s, i) => {
+    const el = document.getElementById('s' + i);
+    if (!el) return;
+
+    /* label */
+    const lbl = el.querySelector('.label');
+    if (lbl && s.label !== undefined) lbl.textContent = s.label;
+
+    /* big heading */
+    const big = el.querySelector('.big');
+    if (big && s.big !== undefined) big.innerHTML = s.big;
+
+    /* sub — also handles screens with .sub but no .big (e.g. s2 color grid) */
+    const sub = el.querySelector('.sub');
+    if (sub && s.sub !== undefined) sub.innerHTML = s.sub;
+
+    /* artwork captions + section names (s1) */
+    if (s.artworks) {
+      s.artworks.forEach((aw, j) => {
+        const artistEl  = document.getElementById('aw' + j + '-artist');
+        const captionEl = document.getElementById('aw' + j + '-caption');
+        if (artistEl)  artistEl.textContent  = aw.artist;
+        if (captionEl) captionEl.textContent = aw.caption;
+      });
+    }
+    if (s.sec) {
+      s.sec.forEach((name, j) => {
+        const secEl = document.getElementById('t1-sec' + j);
+        if (secEl) secEl.textContent = name;
+      });
+    }
+
+    /* emotion chips (s3) */
+    if (s.chips) {
+      el.querySelectorAll('.chip').forEach((btn, j) => {
+        if (s.chips[j] !== undefined) btn.textContent = s.chips[j];
+      });
+    }
+
+    /* closing back label (s8) */
+    if (s.backLbl !== undefined) {
+      const bl = document.getElementById('t8-back-lbl');
+      if (bl) bl.textContent = s.backLbl;
+    }
+  });
+}
+
+/* ════════════════════════════════════════
+   HUD STEP COUNTER
+════════════════════════════════════════ */
+function updateHud() {
+  const el = document.getElementById('hud-step');
+  if (!el) return;
+  el.textContent = cur < TOTAL - 1 ? (cur + 1) + ' / ' + TOTAL : '✓';
+}
+
+/* ════════════════════════════════════════
+   DOTS + BUTTON
+════════════════════════════════════════ */
+function buildDots()   { LS_buildDots(TOTAL, go); }
+function refreshDots() { LS_refreshDots(cur); }
+function updateBtn() {
+  updateLessonBtn(
+    document.getElementById('next-btn'),
+    T[he ? 'he' : 'en'].btn,
+    cur, GOLD_FROM, he
+  );
+}
+
+/* ════════════════════════════════════════
+   BACKGROUND PER SCREEN
+════════════════════════════════════════ */
+function setBg(idx) {
+  const el = document.getElementById('s' + idx);
+  if (el) document.body.style.background = el.dataset.bg || '#0d0d1a';
+}
+
+/* ════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════ */
+function go(n) {
+  if (n < 0 || n >= TOTAL || busy) return;
+  busy = true;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.add('leaving');
+  setTimeout(() => {
+    prev.classList.remove('active', 'leaving');
+    cur = n;
+    const next = document.getElementById('s' + cur);
+    next.classList.add('active');
+    next.scrollTop = 0;
+    setBg(cur);
+    refreshDots();
+    updateBtn();
+    updateHud();
+    updateBackBtn();
+    busy = false;
+  }, 360);
+}
+
+function advance() {
+  if (busy) return;
+  if (cur === TOTAL - 1) finishLesson(); else go(cur + 1);
+}
+function goBack() {
+  if (!busy && cur > 0) go(cur - 1);
+}
+function updateBackBtn() {
+  document.getElementById('back-btn').disabled = (cur === 0);
+}
+
+/* ════════════════════════════════════════
+   MULTI-SELECT CHIPS
+════════════════════════════════════════ */
+function pickMulti(btn) { btn.classList.toggle('picked'); }
+
+/* ════════════════════════════════════════
+   FULLSCREEN
+════════════════════════════════════════ */
+function toggleFS() {
+  if (!document.fullscreenElement)
+    document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen();
+}
+
+/* ════════════════════════════════════════
+   KEYBOARD
+════════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+  if (e.key === ' ')          { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
+  if (e.key === 'f' || e.key === 'F') toggleFS();
+});
+
+/* ════════════════════════════════════════
+   TOUCH SWIPE
+   — Disabled on screens with data-no-swipe="true" (s1, s2)
+   — Vertical scroll also suppressed: |dy| > |dx| → ignore
+════════════════════════════════════════ */
+document.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+  touchY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  /* disable swipe on flagged screens */
+  const screenEl = document.getElementById('s' + cur);
+  if (screenEl && screenEl.dataset.noSwipe === 'true') return;
+
+  const dx = e.changedTouches[0].clientX - touchX;
+  const dy = e.changedTouches[0].clientY - touchY;
+
+  /* ignore if vertical scroll dominates */
+  if (Math.abs(dy) > Math.abs(dx)) return;
+  if (Math.abs(dx) < 52) return;
+
+  if (he) { if (dx > 0) advance(); else goBack(); }
+  else    { if (dx < 0) advance(); else goBack(); }
+}, { passive: true });
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+setLang(he ? 'he' : 'en');
+document.body.classList.remove('lang-loading');
+buildDots();
+refreshDots();
+updateBtn();
+setBg(0);
+updateBackBtn();
+</script>
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>What Colour Is Sadness? — Sources of Inspiration</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+textarea{font-family:inherit;outline:none;border:none;resize:none}
+
+:root{
+  --gold:#c9a96e;
+  --rose:#FF4D4D;
+  --violet:#7c6fcd;
+  --ink:#0f0f10;
+  --u1:#FF4D4D;
+  --speed:600ms;
+  --tp:#ffffff;
+  --ts:#cfcfcf;
+  --tm:#8a8a8a;
+}
+
+/* ── BODY FONT by lang ── */
+body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--tp)}
+[lang="he"] body, body[dir="rtl"]{font-family:'Heebo',sans-serif}
+
+/* ════════════════════════════════
+   STAGE
+════════════════════════════════ */
+#stage{
+  position:fixed;inset:0;
+  overflow:hidden;
+}
+/* Screens that have lots of content: top-aligned + scrollable */
+.screen--scroll{
+  justify-content:flex-start !important;
+  padding-top:72px !important;
+  padding-bottom:120px !important;
+}
+
+/* ════════════════════════════════
+   SCREENS — full viewport, one at a time
+════════════════════════════════ */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:68px 32px 100px;
+  text-align:center;
+  opacity:0;pointer-events:none;
+  transform:translateY(36px) scale(.985);
+  transition:opacity var(--speed) ease,
+             transform var(--speed) cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{
+  opacity:1;pointer-events:all;
+  transform:translateY(0) scale(1);
+}
+.screen.leaving{
+  opacity:0;
+  transform:translateY(-28px) scale(1.01);
+  transition:opacity 380ms ease,
+             transform 380ms cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+
+/* ── Ambient BG ── */
+.bg{
+  position:absolute;inset:0;z-index:0;
+  pointer-events:none;overflow:hidden;
+}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(100px);
+  animation:bfloat 14s ease-in-out infinite;
+}
+@keyframes bfloat{
+  0%,100%{transform:translate(0,0)}
+  40%{transform:translate(28px,-22px)}
+  70%{transform:translate(-18px,18px)}
+}
+
+/* ── Content wrapper ── */
+.sc{
+  position:relative;z-index:2;
+  max-width:680px;width:100%;
+}
+
+/* ── Step eyebrow ── */
+.eyebrow{
+  font-size:.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  color:var(--tm);
+  margin-bottom:36px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+}
+.ey-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent,var(--gold));
+  animation:pulse 2.8s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.4);opacity:.9}}
+
+/* ── BIG TEXT ── */
+.big{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1.7rem,4.5vw,3.2rem);
+  font-weight:700;color:var(--tp);line-height:1.28;
+  letter-spacing:-.02em;
+  margin-bottom:0;
+}
+.big em{font-style:normal;color:var(--gold)}
+[dir="rtl"] .big{letter-spacing:0}
+
+.mid{
+  font-size:clamp(1.15rem,3vw,2rem);
+  font-family:'Sora',sans-serif;font-weight:600;
+  color:var(--ts);line-height:1.45;margin-bottom:0;
+}
+
+/* ── SUB TEXT ── */
+.sub{
+  font-size:clamp(.92rem,2vw,1.08rem);
+  color:var(--tm);line-height:2.1;
+  max-width:480px;margin:0 auto;
+  font-weight:300;
+}
+
+/* ── GALLERY RHYTHM — vertical spacing between text blocks ── */
+.big + .aline  { margin-top:32px }
+.big + .sub    { margin-top:28px }
+.mid + .aline  { margin-top:26px }
+.mid + .sub    { margin-top:20px }
+.aline + .sub  { margin-top:0 }
+.aline + .mid  { margin-top:0 }
+.sub  + .choices { margin-top:36px }
+
+/* ── ACCENT LINE ── */
+.aline{
+  width:28px;height:1.5px;border-radius:2px;
+  background:var(--gold);opacity:.6;
+  margin:28px auto;
+  animation:lineGrow .9s ease forwards;
+  transform-origin:center;
+}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ── CHOICE GRID ── */
+.choices{
+  display:flex;flex-wrap:wrap;
+  gap:11px;justify-content:center;
+  margin-top:28px;
+}
+.choice-btn{
+  padding:11px 22px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  font-size:.9rem;font-weight:600;color:var(--ts);
+  transition:all .22s;
+  display:flex;align-items:center;gap:8px;
+}
+.choice-btn:hover{
+  background:rgba(255,255,255,.11);
+  border-color:rgba(255,255,255,.28);color:var(--tp);
+  transform:translateY(-2px);
+}
+.choice-btn.picked{
+  background:rgba(255,77,77,.14);
+  border-color:var(--rose);
+  color:var(--tp);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+/* ── COLOUR SWATCHES ── */
+.swatches{
+  display:flex;flex-wrap:wrap;gap:14px;
+  justify-content:center;margin-top:28px;
+}
+.swatch{
+  width:52px;height:52px;border-radius:50%;
+  border:3px solid transparent;
+  transition:all .2s;transform:scale(.88);cursor:pointer;
+  position:relative;
+}
+.swatch:hover{transform:scale(1.05)}
+.swatch.picked{
+  border-color:#fff;transform:scale(1.18);
+  box-shadow:0 0 20px rgba(255,255,255,.25);
+}
+.swatch-name{
+  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  font-size:.58rem;font-weight:700;color:var(--tm);
+  white-space:nowrap;pointer-events:none;
+}
+
+/* ── RESPONSE TEXT ── */
+.resp{
+  margin-top:20px;font-size:.92rem;
+  color:var(--tm);min-height:22px;
+  transition:all .4s ease;font-style:italic;
+}
+
+/* ── REFLECTION TEXTAREA ── */
+.ref-wrap{margin:20px auto 0;width:100%;max-width:540px}
+.ref-ta{
+  width:100%;min-height:120px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:16px 18px;
+  font-size:.97rem;color:var(--tp);line-height:1.75;
+  transition:.2s;
+}
+.ref-ta:focus{
+  border-color:rgba(201,169,110,.35);
+  background:rgba(255,255,255,.08);
+}
+.ref-ta::placeholder{color:var(--tm)}
+.ref-save{
+  margin-top:12px;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 24px;border-radius:10px;
+  background:#FF4D4D;color:#fff;
+  font-size:.86rem;font-weight:700;transition:.2s;
+}
+.ref-save:hover{background:#e03333;transform:translateY(-1px)}
+.saved-ok{
+  display:none;align-items:center;gap:6px;
+  margin-top:10px;padding:9px 16px;
+  background:rgba(255,255,255,.06);color:var(--ts);
+  border:1px solid rgba(255,255,255,.12);border-radius:9px;
+  font-size:.82rem;font-weight:600;
+}
+.saved-ok.show{display:inline-flex}
+
+/* ════════════════════════════════
+   HUD
+════════════════════════════════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:52px;padding:0 18px;
+  display:flex;align-items:center;
+  gap:12px;
+  background:rgba(13,13,26,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+[dir="rtl"] #hud{flex-direction:row-reverse}
+#hud-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:.78rem;color:var(--tm);
+  text-decoration:none;transition:.2s;flex-shrink:0;
+}
+#hud-back:hover{color:var(--tp)}
+[dir="rtl"] #hud-back svg{transform:scaleX(-1)}
+#hud-badge{
+  padding:4px 12px;border-radius:20px;
+  background:rgba(255,77,77,.1);color:#FF4D4D;
+  font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;
+  flex-shrink:0;
+}
+#hud-spacer{flex:1}
+#hud-step{
+  font-size:.72rem;font-weight:700;color:var(--tm);
+  flex-shrink:0;
+}
+
+/* Language toggle */
+#lang-toggle{
+  display:flex;align-items:center;gap:0;
+  background:rgba(255,255,255,.07);
+  border-radius:8px;overflow:hidden;flex-shrink:0;
+}
+.lang-btn{
+  padding:5px 11px;font-size:.72rem;font-weight:700;
+  color:var(--tm);background:transparent;
+  transition:.2s;border:none;cursor:pointer;
+}
+.lang-btn.active{
+  background:rgba(201,169,110,.18);color:var(--gold);
+}
+
+/* Classroom btn */
+#cls-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:7px;
+  background:rgba(255,255,255,.07);color:var(--tm);
+  font-size:.7rem;font-weight:700;transition:.2s;flex-shrink:0;
+}
+#cls-btn:hover{background:rgba(255,255,255,.13);color:#fff}
+
+/* ── PROGRESS ── */
+#prog{
+  position:fixed;top:52px;left:0;right:0;z-index:199;
+  height:3px;background:rgba(255,255,255,.06);
+}
+#prog-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--rose),var(--gold));
+  transition:width .55s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px rgba(232,93,117,.4);
+}
+#prog-dots{
+  position:fixed;top:52px;left:0;right:0;z-index:198;
+  height:3px;pointer-events:none;
+}
+.pdot{
+  position:absolute;top:-3.5px;transform:translateX(-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:rgba(255,255,255,.07);
+  border:2px solid rgba(255,255,255,.1);
+  transition:.3s;cursor:pointer;pointer-events:all;
+}
+.pdot.done{background:rgba(201,168,76,.7);border-color:var(--gold)}
+.pdot.now{background:var(--rose);border-color:var(--rose);box-shadow:0 0 9px rgba(232,93,117,.6)}
+
+/* ════════════════════════════════
+   NAV BUTTONS — bottom fixed bar
+════════════════════════════════ */
+#nav-bar{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:300;
+  display:flex;align-items:center;gap:12px;
+}
+[dir="rtl"] #nav-bar{flex-direction:row-reverse}
+
+#back-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;
+  background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  color:rgba(255,255,255,.7);
+  font-size:1.2rem;
+  transition:all .22s;
+  flex-shrink:0;
+}
+#back-btn:hover{background:rgba(255,255,255,.18);color:#fff;transform:scale(1.07)}
+#back-btn:disabled{opacity:.2;cursor:default;pointer-events:none}
+[dir="rtl"] #back-btn svg{transform:scaleX(-1)}
+
+#next-btn{
+  padding:15px 52px;
+  background:#FF4D4D;
+  color:#fff;
+  font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;
+  border-radius:50px;letter-spacing:.03em;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+  transition:all .25s;
+  white-space:nowrap;
+}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+#next-btn.gold-btn{
+  background:#FF4D4D;color:#fff;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+}
+#next-btn.gold-btn:hover{background:#e03333;transform:translateY(-3px)}
+
+/* hint hidden now */
+#hint{display:none}
+
+/* ════════════════════════════════
+   GALLERY — artwork display
+════════════════════════════════ */
+
+/* Outer wrapper — sets the gallery atmosphere */
+.gallery-wrap{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0 0 4px;
+}
+
+/* The artwork card itself */
+.artwork-card{
+  width:100%;
+  max-width:90vw;
+  margin:0 auto;
+  border-radius:4px;
+  overflow:visible;           /* let shadow breathe outside */
+  position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),
+             0 4px  18px rgba(0,0,0,.35),
+             0 0 80px rgba(201,169,110,.08);
+  animation:artFloat 6s ease-in-out infinite alternate;
+}
+@keyframes artFloat{
+  from{transform:translateY(0px)}
+  to  {transform:translateY(-5px)}
+}
+
+/* The image — full artwork, no crop */
+.artwork-card img{
+  width:100%;
+  height:auto;
+  max-height:70vh;
+  display:block;
+  object-fit:contain;
+  border-radius:3px;
+  background:#141420;        /* near-ink fill for letterbox areas */
+}
+
+/* Museum label — sits below the card, outside it */
+.artwork-meta{
+  margin-top:18px;
+  text-align:center;
+  padding:0 8px;
+}
+.artwork-meta-artist{
+  font-size:.65rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--tm);
+  margin-bottom:5px;
+}
+.artwork-meta-title{
+  font-size:.82rem;
+  font-weight:400;
+  font-style:italic;
+  color:var(--ts);
+  letter-spacing:.01em;
+}
+.artwork-meta-year{
+  font-size:.72rem;
+  color:var(--tm);
+  margin-left:7px;
+  font-style:normal;
+}
+
+/* Bilingual emotion caption */
+.artwork-caption{
+  font-size:.75rem;
+  color:var(--tm);
+  font-style:italic;
+  line-height:1.7;
+  margin-top:14px;
+  max-width:360px;
+  text-align:center;
+}
+[dir="rtl"] .artwork-caption{ text-align:center }
+[dir="rtl"] .artwork-meta-year{ margin-left:0; margin-right:7px }
+
+/* ════════════════════════════════
+   COMPLETE SCREEN
+════════════════════════════════ */
+.complete-icon{
+  width:76px;height:76px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#d4b87a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin:0 auto 22px;
+  box-shadow:0 0 36px rgba(201,169,110,.2);
+}
+.complete-btns{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:12px;
+  background:#FF4D4D;
+  color:#fff;font-size:.9rem;font-weight:700;
+  text-decoration:none;transition:.2s;
+}
+.btn-gold:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 24px;border-radius:12px;
+  background:transparent;color:var(--ts);
+  border:1.5px solid rgba(255,255,255,.15);
+  font-size:.9rem;font-weight:600;
+  cursor:pointer;transition:.2s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.35);color:var(--tp)}
+
+/* ════════════════════════════════
+   RTL adjustments
+════════════════════════════════ */
+[dir="rtl"] .eyebrow{flex-direction:row-reverse}
+[dir="rtl"] .choices{direction:rtl}
+[dir="rtl"] .complete-btns{flex-direction:row-reverse}
+/* Text alignment */
+[dir="rtl"] .big,
+[dir="rtl"] .sub  { text-align:right; }
+[dir="rtl"] .eyebrow { justify-content:flex-end; }
+[dir="rtl"] .aline { margin-left:auto; margin-right:0; }
+/* Lang toggle — עב button appears on right in RTL */
+[dir="rtl"] #lang-toggle { flex-direction:row-reverse; }
+/* Lang toggle — עב button appears on right in RTL */
+[dir="rtl"] #lang-toggle { flex-direction:row-reverse; }
+
+/* ════════════════════════════════
+   MOBILE
+════════════════════════════════ */
+@media(max-width:540px){
+  .screen{padding:62px 22px 95px}
+  .big{font-size:clamp(1.6rem,8vw,2.4rem)}
+  #next-btn{padding:13px 36px;font-size:.9rem}
+  .swatch{width:40px;height:40px}
+  #cls-btn span{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HUD ══ -->
+<header id="hud">
+  <a href="course.html" id="hud-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Course" data-he="הקורס">Course</span>
+  </a>
+  <div id="hud-badge"><span data-en="Unit 01 · Emotion" data-he="יחידה 01 · רגש">Unit 01 · Emotion</span></div>
+  <div id="hud-spacer"></div>
+  <span id="hud-step">1 / 9</span>
+
+  <!-- Language Toggle -->
+  <div id="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">עב</button>
+  </div>
+
+  <!-- Classroom Mode -->
+  <button id="cls-btn" onclick="toggleClassroom()">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 4V1h3M9 1h3v3M12 9v3H9M4 12H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Classroom" data-he="מצב כיתה">Classroom</span>
+  </button>
+</header>
+
+<!-- ══ PROGRESS ══ -->
+<div id="prog"><div id="prog-fill"></div></div>
+<div id="prog-dots"></div>
+
+<!-- ════════════════════════════════
+     STAGE
+════════════════════════════════ -->
+<main id="stage">
+
+<!-- ── S1: Big Question ── -->
+<section class="screen active" id="s1" style="--accent:var(--gold);--accent-rgb:201,168,76">
+  <div class="bg">
+    <div class="blob" style="width:580px;height:580px;background:#c9a96e;opacity:.09;top:-160px;left:-120px;animation-delay:0s"></div>
+    <div class="blob" style="width:380px;height:380px;background:#e85d75;opacity:.08;bottom:-60px;right:-60px;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="Opening · Lesson 1.1" data-he="פתיחה · שיעור 1.1">Opening · Lesson 1.1</span></div>
+    <h1 class="big" data-en="What Colour<br>Is <em>Sadness?</em>" data-he="איזה צבע<br>הוא <em>עצב?</em>">What Colour<br>Is <em>Sadness?</em></h1>
+    <div class="aline"></div>
+    <p class="sub" data-en="Before you think — what colour comes to mind right now?" data-he="לפני שאתה חושב — איזה צבע עולה לך עכשיו בראש?">Before you think — what colour comes to mind right now?</p>
+  </div>
+</section>
+
+<!-- ── S2: Choose Your Colour ── -->
+<section class="screen screen--scroll" id="s2" style="--accent:var(--rose);--accent-rgb:232,93,117">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#e85d75;opacity:.1;top:-100px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#7c6fcd;opacity:.1;bottom:-40px;left:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-en="Your Instinct" data-he="האינסטינקט שלך">Your Instinct</span></div>
+    <h2 class="mid" data-en="Choose <em style='color:var(--gold)'>your colour</em><br>for sadness." data-he="בחר <em style='color:var(--gold)'>את הצבע שלך</em><br>לעצב.">Choose <em style="color:var(--gold)">your colour</em><br>for sadness.</h2>
+    <div class="aline" style="background:var(--rose)"></div>
+    <div class="swatches" id="colour-swatches">
+      <button class="swatch" style="background:#1e3a7a" onclick="pickColour(this,'Deep Blue','#1e3a7a','כחול עמוק')"><span class="swatch-name" data-en="Deep Blue" data-he="כחול עמוק">Deep Blue</span></button>
+      <button class="swatch" style="background:#5c7cba" onclick="pickColour(this,'Steel','#5c7cba','פלדה')"><span class="swatch-name" data-en="Steel" data-he="פלדה">Steel</span></button>
+      <button class="swatch" style="background:#7c3aed" onclick="pickColour(this,'Violet','#7c3aed','סגול')"><span class="swatch-name" data-en="Violet" data-he="סגול">Violet</span></button>
+      <button class="swatch" style="background:#e85d75" onclick="pickColour(this,'Rose','#e85d75','ורד')"><span class="swatch-name" data-en="Rose" data-he="ורד">Rose</span></button>
+      <button class="swatch" style="background:#c9a96e" onclick="pickColour(this,'Gold','#c9a96e','זהב')"><span class="swatch-name" data-en="Gold" data-he="זהב">Gold</span></button>
+      <button class="swatch" style="background:#3a3a5a" onclick="pickColour(this,'Dark','#3a3a5a','כהה')"><span class="swatch-name" data-en="Dark" data-he="כהה">Dark</span></button>
+      <button class="swatch" style="background:#6b8c7a" onclick="pickColour(this,'Sage','#6b8c7a','ירוק אפור')"><span class="swatch-name" data-en="Sage" data-he="ירוק אפור">Sage</span></button>
+      <button class="swatch" style="background:#e0dcd0" onclick="pickColour(this,'Pale','#e0dcd0','בהיר')"><span class="swatch-name" data-en="Pale" data-he="בהיר">Pale</span></button>
+    </div>
+    <p class="resp" id="colour-resp"></p>
+  </div>
+</section>
+
+<!-- ── S3: Why Colour? ── -->
+<section class="screen" id="s3" style="--accent:#a8c0e8;--accent-rgb:168,192,232">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#a8c0e8;opacity:.08;top:-80px;left:-60px;animation-delay:1s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.1;bottom:-30px;right:5%;animation-delay:7s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#a8c0e8"></div><span data-en="The Insight" data-he="התובנה">The Insight</span></div>
+    <h2 class="big" style="font-size:clamp(1.5rem,4vw,2.8rem);" data-en='"I paint what I <em>felt</em> —<br>not what I saw."' data-he='"אני מצייר את מה שהרגשתי —<br>לא את מה שראיתי."'>"I paint what I <em>felt</em> —<br>not what I saw."</h2>
+    <div class="aline" style="background:#a8c0e8"></div>
+    <p class="sub" data-en="— Edvard Munch" data-he="— אדוורד מונק">— Edvard Munch</p>
+  </div>
+</section>
+
+<!-- ── S4: Look at Munch ── -->
+<section class="screen screen--scroll" id="s4" style="--accent:var(--rose);--accent-rgb:232,93,117">
+  <div class="bg">
+    <div class="blob" style="width:600px;height:600px;background:#e85d75;opacity:.08;top:-120px;right:-100px;animation-delay:3s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c9a96e;opacity:.07;bottom:-40px;left:0;animation-delay:8s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-en="Look Closely" data-he="הסתכל מקרוב">Look Closely</span></div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img src="lessons/images/munch-scream.jpg" alt="The Scream by Edvard Munch, 1893" loading="lazy"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Edvard Munch</div>
+        <div class="artwork-meta-title" data-en="The Scream" data-he="הצעקה">The Scream<span class="artwork-meta-year">1893</span></div>
+      </div>
+      <p class="artwork-caption" data-en="The color here does not describe reality — it describes emotion." data-he="הצבע כאן לא מתאר מציאות — הוא מתאר רגש.">The color here does not describe reality — it describes emotion.</p>
+    </div>
+    <div class="aline" style="background:var(--rose)"></div>
+    <p class="sub" data-en="What colours do you see? What do they make you feel?" data-he="אילו צבעים אתה רואה? מה הם גורמים לך להרגיש?">What colours do you see? What do they make you feel?</p>
+    <div class="choices" id="munch-choices">
+      <button class="choice-btn" onclick="pick(this)" data-en="Anxious" data-he="חרדה">Anxious</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="Lonely" data-he="בדידות">Lonely</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="Terrified" data-he="אימה">Terrified</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="Alive" data-he="חי">Alive</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="Trapped" data-he="לכוד">Trapped</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── S5: Rothko ── -->
+<section class="screen" id="s5" style="--accent:#c97cc9;--accent-rgb:201,124,201">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.1;top:-100px;left:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:320px;height:320px;background:#7c6fcd;opacity:.09;bottom:-50px;right:5%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#c97cc9"></div><span data-en="Think About This" data-he="חשוב על זה">Think About This</span></div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img src="lessons/images/rothko-colorfield.jpg" alt="Color Field Painting by Mark Rothko" loading="lazy"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Mark Rothko</div>
+        <div class="artwork-meta-title" data-en="Color Field Painting" data-he="ציור שדה צבע">Color Field Painting<span class="artwork-meta-year">c. 1949</span></div>
+      </div>
+      <p class="artwork-caption" data-en="The color here does not describe reality — it describes emotion." data-he="הצבע כאן לא מתאר מציאות — הוא מתאר רגש.">The color here does not describe reality — it describes emotion.</p>
+    </div>
+    <h2 class="mid" data-en="Rothko wanted people to <em style='color:var(--gold)'>cry</em><br>in front of his paintings." data-he="רוטקו רצה שאנשים <em style='color:var(--gold)'>יבכו</em><br>מול ציוריו.">Rothko wanted people to <em style="color:var(--gold)">cry</em><br>in front of his paintings.</h2>
+    <div class="aline" style="background:#c97cc9"></div>
+    <p class="sub" data-en="Can colour alone carry emotion — with no shapes, no story?" data-he="האם צבע לבדו יכול לשאת רגש — ללא צורות, ללא סיפור?">Can colour alone carry emotion — with no shapes, no story?</p>
+    <div class="choices" id="rothko-q">
+      <button class="choice-btn" onclick="pick(this)" data-en="Yes — I've felt it" data-he="כן — הרגשתי את זה">Yes — I've felt it</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="I'm not sure" data-he="לא בטוח">I'm not sure</button>
+      <button class="choice-btn" onclick="pick(this)" data-en="No — I need more" data-he="לא — אני צריך יותר">No — I need more</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── S6: Studio Instructions ── -->
+<section class="screen screen--scroll" id="s6" style="--accent:var(--gold);--accent-rgb:201,168,76">
+  <div class="bg">
+    <div class="blob" style="width:560px;height:560px;background:#c9a96e;opacity:.09;top:-120px;right:-100px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#e85d75;opacity:.07;bottom:-40px;left:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="Studio · 20 minutes" data-he="סטודיו · 20 דקות">Studio · 20 minutes</span></div>
+    <h2 class="big" data-en="Create your<br><em>Emotion Palette.</em>" data-he="צור את<br><em>לוח הרגשות שלך.</em>">Create your<br><em>Emotion Palette.</em></h2>
+    <div class="aline"></div>
+    <p class="sub" data-en="Choose 4 emotions. Give each one a colour.<br>Then paint an abstract composition using only those colours." data-he="בחר 4 רגשות. תן לכל אחד צבע.<br>לאחר מכן צייר קומפוזיציה מופשטת עם הצבעים האלה בלבד.">Choose 4 emotions. Give each one a colour.<br>Then paint an abstract composition using only those colours.</p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap">
+      <div style="padding:11px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:.83rem;color:#8A8A8A;" data-en="1 · Choose emotions" data-he="1 · בחר רגשות">1 · Choose emotions</div>
+      <div style="padding:11px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:.83rem;color:#8A8A8A;" data-en="2 · Assign colours" data-he="2 · שייך צבעים">2 · Assign colours</div>
+      <div style="padding:11px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:.83rem;color:#8A8A8A;" data-en="3 · Paint abstract" data-he="3 · צייר מופשט">3 · Paint abstract</div>
+      <div style="padding:11px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:.83rem;color:#8A8A8A;" data-en="4 · Give it a title" data-he="4 · תן לו כותרת">4 · Give it a title</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S7: Timer ── -->
+<section class="screen" id="s7" style="--accent:var(--gold);--accent-rgb:201,168,76">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c9a96e;opacity:.1;top:-100px;left:-80px;animation-delay:0s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#e85d75;opacity:.08;bottom:-30px;right:8%;animation-delay:4s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="You have 20 minutes" data-he="יש לך 20 דקות">You have 20 minutes</span></div>
+    <div id="timer-display" style="font-family:'Sora',sans-serif;font-size:clamp(4rem,14vw,8rem);font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1;margin-bottom:12px;transition:color .3s">20:00</div>
+    <div style="width:280px;height:5px;background:rgba(255,255,255,.07);border-radius:4px;margin:0 auto 24px">
+      <div id="timer-bar" style="height:100%;width:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--rose));transition:width .8s linear"></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button id="timer-start" onclick="toggleTimer()" style="padding:11px 28px;background:var(--gold);color:#0d0d1a;border-radius:10px;font-size:.9rem;font-weight:800;transition:.2s" data-en="▶ Start" data-he="▶ התחל">▶ Start</button>
+      <button onclick="resetTimer()" style="padding:11px 20px;background:rgba(255,255,255,.08);color:#8A8A8A;border-radius:10px;font-size:.9rem;font-weight:700;transition:.2s" data-en="↺ Reset" data-he="↺ אפס">↺ Reset</button>
+    </div>
+    <p style="margin-top:20px;font-size:.83rem;color:var(--tm)" data-en="Draw while the timer runs. Don't stop." data-he="צייר בזמן שהטיימר רץ. אל תעצור.">Draw while the timer runs. Don't stop.</p>
+  </div>
+</section>
+
+<!-- ── S8: Reflection ── -->
+<section class="screen" id="s8" style="--accent:var(--violet);--accent-rgb:124,111,205">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#7c6fcd;opacity:.1;top:-80px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:270px;height:270px;background:#c97cc9;opacity:.09;bottom:-20px;left:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--violet)"></div><span data-en="Reflection" data-he="הרהור">Reflection</span></div>
+    <h2 class="mid" data-en="Look at what you made.<br>Does it <em style='color:var(--gold)'>surprise you?</em>" data-he="הסתכל על מה שיצרת.<br>האם זה <em style='color:var(--gold)'>מפתיע אותך?</em>">Look at what you made.<br>Does it <em style="color:var(--gold)">surprise you?</em></h2>
+    <div class="aline" style="background:var(--violet)"></div>
+    <div class="ref-wrap">
+      <textarea class="ref-ta" id="ref-text" rows="4" data-placeholder-en="Write anything — what felt true, what surprised you…" data-placeholder-he="כתוב כל דבר — מה הרגיש נכון, מה הפתיע אותך..."></textarea>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="ref-save" onclick="saveRef()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-en="Save" data-he="שמור">Save</span>
+        </button>
+        <span class="saved-ok" id="saved-ok">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-en="Saved" data-he="נשמר">Saved</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S9: Complete ── -->
+<section class="screen" id="s9" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
+    <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.07;bottom:-60px;right:-60px;animation-delay:4s"></div>
+    <div class="blob" style="width:200px;height:200px;background:#7c6fcd;opacity:.1;top:35%;right:12%;animation-delay:2s"></div>
+  </div>
+  <div class="sc">
+    <div class="complete-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3l2.8 8.6H25l-7 5 2.7 8.4L14 20l-6.7 5 2.7-8.4-7-5h8.2L14 3z" fill="rgba(255,255,255,.9)"/>
+      </svg>
+    </div>
+    <h2 class="big" style="font-size:clamp(1.6rem,4.5vw,3rem)" data-en="Lesson <em>Complete</em>" data-he="שיעור <em>הושלם</em>">Lesson <em>Complete</em></h2>
+    <div class="aline"></div>
+    <p class="sub" data-en="You explored colour as emotional language.<br>In the next lesson we go deeper into Munch." data-he="חקרת צבע כשפה רגשית.<br>בשיעור הבא נעמיק לתוך עולמו של מונק.">You explored colour as emotional language.<br>In the next lesson we go deeper into Munch.</p>
+    <div class="complete-btns">
+      <a href="course.html" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l6 6-6 6M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-en="All Units" data-he="כל היחידות">All Units</span>
+      </a>
+      <button class="btn-ghost" onclick="go(1)">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M11 2.5A5.5 5.5 0 102 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M1 7V11h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-en="Review" data-he="חזור">Review</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ NAV BAR ══ -->
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled title="Back">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Begin →</button>
+</div>
+
+<script>
+// ════════════════════════════
+// STATE
+// ════════════════════════════
+const TOTAL = 9;
+let cur = 1;
+let busy = false;
+let lang = localStorage.getItem('sourcesLang') || localStorage.getItem('lesson-lang') || 'en';
+
+// Timer
+let timerOn = false;
+let timerSec = 20 * 60;
+let timerInt = null;
+const TIMER_TOTAL = 20 * 60;
+
+// ════════════════════════════
+// BUTTON CONFIG
+// ════════════════════════════
+const BTN = {
+  en:{
+    1:'I\'m ready →', 2:'That\'s my colour →', 3:'I understand →',
+    4:'I see it →', 5:'I\'ve thought about it →', 6:'I\'m ready to create →',
+    7:'Done drawing →', 8:'I\'ve reflected →', 9:null
+  },
+  he:{
+    1:'← אני מוכן', 2:'← זה הצבע שלי', 3:'← הבנתי',
+    4:'← אני רואה את זה', 5:'← חשבתי על זה', 6:'← אני מוכן ליצור',
+    7:'← סיימתי לצייר', 8:'← הרהרתי', 9:null
+  }
+};
+const GOLD_FROM = 7;
+
+// ════════════════════════════
+// INIT
+// ════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildDots();
+  applyLang();
+  updateProgress();
+  updateBtn();
+  loadRef();
+});
+
+// ════════════════════════════
+// LANGUAGE
+// ════════════════════════════
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('sourcesLang', l);  // shared key
+  localStorage.setItem('lesson-lang', l);
+  applyLang();
+  updateBtn();
+}
+
+function applyLang() {
+  const isHe = lang === 'he';
+  document.documentElement.lang = lang;
+  document.body.dir = isHe ? 'rtl' : 'ltr';
+  document.body.style.fontFamily = isHe ? "'Heebo', sans-serif" : "'Inter', sans-serif";
+
+  // Toggle lang buttons
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', 
+      (b.textContent.trim() === 'EN' && !isHe) ||
+      (b.textContent.trim() === 'עב' && isHe)
+    );
+  });
+
+  // Swap all [data-en] / [data-he] text
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute(`data-${lang}`);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+
+  // Textarea placeholder
+  const ta = document.getElementById('ref-text');
+  if (ta) {
+    ta.placeholder = ta.getAttribute(`data-placeholder-${lang}`) || '';
+  }
+
+  // hint
+  const hint = document.getElementById('hint');
+  if (hint) hint.textContent = isHe ? '→ או רווח להמשך' : '→ or Space to advance';
+}
+
+// ════════════════════════════
+// NAVIGATION
+// ════════════════════════════
+function advance() {
+  if (busy || cur >= TOTAL) return;
+  go(cur + 1);
+}
+
+function goBack() {
+  if (busy || cur <= 1) return;
+  go(cur - 1);
+}
+
+function go(n) {
+  if (busy || n < 1 || n > TOTAL) return;
+  busy = true;
+
+  const prev = document.getElementById(`s${cur}`);
+  prev.classList.remove('active');
+  prev.classList.add('leaving');
+  setTimeout(() => prev.classList.remove('leaving'), 420);
+
+  cur = n;
+  setTimeout(() => {
+    const next = document.getElementById(`s${cur}`);
+    next.scrollTop = 0;
+    next.classList.add('active');
+    busy = false;
+  }, 80);
+
+  updateProgress();
+  updateDots();
+  updateBtn();
+  document.getElementById('hud-step').textContent = `${cur} / ${TOTAL}`;
+}
+
+// ════════════════════════════
+// PROGRESS
+// ════════════════════════════
+function updateProgress() {
+  const pct = ((cur - 1) / (TOTAL - 1)) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+function buildDots() {
+  const wrap = document.getElementById('prog-dots');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'pdot'; d.id = `dot-${i}`;
+    d.style.left = ((i-1)/(TOTAL-1)*100) + '%';
+    d.style.cursor = 'pointer';
+    d.onclick = () => go(i);
+    wrap.appendChild(d);
+  }
+  updateDots();
+}
+function updateDots() {
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.getElementById(`dot-${i}`);
+    if (!d) continue;
+    d.classList.remove('done','now');
+    if (i < cur) d.classList.add('done');
+    if (i === cur) d.classList.add('now');
+  }
+}
+
+// ════════════════════════════
+// BUTTON
+// ════════════════════════════
+function updateBtn() {
+  const btn = document.getElementById('next-btn');
+  const back = document.getElementById('back-btn');
+  const label = BTN[lang][cur];
+  if (!label) { btn.style.display = 'none'; } else {
+    btn.style.display = '';
+    btn.textContent = label;
+    btn.classList.toggle('gold-btn', cur >= GOLD_FROM);
+  }
+  // back button: disabled on screen 1
+  if (back) back.disabled = (cur <= 1);
+}
+
+// ════════════════════════════
+// INTERACTIONS
+// ════════════════════════════
+const COLOUR_MSG = {
+  en:{
+    'Deep Blue':'Cold, watery, quiet. Many artists agree.',
+    'Steel':'Distant. Like light through a cloudy sky.',
+    'Violet':'Between sadness and something stranger.',
+    'Rose':'Tender pain. Something that still hurt.',
+    'Gold':'Grief can be golden — precious and heavy.',
+    'Dark':'Not absence. Fullness that absorbs everything.',
+    'Sage':'Quietly grieving. Still growing.',
+    'Pale':'Faded. Still here. A colour that remembers.'
+  },
+  he:{
+    'Deep Blue':'קר, מימי, שקט. אמנים רבים מסכימים.',
+    'Steel':'מרוחק. כמו אור דרך שמיים מעוננים.',
+    'Violet':'בין עצב למשהו זר יותר.',
+    'Rose':'כאב עדין. משהו שעדיין כאב.',
+    'Gold':'אבל יכול להיות זהוב — יקר וכבד.',
+    'Dark':'לא היעדר. מלאות שסופגת הכל.',
+    'Sage':'מתאבל בשקט. עדיין גדל.',
+    'Pale':'דהוי. עדיין כאן. צבע שזוכר.'
+  }
+};
+
+function pickColour(btn, nameEn, hex, nameHe) {
+  document.querySelectorAll('#colour-swatches .swatch').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  const name = lang === 'he' ? nameHe : nameEn;
+  const msg = COLOUR_MSG[lang][nameEn] || '';
+  document.getElementById('colour-resp').textContent = msg;
+  // tint the accent line
+  const screen = btn.closest('.screen');
+  if (screen) screen.style.setProperty('--accent', hex);
+}
+
+function pick(btn) {
+  const siblings = btn.parentElement.querySelectorAll('.choice-btn');
+  siblings.forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+}
+
+// ════════════════════════════
+// TIMER
+// ════════════════════════════
+function toggleTimer() {
+  if (timerOn) {
+    clearInterval(timerInt); timerOn = false;
+    const startBtn = document.getElementById('timer-start');
+    startBtn.textContent = lang === 'he' ? '▶ המשך' : '▶ Resume';
+    document.getElementById('timer-display').style.color = '#fff';
+  } else {
+    timerOn = true;
+    const startBtn = document.getElementById('timer-start');
+    startBtn.textContent = lang === 'he' ? '⏸ השהה' : '⏸ Pause';
+    document.getElementById('timer-display').style.color = 'var(--gold)';
+    timerInt = setInterval(tick, 1000);
+  }
+}
+function tick() {
+  if (timerSec <= 0) {
+    clearInterval(timerInt); timerOn = false;
+    document.getElementById('timer-display').textContent = lang === 'he' ? 'זמן!' : 'Time!';
+    document.getElementById('timer-display').style.color = 'var(--rose)';
+    document.getElementById('timer-bar').style.width = '0%';
+    return;
+  }
+  timerSec--;
+  const m = Math.floor(timerSec/60), s = timerSec%60;
+  document.getElementById('timer-display').textContent =
+    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.getElementById('timer-bar').style.width = (timerSec/TIMER_TOTAL*100)+'%';
+  if (timerSec <= 120) document.getElementById('timer-display').style.color = 'var(--rose)';
+}
+function resetTimer() {
+  clearInterval(timerInt); timerOn = false; timerSec = TIMER_TOTAL;
+  document.getElementById('timer-display').textContent = '20:00';
+  document.getElementById('timer-display').style.color = '#fff';
+  document.getElementById('timer-bar').style.width = '100%';
+  const startBtn = document.getElementById('timer-start');
+  startBtn.textContent = lang === 'he' ? '▶ התחל' : '▶ Start';
+}
+
+// ════════════════════════════
+// REFLECTION
+// ════════════════════════════
+function saveRef() {
+  const t = document.getElementById('ref-text').value.trim();
+  if (!t) return;
+  localStorage.setItem('lesson1-ref', t);
+  const ok = document.getElementById('saved-ok');
+  ok.classList.add('show');
+  setTimeout(() => ok.classList.remove('show'), 2500);
+}
+function loadRef() {
+  const s = localStorage.getItem('lesson1-ref');
+  if (s) document.getElementById('ref-text').value = s;
+}
+
+// ════════════════════════════
+// CLASSROOM MODE
+// ════════════════════════════
+function toggleClassroom() {
+  const el = document.documentElement;
+  if (!document.fullscreenElement) {
+    el.requestFullscreen && el.requestFullscreen();
+  } else {
+    document.exitFullscreen && document.exitFullscreen();
+  }
+}
+
+// ════════════════════════════
+// KEYBOARD + TOUCH
+// ════════════════════════════
+document.addEventListener('keydown', e => {
+  if (['TEXTAREA','INPUT'].includes(document.activeElement.tagName)) return;
+  const isHe = lang === 'he';
+  if (e.key === ' ') { e.preventDefault(); advance(); }
+  // RTL: ArrowLeft = advance (reading direction), ArrowRight = back
+  if (e.key === 'ArrowRight') { e.preventDefault(); isHe ? goBack()  : advance(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); isHe ? advance() : goBack();  }
+  if (e.key === 'f' || e.key === 'F') toggleClassroom();
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive:true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  const isHe = lang === 'he';
+  if (Math.abs(dx) > 55) {
+    // RTL: swipe-right = advance, swipe-left = back
+    if(isHe){ dx > 0 ? advance() : go(cur-1); }
+    else    { dx < 0 ? advance() : go(cur-1); }
+  }
+}, { passive:true });
+</script>
+</body>
+</html>

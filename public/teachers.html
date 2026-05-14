@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Teachers & Schools — Sources of Inspiration in Art</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+/* ── Page-specific styles ── */
+
+/* Teacher Hero */
+.teacher-hero{background:linear-gradient(155deg,#f7f6f2 0%,#eef0f5 100%);padding:140px 0 80px;position:relative;overflow:hidden}
+.teacher-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(201,168,76,.1) 0%,transparent 60%)}
+.teacher-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(63,168,200,.06) 0%,transparent 60%)}
+.teacher-hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.th-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:6px 16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-dk);margin-bottom:24px}
+.teacher-hero h1{font-size:clamp(2rem,4vw,3.2rem);color:#0d0d1a;margin-bottom:20px;line-height:1.15}
+.teacher-hero h1 em{font-style:normal;color:var(--gold-dk)}
+.teacher-hero p{font-size:1.05rem;color:rgba(13,13,26,.6);line-height:1.8;margin-bottom:32px;max-width:480px}
+.th-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* Hero visual / stats card */
+.th-visual{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:32px;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
+.th-visual-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.4);margin-bottom:24px}
+.th-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.th-stat{background:#f7f6f2;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:18px}
+.th-stat-num{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold-dk);line-height:1;margin-bottom:4px}
+.th-stat-label{font-size:.72rem;color:rgba(13,13,26,.45);font-weight:500;line-height:1.4}
+.th-teacher-quote{background:rgba(201,168,76,.08);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px}
+.th-teacher-quote p{font-size:.9rem;color:rgba(13,13,26,.7);line-height:1.6;font-style:italic;margin-bottom:8px}
+.th-quote-author{font-size:.75rem;color:var(--gold-dk);font-weight:600}
+
+/* What Teachers Get */
+.benefits-section{padding:96px 0;background:white}
+.benefits-section .section-header{text-align:center;margin-bottom:60px}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.benefit-card{background:var(--cream);border-radius:var(--radius-lg);padding:32px;transition:all var(--transition)}
+.benefit-card:hover{background:white;box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.benefit-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px}
+.benefit-card h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+.benefit-card p{font-size:.88rem;color:var(--gray-500);line-height:1.7}
+
+/* How It Works for Teachers */
+.how-works{padding:80px 0;background:var(--warm)}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:52px;position:relative}
+.how-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:rgba(0,0,0,.08)}
+.how-step{text-align:center;position:relative}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--gold-dk);color:white;font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;box-shadow:0 4px 16px rgba(180,140,60,.3)}
+.how-step h4{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.how-step p{font-size:.82rem;color:var(--gray-500);line-height:1.6}
+
+/* Curriculum Details */
+.curriculum-detail{padding:80px 0;background:white}
+.cd-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cd-units{display:flex;flex-direction:column;gap:12px}
+.cd-unit{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--cream);border-radius:14px;transition:all var(--transition);cursor:default}
+.cd-unit:hover{background:var(--gold-lt);background:rgba(201,168,76,.1);transform:translateX(4px)}
+.cd-unit-icon{font-size:1.4rem;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cd-unit-info{}
+.cd-unit-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-500);margin-bottom:2px}
+.cd-unit-name{font-size:.9rem;font-weight:700;color:var(--ink)}
+.cd-unit-count{font-size:.75rem;color:var(--gray-500);margin-top:2px}
+.cd-features{display:flex;flex-direction:column;gap:16px}
+.cd-feature{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:14px}
+.cd-feature-icon{font-size:1.3rem;flex-shrink:0;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.15)}
+.cd-feature h4{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.cd-feature p{font-size:.8rem;color:var(--gray-500);line-height:1.6}
+
+/* Pricing */
+.pricing-section{padding:96px 0;background:#f0ede6}
+.pricing-section .section-header{text-align:center;margin-bottom:16px}
+.pricing-section .section-header h2{color:var(--ink)}
+.pricing-section .section-header p{color:var(--gray-700)}
+.pricing-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin:32px 0 52px}
+.ptoggle-label{font-size:.88rem;font-weight:600;color:rgba(13,13,26,.4);transition:.2s}
+.ptoggle-label.active{color:var(--ink)}
+.ptoggle-switch{width:52px;height:28px;background:rgba(0,0,0,.12);border-radius:14px;cursor:pointer;position:relative;transition:.3s;border:none}
+.ptoggle-switch.annual .ptoggle-knob{transform:translateX(24px)}
+.ptoggle-switch.annual{background:var(--gold-dk)}
+.ptoggle-knob{width:22px;height:22px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .3s}
+.ptoggle-badge{background:rgba(80,220,120,.2);color:#4ed88a;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:10px;letter-spacing:.05em}
+.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.price-card{background:white;border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:36px;transition:all var(--transition);box-shadow:var(--shadow-sm)}
+.price-card.featured{background:linear-gradient(135deg,#fffdf5 0%,#fff8e6 100%);border-color:var(--gold);position:relative;box-shadow:0 8px 40px rgba(201,168,76,.2)}
+.price-featured-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold-dk);color:var(--ink);font-size:.68rem;font-weight:800;padding:5px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.price-plan{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-500);margin-bottom:12px}
+.price-card.featured .price-plan{color:var(--gold-dk)}
+.price-name{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:8px}
+.price-card.featured .price-name{color:var(--ink)}
+.price-desc{font-size:.82rem;color:var(--gray-500);line-height:1.6;margin-bottom:28px;min-height:48px}
+.price-card.featured .price-desc{color:var(--gray-500)}
+.price-amount{margin-bottom:28px}
+.price-num{font-family:'Sora',sans-serif;font-size:3rem;font-weight:800;color:var(--ink);line-height:1}
+.price-card.featured .price-num{color:var(--ink)}
+.price-num sup{font-size:1.2rem;vertical-align:top;margin-top:8px;font-weight:600;color:var(--gray-500)}
+.price-card.featured .price-num sup{color:var(--gray-500)}
+.price-period{font-size:.8rem;color:var(--gray-500);margin-top:4px}
+.price-card.featured .price-period{color:var(--gray-500)}
+.price-orig{font-size:.82rem;color:var(--gray-300);text-decoration:line-through;margin-top:2px}
+.price-custom{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;color:var(--gold-dk);line-height:1;margin-bottom:8px}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.price-features li{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--gray-700)}
+.price-features li i{font-size:.75rem;color:#27b066;flex-shrink:0}
+.price-features li.disabled{color:var(--gray-300)}
+.price-features li.disabled i{color:var(--gray-300)}
+.price-card.featured .price-features li{color:var(--gray-700)}
+.price-card.featured .price-features li.disabled{color:var(--gray-300)}
+.price-card.featured .price-features li.disabled i{color:var(--gray-300)}
+.price-cta{display:block;text-align:center;padding:14px;border-radius:12px;font-size:.88rem;font-weight:700;transition:all var(--transition)}
+.price-cta-outline{background:transparent;border:1.5px solid rgba(0,0,0,.2);color:var(--gray-700)}
+.price-cta-outline:hover{border-color:var(--ink);color:var(--ink)}
+.price-cta-gold{background:var(--gold-dk);color:var(--ink)}
+.price-cta-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.price-cta-ghost{background:rgba(0,0,0,.04);color:var(--gray-700);border:1.5px solid rgba(0,0,0,.15)}
+.price-cta-ghost:hover{background:rgba(0,0,0,.08);color:var(--ink)}
+
+/* Comparison table */
+.compare-section{padding:64px 0 80px;background:#f7f6f2}
+.compare-table{width:100%;border-collapse:collapse;margin-top:40px}
+.compare-table th{padding:14px 20px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(13,13,26,.4);border-bottom:1px solid rgba(0,0,0,.08)}
+.compare-table th:not(:first-child){text-align:center}
+.compare-table td{padding:16px 20px;border-bottom:1px solid rgba(0,0,0,.05);font-size:.88rem;color:var(--gray-700)}
+.compare-table td:not(:first-child){text-align:center}
+.compare-table tr:hover td{background:rgba(0,0,0,.02)}
+.compare-table .fa-check{color:#27b066}
+.compare-table .fa-times{color:rgba(0,0,0,.18)}
+.compare-table .ct-category{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.3);padding-top:24px}
+.compare-table .ct-category td{color:rgba(13,13,26,.3);border-bottom:none}
+
+/* Free Trial Section */
+.trial-section{padding:96px 0;background:white;scroll-margin-top:calc(var(--nav-h) + 16px)}
+.trial-section .section-header{text-align:center;margin-bottom:52px}
+.trial-box{max-width:680px;margin:0 auto;background:white;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);border:1.5px solid rgba(0,0,0,.07)}
+.trial-box-top{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.04));padding:40px 40px 32px;text-align:center;border-bottom:1px solid rgba(0,0,0,.07)}
+.trial-box-top .tbt-tag{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-dk);margin-bottom:12px}
+.trial-box-top h3{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);margin-bottom:10px}
+.trial-box-top p{font-size:.9rem;color:var(--gray-700);line-height:1.7}
+.trial-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:20px}
+.trial-perk{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--gray-700);font-weight:500}
+.trial-perk i{color:#27b066;font-size:.78rem}
+.trial-form{padding:36px 40px 40px;background:white}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.75rem;font-weight:600;color:rgba(13,13,26,.45);text-transform:uppercase;letter-spacing:.06em}
+.form-group input,
+.form-group select{background:#f7f6f2;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;padding:12px 14px;font-size:.88rem;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:.2s}
+.form-group input::placeholder{color:rgba(13,13,26,.3)}
+.form-group input:focus,
+.form-group select:focus{border-color:rgba(201,168,76,.5);background:white}
+.form-group select option{background:#f7f6f2;color:var(--ink)}
+.form-submit{width:100%;padding:16px;border-radius:12px;background:var(--gold-dk);color:var(--ink);font-size:.95rem;font-weight:800;font-family:'Sora',sans-serif;transition:all var(--transition);margin-top:6px;letter-spacing:.02em}
+.form-submit:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.35)}
+.form-note{text-align:center;font-size:.75rem;color:rgba(13,13,26,.35);margin-top:14px;line-height:1.6}
+.form-note a{color:var(--gold-dk);text-decoration:underline}
+
+/* Success state */
+.trial-success{display:none;padding:48px 40px;text-align:center}
+.success-icon{font-size:3rem;margin-bottom:20px;animation:popIn .4s ease}
+@keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+.trial-success h3{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:12px}
+.trial-success p{font-size:.9rem;color:var(--gray-700);line-height:1.7;max-width:400px;margin:0 auto 28px}
+.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* Testimonials */
+.testimonials-section{padding:80px 0;background:var(--cream)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.testimonial-card{background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.tc-stars{color:var(--gold-dk);font-size:.9rem;margin-bottom:14px;letter-spacing:2px}
+.tc-text{font-size:.9rem;color:var(--gray-500);line-height:1.75;font-style:italic;margin-bottom:20px}
+.tc-author{display:flex;align-items:center;gap:12px}
+.tc-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:white;flex-shrink:0}
+.tc-name{font-size:.88rem;font-weight:700;color:var(--ink)}
+.tc-role{font-size:.75rem;color:var(--gray-500)}
+
+/* FAQ */
+.faq-section{padding:80px 0;background:white}
+.faq-list{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.07)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:.95rem;font-weight:600;color:var(--ink);cursor:pointer;transition:color var(--transition)}
+.faq-q:hover{color:var(--gold-dk)}
+.faq-q i{font-size:.8rem;color:var(--gray-500);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;padding:0}
+.faq-item.open .faq-a{max-height:300px;padding:0 0 20px}
+.faq-a p{font-size:.88rem;color:var(--gray-500);line-height:1.75}
+
+/* Final CTA */
+.final-cta{padding:96px 0;background:linear-gradient(135deg,#f7f6f2 0%,#eef0f5 100%);text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(0,0,0,.06)}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(201,168,76,.1) 0%,transparent 70%)}
+.final-cta .container{position:relative;z-index:2}
+.final-cta h2{font-size:clamp(2rem,4vw,3rem);color:var(--ink);margin-bottom:16px}
+.final-cta p{font-size:1rem;color:var(--gray-700);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
+.final-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* Responsive */
+@media(max-width:1024px){
+  .teacher-hero .container{grid-template-columns:1fr;gap:40px}
+  .th-visual{max-width:520px}
+  .benefits-grid{grid-template-columns:repeat(2,1fr)}
+  .how-steps{grid-template-columns:repeat(2,1fr)}
+  .how-steps::before{display:none}
+  .pricing-cards{grid-template-columns:1fr}
+  .price-card.featured{order:-1}
+  .cd-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .teacher-hero{padding:120px 0 64px}
+  .benefits-grid{grid-template-columns:1fr}
+  .how-steps{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .trial-form{padding:28px 24px 32px}
+  .trial-box-top{padding:28px 24px 24px}
+  .testimonials-grid{grid-template-columns:1fr}
+  .th-stats{grid-template-columns:1fr 1fr}
+}
+
+/* RTL support */
+[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
+/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly.
+   Reversing .nav-actions again pushes the EN button off-screen on tablet/mobile.   */
+[dir="rtl"] .teacher-hero .container { direction: rtl; }
+[dir="rtl"] .th-left { text-align: right; }
+[dir="rtl"] .th-ctas { justify-content: flex-start; flex-direction: row-reverse; }
+[dir="rtl"] .section-header { text-align: right; }
+[dir="rtl"] .benefits-grid { direction: rtl; }
+[dir="rtl"] .benefit-card { text-align: right; }
+[dir="rtl"] .how-steps { direction: rtl; }
+[dir="rtl"] .cd-grid { direction: rtl; }
+[dir="rtl"] .pricing-cards { direction: rtl; }
+[dir="rtl"] .testimonials-grid { direction: rtl; }
+[dir="rtl"] .testimonial-card { text-align: right; }
+[dir="rtl"] .faq-q { flex-direction: row-reverse; }
+[dir="rtl"] .footer-grid { direction: rtl; }
+[dir="rtl"] #mobile-menu { direction: rtl; }
+
+/* ── DARK MODE ── */
+body.dark{background:#0f0f12 !important;color:#e8e6e1}
+body.dark nav#nav{background:rgba(15,15,18,.97) !important;border-bottom-color:rgba(255,255,255,.07) !important}
+body.dark .nav-logo,body.dark .nav-logo span{color:#e8e6e1 !important}
+body.dark .nav-link{color:rgba(232,230,225,.45) !important}
+body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;background:rgba(255,255,255,.06) !important}
+body.dark #nav-hamburger span,body.dark .hamburger span{background:#e8e6e1 !important}
+body.dark #mobile-menu{background:rgba(15,15,18,.98) !important;border-color:rgba(255,255,255,.07) !important}
+body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
+/* Light sections */
+body.dark .teacher-hero,
+body.dark .benefits-section,
+body.dark .how-works,
+body.dark .preview-section,
+body.dark .testimonials,
+body.dark .faq-section,
+body.dark .pricing-section,
+body.dark .trial-section,
+body.dark section{background:#0f0f12 !important}
+body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
+body.dark p,body.dark .unit-desc,body.dark .teacher-hero p,body.dark .benefit-card p{color:rgba(232,230,225,.58) !important}
+body.dark .th-visual,body.dark .benefit-card,body.dark .how-step,body.dark .testi-card,body.dark .faq-item,body.dark .pricing-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
+body.dark .th-stat{background:#1c1c28 !important;border-color:rgba(255,255,255,.08) !important}
+body.dark .th-stat-label{color:rgba(232,230,225,.45) !important}
+body.dark .th-visual-title{color:rgba(232,230,225,.35) !important}
+body.dark .lesson-row-preview,body.dark .lr-row{background:#1c1c28 !important;border-color:rgba(255,255,255,.08) !important;color:#e8e6e1 !important}
+body.dark .section-header p{color:rgba(232,230,225,.55) !important}
+body.dark .faq-q{color:#e8e6e1 !important}
+body.dark .faq-a{color:rgba(232,230,225,.58) !important;border-top-color:rgba(255,255,255,.07) !important}
+body.dark footer,body.dark #footer{background:#0a0a0e !important;border-top-color:rgba(255,255,255,.07) !important}
+body.dark .footer-brand,body.dark .footer-logo{color:#e8e6e1 !important}
+body.dark .footer-col h4{color:rgba(232,230,225,.35) !important}
+body.dark .footer-col a,body.dark .footer-tagline,body.dark .footer-copy{color:rgba(232,230,225,.45) !important}
+body.dark .footer-col a:hover{color:#e8e6e1 !important}
+body.dark .btn-outline{border-color:rgba(232,230,225,.3) !important;color:rgba(232,230,225,.7) !important}
+body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
+</style>
+</head>
+<body class="dark">
+<!-- Shared init: dark mode flash-prevention + language bootstrap -->
+<script src="js/app-init.js"></script>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">✦</div>
+      <span>Sources of Inspiration</span>
+    </a>
+    <div class="nav-links">
+      <a href="course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
+      <a href="lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+      <a href="teachers.html" class="nav-link active" data-en="For Teachers" data-he="למורים">For Teachers</a>
+      <a href="#pricing" class="nav-link" data-en="Pricing" data-he="מחירון">Pricing</a>
+    </div>
+    <div class="nav-actions">
+      <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
+      <a href="#trial" class="btn btn-gold btn-sm" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+      <div id="nav-lang-toggle" style="display:flex;gap:4px;align-items:center;margin-left:8px">
+        <button id="btn-en" class="active" onclick="setLang('en')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">EN</button>
+        <button id="btn-he" onclick="setLang('he')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">עברית</button>
+      </div>
+    </div>
+    <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <a href="course.html" data-en="The Course" data-he="הקורס">The Course</a>
+  <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
+  <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
+  <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+  <div class="mob-actions">
+    <a href="#trial" class="btn btn-gold btn-sm" style="flex:1;justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
+    <button id="mob-btn-en" onclick="setLang('en')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">EN</button>
+    <button id="mob-btn-he" onclick="setLang('he')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">עברית</button>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="teacher-hero">
+  <div class="container">
+    <div class="th-left fade-up">
+      <div class="th-tag" data-en="✦ For Art Teachers &amp; Schools" data-he="✦ למורי אמנות ובתי ספר">✦ For Art Teachers & Schools</div>
+      <h1 data-en="A Curriculum<br>That <em>Inspires</em><br>Every Student" data-he="תכנית לימודים<br>ש<em>מעררת</em><br>כל תלמיד">A Curriculum<br>That <em>Inspires</em><br>Every Student</h1>
+      <p data-en="Everything you need to deliver a complete, engaging art curriculum — from lesson plans and slide decks to student reflections and grading rubrics." data-he="כל מה שצריך כדי להעביר תכנית אמנות מלאה — מתכנית שיעורים עד התבוננות תלמידים ורובריקות.">Everything you need to deliver a complete, engaging art curriculum — from lesson plans and slide decks to student reflections and grading rubrics.</p>
+      <div class="th-ctas">
+        <a href="#trial" class="btn btn-gold" data-en="Start Free Trial" data-he="התחילו התנסות חינם">Start Free Trial <i class="fas fa-arrow-right" style="margin-left:8px"></i></a>
+        <a href="course.html" class="btn btn-outline-white" data-en="Browse the Course" data-he="עיינו בקורס">Browse the Course</a>
+      </div>
+    </div>
+    <div class="th-right fade-up" style="animation-delay:.15s">
+      <div class="th-visual">
+        <div class="th-visual-title" data-en="This year, our partner schools report:" data-he="השנה, בתי הספר השותפים שלנו מדווחים:">This year, our partner schools report:</div>
+        <div class="th-stats">
+          <div class="th-stat">
+            <div class="th-stat-num">94%</div>
+        <div class="th-stat-label" data-en="Student engagement increase" data-he="עלייה במעורבות תלמידים">Student engagement increase</div>
+          </div>
+          <div class="th-stat">
+            <div class="th-stat-num">3.5×</div>
+          <div class="th-stat-label" data-en="More creative output per class" data-he="יצירתיות גבוהה יותר בכיתה">More creative output per class</div>
+          </div>
+          <div class="th-stat">
+            <div class="th-stat-num">2 hrs</div>
+          <div class="th-stat-label" data-en="Saved per week per teacher" data-he="שעות שנחסכות למורה בשבוע">Saved per week per teacher</div>
+          </div>
+          <div class="th-stat">
+            <div class="th-stat-num">97%</div>
+          <div class="th-stat-label" data-en="Teacher satisfaction score" data-he="שביעות מורים">Teacher satisfaction score</div>
+          </div>
+        </div>
+        <div class="th-teacher-quote">
+          <p data-en="&quot;I used to spend hours searching for images and writing lesson plans. Now I open the platform and everything is there — beautiful, ready to teach.&quot;" data-he="&quot;נהגתי לבלות שעות בחיפוש תמונות וכתיבת תכניות שיעורים. עכשיו אני פותחת את הפלטפורמה וכל מה שצריך שם — יפה, מוכן להוראה.&quot;">"I used to spend hours searching for images and writing lesson plans. Now I open the platform and everything is there — beautiful, ready to teach."</p>
+          <div class="th-quote-author" data-en="— Maya R., Art Teacher, Grade 7–9" data-he="— מאיה ר., מורת אמנות, כיתות ז'-ט'">— Maya R., Art Teacher, Grade 7–9</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT TEACHERS GET ══ -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag" data-en="✦ Teacher Resources" data-he="✦ משאבים למורים">✦ Teacher Resources</div>
+      <h2 data-en="Everything Ready.<br>Nothing Left to Guess." data-he="הכל מוכן.<br>לא צריך לנחש.">Everything Ready.<br>Nothing Left to Guess.</h2>
+      <p data-en="We built this curriculum with teachers, not just for them. Every resource is classroom-tested and curriculum-aligned." data-he="בנינו תכנית לימודים זו יחד עם מורים. כל משאב נבדק בכיתה ומותאם לתכנית.">We built this curriculum with teachers, not just for them. Every resource is classroom-tested and curriculum-aligned.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon" style="background:rgba(232,93,117,.12);color:#e85d75">📚</div>
+        <h3 data-en="36 Complete Lesson Plans" data-he="36 תכניות שיעורים מלאות">36 Complete Lesson Plans</h3>
+        <p data-en="Every lesson includes a teacher guide, timing breakdown, discussion prompts, and differentiation tips for mixed-ability classrooms." data-he="כל שיעור כולל מדריך למורה, חלוקת זמנים, שאלות דיון וטיפים להתאמה לכיתות מיומנות מעורבת.">Every lesson includes a teacher guide, timing breakdown, discussion prompts, and differentiation tips for mixed-ability classrooms.</p>
+      </div>
+      <div class="benefit-card fade-up" style="animation-delay:.06s">
+        <div class="benefit-icon" style="background:rgba(201,168,76,.12);color:var(--gold-dk)">🖼️</div>
+        <h3 data-en="Curated Artwork Galleries" data-he="גלריות יצירות אמנות נבחרות">Curated Artwork Galleries</h3>
+        <p data-en="Each lesson features carefully selected artworks with artist bios, historical context, and age-appropriate discussion notes." data-he="כל שיעור מציג יצירות אמנות נבחרות עם ביוגרפיות אמנים, הקשר היסטורי והערות דיון מותאמות גיל.">Each lesson features carefully selected artworks with artist bios, historical context, and age-appropriate discussion notes.</p>
+      </div>
+      <div class="benefit-card fade-up" style="animation-delay:.12s">
+        <div class="benefit-icon" style="background:rgba(100,160,255,.12);color:#64a0ff">🎯</div>
+        <h3 data-en="Ready-to-Use Slide Decks" data-he="מצגות מוכנות לשימוש">Ready-to-Use Slide Decks</h3>
+        <p data-en="Beautiful presentation slides for every lesson — just open and teach. Available in English, Spanish, French, and Hebrew." data-he="מצגות יפות לכל שיעור — פשוט פתחו ולמדו. זמינות באנגלית, ספרדית, צרפתית ועברית.">Beautiful presentation slides for every lesson — just open and teach. Available in English, Spanish, French, and Hebrew.</p>
+      </div>
+      <div class="benefit-card fade-up" style="animation-delay:.18s">
+        <div class="benefit-icon" style="background:rgba(80,220,120,.12);color:#4ed88a">📝</div>
+        <h3 data-en="Student Worksheets &amp; Rubrics" data-he="דפי עבודה ורובריקות">Student Worksheets &amp; Rubrics</h3>
+        <p data-en="Printable and digital worksheets, reflection prompts, and assessment rubrics aligned to national art curriculum standards." data-he="דפי עבודה להדפסה ודיגיטליים, שאלות התבוננות ורובריקות הערכה מותאמות לתכנית.">Printable and digital worksheets, reflection prompts, and assessment rubrics aligned to national art curriculum standards.</p>
+      </div>
+      <div class="benefit-card fade-up" style="animation-delay:.24s">
+        <div class="benefit-icon" style="background:rgba(180,100,220,.12);color:#b464dc">📊</div>
+        <h3 data-en="Progress Analytics" data-he="אנליטיקת התקדמות">Progress Analytics</h3>
+        <p data-en="Track individual student engagement, lesson completion, and creative reflection quality — with class-level dashboards for administrators." data-he="עקוב אחר מעורבות, השלמת שיעורים ואיכות התבוננות היצירתית של כל תלמיד.">Track individual student engagement, lesson completion, and creative reflection quality — with class-level dashboards for administrators.</p>
+      </div>
+      <div class="benefit-card fade-up" style="animation-delay:.3s">
+        <div class="benefit-icon" style="background:rgba(255,140,60,.12);color:#ff8c3c">🌍</div>
+        <h3 data-en="Multilingual Support" data-he="תמיכה רב-לשונית">Multilingual Support</h3>
+        <p data-en="The platform and all materials are available in 4 languages. Switch anytime — ideal for international schools and diverse classrooms." data-he="הפלטפורמה וכל החומרים זמינים ב-4 שפות. ניתן לעבור בכל עת." >The platform and all materials are available in 4 languages. Switch anytime — ideal for international schools and diverse classrooms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="how-works">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-tag" data-en="✦ Getting Started" data-he="✦ התחילו">✦ Getting Started</div>
+      <h2 data-en="Up and Running in One Day" data-he="פעילים תוך יום אחד">Up and Running in One Day</h2>
+      <p data-en="No IT setup, no software installation. Just sign in and start teaching." data-he="ללא התקנת תוכנה, ללא הגדרות. פשוט התחברו והתחילו ללמד.">No IT setup, no software installation. Just sign in and start teaching.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step fade-up">
+        <div class="step-num">1</div>
+        <h4 data-en="Start Free Trial" data-he="התחילו התנסות חינם">Start Free Trial</h4>
+        <p data-en="Sign up with your school email — no credit card needed. Full access for 30 days." data-he="הירשמו עם אימייל בית הספר — ללא כרטיס אשראי. גישה מלאה ל-30 יום.">Sign up with your school email — no credit card needed. Full access for 30 days.</p>
+      </div>
+      <div class="how-step fade-up" style="animation-delay:.08s">
+        <div class="step-num">2</div>
+        <h4 data-en="Explore the Curriculum" data-he="עיינו בתכנית">Explore the Curriculum</h4>
+        <p data-en="Browse all 6 units and 36 lessons. Download slide decks and worksheets to review." data-he="עיינו בכל 7 היחידות ו-40+ השיעורים. הורידו מצגות ודפי עבודה.">Browse all 6 units and 36 lessons. Download slide decks and worksheets to review.</p>
+      </div>
+      <div class="how-step fade-up" style="animation-delay:.16s">
+        <div class="step-num">3</div>
+        <h4 data-en="Teach Your First Lesson" data-he="למדו את השיעור הראשון">Teach Your First Lesson</h4>
+        <p data-en="Open the platform in class. Walk through the guided lesson with your students." data-he="פתחו את הפלטפורמה בכיתה. עברו את השיעור יחד עם התלמידים.">Open the platform in class. Walk through the guided lesson with your students.</p>
+      </div>
+      <div class="how-step fade-up" style="animation-delay:.24s">
+        <div class="step-num">4</div>
+        <h4 data-en="Invite Your School" data-he="הזמינו את בית הספר">Invite Your School</h4>
+        <p data-en="Scale to your whole art department or the entire school — with a single admin dashboard." data-he="הרחיבו לכל מחלקת אמנות או לכל בית הספר — בדשבורד אחד.">Scale to your whole art department or the entire school — with a single admin dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CURRICULUM DETAILS ══ -->
+<section class="curriculum-detail">
+  <div class="container">
+    <div class="cd-grid">
+      <div class="fade-up">
+        <div class="section-tag" style="margin-bottom:20px" data-en="✦ The 7 Units" data-he="✦ 7 היחידות">✦ The 6 Units</div>
+        <h2 style="margin-bottom:12px" data-en="A Complete Year<br>of Creative Learning" data-he="שנת לימודים שלמה<br>של למידה יצירתית">A Complete Year<br>of Creative Learning</h2>
+        <p style="color:var(--gray-500);line-height:1.75;margin-bottom:32px" data-en="Each unit is 4–6 weeks of curriculum with 6 lessons, designed to build on the previous one. Students finish the year with a deep, personal creative language." data-he="כל יחידה היא 4–6 שבועות עם 6 שיעורים, בנוייה על הקודמת. התלמידים מסיימים את השנה עם שפה יצירתית עמוקה ואישית.">Each unit is 4–6 weeks of curriculum with 6 lessons, designed to build on the previous one. Students finish the year with a deep, personal creative language.</p>
+        <div class="cd-units">
+          <div class="cd-unit" style="--u:#e85d75">
+            <div class="cd-unit-icon" style="background:rgba(232,93,117,.12);color:#e85d75">💜</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 01</div>
+          <div class="cd-unit-name" data-en="Personal Experience as Inspiration" data-he="חווייה אישית כמקור השראה">Emotion as Inspiration</div>
+              <div class="cd-unit-count">6 lessons · Grades 5–12</div>
+            </div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-unit-icon" style="background:rgba(80,180,100,.12);color:#50b464">🌿</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 02</div>
+          <div class="cd-unit-name" data-en="Nature as Inspiration" data-he="טבע כמקור השראה">Nature as Inspiration</div>
+              <div class="cd-unit-count">6 lessons · Grades 5–12</div>
+            </div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-unit-icon" style="background:rgba(100,140,255,.12);color:#648cff">🎵</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 03</div>
+          <div class="cd-unit-name" data-en="Music &amp; Rhythm in Art" data-he="מוזיקה וריתמוס באמנות">Music &amp; Rhythm in Art</div>
+              <div class="cd-unit-count">6 lessons · Grades 5–12</div>
+            </div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-unit-icon" style="background:rgba(201,168,76,.12);color:var(--gold-dk)">🪞</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 04</div>
+          <div class="cd-unit-name" data-en="Memory &amp; Identity" data-he="זיכרון וזהות">Memory &amp; Identity</div>
+              <div class="cd-unit-count">6 lessons · Grades 6–12</div>
+            </div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-unit-icon" style="background:rgba(255,140,60,.12);color:#ff8c3c">🏛️</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 05</div>
+          <div class="cd-unit-name" data-en="Culture &amp; Symbols" data-he="תרבות וסמלים">Culture &amp; Symbols</div>
+              <div class="cd-unit-count">6 lessons · Grades 6–12</div>
+            </div>
+          </div>
+          <div class="cd-unit">
+            <div class="cd-unit-icon" style="background:rgba(180,100,220,.12);color:#b464dc">✨</div>
+            <div class="cd-unit-info">
+              <div class="cd-unit-tag">Unit 06</div>
+          <div class="cd-unit-name" data-en="Personal Style Development" data-he="פיתוח סגנון אישי">Personal Style Development</div>
+              <div class="cd-unit-count">6 lessons · Grades 7–12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="animation-delay:.15s">
+        <div class="section-tag" style="margin-bottom:20px" data-en="✦ What's Included Per Lesson" data-he="✦ מה כלול כל שיעור">✦ What's Included Per Lesson</div>
+        <h2 style="margin-bottom:12px" data-en="Every Lesson,<br>Fully Equipped" data-he="כל שיעור,<br>הכל מוכן">Every Lesson,<br>Fully Equipped</h2>
+        <p style="color:var(--gray-500);line-height:1.75;margin-bottom:32px" data-en="You never walk in underprepared. Each lesson is a complete teaching package that takes less than 10 minutes to set up." data-he="לא תיכנסו לכיתה בלי הכנה. כל שיעור הוא חבילה שלמה שלוקחת פחות מ-10 דקות להכנה.">You never walk in underprepared. Each lesson is a complete teaching package that takes less than 10 minutes to set up.</p>
+        <div class="cd-features">
+          <div class="cd-feature">
+            <div class="cd-feature-icon">🎨</div>
+            <div>
+              <h4 data-en="Opening Big Question" data-he="שאלה פותחת גדולה">Opening Big Question</h4>
+              <p data-en="A thought-provoking prompt to spark curiosity and set the lesson's emotional tone." data-he="הנחיה מעוררת חשיבה שמציתה סקרנות ומגדירה את הטון הרגשי של השיעור.">A thought-provoking prompt to spark curiosity and set the lesson's emotional tone.</p>
+            </div>
+          </div>
+          <div class="cd-feature">
+            <div class="cd-feature-icon">🖼️</div>
+            <div>
+              <h4 data-en="Curated Artwork Gallery" data-he="גלריית יצירות אמנות נבחרת">Curated Artwork Gallery</h4>
+              <p data-en="3–5 artworks with full artist context, guided observation questions, and comparison tasks." data-he="3–5 יצירות אמנות עם הקשר מלא, שאלות התבוננות מודרכות ומשימות השוואה.">3–5 artworks with full artist context, guided observation questions, and comparison tasks.</p>
+            </div>
+          </div>
+          <div class="cd-feature">
+            <div class="cd-feature-icon">✍️</div>
+            <div>
+              <h4 data-en="Creative Activity" data-he="פעילות יצירתית">Creative Activity</h4>
+              <p data-en="A hands-on studio task tied to the lesson theme — with adaptation options for different skill levels." data-he="משימת סטודיו מעשית הקשורה לנושא השיעור — עם אפשרויות התאמה לרמות שונות.">A hands-on studio task tied to the lesson theme — with adaptation options for different skill levels.</p>
+            </div>
+          </div>
+          <div class="cd-feature">
+            <div class="cd-feature-icon">💬</div>
+            <div>
+              <h4 data-en="Reflection &amp; Discussion" data-he="התבוננות ודיון">Reflection &amp; Discussion</h4>
+              <p data-en="Structured prompts for verbal sharing and written journaling to deepen understanding." data-he="הנחיות מובנות לשיתוף מילולי ורישום ביומן להעמקת ההבנה.">Structured prompts for verbal sharing and written journaling to deepen understanding.</p>
+            </div>
+          </div>
+          <div class="cd-feature">
+            <div class="cd-feature-icon">📋</div>
+            <div>
+              <h4 data-en="Assessment Rubric" data-he="רובריקת הערכה">Assessment Rubric</h4>
+              <p data-en="Clear, standards-aligned criteria for evaluating creative work with minimal subjectivity." data-he="קריטריונים ברורים ומותאמים לסטנדרטים להערכת עבודה יצירתית עם מינימום סובייקטיביות.">Clear, standards-aligned criteria for evaluating creative work with minimal subjectivity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag" style="color:var(--gold-lt)" data-en="✦ Pricing" data-he="✦ מחירון">✦ Pricing</div>
+      <h2 data-en="Simple, School-Friendly Pricing" data-he="תמחור פשוט ומתאים לבתי ספר">Simple, School-Friendly Pricing</h2>
+      <p data-en="Start free. Scale to your school. No hidden fees, no surprise renewals." data-he="התחילו בחינם. התרחבו לפי הצורך. ללא דמי חבויים.">Start free. Scale to your school. No hidden fees, no surprise renewals.</p>
+    </div>
+    <div class="pricing-toggle fade-up">
+      <span class="ptoggle-label" id="lbl-monthly" data-en="Monthly" data-he="חודשי">Monthly</span>
+      <button class="ptoggle-switch annual" id="billing-toggle" aria-label="Toggle billing period">
+        <div class="ptoggle-knob"></div>
+      </button>
+      <span class="ptoggle-label active" id="lbl-annual" data-en="Annual" data-he="שנתי">Annual</span>
+      <span class="ptoggle-badge" data-en="Save 30%" data-he="חסכו 30%">Save 30%</span>
+    </div>
+    <div class="pricing-cards fade-up">
+      <!-- Teacher -->
+      <div class="price-card">
+        <div class="price-plan" data-en="For Individual Teachers" data-he="למורים בודדים">For Individual Teachers</div>
+        <div class="price-name" data-en="Teacher" data-he="מורה">Teacher</div>
+        <div class="price-desc" data-en="Perfect for a single art teacher running the full curriculum independently." data-he="מושלם למורה אמנות בודד המעביר את התכנית.">Perfect for a single art teacher running the full curriculum independently.</div>
+        <div class="price-amount">
+          <div class="price-num"><sup>$</sup><span class="price-val" data-monthly="19" data-annual="13">13</span></div>
+          <div class="price-period"><span data-en="per month," data-he="לחודש,">per month,</span> <span class="billing-period">billed annually</span></div>
+          <div class="price-orig"><span class="price-orig-val" data-monthly="" data-annual="$19/mo if monthly">$19/mo if monthly</span></div>
+        </div>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> <span data-en="Full 6-unit curriculum access" data-he="גישה לתכנית 6 היחידות המלאה">Full 6-unit curriculum access</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="All lesson plans &amp; slide decks" data-he="כל תכניות השיעורים והמצגות">All lesson plans &amp; slide decks</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Student worksheets (PDF)" data-he="דפי עבודה לתלמידים (PDF)">Student worksheets (PDF)</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Up to 60 students" data-he="עד 60 תלמידים">Up to 60 students</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Progress tracking" data-he="מעקב התקדמות">Progress tracking</span></li>
+          <li class="disabled"><i class="fas fa-times"></i> <span data-en="Multi-teacher dashboard" data-he="דשבורד רב-מורים">Multi-teacher dashboard</span></li>
+          <li class="disabled"><i class="fas fa-times"></i> <span data-en="School admin panel" data-he="פאנל ניהול בית ספר">School admin panel</span></li>
+        </ul>
+        <a href="#trial" class="price-cta price-cta-outline" data-en="Start Free Trial" data-he="התחילו חינם">Start Free Trial</a>
+      </div>
+      <!-- School — Featured -->
+      <div class="price-card featured">
+        <div class="price-featured-badge" data-en="Most Popular" data-he="הפופולרי ביותר">Most Popular</div>
+        <div class="price-plan" data-en="For Schools" data-he="לבתי ספר">For Schools</div>
+        <div class="price-name" data-en="School" data-he="בית ספר">School</div>
+        <div class="price-desc" data-en="For one school with multiple art teachers and full administrative oversight." data-he="לבית ספר אחד עם מספר מורי אמנות ופיקוח מלא.">For one school with multiple art teachers and full administrative oversight.</div>
+        <div class="price-amount">
+          <div class="price-num"><sup>$</sup><span class="price-val" data-monthly="199" data-annual="139">139</span></div>
+          <div class="price-period"><span data-en="per month," data-he="לחודש,">per month,</span> <span class="billing-period">billed annually</span></div>
+          <div class="price-orig"><span class="price-orig-val" data-monthly="" data-annual="$199/mo if monthly">$199/mo if monthly</span></div>
+        </div>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> <span data-en="Everything in Teacher plan" data-he="הכל מהתכנית למורה">Everything in Teacher plan</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Unlimited teachers &amp; students" data-he="מורים ותלמידים ללא הגבלה">Unlimited teachers &amp; students</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Admin dashboard &amp; reports" data-he="דשבורד ניהול ודוחות">Admin dashboard &amp; reports</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Curriculum customization" data-he="התאמת תכנית לימודים">Curriculum customization</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Priority support (email + video)" data-he="תמיכה מועדפת (אימייל + וידאו)">Priority support (email + video)</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="PD training session included" data-he="סשן הכשרה מקצועית כלול">PD training session included</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Multilingual interface" data-he="ממשק רב-לשוני">Multilingual interface</span></li>
+        </ul>
+        <a href="#trial" class="price-cta price-cta-gold" data-en="Start Free Trial" data-he="התחילו חינם">Start Free Trial</a>
+      </div>
+      <!-- Network -->
+      <div class="price-card">
+        <div class="price-plan" data-en="For School Networks" data-he="לרשתות בתי ספר">For School Networks</div>
+        <div class="price-name" data-en="Network" data-he="רשת">Network</div>
+        <div class="price-desc" data-en="For districts, international school groups, and ministry-level deployments." data-he="לרשתות, קבוצות בינלאומיות ופריסות משרד.">For districts, international school groups, and ministry-level deployments.</div>
+        <div class="price-amount">
+          <div class="price-custom" data-en="Custom" data-he="מחיר מותאם">Custom</div>
+          <div class="price-period" style="color:rgba(13,13,26,.4)" data-en="Volume pricing available" data-he="תמחור נפח זמין">Volume pricing available</div>
+        </div>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> <span data-en="Everything in School plan" data-he="הכל מהתכנית לבית ספר">Everything in School plan</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Multi-school management" data-he="ניהול בתי ספר מרובים">Multi-school management</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Dedicated account manager" data-he="מנהל חשבון ייעודי">Dedicated account manager</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="White-label option" data-he="אפשרות מיתוג עצמי">White-label option</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="Custom curriculum modules" data-he="מודולים מותאמים לתכנית">Custom curriculum modules</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="API access &amp; LMS integration" data-he="גישת API ואינטגרציה LMS">API access &amp; LMS integration</span></li>
+          <li><i class="fas fa-check"></i> <span data-en="On-site PD workshops" data-he="סדנאות פיתוח מקצועי במקום">On-site PD workshops</span></li>
+        </ul>
+        <a href="mailto:hello@sourcesofinspiration.art" class="price-cta price-cta-ghost" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPARISON TABLE ══ -->
+<section class="compare-section">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-tag" style="color:var(--gold-lt)" data-en="✦ Compare Plans" data-he="✦ השוואת תכניות">✦ Compare Plans</div>
+      <h2 data-en="Full Feature Comparison" data-he="השוואת תכונות מלאה">Full Feature Comparison</h2>
+    </div>
+    <div style="overflow-x:auto" class="fade-up">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:44%" data-en="Feature" data-he="תכונה">Feature</th>
+            <th data-en="Teacher" data-he="מורה">Teacher</th>
+            <th data-en="School" data-he="בית ספר">School</th>
+            <th data-en="Network" data-he="רשת">Network</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ct-category"><td colspan="4" data-en="📚 Curriculum Content" data-he="📚 תוכן תכנית לימודים">📚 Curriculum Content</td></tr>
+          <tr><td data-en="All 6 units (36 lessons)" data-he="כל 6 היחידות (36 שיעורים)">All 6 units (36 lessons)</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Lesson plans &amp; teacher guides" data-he="תכניות שיעורים ומדריכי מורה">Lesson plans &amp; teacher guides</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Slide decks (4 languages)" data-he="מצגות (4 שפות)">Slide decks (4 languages)</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Student worksheets &amp; rubrics" data-he="דפי עבודה ורובריקות">Student worksheets &amp; rubrics</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Custom curriculum modules" data-he="מודולים מותאמים לתכנית">Custom curriculum modules</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr class="ct-category"><td colspan="4" data-en="👥 Users &amp; Access" data-he="👥 משתמשים וגישה">👥 Users &amp; Access</td></tr>
+          <tr><td data-en="Number of teachers" data-he="מספר מורים">Number of teachers</td><td data-en="1" data-he="1">1</td><td data-en="Unlimited" data-he="ללא הגבלה">Unlimited</td><td data-en="Unlimited" data-he="ללא הגבלה">Unlimited</td></tr>
+          <tr><td data-en="Number of students" data-he="מספר תלמידים">Number of students</td><td data-en="Up to 60" data-he="עד 60">Up to 60</td><td data-en="Unlimited" data-he="ללא הגבלה">Unlimited</td><td data-en="Unlimited" data-he="ללא הגבלה">Unlimited</td></tr>
+          <tr><td data-en="Admin panel" data-he="פאנל ניהול">Admin panel</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Multi-school management" data-he="ניהול בתי ספר מרובים">Multi-school management</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr class="ct-category"><td colspan="4" data-en="📊 Analytics &amp; Reporting" data-he="📊 אנליטיקה ודיווח">📊 Analytics &amp; Reporting</td></tr>
+          <tr><td data-en="Student progress tracking" data-he="מעקב התקדמות תלמידים">Student progress tracking</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Class-level dashboards" data-he="דשבורד ברמת כיתה">Class-level dashboards</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Export reports (CSV/PDF)" data-he="ייצוא דוחות (CSV/PDF)">Export reports (CSV/PDF)</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr class="ct-category"><td colspan="4" data-en="🛠️ Support &amp; Training" data-he="🛠️ תמיכה והכשרה">🛠️ Support &amp; Training</td></tr>
+          <tr><td data-en="Email support" data-he="תמיכה באימייל">Email support</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="Priority support (email + video)" data-he="תמיכה מועדפת (אימייל + וידאו)">Priority support (email + video)</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td data-en="PD training session" data-he="סשן הכשרה מקצועית">PD training session</td><td><i class="fas fa-times"></i></td><td data-en="1 session" data-he="סשן 1">1 session</td><td data-en="Unlimited" data-he="ללא הגבלה">Unlimited</td></tr>
+          <tr><td data-en="Dedicated account manager" data-he="מנהל חשבון ייעודי">Dedicated account manager</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FREE TRIAL ══ -->
+<section class="trial-section" id="trial">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag" data-en="✦ Free Trial" data-he="✦ התנסות חינם">✦ Free Trial</div>
+      <h2 data-en="30 Days Free.&lt;br&gt;No Credit Card Required." data-he="30 יום חינם.&lt;br&gt;ללא כרטיס אשראי.">30 Days Free.<br>No Credit Card Required.</h2>
+      <p data-en="Get full access to the entire curriculum. If it doesn't transform your art classes, you pay nothing." data-he="קבלו גישה מלאה לכל התכנית. אם זה לא ישנה את שיעורי האמנות שלכם, לא תשלמו כלום.">Get full access to the entire curriculum. If it doesn't transform your art classes, you pay nothing.</p>
+    </div>
+    <div class="trial-box fade-up">
+      <div class="trial-box-top">
+        <div class="tbt-tag" data-en="🎁 Free School Trial" data-he="🎁 התנסות חינם לבית הספר">🎁 Free School Trial</div>
+        <h3 data-en="Start Teaching in Minutes" data-he="התחילו ללמד תוך דקות">Start Teaching in Minutes</h3>
+        <p data-en="Full access to all 6 units, 36 lessons, slide decks, worksheets, and teacher guides — free for 30 days." data-he="גישה מלאה לכל 6 היחידות, 36 שיעורים, מצגות, דפי עבודה ומדריכי מורה — חינם ל-30 יום.">Full access to all 6 units, 36 lessons, slide decks, worksheets, and teacher guides — free for 30 days.</p>
+        <div class="trial-perks">
+          <div class="trial-perk"><i class="fas fa-check"></i> <span data-en="All features included" data-he="כל התכונות כלולות">All features included</span></div>
+          <div class="trial-perk"><i class="fas fa-check"></i> <span data-en="No credit card needed" data-he="ללא כרטיס אשראי">No credit card needed</span></div>
+          <div class="trial-perk"><i class="fas fa-check"></i> <span data-en="Cancel anytime" data-he="ביטול בכל עת">Cancel anytime</span></div>
+          <div class="trial-perk"><i class="fas fa-check"></i> <span data-en="Setup in under 5 min" data-he="הגדרה תוך 5 דקות">Setup in under 5 min</span></div>
+        </div>
+      </div>
+      <div class="trial-form" id="trial-form-wrap">
+        <form id="trial-form" onsubmit="submitTrial(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-en="First Name" data-he="שם פרטי">First Name</label>
+              <input type="text" placeholder="Maya" required />
+            </div>
+            <div class="form-group">
+              <label data-en="Last Name" data-he="שם משפחה">Last Name</label>
+              <input type="text" placeholder="Cohen" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-en="School Email" data-he="אימייל בית הספר">School Email</label>
+              <input type="email" placeholder="maya@school.edu" required />
+            </div>
+            <div class="form-group">
+              <label data-en="School Name" data-he="שם בית הספר">School Name</label>
+              <input type="text" placeholder="International Art Academy" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-en="Country" data-he="מדינה">Country</label>
+              <select required>
+                <option value="">Select country…</option>
+                <option>United States</option>
+                <option>United Kingdom</option>
+                <option>Israel</option>
+                <option>Canada</option>
+                <option>Australia</option>
+                <option>France</option>
+                <option>Spain</option>
+                <option>Germany</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-en="Your Role" data-he="תפקידך">Your Role</label>
+              <select required>
+                <option value="">Select role…</option>
+                <option>Art Teacher</option>
+                <option>Head of Department</option>
+                <option>Principal / Vice-Principal</option>
+                <option>Curriculum Director</option>
+                <option>IT / Admin</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" data-en="<i class='fas fa-star' style='margin-right:8px'></i>Get Free 30-Day Access" data-he="<i class='fas fa-star' style='margin-left:8px'></i>קבלו גישה חינם ל-30 יום">
+            <i class="fas fa-star" style="margin-right:8px"></i>
+            Get Free 30-Day Access
+          </button>
+          <div class="form-note">
+            By signing up you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>
+            We'll never share your data with third parties.
+          </div>
+        </form>
+      </div>
+      <div class="trial-success" id="trial-success">
+        <div class="success-icon">🎉</div>
+        <h3 data-en="You're in! Welcome to Sources of Inspiration." data-he="נרשמתם! ברוכים הבאים.">You're in! Welcome to Sources of Inspiration.</h3>
+        <p data-en="Check your email for your login link and a quick-start guide. Your 30-day free trial begins now." data-he="בדקו את האימייל לקישור הכניסה. 30 יום חינם מתחילים עכשיו.">Check your email for your login link and a quick-start guide. Your 30-day free trial begins now.</p>
+        <div class="success-actions">
+          <a href="course.html" class="btn btn-gold" data-en="Explore the Course" data-he="לתכנית הלימודים">Explore the Course</a>
+          <a href="lesson.html" class="btn" style="background:rgba(255,255,255,.08);color:white;border:1px solid rgba(255,255,255,.15)" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-tag" data-en="✦ What Teachers Say" data-he="✦ מה אומרים המורים">✦ What Teachers Say</div>
+      <h2 data-en="Trusted by Art Teachers<br>Around the World" data-he="מורים לאמנות<br>ברחבי העולם בוטחים בה">Trusted by Art Teachers<br>Around the World</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"The lesson on Music & Rhythm completely changed how my students think about art. They started noticing rhythm in everything — in architecture, in fashion, in nature. The curriculum does something rare: it teaches them to see."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#FF4D4D,#c9a96e)">S</div>
+          <div>
+            <div class="tc-name">Sarah Mitchell</div>
+            <div class="tc-role">Art Teacher · London International School</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="animation-delay:.1s">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"I've been teaching art for 18 years and this is the first curriculum that actually helps students understand where their creativity comes from. The Memory & Identity unit moved some students to tears — in the best way."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#50b464,#648cff)">D</div>
+          <div>
+            <div class="tc-name">David Okonkwo</div>
+            <div class="tc-role">Head of Art · Nairobi International Academy</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="animation-delay:.2s">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"The teacher resources are incredible. Having ready-made slide decks and worksheets saves me 3–4 hours every week. And my students are producing the most beautiful, thoughtful work I've ever seen from Grade 8."</p>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#b464dc,#ff8c3c)">A</div>
+          <div>
+            <div class="tc-name">Amélie Dubois</div>
+            <div class="tc-role" data-en="Art &amp; Design Teacher · École Internationale, Paris" data-he="מורה לאמנות ועיצוב · École Internationale, Paris">Art & Design Teacher · École Internationale, Paris</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-tag" data-en="✦ FAQ" data-he="✦ שאלות נפוצות">✦ FAQ</div>
+      <h2 data-en="Common Questions" data-he="שאלות נפוצות">Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" data-en="What grade levels is this curriculum suitable for? <i class='fas fa-chevron-down'></i>" data-he="לאיזה שכבות גיל מתאימה התכנית? <i class='fas fa-chevron-down'></i>">What grade levels is this curriculum suitable for? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="The curriculum is designed for Grades 5–12 (ages 10–18). Most units work well across this full range, with differentiation guidance provided for each lesson. Unit 06 (Personal Style Development) is best suited for Grades 7 and up." data-he="התכנית מיועדת לכיתות ה׳–י״ב (גילאי 10–18). רוב היחידות מתאימות לכל הטווח עם הנחיות לדיפרנציאציה. יחידה 06 מתאימה במיוחד לכיתות ז׳ ומעלה.">The curriculum is designed for Grades 5–12 (ages 10–18). Most units work well across this full range, with differentiation guidance provided for each lesson. Unit 06 (Personal Style Development) is best suited for Grades 7 and up.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="Do I need any special technology or equipment? <i class='fas fa-chevron-down'></i>" data-he="האם נדרשת טכנולוגיה מיוחדת? <i class='fas fa-chevron-down'></i>">Do I need any special technology or equipment? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="No special equipment needed. You just need a browser and ideally a projector or screen for class display. All lessons work on tablets and laptops. There's nothing to install." data-he="לא צריך ציוד מיוחד. מספיק דפדפן ומקרן. כל השיעורים עובדים על טאבלטים ומחשבים ניידים. אין מה להתקין.">No special equipment needed. You just need a browser (Chrome, Safari, Firefox, or Edge) and ideally a projector or screen for class display. All lessons work on tablets and laptops. There's nothing to install.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="Is the curriculum aligned to national art standards? <i class='fas fa-chevron-down'></i>" data-he="האם התכנית מותאמת לתקנים לאומיים? <i class='fas fa-chevron-down'></i>">Is the curriculum aligned to national art standards? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="Yes. The curriculum is aligned to the US National Core Arts Standards, the UK Art & Design curriculum framework, and the Israeli Ministry of Education visual arts program." data-he="כן. התכנית מותאמת לתקני האמנות הלאומיים של ארה״ב, בריטניה ותכנית הלימודים של משרד החינוך הישראלי.">Yes. The curriculum is aligned to the US National Core Arts Standards, the UK Art & Design curriculum framework, and the Israeli Ministry of Education visual arts program. We provide alignment documents for each on request.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="How long is each lesson? <i class='fas fa-chevron-down'></i>" data-he="כמה זמן אורך כל שיעור? <i class='fas fa-chevron-down'></i>">How long is each lesson? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="Each lesson is designed for a 45–60 minute class period. The teacher guide includes a timing breakdown. Lessons can be split across two shorter periods if needed." data-he="כל שיעור מיועד ל-45–60 דקות. מדריך המורה כולל פירוט עיתוי. ניתן לחלק לשני מפגשים קצרים.">Each lesson is designed for a 45–60 minute class period. The teacher guide includes a timing breakdown (e.g., 10 min opening discussion, 20 min gallery exploration, 20 min studio activity, 10 min reflection). Lessons can be split across two shorter periods if needed.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="What happens after the free trial ends? <i class='fas fa-chevron-down'></i>" data-he="מה קורה אחרי תקופת הניסיון? <i class='fas fa-chevron-down'></i>">What happens after the free trial ends? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="After 30 days, you'll receive an email with subscription options. There's no automatic charge — you only pay if you choose to continue." data-he="אחרי 30 יום תקבלו אימייל עם אפשרויות המנוי. אין חיוב אוטומטי — משלמים רק אם בוחרים להמשיך.">After 30 days, you'll receive an email with subscription options. You can choose a Teacher or School plan, or contact us about a Network license. There's no automatic charge — you only pay if you choose to continue, and we make the process simple.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="Can I use this alongside our existing art program? <i class='fas fa-chevron-down'></i>" data-he="אפשר להשתמש בה לצד תכנית קיימת? <i class='fas fa-chevron-down'></i>">Can I use this alongside our existing art program? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="Absolutely. Many teachers use Sources of Inspiration as a standalone curriculum, while others integrate individual units into their existing program." data-he="בהחלט. מורים רבים משתמשים בתכנית כתכנית עצמאית, ואחרים משלבים יחידות בודדות בתכנית הקיימת.">Absolutely. Many teachers use Sources of Inspiration as a standalone year-long curriculum, while others integrate individual units into their existing program. You're free to use any combination of the 6 units in any order.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" data-en="Is there support available if I have questions? <i class='fas fa-chevron-down'></i>" data-he="יש תמיכה אם יש שאלות? <i class='fas fa-chevron-down'></i>">Is there support available if I have questions? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-a"><p data-en="Yes. All plans include email support within 24 hours. School and Network plans include priority video support and a dedicated onboarding session." data-he="כן. כל התכניות כוללות תמיכה במייל תוך 24 שעות. תכניות בית ספר ורשת כוללות תמיכת וידאו ומפגש קליטה ייעודי.">Yes. All plans include email support with responses within 24 hours. School and Network plans include priority video support and a dedicated onboarding session. We also maintain a comprehensive teacher resource library and community forum.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="final-cta">
+  <div class="container">
+    <div class="section-tag" style="color:var(--gold-lt);text-align:center;margin-bottom:20px" data-en="✦ Ready to Start?" data-he="✦ מוכנים להתחיל?">✦ Ready to Start?</div>
+    <h2 class="fade-up" data-en="Give Your Students a<br>Language for Creativity" data-he="תנו לתלמידים שלכם<br>שפה ליצירתיות">Give Your Students a<br>Language for Creativity</h2>
+    <p class="fade-up" data-en="Join 500+ schools worldwide who have transformed their art programs with Sources of Inspiration." data-he="הצטרפו ל-500+ בתי ספר ששינו את תכנית האמנות שלהם.">Join 500+ schools worldwide who have transformed their art programs with Sources of Inspiration.</p>
+    <div class="final-cta-actions fade-up">
+      <a href="#trial" class="btn btn-gold btn-lg" data-en="Start Free Trial — 30 Days Free" data-he="התחילו התנסות חינם — 30 יום">Start Free Trial — 30 Days Free <i class="fas fa-arrow-right" style="margin-left:8px"></i></a>
+      <a href="course.html" class="btn btn-outline-white btn-lg" data-en="Explore the Curriculum" data-he="לתכנית הלימודים">Explore the Curriculum</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo-mark" style="width:36px;height:36px;font-size:1.2rem">✦</div>
+      <div>
+        <div style="font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:1rem;margin-bottom:2px">Sources of Inspiration in Art</div>
+        <div style="font-size:.78rem;color:rgba(13,13,26,.4)" data-en="Premium Creativity Curriculum for Schools" data-he="תכנית יצירתיות מתקדמת לבתי ספר">Premium Creativity Curriculum for Schools</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="Curriculum" data-he="תכנית לימודים">Curriculum</div>
+        <a href="course.html" data-en="The 7 Units" data-he="7 היחידות">The 7 Units</a>
+        <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
+        <a href="course.html#unit01" data-en="Personal Experience" data-he="חווייה אישית">Personal Experience</a>
+        <a href="course.html#unit02" data-en="Nature as Inspiration" data-he="טבע כמקור השראה">Nature as Inspiration</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="For Schools" data-he="לבתי ספר">For Schools</div>
+        <a href="teachers.html" data-en="Teacher Resources" data-he="משאבים למורים">Teacher Resources</a>
+        <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+        <a href="#trial" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+        <a href="mailto:hello@sourcesofinspiration.art" data-en="Contact Sales" data-he="צרו קשר">Contact Sales</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="Company" data-he="אודות">Company</div>
+        <a href="#" data-en="About Us" data-he="עלינו">About Us</a>
+        <a href="#" data-en="Blog" data-he="בלוג">Blog</a>
+        <a href="#" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a>
+        <a href="#" data-en="Terms of Service" data-he="תנאי שירות">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div data-en="© 2025 Sources of Inspiration in Art. All rights reserved." data-he="© 2025 מקורות השראה באמנות. כל הזכויות שמורות.">© 2025 Sources of Inspiration in Art. All rights reserved.</div>
+    <div style="display:flex;gap:16px">
+      <a href="#" style="color:rgba(13,13,26,.45);font-size:.82rem">Privacy</a>
+      <a href="#" style="color:rgba(13,13,26,.45);font-size:.82rem">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Navbar scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Hamburger ──
+const hamburger = document.getElementById('nav-hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.addEventListener('click', e => {
+  if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+});
+
+// ── Fade-up on scroll ──
+const fadeEls = document.querySelectorAll('.fade-up');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => io.observe(el));
+} else {
+  fadeEls.forEach(el => el.classList.add('visible'));
+}
+
+// ── Pricing toggle ──
+const billingToggle = document.getElementById('billing-toggle');
+let isAnnual = true;
+billingToggle.addEventListener('click', () => {
+  isAnnual = !isAnnual;
+  billingToggle.classList.toggle('annual', isAnnual);
+  document.getElementById('lbl-monthly').classList.toggle('active', !isAnnual);
+  document.getElementById('lbl-annual').classList.toggle('active', isAnnual);
+  document.querySelectorAll('.price-val').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+  document.querySelectorAll('.price-orig-val').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+  document.querySelectorAll('.billing-period').forEach(el => {
+    el.textContent = isAnnual
+      ? (currentLang === 'he' ? 'לתשלום שנתי' : 'billed annually')
+      : (currentLang === 'he' ? 'לתשלום חודשי' : 'billed monthly');
+  });
+});
+
+// ── FAQ ──
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// ── Trial form ──
+function submitTrial(e) {
+  e.preventDefault();
+  document.getElementById('trial-form-wrap').style.display = 'none';
+  document.getElementById('trial-success').style.display = 'block';
+}
+
+// ── Smooth scroll for anchor links — offset by sticky nav height ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const navEl = document.getElementById('nav');
+      const navH  = navEl ? navEl.getBoundingClientRect().height : 72;
+      const top   = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── LANGUAGE + THEME: handled by app-init.js ─────────────────────────────
+// setLang(), toggleTheme(), currentLang, _syncThemeBtn() are all global.
+// Apply language on load (currentLang set by app-init.js).
+setLang(currentLang);
+_syncThemeBtn();
+</script>
+</body>
+</html>

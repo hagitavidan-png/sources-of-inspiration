@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║   7 DIAMONDS – LESSON PAGE (DYNAMIC)                        ║
+  ║   הדף הזה נבנה דינמית מקובץ data/lesson-XX.js              ║
+  ║   כדי ליצור שיעור חדש:                                      ║
+  ║   1. צור data/lesson-XX.js עם הגדרת LESSON_XX              ║
+  ║   2. הוסף <script src="../data/lesson-XX.js"> לפני main.js  ║
+  ║   3. עדכן data/unit-X.js – הוסף רשומה ל-lessons[]          ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7 Diamonds | שיעור</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="lang-he lesson-page">
+
+<div class="lesson-progress-bar"><div class="lesson-progress-fill"></div></div>
+
+<!-- ─ HEADER ─────────────────────────────────────────────── -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <span class="logo-diamonds">◆◆◆</span>
+      <span class="logo-text">7 Diamonds</span>
+    </a>
+    <nav id="main-nav">
+      <a href="../index.html#about"    class="nav-link" data-he="אודות"    data-en="About">אודות</a>
+      <a href="../index.html#lessons"  class="nav-link active" data-he="שיעורים" data-en="Lessons">שיעורים</a>
+      <a href="../index.html#video"    class="nav-link" data-he="וידאו"    data-en="Video">וידאו</a>
+      <a href="../index.html#register" class="nav-link" data-he="הרשמה"   data-en="Register">הרשמה</a>
+    </nav>
+    <div class="header-actions">
+      <button id="lang-toggle">EN</button>
+      <button id="hamburger" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ─ HERO (נבנה ע"י JS) ─────────────────────────────── -->
+<section class="lesson-hero" id="lesson-hero" style="padding-top:var(--header-h)">
+  <div class="lesson-hero-bg" id="lesson-hero-bg"></div>
+  <div class="lesson-hero-overlay"></div>
+  <div class="lesson-hero-content container">
+    <a href="../index.html#lessons" class="lesson-back">
+      <i class="fa-solid fa-arrow-right"></i>
+      <span data-he="חזרה לכל השיעורים" data-en="Back to all lessons">חזרה לכל השיעורים</span>
+    </a>
+    <div class="lesson-unit-badge" id="lesson-unit-badge"></div>
+    <h1 id="lesson-title"></h1>
+    <div class="lesson-hero-meta" id="lesson-hero-meta"></div>
+  </div>
+</section>
+
+<!-- ─ MAIN CONTENT (נבנה ע"י JS) ──────────────────────── -->
+<main class="lesson-body">
+  <div class="lesson-container" id="lesson-content">
+    <!-- תוכן נטען דינמית -->
+    <div style="text-align:center; padding:80px 20px; color:#888;">
+      <i class="fa-solid fa-spinner fa-spin" style="font-size:2rem; color:#C9A96E;"></i>
+      <p style="margin-top:16px">טוען שיעור...</p>
+    </div>
+  </div>
+</main>
+
+<!-- Lightbox (נבנה אוטומטי ע"י main.js) -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<!-- ─ FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">◆◆◆ 7 Diamonds</div>
+  <div class="footer-socials">
+    <a href="https://youtube.com/@hagitavidanart" target="_blank" class="footer-social" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://www.instagram.com/hagitavidanart" target="_blank" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://bio.site/hagitavidan" target="_blank" class="footer-social" aria-label="Bio"><i class="fa-solid fa-link"></i></a>
+  </div>
+  <p class="footer-copy">© 2025 חגית אבידן | 7 Diamonds</p>
+</footer>
+
+<!-- ─ SCRIPTS ─────────────────────────────────────────────
+     סקריפט השיעור נטען דינמית מ-URL param ?lesson=01
+     אפשר גם לפרוס כל שיעור בנפרד: lesson-01.html עם
+     <script src="../data/lesson-01.js"> לפני main.js
+──────────────────────────────────────────────────────── -->
+<script src="../js/main.js"></script>
+<script>
+/* ============================================================
+   LESSON PAGE DYNAMIC BUILDER
+   מנגנון: קובץ lesson-XX.html יכיל <script src="../data/lesson-XX.js">
+   לפני main.js, והמשתנה LESSON_XX יהיה זמין גלובלית.
+   או: ניתן לטעון דינמית לפי ?lesson=XX בקובץ תבנית זה.
+   ============================================================ */
+
+(function() {
+  'use strict';
+
+  /* ── מצא את נתוני השיעור ─────────────────────────────── */
+  function getLessonData() {
+    /* שיטה 1: משתנה גלובלי (lesson-01.html עם <script src="../data/lesson-01.js">) */
+    const globalVars = Object.keys(window).filter(k => /^LESSON_\d+$/.test(k));
+    if (globalVars.length > 0) {
+      return window[globalVars[0]];
+    }
+    /* שיטה 2: URL param ?lesson=01 */
+    const params = new URLSearchParams(location.search);
+    const num = params.get('lesson');
+    if (num) {
+      const key = 'LESSON_' + num.padStart(2,'0').toUpperCase();
+      return window[key] || null;
+    }
+    return null;
+  }
+
+  /* ── בנה את הדף ──────────────────────────────────────── */
+  function buildPage(d) {
+    if (!d) {
+      document.getElementById('lesson-content').innerHTML =
+        '<p style="text-align:center;padding:60px;color:red;">שגיאה: נתוני שיעור לא נמצאו.</p>';
+      return;
+    }
+
+    const lang = localStorage.getItem('7d-lang') || 'he';
+    const t = (obj) => (obj && typeof obj === 'object') ? (obj[lang] || obj.he || '') : (obj || '');
+
+    /* ── כותרת הדף ── */
+    document.title = `שיעור ${d.num} – ${t(d.titleHe ? {he:d.titleHe,en:d.titleEn} : d.titleHe)} | 7 Diamonds`;
+
+    /* ── צבע יחידה ── */
+    document.documentElement.style.setProperty('--unit-color', d.unitColor || '#c9a96e');
+
+    /* ── HERO ── */
+    const heroBg = document.getElementById('lesson-hero-bg');
+    if (heroBg) heroBg.style.backgroundImage = `url('${d.heroImage}')`;
+
+    const unitBadge = document.getElementById('lesson-unit-badge');
+    if (unitBadge) {
+      unitBadge.dataset.he = d.unit || '';
+      unitBadge.dataset.en = d.unitEn || '';
+      unitBadge.textContent = lang === 'en' ? (d.unitEn || d.unit) : d.unit;
+    }
+
+    const titleEl = document.getElementById('lesson-title');
+    if (titleEl) {
+      titleEl.dataset.he = d.titleHe || '';
+      titleEl.dataset.en = d.titleEn || '';
+      titleEl.textContent = lang === 'en' ? (d.titleEn || d.titleHe) : d.titleHe;
+    }
+
+    const metaEl = document.getElementById('lesson-hero-meta');
+    if (metaEl) {
+      metaEl.innerHTML = `
+        <span><i class="${d.metaIcon1 || 'fa-solid fa-book-open'}"></i>
+          <span data-he="${d.meta1He||''}" data-en="${d.meta1En||''}">${lang==='en'?(d.meta1En||d.meta1He):d.meta1He}</span>
+        </span>
+        <span><i class="${d.metaIcon2 || 'fa-solid fa-clock'}"></i>
+          <span data-he="${d.meta2He||''}" data-en="${d.meta2En||''}">${lang==='en'?(d.meta2En||d.meta2He):d.meta2He}</span>
+        </span>
+        <span><i class="${d.metaIcon3 || 'fa-solid fa-pen-nib'}"></i>
+          <span data-he="${d.meta3He||''}" data-en="${d.meta3En||''}">${lang==='en'?(d.meta3En||d.meta3He):d.meta3He}</span>
+        </span>`;
+    }
+
+    /* ── MAIN CONTENT ── */
+    let html = '';
+
+    /* בנר סיום */
+    const completionMsg = d.isLastLesson
+      ? `<strong>כל הכבוד!</strong> קראת את השיעור עד הסוף — את סיימת את הקורס!`
+      : `<strong>כל הכבוד!</strong> קראת את השיעור עד הסוף.`;
+    html += `<div class="lesson-complete-banner"><i class="fa-solid fa-circle-check"></i><p>${completionMsg}</p></div>`;
+
+    /* פסקת פתיחה */
+    if (d.introTitle || d.introText) {
+      html += `
+        <h2 class="lesson-section-title fade-in">
+          <span class="lesson-section-icon"><i class="fa-solid fa-lightbulb"></i></span>
+          <span data-he="${t({he:d.introTitle?.he,en:d.introTitle?.en})}" data-en="${t({he:d.introTitle?.he,en:d.introTitle?.en})}">${lang==='en'?(d.introTitle?.en||d.introTitle?.he):(d.introTitle?.he||'')}</span>
+        </h2>
+        <div class="lesson-inspiration-block fade-in">
+          <p data-he="${(d.introText?.he||'').replace(/"/g,'&quot;')}" data-en="${(d.introText?.en||'').replace(/"/g,'&quot;')}">${lang==='en'?(d.introText?.en||d.introText?.he):(d.introText?.he||'')}</p>
+        </div>`;
+    }
+
+    /* גלריית אמנים */
+    if (d.artists && d.artists.length > 0) {
+      const secTitle = d.artistsSectionTitle;
+      html += `
+        <h2 class="lesson-section-title fade-in">
+          <span class="lesson-section-icon"><i class="fa-solid fa-images"></i></span>
+          <span data-he="${secTitle?.he||''}" data-en="${secTitle?.en||''}">${lang==='en'?(secTitle?.en||secTitle?.he):(secTitle?.he||'')}</span>
+        </h2>
+        <div class="artist-cards-grid fade-in">`;
+
+      d.artists.forEach(artist => {
+        html += `
+          <div class="artist-card-full">
+            <div class="artist-card-inner">
+              <div class="artist-card-header">
+                <div class="artist-avatar">${artist.avatar || '🎨'}</div>
+                <div>
+                  <div class="artist-name" data-he="${artist.nameHe||''}" data-en="${artist.nameEn||''}">${lang==='en'?(artist.nameEn||artist.nameHe):artist.nameHe}</div>
+                  <div class="artist-style" data-he="${artist.styleHe||''}" data-en="${artist.styleEn||''}">${lang==='en'?(artist.styleEn||artist.styleHe):artist.styleHe}</div>
+                </div>
+              </div>
+              <p class="artist-bio" data-he="${(artist.bioHe||'').replace(/"/g,'&quot;')}" data-en="${(artist.bioEn||'').replace(/"/g,'&quot;')}">${lang==='en'?(artist.bioEn||artist.bioHe):artist.bioHe}</p>
+            </div>
+            <div class="artist-gallery">
+              ${(artist.images||[]).map(img => `
+                <div class="gallery-item">
+                  <img src="${img.url}" alt="${lang==='en'?(img.altEn||img.altHe):img.altHe}" loading="lazy" />
+                  <div class="gallery-caption" data-he="${img.captionHe||''}" data-en="${img.captionEn||''}">${lang==='en'?(img.captionEn||img.captionHe):img.captionHe}</div>
+                </div>`).join('')}
+            </div>
+          </div>`;
+      });
+      html += `</div><!-- /artist-cards-grid -->`;
+    }
+
+    /* טכניקות */
+    if (d.techniques && d.techniques.length > 0) {
+      const secTitle = d.techniquesSectionTitle;
+      html += `
+        <h2 class="lesson-section-title fade-in">
+          <span class="lesson-section-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+          <span data-he="${secTitle?.he||''}" data-en="${secTitle?.en||''}">${lang==='en'?(secTitle?.en||secTitle?.he):(secTitle?.he||'')}</span>
+        </h2>
+        <div class="techniques-grid fade-in">
+          ${d.techniques.map(tech => `
+            <div class="technique-card">
+              <div class="technique-icon">${tech.icon||'✨'}</div>
+              <div class="technique-title" data-he="${tech.titleHe||''}" data-en="${tech.titleEn||''}">${lang==='en'?(tech.titleEn||tech.titleHe):tech.titleHe}</div>
+              <div class="technique-desc" data-he="${(tech.descHe||'').replace(/"/g,'&quot;')}" data-en="${(tech.descEn||'').replace(/"/g,'&quot;')}">${lang==='en'?(tech.descEn||tech.descHe):tech.descHe}</div>
+            </div>`).join('')}
+        </div>`;
+    }
+
+    /* תרגיל */
+    if (d.exerciseTitle) {
+      const exTitle = lang==='en'?(d.exerciseTitle.en||d.exerciseTitle.he):d.exerciseTitle.he;
+      const timerLabel = d.exerciseTimerLabel ? (lang==='en'?(d.exerciseTimerLabel.en||d.exerciseTimerLabel.he):d.exerciseTimerLabel.he) : '';
+      const secs = d.exerciseSeconds;
+
+      html += `<div class="exercise-block fade-in">
+        <div class="exercise-header">
+          <div class="lesson-section-icon"><i class="fa-solid fa-pencil"></i></div>
+          <div class="exercise-title" data-he="${d.exerciseTitle.he||''}" data-en="${d.exerciseTitle.en||''}">${exTitle}</div>
+        </div>`;
+
+      if (secs) {
+        const mm = String(Math.floor(secs/60)).padStart(2,'0');
+        const ss = String(secs % 60).padStart(2,'0');
+        html += `
+        <div class="exercise-timer-wrap">
+          <div class="exercise-timer-display">
+            <div class="timer-badge"><i class="fa-solid fa-stopwatch"></i> ${timerLabel}</div>
+            <div class="timer-clock" data-seconds="${secs}">${mm}:${ss}</div>
+          </div>
+          <div class="timer-buttons">
+            <button class="timer-btn timer-start" data-he="התחל" data-en="Start">התחל</button>
+            <button class="timer-btn timer-reset" data-he="אפס" data-en="Reset">אפס</button>
+          </div>
+          <div class="timer-progress" style="margin-top:12px"><div class="timer-progress-fill"></div></div>
+        </div>`;
+      }
+
+      if (d.exerciseChecklist && d.exerciseChecklist.length > 0) {
+        html += `<div class="exercise-checklist">
+          ${d.exerciseChecklist.map(item => `
+            <div class="checklist-item">
+              <div class="checklist-checkbox"></div>
+              <div class="checklist-text" data-he="${(item.he||'').replace(/"/g,'&quot;')}" data-en="${(item.en||'').replace(/"/g,'&quot;')}">${lang==='en'?(item.en||item.he):item.he}</div>
+            </div>`).join('')}
+        </div>`;
+      }
+      html += `</div>`;
+    }
+
+    /* בלוק חגיגת סיום (שיעור 14) */
+    if (d.isLastLesson && d.completionTitle) {
+      const cTitle = lang==='en'?(d.completionTitle.en||d.completionTitle.he):d.completionTitle.he;
+      const cText  = lang==='en'?(d.completionText?.en||d.completionText?.he):d.completionText?.he;
+      html += `
+        <div class="course-completion-block fade-in">
+          <div class="completion-icon">🎉</div>
+          <h2 data-he="${d.completionTitle.he||''}" data-en="${d.completionTitle.en||''}">${cTitle}</h2>
+          <p>${cText||''}</p>
+          <div class="completion-links">
+            ${(d.completionLinks||[]).map(link => `
+              <a href="${link.href}" target="_blank" class="completion-link">
+                <i class="${link.icon}"></i>
+                <span data-he="${link.labelHe||''}" data-en="${link.labelEn||''}">${lang==='en'?(link.labelEn||link.labelHe):link.labelHe}</span>
+              </a>`).join('')}
+          </div>
+        </div>`;
+    }
+
+    /* ציטוט */
+    if (d.quote) {
+      html += `
+        <div class="lesson-quote fade-in">
+          <p class="lesson-quote-text" data-he="${(d.quote.he||'').replace(/"/g,'&quot;')}" data-en="${(d.quote.en||'').replace(/"/g,'&quot;')}">${lang==='en'?(d.quote.en||d.quote.he):d.quote.he}</p>
+          <p class="lesson-quote-author">${d.quoteAuthor||''}</p>
+        </div>`;
+    }
+
+    /* רפלקציה */
+    if (d.reflectionQ) {
+      const rQ = lang==='en'?(d.reflectionQ.en||d.reflectionQ.he):d.reflectionQ.he;
+      const rPh = lang==='en'?(d.reflectionPlaceholder?.en||d.reflectionPlaceholder?.he):d.reflectionPlaceholder?.he;
+      html += `
+        <div class="reflection-block fade-in">
+          <h3><i class="fa-solid fa-feather-pointed"></i>
+            <span data-he="${d.reflectionQ.he||''}" data-en="${d.reflectionQ.en||''}">${rQ}</span>
+          </h3>
+          <textarea class="reflection-textarea" placeholder="${rPh||''}"></textarea>
+          <button class="reflection-save" data-he="שמור" data-en="Save">שמור</button>
+          <p class="reflection-saved">✓ נשמר</p>
+        </div>`;
+    }
+
+    /* ניווט */
+    const prev = d.prevLesson;
+    const next = d.nextLesson;
+    const backHome = d.isLastLesson;
+
+    html += `<div class="lesson-nav-footer fade-in">`;
+    if (prev) {
+      html += `<a href="${prev.file}" class="lesson-nav-btn"><i class="fa-solid fa-arrow-right"></i><span data-he="שיעור קודם" data-en="Previous">${lang==='en'?'Previous':'שיעור קודם'}</span></a>`;
+    }
+    html += `<a href="../index.html#lessons" class="lesson-nav-btn"><i class="fa-solid fa-grid-2"></i><span data-he="כל השיעורים" data-en="All Lessons">${lang==='en'?'All Lessons':'כל השיעורים'}</span></a>`;
+    if (next) {
+      const nextTitle = lang==='en'?(next.titleEn||next.titleHe):next.titleHe;
+      html += `<a href="${next.file}" class="lesson-nav-btn primary"><span data-he="שיעור הבא: ${next.titleHe}" data-en="Next: ${next.titleEn||next.titleHe}">${lang==='en'?`Next: ${next.titleEn||next.titleHe}`:`שיעור הבא: ${next.titleHe}`}</span><i class="fa-solid fa-arrow-left"></i></a>`;
+    } else if (backHome) {
+      html += `<a href="../index.html" class="lesson-nav-btn primary"><span data-he="חזרה לדף הבית" data-en="Back to Home">${lang==='en'?'Back to Home':'חזרה לדף הבית'}</span><i class="fa-solid fa-house"></i></a>`;
+    }
+    html += `</div>`;
+
+    /* הכנס לדף */
+    document.getElementById('lesson-content').innerHTML = html;
+
+    /* ── הפעל fade-in observer ── */
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    }
+
+    /* ── הפעל lightbox ו-checklist על תמונות החדשות ── */
+    if (typeof window.initLightbox === 'function') window.initLightbox();
+    if (typeof window.initChecklist === 'function') window.initChecklist();
+
+    /* ── reflection – טען מ-localStorage ── */
+    const textarea = document.querySelector('.reflection-textarea');
+    if (textarea && d.id) {
+      const saved = localStorage.getItem('7d-reflection-' + d.id);
+      if (saved) textarea.value = saved;
+      document.querySelector('.reflection-save')?.addEventListener('click', () => {
+        localStorage.setItem('7d-reflection-' + d.id, textarea.value);
+        const msg = document.querySelector('.reflection-saved');
+        if (msg) { msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 2500); }
+      });
+    }
+  }
+
+  /* ── הרץ לאחר טעינת ה-DOM ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => buildPage(getLessonData()));
+  } else {
+    /* אם main.js כבר רץ – buildPage ישיר */
+    buildPage(getLessonData());
+  }
+})();
+</script>
+</body>
+</html>
