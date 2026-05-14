@@ -1,0 +1,363 @@
+/* ============================================================
+   LESSON RESPONSIVE — Global Layout Fix
+   Sources of Inspiration in Art
+   
+   PURPOSE: Ensures CTA button is always visible inside viewport.
+   Applies to ALL lesson pages universally.
+   Injected via <link> in every lesson HTML file.
+   
+   DO NOT change navigation logic, design language, or architecture.
+   ONLY fixes vertical layout overflow and CTA visibility.
+   ============================================================ */
+
+/* ── 1. CORE VIEWPORT VARIABLES ──────────────────────────────
+   Unified nav/bar heights used across all lessons.
+   Each lesson may define its own vars — these serve as fallback.
+──────────────────────────────────────────────────────────── */
+:root {
+  --lr-nav-h:    52px;   /* top HUD bar */
+  --lr-bar-h:    78px;   /* bottom nav bar */
+  --lr-dots-h:   32px;   /* progress dots zone */
+  --lr-safe-bot: calc(var(--lr-bar-h) + var(--lr-dots-h) + 8px);
+  --lr-stage-h:  calc(100dvh - var(--lr-nav-h) - var(--lr-bar-h));
+  /* fallback for browsers without dvh */
+  --lr-stage-h-fb: calc(100vh - var(--lr-nav-h) - var(--lr-bar-h));
+}
+
+/* ── 2. STAGE — unified across all lessons ────────────────────
+   Every lesson uses #stage as the main screen container.
+   Force it to stay inside viewport using dvh with svh fallback.
+──────────────────────────────────────────────────────────── */
+#stage {
+  position: fixed !important;
+  top: var(--nav-h, var(--lr-nav-h)) !important;
+  bottom: var(--bar-h, var(--lr-bar-h)) !important;
+  left: 0 !important;
+  right: 0 !important;
+  overflow: hidden !important;
+  /* dvh = dynamic viewport height (accounts for browser chrome) */
+  height: calc(100svh - var(--nav-h, var(--lr-nav-h)) - var(--bar-h, var(--lr-bar-h))) !important;
+  height: calc(100dvh - var(--nav-h, var(--lr-nav-h)) - var(--bar-h, var(--lr-bar-h))) !important;
+}
+
+/* ── 3. SCREEN BASE — flex column, never overflows ────────────
+   .screen is the per-slide container.
+   Use flex + min-height:0 to allow children to shrink.
+──────────────────────────────────────────────────────────── */
+.screen {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  /* Dynamic vertical padding — shrinks on short viewports */
+  padding-top:    clamp(8px, 2vh, 28px) !important;
+  padding-bottom: clamp(8px, 2vh, 28px) !important;
+  padding-left:   clamp(16px, 4vw, 40px) !important;
+  padding-right:  clamp(16px, 4vw, 40px) !important;
+  /* Gap between children scales with viewport */
+  gap: clamp(4px, 1.2vh, 16px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ── 4. SCROLLABLE SCREENS — gallery/artwork/scroll types ────
+   These screens allow vertical scroll — give safe bottom padding.
+──────────────────────────────────────────────────────────── */
+.screen--scroll,
+.screen--gallery,
+[data-scroll="true"] {
+  justify-content: flex-start !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-top:    clamp(14px, 2.5vh, 28px) !important;
+  padding-bottom: var(--safe-bot, var(--lr-safe-bot)) !important;
+  scrollbar-width: none !important;
+  overscroll-behavior: contain !important;
+  gap: 0 !important;
+}
+.screen--scroll::-webkit-scrollbar,
+.screen--gallery::-webkit-scrollbar { display: none !important; }
+
+/* ── 5. FLEX CHILDREN — allow shrinking ──────────────────────
+   All direct children of .screen must be able to shrink
+   so the CTA is never pushed below viewport.
+──────────────────────────────────────────────────────────── */
+.screen > * {
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+}
+
+/* CTA / button area — never shrinks, always visible */
+.screen > .bar,
+.screen > .cta,
+.screen > [class*="cta"],
+.screen > [class*="btn-wrap"],
+.screen > .action-area {
+  flex-shrink: 0 !important;
+}
+
+/* ── 6. TYPOGRAPHY SCALING ───────────────────────────────────
+   Headings and subtitles scale down on short viewports.
+   Uses clamp() with vh units for dynamic scaling.
+──────────────────────────────────────────────────────────── */
+
+/* Large heading (.big) */
+.screen .big,
+.screen [class*="title"],
+.screen h1, .screen h2 {
+  font-size: clamp(1.3rem, min(4.2vw, 4.5vh), 3rem) !important;
+  line-height: 1.28 !important;
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+}
+
+/* Subtitle (.sub) */
+.screen .sub,
+.screen [class*="subtitle"],
+.screen [class*="desc"] {
+  font-size: clamp(0.82rem, min(1.8vw, 2.2vh), 1.06rem) !important;
+  line-height: 1.75 !important;
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+}
+
+/* Eyebrow label (.label) */
+.screen .label {
+  font-size: clamp(0.62rem, 1.4vw, 0.9rem) !important;
+  flex-shrink: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── 7. BOTTOM NAV BAR ───────────────────────────────────────
+   #bar is the fixed bottom CTA container.
+   Always at bottom, never overlapped.
+──────────────────────────────────────────────────────────── */
+#bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  /* Respect device safe area (notch/home bar) */
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px) !important;
+  z-index: 200 !important;
+  flex-shrink: 0 !important;
+  /* Ensure bar height is consistent */
+  min-height: var(--bar-h, var(--lr-bar-h)) !important;
+  box-sizing: border-box !important;
+}
+
+/* ── 8. PROGRESS DOTS ────────────────────────────────────────
+   Position above the bar, never overlapping content.
+──────────────────────────────────────────────────────────── */
+#progress {
+  position: fixed !important;
+  bottom: calc(var(--bar-h, var(--lr-bar-h)) + 10px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 150 !important;
+  pointer-events: none !important;
+}
+
+/* ── 9. CHIPS / EMOTION SELECTOR ────────────────────────────
+   Chip grid wraps and shrinks on small screens.
+──────────────────────────────────────────────────────────── */
+.screen .chips,
+.screen [class*="chips"],
+.screen [class*="emotion"] {
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+  /* Limit max height so chips don't overflow */
+  max-height: clamp(120px, 35vh, 280px) !important;
+  overflow-y: auto !important;
+  scrollbar-width: none !important;
+}
+.screen .chips::-webkit-scrollbar { display: none !important; }
+
+/* ── 10. COLOR GRID ──────────────────────────────────────────
+   Color selection grids must stay within viewport.
+──────────────────────────────────────────────────────────── */
+.screen--grid,
+.screen [class*="color-grid"],
+.screen [class*="colour-grid"] {
+  justify-content: flex-start !important;
+  overflow: hidden !important;
+  padding-top:    clamp(10px, 1.8vh, 22px) !important;
+  padding-bottom: clamp(10px, 1.8vh, 22px) !important;
+}
+
+/* ── 11. TABLET PORTRAIT (769px – 1180px) ───────────────────
+   Most problematic breakpoint — extra care here.
+──────────────────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1180px) and (orientation: portrait) {
+  :root {
+    --lr-nav-h: 52px;
+    --lr-bar-h: 72px;
+  }
+
+  .screen {
+    padding-top:    clamp(10px, 1.8vh, 22px) !important;
+    padding-bottom: clamp(10px, 1.8vh, 22px) !important;
+    gap: clamp(4px, 1vh, 12px) !important;
+  }
+
+  .screen .big,
+  .screen [class*="title"],
+  .screen h1, .screen h2 {
+    font-size: clamp(1.4rem, min(3.8vw, 4vh), 2.6rem) !important;
+  }
+
+  .screen .sub {
+    font-size: clamp(0.84rem, min(1.6vw, 2vh), 1rem) !important;
+    line-height: 1.65 !important;
+  }
+}
+
+/* ── 12. MOBILE (≤ 768px) ───────────────────────────────────
+   Tighter spacing, smaller type.
+──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --lr-nav-h: 52px;
+    --lr-bar-h: 72px;
+  }
+
+  .screen {
+    padding-top:    clamp(8px, 1.6vh, 18px) !important;
+    padding-bottom: clamp(8px, 1.6vh, 18px) !important;
+    padding-left:   16px !important;
+    padding-right:  16px !important;
+    gap: clamp(4px, 1vh, 12px) !important;
+  }
+
+  .screen .big,
+  .screen h1, .screen h2 {
+    font-size: clamp(1.25rem, min(5.5vw, 4.5vh), 2.2rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  .screen .sub {
+    font-size: clamp(0.8rem, min(3.5vw, 2vh), 0.96rem) !important;
+    line-height: 1.65 !important;
+    /* Hide subtitle on very short screens to preserve CTA visibility */
+    max-height: clamp(60px, 18vh, 120px) !important;
+    overflow: hidden !important;
+  }
+
+  .screen .label {
+    font-size: clamp(0.58rem, 2.5vw, 0.75rem) !important;
+  }
+}
+
+/* ── 13. VERY SHORT SCREENS (height ≤ 600px) ───────────────
+   Landscape phones, small tablets landscape.
+──────────────────────────────────────────────────────────── */
+@media (max-height: 600px) {
+  :root {
+    --lr-nav-h: 44px;
+    --lr-bar-h: 62px;
+  }
+
+  .screen {
+    gap: clamp(2px, 0.8vh, 8px) !important;
+    padding-top:    6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .screen .big,
+  .screen h1, .screen h2 {
+    font-size: clamp(1.1rem, 4vh, 1.8rem) !important;
+  }
+
+  .screen .sub {
+    display: none !important; /* hide subtitle on tiny screens — CTA must show */
+  }
+
+  .screen .label {
+    display: none !important;
+  }
+
+  .screen .aline {
+    display: none !important;
+  }
+}
+
+/* ── 14. RTL — Hebrew layout adjustments ────────────────────
+   Ensure RTL screens also respect viewport constraints.
+──────────────────────────────────────────────────────────── */
+body.rtl .screen,
+body[dir="rtl"] .screen,
+html[dir="rtl"] .screen {
+  /* RTL Hebrew line-height needs slightly more space */
+  gap: clamp(4px, 1.1vh, 14px) !important;
+}
+
+body.rtl .screen .big,
+body[dir="rtl"] .screen .big {
+  line-height: 1.38 !important;
+  letter-spacing: 0 !important;
+}
+
+body.rtl .screen .sub,
+body[dir="rtl"] .screen .sub {
+  line-height: 1.9 !important;
+}
+
+/* RTL tablet portrait */
+@media (min-width: 769px) and (max-width: 1180px) and (orientation: portrait) {
+  body.rtl .screen .big,
+  body[dir="rtl"] .screen .big {
+    font-size: clamp(1.3rem, min(3.5vw, 3.8vh), 2.4rem) !important;
+  }
+}
+
+/* RTL mobile */
+@media (max-width: 768px) {
+  body.rtl .screen .big,
+  body[dir="rtl"] .screen .big {
+    font-size: clamp(1.2rem, min(5vw, 4.2vh), 2rem) !important;
+  }
+}
+
+/* ── 15. ALINE SEPARATOR ────────────────────────────────────
+   Scale down or hide decorative line on tight screens.
+──────────────────────────────────────────────────────────── */
+.screen .aline {
+  flex-shrink: 1 !important;
+  margin: 0 auto !important;
+}
+
+@media (max-height: 700px) {
+  .screen .aline {
+    display: none !important;
+  }
+}
+
+/* ── 16. PULSE-RING ANIMATION (pause screens) ───────────────
+   Must not overflow the viewport.
+──────────────────────────────────────────────────────────── */
+.pulse-ring {
+  flex-shrink: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ── 17. ARTWORK / IMAGE BLOCKS ─────────────────────────────
+   Prevent images from growing beyond available space.
+──────────────────────────────────────────────────────────── */
+.screen .artwork-stack,
+.screen [class*="artwork"],
+.screen [class*="img-wrap"] {
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+  max-height: clamp(140px, 40vh, 400px) !important;
+}
+
+.screen img {
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
+  max-height: clamp(100px, 35vh, 360px) !important;
+  object-fit: contain !important;
+}
