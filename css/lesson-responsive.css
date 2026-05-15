@@ -7,6 +7,10 @@
    FIX 2: Language visibility — Hebrew-only in HE mode, English-only in EN mode.
            Applied via html[lang="he"] / html[lang="en"] selectors.
    FIX 3: Mobile viewport — prevent horizontal shift/overflow on all lesson pages.
+   FIX 4: Global RTL/LTR direction — PERMANENT ARCHITECTURAL RULE.
+           Hebrew mode:  html/body direction=rtl, all content right-aligned by default.
+           English mode: html/body direction=ltr, all content left-aligned by default.
+           No per-screen hacks needed — all future screens inherit automatically.
 
    Injected into every lesson HTML via <link> in <head>.
    DO NOT change design, colors, typography style, or navigation.
@@ -459,3 +463,158 @@ html[lang="he"] .chip-he { display: inline-block !important; }
 html[lang="en"] .chip-en { display: inline-block !important; }
 html[lang="he"] .card-he { display: inline-block !important; }
 html[lang="en"] .card-en { display: inline-block !important; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION 14 — GLOBAL RTL/LTR DIRECTION ARCHITECTURE
+
+   PERMANENT RULE — applies to every lesson page automatically.
+   No per-screen direction hacks needed.
+   All containers, text, flex rows inherit from html[lang] direction.
+
+   Hebrew (he) = RTL: direction:rtl, text-align:right, flex rows reversed.
+   English (en) = LTR: direction:ltr, text-align:left,  flex rows normal.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Root direction — drives inheritance for EVERYTHING ── */
+html[lang="he"],
+html[lang="he"] body {
+  direction: rtl !important;
+}
+html[lang="en"],
+html[lang="en"] body {
+  direction: ltr !important;
+}
+
+/* ── 2. Screen containers: text-align follows direction ── */
+html[lang="he"] .screen,
+html[lang="he"] .sc,
+html[lang="he"] .bi-block,
+html[lang="he"] .art-text,
+html[lang="he"] .action-block,
+html[lang="he"] .closing-block {
+  text-align: right !important;
+}
+html[lang="en"] .screen,
+html[lang="en"] .sc,
+html[lang="en"] .bi-block,
+html[lang="en"] .art-text,
+html[lang="en"] .action-block,
+html[lang="en"] .closing-block {
+  text-align: left !important;
+}
+
+/* ── 3. Eyebrow labels — flex row direction ── */
+html[lang="he"] .eyebrow {
+  flex-direction: row-reverse !important;
+  justify-content: flex-start !important;
+}
+html[lang="en"] .eyebrow {
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+}
+
+/* ── 4. Selection cards — alignment and text direction ── */
+html[lang="he"] .select-card {
+  align-items: flex-end !important;
+  text-align: right !important;
+}
+html[lang="en"] .select-card {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+/* ── 5. Emotion grid chips — wrap direction ── */
+html[lang="he"] .emotion-grid {
+  direction: rtl !important;
+}
+html[lang="en"] .emotion-grid {
+  direction: ltr !important;
+}
+
+/* ── 6. Action label (S9/S10) — flex row direction ── */
+html[lang="he"] .action-label {
+  flex-direction: row-reverse !important;
+  justify-content: flex-start !important;
+}
+html[lang="en"] .action-label {
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+}
+
+/* ── 7. HUD — flex row direction ── */
+html[lang="he"] #hud {
+  flex-direction: row-reverse !important;
+}
+html[lang="en"] #hud {
+  flex-direction: row !important;
+}
+
+/* ── 8. Back button arrow — mirror in Hebrew ── */
+html[lang="he"] #hud-back svg,
+html[lang="he"] #back-btn svg {
+  transform: scaleX(-1) !important;
+}
+html[lang="en"] #hud-back svg,
+html[lang="en"] #back-btn svg {
+  transform: scaleX(1) !important;
+}
+
+/* ── 9. Nav-bar pill — button order ── */
+html[lang="he"] #nav-bar {
+  flex-direction: row-reverse !important;
+}
+html[lang="en"] #nav-bar {
+  flex-direction: row !important;
+}
+
+/* ── 10. artwork-meta — text alignment ── */
+html[lang="he"] .artwork-meta {
+  text-align: right !important;
+}
+html[lang="en"] .artwork-meta {
+  text-align: left !important;
+}
+
+/* ── 11. Progress bar direction (lessons/*.html) ── */
+html[lang="he"] #progress {
+  flex-direction: row-reverse !important;
+}
+html[lang="en"] #progress {
+  flex-direction: row !important;
+}
+
+/* ── 12. Close/complete buttons ── */
+html[lang="he"] .close-btns,
+html[lang="he"] .complete-btns {
+  flex-direction: row-reverse !important;
+}
+html[lang="en"] .close-btns,
+html[lang="en"] .complete-btns {
+  flex-direction: row !important;
+}
+
+/* ── 13. Typography: RTL line-height + letter-spacing tweaks ── */
+html[lang="he"] .screen .big,
+html[lang="he"] .screen h1,
+html[lang="he"] .screen h2 {
+  letter-spacing: 0 !important;
+  line-height: 1.38 !important;
+}
+html[lang="he"] .screen .sub {
+  line-height: 1.9 !important;
+}
+
+/* ── 14. Lang-toggle button row (lessons/*.html) ── */
+html[lang="he"] #hud-lang {
+  flex-direction: row-reverse !important;
+}
+html[lang="en"] #hud-lang {
+  flex-direction: row !important;
+}
+
+/* ── 15. Fullscreen / classroom button positioning ── */
+html[lang="he"] #fs-btn {
+  right: auto !important;
+  left: 12px !important;
+}
