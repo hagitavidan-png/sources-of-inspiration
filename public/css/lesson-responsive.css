@@ -15,14 +15,24 @@
 
 /* ══════════════════════════════════════════════════════════════
    SECTION 0 — MOBILE VIEWPORT GLOBAL FIX
-   Prevents horizontal overflow / page shift on all mobile devices.
-   Must be first so all subsequent rules inherit correct box model.
+   Prevents horizontal overflow / RTL bidi-shift on all lesson pages.
+   The RTL bidi-shift: dir=rtl + overflow-x:hidden causes iOS/Safari
+   to reserve scrollbar space on the LEFT, shifting content off-screen.
+   Fix: overflow-y:scroll (keeps scrollbar right) + body anchored at left:0.
    ══════════════════════════════════════════════════════════════ */
 html,
 body {
   overflow-x: hidden !important;
   width: 100% !important;
   max-width: 100% !important;
+}
+html {
+  overflow-y: scroll !important;   /* scrollbar always RIGHT — prevents RTL bidi shift */
+}
+body {
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
 /* Every element must stay within its containing block — no escape */

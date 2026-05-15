@@ -95,15 +95,16 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 /* ── MOBILE VIEWPORT FIX ──────────────────────────────────────────────────
-   overflow-x on BOTH html AND body.
-   html: primary guard — prevents the page from being wider than the viewport.
-   body: width capped at 100% so no child element can push it wider.
-   Note: overflow-x:hidden on body can clip overflow-y on iOS WebKit — that
-   is why we keep overflow-y:auto on body and rely on html as the main guard. */
+   RTL + overflow-x:hidden on html causes a "Bidi shift" on iOS/Safari:
+   the browser reserves scrollbar space on the LEFT (RTL side), pushing all
+   content ~15px to the right-and-off-screen.
+   Fix: anchor body to position:relative; left:0 so it never drifts,
+   and ensure width is exactly 100vw clamped to 100%. */
 html {
   scroll-behavior: smooth;
   font-size: 16px;
   overflow-x: hidden;
+  overflow-y: scroll;          /* force scrollbar always visible — prevents layout shift */
   width: 100%;
   max-width: 100%;
 }
@@ -111,6 +112,9 @@ body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  position: relative;          /* RTL bidi-shift fix: anchor body in flow */
+  left: 0 !important;          /* never drift horizontally in any dir */
+  right: 0 !important;
 }
 
 /* ── SCROLL OFFSET — sticky nav compensation ── */

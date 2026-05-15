@@ -12,8 +12,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-<link rel="stylesheet" href="css/style.css?v=20250507f" />
+<link rel="stylesheet" href="css/style.css?v=20250514" />
 <style>
+/* ── MOBILE VIEWPORT / RTL BIDI-SHIFT FIX ──────────────────────────────
+   Inline so it applies before any external CSS loads on mobile.
+   RTL bidi-shift: dir=rtl + overflow-x:hidden causes Safari/iOS to put the
+   scrollbar on the LEFT, pushing the entire page right and off-screen.
+   overflow-y:scroll forces the scrollbar to always appear on the RIGHT. */
+html { overflow-x: hidden !important; overflow-y: scroll !important; width: 100% !important; max-width: 100% !important; }
+body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !important; position: relative; left: 0 !important; right: 0 !important; }
 /* RTL support for sources/index.html — minimal overrides only.
    Full RTL rules live in css/style.css.
    IMPORTANT: .nav-actions and #nav-lang-toggle are NOT reversed here —
