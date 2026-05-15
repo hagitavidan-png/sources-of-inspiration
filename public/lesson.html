@@ -34,11 +34,10 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 ════════════════════════════════ */
 #stage{
   position:fixed;
-  top:55px;       /* below HUD */
-  bottom:88px;    /* nav-bar bottom:20px + height≈50px + safe gap */
+  top:55px;
+  bottom:88px;
   left:0;right:0;
   overflow:hidden;
-  /* dvh accounts for mobile browser chrome collapse */
   height:calc(100svh - 55px - 88px);
   height:calc(100dvh - 55px - 88px);
 }
@@ -50,7 +49,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   position:absolute;inset:0;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:24px 32px 16px;
+  padding:20px 28px 12px;
   text-align:center;
   opacity:0;pointer-events:none;
   transform:translateY(36px) scale(.985);
@@ -73,11 +72,18 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   pointer-events:none;
 }
 
-/* scroll-heavy screens align top */
-.screen--scroll{
+/* artwork screens — top-aligned to show image + text + CTA without scroll */
+.screen--art{
   justify-content:flex-start;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top:16px;
+  padding-bottom:12px;
+}
+
+/* choice screens — centered, no scroll needed */
+.screen--choice{
+  justify-content:center;
+  padding-top:16px;
+  padding-bottom:12px;
 }
 
 /* ── Ambient BG ── */
@@ -99,247 +105,166 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 /* ── Content wrapper ── */
 .sc{
   position:relative;z-index:2;
-  max-width:680px;width:100%;
+  max-width:660px;width:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
 }
 
 /* ── Eyebrow ── */
 .eyebrow{
-  font-size:.62rem;font-weight:700;
+  font-size:.6rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.18em;
   color:var(--tm);
-  margin-bottom:28px;
+  margin-bottom:18px;
   display:flex;align-items:center;justify-content:center;gap:9px;
+  flex-shrink:0;
 }
-[dir="rtl"] .eyebrow{flex-direction:row-reverse;justify-content:flex-end}
+[dir="rtl"] .eyebrow{flex-direction:row-reverse}
 .ey-dot{
   width:6px;height:6px;border-radius:50%;
   background:var(--accent,var(--gold));
   animation:pulse 2.8s ease-in-out infinite;
+  flex-shrink:0;
 }
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.4);opacity:.9}}
 
-/* ── BIG TEXT ── */
-.big{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(1.6rem,4.2vw,3rem);
-  font-weight:700;color:var(--tp);line-height:1.3;
-  letter-spacing:-.02em;
-}
-.big em{font-style:normal;color:var(--gold)}
-[dir="rtl"] .big{letter-spacing:0;text-align:right}
-
-.mid{
-  font-size:clamp(1.1rem,2.8vw,1.9rem);
-  font-family:'Sora',sans-serif;font-weight:600;
-  color:var(--ts);line-height:1.5;
-}
-[dir="rtl"] .mid{text-align:right}
-
-/* ── SUB TEXT ── */
-.sub{
-  font-size:clamp(.88rem,1.9vw,1.04rem);
-  color:var(--tm);line-height:2;
-  max-width:500px;
-  font-weight:300;
-}
-[dir="rtl"] .sub{text-align:right}
-
-/* ── BILINGUAL BLOCK ── */
-/* language visibility controlled by lesson-responsive.css via html[lang] */
-.bilingual{
-  display:flex;flex-direction:column;gap:10px;
+/* ── BILINGUAL BLOCK — text screens ── */
+.bi-block{
+  display:flex;flex-direction:column;
   width:100%;max-width:560px;
+  gap:0;
 }
+/* Hebrew — primary, large, RTL */
 .bi-he{
   font-family:'Heebo',sans-serif;
-  font-size:clamp(1.5rem,4vw,2.6rem);
+  font-size:clamp(1.45rem,4.2vw,2.5rem);
   font-weight:700;color:var(--tp);line-height:1.35;
   text-align:right;direction:rtl;
+  width:100%;
 }
-.bi-he-attr{
+.bi-he-sub{
   font-family:'Heebo',sans-serif;
-  font-size:clamp(.88rem,1.8vw,1rem);
+  font-size:clamp(.82rem,2vw,.98rem);
   color:var(--tm);text-align:right;direction:rtl;
-  margin-top:4px;
+  font-weight:300;line-height:1.8;
+  margin-top:5px;width:100%;
+}
+/* English — secondary, smaller, LTR, below */
+.bi-sep{
+  width:100%;height:1px;
+  background:rgba(255,255,255,.07);
+  margin:10px 0 8px;
+  flex-shrink:0;
 }
 .bi-en{
   font-family:'Sora',sans-serif;
-  font-size:clamp(1rem,2.5vw,1.55rem);
+  font-size:clamp(.88rem,2.2vw,1.2rem);
   font-weight:400;font-style:italic;
-  color:var(--ts);line-height:1.45;
+  color:var(--ts);opacity:.72;
   text-align:left;direction:ltr;
-  opacity:.8;
+  line-height:1.5;width:100%;
 }
-.bi-en-attr{
+.bi-en-sub{
   font-family:'Inter',sans-serif;
-  font-size:clamp(.76rem,1.5vw,.88rem);
-  color:var(--tm);text-align:left;direction:ltr;
-  margin-top:2px;
+  font-size:clamp(.72rem,1.6vw,.84rem);
+  color:var(--tm);opacity:.65;
+  text-align:left;direction:ltr;
+  font-style:italic;line-height:1.7;
+  margin-top:3px;width:100%;
 }
 
 /* ── ACCENT LINE ── */
 .aline{
   width:28px;height:1.5px;border-radius:2px;
   background:var(--gold);opacity:.6;
-  margin:20px auto;
+  margin:14px auto;flex-shrink:0;
   animation:lineGrow .9s ease forwards;
   transform-origin:center;
 }
 @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-[dir="rtl"] .aline{margin-left:auto;margin-right:0}
-
-/* ── CAPTION BILINGUAL ── */
-/* language visibility controlled by lesson-responsive.css via html[lang] */
-.cap-block{
-  margin-top:14px;
-  display:flex;flex-direction:column;gap:4px;
-  max-width:400px;
-  margin-left:auto;margin-right:auto;
-  text-align:center;
-}
-.cap-he{
-  font-family:'Heebo',sans-serif;
-  font-size:.82rem;color:var(--ts);
-  direction:rtl;font-weight:400;
-}
-.cap-en{
-  font-family:'Inter',sans-serif;
-  font-size:.74rem;color:var(--tm);
-  direction:ltr;font-style:italic;
-}
 
 /* ════════════════════════════════
-   GALLERY
+   GALLERY — artwork screens
 ════════════════════════════════ */
 .gallery-wrap{
-  width:100%;
+  width:100%;flex-shrink:0;
   display:flex;flex-direction:column;
   align-items:center;
-  padding:0 0 4px;
 }
 .artwork-card{
   width:100%;
-  max-width:min(88vw, 500px);
+  max-width:min(86vw, 460px);
   margin:0 auto;
   border-radius:4px;
   overflow:visible;
-  box-shadow:0 20px 60px rgba(0,0,0,.4),
-             0 4px 18px rgba(0,0,0,.35),
-             0 0 80px rgba(201,169,110,.08);
+  box-shadow:0 16px 48px rgba(0,0,0,.4),
+             0 4px 16px rgba(0,0,0,.3),
+             0 0 60px rgba(201,169,110,.07);
   animation:artFloat 6s ease-in-out infinite alternate;
+  flex-shrink:0;
 }
 @keyframes artFloat{
   from{transform:translateY(0px)}
-  to{transform:translateY(-5px)}
+  to{transform:translateY(-4px)}
 }
 .artwork-card img{
   width:100%;
   height:auto;
-  max-height:38vh;
+  max-height:32vh;
   display:block;
   object-fit:contain;
   border-radius:3px;
   background:#141420;
 }
-/* fallback placeholder when image fails */
 .artwork-card img.broken{
-  min-height:160px;
+  min-height:120px;
   background:linear-gradient(135deg,#1a1a2e,#2a1a3e);
 }
-
 .artwork-meta{
-  margin-top:12px;
+  margin-top:8px;
   text-align:center;
-  padding:0 8px;
+  padding:0 4px;
+  flex-shrink:0;
 }
 .artwork-meta-artist{
-  font-size:.63rem;font-weight:700;
+  font-size:.6rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.16em;
-  color:var(--tm);margin-bottom:4px;
+  color:var(--tm);margin-bottom:3px;
 }
 .artwork-meta-title{
-  font-size:.8rem;font-weight:400;
+  font-size:.76rem;font-weight:400;
   font-style:italic;color:var(--ts);
 }
 .artwork-meta-year{
-  font-size:.7rem;color:var(--tm);
-  margin-right:6px;font-style:normal;
+  font-size:.68rem;color:var(--tm);
+  margin-right:5px;font-style:normal;
 }
+
+/* ── artwork text block (below image) ── */
+.art-text{
+  margin-top:10px;
+  width:100%;max-width:min(86vw,460px);
+  flex-shrink:0;
+}
+.art-text .bi-he{font-size:clamp(1.1rem,3.2vw,1.7rem)}
+.art-text .bi-en{font-size:clamp(.78rem,2vw,1rem)}
+.art-text .bi-he-sub{font-size:clamp(.74rem,1.8vw,.9rem)}
+.art-text .bi-en-sub{font-size:clamp(.66rem,1.5vw,.78rem)}
+.art-text .bi-sep{margin:7px 0 5px}
 
 /* ════════════════════════════════
-   ARTWORK + ACTION — combined layout
-════════════════════════════════ */
-.action-block{
-  margin-top:16px;
-  width:100%;
-  max-width:min(88vw,500px);
-  margin-left:auto;margin-right:auto;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:10px;
-  padding:14px 18px 12px;
-}
-.action-label{
-  font-size:.58rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.18em;
-  color:var(--gold);margin-bottom:10px;
-  display:flex;align-items:center;gap:7px;
-}
-[dir="rtl"] .action-label{flex-direction:row-reverse;justify-content:flex-end}
-.action-label::before{
-  content:'';display:inline-block;
-  width:16px;height:1.5px;background:var(--gold);opacity:.7;
-}
-.instr-he{
-  font-family:'Heebo',sans-serif;
-  font-size:clamp(1.3rem,3.8vw,2.2rem);
-  font-weight:700;color:var(--tp);
-  text-align:right;direction:rtl;line-height:1.35;
-}
-.instr-he-sub{
-  font-family:'Heebo',sans-serif;
-  font-size:clamp(.82rem,1.9vw,.98rem);
-  color:var(--tm);text-align:right;direction:rtl;
-  font-weight:300;line-height:1.8;margin-top:5px;
-}
-.instr-en{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(.88rem,2vw,1.15rem);
-  font-weight:400;font-style:italic;
-  color:var(--ts);opacity:.75;
-  text-align:left;direction:ltr;line-height:1.5;
-  margin-top:6px;
-}
-.instr-en-sub{
-  font-family:'Inter',sans-serif;
-  font-size:clamp(.72rem,1.5vw,.84rem);
-  color:var(--tm);opacity:.7;
-  text-align:left;direction:ltr;
-  font-style:italic;line-height:1.7;
-}
-.instr-divider{
-  width:100%;height:1px;
-  background:rgba(255,255,255,.06);
-  margin:8px 0;
-}
-
-/* ── standalone instruction block (S6, S7) ── */
-.instruction-block{
-  display:flex;flex-direction:column;gap:8px;
-  width:100%;max-width:520px;
-}
-
-/* ════════════════════════════════
-   EMOTION CHIPS (S1)
+   EMOTION CHIPS (S5)
 ════════════════════════════════ */
 .emotion-grid{
   display:flex;flex-wrap:wrap;
-  gap:10px;justify-content:center;
-  margin-top:24px;
+  gap:9px;justify-content:center;
+  margin-top:16px;
   direction:rtl;
+  width:100%;max-width:500px;
+  flex-shrink:0;
 }
 .emotion-chip{
-  padding:10px 20px;
+  padding:9px 18px;
   background:rgba(255,255,255,.07);
   border:1.5px solid rgba(255,255,255,.1);
   border-radius:30px;
@@ -359,24 +284,24 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 .chip-he{
   font-family:'Heebo',sans-serif;
-  font-size:.95rem;font-weight:700;color:var(--tp);
+  font-size:.93rem;font-weight:700;color:var(--tp);
 }
 .chip-en{
   font-family:'Inter',sans-serif;
-  font-size:.66rem;color:var(--tm);font-weight:400;
+  font-size:.63rem;color:var(--tm);font-weight:400;
 }
 
 /* ════════════════════════════════
-   COLOR GRID (S2) — 2×3, LARGE SQUARES, NO TEXT
+   COLOR GRID (S6) — 2×3, LARGE SQUARES
 ════════════════════════════════ */
 .color-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:24px;
+  gap:10px;
+  margin-top:16px;
   width:100%;
-  max-width:400px;
-  margin-left:auto;margin-right:auto;
+  max-width:min(86vw,380px);
+  flex-shrink:0;
 }
 .color-sq{
   aspect-ratio:1/1;
@@ -384,7 +309,6 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   border:3px solid transparent;
   cursor:pointer;
   transition:all .22s;
-  position:relative;
 }
 .color-sq:hover{
   transform:scale(1.05);
@@ -393,58 +317,127 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 .color-sq.picked{
   border-color:#fff;
   transform:scale(1.08);
-  box-shadow:0 0 24px rgba(255,255,255,.3);
+  box-shadow:0 0 22px rgba(255,255,255,.28);
 }
 
 /* ════════════════════════════════
-   CLOSING (S7)
+   SELECTION CARDS (S7, S8) — large cards
 ════════════════════════════════ */
-.closing-block{
-  display:flex;flex-direction:column;gap:14px;
-  width:100%;max-width:540px;
-  align-items:center;
+.select-grid{
+  display:flex;flex-direction:column;
+  gap:8px;
+  margin-top:14px;
+  width:100%;max-width:460px;
+  flex-shrink:0;
 }
-/* language visibility controlled by lesson-responsive.css via html[lang] */
+.select-card{
+  width:100%;
+  padding:13px 18px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  display:flex;flex-direction:column;
+  align-items:flex-end;
+  gap:2px;
+  cursor:pointer;
+  transition:all .22s;
+  text-align:right;
+}
+.select-card:hover{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.22);
+  transform:translateY(-1px);
+}
+.select-card.picked{
+  background:rgba(255,77,77,.13);
+  border-color:var(--rose);
+  box-shadow:0 4px 18px rgba(0,0,0,.2);
+}
+.card-he{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(1rem,3vw,1.25rem);
+  font-weight:700;color:var(--tp);
+  direction:rtl;
+}
+.card-en{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(.7rem,1.8vw,.82rem);
+  color:var(--tm);font-style:italic;
+  direction:ltr;text-align:left;
+  width:100%;
+}
+
+/* ════════════════════════════════
+   ACTION SCREENS (S9, S10, S11) — instruction only
+════════════════════════════════ */
+.action-block{
+  width:100%;max-width:500px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  padding:20px 22px 18px;
+  flex-shrink:0;
+}
+.action-label{
+  font-size:.57rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  color:var(--gold);margin-bottom:12px;
+  display:flex;align-items:center;gap:7px;
+  flex-direction:row-reverse;justify-content:flex-start;
+}
+[dir="ltr"] .action-label{flex-direction:row;justify-content:flex-start}
+.action-label::before{
+  content:'';display:inline-block;
+  width:16px;height:1.5px;background:var(--gold);opacity:.7;
+}
+
+/* ── CLOSING (S12) ── */
+.closing-block{
+  display:flex;flex-direction:column;gap:12px;
+  width:100%;max-width:520px;
+  align-items:center;flex-shrink:0;
+}
 .close-he{
   font-family:'Heebo',sans-serif;
-  font-size:clamp(1.5rem,4vw,2.6rem);
+  font-size:clamp(1.4rem,4vw,2.4rem);
   font-weight:700;color:var(--tp);
   text-align:right;direction:rtl;line-height:1.4;
   width:100%;
 }
 .close-en{
   font-family:'Sora',sans-serif;
-  font-size:clamp(.95rem,2.4vw,1.4rem);
+  font-size:clamp(.88rem,2.3vw,1.3rem);
   font-weight:300;font-style:italic;
-  color:var(--ts);opacity:.7;
+  color:var(--ts);opacity:.68;
   text-align:left;direction:ltr;line-height:1.6;
   width:100%;
 }
 .complete-icon{
-  width:70px;height:70px;border-radius:50%;
+  width:64px;height:64px;border-radius:50%;
   background:linear-gradient(135deg,var(--gold),#d4b87a);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.9rem;margin:0 auto 16px;
-  box-shadow:0 0 36px rgba(201,169,110,.2);
+  font-size:1.7rem;margin:0 auto 14px;
+  box-shadow:0 0 32px rgba(201,169,110,.2);
+  flex-shrink:0;
 }
 .complete-btns{
-  display:flex;gap:12px;justify-content:center;
-  flex-wrap:wrap;margin-top:22px;
+  display:flex;gap:10px;justify-content:center;
+  flex-wrap:wrap;margin-top:18px;flex-shrink:0;
 }
-.btn-gold{
+.btn-primary{
   display:inline-flex;align-items:center;gap:8px;
-  padding:13px 28px;border-radius:12px;
+  padding:12px 26px;border-radius:12px;
   background:#FF4D4D;color:#fff;
-  font-size:.9rem;font-weight:700;
+  font-size:.88rem;font-weight:700;
   text-decoration:none;transition:.2s;
 }
-.btn-gold:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
+.btn-primary:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:8px;
-  padding:13px 24px;border-radius:12px;
+  padding:12px 22px;border-radius:12px;
   background:transparent;color:var(--ts);
   border:1.5px solid rgba(255,255,255,.15);
-  font-size:.9rem;font-weight:600;
+  font-size:.88rem;font-weight:600;
   cursor:pointer;transition:.2s;
 }
 .btn-ghost:hover{border-color:rgba(255,255,255,.35);color:var(--tp)}
@@ -471,12 +464,12 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 #hud-badge{
   padding:4px 11px;border-radius:20px;
   background:rgba(255,77,77,.1);color:#FF4D4D;
-  font-size:.66rem;font-weight:700;
+  font-size:.65rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.07em;
   flex-shrink:0;
 }
 #hud-spacer{flex:1}
-#hud-step{font-size:.72rem;font-weight:700;color:var(--tm);flex-shrink:0}
+#hud-step{font-size:.7rem;font-weight:700;color:var(--tm);flex-shrink:0}
 
 /* Language toggle */
 #lang-toggle{
@@ -526,7 +519,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 .pdot.now{background:var(--rose);border-color:var(--rose);box-shadow:0 0 9px rgba(232,93,117,.6)}
 
 /* ════════════════════════════════
-   NAV BAR — floating pill, bottom fixed
+   NAV BAR — floating pill
    !important overrides lesson-responsive.css section 10
 ════════════════════════════════ */
 #nav-bar{
@@ -571,29 +564,55 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 #next-btn:active{transform:translateY(0)}
 
 /* ════════════════════════════════
-   MOBILE
+   RESPONSIVE
 ════════════════════════════════ */
 @media(max-width:540px){
-  .screen{padding:18px 18px 12px}
-  .screen--scroll{padding-top:14px;padding-bottom:14px}
-  .bi-he{font-size:clamp(1.3rem,6.5vw,2rem)}
-  .bi-en{font-size:clamp(.88rem,4vw,1.1rem)}
-  .artwork-card img{max-height:30vh}
-  .color-grid{max-width:300px;gap:9px}
-  #next-btn{padding:13px 34px;font-size:.9rem}
+  .screen{padding:14px 16px 10px}
+  .bi-he{font-size:clamp(1.25rem,6vw,1.85rem)}
+  .bi-he-sub{font-size:clamp(.74rem,3.5vw,.9rem)}
+  .bi-en{font-size:clamp(.78rem,3.8vw,1rem)}
+  .artwork-card img{max-height:26vh}
+  .color-grid{max-width:min(86vw,280px);gap:8px}
+  .select-card{padding:10px 14px}
+  .card-he{font-size:clamp(.92rem,4.5vw,1.1rem)}
+  .action-block{padding:14px 16px 12px}
+  #next-btn{padding:13px 32px;font-size:.9rem}
   #cls-btn span{display:none}
-  .action-block{padding:11px 14px 10px}
-  .instr-he{font-size:clamp(1.1rem,5.5vw,1.8rem)}
+  .eyebrow{margin-bottom:12px;font-size:.58rem}
+  .art-text .bi-he{font-size:clamp(1rem,5vw,1.5rem)}
+}
+
+@media(max-width:390px){
+  .bi-he{font-size:clamp(1.1rem,5.5vw,1.6rem)}
+  .artwork-card img{max-height:22vh}
+  .color-grid{gap:7px}
+  .select-card{padding:9px 12px}
+  #next-btn{padding:12px 28px;font-size:.85rem}
 }
 
 /* Short screens */
-@media(max-height:620px){
+@media(max-height:700px){
   .artwork-card img{max-height:26vh}
-  .bi-he{font-size:clamp(1.1rem,4vw,1.6rem)}
-  .instr-he{font-size:clamp(1.1rem,4vw,1.8rem)}
-  .eyebrow{margin-bottom:14px}
-  .aline{margin:12px auto}
-  .action-block{margin-top:10px}
+  .eyebrow{margin-bottom:12px}
+  .aline{margin:10px auto}
+  .art-text{margin-top:7px}
+  .art-text .bi-he{font-size:clamp(1rem,3vw,1.5rem)}
+  .bi-he{font-size:clamp(1.2rem,3.8vw,2rem)}
+}
+@media(max-height:600px){
+  .artwork-card img{max-height:20vh}
+  .bi-he{font-size:clamp(1.1rem,3.5vw,1.7rem)}
+  .select-card{padding:8px 14px}
+  .emotion-chip{padding:7px 14px}
+  .action-block{padding:12px 16px 10px}
+  .eyebrow{margin-bottom:8px}
+}
+
+/* Tablet portrait */
+@media(min-width:541px) and (max-width:900px){
+  .artwork-card img{max-height:34vh}
+  .bi-he{font-size:clamp(1.5rem,3.8vw,2.3rem)}
+  .color-grid{max-width:340px}
 }
 </style>
 <link rel="stylesheet" href="css/lesson-responsive.css"/>
@@ -608,7 +627,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   </a>
   <div id="hud-badge"><span data-he="שיעור דוגמה" data-en="Example Lesson">שיעור דוגמה</span></div>
   <div id="hud-spacer"></div>
-  <span id="hud-step">1 / 7</span>
+  <span id="hud-step">1 / 12</span>
   <div id="lang-toggle">
     <button class="lang-btn" onclick="setLang('en')">EN</button>
     <button class="lang-btn active" onclick="setLang('he')">עב</button>
@@ -624,14 +643,154 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 <div id="prog-dots"></div>
 
 <!-- ════════════════════════════════
-     STAGE — 7 screens
+     STAGE — 12 screens
 ════════════════════════════════ -->
 <main id="stage">
 
 <!-- ══════════════════════════════════════
-     S1 — Phase 1 Connect: Emotion Selection
+     S1 — Phase 1 Learn: Definition
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll active" id="s1" style="--accent:var(--rose)">
+<section class="screen active" id="s1" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c9a96e;opacity:.08;top:-120px;right:-80px;animation-delay:0s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.07;bottom:-40px;left:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:var(--gold)"></div>
+      <span data-he="שלב 1 — למידה" data-en="Phase 1 — Learn">שלב 1 — למידה</span>
+    </div>
+    <div class="bi-block">
+      <div class="bi-he">ציור מופשט לא מתאר מה שרואים —<br>הוא מתאר מה שמרגישים.</div>
+      <div class="bi-he-sub">לא דמויות. לא נוף. רק צבע, תנועה ויחסים.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Abstract painting doesn't describe what you see — it describes what you feel.</div>
+      <div class="bi-en-sub">No figures. No landscape. Only color, movement and relationships.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S2 — Phase 1 Learn: Rothko
+══════════════════════════════════════ -->
+<section class="screen screen--art" id="s2" style="--accent:#9b7fd4">
+  <div class="bg">
+    <div class="blob" style="width:520px;height:520px;background:#7c6fcd;opacity:.09;top:-100px;left:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c97cc9;opacity:.07;bottom:-50px;right:8%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#9b7fd4"></div>
+      <span data-he="שלב 1 — למידה" data-en="Phase 1 — Learn">שלב 1 — למידה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/rothko-colorfield.jpg"
+          alt="No. 61 (Rust and Blue) — Mark Rothko, 1953"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Rothko No. 61 (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Mark Rothko</div>
+        <div class="artwork-meta-title">
+          <span data-he="מס׳ 61 (חלודה וכחול)" data-en="No. 61 (Rust and Blue)">מס׳ 61 (חלודה וכחול)</span>,
+          <span class="artwork-meta-year">1953</span>
+        </div>
+      </div>
+    </div>
+    <div class="art-text bi-block">
+      <div class="bi-he">רותקו הניח כתמים גדולים של צבע — ויצר תחושה שלמה.</div>
+      <div class="bi-he-sub">בלי צורות. בלי דמויות. רק צבע שמרגיש.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Rothko placed large fields of color — and created a complete feeling.</div>
+      <div class="bi-en-sub">No shapes. No figures. Just color that feels.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S3 — Phase 1 Learn: Frankenthaler
+══════════════════════════════════════ -->
+<section class="screen screen--art" id="s3" style="--accent:#a8c0e8">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#a8c0e8;opacity:.08;top:-110px;left:-90px;animation-delay:2s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#7c6fcd;opacity:.07;bottom:-40px;right:8%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#a8c0e8"></div>
+      <span data-he="שלב 1 — למידה" data-en="Phase 1 — Learn">שלב 1 — למידה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/frankenthaler-mountains.jpg"
+          alt="Mountains and Sea — Helen Frankenthaler, 1952"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Frankenthaler Mountains and Sea (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Helen Frankenthaler</div>
+        <div class="artwork-meta-title">
+          <span data-he="הרים וים" data-en="Mountains and Sea">הרים וים</span>,
+          <span class="artwork-meta-year">1952</span>
+        </div>
+      </div>
+    </div>
+    <div class="art-text bi-block">
+      <div class="bi-he">פרנקנת׳לר נתנה לצבע לנוע בעצמו — כמו רגש שזורם.</div>
+      <div class="bi-he-sub">היא לא שלטה בצבע — היא הקשיבה לו.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Frankenthaler let the color move on its own — like an emotion that flows.</div>
+      <div class="bi-en-sub">She didn't control the color — she listened to it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S4 — Phase 1 Learn: Kline
+══════════════════════════════════════ -->
+<section class="screen screen--art" id="s4" style="--accent:#c97cc9">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.08;top:-100px;right:-70px;animation-delay:0s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.08;bottom:-40px;left:10%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#c97cc9"></div>
+      <span data-he="שלב 1 — למידה" data-en="Phase 1 — Learn">שלב 1 — למידה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/kline-mahoning.jpg"
+          alt="Mahoning — Franz Kline, 1956"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Kline Mahoning (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Franz Kline</div>
+        <div class="artwork-meta-title">
+          <span data-he="מהונינג" data-en="Mahoning">מהונינג</span>,
+          <span class="artwork-meta-year">1956</span>
+        </div>
+      </div>
+    </div>
+    <div class="art-text bi-block">
+      <div class="bi-he">קליין צייר כתמים שנוגעים ונפרדים — והמרחב ביניהם הפך לציור.</div>
+      <div class="bi-he-sub">לא הכתם חשוב — מה שביניהם חשוב.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Kline painted marks that touch and separate — the space between them became the painting.</div>
+      <div class="bi-en-sub">Not the mark itself — what's between them matters.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S5 — Phase 2 Choose: Emotion
+══════════════════════════════════════ -->
+<section class="screen screen--choice" id="s5" style="--accent:var(--rose)">
   <div class="bg">
     <div class="blob" style="width:480px;height:480px;background:#e85d75;opacity:.09;top:-100px;right:-70px;animation-delay:3s"></div>
     <div class="blob" style="width:260px;height:260px;background:#c9a96e;opacity:.07;bottom:-30px;left:5%;animation-delay:8s"></div>
@@ -639,14 +798,14 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <div class="sc">
     <div class="eyebrow">
       <div class="ey-dot" style="background:var(--rose)"></div>
-      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+      <span data-he="שלב 2 — בחירה" data-en="Phase 2 — Choose">שלב 2 — בחירה</span>
     </div>
-    <div class="instruction-block">
-      <div class="instr-he">מה נוכח בך עכשיו?</div>
-      <div class="instr-he-sub">אל תחשוב — תרגיש. בחר עד שלושה רגשות.</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">What is present in you right now?</div>
-      <div class="instr-en-sub">Don't think — feel. Choose up to three emotions.</div>
+    <div class="bi-block" style="max-width:460px">
+      <div class="bi-he">עכשיו אתם. מה נוכח בכם עכשיו?</div>
+      <div class="bi-he-sub">זה יהיה מקור ההשראה שלכם.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Now you. What is present in you right now?</div>
+      <div class="bi-en-sub">This will be your source of inspiration.</div>
     </div>
     <div class="emotion-grid" id="emotion-chips">
       <button class="emotion-chip" onclick="pickEmotion(this)">
@@ -674,14 +833,13 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
         <span class="chip-he">בלבול</span><span class="chip-en">Confusion</span>
       </button>
     </div>
-    <p id="emotion-resp" style="margin-top:14px;font-size:.82rem;color:var(--tm);min-height:20px;font-style:italic"></p>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S2 — Phase 1 Connect: Color Selection
+     S6 — Phase 2 Choose: Color
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s2" style="--accent:var(--gold)">
+<section class="screen screen--choice" id="s6" style="--accent:var(--gold)">
   <div class="bg">
     <div class="blob" style="width:460px;height:460px;background:#c9a96e;opacity:.09;top:-80px;left:-80px;animation-delay:0s"></div>
     <div class="blob" style="width:280px;height:280px;background:#e85d75;opacity:.07;bottom:-40px;right:10%;animation-delay:5s"></div>
@@ -689,22 +847,20 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <div class="sc">
     <div class="eyebrow">
       <div class="ey-dot"></div>
-      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+      <span data-he="שלב 2 — בחירה" data-en="Phase 2 — Choose">שלב 2 — בחירה</span>
     </div>
-    <div class="instruction-block">
-      <div class="instr-he">איזה צבע הוא הרגש הזה?</div>
-      <div class="instr-he-sub">מהיר. אינטואיטיבי. אין תשובה נכונה.</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">What color is this feeling?</div>
-      <div class="instr-en-sub">Fast. Intuitive. No right answer.</div>
+    <div class="bi-block" style="max-width:380px">
+      <div class="bi-he">איזה צבע הוא הרגש הזה?</div>
+      <div class="bi-he-sub">מהיר. אינטואיטיבי. אין תשובה נכונה.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">What color is this feeling?</div>
+      <div class="bi-en-sub">Fast. Intuitive. No right answer.</div>
     </div>
     <div class="color-grid" id="color-grid">
-      <!-- Row 1 -->
       <button class="color-sq" style="background:#8B1A1A" onclick="pickColor(this)" aria-label="Deep red"></button>
       <button class="color-sq" style="background:#1a2e6e" onclick="pickColor(this)" aria-label="Deep blue"></button>
-      <button class="color-sq" style="background:#d4b800" onclick="pickColor(this)" aria-label="Yellow"></button>
-      <!-- Row 2 -->
-      <button class="color-sq" style="background:#1a1a1a" onclick="pickColor(this)" aria-label="Black"></button>
+      <button class="color-sq" style="background:#c9b800" onclick="pickColor(this)" aria-label="Yellow"></button>
+      <button class="color-sq" style="background:#1c1c1c" onclick="pickColor(this)" aria-label="Black"></button>
       <button class="color-sq" style="background:#c97ca0" onclick="pickColor(this)" aria-label="Pink"></button>
       <button class="color-sq" style="background:#1a3d2b" onclick="pickColor(this)" aria-label="Dark green"></button>
     </div>
@@ -712,129 +868,147 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 </section>
 
 <!-- ══════════════════════════════════════
-     S3 — Phase 2 Inspire+Act: Rothko
+     S7 — Phase 3 Translate: Movement
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s3" style="--accent:#9b7fd4">
+<section class="screen screen--choice" id="s7" style="--accent:var(--violet)">
   <div class="bg">
-    <div class="blob" style="width:520px;height:520px;background:#7c6fcd;opacity:.1;top:-100px;left:-80px;animation-delay:1s"></div>
-    <div class="blob" style="width:300px;height:300px;background:#c97cc9;opacity:.08;bottom:-50px;right:8%;animation-delay:5s"></div>
+    <div class="blob" style="width:500px;height:500px;background:#7c6fcd;opacity:.09;top:-110px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:270px;height:270px;background:#c9a96e;opacity:.07;bottom:-40px;left:8%;animation-delay:7s"></div>
   </div>
   <div class="sc">
     <div class="eyebrow">
-      <div class="ey-dot" style="background:#9b7fd4"></div>
-      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+      <div class="ey-dot" style="background:var(--violet)"></div>
+      <span data-he="שלב 3 — תרגום" data-en="Phase 3 — Translate">שלב 3 — תרגום</span>
     </div>
-    <div class="gallery-wrap">
-      <div class="artwork-card">
-        <img
-          src="lessons/images/rothko-colorfield.jpg"
-          alt="No. 61 (Rust and Blue) — Mark Rothko, 1953"
-          loading="lazy"
-          onerror="this.classList.add('broken');this.alt='Rothko No. 61 (תמונה לא זמינה)'"/>
-      </div>
-      <div class="artwork-meta">
-        <div class="artwork-meta-artist">Mark Rothko</div>
-        <div class="artwork-meta-title">
-          <span data-he="מס׳ 61 (חלודה וכחול)" data-en="No. 61 (Rust and Blue)">מס׳ 61 (חלודה וכחול)</span>
-          <span class="artwork-meta-year">1953</span>
-        </div>
-      </div>
+    <div class="bi-block" style="max-width:460px">
+      <div class="bi-he">איך הרגש הזה זז?</div>
+      <div class="bi-he-sub">בחרו תנועה אחת.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">How does this feeling move?</div>
+      <div class="bi-en-sub">Choose one movement.</div>
     </div>
-    <div class="action-block">
-      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
-      <div class="instr-he">הניחו כתם אחד גדול.</div>
-      <div class="instr-he-sub">לא ציור — כתם. מלא. בלי לחשוב על מיקום.</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">Place one large mark.</div>
-      <div class="instr-en-sub">Not a drawing — a mark. Full. Don't think about placement.</div>
+    <div class="select-grid" id="movement-grid">
+      <button class="select-card" onclick="pickCard(this,'movement-grid')">
+        <span class="card-he">זורם</span>
+        <span class="card-en">Flowing</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'movement-grid')">
+        <span class="card-he">מתפרץ</span>
+        <span class="card-en">Bursting</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'movement-grid')">
+        <span class="card-he">נעצר</span>
+        <span class="card-en">Stopping</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'movement-grid')">
+        <span class="card-he">מתפשט</span>
+        <span class="card-en">Spreading</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'movement-grid')">
+        <span class="card-he">מתכווץ</span>
+        <span class="card-en">Contracting</span>
+      </button>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S4 — Phase 2 Inspire+Act: Frankenthaler
+     S8 — Phase 3 Translate: Mark
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s4" style="--accent:#a8c0e8">
+<section class="screen screen--choice" id="s8" style="--accent:var(--violet)">
   <div class="bg">
-    <div class="blob" style="width:520px;height:520px;background:#a8c0e8;opacity:.08;top:-120px;left:-90px;animation-delay:2s"></div>
-    <div class="blob" style="width:260px;height:260px;background:#7c6fcd;opacity:.08;bottom:-40px;right:8%;animation-delay:6s"></div>
+    <div class="blob" style="width:480px;height:480px;background:#7c6fcd;opacity:.08;top:-100px;left:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#e85d75;opacity:.07;bottom:-40px;right:8%;animation-delay:6s"></div>
   </div>
   <div class="sc">
     <div class="eyebrow">
-      <div class="ey-dot" style="background:#a8c0e8"></div>
-      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+      <div class="ey-dot" style="background:var(--violet)"></div>
+      <span data-he="שלב 3 — תרגום" data-en="Phase 3 — Translate">שלב 3 — תרגום</span>
     </div>
-    <div class="gallery-wrap">
-      <div class="artwork-card">
-        <img
-          src="lessons/images/frankenthaler-mountains.jpg"
-          alt="Mountains and Sea — Helen Frankenthaler, 1952"
-          loading="lazy"
-          onerror="this.classList.add('broken');this.alt='Frankenthaler Mountains and Sea (תמונה לא זמינה)'"/>
-      </div>
-      <div class="artwork-meta">
-        <div class="artwork-meta-artist">Helen Frankenthaler</div>
-        <div class="artwork-meta-title">
-          <span data-he="הרים וים" data-en="Mountains and Sea">הרים וים</span>
-          <span class="artwork-meta-year">1952</span>
-        </div>
-      </div>
+    <div class="bi-block" style="max-width:460px">
+      <div class="bi-he">איזה כתם הוא הרגש הזה?</div>
+      <div class="bi-he-sub">בחרו אחד.</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">What kind of mark is this feeling?</div>
+      <div class="bi-en-sub">Choose one.</div>
     </div>
-    <div class="action-block">
-      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
-      <div class="instr-he">הוסיפו כתם שני.</div>
-      <div class="instr-he-sub">תנו לו להיות קרוב או רחוק מהראשון. תנו להם לדבר.</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">Add a second mark.</div>
-      <div class="instr-en-sub">Let it be close or far from the first. Let them speak to each other.</div>
+    <div class="select-grid" id="mark-grid">
+      <button class="select-card" onclick="pickCard(this,'mark-grid')">
+        <span class="card-he">גדול ומפוזר</span>
+        <span class="card-en">Large and spread</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'mark-grid')">
+        <span class="card-he">קטן וממוקד</span>
+        <span class="card-en">Small and focused</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'mark-grid')">
+        <span class="card-he">חד ומוגדר</span>
+        <span class="card-en">Sharp and defined</span>
+      </button>
+      <button class="select-card" onclick="pickCard(this,'mark-grid')">
+        <span class="card-he">רך ומטושטש</span>
+        <span class="card-en">Soft and blurred</span>
+      </button>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S5 — Phase 2 Inspire+Act: Kline
+     S9 — Phase 4 Create: First Mark
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s5" style="--accent:#c97cc9">
+<section class="screen" id="s9" style="--accent:var(--rose)">
   <div class="bg">
-    <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.09;top:-100px;right:-70px;animation-delay:0s"></div>
-    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.09;bottom:-40px;left:10%;animation-delay:5s"></div>
+    <div class="blob" style="width:520px;height:520px;background:#e85d75;opacity:.08;top:-120px;right:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#c9a96e;opacity:.07;bottom:-40px;left:8%;animation-delay:6s"></div>
   </div>
   <div class="sc">
     <div class="eyebrow">
-      <div class="ey-dot" style="background:#c97cc9"></div>
-      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
-    </div>
-    <div class="gallery-wrap">
-      <div class="artwork-card">
-        <img
-          src="lessons/images/kline-mahoning.jpg"
-          alt="Mahoning — Franz Kline, 1956"
-          loading="lazy"
-          onerror="this.classList.add('broken');this.alt='Kline Mahoning (תמונה לא זמינה)'"/>
-      </div>
-      <div class="artwork-meta">
-        <div class="artwork-meta-artist">Franz Kline</div>
-        <div class="artwork-meta-title">
-          <span data-he="מהונינג" data-en="Mahoning">מהונינג</span>
-          <span class="artwork-meta-year">1956</span>
-        </div>
-      </div>
+      <div class="ey-dot" style="background:var(--rose)"></div>
+      <span data-he="שלב 4 — יצירה" data-en="Phase 4 — Create">שלב 4 — יצירה</span>
     </div>
     <div class="action-block">
-      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
-      <div class="instr-he">תנו לצבע לנוע.</div>
-      <div class="instr-he-sub">להתפשט. להיעצר. להתערבב. הגוף מצייר — לא רק היד.</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">Let the color move.</div>
-      <div class="instr-en-sub">Spread. Stop. Mix. The body paints — not just the hand.</div>
+      <div class="action-label" data-he="פעולה ראשונה" data-en="First Action">פעולה ראשונה</div>
+      <div class="bi-block">
+        <div class="bi-he">קחו את הצבע שבחרתם — והניחו כתם אחד גדול על הדף.</div>
+        <div class="bi-he-sub">בלי לחשוב. בלי לתכנן. רק להניח.</div>
+        <div class="bi-sep"></div>
+        <div class="bi-en">Take the color you chose — and place one large mark on the page.</div>
+        <div class="bi-en-sub">No thinking. No planning. Just place it.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S6 — Phase 3 Pause: Quiet Observation
+     S10 — Phase 4 Create: Second Mark
 ══════════════════════════════════════ -->
-<section class="screen" id="s6" style="--accent:var(--gold)">
+<section class="screen" id="s10" style="--accent:var(--rose)">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#e85d75;opacity:.08;top:-100px;left:-80px;animation-delay:3s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#7c6fcd;opacity:.08;bottom:-40px;right:8%;animation-delay:7s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:var(--rose)"></div>
+      <span data-he="שלב 4 — יצירה" data-en="Phase 4 — Create">שלב 4 — יצירה</span>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה שנייה" data-en="Second Action">פעולה שנייה</div>
+      <div class="bi-block">
+        <div class="bi-he">הוסיפו כתם שני — עם התנועה שבחרתם.</div>
+        <div class="bi-he-sub">קרוב או רחוק. נוגע או נפרד. תנו להם לדבר.</div>
+        <div class="bi-sep"></div>
+        <div class="bi-en">Add a second mark — with the movement you chose.</div>
+        <div class="bi-en-sub">Close or far. Touching or separate. Let them speak.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S11 — Phase 5 Reflect: Pause
+══════════════════════════════════════ -->
+<section class="screen" id="s11" style="--accent:var(--gold)">
   <div class="bg">
     <div class="blob" style="width:580px;height:580px;background:#c9a96e;opacity:.09;top:-150px;right:-100px;animation-delay:1s"></div>
     <div class="blob" style="width:300px;height:300px;background:#7c6fcd;opacity:.07;bottom:-50px;left:5%;animation-delay:7s"></div>
@@ -842,22 +1016,22 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <div class="sc">
     <div class="eyebrow">
       <div class="ey-dot"></div>
-      <span data-he="שלב 3 — עצירה" data-en="Phase 3 — Pause">שלב 3 — עצירה</span>
+      <span data-he="שלב 5 — רפלקציה" data-en="Phase 5 — Reflect">שלב 5 — רפלקציה</span>
     </div>
-    <div class="instruction-block">
-      <div class="instr-he">עצרו. הסתכלו על הדף.</div>
-      <div class="instr-he-sub">אל תשפטו — רק שימו לב. מה הדף אומר לכם?</div>
-      <div class="instr-divider"></div>
-      <div class="instr-en">Stop. Look at the page.</div>
-      <div class="instr-en-sub">Don't judge — just notice. What is the page saying to you?</div>
+    <div class="bi-block" style="max-width:500px">
+      <div class="bi-he">עצרו. הסתכלו על מה שנוצר.</div>
+      <div class="bi-he-sub">מה קורה בין הכתמים?</div>
+      <div class="bi-sep"></div>
+      <div class="bi-en">Stop. Look at what was created.</div>
+      <div class="bi-en-sub">What happens between the marks?</div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S7 — Phase 4 Close: Warm Ending
+     S12 — Phase 5 Reflect: Closing
 ══════════════════════════════════════ -->
-<section class="screen" id="s7" style="--accent:var(--gold)">
+<section class="screen" id="s12" style="--accent:var(--gold)">
   <div class="bg">
     <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
     <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.07;bottom:-60px;right:-60px;animation-delay:4s"></div>
@@ -866,11 +1040,11 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <div class="sc">
     <div class="complete-icon">✦</div>
     <div class="closing-block">
-      <div class="close-he">הציור לא מתאר משהו. הוא יוצר תחושה.</div>
-      <div class="close-en">The painting doesn't describe something. It creates a feeling.</div>
+      <div class="close-he">לקחתם רגש — ותרגמתם אותו לשפה ציורית. זה ציור מופשט.</div>
+      <div class="close-en">You took an emotion — and translated it into a painterly language. This is abstract painting.</div>
     </div>
     <div class="complete-btns">
-      <a href="course.html" class="btn-gold">
+      <a href="course.html" class="btn-primary">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l6 6-6 6M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span data-he="חזרה לקורס" data-en="Back to Course">חזרה לקורס</span>
       </a>
@@ -889,43 +1063,40 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <button id="back-btn" onclick="goBack()" disabled title="Back">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
-  <button id="next-btn" onclick="advance()">בחר ←</button>
+  <button id="next-btn" onclick="advance()">המשך ←</button>
 </div>
 
 <script>
 // ══════════════════════════════════════
 // STATE
 // ══════════════════════════════════════
-const TOTAL = 7;
-let cur = 1;
+const TOTAL = 12;
+let cur  = 1;
 let busy = false;
 let lang = localStorage.getItem('sourcesLang') || localStorage.getItem('lesson-lang') || 'he';
 
-// Selections
-let pickedEmotions = [];   // up to 3
+let pickedEmotions = [];
 let pickedColor    = null;
+let pickedMovement = null;
+let pickedMark     = null;
 
 // ══════════════════════════════════════
-// BUTTON LABELS — bilingual per screen
+// BUTTON LABELS — per screen, bilingual
 // ══════════════════════════════════════
 const BTN = {
   he: {
-    1: 'בחר ←',
-    2: 'בחר ←',
-    3: 'המשך ←',
-    4: 'המשך ←',
-    5: 'המשך ←',
-    6: 'המשך ←',
-    7: null      // closing screen — no next-btn
+    1:'המשך ←', 2:'המשך ←', 3:'המשך ←', 4:'המשך ←',
+    5:'בחר ←',  6:'בחר ←',
+    7:'בחר ←',  8:'בחר ←',
+    9:'המשך ←', 10:'המשך ←',
+    11:'המשך ←', 12: null
   },
   en: {
-    1: 'Choose →',
-    2: 'Choose →',
-    3: 'Continue →',
-    4: 'Continue →',
-    5: 'Continue →',
-    6: 'Continue →',
-    7: null
+    1:'Continue →', 2:'Continue →', 3:'Continue →', 4:'Continue →',
+    5:'Choose →',   6:'Choose →',
+    7:'Choose →',   8:'Choose →',
+    9:'Continue →', 10:'Continue →',
+    11:'Continue →', 12: null
   }
 };
 
@@ -963,7 +1134,6 @@ function applyLang() {
     );
   });
 
-  // swap [data-he] / [data-en]
   document.querySelectorAll('[data-he]').forEach(el => {
     const val = el.getAttribute(`data-${lang}`);
     if (!val) return;
@@ -974,11 +1144,8 @@ function applyLang() {
     }
   });
 
-  // nav-bar direction
   const nav = document.getElementById('nav-bar');
   if (nav) nav.style.flexDirection = isHe ? 'row-reverse' : 'row';
-
-  // hud direction
   const hud = document.getElementById('hud');
   if (hud) hud.style.flexDirection = isHe ? 'row-reverse' : 'row';
 }
@@ -1065,36 +1232,36 @@ function updateBtn() {
 }
 
 // ══════════════════════════════════════
-// EMOTION SELECTION (S1) — max 3
+// EMOTION SELECTION (S5) — single pick
 // ══════════════════════════════════════
 function pickEmotion(btn) {
   const isAlreadyPicked = btn.classList.contains('picked');
-  if (isAlreadyPicked) {
-    btn.classList.remove('picked');
-    pickedEmotions = pickedEmotions.filter(b => b !== btn);
-  } else {
-    if (pickedEmotions.length >= 3) return; // max 3
+  document.querySelectorAll('#emotion-chips .emotion-chip').forEach(b => b.classList.remove('picked'));
+  if (!isAlreadyPicked) {
     btn.classList.add('picked');
-    pickedEmotions.push(btn);
-  }
-  // feedback count
-  const resp = document.getElementById('emotion-resp');
-  if (pickedEmotions.length > 0) {
-    resp.textContent = lang === 'he'
-      ? `בחרת ${pickedEmotions.length} רגש${pickedEmotions.length > 1 ? 'ות' : ''}`
-      : `${pickedEmotions.length} emotion${pickedEmotions.length > 1 ? 's' : ''} selected`;
+    pickedEmotions = [btn];
   } else {
-    resp.textContent = '';
+    pickedEmotions = [];
   }
 }
 
 // ══════════════════════════════════════
-// COLOR SELECTION (S2)
+// COLOR SELECTION (S6)
 // ══════════════════════════════════════
 function pickColor(btn) {
   document.querySelectorAll('#color-grid .color-sq').forEach(b => b.classList.remove('picked'));
   btn.classList.add('picked');
   pickedColor = btn.style.background;
+}
+
+// ══════════════════════════════════════
+// CARD SELECTION (S7 movement, S8 mark)
+// ══════════════════════════════════════
+function pickCard(btn, gridId) {
+  document.querySelectorAll(`#${gridId} .select-card`).forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  if (gridId === 'movement-grid') pickedMovement = btn.querySelector('.card-he').textContent;
+  if (gridId === 'mark-grid')     pickedMark     = btn.querySelector('.card-he').textContent;
 }
 
 // ══════════════════════════════════════
