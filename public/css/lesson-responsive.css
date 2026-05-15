@@ -361,7 +361,9 @@ body:has(#prog-fill) #nav-bar {
 /* ── Default: hide the secondary-language elements ── */
 /* These elements are only meaningful when shown one at a time */
 .bi-en,
+.bi-en-sub,
 .bi-en-attr,
+.bi-sep,
 .instr-en,
 .instr-en-sub,
 .cap-en,
@@ -374,6 +376,7 @@ body:has(#prog-fill) #nav-bar {
 
 /* ── Hebrew mode: show HE elements, hide EN elements ── */
 html[lang="he"] .bi-he,
+html[lang="he"] .bi-he-sub,
 html[lang="he"] .bi-he-attr,
 html[lang="he"] .instr-he,
 html[lang="he"] .instr-he-sub,
@@ -385,7 +388,9 @@ html[lang="he"] .close-he {
 }
 
 html[lang="he"] .bi-en,
+html[lang="he"] .bi-en-sub,
 html[lang="he"] .bi-en-attr,
+html[lang="he"] .bi-sep,
 html[lang="he"] .instr-en,
 html[lang="he"] .instr-en-sub,
 html[lang="he"] .cap-en,
@@ -398,7 +403,9 @@ html[lang="he"] .instr-divider {
 
 /* ── English mode: show EN elements, hide HE elements ── */
 html[lang="en"] .bi-en,
+html[lang="en"] .bi-en-sub,
 html[lang="en"] .bi-en-attr,
+html[lang="en"] .bi-sep,
 html[lang="en"] .instr-en,
 html[lang="en"] .instr-en-sub,
 html[lang="en"] .cap-en,
@@ -413,6 +420,7 @@ html[lang="en"] .chip-en {
 }
 
 html[lang="en"] .bi-he,
+html[lang="en"] .bi-he-sub,
 html[lang="en"] .bi-he-attr,
 html[lang="en"] .instr-he,
 html[lang="en"] .instr-he-sub,
