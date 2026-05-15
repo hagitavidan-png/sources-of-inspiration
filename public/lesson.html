@@ -474,14 +474,14 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.05);
 }
-[dir="rtl"] #hud{flex-direction:row-reverse}
+/* #hud flex-direction set by html[lang] rule in lesson-responsive.css */
 #hud-back{
   display:flex;align-items:center;gap:6px;
   font-size:.78rem;color:var(--tm);
   text-decoration:none;transition:.2s;flex-shrink:0;
 }
 #hud-back:hover{color:var(--tp)}
-[dir="rtl"] #hud-back svg{transform:scaleX(-1)}
+/* #hud-back svg mirror set by html[lang] rule in lesson-responsive.css */
 #hud-badge{
   padding:4px 11px;border-radius:20px;
   background:rgba(255,77,77,.1);color:#FF4D4D;
@@ -1161,7 +1161,9 @@ function setLang(l) {
 
 function applyLang() {
   const isHe = lang === 'he';
+  // Set lang on <html> — CSS html[lang="he"/"en"] rules handle ALL direction/alignment
   document.documentElement.lang = lang;
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
   document.body.dir = isHe ? 'rtl' : 'ltr';
   document.body.style.fontFamily = isHe ? "'Heebo', sans-serif" : "'Inter', sans-serif";
 
@@ -1181,11 +1183,7 @@ function applyLang() {
       el.innerHTML = val;
     }
   });
-
-  const nav = document.getElementById('nav-bar');
-  if (nav) nav.style.flexDirection = isHe ? 'row-reverse' : 'row';
-  const hud = document.getElementById('hud');
-  if (hud) hud.style.flexDirection = isHe ? 'row-reverse' : 'row';
+  // Direction/alignment handled entirely by CSS html[lang] selectors — no inline style overrides
 }
 
 // ══════════════════════════════════════

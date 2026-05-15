@@ -1028,13 +1028,14 @@ const T = {
 function setLang(l) {
   he = (l === 'he');
   localStorage.setItem('sourcesLang', l);
+  // Set lang + dir on <html> — CSS html[lang] rules in lesson-responsive.css
+  // handle ALL direction/alignment globally. No inline style overrides needed.
   document.documentElement.lang = l;
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
   document.body.classList.toggle('he',  he);
   document.body.classList.toggle('rtl', he);
-  document.documentElement.dir = he ? 'rtl' : 'ltr';
-  document.body.dir             = he ? 'rtl' : 'ltr';
-  const pg = document.getElementById('progress');
-  if (pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.body.dir = he ? 'rtl' : 'ltr';
+  // Do NOT set inline flexDirection — CSS handles it via html[lang] selectors
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
   });
