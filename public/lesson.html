@@ -526,15 +526,20 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 .pdot.now{background:var(--rose);border-color:var(--rose);box-shadow:0 0 9px rgba(232,93,117,.6)}
 
 /* ════════════════════════════════
-   NAV BAR — bottom fixed
+   NAV BAR — floating pill, bottom fixed
+   !important overrides lesson-responsive.css section 10
 ════════════════════════════════ */
 #nav-bar{
-  position:fixed;bottom:20px;left:50%;
-  transform:translateX(-50%);
-  z-index:300;
-  display:flex;align-items:center;gap:12px;
-  /* safe-area for notch/home-bar devices */
-  padding-bottom:env(safe-area-inset-bottom,0px);
+  position:fixed !important;
+  bottom:max(20px, env(safe-area-inset-bottom, 20px)) !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  z-index:400 !important;
+  display:flex !important;
+  align-items:center;gap:12px;
+  width:auto !important;
+  padding-bottom:0 !important;
 }
 [dir="rtl"] #nav-bar{flex-direction:row-reverse}
 

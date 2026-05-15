@@ -282,6 +282,20 @@ body[dir="rtl"] .screen .sub {
   box-sizing: border-box !important;
 }
 
+/* ── EXCEPTION: lesson.html nav-bar is a floating pill — restore its layout ──
+   lesson.html uses bottom:20px + left:50% + transform:translateX(-50%)
+   so the back/next buttons appear as a centered floating row, not a full-width bar.
+   We must NOT override its left/right/bottom or the buttons get pushed off-screen.
+   Identify it by the presence of #prog-fill (slide-engine architecture).         */
+body:has(#prog-fill) #nav-bar {
+  bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  padding-bottom: 0 !important;
+  width: auto !important;
+}
+
 
 /* ══════════════════════════════════════════════════════════════
    SECTION 11 — PROGRESS DOTS: always above nav-bar
