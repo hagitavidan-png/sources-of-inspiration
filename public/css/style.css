@@ -94,10 +94,24 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-/* overflow-x:hidden on html (NOT body) — on WebKit/iOS, setting it on body
-   creates an implicit scroll container that also clips overflow-y in children,
-   causing pricing cards / trial forms to be cut off vertically.              */
-html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+/* ── MOBILE VIEWPORT FIX ──────────────────────────────────────────────────
+   overflow-x on BOTH html AND body.
+   html: primary guard — prevents the page from being wider than the viewport.
+   body: width capped at 100% so no child element can push it wider.
+   Note: overflow-x:hidden on body can clip overflow-y on iOS WebKit — that
+   is why we keep overflow-y:auto on body and rely on html as the main guard. */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
 
 /* ── SCROLL OFFSET — sticky nav compensation ── */
 [id], section { scroll-margin-top: calc(var(--nav-h) + 16px); }
@@ -253,7 +267,10 @@ body:not(.dark) #hero {
   background: linear-gradient(155deg, #f7f6f2 0%, #eef0f5 60%, #f0ede6 100%);
 }
 .hero-canvas { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; }
+/* Blobs: decorative only — must NEVER cause horizontal scroll.
+   They are clipped by .hero-canvas (overflow:hidden) above, but we also
+   constrain their max-width so they cannot push the layout on any device. */
+.hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; max-width: 100vw; }
 .hb1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(176,124,201,.25), transparent); top: -200px; right: -150px; }
 .hb2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(201,168,76,.18), transparent); bottom: -100px; left: -100px; }
 .hb3 { width: 400px; height: 400px; background: radial-gradient(circle, var(--gold), transparent); top: 30%; left: 40%; opacity: .1; }
@@ -783,6 +800,17 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
    MOBILE  ≤ 768px  (unchanged — working)
 ───────────────────────────────────────── */
 @media (max-width: 768px) {
+
+  /* ── MOBILE VIEWPORT SAFETY ──────────────────────────────────
+     Prevents horizontal scroll / page shift on mobile.
+     html+body already set globally; .container needs padding
+     reduction so it never causes inline overflow.              */
+  .container {
+    padding-left:  16px;
+    padding-right: 16px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
   /* Nav */
   .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }

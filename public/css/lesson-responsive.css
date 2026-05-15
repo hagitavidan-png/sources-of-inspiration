@@ -1,15 +1,37 @@
 /* ============================================================
-   LESSON RESPONSIVE — Global Layout Fix v2
+   LESSON RESPONSIVE — Global Layout Fix v3
    Sources of Inspiration in Art
 
    FIX 1: CTA always visible — stage sits exactly between HUD and nav-bar,
            never overlapping. Uses dvh/svh for mobile browser chrome.
    FIX 2: Language visibility — Hebrew-only in HE mode, English-only in EN mode.
            Applied via html[lang="he"] / html[lang="en"] selectors.
+   FIX 3: Mobile viewport — prevent horizontal shift/overflow on all lesson pages.
 
    Injected into every lesson HTML via <link> in <head>.
    DO NOT change design, colors, typography style, or navigation.
    ============================================================ */
+
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION 0 — MOBILE VIEWPORT GLOBAL FIX
+   Prevents horizontal overflow / page shift on all mobile devices.
+   Must be first so all subsequent rules inherit correct box model.
+   ══════════════════════════════════════════════════════════════ */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Every element must stay within its containing block — no escape */
+*,
+*::before,
+*::after {
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 
 /* ══════════════════════════════════════════════════════════════
