@@ -486,7 +486,10 @@ html[lang="en"] body {
   direction: ltr !important;
 }
 
-/* ── 2. Screen containers: text-align follows direction ── */
+/* ── 2. Screen containers: text-align AND align-items follow direction ──
+   KEY: In a flex-column container, align-items controls the cross axis (horizontal).
+   RTL: align-items:flex-start = right side. align-items:flex-end = left side.
+   So in Hebrew we use flex-start to push content to the RIGHT edge. ── */
 html[lang="he"] .screen,
 html[lang="he"] .sc,
 html[lang="he"] .bi-block,
@@ -494,6 +497,7 @@ html[lang="he"] .art-text,
 html[lang="he"] .action-block,
 html[lang="he"] .closing-block {
   text-align: right !important;
+  align-items: flex-start !important;
 }
 html[lang="en"] .screen,
 html[lang="en"] .sc,
@@ -502,6 +506,7 @@ html[lang="en"] .art-text,
 html[lang="en"] .action-block,
 html[lang="en"] .closing-block {
   text-align: left !important;
+  align-items: flex-start !important;
 }
 
 /* ── 3. Eyebrow labels — flex row direction ── */
@@ -522,6 +527,22 @@ html[lang="he"] .select-card {
 html[lang="en"] .select-card {
   align-items: flex-start !important;
   text-align: left !important;
+}
+
+/* ── 4b. Elements that must stay centered regardless of language ──
+   Artwork, gallery, chips grid, complete-icon — purely visual, not text-flow. ── */
+html[lang="he"] .gallery-wrap,
+html[lang="he"] .artwork-card,
+html[lang="he"] .emotion-chip,
+html[lang="he"] .complete-icon,
+html[lang="he"] .color-grid,
+html[lang="en"] .gallery-wrap,
+html[lang="en"] .artwork-card,
+html[lang="en"] .emotion-chip,
+html[lang="en"] .complete-icon,
+html[lang="en"] .color-grid {
+  align-items: center !important;
+  align-self: center !important;
 }
 
 /* ── 5. Emotion grid chips — wrap direction ── */
