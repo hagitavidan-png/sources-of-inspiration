@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Curriculum — Sources of Inspiration in Art</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+
+/* ── SCROLL OFFSET — sticky nav + tabs compensation ──
+   Unit sections scroll to precisely below the sticky header + tabs bar.
+   Using dynamic measurement in scrollToUnit(); CSS covers direct anchor hits. */
+[id], section {
+  scroll-margin-top: calc(57px + 46px + 16px); /* nav ~57px + tabs ~46px + breathing room */
+}
+body{font-family:'Inter',sans-serif;background:#f7f6f2;color:#0d0d1a;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none}
+.container{max-width:1100px;margin:0 auto;padding:0 28px}
+
+:root{
+  --ink:#0d0d1a;
+  --ink-soft:#1a1a2e;
+  --gold:#c9a96e;
+  --gold-lt:#e8d08a;
+  --gold-dk:#c9a96e;
+  --white:#ffffff;
+  --gray-300:#d0d0d8;
+  --gray-500:#888898;
+  --u1:#E04D4D;
+  --u2:#4CAF7D;
+  --u3:#7B61FF;
+  --u4:#C9A96E;
+  --u5:#4A90E2;
+  --u6:#c84c8e;
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.08);transition:.3s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:#0d0d1a;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:.85rem;font-weight:500;color:rgba(13,13,26,.55);transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:#0d0d1a}
+.nav-cta{padding:8px 20px;background:var(--gold);color:#0d0d1a;border-radius:8px;font-size:.82rem;font-weight:700;transition:.2s}
+.nav-cta:hover{background:#e8c460;transform:translateY(-1px)}
+.lang-toggle{display:flex;gap:4px;align-items:center}
+.lang-toggle button{padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:.2s;font-family:inherit}
+.lang-toggle button.active{background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.6);color:var(--gold-dk)}
+.lang-toggle button:hover:not(.active){color:#0d0d1a;border-color:rgba(0,0,0,.35)}
+/* RTL support */
+/* Lang toggle — עברית button on right in RTL */
+[dir="rtl"] .lang-toggle{flex-direction:row-reverse}
+[dir="rtl"] .unit-tabs{direction:rtl}
+[dir="rtl"] .ch-eyebrow{flex-direction:row-reverse;justify-content:center}
+[dir="rtl"] .course-stats{flex-direction:row-reverse}
+[dir="rtl"] .unit-header{flex-direction:row-reverse;text-align:right}
+[dir="rtl"] .approach-bar{justify-content:flex-end}
+[dir="rtl"] .lessons-list,.lr-head,.lr-info,.lr-right,.lr-expand-inner{direction:rtl}
+[dir="rtl"] .lr-tags{justify-content:flex-end}
+[dir="rtl"] .lx-meta{margin-right:0;margin-left:0}
+[dir="rtl"] .artist-spotlight{direction:rtl}
+[dir="rtl"] .footer-inner{direction:rtl}
+[dir="rtl"] .lesson-row:hover{transform:translateX(-3px)}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:#0d0d1a;border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(247,246,242,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:700;color:rgba(13,13,26,.75)}
+.mobile-menu a:hover{color:#0d0d1a}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* ── HERO ── */
+.course-hero{
+  padding:140px 0 80px;
+  background:linear-gradient(160deg,#f7f6f2 0%,#eef0f5 100%);
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.course-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,168,76,.13) 0%,transparent 70%);
+}
+.course-hero .container{position:relative;z-index:2}
+.ch-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:rgba(13,13,26,.45);margin-bottom:18px;
+}
+.ch-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.course-hero h1{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:800;
+  color:#0d0d1a;line-height:1.15;margin-bottom:18px;
+}
+.course-hero h1 em{font-style:normal;color:var(--gold)}
+.course-hero p{color:rgba(13,13,26,.55);font-size:1.05rem;max-width:580px;margin:0 auto 36px;line-height:1.85}
+.course-stats{
+  display:flex;gap:40px;justify-content:center;flex-wrap:wrap;
+  margin-top:48px;padding-top:40px;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+.cs-item{text-align:center}
+.cs-num{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;color:var(--gold-dk);line-height:1}
+.cs-label{font-size:.72rem;color:rgba(13,13,26,.4);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+
+/* ── UNIT NAVIGATION TABS ── */
+.unit-tabs-wrap{
+  position:sticky;top:57px;z-index:80;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,.07);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.unit-tabs-wrap::-webkit-scrollbar{display:none}
+.unit-tabs{display:flex;gap:0;min-width:max-content;padding:0 24px}
+.unit-tab{
+  padding:14px 20px;font-size:.8rem;font-weight:700;
+  color:rgba(13,13,26,.35);border-bottom:2px solid transparent;
+  transition:.2s;white-space:nowrap;cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+}
+.unit-tab:hover{color:rgba(13,13,26,.75)}
+.unit-tab.active{color:#0d0d1a;border-bottom-color:var(--tab-color,var(--gold))}
+.tab-dot{width:7px;height:7px;border-radius:50%}
+
+/* ── UNIT SECTIONS ── */
+.unit-section{
+  padding:72px 0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+
+/* Unit header */
+.unit-header{
+  display:flex;align-items:flex-start;gap:22px;
+  margin-bottom:48px;
+}
+.unit-badge{
+  width:64px;height:64px;border-radius:18px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.9rem;
+}
+.unit-meta-tag{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--unit-color);margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;
+}
+.unit-header h2{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:#0d0d1a;
+  margin-bottom:10px;line-height:1.2;
+}
+.unit-header h2 em{font-style:normal;color:var(--unit-color)}
+.unit-desc{font-size:.95rem;color:rgba(13,13,26,.55);line-height:1.85;max-width:660px}
+.unit-lesson-count{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;padding:5px 14px;
+  background:rgba(0,0,0,.05);border-radius:20px;
+  font-size:.73rem;font-weight:700;color:rgba(13,13,26,.45);
+}
+
+/* ── LESSONS LIST ── */
+.lessons-list{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+
+/* ── UNIT TRANSITION DIVIDER ── */
+.unit-transition{
+  padding:14px 20px;
+  border-left:3px solid var(--unit-color,var(--gold));
+  background:rgba(0,0,0,.025);
+  border-radius:0 10px 10px 0;
+  margin:4px 0;
+}
+[dir="rtl"] .unit-transition{
+  border-left:none;
+  border-right:3px solid var(--unit-color,var(--gold));
+  border-radius:10px 0 0 10px;
+}
+.unit-transition p{
+  margin:0;
+  font-size:.88rem;
+  line-height:1.7;
+  color:#6b7280;
+  font-style:italic;
+}
+
+.lesson-row{
+  background:#ffffff;
+  border:1.5px solid rgba(0,0,0,.07);
+  border-radius:14px;overflow:hidden;
+  cursor:pointer;
+  transition:border-color .22s, background .22s, transform .22s, box-shadow .22s;
+  position:relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.lesson-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--unit-color,var(--gold));opacity:0;
+  transition:opacity .22s;
+}
+.lesson-row:hover{
+  border-color:rgba(0,0,0,.14);
+  background:#fafaf8;
+  transform:translateX(3px);
+  box-shadow:0 4px 16px rgba(0,0,0,.07);
+}
+.lesson-row:hover::before{opacity:1}
+/* Available lesson row — full card is tappable */
+.lesson-row.available{
+  cursor:pointer;
+}
+.lesson-row.available:hover{
+  border-color:var(--unit-color);
+  background:#fffdf8;
+  box-shadow:0 4px 20px rgba(0,0,0,.09);
+}
+
+/* Lesson row header (always visible) */
+.lr-head{display:flex;align-items:center;gap:16px;padding:18px 20px}
+.lr-num{
+  flex-shrink:0;width:36px;height:36px;
+  border-radius:10px;
+  background:rgba(0,0,0,.06);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:rgba(13,13,26,.4);
+  font-family:'Sora',sans-serif;
+}
+.lesson-row.available .lr-num{background:rgba(var(--unit-rgb),.15);color:var(--unit-color)}
+.lr-info{flex:1;min-width:0}
+.lr-title{
+  font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;color:#0d0d1a;
+  margin-bottom:4px;
+}
+.lr-subtitle{font-size:.8rem;color:rgba(13,13,26,.45);line-height:1.5}
+.lr-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.lr-tag{
+  font-size:.67rem;font-weight:600;padding:3px 9px;border-radius:8px;
+  background:rgba(0,0,0,.05);color:rgba(13,13,26,.45);
+}
+.lr-right{flex-shrink:0;display:flex;align-items:center;gap:12px}
+.lr-duration{font-size:.75rem;color:rgba(13,13,26,.38);font-weight:600}
+.lr-action{
+  padding:9px 18px;border-radius:10px;font-size:.82rem;font-weight:700;
+  background:rgba(0,0,0,.05);color:rgba(13,13,26,.4);
+  transition:.2s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:6px;
+  cursor:pointer;text-decoration:none;
+  min-height:40px;
+  -webkit-tap-highlight-color:transparent;
+}
+.lesson-row.available .lr-action{
+  background:var(--unit-color);color:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.lesson-row.available .lr-action:hover{filter:brightness(1.1)}
+.lr-lock{font-size:.85rem;color:rgba(13,13,26,.2)}
+
+/* Lesson expand panel */
+.lr-expand{
+  max-height:0;overflow:hidden;
+  transition:max-height .38s ease;
+  padding:0 20px;border-top:0px solid rgba(0,0,0,.06);
+}
+.lesson-row.open .lr-expand{
+  max-height:300px;
+  border-top-width:1px;
+  border-top-color:rgba(0,0,0,.06);
+}
+.lr-expand-inner{padding:16px 0 20px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.lx-desc{flex:1;min-width:200px;font-size:.85rem;color:rgba(13,13,26,.5);line-height:1.75}
+.lx-meta{flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+.lx-meta-row{display:flex;align-items:center;gap:7px;font-size:.78rem;color:rgba(13,13,26,.45)}
+.lx-meta-row i{width:14px;text-align:center;color:rgba(13,13,26,.25)}
+.lx-cta{
+  margin-top:14px;display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:10px;font-size:.83rem;font-weight:700;
+  background:var(--unit-color);color:#fff;transition:.2s;
+}
+.lx-cta:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.lx-coming{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;padding:8px 16px;
+  border-radius:10px;font-size:.8rem;font-weight:600;
+  background:rgba(0,0,0,.04);color:rgba(13,13,26,.38);
+  border:1px solid rgba(0,0,0,.07);
+}
+
+/* ── UNIT APPROACH TAGS ── */
+.approach-bar{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:16px 0;margin-bottom:24px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.approach-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.3)}
+.approach-tag{
+  padding:5px 13px;border-radius:20px;font-size:.73rem;font-weight:600;
+  background:rgba(0,0,0,.05);color:rgba(13,13,26,.5);
+}
+
+/* ── ARTIST SPOTLIGHT ── */
+.artist-spotlight{
+  background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.07);
+  border-radius:16px;padding:22px 24px;margin-top:12px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.as-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.3);margin-right:4px}
+.as-pills{display:flex;gap:8px;flex-wrap:wrap}
+.as-pill{
+  display:flex;align-items:center;gap:7px;
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  border-radius:20px;padding:6px 14px;font-size:.78rem;font-weight:600;color:rgba(13,13,26,.65);
+  transition:.2s;
+}
+.as-pill:hover{background:#f5f0e8;color:#0d0d1a}
+.as-emoji{font-size:1rem}
+
+/* ── FOOTER ── */
+footer{background:#f0ede6;border-top:1px solid rgba(0,0,0,.08);padding:60px 0 40px}
+.footer-inner{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.footer-brand{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;color:#0d0d1a;margin-bottom:10px}
+.footer-brand span{color:var(--gold)}
+.footer-tagline{font-size:.82rem;color:rgba(13,13,26,.4);line-height:1.6;max-width:240px}
+.footer-col h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(13,13,26,.4);margin-bottom:14px}
+.footer-col a{display:block;font-size:.83rem;color:rgba(13,13,26,.55);margin-bottom:8px;transition:.2s}
+.footer-col a:hover{color:#0d0d1a}
+.footer-bottom{border-top:1px solid rgba(0,0,0,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:.78rem;color:rgba(13,13,26,.35)}
+
+@media(max-width:768px){
+  .unit-header{flex-direction:column}
+  .lr-right{display:flex !important}
+  .lr-duration{display:none}
+  .footer-inner{flex-direction:column}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:540px){
+  .lr-head{gap:10px;padding:14px 14px}
+  .lr-title{font-size:.88rem}
+  .lr-subtitle{display:none}
+  .lr-action{padding:8px 14px;font-size:.78rem}
+  .lr-tag{font-size:.62rem;padding:2px 7px}
+}
+
+/* ── DARK MODE ── */
+body.dark{background:#0f0f12;color:#e8e6e1}
+body.dark nav{background:rgba(15,15,18,.97);border-bottom-color:rgba(255,255,255,.07)}
+body.dark .nav-logo{color:#e8e6e1}
+body.dark .nav-links a{color:rgba(232,230,225,.45)}
+body.dark .nav-links a:hover,body.dark .nav-links a.active{color:#e8e6e1}
+body.dark .lang-toggle button{border-color:rgba(255,255,255,.15);color:rgba(232,230,225,.45)}
+body.dark .lang-toggle button:hover:not(.active){color:#e8e6e1;border-color:rgba(255,255,255,.4)}
+body.dark .hamburger span{background:#e8e6e1}
+body.dark .mobile-menu{background:rgba(15,15,18,.98)}
+body.dark .mobile-menu a{color:rgba(232,230,225,.75)}
+body.dark .mobile-menu a:hover{color:#e8e6e1}
+/* Hero */
+body.dark .course-hero{background:linear-gradient(160deg,#0f0f12 0%,#141420 100%)}
+body.dark .course-hero h1{color:#e8e6e1}
+body.dark .course-hero p{color:rgba(232,230,225,.55)}
+body.dark .course-hero::before{background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(201,168,76,.1) 0%,transparent 70%)}
+body.dark .ch-eyebrow{color:rgba(232,230,225,.4)}
+body.dark .course-stats{border-top-color:rgba(255,255,255,.07)}
+body.dark .cs-label{color:rgba(232,230,225,.4)}
+/* Unit tabs */
+body.dark .unit-tabs-wrap{background:rgba(15,15,18,.97);border-bottom-color:rgba(255,255,255,.07)}
+body.dark .unit-tab{color:rgba(232,230,225,.3)}
+body.dark .unit-tab:hover{color:rgba(232,230,225,.75)}
+body.dark .unit-tab.active{color:#e8e6e1}
+/* Unit sections */
+body.dark .unit-section{border-bottom-color:rgba(255,255,255,.06)}
+body.dark .unit-header h2{color:#e8e6e1}
+body.dark .unit-desc{color:rgba(232,230,225,.55)}
+body.dark .unit-lesson-count{background:rgba(255,255,255,.07);color:rgba(232,230,225,.45)}
+body.dark .unit-badge{filter:brightness(.85)}
+/* Approach bar */
+body.dark .approach-bar{border-bottom-color:rgba(255,255,255,.06)}
+body.dark .approach-label{color:rgba(232,230,225,.3)}
+body.dark .approach-tag{background:rgba(255,255,255,.07);color:rgba(232,230,225,.5)}
+/* Unit transition divider */
+body.dark .unit-transition{background:rgba(255,255,255,.04)}
+body.dark .unit-transition p{color:#9ca3af}
+/* Lesson rows */
+body.dark .lesson-row{background:#161620;border-color:rgba(255,255,255,.07)}
+body.dark .lesson-row:hover{background:#1c1c28;border-color:rgba(255,255,255,.13);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+body.dark .lesson-row.available:hover{background:#1c1c28;border-color:var(--unit-color);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+body.dark .lr-title{color:#e8e6e1}
+body.dark .lr-subtitle{color:rgba(232,230,225,.4)}
+body.dark .lr-tag{background:rgba(255,255,255,.07);color:rgba(232,230,225,.45)}
+body.dark .lr-duration{color:rgba(232,230,225,.35)}
+body.dark .lr-action{background:rgba(255,255,255,.07);color:rgba(232,230,225,.4)}
+body.dark .lesson-row.available .lr-action{background:var(--unit-color);color:#fff}
+body.dark .lr-lock{color:rgba(232,230,225,.18)}
+body.dark .lr-num{background:rgba(255,255,255,.07);color:rgba(232,230,225,.4)}
+/* Expand panel */
+body.dark .lesson-row.open .lr-expand{border-top-color:rgba(255,255,255,.07)}
+body.dark .lx-desc{color:rgba(232,230,225,.5)}
+body.dark .lx-meta-row{color:rgba(232,230,225,.45)}
+body.dark .lx-meta-row i{color:rgba(232,230,225,.25)}
+body.dark .lx-coming{background:rgba(255,255,255,.05);color:rgba(232,230,225,.35);border-color:rgba(255,255,255,.08)}
+/* Artist spotlight */
+body.dark .artist-spotlight{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.07)}
+body.dark .as-label{color:rgba(232,230,225,.3)}
+body.dark .as-pill{background:#1c1c28;border-color:rgba(255,255,255,.09);color:rgba(232,230,225,.65)}
+body.dark .as-pill:hover{background:#252535;color:#e8e6e1}
+/* Footer */
+body.dark footer{background:#0a0a0e;border-top-color:rgba(255,255,255,.07)}
+body.dark .footer-brand{color:#e8e6e1}
+body.dark .footer-tagline{color:rgba(232,230,225,.4)}
+body.dark .footer-col h4{color:rgba(232,230,225,.4)}
+body.dark .footer-col a{color:rgba(232,230,225,.55)}
+body.dark .footer-col a:hover{color:#e8e6e1}
+body.dark .footer-bottom{border-top-color:rgba(255,255,255,.07)}
+body.dark .footer-copy{color:rgba(232,230,225,.32)}
+</style>
+</head>
+<body class="dark">
+<!-- Shared init: dark mode flash-prevention + language bootstrap -->
+<script src="js/app-init.js"></script>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">✦ <span>Sources</span> of Inspiration</a>
+    <div class="nav-links">
+      <a href="index.html" data-en="Home" data-he="בית">Home</a>
+      <a href="course.html" class="active" data-en="The Course" data-he="הקורס">The Course</a>
+      <a href="lesson.html" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+      <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
+      <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+      <a href="teachers.html#trial" class="nav-cta" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-he" onclick="setLang('he')">עברית</button>
+    </div>
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 11px;font-size:.82rem;cursor:pointer;color:rgba(232,230,225,.6);transition:.2s;margin-left:4px">☀️</button>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="toggleMenu()" data-en="Home" data-he="בית">Home</a>
+  <a href="course.html" onclick="toggleMenu()" data-en="The Course" data-he="הקורס">The Course</a>
+  <a href="lesson.html" onclick="toggleMenu()" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+  <a href="teachers.html" onclick="toggleMenu()" data-en="For Teachers" data-he="למורים">For Teachers</a>
+  <a href="index.html#pricing" onclick="toggleMenu()" data-en="Pricing" data-he="מחירון">Pricing</a>
+  <a href="teachers.html#trial" onclick="toggleMenu()" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+</div>
+
+<!-- ── HERO ── */-->
+<section class="course-hero">
+  <div class="container">
+    <div class="ch-eyebrow" data-en="Complete Art Curriculum" data-he="תכנית לימודים שלמה לאמנות"><div class="ch-eyebrow-dot"></div> Complete Art Curriculum</div>
+    <h1 data-en="Seven <em>Units</em>. A Complete Journey." data-he="שבע <em>יחידות</em>. מסע שלם.">Seven <em>Units</em>. A Complete Journey.</h1>
+    <p data-en="Starting from the foundations of seeing and inspiration, through personal experience, emotion, nature, music, memory, culture and style — each unit explores one deep source through multiple lessons, studio projects and artist studies." data-he="מהיסודות של ראייה ויצירה, דרך חוויה אישית, רגש, טבע, מוזיקה, זיכרון, תרבות וסגנון — כל יחידה חוקרת מקור עמוק אחד דרך שיעורים מרובים, פרויקטי סטודיו ולימוד אמנים.">Starting from the foundations of seeing and inspiration, through personal experience, emotion, nature, music, memory, culture and style — each unit explores one deep source through multiple lessons, studio projects and artist studies.</p>
+    <div class="course-stats">
+      <div class="cs-item"><div class="cs-num">7</div><div class="cs-label" data-en="Units" data-he="יחידות">Units</div></div>
+      <div class="cs-item"><div class="cs-num">40+</div><div class="cs-label" data-en="Lessons" data-he="שיעורים">Lessons</div></div>
+      <div class="cs-item"><div class="cs-num">45–60</div><div class="cs-label" data-en="Min per Lesson" data-he="דק׳ לשיעור">Min per Lesson</div></div>
+      <div class="cs-item"><div class="cs-num">K–12</div><div class="cs-label" data-en="Grade Range" data-he="שכבת גיל">Grade Range</div></div>
+      <div class="cs-item"><div class="cs-num">2</div><div class="cs-label" data-en="Languages" data-he="שפות">Languages</div></div>
+    </div>
+    <div style="margin-top:28px;display:flex;justify-content:center">
+      <a href="lessons/personal-experience.html"
+         style="display:inline-flex;align-items:center;gap:9px;padding:13px 32px;
+                border-radius:50px;background:linear-gradient(135deg,#E04D4D,#c9462f);
+                color:#fff;font-family:inherit;font-size:.95rem;font-weight:700;
+                text-decoration:none;letter-spacing:.03em;
+                box-shadow:0 6px 28px rgba(232,93,117,.38);
+                transition:transform .2s,box-shadow .2s"
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 36px rgba(232,93,117,.5)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 6px 28px rgba(232,93,117,.38)'">
+        <i class="fa-solid fa-play" style="font-size:.8rem"></i>
+        <span data-en="Try Demo Lesson" data-he="נסו שיעור דמו">Try Demo Lesson</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── UNIT TABS ── -->
+<div class="unit-tabs-wrap" id="unit-tabs">
+  <div class="unit-tabs">
+    <div class="unit-tab active" style="--tab-color:#7a8fa0" onclick="scrollToUnit('unit00',this)">
+      <div class="tab-dot" style="background:#7a8fa0"></div> <span data-en="🔭 Foundations" data-he="🔭 יסודות">🔭 Foundations</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:#E04D4D" onclick="scrollToUnit('unit01',this)">
+      <div class="tab-dot" style="background:#E04D4D"></div> <span data-en="🪞 Personal Experience" data-he="🪞 חוויה אישית">🪞 Personal Experience</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:var(--u2)" onclick="scrollToUnit('unit02',this)">
+      <div class="tab-dot" style="background:var(--u2)"></div> <span data-en="🌿 Nature" data-he="🌿 טבע">🌿 Nature</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:var(--u3)" onclick="scrollToUnit('unit03',this)">
+      <div class="tab-dot" style="background:var(--u3)"></div> <span data-en="🎵 Music" data-he="🎵 מוזיקה">🎵 Music</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:var(--u4)" onclick="scrollToUnit('unit04',this)">
+      <div class="tab-dot" style="background:var(--u4)"></div> <span data-en="🧠 Memory" data-he="🧠 זיכרון">🧠 Memory</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:var(--u5)" onclick="scrollToUnit('unit05',this)">
+      <div class="tab-dot" style="background:var(--u5)"></div> <span data-en="🌍 Culture" data-he="🌍 תרבות">🌍 Culture</span>
+    </div>
+    <div class="unit-tab" style="--tab-color:var(--u6)" onclick="scrollToUnit('unit06',this)">
+      <div class="tab-dot" style="background:var(--u6)"></div> <span data-en="🎨 Style" data-he="🎨 סגנון">🎨 Style</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     UNIT 00 — FOUNDATIONS OF INSPIRATION
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit00" style="--unit-color:#7a8fa0;--unit-rgb:122,143,160">
+  <div class="container">
+
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(122,143,160,.12)">🔭</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 00 · Grades 5–12" data-he="יחידה 00 · כיתות ה׳–י״ב">Unit 00 · Grades 5–12</div>
+        <h2 data-en="Foundations of <em>Inspiration</em>" data-he="יסודות <em>ההשראה</em>">Foundations of <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="Before we create, we must learn to see. This unit is theoretical and philosophical — it challenges automatic perception and builds the conscious, active seeing that underlies all artistic practice. Students examine how the brain organises visual information, discover three modes of seeing, and practise shifting between them." data-he="לפני שאנו יוצרים, עלינו ללמוד לראות. יחידה זו תיאורטית ופילוסופית — היא מאתגרת את התפיסה האוטומטית ובונה ראייה מודעת ופעילה שעומדת בבסיס כל עשייה אמנותית. התלמידים בוחנים כיצד המוח מארגן מידע חזותי, מגלים שלושה אופני ראייה ומתרגלים מעבר ביניהם.">Before we create, we must learn to see. This unit is theoretical and philosophical — it challenges automatic perception and builds the conscious, active seeing that underlies all artistic practice. Students examine how the brain organises visual information, discover three modes of seeing, and practise shifting between them.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="4 Lessons" data-he="4 שיעורים">4 Lessons</span></div>
+      </div>
+    </div>
+
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="🔭 Critical Looking" data-he="🔭 ראייה ביקורתית">🔭 Critical Looking</span>
+      <span class="approach-tag" data-en="🧠 Visual Perception" data-he="🧠 תפיסה חזותית">🧠 Visual Perception</span>
+      <span class="approach-tag" data-en="📐 Gestalt Principles" data-he="📐 עקרונות גשטלט">📐 Gestalt Principles</span>
+      <span class="approach-tag" data-en="✏️ Seeing Exercises" data-he="✏️ תרגילי ראייה">✏️ Seeing Exercises</span>
+      <span class="approach-tag" data-en="💬 Reflective Discussion" data-he="💬 דיון רפלקטיבי">💬 Reflective Discussion</span>
+    </div>
+
+    <div class="lessons-list">
+
+      <!-- Lesson 00.1 — What is Inspiration -->
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num" style="color:#7a8fa0">00.1</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="What is Inspiration" data-he="מהי השראה">What is Inspiration</div>
+            <div class="lr-subtitle" data-en="Moving from automatic perception to active, conscious seeing" data-he="מתפיסה אוטומטית לראייה פעילה ומודעת">Moving from automatic perception to active, conscious seeing</div>
+            <div class="lr-tags">
+              <span class="lr-tag" data-en="Perception" data-he="תפיסה">Perception</span>
+              <span class="lr-tag" data-en="Active Seeing" data-he="ראייה פעילה">Active Seeing</span>
+              <span class="lr-tag" data-en="Consciousness" data-he="מודעות">Consciousness</span>
+            </div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">40 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Inspiration is not a random occurrence — it is the result of a conscious act of seeing. This lesson challenges students to question automatic perception: we think we see, but mostly we recognise." data-he="השראה אינה אקראית — היא תוצאה של מעשה ראייה מודעת. השיעור מעורר בתלמידים לבדוק את התפיסה האוטומטית.">Inspiration is not a random occurrence — it is the result of a conscious act of seeing. This lesson challenges students to question automatic perception: we think we see, but mostly we recognise.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="40 minutes" data-he="40 דקות">40 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–18" data-he="גילאים 11–18">Ages 11–18</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-book"></i> <span data-en="Theory + Discussion" data-he="תיאוריה + דיון">Theory + Discussion</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 00.2 — How We See -->
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num" style="color:#7a8fa0">00.2</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="How We See" data-he="כיצד אנו רואים">How We See</div>
+            <div class="lr-subtitle" data-en="Gestalt principles, visual organisation, and why we do not see reality directly" data-he="עקרונות גשטלט, ארגון חזותי, ומדוע איננו רואים את המציאות ישירות">Gestalt principles, visual organisation, and why we do not see reality directly</div>
+            <div class="lr-tags">
+              <span class="lr-tag" data-en="Gestalt" data-he="גשטלט">Gestalt</span>
+              <span class="lr-tag" data-en="Visual Cognition" data-he="קוגניציה חזותית">Visual Cognition</span>
+              <span class="lr-tag" data-en="Perception Science" data-he="מדע התפיסה">Perception Science</span>
+            </div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">45 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="The brain does not record what the eye sees — it constructs an interpretation. This lesson introduces the Gestalt principles and shows how the brain organises raw visual data into meaningful patterns." data-he="המוח אינו רושם מה שהעין רואה — הוא בונה פרשנות. שיעור זה מקדים את עקרונות הגשטלט ומדגים כיצד המוח מארגן נתונים בדפוסים בעלי משמעות.">The brain does not record what the eye sees — it constructs an interpretation. This lesson introduces the Gestalt principles and shows how the brain organises raw visual data into meaningful patterns.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–18" data-he="גילאים 12–18">Ages 12–18</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-book"></i> <span data-en="Theory + Visual Examples" data-he="תיאוריה + דוגמאות חזותיות">Theory + Visual Examples</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 00.3 — Three Ways of Seeing -->
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num" style="color:#7a8fa0">00.3</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Three Ways of Seeing" data-he="שלוש דרכי ראייה">Three Ways of Seeing</div>
+            <div class="lr-subtitle" data-en="Analytical seeing · Emotional seeing · Conceptual seeing" data-he="ראייה אנליטית · ראייה רגשית · ראייה קונספטואלית">Analytical seeing · Emotional seeing · Conceptual seeing</div>
+            <div class="lr-tags">
+              <span class="lr-tag" data-en="Analytical" data-he="אנליטי">Analytical</span>
+              <span class="lr-tag" data-en="Emotional" data-he="רגשי">Emotional</span>
+              <span class="lr-tag" data-en="Conceptual" data-he="קונספטואלי">Conceptual</span>
+            </div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">45 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="There is no single way to look at a work of art. This lesson introduces three modes of seeing: Analytical, Emotional, and Conceptual. Students practise switching between modes when encountering the same work." data-he="אין דרך אחת להסתכל על יצירת אמנות. שיעור זה מציג שלושה אופני ראייה: אנליטי, רגשי וקונצפטואלי. התלמידים מתרגלים לעבור בין האופנים.">There is no single way to look at a work of art. This lesson introduces three modes of seeing: Analytical, Emotional, and Conceptual. Students practise switching between modes when encountering the same work.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–18" data-he="גילאים 12–18">Ages 12–18</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-book"></i> <span data-en="Theory + Guided Looking" data-he="תיאוריה + צפייה מודרכת">Theory + Guided Looking</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 00.4 — Active Seeing Practice -->
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num" style="color:#7a8fa0">00.4</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Active Seeing Practice" data-he="תרגול ראייה פעילה">Active Seeing Practice</div>
+            <div class="lr-subtitle" data-en="Practical exercises: colour only · lines only · light and shadow · texture · negative space" data-he="תרגילים מעשיים: צבע בלבד · קווים בלבד · אור וצל · מרקם · מרחב שלילי">Practical exercises: colour only · lines only · light and shadow · texture · negative space</div>
+            <div class="lr-tags">
+              <span class="lr-tag">Observation</span>
+              <span class="lr-tag">Focused Practice</span>
+              <span class="lr-tag">Visual Filters</span>
+            </div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Theory becomes practice. Students isolate one visual element at a time: colour only, lines only, light and shadow, texture, then negative space." data-he="התיאוריה הופכת לפרקטיקה. התלמידים מבדדים אלמנט חזותי אחד: צבע בלבד, קווים בלבד, אור וצל, מרקם, מרחב שלילי.">Theory becomes practice. Students isolate one visual element at a time: colour only, lines only, light and shadow, texture, then negative space.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–18" data-he="גילאים 11–18">Ages 11–18</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-book"></i> <span data-en="Practical Exercises" data-he="תרגילים מעשיים">Practical Exercises</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /lessons-list -->
+
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Thinkers &amp; Theorists in this Unit" data-he="הוגים ותיאורטיקנים ביחידה">Thinkers &amp; Theorists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">🧠</span> Rudolf Arnheim</span>
+        <span class="as-pill"><span class="as-emoji">👁</span> John Berger</span>
+        <span class="as-pill"><span class="as-emoji">📐</span> Gestalt Psychology</span>
+        <span class="as-pill"><span class="as-emoji">📷</span> Paul Klee</span>
+        <span class="as-pill"><span class="as-emoji">🔭</span> Josef Albers</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 01 — PERSONAL EXPERIENCE AS INSPIRATION
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit01" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+  <div class="container">
+
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(224,77,77,.12)">🪞</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 01 · Grades 5–12" data-he="יחידה 01 · כיתות ה׳–י״ב">Unit 01 · Grades 5–12</div>
+        <h2 data-en="Personal Experience as <em>Inspiration</em>" data-he="חוויה אישית כ<em>השראה</em>">Personal Experience as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="Your own life is the richest source you have. This unit moves through a clear progression: from the language of emotion, through line and composition, into memory and time-based journaling, arriving at an artist model and a final personal work. Each lesson builds on the last." data-he="חייך הם המקור העשיר ביותר שיש לך. יחידה זו עוברת דרך התקדמות ברורה: משפת הרגש, דרך קו וקומפוזיציה, אל תוך זיכרון ויומן מבוסס-זמן, עד לדגם אמן ויצירה אישית סופית. כל שיעור בנוי על הקודם לו.">Your own life is the richest source you have. This unit moves through a clear progression: from the language of emotion, through line and composition, into memory and time-based journaling, arriving at an artist model and a final personal work. Each lesson builds on the last.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="7 Lessons + Capstone Project" data-he="7 שיעורים + פרויקט מסכם">7 Lessons + Capstone Project</span></div>
+      </div>
+    </div>
+
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Progression:" data-he="התקדמות:">Progression:</span>
+      <span class="approach-tag" data-en="❤️ Emotion" data-he="❤️ רגש">❤️ Emotion</span>
+      <span class="approach-tag" data-en="✏️ Line" data-he="✏️ קו">✏️ Line</span>
+      <span class="approach-tag" data-en="📐 Composition" data-he="📐 קומפוזיציה">📐 Composition</span>
+      <span class="approach-tag" data-en="🧠 Memory" data-he="🧠 זיכרון">🧠 Memory</span>
+      <span class="approach-tag" data-en="📖 Time" data-he="📖 זמן">📖 Time</span>
+      <span class="approach-tag" data-en="🎨 Artist Study" data-he="🎨 לימוד אמן">🎨 Artist Study</span>
+      <span class="approach-tag" data-en="✦ Personal Work" data-he="✦ יצירה אישית">✦ Personal Work</span>
+      <span class="approach-tag" data-en="✋ Form &amp; Gesture" data-he="✋ צורה ומחווה">✋ Form &amp; Gesture</span>
+    </div>
+
+    <div class="lessons-list">
+
+      <!-- Lesson 1.1 — Emotion in Visual Language (introduction) -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.1</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Emotion in Visual Language" data-he="רגש בשפה חזותית">Emotion in Visual Language</div>
+            <div class="lr-subtitle" data-en="Introduction — how does an inner feeling become a visible mark, colour or form?" data-he="מבוא — כיצד הופך רגש פנימי לסימן, צבע או צורה גלויים?">Introduction — how does an inner feeling become a visible mark, colour or form?</div>
+            <div class="lr-tags">
+              <span class="lr-tag" data-en="Introduction" data-he="מבוא">Introduction</span>
+              <span class="lr-tag" data-en="Colour" data-he="צבע">Colour</span>
+              <span class="lr-tag" data-en="Abstraction" data-he="אבסטרקציה">Abstraction</span>
+              <span class="lr-tag">Munch · Rothko</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">45 min</span>
+            <a href="lessons/lesson-1-1.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="The opening lesson of the unit. Students encounter the central question: how does an inner feeling become a visible mark, colour or form? Through Munch and Rothko, they discover that colour is not decoration — it is emotional language. Students build their own abstract emotional palette as a foundation for the lessons that follow." data-he="השיעור הפותח של היחידה. התלמידים נתקלים בשאלה המרכזית: כיצד הופך רגש פנימי לסימן, צבע או צורה גלויים? דרך מונק ורוטקו, הם מגלים שצבע אינו קישוט — הוא שפה רגשית.">The opening lesson of the unit. Students encounter the central question: how does an inner feeling become a visible mark, colour or form? Through Munch and Rothko, they discover that colour is not decoration — it is emotional language. Students build their own abstract emotional palette as a foundation for the lessons that follow.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–16" data-he="גילאים 11–16">Ages 11–16</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> <span data-en="15 interactive screens · EN + עברית" data-he="15 מסכים אינטראקטיביים · EN + עברית">15 interactive screens · EN + עברית</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/lesson-1-1.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.2 — How Emotion Becomes a Drawing  ★ LIVE -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.2</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="How Emotion Becomes a Drawing" data-he="כיצד הופך רגש לציור">How Emotion Becomes a Drawing</div>
+            <div class="lr-subtitle" data-en="Emotion → line quality → drawing → colour layer → personal mark" data-he="רגש ← איכות קו ← ציור ← שכבת צבע ← סימן אישי">Emotion → line quality → drawing → colour layer → personal mark</div>
+            <div class="lr-tags">
+              <span class="lr-tag">Line</span>
+              <span class="lr-tag">Colour Layer</span>
+              <span class="lr-tag">Van Gogh</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">55 min</span>
+            <a href="lessons/emotion-drawing.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="The first studio lesson. Students choose a personal moment, identify its emotion, select a line quality that matches it (soft, sharp, broken, continuous…), draw using only lines — then add a colour layer on top. The process follows the real logic of working in layers: line first, then tone and colour, then a personal mark. 15 full-screen guided steps." data-he="השיעור הראשון בסטודיו. התלמידים בוחרים רגע אישי, מזהים את רגשו, בוחרים איכות קו המתאימה (רך, חד, שבור, רציף...), מציירים בקווים בלבד — ואז מוסיפים שכבת צבע מלמעלה. 15 שלבים מודרכים.">The first studio lesson. Students choose a personal moment, identify its emotion, select a line quality that matches it (soft, sharp, broken, continuous…), draw using only lines — then add a colour layer on top. The process follows the real logic of working in layers: line first, then tone and colour, then a personal mark. 15 full-screen guided steps.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–17" data-he="גילאים 12–17">Ages 12–17</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> <span data-en="15 interactive screens · EN + עברית" data-he="15 מסכים אינטראקטיביים · EN + עברית">15 interactive screens · EN + עברית</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/emotion-drawing.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.3 — Emotion as Composition  ★ LIVE -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.3</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Emotion as Composition" data-he="רגש כקומפוזיציה">Emotion as Composition</div>
+            <div class="lr-subtitle" data-en="How emotion spreads across the page — placement, space, and compositional choices" data-he="כיצד הרגש מתפרס על הדף — מיקום, מרחב ובחירות קומפוזיציוניות">How emotion spreads across the page — placement, space, and compositional choices</div>
+            <div class="lr-tags">
+              <span class="lr-tag" data-en="Composition" data-he="קומפוזיציה">Composition</span>
+              <span class="lr-tag" data-en="Space" data-he="מרחב">Space</span>
+              <span class="lr-tag" data-en="Placement" data-he="מיקום">Placement</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">45 min</span>
+            <a href="lessons/visual-journal.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="After working with line in 1.2, this lesson shifts the question: how does emotion spread across the entire page? Students work with placement (where on the page), proportion (how much space), and the relationships between empty and filled areas. The focus is compositional decision-making as emotional expression — not decorating, but structuring feeling. 11 full-screen guided steps." data-he="לאחר עבודה עם קו ב-1.2, שיעור זה מעביר את השאלה: כיצד מתפשט הרגש על פני הדף כולו? התלמידים עובדים עם מיקום (איפה בדף), פרופורציה (כמה מקום), ויחסים בין אזורים ריקים ומלאים. 11 שלבים מודרכים.">After working with line in 1.2, this lesson shifts the question: how does emotion spread across the entire page? Students work with placement (where on the page), proportion (how much space), and the relationships between empty and filled areas. The focus is compositional decision-making as emotional expression — not decorating, but structuring feeling. 11 full-screen guided steps.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–16" data-he="גילאים 11–16">Ages 11–16</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> <span data-en="11 interactive screens · EN + עברית" data-he="11 מסכים אינטראקטיביים · EN + עברית">11 interactive screens · EN + עברית</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/visual-journal.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.4 FIXED — How Memory Becomes a Drawing  ★ LIVE -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.4</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="How Memory Becomes a Drawing" data-he="כיצד הופך זיכרון לציור">How Memory Becomes a Drawing</div>
+            <div class="lr-subtitle" data-en="Memory → parts → composition → drawing → reflection" data-he="זיכרון ← חלקים ← קומפוזיציה ← ציור ← רפלקציה">Memory → parts → composition → drawing → reflection</div>
+            <div class="lx-tags">
+              <span class="lr-tag" data-en="Memory" data-he="זיכרון">Memory</span>
+              <span class="lr-tag" data-en="Fragmentation" data-he="פיצול">Fragmentation</span>
+              <span class="lr-tag">Chagall</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">50 min</span>
+            <a href="lessons/memory-drawing.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="The shift from immediate emotion to memory. Memory is never complete — it arrives in fragments: a colour, a texture, a shape, a place. Students choose a personal memory, break it into its parts, draw the parts without trying to reconstruct a scene, then arrange them into a composition. Inspired by Chagall's dreamlike fragmentation. 12 full-screen guided steps." data-he="המעבר מרגש מיידי לזיכרון. הזיכרון אינו מלא אף פעם — הוא מגיע בשברים: צבע, מרקם, צורה, מקום. התלמידים בוחרים זיכרון אישי, שוברים אותו לחלקיו, מציירים את החלקים מבלי לנסות לשחזר סצנה, ואז מסדרים אותם לקומפוזיציה. 12 שלבים מודרכים.">The shift from immediate emotion to memory. Memory is never complete — it arrives in fragments: a colour, a texture, a shape, a place. Students choose a personal memory, break it into its parts, draw the parts without trying to reconstruct a scene, then arrange them into a composition. Inspired by Chagall's dreamlike fragmentation. 12 full-screen guided steps.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–17" data-he="גילאים 12–17">Ages 12–17</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> <span data-en="12 interactive screens · EN + עברית" data-he="12 מסכים אינטראקטיביים · EN + עברית">12 interactive screens · EN + עברית</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/memory-drawing.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.5 — How a Personal Journal Becomes an Artwork  ★ LIVE -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.5</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="How a Personal Journal Becomes an Artwork" data-he="כיצד יומן אישי הופך ליצירת אמנות">How a Personal Journal Becomes an Artwork</div>
+            <div class="lr-subtitle" data-en="Time-based — collecting a week of moments into a single page" data-he="מבוסס-זמן — איסוף רגעי שבוע לדף אחד">Time-based — collecting a week of moments into a single page</div>
+            <div class="lr-tags">
+              <span class="lr-tag">Journal</span>
+              <span class="lr-tag">Time</span>
+              <span class="lr-tag">Collection</span>
+              <span class="lr-tag">Hundertwasser</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">50 min</span>
+            <a href="lessons/journal-artwork.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc">Unlike 1.3 (which works with a single emotion) and 1.4 (which works with a single memory), this lesson works with time — a whole week. Students collect moments, things they saw, heard, read, wrote, felt — and place them together on one page without order. The result is a time-based composition: not one image, but an accumulation of living. 12 full-screen guided steps.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> 50 minutes</div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> Ages 12–17</div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> 12 interactive screens · EN + עברית</div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/journal-artwork.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.6 — Artists as Inspiration: Frida Kahlo -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.6</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Artists as Inspiration — Frida Kahlo" data-he="אמנים כהשראה — פרידה קאלו">Artists as Inspiration — Frida Kahlo</div>
+            <div class="lr-subtitle" data-en="How artists turn personal experience into art" data-he="איך אמנים הופכים חוויה אישית לציור">How artists turn personal experience into art</div>
+            <div class="lr-tags">
+              <span class="lr-tag">Artist Study</span>
+              <span class="lr-tag">Symbolism</span>
+              <span class="lr-tag">Frida Kahlo</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">45 min</span>
+            <a href="lessons/frida-kahlo.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students study Frida Kahlo's self-portraits as a personal visual world — figure, place, symbols, and color combined to express inner experience. They then create their own painting built from a personal experience." data-he="התלמידים לומדים את דיוקנאות העצמית של פרידה קאלו כעולם חזותי אישי — דמות, מקום, סמלים וצבע המשולבים לביטוי חוויה פנימית. לאחר מכן יוצרים ציור הבנוי מחוויה אישית משלהם.">Students study Frida Kahlo's self-portraits as a personal visual world — figure, place, symbols, and color combined to express inner experience. They then create their own painting built from a personal experience.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> 45 minutes</div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> Ages 13–18</div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> 15 interactive screens · EN + עברית</div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/frida-kahlo.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 1.7 — My Personal Story in Images (Capstone) -->
+      <div class="lesson-row available" onclick="toggleLesson(this)" style="--unit-color:#E04D4D;--unit-rgb:224,77,77;border-color:rgba(224,77,77,.18)">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(224,77,77,.15);color:#E04D4D">1.7</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="✦ My Personal Story in Images <span style='font-size:.7rem;background:rgba(224,77,77,.15);color:#E04D4D;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'>Capstone</span>" data-he="✦ הסיפור האישי שלי בתמונות <span style='font-size:.7rem;background:rgba(224,77,77,.15);color:#E04D4D;padding:2px 8px;border-radius:6px;font-weight:700;margin-right:6px'>פרויקט מסכם</span>">✦ My Personal Story in Images <span style="font-size:.7rem;background:rgba(224,77,77,.15);color:#E04D4D;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div>
+            <div class="lr-subtitle" data-en="Final unit project — a visual sequence that tells a personal story" data-he="פרויקט מסכם של היחידה — רצף חזותי שמספר סיפור אישי">Final unit project — a visual sequence that tells a personal story</div>
+            <div class="lr-tags">
+              <span class="lr-tag">Final Project</span>
+              <span class="lr-tag">Series</span>
+              <span class="lr-tag">Portfolio</span>
+            </div>
+          </div>
+          <div class="lr-right">
+            <span class="lr-duration">60+ min</span>
+            <a href="lessons/unit-summary.html" class="lr-action" style="background:#E04D4D;color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a>
+          </div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="The culminating project of Unit 01. Students create a 3–5 piece visual sequence drawing on everything built across the unit. Includes a short written artist statement and peer critique." data-he="פרויקט הסיום של יחידה 01. התלמידים יוצרים רצף חזותי של 3–5 יצירות. כולל הצהרת אמן וביקורת עמיתים.">The culminating project of Unit 01. Students create a 3–5 piece visual sequence drawing on everything built across the unit. Includes a short written artist statement and peer critique.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60+ minutes" data-he="60+ דקות">60+ minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star" style="color:#E04D4D"></i> <span data-en="Unit Capstone" data-he="פרויקט מסכם">Unit Capstone</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/unit-summary.html" class="lx-cta" style="background:#E04D4D" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /lessons-list -->
+
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">🪞</span> Frida Kahlo</span>
+        <span class="as-pill"><span class="as-emoji">🌊</span> Marc Chagall</span>
+        <span class="as-pill"><span class="as-emoji">😱</span> Edvard Munch</span>
+        <span class="as-pill"><span class="as-emoji">🟥</span> Mark Rothko</span>
+        <span class="as-pill"><span class="as-emoji">🌀</span> Louise Bourgeois</span>
+        <span class="as-pill"><span class="as-emoji">🏠</span> Hundertwasser</span>
+        <span class="as-pill"><span class="as-emoji">⭐</span> Vincent van Gogh</span>
+        <span class="as-pill"><span class="as-emoji">⚡</span> Jean-Michel Basquiat</span>
+        <span class="as-pill"><span class="as-emoji">🖌</span> Willem de Kooning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 02 — NATURE AS INSPIRATION
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit02" style="--unit-color:var(--u2);--unit-rgb:76,175,125">
+  <div class="container">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(76,175,125,.12)">🌿</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 02 · Grades 4–12" data-he="יחידה 02 · כיתות ד׳–י״ב">Unit 02 · Grades 4–12</div>
+        <h2 data-en="Nature as <em>Inspiration</em>" data-he="טבע כ<em>מקור השראה</em>">Nature as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="From microscopic patterns to vast landscapes, students discover how the natural world has driven visual artists for centuries — and build their own visual relationship with their environment." data-he="מדפוסים מיקרוסקופיים עד נוף עצום — התלמידים מגלים כיצד העולם הטבעי הניע אמנים לאורך דורות.">From microscopic patterns to vast landscapes, students discover how the natural world has driven visual artists for centuries — and build their own visual relationship with their environment.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="6 Lessons + Capstone Project" data-he="6 שיעורים + פרויקט מסכם">6 Lessons + Capstone Project</span></div>
+      </div>
+    </div>
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="🔭 Observation Drawing" data-he="🔭 ציור התבוננות">🔭 Observation Drawing</span>
+      <span class="approach-tag" data-en="🌀 Pattern &amp; Geometry" data-he="🌀 דפוס וגאומטריה">🌀 Pattern &amp; Geometry</span>
+      <span class="approach-tag" data-en="🌫️ Landscape" data-he="🌫️ נוף">🌫️ Landscape</span>
+      <span class="approach-tag" data-en="🔬 Botanical Study" data-he="🔬 לימוד בוטני">🔬 Botanical Study</span>
+      <span class="approach-tag" data-en="📸 Photography" data-he="📸 צילום">📸 Photography</span>
+    </div>
+    <div class="lessons-list">
+      <div class="lesson-row available" onclick="location.href='lessons/lesson-2-1.html'" style="--unit-color:var(--u2);--unit-rgb:76,175,125">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(76,175,125,.15);color:var(--u2)">2.1</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Patterns in Nature &amp; Art" data-he="דפוסים בטבע ובאמנות">Patterns in Nature &amp; Art</div>
+            <div class="lr-subtitle" data-en="Identify recurring structures in nature and see them as a visual language" data-he="לזהות מבנים חוזרים בטבע ולראות אותם כשפה חזותית">Identify recurring structures in nature and see them as a visual language</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Pattern" data-he="דפוס">Pattern</span><span class="lr-tag" data-en="Geometry" data-he="גאומטריה">Geometry</span><span class="lr-tag">Hokusai · Morris</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">45 min</span><a href="lessons/lesson-2-1.html" class="lr-action" style="background:var(--u2);color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students observe natural patterns (spirals, fractals, tessellations) and create their own repeating motif inspired by a natural object." data-he="התלמידים מתבוננים בדפוסים טבעיים (ספירלות, פרקטלים, תבניות חוזרות) ויוצרים מוטיב חוזר משלהם בהשראת עצם טבעי.">Students observe natural patterns (spirals, fractals, tessellations) and create their own repeating motif inspired by a natural object.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 8–14" data-he="גילאים 8–14">Ages 8–14</span></div>
+            </div>
+            <div style="flex-basis:100%">
+              <a href="lessons/lesson-2-1.html" class="lx-cta" style="background:var(--u2)" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row available" onclick="window.location='lessons/lesson-2-2.html'" style="--unit-color:var(--u2);--unit-rgb:76,175,125">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(76,175,125,.15);color:var(--u2)">2.2</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Monet and the Impressionists" data-he="מונה והאימפרסיוניסטים">Monet and the Impressionists</div>
+            <div class="lr-subtitle" data-en="How capturing light and atmosphere transformed art forever" data-he="כיצד לכידת האור והאווירה שינתה את האמנות לנצח">How capturing light and atmosphere transformed art forever</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Impressionism" data-he="אימפרסיוניזם">Impressionism</span><span class="lr-tag" data-en="Light" data-he="אור">Light</span><span class="lr-tag">Monet · Pissarro</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">50 min</span><a href="lessons/lesson-2-2.html" class="lr-action" style="background:var(--u2);color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="A study of Monet's Haystacks series as a lesson in observation — the same subject, different times of day, radically different paintings. Students create two studies of the same scene." data-he="לימוד סדרת גדישי השחת של מונה כשיעור בהתבוננות — אותו נושא, שעות שונות ביום, ציורים שונים לחלוטין. התלמידים יוצרים שתי עבודות של אותה סצנה.">A study of Monet's Haystacks series as a lesson in observation — the same subject, different times of day, radically different paintings. Students create two studies of the same scene.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–16" data-he="גילאים 10–16">Ages 10–16</span></div>
+            </div>
+            <div style="flex-basis:100%"><a href="lessons/lesson-2-2.html" class="lx-cta" style="background:var(--u2)" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row available" onclick="window.location='lessons/lesson-2-3.html'" style="--unit-color:var(--u2);--unit-rgb:76,175,125">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(76,175,125,.15);color:var(--u2)">2.3</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Georgia O'Keeffe — Enlargement" data-he="ג׳ורג׳יה אוקיף — הגדלה">Georgia O'Keeffe — Enlargement</div>
+            <div class="lr-subtitle" data-en="Getting close. Very close. What changes?" data-he="להתקרב. מאוד קרוב. מה משתנה?">Getting close. Very close. What changes?</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Scale" data-he="קנה מידה">Scale</span><span class="lr-tag" data-en="Close Observation" data-he="התבוננות מקרובה">Close Observation</span><span class="lr-tag">O'Keeffe</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">55 min</span><a href="lessons/lesson-2-3.html" class="lr-action" style="background:var(--u2);color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students select a small natural object and draw it at extreme magnification — discovering that scale changes meaning, and detail becomes abstraction." data-he="התלמידים בוחרים עצם טבעי קטן ומציירים אותו בהגדלה קיצונית — מגלים שקנה המידה משנה משמעות, ופרט הופך לאבסטרקציה.">Students select a small natural object and draw it at extreme magnification — discovering that scale changes meaning, and detail becomes abstraction.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 9–16" data-he="גילאים 9–16">Ages 9–16</span></div>
+            </div>
+            <div style="flex-basis:100%"><a href="lessons/lesson-2-3.html" class="lx-cta" style="background:var(--u2)" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="unit-transition" dir="rtl">
+        <p data-he="עברנו מלהסתכל על הטבע עצמו —<br>למפגש שלנו איתו." data-en="We move from observing nature itself —<br>to encountering our relationship with it.">We move from observing nature itself —<br>to encountering our relationship with it.</p>
+      </div>
+      <div class="lesson-row available" onclick="window.location='lessons/lesson-2-4.html'" style="--unit-color:var(--u2);--unit-rgb:76,175,125">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(76,175,125,.15);color:var(--u2)">2.4</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Human vs. Nature — The Sublime" data-he="אדם מול טבע — הנשגב">Human vs. Nature — The Sublime</div>
+            <div class="lr-subtitle" data-en="Some things are larger than you. Friedrich, Turner, and the encounter." data-he="יש דברים שגדולים מכם. פרידריך, טרנר, והמפגש.">Some things are larger than you. Friedrich, Turner, and the encounter.</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Landscape" data-he="נוף">Landscape</span><span class="lr-tag" data-en="The Sublime" data-he="הנשגב">The Sublime</span><span class="lr-tag">Turner · Friedrich</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">45 min</span><a href="lessons/lesson-2-4.html" class="lr-action" style="background:var(--u2);color:#fff" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-play'></i> Start Lesson" data-he="<i class='fa-solid fa-play'></i> התחל שיעור"><i class="fa-solid fa-play"></i> Start Lesson</a></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students explore the Romantic concept of the Sublime — nature as something vast and overwhelming. Comparing Friedrich's solitary figures with Turner's swirling storms, they draw a large space with a small element inside it and reflect on how placement changes feeling." data-he="התלמידים בוחנים את מושג הנשגב הרומנטי — טבע כמשהו עצום ומכריע. בהשוואת הדמויות הבודדות של פרידריך לסערות הסוחפות של טרנר, הם מציירים מרחב גדול עם אלמנט קטן בפנים ומרחו כיצד המיקום משנה את התחושה.">Students explore the Romantic concept of the Sublime — nature as something vast and overwhelming. Comparing Friedrich's solitary figures with Turner's swirling storms, they draw a large space with a small element inside it and reflect on how placement changes feeling.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–17" data-he="גילאים 10–17">Ages 10–17</span></div>
+            </div>
+            <div style="flex-basis:100%"><a href="lessons/lesson-2-4.html" class="lx-cta" style="background:var(--u2)" onclick="event.stopPropagation()" data-en="<i class='fa-solid fa-arrow-right'></i> Open Lesson" data-he="<i class='fa-solid fa-arrow-left'></i> פתח שיעור"><i class="fa-solid fa-arrow-right"></i> Open Lesson</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">2.5</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Nature in Non-Western Art" data-he="טבע באמנות לא-מערבית">Nature in Non-Western Art</div>
+            <div class="lr-subtitle" data-en="Understand alternative ways of seeing nature beyond the Western tradition" data-he="להבין דרכי הסתכלות שונות על טבע מעבר למסורת המערבית">Understand alternative ways of seeing nature beyond the Western tradition</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Cross-Cultural" data-he="בין-תרבותי">Cross-Cultural</span><span class="lr-tag" data-en="Woodblock" data-he="גוש עץ">Woodblock</span><span class="lr-tag">Hokusai · Indigenous Art</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students compare how different cultures represent the natural world and create a work that blends two visual traditions in their own response to nature." data-he="התלמידים משווים כיצד תרבויות שונות מייצגות את העולם הטבעי ויוצרים עבודה המשלבת שתי מסורות חזותיות בתגובה אישית לטבע.">Students compare how different cultures represent the natural world and create a work that blends two visual traditions in their own response to nature.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–16" data-he="גילאים 10–16">Ages 10–16</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)" style="border-color:rgba(76,175,125,.18)">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(76,175,125,.15);color:var(--u2)">2.6</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="✦ My Natural World &lt;span style='font-size:.7rem;background:rgba(76,175,125,.15);color:var(--u2);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'&gt;Capstone&lt;/span&gt;" data-he="✦ העולם הטבעי שלי &lt;span style='font-size:.7rem;background:rgba(76,175,125,.15);color:var(--u2);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'&gt;פרויקט מסכם&lt;/span&gt;">✦ My Natural World <span style="font-size:.7rem;background:rgba(76,175,125,.15);color:var(--u2);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div>
+            <div class="lr-subtitle" data-en="Final unit project — an original artwork responding to your personal relationship with nature" data-he="פרויקט יחידה סופי — יצירת אמנות מקורית המגיבה לקשר האישי שלך עם הטבע">Final unit project — an original artwork responding to your personal relationship with nature</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Final Project" data-he="פרויקט סיום">Final Project</span><span class="lr-tag" data-en="Choice Media" data-he="מדיה לבחירה">Choice Media</span><span class="lr-tag" data-en="Portfolio" data-he="תיק עבודות">Portfolio</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">60+ min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students choose any natural inspiration source and create a personal artwork that demonstrates skills and concepts from the full unit." data-he="התלמידים בוחרים כל מקור השראה טבעי ויוצרים יצירת אמנות אישית המדגימה מיומנויות ומושגים מכל היחידה.">Students choose any natural inspiration source and create a personal artwork that demonstrates skills and concepts from the full unit.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60+ minutes" data-he="60+ דקות">60+ minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star"></i> <span data-en="Unit Capstone" data-he="פרויקט מסכם יחידה">Unit Capstone</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">🌸</span> Claude Monet</span>
+        <span class="as-pill"><span class="as-emoji">🌊</span> Katsushika Hokusai</span>
+        <span class="as-pill"><span class="as-emoji">🌺</span> Georgia O'Keeffe</span>
+        <span class="as-pill"><span class="as-emoji">⛈️</span> J.M.W. Turner</span>
+        <span class="as-pill"><span class="as-emoji">🧭</span> Caspar David Friedrich</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 03 — MUSIC & RHYTHM
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit03" style="--unit-color:var(--u3);--unit-rgb:123,97,255">
+  <div class="container">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(123,97,255,.12)">🎵</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 03 · Grades 6–12" data-he="יחידה 03 · כיתות ו׳–י״ב">Unit 03 · Grades 6–12</div>
+        <h2 data-en="Music &amp; Rhythm as <em>Inspiration</em>" data-he="מוזיקה וריתמוס כ<em>מקור השראה</em>">Music &amp; Rhythm as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="How do you paint sound? Students explore synesthesia, visual rhythm and the cross-sensory experiments of artists who used music as their creative starting point." data-he="איך מציירים צליל? התלמידים חוקרים סינאסתזיה, קצב חזותי והניסויות החושיים של אמנים שהשתמשו במוזיקה.">How do you paint sound? Students explore synesthesia, visual rhythm and the cross-sensory experiments of artists who used music as their creative starting point.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="6 Lessons + Capstone Project" data-he="6 שיעורים + פרויקט מסכם">6 Lessons + Capstone Project</span></div>
+      </div>
+    </div>
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="🎼 Synesthesia" data-he="🎼 סינאסתזיה">🎼 Synesthesia</span>
+      <span class="approach-tag" data-en="🥁 Rhythm &amp; Pattern" data-he="🥁 קצב ודפוס">🥁 Rhythm &amp; Pattern</span>
+      <span class="approach-tag" data-en="🎷 Jazz &amp; Improvisation" data-he="🎷 ג'אז ואילתור">🎷 Jazz &amp; Improvisation</span>
+      <span class="approach-tag" data-en="🎹 Notation as Art" data-he="🎹 תווים כאמנות">🎹 Notation as Art</span>
+    </div>
+    <div class="lessons-list">
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">3.1</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Kandinsky &amp; Synesthesia" data-he="קנדינסקי וסינאסתזיה">Kandinsky &amp; Synesthesia</div>
+            <div class="lr-subtitle" data-en="Hearing colour, seeing sound — the artist who painted music" data-he="לשמוע צבע, לראות צליל — האמן שצייר מוזיקה">Hearing colour, seeing sound — the artist who painted music</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Synesthesia" data-he="סינאסתזיה">Synesthesia</span><span class="lr-tag" data-en="Abstract" data-he="אבסטרקטי">Abstract</span><span class="lr-tag">Kandinsky</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students listen to two contrasting pieces of music and create visual responses — then compare with Kandinsky's own visual-musical experiments." data-he="התלמידים מאזינים לשתי יצירות מוזיקליות מנוגדות ויוצרים תגובות חזותיות — ואז משווים עם הניסויים החזותיים-מוזיקליים של קנדינסקי עצמו.">Students listen to two contrasting pieces of music and create visual responses — then compare with Kandinsky's own visual-musical experiments.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–17" data-he="גילאים 12–17">Ages 12–17</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">3.2</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Jazz &amp; Abstract Expressionism" data-he="ג'אז ואקספרסיוניזם מופשט">Jazz &amp; Abstract Expressionism</div>
+            <div class="lr-subtitle" data-en="Improvisation, rhythm and the freedom of mark-making" data-he="אילתור, קצב וחופש יצירת הסימן">Improvisation, rhythm and the freedom of mark-making</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Jazz" data-he="ג'אז">Jazz</span><span class="lr-tag" data-en="Improvisation" data-he="אילתור">Improvisation</span><span class="lr-tag">Basquiat · Pollock</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="How did Jazz culture influence Abstract Expressionism? Students create an improvised gestural painting while listening to a jazz track, channelling rhythm into mark-making." data-he="כיצד תרבות הג'אז השפיעה על האקספרסיוניזם המופשט? התלמידים יוצרים ציור מחוות מאולתר תוך האזנה לרצועת ג'אז, מעבירים קצב לסימן.">How did Jazz culture influence Abstract Expressionism? Students create an improvised gestural painting while listening to a jazz track, channelling rhythm into mark-making.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 13–18" data-he="גילאים 13–18">Ages 13–18</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">3.3</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Mondrian &amp; the Grid of Music" data-he="מונדריאן ורשת המוזיקה">Mondrian &amp; the Grid of Music</div>
+            <div class="lr-subtitle" data-en="How Broadway Boogie-Woogie turned jazz into pure geometry" data-he="כיצד Broadway Boogie-Woogie הפך ג'אז לגאומטריה טהורה">How Broadway Boogie-Woogie turned jazz into pure geometry</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Geometry" data-he="גאומטריה">Geometry</span><span class="lr-tag" data-en="De Stijl" data-he="דה סטייל">De Stijl</span><span class="lr-tag">Mondrian</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">45 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Mondrian's final masterpiece visualises the rhythm of New York streets and jazz music through a grid of coloured lines and squares. Students design their own &quot;city rhythm&quot; grid." data-he="יצירת המופת הסופית של מונדריאן מדמיינת את קצב רחובות ניו-יורק ומוזיקת הג'אז דרך רשת של קווים וריבועים צבעוניים. התלמידים מתכננים רשת 'קצב עיר' משלהם.">Mondrian's final masterpiece visualises the rhythm of New York streets and jazz music through a grid of coloured lines and squares. Students design their own "city rhythm" grid.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 minutes" data-he="45 דקות">45 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–16" data-he="גילאים 10–16">Ages 10–16</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">3.4</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Paul Klee — Drawing as Notation" data-he="פול קלה — ציור כתווים">Paul Klee — Drawing as Notation</div>
+            <div class="lr-subtitle" data-en="The musician-painter who made every line a note" data-he="הצייר-מוזיקאי שהפך כל קו לתו">The musician-painter who made every line a note</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Line" data-he="קו">Line</span><span class="lr-tag" data-en="Notation" data-he="תווים">Notation</span><span class="lr-tag">Paul Klee</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Klee was a trained violinist who thought about drawing the way a composer thinks about melody. Students create a &quot;visual score&quot; — a drawing that reads like music." data-he="קלה היה כנר מוסמך שחשב על ציור כמו שמלחין חושב על מנגינה. התלמידים יוצרים 'תווים חזותיים' — ציור שנקרא כמו מוזיקה.">Klee was a trained violinist who thought about drawing the way a composer thinks about melody. Students create a "visual score" — a drawing that reads like music.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–16" data-he="גילאים 11–16">Ages 11–16</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head">
+          <div class="lr-num">3.5</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="Your Playlist, Your Palette" data-he="הפלייליסט שלך, הפלטה שלך">Your Playlist, Your Palette</div>
+            <div class="lr-subtitle" data-en="Personal music as visual identity — what does your soundtrack look like?" data-he="מוזיקה אישית כזהות חזותית — איך נראה הפסקול שלך?">Personal music as visual identity — what does your soundtrack look like?</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Personal" data-he="אישי">Personal</span><span class="lr-tag" data-en="Mixed Media" data-he="מדיה מעורבת">Mixed Media</span><span class="lr-tag" data-en="Contemporary" data-he="עכשווי">Contemporary</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students bring their own music and translate 3 tracks into visual responses — building a triptych that represents their musical identity." data-he="התלמידים מביאים את המוזיקה שלהם ומתרגמים 3 רצועות לתגובות חזותיות — בונים טריפטיך שמייצג את זהותם המוזיקלית.">Students bring their own music and translate 3 tracks into visual responses — building a triptych that represents their musical identity.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–18" data-he="גילאים 12–18">Ages 12–18</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)" style="border-color:rgba(123,97,255,.18)">
+        <div class="lr-head">
+          <div class="lr-num" style="background:rgba(123,97,255,.15);color:var(--u3)">3.6</div>
+          <div class="lr-info">
+            <div class="lr-title" data-en="✦ Sound Into Image &lt;span style='font-size:.7rem;background:rgba(123,97,255,.15);color:var(--u3);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'&gt;Capstone&lt;/span&gt;" data-he="✦ צליל לתמונה &lt;span style='font-size:.7rem;background:rgba(123,97,255,.15);color:var(--u3);padding:2px 8px;border-radius:6px;font-weight:700;margin-right:6px'&gt;פרויקט מסכם&lt;/span&gt;">✦ Sound Into Image <span style="font-size:.7rem;background:rgba(123,97,255,.15);color:var(--u3);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div>
+            <div class="lr-subtitle" data-en="Final unit project — translating a full piece of music into a multi-part visual work" data-he="פרויקט מסכם — תרגום יצירת מוזיקה שלמה לעבודה חזותית רב-חלקית">Final unit project — translating a full piece of music into a multi-part visual work</div>
+            <div class="lr-tags"><span class="lr-tag" data-en="Final Project" data-he="פרויקט סיום">Final Project</span><span class="lr-tag" data-en="Series" data-he="סדרה">Series</span><span class="lr-tag" data-en="Portfolio" data-he="תיק עבודות">Portfolio</span></div>
+          </div>
+          <div class="lr-right"><span class="lr-duration">60+ min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div>
+        </div>
+        <div class="lr-expand">
+          <div class="lr-expand-inner">
+            <div class="lx-desc" data-en="Students choose a piece of music and create a visual sequence that corresponds to its structure — responding to tempo, dynamics, mood and key transitions." data-he="התלמידים בוחרים יצירת מוזיקה ויוצרים רצף חזותי המתאים למבנה שלה — מגיבים לטמפו, דינמיקה, מצב רוח ומעברים עיקריים.">Students choose a piece of music and create a visual sequence that corresponds to its structure — responding to tempo, dynamics, mood and key transitions.</div>
+            <div class="lx-meta">
+              <div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60+ minutes" data-he="60+ דקות">60+ minutes</span></div>
+              <div class="lx-meta-row"><i class="fa-solid fa-star"></i> <span data-en="Unit Capstone" data-he="פרויקט מסכם יחידה">Unit Capstone</span></div>
+            </div>
+            <div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+        <span class="as-pill"><span class="as-emoji">🎷</span> Jean-Michel Basquiat</span>
+        <span class="as-pill"><span class="as-emoji">🔲</span> Piet Mondrian</span>
+        <span class="as-pill"><span class="as-emoji">🎹</span> Paul Klee</span>
+        <span class="as-pill"><span class="as-emoji">💦</span> Jackson Pollock</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 04 — MEMORY & IDENTITY
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit04" style="--unit-color:var(--u4);--unit-rgb:201,169,110">
+  <div class="container">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(201,169,110,.12)">🧠</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 04 · Grades 7–12" data-he="יחידה 04 · כיתות ז׳–י״ב">Unit 04 · Grades 7–12</div>
+        <h2 data-en="Memory &amp; Identity as <em>Inspiration</em>" data-he="זיכרון וזהות כ<em>מקור השראה</em>">Memory &amp; Identity as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="Personal history, heritage and the question of who we are become raw material. Students explore how artists use autobiography, cultural memory and identity as creative subject matter." data-he="היסטוריה האישית, מורשת ושאלת מי אנו הופכים לחומר גלם. התלמידים בודקים כיצד אמנים משתמשים באוטוביוגרפיה, זיכרון תרבותי וזהות כחומר יצירתי.">Personal history, heritage and the question of who we are become raw material. Students explore how artists use autobiography, cultural memory and identity as creative subject matter.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="6 Lessons + Capstone Project" data-he="6 שיעורים + פרויקט מסכם">6 Lessons + Capstone Project</span></div>
+      </div>
+    </div>
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="📷 Personal Archive" data-he="📷 ארכיון אישי">📷 Personal Archive</span>
+      <span class="approach-tag" data-en="🗺️ Cultural Heritage" data-he="🗺️ מורשת תרבותית">🗺️ Cultural Heritage</span>
+      <span class="approach-tag" data-en="🪞 Self-Portrait" data-he="🪞 דיוקן עצמי">🪞 Self-Portrait</span>
+      <span class="approach-tag" data-en="📦 Found Objects" data-he="📦 חפצים שנמצאו">📦 Found Objects</span>
+    </div>
+    <div class="lessons-list">
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head"><div class="lr-num">4.1</div><div class="lr-info"><div class="lr-title" data-en="The Childhood Object" data-he="חפץ הילדות">The Childhood Object</div><div class="lr-subtitle" data-en="One object from childhood — what memory does it carry?" data-he="חפץ אחד מהילדות — איזה זיכרון הוא נושא?">One object from childhood — what memory does it carry?</div><div class="lr-tags"><span class="lr-tag" data-en="Found Objects" data-he="חפצים שנמצאו">Found Objects</span><span class="lr-tag" data-en="Memory" data-he="זיכרון">Memory</span><span class="lr-tag">Joseph Cornell</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Inspired by Joseph Cornell's memory boxes, students select an ordinary object and elevate it through drawing, framing and annotation into a memory portrait." data-he="בהשראת קופסאות הזיכרון של ג'וזף קורנל, התלמידים בוחרים חפץ רגיל ומעלים אותו דרך ציור, מסגור והערות לדיוקן זיכרון.">Inspired by Joseph Cornell's memory boxes, students select an ordinary object and elevate it through drawing, framing and annotation into a memory portrait.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–17" data-he="גילאים 12–17">Ages 12–17</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head"><div class="lr-num">4.2</div><div class="lr-info"><div class="lr-title" data-en="Family, Heritage and the Portrait" data-he="משפחה, מורשת ודיוקן">Family, Heritage and the Portrait</div><div class="lr-subtitle" data-en="How do we carry our family in our face?" data-he="כיצד אנו נושאים את משפחתנו בפנינו?">How do we carry our family in our face?</div><div class="lr-tags"><span class="lr-tag" data-en="Portrait" data-he="דיוקן">Portrait</span><span class="lr-tag" data-en="Heritage" data-he="מורשת">Heritage</span><span class="lr-tag">Kehinde Wiley</span></div></div><div class="lr-right"><span class="lr-duration">60 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students create a portrait that incorporates cultural symbols and heritage details — exploring identity through visual representation." data-he="התלמידים יוצרים דיוקן הכולל סמלים תרבותיים ופרטי מורשת — ובוחנים זהות דרך ייצוג חזותי.">Students create a portrait that incorporates cultural symbols and heritage details — exploring identity through visual representation.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60 minutes" data-he="60 דקות">60 minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 13–18" data-he="גילאים 13–18">Ages 13–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head"><div class="lr-num">4.3</div><div class="lr-info"><div class="lr-title" data-en="Place as Memory" data-he="מקום כזיכרון">Place as Memory</div><div class="lr-subtitle" data-en="Where you grew up — what does that place look like inside your memory?" data-he="המקום שגדלת בו — כיצד נראה המקום בתוך הזיכרון שלך?">Where you grew up — what does that place look like inside your memory?</div><div class="lr-tags"><span class="lr-tag" data-en="Place" data-he="מקום">Place</span><span class="lr-tag" data-en="Nostalgia" data-he="נוסטלגיה">Nostalgia</span><span class="lr-tag">Chagall · Hopper</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Memory distorts place — colours are brighter, details are wrong, some things float. Students create a memory-version of a significant place, deliberately distorting for emotional truth." data-he="הזיכרון מעוות מקומות — צבעים בהירים, פרטים שגויים, דברים מרחפים. התלמידים יוצרים גרסת זיכרון של מקום משמעותי, ומעוותים אותו לטובת אמת רגשית.">Memory distorts place — colours are brighter, details are wrong, some things float. Students create a memory-version of a significant place, deliberately distorting for emotional truth.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 13–18" data-he="גילאים 13–18">Ages 13–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head"><div class="lr-num">4.4</div><div class="lr-info"><div class="lr-title" data-en="Artist Study — Yinka Shonibare" data-he="לימוד אמן — יינקה שוניברה">Artist Study — Yinka Shonibare</div><div class="lr-subtitle" data-en="When cultural identity becomes the medium itself" data-he="כשזהות תרבותית הופכת למדיום עצמו">When cultural identity becomes the medium itself</div><div class="lr-tags"><span class="lr-tag" data-en="Cultural Identity" data-he="זהות תרבותית">Cultural Identity</span><span class="lr-tag" data-en="Contemporary" data-he="עכשווי">Contemporary</span><span class="lr-tag">Shonibare</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Shonibare uses Dutch wax fabric — originally African but made in Indonesia for British markets — as a commentary on cultural identity and colonial history. Students create a work using unexpected cultural materials." data-he="שוניברה משתמש בבד שעווה הולנדי — במקורו אפריקאי אך מיוצר באינדונזיה לשוקים בריטיים — כפרשנות על זהות תרבותית והיסטוריה קולוניאלית. התלמידים יוצרים עבודה עם חומרים תרבותיים בלתי צפויים.">Shonibare uses Dutch wax fabric — originally African but made in Indonesia for British markets — as a commentary on cultural identity and colonial history. Students create a work using unexpected cultural materials.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 minutes" data-he="50 דקות">50 minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 14–18" data-he="גילאים 14–18">Ages 14–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)">
+        <div class="lr-head"><div class="lr-num">4.5</div><div class="lr-info"><div class="lr-title" data-en="The Archive — Collage and Found Images" data-he="הארכיון — קולאז' ותמונות שנמצאו">The Archive — Collage and Found Images</div><div class="lr-subtitle" data-en="Old photographs, tickets, maps, letters — assembling a visual autobiography" data-he="תצלומים ישנים, כרטיסים, מפות, מכתבים — הרכבת אוטוביוגרפיה חזותית">Old photographs, tickets, maps, letters — assembling a visual autobiography</div><div class="lr-tags"><span class="lr-tag" data-en="Collage" data-he="קולאז'">Collage</span><span class="lr-tag" data-en="Found Images" data-he="תמונות שנמצאו">Found Images</span><span class="lr-tag">Rauschenberg</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students collect images, textures and texts from their personal archives and create a collaged self-portrait that tells the story of their identity in fragments." data-he="התלמידים אוספים תמונות, מרקמים וטקסטים מהארכיונים האישיים שלהם ויוצרים דיוקן עצמי בקולאז' המספר את סיפור זהותם בשברים.">Students collect images, textures and texts from their personal archives and create a collaged self-portrait that tells the story of their identity in fragments.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 minutes" data-he="55 דקות">55 minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–18" data-he="גילאים 12–18">Ages 12–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+      <div class="lesson-row" onclick="toggleLesson(this)" style="border-color:rgba(201,169,110,.18)">
+        <div class="lr-head"><div class="lr-num" style="background:rgba(201,169,110,.15);color:var(--u4)">4.6</div><div class="lr-info"><div class="lr-title" data-en="✦ My Visual Autobiography <span style='font-size:.7rem;background:rgba(201,169,110,.15);color:var(--u4);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'>Capstone</span>" data-he="✦ האוטוביוגרפיה החזותית שלי <span style='font-size:.7rem;background:rgba(201,169,110,.15);color:var(--u4);padding:2px 8px;border-radius:6px;font-weight:700;margin-right:6px'>פרויקט מסכם</span>">✦ My Visual Autobiography <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--u4);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div><div class="lr-subtitle" data-en="Final unit project — a visual story of your identity, memory and heritage" data-he="פרויקט מסכם של היחידה — סיפור חזותי של זהותך, זיכרונך ומורשתך">Final unit project — a visual story of your identity, memory and heritage</div><div class="lr-tags"><span class="lr-tag" data-en="Final Project" data-he="פרויקט סופי">Final Project</span><span class="lr-tag" data-en="Mixed Media" data-he="מדיה מעורבת">Mixed Media</span><span class="lr-tag" data-en="Portfolio" data-he="תיק עבודות">Portfolio</span></div></div><div class="lr-right"><span class="lr-duration">60+ min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div>
+        <div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students create a multi-panel visual autobiography incorporating personal, cultural and emotional memory. Includes peer critique and artist statement." data-he="התלמידים יוצרים אוטוביוגרפיה חזותית רב-פאנלית הכוללת זיכרון אישי, תרבותי ורגשי. כולל ביקורת עמיתים והצהרת אמן.">Students create a multi-panel visual autobiography incorporating personal, cultural and emotional memory. Includes peer critique and artist statement.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60+ minutes" data-he="60+ דקות">60+ minutes</span></div><div class="lx-meta-row"><i class="fa-solid fa-star"></i> <span data-en="Unit Capstone" data-he="פרויקט מסכם">Unit Capstone</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div>
+      </div>
+    </div>
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">📦</span> Joseph Cornell</span>
+        <span class="as-pill"><span class="as-emoji">👑</span> Kehinde Wiley</span>
+        <span class="as-pill"><span class="as-emoji">🌊</span> Marc Chagall</span>
+        <span class="as-pill"><span class="as-emoji">🏙️</span> Edward Hopper</span>
+        <span class="as-pill"><span class="as-emoji">🌍</span> Yinka Shonibare</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 05 — CULTURE & SYMBOLS
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit05" style="--unit-color:var(--u5);--unit-rgb:74,144,226">
+  <div class="container">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(74,144,226,.12)">🌍</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 05 · Grades 5–12" data-he="יחידה 05 · כיתות ה׳–י״ב">Unit 05 · Grades 5–12</div>
+        <h2 data-en="Culture &amp; Symbols as <em>Inspiration</em>" data-he="תרבות וסמלים כ<em>מקור השראה</em>">Culture &amp; Symbols as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="Every culture creates visual symbols. Students explore how cultural symbols function, change over time, and can become powerful artistic material." data-he="כל תרבות יוצרת סמלים חזותיים. התלמידים בודקים כיצד סמלים תרבותיים פועלים, משתנים לאורך הזמן ויכולים להיות חומר אמנותי עוצמתי.">Every culture creates visual symbols. Students explore how cultural symbols function, change over time, and can become powerful artistic material.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="6 Lessons + Capstone Project" data-he="6 שיעורים + פרויקט מסכם">6 Lessons + Capstone Project</span></div>
+      </div>
+    </div>
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="🔣 Symbolism" data-he="🔣 סמליות">🔣 Symbolism</span>
+      <span class="approach-tag" data-en="🏺 Artefact Study" data-he="🏺 לימוד חפץ">🏺 Artefact Study</span>
+      <span class="approach-tag" data-en="🖼️ Iconography" data-he="🖼️ איקונוגרפיה">🖼️ Iconography</span>
+      <span class="approach-tag" data-en="🌐 Cross-Cultural" data-he="🌐 בין-תרבותי">🌐 Cross-Cultural</span>
+    </div>
+    <div class="lessons-list">
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">5.1</div><div class="lr-info"><div class="lr-title" data-en="What is a Symbol?" data-he="מהו סמל?">What is a Symbol?</div><div class="lr-subtitle" data-en="Signs, symbols and icons — how visual culture communicates across languages" data-he="סימנים, סמלים ואיקונים — כיצד תרבות חזותית מתקשרת מעבר לשונות">Signs, symbols and icons — how visual culture communicates across languages</div><div class="lr-tags"><span class="lr-tag" data-en="Semiotics" data-he="סמיוטיקה">Semiotics</span><span class="lr-tag" data-en="Visual Language" data-he="שפה חזותית">Visual Language</span></div></div><div class="lr-right"><span class="lr-duration">45 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="An introduction to visual symbols — how they work, how they change meaning across contexts, and how artists use them deliberately." data-he="מבוא לסמלים חזותיים — כיצד הם פועלים, כיצד הם משנים משמעות לפי הקשר, וכיצד אמנים משתמשים בהם בכוונה.">An introduction to visual symbols — how they work, how they change meaning across contexts, and how artists use them deliberately.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 min" data-he="45 דק">45 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–15" data-he="גילאים 10–15">Ages 10–15</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">5.2</div><div class="lr-info"><div class="lr-title" data-en="Egyptian Hieroglyphs to Emoji" data-he="מהירוגליפים מצריים עד אימוג'י">Egyptian Hieroglyphs to Emoji</div><div class="lr-subtitle" data-en="4,000 years of visual communication — what changes?" data-he="4,000 שנות של תקשורת חזותית — מה משתנה?">4,000 years of visual communication — what changes?</div><div class="lr-tags"><span class="lr-tag" data-en="History" data-he="היסטוריה">History</span><span class="lr-tag" data-en="Typography" data-he="טיפוגרפיה">Typography</span><span class="lr-tag" data-en="Ancient Egypt" data-he="מצרים העתיקה">Ancient Egypt</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students trace the evolution of visual communication from hieroglyphs to contemporary emoji, exploring how and why symbols persist, mutate or disappear." data-he="התלמידים עוקבים אחר התפתחות התקשורת החזותית מהירוגליפים ועד אימוג'י עכשווי, ובודקים מדוע סמלים מתמידים, משתנים או נעלמים.">Students trace the evolution of visual communication from hieroglyphs to contemporary emoji, exploring how and why symbols persist, mutate or disappear.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 min" data-he="50 דק">50 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 11–16" data-he="גילאים 11–16">Ages 11–16</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">5.3</div><div class="lr-info"><div class="lr-title" data-en="Frida Kahlo and Mexican Symbolism" data-he="פרידה קאלו והסמליות המקסיקנית">Frida Kahlo and Mexican Symbolism</div><div class="lr-subtitle" data-en="How national symbols become personal visual language" data-he="כיצד סמלים לאומיים הופכים לשפה חזותית אישית">How national symbols become personal visual language</div><div class="lr-tags"><span class="lr-tag" data-en="Mexico" data-he="מקסיקו">Mexico</span><span class="lr-tag" data-en="Symbolism" data-he="סמליות">Symbolism</span><span class="lr-tag">Kahlo · Rivera</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Kahlo's work is dense with Mexican cultural symbols. Students decode her iconography and create a self-portrait incorporating symbols from their own culture." data-he="עבודתה של קאלו עשירה בסמלים תרבותיים מקסיקניים. התלמידים מפענחים את האיקונוגרפיה שלה ויוצרים דיוקן עצמי הכולל סמלים מתרבותם שלהם.">Kahlo's work is dense with Mexican cultural symbols. Students decode her iconography and create a self-portrait incorporating symbols from their own culture.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 min" data-he="55 דק">55 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 12–17" data-he="גילאים 12–17">Ages 12–17</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">5.4</div><div class="lr-info"><div class="lr-title" data-en="Pattern as Cultural Identity" data-he="דפוס כזהות תרבותית">Pattern as Cultural Identity</div><div class="lr-subtitle" data-en="Kente cloth, Islamic geometry, Māori tā moko — pattern that speaks" data-he="בד קנטה, גיאומטריה איסלמית, טא מוקו מאורי — דפוס שמדבר">Kente cloth, Islamic geometry, Māori tā moko — pattern that speaks</div><div class="lr-tags"><span class="lr-tag" data-en="Pattern" data-he="דפוס">Pattern</span><span class="lr-tag" data-en="Textile" data-he="טקסטיל">Textile</span><span class="lr-tag" data-en="Global" data-he="גלובלי">Global</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Pattern is one of the world's oldest artistic languages. Students study three patterning traditions and create an original pattern incorporating elements of their own cultural identity." data-he="דפוס הוא אחד השפות האמנותיים הוותיקות בעולם. התלמידים לומדים שלושה מסורות דפוס ויוצרים דפוס מקורי הכולל אלמנטים מזהותם התרבותית שלהם.">Pattern is one of the world's oldest artistic languages. Students study three patterning traditions and create an original pattern incorporating elements of their own cultural identity.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 min" data-he="55 דק">55 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 10–16" data-he="גילאים 10–16">Ages 10–16</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">5.5</div><div class="lr-info"><div class="lr-title" data-en="Banksy and Subverted Symbols" data-he="בנקסי וסמלים הפוכים">Banksy and Subverted Symbols</div><div class="lr-subtitle" data-en="When familiar icons are hijacked to say something new" data-he="כשאיקונים מוכרים נחטפים כדי לומר משהו חדש">When familiar icons are hijacked to say something new</div><div class="lr-tags"><span class="lr-tag" data-en="Street Art" data-he="אמנות רחוב">Street Art</span><span class="lr-tag" data-en="Subversion" data-he="סובברסיה">Subversion</span><span class="lr-tag">Banksy · Warhol</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="What happens when you take a culturally loaded symbol and transform its meaning? Students create a work that subverts or recontextualises an existing cultural icon." data-he="מה קורה כשלוקחים סמל רווי תרבותית ומשנים את משמעותו? התלמידים יוצרים עבודה ההופכת איקון תרבותי קיים או מציבה אותו בהקשר חדש.">What happens when you take a culturally loaded symbol and transform its meaning? Students create a work that subverts or recontextualises an existing cultural icon.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 min" data-he="50 דק">50 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 13–18" data-he="גילאים 13–18">Ages 13–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)" style="border-color:rgba(74,144,226,.18)"><div class="lr-head"><div class="lr-num" style="background:rgba(74,144,226,.15);color:var(--u5)">5.6</div><div class="lr-info"><div class="lr-title" data-en="✦ My Cultural Map <span style='font-size:.7rem;background:rgba(74,144,226,.15);color:var(--u5);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'>Capstone</span>" data-he="✦ המפה התרבותי שלי <span style='font-size:.7rem;background:rgba(74,144,226,.15);color:var(--u5);padding:2px 8px;border-radius:6px;font-weight:700;margin-right:6px'>פרויקט מסכם</span>">✦ My Cultural Map <span style="font-size:.7rem;background:rgba(74,144,226,.15);color:var(--u5);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div><div class="lr-subtitle" data-en="Final unit project — a personal visual map of cultural symbols and meanings" data-he="פרויקט מסכם של היחידה — מפה חזותי אישי של סמלים ומשמעויות תרבותיים">Final unit project — a personal visual map of cultural symbols and meanings</div><div class="lr-tags"><span class="lr-tag" data-en="Final Project" data-he="פרויקט סופי">Final Project</span><span class="lr-tag" data-en="Map / Diagram" data-he="מפה / דיאגרמה">Map / Diagram</span><span class="lr-tag" data-en="Portfolio" data-he="תיק עבודות">Portfolio</span></div></div><div class="lr-right"><span class="lr-duration">60+ min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students create an original visual cultural map — part artwork, part personal statement — that charts the symbols, colours, patterns and icons that constitute their cultural identity." data-he="התלמידים יוצרים מפה תרבותית חזותית מקורי — חלקית יצירת אמנות, חלקית הצהרה אישית — המשרטט את הסמלים, הצבעים, הדפוסים והאיקונים המרכיבים את זהותם התרבותית.">Students create an original visual cultural map — part artwork, part personal statement — that charts the symbols, colours, patterns and icons that constitute their cultural identity.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="60+ min" data-he="60+ דק">60+ min</span></div><div class="lx-meta-row"><i class="fa-solid fa-star"></i> <span data-en="Unit Capstone" data-he="פרויקט מסכם">Unit Capstone</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+    </div>
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">🪞</span> Frida Kahlo</span>
+        <span class="as-pill"><span class="as-emoji">🏙️</span> Diego Rivera</span>
+        <span class="as-pill"><span class="as-emoji">🐀</span> Banksy</span>
+        <span class="as-pill"><span class="as-emoji">🍅</span> Andy Warhol</span>
+        <span class="as-pill"><span class="as-emoji">👑</span> Kehinde Wiley</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 06 — PERSONAL STYLE
+═══════════════════════════════════════════ -->
+<section class="unit-section" id="unit06" style="--unit-color:var(--u6);--unit-rgb:200,76,142">
+  <div class="container">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(200,76,142,.12)">🎨</div>
+      <div>
+        <div class="unit-meta-tag" data-en="Unit 06 · Grades 8–12" data-he="יחידה 06 · כיתות ח׳–י״ב">Unit 06 · Grades 8–12</div>
+        <h2 data-en="Personal Style as <em>Inspiration</em>" data-he="סגנון אישי כ<em>מקור השראה</em>">Personal Style as <em>Inspiration</em></h2>
+        <p class="unit-desc" data-en="The culminating unit. Students synthesise all previous sources of inspiration into a cohesive personal artistic style." data-he="יחידת הסיום. התלמידים משלבים את כל מקורות ההשראה הקודמים לסגנון אמנותי אישי קוהרנט.">The culminating unit. Students synthesise all previous sources of inspiration into a cohesive personal artistic style.</p>
+        <div class="unit-lesson-count"><i class="fa-solid fa-layer-group"></i> <span data-en="6 Lessons + Final Portfolio" data-he="6 שיעורים + תיק עבודות סופי">6 Lessons + Final Portfolio</span></div>
+      </div>
+    </div>
+    <div class="approach-bar">
+      <span class="approach-label" data-en="Approaches:" data-he="גישות:">Approaches:</span>
+      <span class="approach-tag" data-en="🔍 Style Analysis" data-he="🔍 ניתוח סגנון">🔍 Style Analysis</span>
+      <span class="approach-tag" data-en="📝 Artist Statement" data-he="📝 הצהרת אמן">📝 Artist Statement</span>
+      <span class="approach-tag" data-en="🗂️ Portfolio Building" data-he="🗂️ בניית תיק עבודות">🗂️ Portfolio Building</span>
+      <span class="approach-tag" data-en="🤝 Peer Critique" data-he="🤝 ביקורת עמיתים">🤝 Peer Critique</span>
+    </div>
+    <div class="lessons-list">
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">6.1</div><div class="lr-info"><div class="lr-title" data-en="What is Your Visual Voice?" data-he="מהו הקול החזותי שלך?">What is Your Visual Voice?</div><div class="lr-subtitle" data-en="Identifying the marks, colours and subjects that are uniquely yours" data-he="זיהוי הסימנים, הצבעים והנושאים הייחודיים לך">Identifying the marks, colours and subjects that are uniquely yours</div><div class="lr-tags"><span class="lr-tag" data-en="Style" data-he="סגנון">Style</span><span class="lr-tag" data-en="Voice" data-he="קול">Voice</span><span class="lr-tag" data-en="Self-Analysis" data-he="ניתוח עצמי">Self-Analysis</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students review their work from all units and begin identifying recurring elements — what themes, colours, marks and subjects they keep returning to. What is their visual signature?" data-he="התלמידים סוקרים את עבודתם מכל היחידות ומתחילים לזהות אלמנטים חוזרים — אילו נושאים, צבעים, סימנים ונושאים הם חוזרים אליהם. מהי החתימה החזותית שלהם?">Students review their work from all units and begin identifying recurring elements — what themes, colours, marks and subjects they keep returning to. What is their visual signature?</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 min" data-he="50 דק">50 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 14–18" data-he="גילאים 14–18">Ages 14–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">6.2</div><div class="lr-info"><div class="lr-title" data-en="Influence vs. Imitation" data-he="השפעה מול חיקוי">Influence vs. Imitation</div><div class="lr-subtitle" data-en="How great artists learned from others without losing themselves" data-he="כיצד אמנים גדולים למדו מאחרים מבלי לאבד את עצמם">How great artists learned from others without losing themselves</div><div class="lr-tags"><span class="lr-tag" data-en="Influence" data-he="השפעה">Influence</span><span class="lr-tag" data-en="Copying" data-he="חיקוי">Copying</span><span class="lr-tag">Picasso · Cézanne</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Picasso said 'good artists borrow, great artists steal.' Students study how artists consciously absorbed and transformed influence — then create a work in the style of an artist they admire, then subvert it." data-he="פיקאסו אמר: 'אמנים טובים לווים, אמנים גדולים גונבים.' התלמידים בודקים כיצד אמנים ספגו ושינו השפעה — ויוצרים עבודה בסגנון אמן מעריץ, ולאחר מכך עוקרים אתו משישתו.">Picasso said 'good artists borrow, great artists steal.' Students study how artists consciously absorbed and transformed influence — then create a work in the style of an artist they admire, then subvert it.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 min" data-he="55 דק">55 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 14–18" data-he="גילאים 14–18">Ages 14–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">6.3</div><div class="lr-info"><div class="lr-title" data-en="Series Thinking" data-he="חשיבה סדרתית">Series Thinking</div><div class="lr-subtitle" data-en="Why great artists return to the same subject again and again" data-he="מדוע אמנים גדולים חוזרים לאותו נושא שוב ושוב">Why great artists return to the same subject again and again</div><div class="lr-tags"><span class="lr-tag" data-en="Series" data-he="סדרה">Series</span><span class="lr-tag" data-en="Repetition" data-he="חזרה">Repetition</span><span class="lr-tag">Monet · Warhol · Hockney</span></div></div><div class="lr-right"><span class="lr-duration">55 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Monet painted 250 haystacks. Warhol made 32 Campbell's soup cans. Students begin their own three-part series responding to a single chosen subject." data-he="מונה צייר 250 ערימות שחת. וורהול יצר 32 פחית מרק קמפבל. התלמידים מתחילים סדרה משלשת חלקים משלהם המגיבה לנושא אחד שבחרו.">Monet painted 250 haystacks. Warhol made 32 Campbell's soup cans. Students begin their own three-part series responding to a single chosen subject.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="55 min" data-he="55 דק">55 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 14–18" data-he="גילאים 14–18">Ages 14–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">6.4</div><div class="lr-info"><div class="lr-title" data-en="Writing Your Artist Statement" data-he="כתיבת הצהרת האמן שלך">Writing Your Artist Statement</div><div class="lr-subtitle" data-en="How do you explain, in words, what you make and why?" data-he="כיצד מסבירים במילים מה אתה יוצר ולמה?">How do you explain, in words, what you make and why?</div><div class="lr-tags"><span class="lr-tag" data-en="Writing" data-he="כתיבה">Writing</span><span class="lr-tag" data-en="Artist Statement" data-he="הצהרת אמן">Artist Statement</span><span class="lr-tag" data-en="Portfolio" data-he="תיק עבודות">Portfolio</span></div></div><div class="lr-right"><span class="lr-duration">45 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students draft an artist statement — describing their inspirations, approach and intentions — through structured prompts and real examples from contemporary artists." data-he="התלמידים מנסחים הצהרת אמן — מתארים את השראותם, גישתם וכוונותיהם — דרך הנחיות מובנות ודוגמאות אמיתיות מאמנים עכשוויים.">Students draft an artist statement — describing their inspirations, approach and intentions — through structured prompts and real examples from contemporary artists.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="45 min" data-he="45 דק">45 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 15–18" data-he="גילאים 15–18">Ages 15–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)"><div class="lr-head"><div class="lr-num">6.5</div><div class="lr-info"><div class="lr-title" data-en="The Critique — Giving &amp; Receiving Feedback" data-he="ביקורת עמיתים — נתינת וקבלת משוב">The Critique — Giving &amp; Receiving Feedback</div><div class="lr-subtitle" data-en="Structured peer critique as a tool for growth" data-he="ביקורת עמיתים מובנית ככלי לצמיחה">Structured peer critique as a tool for growth</div><div class="lr-tags"><span class="lr-tag" data-en="Critique" data-he="ביקורת">Critique</span><span class="lr-tag" data-en="Peer Learning" data-he="למידת עמיתים">Peer Learning</span><span class="lr-tag" data-en="Process" data-he="תהליך">Process</span></div></div><div class="lr-right"><span class="lr-duration">50 min</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students participate in a structured peer critique using the 'describe, analyse, interpret, evaluate' framework — developing their ability to talk about art and receive feedback productively." data-he="התלמידים משתתפים בביקורת עמיתים מובנית באמצעות מסגרת 'תאר, נתח, פרש, הערך' — ומפתחים את יכולתם לדבר על אמנות ולקבל משוב באופן פרודוקטיבי.">Students participate in a structured peer critique using the 'describe, analyse, interpret, evaluate' framework — developing their ability to talk about art and receive feedback productively.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="50 min" data-he="50 דק">50 min</span></div><div class="lx-meta-row"><i class="fa-solid fa-users"></i> <span data-en="Ages 14–18" data-he="גילאים 14–18">Ages 14–18</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+      <div class="lesson-row" onclick="toggleLesson(this)" style="border-color:rgba(200,76,142,.18)"><div class="lr-head"><div class="lr-num" style="background:rgba(200,76,142,.15);color:var(--u6)">6.6</div><div class="lr-info"><div class="lr-title" data-en="✦ Final Portfolio &amp; Presentation <span style='font-size:.7rem;background:rgba(200,76,142,.15);color:var(--u6);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px'>Capstone</span>" data-he="✦ תיק עבודות והצגה סופית <span style='font-size:.7rem;background:rgba(200,76,142,.15);color:var(--u6);padding:2px 8px;border-radius:6px;font-weight:700;margin-right:6px'>פרויקט מסכם</span>">✦ Final Portfolio &amp; Presentation <span style="font-size:.7rem;background:rgba(200,76,142,.15);color:var(--u6);padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px">Capstone</span></div><div class="lr-subtitle" data-en="The complete course final — portfolio, statement and presentation" data-he="הגמר הקורס המלא — תיק עבודות, הצהרה והצגה">The complete course final — portfolio, statement and presentation</div><div class="lr-tags"><span class="lr-tag" data-en="Final Portfolio" data-he="תיק עבודות סופי">Final Portfolio</span><span class="lr-tag" data-en="Presentation" data-he="הצגה">Presentation</span><span class="lr-tag" data-en="Certificate" data-he="תעודה">Certificate</span></div></div><div class="lr-right"><span class="lr-duration" data-en="Full Session" data-he="מפגש מלא">Full Session</span><span class="lr-lock"><i class="fa-solid fa-lock"></i></span></div></div><div class="lr-expand"><div class="lr-expand-inner"><div class="lx-desc" data-en="Students present their curated portfolio of work from across the full course — including artist statement and a brief verbal presentation to classmates or panel." data-he="התלמידים מציגים את תיק העבודות הערוך שלהם מכל הקורס — כולל הצהרת אמן והצגה קצרה לחברי הכיתה או לוועדה.">Students present their curated portfolio of work from across the full course — including artist statement and a brief verbal presentation to classmates or panel.</div><div class="lx-meta"><div class="lx-meta-row"><i class="fa-solid fa-clock"></i> <span data-en="Full session" data-he="מפגש מלא">Full session</span></div><div class="lx-meta-row"><i class="fa-solid fa-star"></i> <span data-en="Course Finale" data-he="סיום הקורס">Course Finale</span></div></div><div style="flex-basis:100%"><span class="lx-coming" data-en="<i class='fa-solid fa-clock'></i> Coming Soon" data-he="<i class='fa-solid fa-clock'></i> בקרוב"><i class="fa-solid fa-clock"></i> Coming Soon</span></div></div></div></div>
+    </div>
+    <div class="artist-spotlight">
+      <span class="as-label" data-en="Artists in this Unit" data-he="אמנים ביחידה">Artists in this Unit</span>
+      <div class="as-pills">
+        <span class="as-pill"><span class="as-emoji">🎸</span> Pablo Picasso</span>
+        <span class="as-pill"><span class="as-emoji">🍎</span> Paul Cézanne</span>
+        <span class="as-pill"><span class="as-emoji">🌸</span> Claude Monet</span>
+        <span class="as-pill"><span class="as-emoji">🍅</span> Andy Warhol</span>
+        <span class="as-pill"><span class="as-emoji">🏊</span> David Hockney</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">✦ <span>Sources</span> of Inspiration</div>
+        <p class="footer-tagline" data-en="A premium art curriculum for K–12 educators worldwide." data-he="תכנית לימודים מתקדמת לאמנות למורים K–12 ברחבי העולם.">A premium art curriculum for K–12 educators worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Curriculum" data-he="תכנית לימודים">Curriculum</h4>
+        <a href="course.html" data-en="Full Course" data-he="הקורס המלא">Full Course</a>
+        <a href="lesson.html" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+        <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Teachers" data-he="מורים">Teachers</h4>
+        <a href="teachers.html" data-en="Resources" data-he="משאבים">Resources</a>
+        <a href="teachers.html#trial" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+        <a href="teachers.html#contact" data-en="Book a Demo" data-he="קבע הדגמה">Book a Demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy" data-en="© 2025 Sources of Inspiration. All rights reserved." data-he="© 2025 מקורות השראה. כל הזכויות שמורות.">© 2025 Sources of Inspiration. All rights reserved.</span>
+      <span class="footer-copy">Privacy · Terms · GDPR</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── NAV ──────────────────────────────────────────
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+// ── UNIT TABS ─────────────────────────────────────
+function scrollToUnit(id, tab) {
+  document.querySelectorAll('.unit-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  const el = document.getElementById(id);
+  if (el) {
+    // Measure both sticky bars dynamically so offset stays correct on all screen sizes
+    const navEl = document.querySelector('nav');
+    const tabsEl = document.getElementById('unit-tabs');
+    const navH  = navEl  ? navEl.getBoundingClientRect().height  : 57;
+    const tabsH = tabsEl ? tabsEl.getBoundingClientRect().height : 46;
+    const offset = navH + tabsH + 8; // +8px breathing room
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// Sync tabs on scroll
+const unitIds = ['unit00','unit01','unit02','unit03','unit04','unit05','unit06'];
+const tabs = document.querySelectorAll('.unit-tab');
+function onScroll() {
+  // Derive threshold dynamically to match scrollToUnit offset
+  const navEl  = document.querySelector('nav');
+  const tabsEl = document.getElementById('unit-tabs');
+  const navH   = navEl  ? navEl.getBoundingClientRect().height  : 57;
+  const tabsH  = tabsEl ? tabsEl.getBoundingClientRect().height : 46;
+  const scrollY = window.scrollY + navH + tabsH + 8;
+  let active = 0;
+  unitIds.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) active = i;
+  });
+  tabs.forEach((t, i) => t.classList.toggle('active', i === active));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// ── LESSON TOGGLE ─────────────────────────────────
+// For AVAILABLE lessons: the whole card navigates to the lesson.
+// For non-available lessons: toggle the accordion expand panel.
+function toggleLesson(row) {
+  if (row.classList.contains('available')) {
+    // Find the lesson URL from the lr-action link
+    const link = row.querySelector('a.lr-action, a.lx-cta');
+    if (link && link.href) {
+      window.location.href = link.href;
+    }
+    return;
+  }
+  // Non-available: accordion behaviour
+  const isOpen = row.classList.contains('open');
+  const section = row.closest('.unit-section');
+  if (section) {
+    section.querySelectorAll('.lesson-row.open').forEach(r => {
+      if (r !== row) r.classList.remove('open');
+    });
+  }
+  row.classList.toggle('open', !isOpen);
+}
+
+// ── STICKY NAV SHADOW ─────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow =
+    window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.1)' : 'none';
+}, { passive: true });
+
+// ── LANGUAGE SWITCH ────────────────────────────────
+// currentLang is provided by app-init.js (global var)
+
+// Full translation map for Unit 02–06 lesson rows (title / subtitle / desc)
+const TRANSLATIONS = {
+  // Unit 01 lx-desc
+  'The opening lesson of the unit. Students encounter the central question: how does an inner feeling become a visible mark, colour or form? Through Munch and Rothko, they discover that colour is not decoration — it is emotional language. Students build their own abstract emotional palette as a foundation for the lessons that follow.': 'השיעור הפותח של היחידה. התלמידים נתקלים בשאלה המרכזית: כיצד הופך רגש פנימי לסימן, צבע או צורה גלויים? דרך מונק ורוטקו, הם מגלים שצבע אינו קישוט — הוא שפה רגשית. התלמידים בונים פלטה רגשית אבסטרקטית משלהם כבסיס לשיעורים שיבואו.',
+  "The first studio lesson. Students choose a personal moment, identify its emotion, select a line quality that matches it (soft, sharp, broken, continuous…), draw using only lines — then add a colour layer on top. The process follows the real logic of working in layers: line first, then tone and colour, then a personal mark. 15 full-screen guided steps.": 'השיעור הראשון בסטודיו. התלמידים בוחרים רגע אישי, מזהים את רגשו, בוחרים איכות קו המתאימה לו (רך, חד, שבור, רציף...), מציירים בקווים בלבד — ואז מוסיפים שכבת צבע מלמעלה. 15 שלבים מודרכים.',
+  // Unit 01 meta
+  'Ages 11–16': 'גילאים 11–16',
+  '15 interactive screens · EN + עברית': '15 מסכים אינטראקטיביים · EN + עברית',
+  '11 interactive screens · EN + עברית': '11 מסכים אינטראקטיביים · EN + עברית',
+  '12 interactive screens · EN + עברית': '12 מסכים אינטראקטיביים · EN + עברית',
+  // Unit 01 lx-desc continued
+  "After working with line in 1.2, this lesson shifts the question: how does emotion spread across the entire page? Students work with placement (where on the page), proportion (how much space), and the relationships between empty and filled areas. The focus is compositional decision-making as emotional expression — not decorating, but structuring feeling. 11 full-screen guided steps.": 'לאחר עבודה עם קו ב-1.2, שיעור זה מעביר את השאלה: כיצד מתפשט הרגש על פני הדף כולו? התלמידים עובדים עם מיקום (איפה בדף), פרופורציה (כמה מקום), ויחסים בין אזורים ריקים ומלאים. 11 שלבים מודרכים.',
+  "The shift from immediate emotion to memory. Memory is never complete — it arrives in fragments: a colour, a texture, a shape, a place. Students choose a personal memory, break it into its parts, draw the parts without trying to reconstruct a scene, then arrange them into a composition. Inspired by Chagall's dreamlike fragmentation. 12 full-screen guided steps.": 'המעבר מרגש מיידי לזיכרון. הזיכרון אינו מלא אף פעם — הוא מגיע בשברים: צבע, מרקם, צורה, מקום. התלמידים בוחרים זיכרון אישי, שוברים אותו לחלקיו, מציירים את החלקים מבלי לנסות לשחזר סצנה, ואז מסדרים אותם לקומפוזיציה. 12 שלבים מודרכים.',
+  "Unlike 1.3 (which works with a single emotion) and 1.4 (which works with a single memory), this lesson works with time — a whole week. Students collect moments, things they saw, heard, read, wrote, felt — and place them together on one page without order. The result is a time-based composition: not one image, but an accumulation of living. 12 full-screen guided steps.": 'שלא כמו 1.3 (שעובד עם רגש יחיד) ו-1.4 (שעובד עם זיכרון יחיד), שיעור זה עובד עם זמן — שבוע שלם. התלמידים אוספים רגעים, דברים שראו, שמעו, קראו, כתבו, הרגישו — ומניחים אותם ביחד בדף אחד ללא סדר. 12 שלבים מודרכים.',
+  // Unit 01 lx-meta rows
+  '55 minutes': '55 דקות',
+  '50 minutes': '50 דקות',
+  '45 minutes': '45 דקות',
+  'Ages 12–17': 'גילאים 12–17',
+  'Ages 13–18': 'גילאים 13–18',
+  // Unit 00 lx-meta
+  '40 minutes': '40 דקות',
+  '50 minutes': '50 דקות',
+  'Ages 11–18': 'גילאים 11–18',
+  'Ages 12–18': 'גילאים 12–18',
+  'Theory + Discussion': 'תיאוריה + דיון',
+  'Theory + Visual Examples': 'תיאוריה + דוגמאות חזותיות',
+  'Theory + Guided Looking': 'תיאוריה + ראייה מודרכת',
+  'Practical Exercises': 'תרגילים מעשיים',
+  'Ages 11–18': 'גילאים 11–18',
+  'Observation': 'התבוננות',
+  'Focused Practice': 'תרגול ממוקד',
+  'Visual Filters': 'מסנני ראייה',
+  // ── UNIT 02 ──
+  'Patterns in Nature &amp; Art': 'דפוסים בטבע ובאמנות',
+  'Identify recurring structures in nature and see them as a visual language': 'לזהות מבנים חוזרים בטבע ולראות אותם כשפה חזותית',
+  'Students observe natural patterns (spirals, fractals, tessellations) and create their own repeating motif inspired by a natural object.': 'התלמידים מתבוננים בדפוסים טבעיים (ספירלות, פרקטלים, תבניות חוזרות) ויוצרים מוטיב חוזר משלהם בהשראת עצם טבעי.',
+  'Monet and the Impressionists': 'מונה והאימפרסיוניסטים',
+  'How capturing light and atmosphere transformed art forever': 'כיצד לכידת האור והאווירה שינתה את האמנות לנצח',
+  "A study of Monet's Haystacks series as a lesson in observation — the same subject, different times of day, radically different paintings. Students create two studies of the same scene.": 'לימוד סדרת גדישי השחת של מונה כשיעור בהתבוננות — אותו נושא, שעות שונות ביום, ציורים שונים לחלוטין. התלמידים יוצרים שתי עבודות של אותה סצנה.',
+  "Georgia O'Keeffe — Enlargement": "ג׳ורג׳יה אוקיף — הגדלה",
+  'Getting close. Very close. What changes?': 'להתקרב. מאוד קרוב. מה משתנה?',
+  'Students select a small natural object and draw it at extreme magnification — discovering that scale changes meaning, and detail becomes abstraction.': 'התלמידים בוחרים עצם טבעי קטן ומציירים אותו בהגדלה קיצונית — מגלים שקנה המידה משנה משמעות, ופרט הופך לאבסטרקציה.',
+  'Human vs Nature (The Sublime)': 'האדם מול הטבע (הנשגב)',
+  'When artists use weather, season and terrain to express inner states': 'כשאמנים משתמשים במזג האוויר, עונות ושטח לביטוי מצבים פנימיים',
+  'We move from observing nature itself —<br>to encountering our relationship with it.': 'עברנו מלהסתכל על הטבע עצמו —<br>למפגש שלנו איתו.',
+  "Comparing Turner's stormy seascapes with Friedrich's isolated figures, students explore how landscape painters transformed nature into psychological space.": 'השוואת נופי הים הסוערים של טרנר עם הדמויות המבודדות של פרידריך — התלמידים בוחנים כיצד צייר נוף הפך את הטבע למרחב פסיכולוגי.',
+  'Nature in Non-Western Art': 'טבע באמנות לא-מערבית',
+  'Understand alternative ways of seeing nature beyond the Western tradition': 'להבין דרכי הסתכלות שונות על טבע מעבר למסורת המערבית',
+  'Students compare how different cultures represent the natural world and create a work that blends two visual traditions in their own response to nature.': 'התלמידים משווים כיצד תרבויות שונות מייצגות את העולם הטבעי ויוצרים עבודה המשלבת שתי מסורות חזותיות בתגובה אישית לטבע.',
+  'Students choose any natural inspiration source and create a personal artwork that demonstrates skills and concepts from the full unit.': 'התלמידים בוחרים כל מקור השראה טבעי ויוצרים יצירת אמנות אישית המדגימה מיומנויות ומושגים מכל היחידה.',
+  // ── UNIT 03 ──
+  'Kandinsky &amp; Synesthesia': 'קנדינסקי וסינאסתזיה',
+  'Hearing colour, seeing sound — the artist who painted music': 'לשמוע צבע, לראות צליל — האמן שצייר מוזיקה',
+  "Students listen to two contrasting pieces of music and create visual responses — then compare with Kandinsky's own visual-musical experiments.": 'התלמידים מאזינים לשתי יצירות מוזיקליות מנוגדות ויוצרים תגובות חזותיות — ואז משווים עם הניסויים החזותיים-מוזיקליים של קנדינסקי עצמו.',
+  'Jazz &amp; Abstract Expressionism': "ג'אז ואקספרסיוניזם מופשט",
+  'Improvisation, rhythm and the freedom of mark-making': 'אילתור, קצב וחופש יצירת הסימן',
+  'How did Jazz culture influence Abstract Expressionism? Students create an improvised gestural painting while listening to a jazz track, channelling rhythm into mark-making.': "כיצד תרבות הג'אז השפיעה על האקספרסיוניזם המופשט? התלמידים יוצרים ציור מחוות מאולתר תוך האזנה לרצועת ג'אז, מעבירים קצב לסימן.",
+  'Mondrian &amp; the Grid of Music': 'מונדריאן ורשת המוזיקה',
+  'How Broadway Boogie-Woogie turned jazz into pure geometry': "כיצד Broadway Boogie-Woogie הפך ג'אז לגאומטריה טהורה",
+  "Mondrian's final masterpiece visualises the rhythm of New York streets and jazz music through a grid of coloured lines and squares. Students design their own \"city rhythm\" grid.": 'יצירת המופת הסופית של מונדריאן מדמיינת את קצב רחובות ניו-יורק ומוזיקת הג\'אז דרך רשת של קווים וריבועים צבעוניים. התלמידים מתכננים רשת "קצב עיר" משלהם.',
+  'Paul Klee — Drawing as Notation': 'פול קלה — ציור כתווים',
+  'The musician-painter who made every line a note': 'הצייר-מוזיקאי שהפך כל קו לתו',
+  'Klee was a trained violinist who thought about drawing the way a composer thinks about melody. Students create a "visual score" — a drawing that reads like music.': 'קלה היה כנר מוסמך שחשב על ציור כמו שמלחין חושב על מנגינה. התלמידים יוצרים "תווים חזותיים" — ציור שנקרא כמו מוזיקה.',
+  'Your Playlist, Your Palette': 'הפלייליסט שלך, הפלטה שלך',
+  'Personal music as visual identity — what does your soundtrack look like?': 'מוזיקה אישית כזהות חזותית — איך נראה הפסקול שלך?',
+  'Students bring their own music and translate 3 tracks into visual responses — building a triptych that represents their musical identity.': 'התלמידים מביאים את המוזיקה שלהם ומתרגמים 3 רצועות לתגובות חזותיות — בונים טריפטיך שמייצג את זהותם המוזיקלית.',
+  'Students choose a piece of music and create a visual sequence that corresponds to its structure — responding to tempo, dynamics, mood and key transitions.': 'התלמידים בוחרים יצירת מוזיקה ויוצרים רצף חזותי המתאים למבנה שלה — מגיבים לטמפו, דינמיקה, מצב רוח ומעברים עיקריים.',
+  // ── UNIT 04 ──
+  'The Childhood Object': 'עצם הילדות',
+  'One object from childhood — what memory does it carry?': 'עצם אחד מהילדות — איזה זיכרון הוא נושא?',
+  "Inspired by Joseph Cornell's memory boxes, students select an ordinary object and elevate it through drawing, framing and annotation into a memory portrait.": "בהשראת קופסאות הזיכרון של ג'וזף קורנל, התלמידים בוחרים עצם רגיל ומעלים אותו דרך ציור, מסגור והערות לדיוקן זיכרון.",
+  'Family, Heritage and the Portrait': 'משפחה, מורשת ודיוקן',
+  'How do we carry our family in our face?': 'כיצד אנו נושאים את משפחתנו בפנינו?',
+  'Students create a portrait that incorporates cultural symbols and heritage details — exploring identity through visual representation.': 'התלמידים יוצרים דיוקן הכולל סמלים תרבותיים ופרטי מורשת — חוקרים זהות דרך ייצוג חזותי.',
+  'Place as Memory': 'מקום כזיכרון',
+  'Where you grew up — what does that place look like inside your memory?': 'איפה גדלת — איך המקום הזה נראה בתוך הזיכרון שלך?',
+  'Memory distorts place — colours are brighter, details are wrong, some things float. Students create a memory-version of a significant place, deliberately distorting for emotional truth.': 'הזיכרון מעוות מקום — צבעים בהירים יותר, פרטים שגויים, דברים מסוימים צפים. התלמידים יוצרים גרסת-זיכרון של מקום משמעותי, מעוותים במכוון לאמת רגשית.',
+  'Artist Study — Yinka Shonibare': 'לימוד אמן — ינקה שוניבארה',
+  'When cultural identity becomes the medium itself': 'כשזהות תרבותית הופכת למדיום עצמו',
+  'Shonibare uses Dutch wax fabric — originally African but made in Indonesia for British markets — as a commentary on cultural identity and colonial history. Students create a work using unexpected cultural materials.': 'שוניבארה משתמש בבד שעווה הולנדי — במקורו אפריקאי אך יוצר באינדונזיה לשווקים הבריטיים — כפרשנות על זהות תרבותית והיסטוריה קולוניאלית. התלמידים יוצרים עבודה באמצעות חומרים תרבותיים בלתי צפויים.',
+  'The Archive — Collage and Found Images': "הארכיון — קולאז' ותמונות שנמצאו",
+  'Old photographs, tickets, maps, letters — assembling a visual autobiography': 'תמונות ישנות, כרטיסים, מפות, מכתבים — הרכבת אוטוביוגרפיה חזותית',
+  'Students collect images, textures and texts from their personal archives and create a collaged self-portrait that tells the story of their identity in fragments.': "התלמידים אוספים תמונות, מרקמים וטקסטים מהארכיונים האישיים שלהם ויוצרים דיוקן עצמי בקולאז' שמספר את סיפור זהותם בשברים.",
+  'Students create a multi-panel visual autobiography incorporating personal, cultural and emotional memory. Includes peer critique and artist statement.': 'התלמידים יוצרים אוטוביוגרפיה חזותית רב-פנלית הכוללת זיכרון אישי, תרבותי ורגשי. כולל ביקורת עמיתים והצהרת אמן.',
+  // ── UNIT 05 ──
+  'What is a Symbol?': 'מהו סמל?',
+  'Signs, symbols and icons — how visual culture communicates across languages': 'סימנים, סמלים ואייקונים — כיצד התרבות החזותית מתקשרת מעבר לשפות',
+  'An introduction to visual symbols — how they work, how they change meaning across contexts, and how artists use them deliberately.': 'מבוא לסמלים חזותיים — כיצד הם פועלים, כיצד הם משנים משמעות בהקשרים שונים, וכיצד אמנים משתמשים בהם במכוון.',
+  'Egyptian Hieroglyphs to Emoji': "מהירוגליפים המצריים לאמוג'י",
+  '4,000 years of visual communication — what changes?': '4,000 שנות תקשורת חזותית — מה משתנה?',
+  'Students trace the evolution of visual communication from hieroglyphs to contemporary emoji, exploring how and why symbols persist, mutate or disappear.': "התלמידים עוקבים אחר התפתחות התקשורת החזותית מהירוגליפים לאמוג'י עכשווי, חוקרים כיצד ומדוע סמלים נמשכים, משתנים או נעלמים.",
+  'Frida Kahlo and Mexican Symbolism': 'פרידה קאלו והסמליות המקסיקנית',
+  'How national symbols become personal visual language': 'כיצד סמלים לאומיים הופכים לשפה חזותית אישית',
+  "Kahlo's work is dense with Mexican cultural symbols. Students decode her iconography and create a self-portrait incorporating symbols from their own culture.": "עבודתה של קאלו עמוסה בסמלים תרבותיים מקסיקנים. התלמידים מפענחים את האיקונוגרפיה שלה ויוצרים דיוקן עצמי הכולל סמלים מהתרבות שלהם.",
+  'Pattern as Cultural Identity': 'דפוס כזהות תרבותית',
+  'Kente cloth, Islamic geometry, Māori tā moko — pattern that speaks': 'בד קנטה, גאומטריה אסלאמית, תא מוקו מאורי — דפוס שמדבר',
+  "Pattern is one of the world's oldest artistic languages. Students study three patterning traditions and create an original pattern incorporating elements of their own cultural identity.": 'דפוס הוא אחת משפות האמנות הוותיקות בעולם. התלמידים לומדים שלוש מסורות דפוסים ויוצרים דפוס מקורי הכולל אלמנטים מזהותם התרבותית.',
+  'Banksy and Subverted Symbols': 'בנקסי וסמלים הפוכים',
+  'When familiar icons are hijacked to say something new': 'כשאייקונים מוכרים נחטפים כדי לומר משהו חדש',
+  'What happens when you take a culturally loaded symbol and transform its meaning? Students create a work that subverts or recontextualises an existing cultural icon.': 'מה קורה כשאתה לוקח סמל עמוס תרבותית ומשנה את משמעותו? התלמידים יוצרים עבודה שהופכת או משנה הקשר לאייקון תרבותי קיים.',
+  "Students create an original visual cultural map — part artwork, part personal statement — that charts the symbols, colours, patterns and icons that constitute their cultural identity.": 'התלמידים יוצרים מפה תרבותית חזותית מקורית — חלקה יצירת אמנות, חלקה הצהרה אישית — שממפה את הסמלים, הצבעים, הדפוסים והאייקונים המהווים את זהותם התרבותית.',
+  // ── UNIT 06 ──
+  'What is Your Visual Voice?': 'מהו הקול החזותי שלך?',
+  'Identifying the marks, colours and subjects that are uniquely yours': 'זיהוי הסימנים, הצבעים והנושאים שהם שלך בלבד',
+  'Students review their work from all units and begin identifying recurring elements — what themes, colours, marks and subjects they keep returning to. What is their visual signature?': 'התלמידים סוקרים את עבודתם מכל היחידות ומתחילים לזהות אלמנטים חוזרים — אילו נושאים, צבעים, סימנים ונושאים הם חוזרים אליהם. מהי החתימה החזותית שלהם?',
+  'Influence vs. Imitation': 'השפעה מול חיקוי',
+  'How great artists learned from others without losing themselves': 'כיצד אמנים גדולים למדו מאחרים מבלי לאבד את עצמם',
+  'Picasso said "good artists borrow, great artists steal." Students study how artists consciously absorbed and transformed influence — then create a work in the style of an artist they admire, then subvert it.': 'פיקאסו אמר "אמנים טובים לווים, אמנים גדולים גונבים." התלמידים לומדים כיצד אמנים ספגו והפכו השפעה במכוון — ואז יוצרים עבודה בסגנון אמן שהם מעריכים, ולאחר מכן מהפכים אותה.',
+  'Series Thinking': 'חשיבת סדרה',
+  'Why great artists return to the same subject again and again': 'מדוע אמנים גדולים חוזרים לאותו נושא שוב ושוב',
+  "Monet painted 250 haystacks. Warhol made 32 Campbell's soup cans. Students begin their own three-part series responding to a single chosen subject.": 'מונה צייר 250 גדישי שחת. וורהול עשה 32 קופסאות מרק קמבלס. התלמידים מתחילים סדרה משלהם בת שלושה חלקים המגיבה לנושא אחד שנבחר.',
+  'Writing Your Artist Statement': 'כתיבת הצהרת האמן שלך',
+  'How do you explain, in words, what you make and why?': 'כיצד אתה מסביר במילים מה אתה יוצר ולמה?',
+  'Students draft an artist statement — describing their inspirations, approach and intentions — through structured prompts and real examples from contemporary artists.': 'התלמידים מנסחים הצהרת אמן — מתארים את מקורות ההשראה, הגישה והכוונות שלהם — דרך הנחיות מובנות ודוגמאות אמיתיות מאמנים עכשוויים.',
+  'The Critique — Giving &amp; Receiving Feedback': 'הביקורת — מתן וקבלת משוב',
+  'Structured peer critique as a tool for growth': 'ביקורת עמיתים מובנית ככלי לצמיחה',
+  'Students participate in a structured peer critique using the "describe, analyse, interpret, evaluate" framework — developing their ability to talk about art and receive feedback productively.': 'התלמידים משתתפים בביקורת עמיתים מובנית תוך שימוש במסגרת "תאר, נתח, פרש, הערך" — מפתחים את יכולתם לדבר על אמנות ולקבל משוב פרודוקטיבית.',
+  "Students present their curated portfolio of work from across the full course — including artist statement and a brief verbal presentation to classmates or panel.": 'התלמידים מציגים את תיק העבודות המאוצר שלהם מכל הקורס — כולל הצהרת אמן והצגה מילולית קצרה לחבריהם לכיתה או לפנל.',
+  // ── UNIT 00/01 lx-desc / lx-meta (also missing) ──
+  'Before creating, students practise the most fundamental skill of all: really looking. Three exercises train them to switch between Analytical, Emotional and Conceptual seeing — and apply each mode to two artworks.': 'לפני היצירה, התלמידים מתרגלים את המיומנות הבסיסית ביותר: לראות באמת. שלושה תרגילים מאמנים אותם לעבור בין ראייה אנליטית, רגשית וקונספטואלית — וליישם כל מצב על שתי יצירות אמנות.',
+  'There is no single way to look at a work of art or the world. This lesson introduces three distinct modes of seeing: Analytical seeing — observing structure, proportion, line, light and composition with precision; Emotional seeing — allowing the visual to provoke a feeling response before analysis; Conceptual seeing — asking what an image means, represents or argues beyond its surface. Students practise switching between modes when encountering the same work, discovering how each mode reveals something the others miss.': 'אין דרך אחת לראות יצירת אמנות או את העולם. שיעור זה מציג שלושה אופני ראייה נפרדים: ראייה אנליטית — התבוננות במבנה, פרופורציה, קו, אור וקומפוזיציה בדיוק; ראייה רגשית — מאפשרת לחזותי לעורר תגובה רגשית לפני הניתוח; ראייה קונספטואלית — שואלת מה התמונה אומרת, מייצגת או טוענת מעבר לפניה.',
+  'Theory becomes practice. This lesson is a set of structured seeing exercises in which students isolate one visual element at a time and look at the world through that single filter: first, see only colour — ignore all else; then see only lines; then only light and shadow; then texture; finally, negative space. Each exercise trains a distinct perceptual channel. Together they build the habit of active, intentional looking that underlies all strong visual work — from drawing and painting to photography and design.': 'תיאוריה הופכת לפרקטיקה. שיעור זה הוא סט של תרגילי ראייה מובנים בהם התלמידים מבודדים אלמנט חזותי אחד בכל פעם ומסתכלים על העולם דרך אותו מסנן יחיד: ראשית, ראה רק צבע; ואז קווים בלבד; ואז אור וצל בלבד; ואז מרקם; לבסוף, מרחב שלילי.',
+  'Having worked directly with their own emotion, memory and time, students now study a master who did the same. Kahlo\'s self-portraits are examined as a systematic visual language of pain, identity and resilience — not autobiography, but translation. Students create their own symbolic self-portrait in response to a personal moment, applying the vocabulary built across lessons 1.1–1.5.': 'לאחר עבודה ישירה עם הרגש, הזיכרון והזמן שלהם, התלמידים לומדים עכשיו מאסטר שעשה את אותו הדבר. דיוקני העצמי של קאלו נבחנים כשפה חזותית שיטתית של כאב, זהות וחוסן — לא אוטוביוגרפיה, אלא תרגום.',
+  'The culminating project of Unit 01. Students create a 3–5 piece visual sequence drawing on everything built across the unit: emotional language, line, composition, memory, time and symbolic reference. The sequence must show progression — not a collection of separate pieces, but a journey. Includes a short written artist statement and a structured peer critique session.': 'הפרויקט המסכם של יחידה 01. התלמידים יוצרים רצף חזותי של 3-5 חלקים המשאב מכל שנבנה לאורך היחידה: שפת רגש, קו, קומפוזיציה, זיכרון, זמן והפניה סמלית. הרצף חייב להראות התקדמות — לא אוסף של חלקים נפרדים, אלא מסע.',
+  // Common tags for Unit 00
+  'Perception': 'תפיסה',
+  'Active Seeing': 'ראייה פעילה',
+  'Consciousness': 'מודעות',
+  'Gestalt': 'גשטלט',
+  'Visual Cognition': 'קוגניציה חזותית',
+  'Perception Science': 'מדע התפיסה',
+  'Analytical': 'אנליטי',
+  'Emotional': 'רגשי',
+  'Conceptual': 'קונספטואלי',
+  'Observation': 'התבוננות',
+  'Focused Practice': 'תרגול ממוקד',
+  'Visual Filters': 'מסנני ראייה',
+  // Unit 01 tags
+  'Introduction': 'מבוא',
+  'Colour': 'צבע',
+  'Abstraction': 'אבסטרקציה',
+  'Line': 'קו',
+  'Composition': 'קומפוזיציה',
+  'Space': 'מרחב',
+  'Placement': 'מיקום',
+  'Memory': 'זיכרון',
+  'Fragmentation': 'פיצול',
+  'Journal': 'יומן',
+  'Time': 'זמן',
+  'Collection': 'איסוף',
+  'Artist Study': 'לימוד אמן',
+  'Final Project': 'פרויקט סיום',
+  'Series': 'סדרה',
+  // Common tags
+  'Pattern': 'דפוס',
+  'Geometry': 'גאומטריה',
+  'Impressionism': 'אימפרסיוניזם',
+  'Light': 'אור',
+  'Scale': 'קנה מידה',
+  'Close Observation': 'התבוננות מקרובה',
+  'Landscape': 'נוף',
+  'Atmosphere': 'אווירה',
+  'Cross-Cultural': 'בין-תרבותי',
+  'Woodblock': 'גוש עץ',
+  'Final Project': 'פרויקט סיום',
+  'Choice Media': 'מדיה לבחירה',
+  'Portfolio': 'תיק עבודות',
+  'Unit Capstone': 'פרויקט מסכם יחידה',
+  'Synesthesia': 'סינאסתזיה',
+  'Abstract': 'אבסטרקטי',
+  'Jazz': "ג'אז",
+  'Improvisation': 'אילתור',
+  'Geometry': 'גאומטריה',
+  'De Stijl': 'דה סטייל',
+  'Line': 'קו',
+  'Notation': 'תווים',
+  'Personal': 'אישי',
+  'Mixed Media': 'מדיה מעורבת',
+  'Contemporary': 'עכשווי',
+  'Series': 'סדרה',
+  'Found Objects': 'חפצים שנמצאו',
+  'Memory': 'זיכרון',
+  'Portrait': 'דיוקן',
+  'Heritage': 'מורשת',
+  'Place': 'מקום',
+  'Nostalgia': 'נוסטלגיה',
+  'Cultural Identity': 'זהות תרבותית',
+  'Collage': "קולאז'",
+  'Found Images': 'תמונות שנמצאו',
+  'Semiotics': 'סמיוטיקה',
+  'Visual Language': 'שפה חזותית',
+  'History': 'היסטוריה',
+  'Typography': 'טיפוגרפיה',
+  'Ancient Egypt': 'מצרים העתיקה',
+  'Mexico': 'מקסיקו',
+  'Symbolism': 'סמליות',
+  'Textile': 'טקסטיל',
+  'Global': 'גלובלי',
+  'Street Art': 'אמנות רחוב',
+  'Subversion': 'חתרנות',
+  'Map / Diagram': 'מפה / דיאגרמה',
+  'Style': 'סגנון',
+  'Voice': 'קול',
+  'Self-Analysis': 'ניתוח עצמי',
+  'Influence': 'השפעה',
+  'Copying': 'העתקה',
+  'Repetition': 'חזרה',
+  'Writing': 'כתיבה',
+  'Artist Statement': 'הצהרת אמן',
+  'Critique': 'ביקורת',
+  'Peer Learning': 'למידת עמיתים',
+  'Process': 'תהליך',
+  'Final Portfolio': 'תיק עבודות סופי',
+  'Presentation': 'הצגה',
+  'Certificate': 'תעודה',
+  'Course Finale': 'סיום הקורס',
+  'Full session': 'מפגש מלא',
+  // Ages / durations
+  '45 minutes': '45 דקות',
+  '50 minutes': '50 דקות',
+  '55 minutes': '55 דקות',
+  '60 minutes': '60 דקות',
+  '60+ minutes': '60+ דקות',
+  '45 min': "45 דק'",
+  '50 min': "50 דק'",
+  '55 min': "55 דק'",
+  '60+ min': "60+ דק'",
+  'Ages 8–14': 'גילאים 8–14',
+  'Ages 9–16': 'גילאים 9–16',
+  'Ages 10–15': 'גילאים 10–15',
+  'Ages 10–16': 'גילאים 10–16',
+  'Ages 11–16': 'גילאים 11–16',
+  'Ages 12–17': 'גילאים 12–17',
+  'Ages 12–18': 'גילאים 12–18',
+  'Ages 13–18': 'גילאים 13–18',
+  'Ages 14–18': 'גילאים 14–18',
+  'Ages 15–18': 'גילאים 15–18',
+};
+
+function applyTranslations(lang) {
+  if (lang !== 'he') return; // EN is already the default text
+  // For elements with NO data-he attribute but matching TRANSLATIONS keys
+  const selectors = '.lr-title, .lr-subtitle, .lx-desc, .lr-tag, .lx-meta-row span';
+  document.querySelectorAll(selectors).forEach(el => {
+    if (!el.hasAttribute('data-he') && !el.hasAttribute('data-en')) {
+      const key = el.innerHTML.trim();
+      if (TRANSLATIONS[key]) {
+        el.setAttribute('data-en', key);
+        el.setAttribute('data-he', TRANSLATIONS[key]);
+        el.innerHTML = TRANSLATIONS[key];
+      }
+    }
+  });
+  // Also handle .lx-meta-row elements whose text node (after icon) matches
+  document.querySelectorAll('.lx-meta-row').forEach(el => {
+    if (!el.hasAttribute('data-he') && !el.hasAttribute('data-en')) {
+      // Get just the text content (strip icon text)
+      const text = el.textContent.trim();
+      if (TRANSLATIONS[text]) {
+        // Wrap text in span if not already wrapped
+        const icon = el.querySelector('i');
+        if (icon && !el.querySelector('span[data-en]')) {
+          const span = document.createElement('span');
+          span.setAttribute('data-en', text);
+          span.setAttribute('data-he', TRANSLATIONS[text]);
+          span.textContent = TRANSLATIONS[text];
+          // Clear and rebuild
+          while (el.lastChild && el.lastChild !== icon) el.removeChild(el.lastChild);
+          el.appendChild(document.createTextNode(' '));
+          el.appendChild(span);
+        }
+      }
+    }
+  });
+}
+
+// ── LANGUAGE: course.html override ─────────────────────────────────────────
+// app-init.js provides the base setLang(). We redefine it here to add the
+// course-specific TRANSLATIONS dictionary step before the standard swap.
+function setLang(l) {
+  currentLang = l;
+  try { localStorage.setItem('sourcesLang', l); } catch(e) {}
+
+  document.documentElement.lang = l;
+  document.documentElement.dir  = l === 'he' ? 'rtl' : 'ltr';
+
+  // Active state on the class-toggled buttons (course.html uses .active class)
+  var btnEn = document.getElementById('btn-en');
+  var btnHe = document.getElementById('btn-he');
+  if (btnEn) btnEn.classList.toggle('active', l === 'en');
+  if (btnHe) btnHe.classList.toggle('active', l === 'he');
+
+  // Course-specific: apply TRANSLATIONS dict for elements without data-he
+  if (l === 'he') applyTranslations('he');
+
+  // Standard data-en / data-he swap
+  document.querySelectorAll('[data-en],[data-he]').forEach(function(el) {
+    var val = el.getAttribute('data-' + l);
+    if (val !== null) el.innerHTML = val;
+  });
+}
+
+// Apply on load (currentLang comes from app-init.js)
+setLang(currentLang);
+
+// ── THEME: sync icon on load (toggleTheme lives in app-init.js) ──────────────
+_syncThemeBtn();
+</script>
+</body>
+</html>

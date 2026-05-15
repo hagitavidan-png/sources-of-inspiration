@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lesson-type="regular">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How a Personal Journal Becomes an Artwork — Sources of Inspiration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════
+   RESET & VARIABLES
+════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f10;
+  --amber:#c9823a;
+  --gold:#c9a96e;
+  --rose:#FF4D4D;
+  --blue:#4a7fa5;
+  --violet:#7c5cbf;
+  --teal:#3dbcaa;
+  --sage:#6aab8e;
+  --cream:#f0e6d2;
+  --white:#ffffff;
+  --tp:#ffffff;--ts:#cfcfcf;--tm:#8a8a8a;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --font-en:'Sora',sans-serif;
+  --font-he:'Heebo',sans-serif;
+}
+html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(--tp)}
+body{font-family:var(--font-en)}
+body.he{font-family:var(--font-he)}
+
+/* ════════════════════════════════
+   HUD
+════════════════════════════════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:52px;
+  background:rgba(13,13,26,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;gap:12px;padding:0 20px;
+}
+body.rtl #hud{flex-direction:row-reverse}
+#hud-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:.75rem;color:var(--tm);
+  text-decoration:none;transition:color .2s;
+}
+#hud-back:hover{color:rgba(255,255,255,.7)}
+#hud-badge{
+  padding:3px 11px;border-radius:20px;
+  background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.22);
+  font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rose);
+}
+#hud-spacer{flex:1}
+#hud-lang{display:flex;gap:4px}
+.lang-btn{
+  padding:4px 12px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:var(--tm);
+  font-size:.7rem;letter-spacing:.06em;cursor:pointer;transition:.2s;
+  font-family:inherit;
+}
+.lang-btn.active{
+  background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.5);color:var(--gold);
+}
+#hud-step{font-size:.7rem;color:var(--tm);letter-spacing:.04em}
+
+/* ════════════════════════════════
+   PROGRESS DOTS
+════════════════════════════════ */
+#progress{
+  position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  z-index:100;display:flex;gap:7px;align-items:center;
+}
+.pdot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:.3s var(--ease);
+}
+.pdot.now{
+  background:var(--rose);border-color:var(--rose);
+  box-shadow:0 0 10px rgba(255,77,77,.4);
+  width:22px;border-radius:4px;
+}
+
+/* ════════════════════════════════
+   STAGE & SCREENS
+════════════════════════════════ */
+#stage{position:fixed;inset:52px 0 80px 0;overflow:hidden}
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:28px 24px 32px;
+  opacity:0;pointer-events:none;
+  transform:translateY(32px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+  text-align:center;
+}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.leaving{
+  opacity:0;transform:translateY(-28px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+/* Gallery screens: top-aligned, scrollable, no button overlap */
+.screen--gallery{
+  justify-content:flex-start;
+  align-items:center;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-top:20px;
+  padding-bottom:120px; /* extra room so content clears nav + dots */
+  scrollbar-width:none;
+  gap:0;
+}
+.screen--gallery::-webkit-scrollbar{display:none}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(90px);opacity:.16;pointer-events:none;
+  animation:drift 14s ease-in-out infinite alternate;
+}
+@keyframes drift{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(25px,18px) scale(1.07)}
+}
+
+/* ════════════════════════════════
+   TYPOGRAPHY
+════════════════════════════════ */
+.label{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tm);margin-bottom:18px;
+}
+.big{
+  font-size:clamp(1.7rem,4.5vw,3.2rem);font-weight:700;
+  line-height:1.28;letter-spacing:-.018em;
+  color:var(--tp);max-width:720px;margin-bottom:0;
+}
+.sub{
+  font-size:clamp(.9rem,2vw,1.06rem);
+  font-weight:300;color:var(--tm);
+  max-width:480px;margin-top:28px;line-height:2.1;
+}
+.quote-text{
+  font-size:clamp(1.25rem,3.5vw,2rem);
+  font-style:italic;font-weight:300;
+  color:var(--tp);max-width:640px;line-height:1.65;position:relative;
+}
+.quote-text::before{
+  content:'\201C';position:absolute;left:-.45em;top:-.1em;
+  font-size:3em;color:var(--gold);opacity:.25;line-height:1;
+}
+body.rtl .quote-text::before{left:auto;right:-.45em}
+.quote-attr{margin-top:24px;font-size:.72rem;letter-spacing:.14em;color:var(--tm);text-transform:uppercase}
+
+/* ════════════════════════════════
+   GALLERY (screen 3)
+════════════════════════════════ */
+/* ── Gallery instruction bar (top) ─────────────────── */
+.gal-instruction{
+  width:100%;max-width:840px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:16px 22px;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+}
+.gal-instruction .gal-eye{font-size:1.5rem;flex-shrink:0}
+.gal-instruction p{
+  font-size:1rem;color:#cfcfcf;
+  line-height:1.55;text-align:left;margin:0;
+  font-weight:400;
+}
+body.rtl .gal-instruction p{text-align:right}
+
+/* ── Gallery grid (middle) ────────────────────────── */
+.gallery{
+  display:flex;gap:18px;flex-wrap:wrap;
+  justify-content:center;
+  max-width:880px;width:100%;
+  flex-shrink:0;
+}
+.gal-item{
+  flex:1;min-width:240px;max-width:340px;
+  border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.13);
+  cursor:pointer;transition:.3s var(--ease);
+  display:flex;flex-direction:column;
+  background:rgba(255,255,255,.04);
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+.gal-item:hover{
+  transform:scale(1.02);
+  border-color:rgba(255,255,255,.4);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+}
+.gal-item img{
+  width:100%;
+  height:auto;
+  max-height:70vh;
+  object-fit:contain;
+  display:block;
+  background:#0d0d1a;
+  border-radius:16px 16px 0 0;
+}
+.gal-caption{
+  padding:11px 16px;
+  font-size:.8rem;
+  font-weight:500;
+  color:#cfcfcf;
+  background:rgba(13,13,26,.85);
+  line-height:1.45;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,.07);
+  letter-spacing:.02em;
+}
+
+/* ── Ask prompt (bottom of gallery screen) ──────── */
+.gal-ask{
+  margin-top:24px;
+  margin-bottom:8px;
+  padding:14px 28px;
+  border-radius:50px;
+  border:1px dashed rgba(255,255,255,.22);
+  font-size:1rem;
+  color:#8a8a8a;
+  font-style:italic;
+  max-width:520px;
+  flex-shrink:0;
+}
+
+/* ════════════════════════════════
+   WEEK CHIPS  (screen 4 — single select)
+════════════════════════════════ */
+.chips{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;max-width:640px;margin-top:24px;
+}
+.chip{
+  padding:11px 20px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.04);
+  font-size:.92rem;color:#cfcfcf;
+  cursor:pointer;transition:.25s var(--ease);
+  user-select:none;font-family:inherit;
+}
+.chip:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+.chip.picked{
+  background:var(--rose);border-color:var(--rose);
+  color:#fff;font-weight:700;
+  box-shadow:0 4px 22px rgba(255,77,77,.35);
+}
+
+/* ════════════════════════════════
+   PART CHIPS  (screen 5 — multi-select)
+════════════════════════════════ */
+.part-chips{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;max-width:620px;margin-top:22px;
+}
+.part-chip{
+  padding:12px 20px;border-radius:14px;
+  border:1.5px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.04);
+  font-size:.88rem;color:#cfcfcf;
+  cursor:pointer;transition:.25s var(--ease);
+  user-select:none;font-family:inherit;
+  display:flex;align-items:center;gap:7px;
+}
+.part-chip:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.28)}
+.part-chip.picked{
+  background:rgba(255,77,77,.14);border-color:var(--rose);
+  color:var(--tp);box-shadow:0 3px 16px rgba(255,77,77,.2);
+}
+.part-chip .icon{font-size:1rem}
+
+/* ════════════════════════════════
+   PLACEMENT CARDS  (screen 7 — composition)
+════════════════════════════════ */
+.comp-cards{
+  display:flex;gap:14px;flex-wrap:wrap;
+  justify-content:center;max-width:700px;margin-top:24px;
+}
+.comp-card{
+  width:155px;padding:18px 12px 14px;border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  cursor:pointer;transition:.25s var(--ease);
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+}
+.comp-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.28)}
+.comp-card.picked{border-color:var(--rose);background:rgba(255,77,77,.1)}
+.comp-card svg{width:86px;height:58px}
+.comp-card span{font-size:.78rem;color:var(--tm);text-align:center;line-height:1.4}
+.comp-card.picked span{color:var(--tp)}
+
+/* ════════════════════════════════
+   INSTRUCTION BOX
+════════════════════════════════ */
+.instr-box{
+  margin-top:24px;padding:22px 28px;border-radius:18px;
+  border:1.5px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.04);
+  max-width:520px;text-align:left;
+}
+body.rtl .instr-box{text-align:right}
+.instr-box ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.instr-box li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.9rem;color:var(--ts);line-height:1.55;
+}
+.instr-box li::before{content:'→';color:var(--gold);flex-shrink:0;margin-top:1px}
+body.rtl .instr-box li::before{content:'←'}
+
+/* ════════════════════════════════
+   REFLECTION
+════════════════════════════════ */
+.ref-wrap{width:100%;max-width:560px;margin-top:20px}
+.ref-area{
+  width:100%;height:120px;resize:none;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:15px 17px;
+  color:var(--tp);font-family:inherit;
+  font-size:.95rem;line-height:1.6;outline:none;transition:.2s;
+}
+.ref-area:focus{border-color:var(--rose);background:rgba(255,77,77,.05)}
+.ref-save{
+  margin-top:10px;padding:10px 26px;
+  border-radius:50px;border:none;cursor:pointer;
+  background:#FF4D4D;color:#fff;
+  font-family:inherit;font-size:.85rem;font-weight:700;transition:.2s;
+}
+.ref-save:hover{filter:brightness(1.1)}
+.ref-saved{display:none;margin-top:8px;font-size:.8rem;color:var(--tm)}
+
+/* ════════════════════════════════
+   CLOSING
+════════════════════════════════ */
+.close-badge{
+  width:80px;height:80px;border-radius:50%;
+  background:#FF4D4D;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin-bottom:22px;
+  box-shadow:0 8px 40px rgba(255,77,77,.35);
+}
+.close-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.btn-outline{
+  padding:12px 24px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:transparent;color:var(--ts);
+  font-family:inherit;font-size:.88rem;cursor:pointer;
+  text-decoration:none;transition:.2s;
+}
+.btn-outline:hover{border-color:rgba(255,255,255,.5);color:var(--tp)}
+.btn-amber{
+  padding:12px 24px;border-radius:50px;border:none;
+  background:#FF4D4D;
+  color:#fff;font-family:inherit;font-size:.88rem;
+  font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;
+}
+.btn-amber:hover{background:#e03333}
+
+/* ════════════════════════════════
+   NAV BAR
+════════════════════════════════ */
+#nav-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  height:80px;display:flex;align-items:center;
+  justify-content:center;gap:14px;padding:0 24px;
+  background:rgba(13,13,26,.95);
+  border-top:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+}
+#back-btn{
+  width:48px;height:48px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);
+  font-size:1.1rem;transition:.2s;flex-shrink:0;
+}
+#back-btn:hover{background:rgba(255,255,255,.14);color:var(--tp)}
+#back-btn:disabled{opacity:.18;cursor:default;pointer-events:none}
+#next-btn{
+  padding:15px 52px;
+  background:#FF4D4D;
+  border:none;border-radius:50px;
+  color:#fff;font-family:inherit;
+  font-size:1rem;font-weight:800;letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+  transition:.25s var(--ease);white-space:nowrap;
+}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+#next-btn.gold-btn{
+  background:#FF4D4D;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+}
+
+/* Fullscreen */
+#fs-btn{
+  position:fixed;top:60px;right:16px;z-index:200;
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);font-size:.85rem;transition:.2s;
+}
+#fs-btn:hover{color:var(--tp);background:rgba(255,255,255,.12)}
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media(max-width:760px){
+  .gallery{
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+  .gal-item{
+    max-width:min(94vw,480px);
+    min-width:unset;
+    width:100%;
+    flex:none;
+  }
+  .gal-item img{
+    aspect-ratio:unset;
+    height:auto;
+    max-height:70vh;
+  }
+  .screen--gallery{
+    padding-left:14px;
+    padding-right:14px;
+    padding-bottom:130px;
+  }
+  .gal-instruction{
+    margin-bottom:16px;
+  }
+}
+@media(max-width:600px){
+  .big{font-size:clamp(1.6rem,8vw,2.4rem)}
+  .comp-cards{gap:8px}
+  .comp-card{width:135px}
+  #next-btn{padding:14px 36px;font-size:.95rem}
+  .gal-instruction{padding:10px 14px}
+  .gal-ask{padding:10px 18px;font-size:.88rem}
+}
+
+/* RTL — full direction logic */
+/* 1. Root direction */
+body.rtl{ direction:rtl; }
+/* 2. Text alignment */
+body.rtl .label,
+body.rtl .big,
+body.rtl .sub,
+body.rtl .gal-ask,
+body.rtl .gal-caption,
+body.rtl .instr-box,
+body.rtl .ref-wrap,
+body.rtl .quote-attr,
+body.rtl .close-btns { text-align:right; }
+body.rtl .quote-text  { text-align:center; }
+body.rtl .quote-text::before { left:auto; right:-.45em; }
+/* 3. Instruction list arrows */
+body.rtl .instr-box li::before { content:'←'; }
+/* 4. HUD order */
+body.rtl #hud { flex-direction:row-reverse; }
+/* 5. Back-btn arrow flip */
+body.rtl #back-btn svg { transform:scaleX(-1); }
+/* 6. Progress dots right-to-left */
+body.rtl #progress { flex-direction:row-reverse; direction:rtl; }
+/* 7. Gallery instruction */
+body.rtl .gal-instruction { flex-direction:row-reverse; }
+body.rtl .gal-instruction p { text-align:right; }
+/* 8. Chips / comp-cards */
+body.rtl .chips,
+body.rtl .part-chips,
+body.rtl .comp-cards { flex-direction:row-reverse; flex-wrap:wrap; }
+/* 9. Closing buttons */
+body.rtl .close-btns { flex-direction:row-reverse; }
+/* 10. Lang toggle — עברית on right in RTL */
+body.rtl #hud-lang { flex-direction:row-reverse; }
+</style>
+<link rel="stylesheet" href="../css/lesson-responsive.css"/>
+</head>
+<body class="dark">
+<script src="../js/app-init.js"></script>
+
+<!-- HUD -->
+<nav id="hud">
+  <a id="hud-back" href="../course.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="t-back">Back to Course</span>
+  </a>
+  <span id="hud-badge">📖 <span id="t-unit">Personal Experience</span></span>
+  <div id="hud-spacer"></div>
+  <div id="hud-lang">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn"        onclick="setLang('he')">עברית</button>
+  </div>
+  <span id="hud-step">1 / 12</span>
+</nav>
+
+<button id="fs-btn" title="Classroom mode" onclick="toggleFS()">⛶</button>
+
+<!-- STAGE -->
+<main id="stage">
+
+  <!-- S0 · Opening -->
+  <section class="screen active" id="s0" data-bg="#100c06">
+    <div class="blob" style="width:500px;height:500px;background:#8c5a20;top:-110px;left:-80px"></div>
+    <div class="blob" style="width:320px;height:320px;background:#5a3010;bottom:0;right:-60px;animation-delay:5s"></div>
+    <p class="label" id="t0-label">Unit: Personal Experience as Inspiration</p>
+    <h1 class="big" id="t0-big">A personal journal<br/>builds over time.</h1>
+    <p class="sub"  id="t0-sub">Moments from it can become an artwork.</p>
+  </section>
+
+  <!-- S1 · Quote -->
+  <section class="screen" id="s1" data-bg="#0e0d08">
+    <div class="blob" style="width:400px;height:400px;background:var(--gold);top:0;right:-60px;opacity:.1"></div>
+    <p class="label" id="t1-label">On drawing</p>
+    <blockquote class="quote-text" id="t1-quote">I draw what I live.</blockquote>
+    <p class="quote-attr" id="t1-attr">— Hundertwasser</p>
+    <p class="sub" style="margin-top:26px" id="t1-sub">Everything you live through is material.</p>
+  </section>
+
+  <!-- S2 · Inspiration -->
+  <section class="screen screen--gallery" id="s2" data-bg="#090808">
+    <div class="blob" style="width:440px;height:440px;background:var(--violet);bottom:-80px;left:-80px;opacity:.12"></div>
+    <div class="gal-instruction">
+      <span class="gal-eye">📖</span>
+      <p><strong id="t2-label">Look at the pages</strong> — <span id="t2-big">Different moments together on one page.</span></p>
+    </div>
+    <div class="gallery">
+      <div class="gal-item">
+        <img src="https://sspark.genspark.ai/cfimages?u1=phuV4bh2GtvAMZa%2BCR32oyQRCmJCeKGBXA9UnlYyaZneojeMsGiOZWHRLqaDkBIXpOCcYl6xkOEsFew%2FIrSSEgpeS%2F5adhGlBerXwwkklZ4Gl2PEoFdHOeJpwILu1ka8Uw%3D%3D&u2=hD7NUYzTkpxM%2FuEn&width=2560"
+             alt="Mixed media sketchbook page"/>
+        <div class="gal-caption" id="t2-cap1">Drawings and marks together</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://sspark.genspark.ai/cfimages?u1=CPlZxwTiv%2BrVxHDu%2B8OzQOL0jzJMKErCM2v86DdNTgt%2F9nToAnNlO19VemCOklPbqCBFL14DbXTeenfZmH6pM9bOgH0XzSgk1USA1n2RmXI%2FZ6kNqgy%2FsdZdhoDSM5MPSUWSRhjDH%2FO%2FfDJ1Yqca7V%2B%2Fe1j0&u2=dDwsHDFdtErQWksK&width=2560"
+             alt="Open journal spread"/>
+        <div class="gal-caption" id="t2-cap2">Open and unfinished</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://sspark.genspark.ai/cfimages?u1=ZqNEXaYPHc88Ts53L6Fsk7jdG9f6S23MUAGmlv0KDRSCGcaCvbyAGcb21S9m5F6U95bpk4S61SL2xEQBtfW0Hz%2Ft9utNFy%2FajjKVzJdeoSiQPRZ5Y8JFDAfNp69z11xId2dPCE2Y9Jv01jrafNAHeWs3w%3D%3D&u2=7cI4CEh8%2FUYNLOX3&width=2560"
+             alt="Sketchbook with varied elements"/>
+        <div class="gal-caption" id="t2-cap3">Words, shapes, color</div>
+      </div>
+    </div>
+    <p class="gal-ask" id="t2-ask">What do you notice on each page?</p>
+  </section>
+
+  <!-- S3 · Choice (DYNAMIC: selection) -->
+  <section class="screen" id="s3" data-bg="#100c06">
+    <div class="blob" style="width:420px;height:420px;background:var(--amber);top:-80px;right:-60px;opacity:.11"></div>
+    <p class="label" id="t3-label">Think about your week</p>
+    <h2 class="big" id="t3-big">Which moments<br/>are you taking from it?</h2>
+    <p class="sub"  id="t3-sub">Choose one or two.</p>
+    <div class="chips" id="week-chips">
+      <button class="chip" onclick="pick(this,'week-chips')">Something I saw</button>
+      <button class="chip" onclick="pick(this,'week-chips')">Something I felt</button>
+      <button class="chip" onclick="pick(this,'week-chips')">A conversation</button>
+      <button class="chip" onclick="pick(this,'week-chips')">Something I read</button>
+      <button class="chip" onclick="pick(this,'week-chips')">A quiet moment</button>
+      <button class="chip" onclick="pick(this,'week-chips')">Something that changed</button>
+      <button class="chip" onclick="pick(this,'week-chips')">Something I noticed outside</button>
+      <button class="chip" onclick="pick(this,'week-chips')">Something small, not important</button>
+    </div>
+  </section>
+
+  <!-- S4 · Parts (DYNAMIC: translation) -->
+  <section class="screen" id="s4" data-bg="#09080c">
+    <div class="blob" style="width:400px;height:400px;background:var(--teal);bottom:-80px;left:-60px;opacity:.11"></div>
+    <p class="label" id="t4-label">Collect the pieces</p>
+    <h2 class="big" id="t4-big">Choose a few things<br/>from your week.</h2>
+    <p class="sub" style="margin-bottom:0" id="t4-sub">Not all. Just a few.</p>
+    <div class="part-chips" id="parts-chips">
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">⏱</span><span id="pc0">A moment</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">👁</span><span id="pc1">Something I saw</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">🔊</span><span id="pc2">Something I heard</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">📖</span><span id="pc3">Something I read</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">✏️</span><span id="pc4">Something I wrote</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">🎨</span><span id="pc5">A color</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">⬟</span><span id="pc6">A shape</span></button>
+      <button class="part-chip" onclick="pickPart(this)"><span class="icon">💭</span><span id="pc7">A feeling</span></button>
+    </div>
+  </section>
+
+  <!-- S5 · Start (DYNAMIC: action) -->
+  <section class="screen" id="s5" data-bg="#0a0c08">
+    <div class="blob" style="width:480px;height:480px;background:var(--amber);top:-100px;right:-80px;opacity:.09"></div>
+    <p class="label" id="t5-label">Begin</p>
+    <h2 class="big" id="t5-big">Place them<br/>on the page.</h2>
+    <p class="sub"  id="t5-sub">Draw, write, or mark.<br/>No need for order.</p>
+    <div class="instr-box">
+      <ul>
+        <li id="t5-i1">Each piece can be any size.</li>
+        <li id="t5-i2">You can draw it, write it, or just mark it.</li>
+        <li id="t5-i3">Let the page fill slowly.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- S6 · Composition (DYNAMIC: development) -->
+  <section class="screen" id="s6" data-bg="#080a0d">
+    <div class="blob" style="width:400px;height:400px;background:var(--blue);bottom:-80px;right:-60px;opacity:.13"></div>
+    <p class="label" id="t6-label">How do they sit</p>
+    <h2 class="big" id="t6-big">How do the parts<br/>sit on the page?</h2>
+    <div class="comp-cards" id="comp-cards">
+
+      <div class="comp-card" onclick="pickComp(this)">
+        <svg viewBox="0 0 86 58">
+          <rect x="6"  y="18" width="28" height="22" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+          <rect x="52" y="18" width="28" height="22" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+        </svg>
+        <span id="cc0">Near each other</span>
+      </div>
+
+      <div class="comp-card" onclick="pickComp(this)">
+        <svg viewBox="0 0 86 58">
+          <rect x="8"  y="8"  width="70" height="42" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+          <rect x="22" y="16" width="42" height="26" rx="3"
+                fill="none" stroke="rgba(201,130,58,.65)" stroke-width="1.4"/>
+        </svg>
+        <span id="cc1">On top of each other</span>
+      </div>
+
+      <div class="comp-card" onclick="pickComp(this)">
+        <svg viewBox="0 0 86 58">
+          <rect x="4"  y="6"  width="22" height="18" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+          <rect x="56" y="34" width="26" height="20" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+        </svg>
+        <span id="cc2">Far apart</span>
+      </div>
+
+      <div class="comp-card" onclick="pickComp(this)">
+        <svg viewBox="0 0 86 58">
+          <circle cx="20" cy="22" r="12"
+                  fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+          <rect x="38" y="10" width="40" height="14" rx="3"
+                fill="none" stroke="rgba(245,243,239,.38)" stroke-width="1.4"/>
+          <line x1="38" y1="38" x2="78" y2="38"
+                stroke="rgba(245,243,239,.28)" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="38" y1="46" x2="66" y2="46"
+                stroke="rgba(245,243,239,.2)" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span id="cc3">Mixed / no rule</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S7 · Develop -->
+  <section class="screen" id="s7" data-bg="#0a0c08">
+    <div class="blob" style="width:460px;height:460px;background:var(--amber);top:-100px;left:-80px;opacity:.09"></div>
+    <p class="label" id="t7-label">Keep adding</p>
+    <h2 class="big" id="t7-big">Keep adding<br/>and changing.</h2>
+    <p class="sub"  id="t7-sub">The page can stay open and unfinished.</p>
+    <div class="instr-box">
+      <ul>
+        <li id="t7-i1">Add a new piece next to something already there.</li>
+        <li id="t7-i2">You can change the size of something.</li>
+        <li id="t7-i3">Leave empty space — it belongs there too.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- S8 · Personal mark -->
+  <section class="screen" id="s8" data-bg="#0d090f">
+    <div class="blob" style="width:400px;height:400px;background:var(--violet);top:-80px;right:-60px;opacity:.17"></div>
+    <p class="label" id="t8-label">Make it yours</p>
+    <h2 class="big" id="t8-big">Add something small<br/>that only you understand.</h2>
+    <p class="sub"  id="t8-sub">No need to explain it.</p>
+  </section>
+
+  <!-- S9 · Pause -->
+  <section class="screen" id="s9" data-bg="#07070d">
+    <div class="blob" style="width:520px;height:520px;background:var(--blue);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.07"></div>
+    <p class="label" id="t9-label">Pause</p>
+    <h2 class="big" id="t9-big">Stop and look<br/>at your page.</h2>
+    <p class="sub"  id="t9-sub">Just look. Don't judge.</p>
+  </section>
+
+  <!-- S10 · Connection -->
+  <section class="screen" id="s10" data-bg="#0a0c08">
+    <div class="blob" style="width:420px;height:420px;background:var(--amber);bottom:-60px;right:-60px;opacity:.09"></div>
+    <p class="label" id="t10-label">What you made</p>
+    <h2 class="big" style="font-size:clamp(1.5rem,4vw,2.6rem)" id="t10-big">This is not one image —<br/>it is part of your time.</h2>
+    <p class="sub"  id="t10-sub">This is your source of inspiration.</p>
+  </section>
+
+  <!-- S11 · Reflection -->
+  <section class="screen" id="s11" data-bg="#0c0a06">
+    <div class="blob" style="width:380px;height:380px;background:var(--amber);bottom:-80px;left:-60px;opacity:.12"></div>
+    <p class="label" id="t11-label">Reflection</p>
+    <h2 class="big" id="t11-big">What stands out most<br/>on your page?</h2>
+    <div class="ref-wrap">
+      <textarea class="ref-area" id="reflection-input"
+                placeholder="What stands out is…"></textarea>
+      <br/>
+      <button class="ref-save" onclick="saveRef()">Save ✓</button>
+      <p class="ref-saved" id="ref-saved-msg">Saved.</p>
+    </div>
+  </section>
+
+  <!-- S12 · Closing -->
+  <section class="screen" id="s12" data-bg="#0d0d1a">
+    <div class="blob" style="width:480px;height:480px;background:var(--amber);top:-100px;left:-80px;opacity:.12"></div>
+    <div class="blob" style="width:300px;height:300px;background:var(--gold);bottom:-60px;right:-60px;opacity:.1;animation-delay:4s"></div>
+    <div class="close-badge">📖</div>
+    <p class="label" id="t12-label">Lesson complete</p>
+    <h2 class="big" id="t12-big">Your journal page<br/>is now an artwork.</h2>
+    <p class="sub"  id="t12-sub">You took moments from your week.<br/>You made something only you could make.</p>
+    <div class="close-btns">
+      <a href="../course.html" class="btn-outline" id="t12-back">← Back to Course</a>
+      <button class="btn-amber" onclick="restart()" id="t12-again">Start again ↺</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- Progress dots -->
+<div id="progress"></div>
+
+<!-- Nav bar -->
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Begin →</button>
+</div>
+
+<!-- ══ GLOBAL LESSON SYSTEM ══ -->
+<script src="js/lesson-system.js"></script>
+
+<script>
+/* ── STATE ─────────────────────── */
+const TOTAL   = 13;   // screens 0–12
+const GOLD_AT = 11;   // reflection + closing turn gold
+let cur    = 0;
+let busy   = false;
+let he     = (localStorage.getItem('sourcesLang') || 'en') === 'he';
+let touchX = 0;
+let choices = { week:'', parts:[], comp:'' };
+
+/* ── STRINGS ───────────────────── */
+const T = {
+  en:{
+    back:'Back to Course', unit:'Personal Experience',
+    s:[
+      { label:'Unit: Personal Experience as Inspiration',
+        big:'A personal journal<br>builds over time.',
+        sub:'Moments from it can become an artwork.' },
+
+      { label:'On drawing',
+        quote:'I draw what I live.',
+        attr:'— Hundertwasser',
+        sub:'Everything you live through is material.' },
+
+      { label:'Look at the pages',
+        big:'Different moments<br>together on one page.',
+        cap1:'Drawings and marks together',
+        cap2:'Open and unfinished',
+        cap3:'Words, shapes, color',
+        ask:'What do you notice on each page?' },
+
+      { label:'Think about your week',
+        big:'Which moments<br>are you taking from it?',
+        sub:'Choose one or two.',
+        chips:['Something I saw','Something I felt','A conversation',
+               'Something I read','A quiet moment','Something that changed',
+               'Something I noticed outside','Something small, not important'] },
+
+      { label:'Collect the pieces',
+        big:'Choose a few things<br>from your week.',
+        sub:'Not all. Just a few.',
+        parts:['A moment','Something I saw','Something I heard',
+               'Something I read','Something I wrote',
+               'A color','A shape','A feeling'] },
+
+      { label:'Begin',
+        big:'Place them<br>on the page.',
+        sub:'Draw, write, or mark.<br>No need for order.',
+        i:['Each piece can be any size.',
+           'You can draw it, write it, or just mark it.',
+           'Let the page fill slowly.'] },
+
+      { label:'How do they sit',
+        big:'How do the parts<br>sit on the page?',
+        comp:['Near each other','On top of each other','Far apart','Mixed / no rule'] },
+
+      { label:'Keep adding',
+        big:'Keep adding<br>and changing.',
+        sub:'The page can stay open and unfinished.',
+        i:['Add a new piece next to something already there.',
+           'You can change the size of something.',
+           'Leave empty space — it belongs there too.'] },
+
+      { label:'Make it yours',
+        big:'Add something small<br>that only you understand.',
+        sub:'No need to explain it.' },
+
+      { label:'Pause',
+        big:'Stop and look<br>at your page.',
+        sub:'Just look. Don\'t judge.' },
+
+      { label:'What you made',
+        big:'This is not one image —<br>it is part of your time.',
+        sub:'This is your source of inspiration.' },
+
+      { label:'Reflection',
+        big:'What stands out most<br>on your page?',
+        ph:'What stands out is…', save:'Save ✓', saved:'Saved.' },
+
+      { label:'Lesson complete',
+        big:'Your journal page<br>is now an artwork.',
+        sub:'You took moments from your week.<br>You made something only you could make.',
+        back:'← Back to Course', again:'Start again ↺' }
+    ],
+    btn:['Begin →','Continue →','Next →','Choose →','Choose →','I\'m placing →',
+         'Choose →','Keep going →','Done →','I stopped →','I see it →',
+         'Save & finish →','']
+  },
+
+  he:{
+    back:'חזרה לקורס', unit:'חוויה אישית',
+    s:[
+      { label:'יחידה: חוויה אישית כמקור השראה',
+        big:'יומן אישי<br>נבנה עם הזמן.',
+        sub:'רגעים ממנו יכולים להפוך ליצירה.' },
+
+      { label:'על ציור',
+        quote:'אני מצייר את מה שאני חי.',
+        attr:'— הונדרטווסר',
+        sub:'כל מה שעוברים עליכם הוא חומר.' },
+
+      { label:'הסתכלו על הדפים',
+        big:'רגעים שונים<br>ביחד על דף אחד.',
+        cap1:'ציורים וסימנים ביחד',
+        cap2:'פתוח ולא גמור',
+        cap3:'מילים, צורות, צבע',
+        ask:'מה אתם שמים לב אליו בכל דף?' },
+
+      { label:'חשבו על השבוע שלכם',
+        big:'אילו רגעים<br>אתם לוקחים ממנו?',
+        sub:'בחרו אחד או שניים.',
+        chips:['משהו שראיתי','משהו שהרגשתי','שיחה',
+               'משהו שקראתי','רגע שקט','משהו שהשתנה',
+               'משהו שהבחנתי בחוץ','משהו קטן, לא חשוב'] },
+
+      { label:'אספו את החלקים',
+        big:'בחרו כמה דברים<br>מהשבוע שלכם.',
+        sub:'לא הכל. רק כמה.',
+        parts:['רגע','משהו שראיתי','משהו ששמעתי',
+               'משהו שקראתי','משהו שכתבתי',
+               'צבע','צורה','תחושה'] },
+
+      { label:'התחילו',
+        big:'מקמו אותם<br>על הדף.',
+        sub:'ציירו, כתבו, או סמנו.<br>לא צריך סדר.',
+        i:['כל חלק יכול להיות בכל גודל.',
+           'אפשר לצייר, לכתוב, או רק לסמן.',
+           'תנו לדף להתמלא לאט.'] },
+
+      { label:'איך הם יושבים',
+        big:'איך החלקים<br>יושבים על הדף?',
+        comp:['קרוב אחד לשני','אחד על השני','רחוקים','מעורב / בלי כלל'] },
+
+      { label:'המשיכו להוסיף',
+        big:'המשיכו להוסיף<br>ולשנות.',
+        sub:'הדף יכול להישאר פתוח ולא גמור.',
+        i:['הוסיפו חלק חדש ליד משהו שכבר שם.',
+           'אפשר לשנות את הגודל של משהו.',
+           'השאירו מקום ריק — גם הוא שייך לשם.'] },
+
+      { label:'תעשו את זה שלכם',
+        big:'הוסיפו משהו קטן<br>שרק אתם מבינים.',
+        sub:'לא צריך להסביר.' },
+
+      { label:'עצרו',
+        big:'עצרו והסתכלו<br>על הדף שלכם.',
+        sub:'פשוט תסתכלו. אל תשפטו.' },
+
+      { label:'מה יצרתם',
+        big:'זו לא תמונה אחת —<br>זה חלק מהזמן שלכם.',
+        sub:'זה מקור ההשראה שלכם.' },
+
+      { label:'רפלקציה',
+        big:'מה בולט הכי הרבה<br>בדף שלכם?',
+        ph:'מה שבולט הוא…', save:'שמור ✓', saved:'נשמר.' },
+
+      { label:'השיעור הסתיים',
+        big:'דף היומן שלכם<br>הפך ליצירה.',
+        sub:'לקחתם רגעים מהשבוע שלכם.<br>יצרתם משהו שרק אתם יכולתם ליצור.',
+        back:'חזרה לקורס →', again:'↺ להתחיל שוב' }
+    ],
+    btn:['← התחל','← המשך','← המשך','← בחר','← בחר','← המשך',
+         '← בחר','← המשך','← המשך','← המשך','← המשך',
+         '← סיום','']
+  }
+};
+
+/* ── LANGUAGE ──────────────────── */
+function setLang(l){
+  he = (l==='he');
+  localStorage.setItem('sourcesLang', l);
+  document.documentElement.lang = l;
+  document.body.classList.toggle('he',  he);
+  document.body.classList.toggle('rtl', he);
+  // Set dir on both <html> and <body>
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.body.dir             = he ? 'rtl' : 'ltr';
+  // RTL: force progress dots to reverse so step 1 is on the right
+  const pg = document.getElementById('progress');
+  if(pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active',
+      b.textContent.trim()===(he?'עברית':'EN'));
+  });
+  applyStrings();
+  updateBtn();
+  updateHud();
+}
+
+function applyStrings(){
+  const d = T[he?'he':'en'];
+  document.getElementById('t-back').textContent = d.back;
+  document.getElementById('t-unit').textContent = d.unit;
+
+  d.s.forEach((s,i)=>{
+    const el = document.getElementById('s'+i);
+    if(!el) return;
+
+    const lbl = el.querySelector('.label') || document.getElementById('t'+i+'-label');
+    if(lbl && s.label) lbl.textContent = s.label;
+    const big = el.querySelector('.big') || document.getElementById('t'+i+'-big');
+    if(big && s.big) big.innerHTML = s.big;
+    const sub = el.querySelector('.sub');
+    if(sub && s.sub){
+      const lang = he?'he':'en';
+      const subVal = (typeof s.sub === 'string' && s.sub.startsWith('_tmpl:'))
+        ? getScreenTemplate(s.sub.slice(6), lang) : s.sub;
+      sub.innerHTML = subVal || '';
+    }
+
+    const qt = el.querySelector('.quote-text');
+    if(qt && s.quote) qt.innerHTML = s.quote;
+    const qa = el.querySelector('.quote-attr');
+    if(qa && s.attr) qa.textContent = s.attr;
+
+    ['cap1','cap2','cap3'].forEach(k=>{
+      if(s[k]){ const e=document.getElementById('t'+i+'-'+k); if(e) e.textContent=s[k]; }
+    });
+    const ask = el.querySelector('.gal-ask');
+    if(ask && s.ask) ask.textContent = s.ask;
+
+    if(s.chips){
+      const btns = el.querySelectorAll('#week-chips .chip');
+      s.chips.forEach((c,j)=>{ if(btns[j]) btns[j].textContent=c; });
+    }
+    if(s.parts){
+      s.parts.forEach((txt,j)=>{
+        const sp=document.getElementById('pc'+j); if(sp) sp.textContent=txt;
+      });
+    }
+    if(s.comp){
+      s.comp.forEach((txt,j)=>{
+        const sp=document.getElementById('cc'+j); if(sp) sp.textContent=txt;
+      });
+    }
+    if(s.i){
+      const lang = he?'he':'en';
+      const lines = (typeof s.i === 'string' && s.i.startsWith('_tmpl:'))
+        ? getScreenTemplate(s.i.slice(6), lang) : s.i;
+      if(Array.isArray(lines)){
+        const items=el.querySelectorAll('.instr-box li');
+        const box=el.querySelector('.instr-box ul');
+        if(box && lines.length !== items.length){
+          box.innerHTML=lines.map(t=>`<li>${t}</li>`).join('');
+        } else {
+          lines.forEach((txt,j)=>{ if(items[j]) items[j].textContent=txt; });
+        }
+      }
+    }
+
+    if(s.ph){ const ta=document.getElementById('reflection-input'); if(ta) ta.placeholder=s.ph; }
+    if(s.save){ const sb=el.querySelector('.ref-save'); if(sb) sb.textContent=s.save; }
+    if(s.saved){ const sm=document.getElementById('ref-saved-msg'); if(sm) sm.textContent=s.saved; }
+    if(s.back){ const ab=document.getElementById('t12-back'); if(ab) ab.textContent=s.back; }
+    if(s.again){ const ag=document.getElementById('t12-again'); if(ag) ag.textContent=s.again; }
+  });
+}
+
+/* ── HUD ───────────────────────── */
+function updateHud(){
+  const display = cur < TOTAL-1 ? (cur+1)+' / 12' : '✓';
+  document.getElementById('hud-step').textContent = display;
+}
+
+/* ── PROGRESS DOTS ─────────────── */
+/* ── DOTS + BUTTON — lesson-system.js ── */
+function buildDots()  { LS_buildDots(TOTAL, go); }
+function refreshDots(){ LS_refreshDots(cur); }
+function updateBtn()  {
+  updateLessonBtn(
+    document.getElementById('next-btn'),
+    T[he ? 'he' : 'en'].btn,
+    cur, GOLD_AT, he
+  );
+}
+
+function updateBackBtn(){
+  document.getElementById('back-btn').disabled=(cur===0);
+}
+
+/* ── BG ────────────────────────── */
+function setBg(idx){
+  const el=document.getElementById('s'+idx);
+  if(!el) return;
+  document.body.style.background=el.dataset.bg||'#0d0d1a';
+}
+
+/* ── NAVIGATION ────────────────── */
+function go(n){
+  if(n<0||n>=TOTAL||busy) return;
+  busy=true;
+  const prev=document.getElementById('s'+cur);
+  prev.classList.add('leaving');
+  setTimeout(()=>{
+    prev.classList.remove('active','leaving');
+    cur=n;
+    const next=document.getElementById('s'+cur);
+    next.classList.add('active');
+    next.scrollTop=0;
+    setBg(cur);
+    refreshDots();
+    updateBtn();
+    updateHud();
+    updateBackBtn();
+    busy=false;
+  },380);
+}
+function advance(){ if(busy) return; if(cur === TOTAL-1) finishLesson(); else go(cur+1); }
+function goBack(){  if(!busy && cur>0)       go(cur-1); }
+
+function restart(){
+  choices={week:'',parts:[],comp:''};
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('picked'));
+  document.querySelectorAll('.part-chip').forEach(c=>c.classList.remove('picked'));
+  document.querySelectorAll('.comp-card').forEach(c=>c.classList.remove('picked'));
+  document.getElementById('reflection-input').value='';
+  document.getElementById('ref-saved-msg').style.display='none';
+  go(0);
+}
+
+/* ── INTERACTIONS ──────────────── */
+function pick(btn, groupId){
+  document.querySelectorAll('#'+groupId+' .chip')
+    .forEach(c=>c.classList.remove('picked'));
+  btn.classList.add('picked');
+  if(groupId==='week-chips') choices.week=btn.textContent;
+}
+function pickPart(btn){
+  btn.classList.toggle('picked');
+  const label=btn.querySelector('span:last-child').textContent;
+  if(btn.classList.contains('picked')){
+    choices.parts.push(label);
+  } else {
+    choices.parts=choices.parts.filter(p=>p!==label);
+  }
+}
+function pickComp(card){
+  document.querySelectorAll('.comp-card').forEach(c=>c.classList.remove('picked'));
+  card.classList.add('picked');
+  choices.comp=card.querySelector('span').textContent;
+}
+function saveRef(){
+  const txt=document.getElementById('reflection-input').value.trim();
+  if(!txt) return;
+  const key='journal-artwork-reflection';
+  const stored=JSON.parse(localStorage.getItem(key)||'[]');
+  stored.push({text:txt,date:new Date().toISOString(),choices});
+  localStorage.setItem(key,JSON.stringify(stored));
+  const msg=document.getElementById('ref-saved-msg');
+  msg.style.display='block';msg.style.opacity='1';
+}
+
+/* ── FULLSCREEN ────────────────── */
+function toggleFS(){
+  if(!document.fullscreenElement)
+    document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+}
+
+/* ── KEYBOARD ──────────────────── */
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA') return;
+  // RTL: ArrowLeft = advance, ArrowRight = back
+  if(e.key===' '){e.preventDefault();advance();}
+  if(e.key==='ArrowRight'){e.preventDefault(); he ? goBack()  : advance();}
+  if(e.key==='ArrowLeft') {e.preventDefault(); he ? advance() : goBack(); }
+  if(e.key==='f'||e.key==='F') toggleFS();
+});
+
+/* ── TOUCH ─────────────────────── */
+document.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchX;
+  // RTL: swipe-right = advance, swipe-left = back
+  if(he){
+    if(dx >  60) advance();
+    if(dx < -60) goBack();
+  } else {
+    if(dx < -60) advance();
+    if(dx >  60) goBack();
+  }
+});
+
+/* ── INIT ──────────────────────── */
+// Apply language FIRST so RTL class is set before buildDots
+setLang(he ? 'he' : 'en');   // MUST run before buildDots
+document.body.classList.remove('lang-loading'); /* reveal after lang applied */
+buildDots();                  // builds dots with correct RTL direction
+refreshDots();                // syncs active dot to cur=0
+updateBtn();                  // syncs button label to screen 0
+setBg(0);
+updateBackBtn();              // syncs back-button disabled state to cur=0
+</script>
+</body>
+</html>

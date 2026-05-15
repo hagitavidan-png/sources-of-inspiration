@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lesson-type="regular">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Frida Kahlo — How Artists Turn Personal Experience into Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   BASE RESET & ROOT VARS
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f10;
+  --rose:#FF4D4D;
+  --gold:#c9a96e;
+  --blue:#4a7fa5;
+  --teal:#3dbcaa;
+  --violet:#7c5cbf;
+  --amber:#e8a030;
+  --green:#4caf82;
+  --white:#ffffff;
+  --tp:#ffffff;--ts:#cfcfcf;--tm:#8a8a8a;
+  --font-en:'Sora',sans-serif;
+  --font-he:'Heebo',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html,body{
+  height:100%;width:100%;overflow:hidden;
+  background:var(--bg);
+  color:var(--tp);
+}
+
+/* ═══════════════════════════════════════════════
+   FONT MODES
+═══════════════════════════════════════════════ */
+body{font-family:var(--font-en)}
+body.he{font-family:var(--font-he)}
+
+/* ═══════════════════════════════════════════════
+   HUD — top bar
+═══════════════════════════════════════════════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:52px;
+  background:rgba(13,13,26,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;gap:12px;padding:0 20px;
+}
+body.rtl #hud{flex-direction:row-reverse}
+#hud-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:.75rem;color:var(--tm);
+  text-decoration:none;transition:color .2s;
+}
+#hud-back:hover{color:rgba(255,255,255,.7)}
+#hud-badge{
+  padding:3px 11px;border-radius:20px;
+  background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.22);
+  font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rose);
+}
+#hud-spacer{flex:1}
+#hud-lang{display:flex;gap:4px}
+.lang-btn{
+  padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:var(--tm);
+  font-size:.7rem;letter-spacing:.06em;cursor:pointer;transition:.2s;
+  font-family:inherit;
+}
+.lang-btn.active{
+  background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.5);
+  color:var(--gold);
+}
+#hud-step{font-size:.7rem;color:var(--tm);letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════════
+   PROGRESS DOTS
+═══════════════════════════════════════════════ */
+#progress{
+  position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  z-index:100;display:flex;gap:7px;align-items:center;
+}
+.pdot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:.3s var(--ease);
+}
+.pdot.now{
+  background:var(--rose);border-color:var(--rose);
+  box-shadow:0 0 10px rgba(255,77,77,.4);
+  width:22px;border-radius:4px;
+}
+
+/* ═══════════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════════ */
+#stage{
+  position:fixed;inset:52px 0 80px 0;
+  overflow:hidden;
+}
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:28px 24px 32px;
+  opacity:0;pointer-events:none;
+  transform:translateY(32px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+  text-align:center;
+}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.leaving{opacity:0;transform:translateY(-28px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+
+/* Gallery screens: top-aligned, scrollable */
+.screen--gallery{
+  justify-content:flex-start;
+  align-items:center;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-top:20px;
+  padding-bottom:120px;
+  scrollbar-width:none;
+  gap:0;
+}
+.screen--gallery::-webkit-scrollbar{display:none}
+
+/* Background blobs */
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(90px);opacity:.18;pointer-events:none;
+  animation:drift 12s ease-in-out infinite alternate;
+}
+@keyframes drift{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(30px,20px) scale(1.08)}
+}
+
+/* ═══════════════════════════════════════════════
+   TEXT ELEMENTS
+═══════════════════════════════════════════════ */
+.label{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tm);margin-bottom:18px;
+}
+.big{
+  font-size:clamp(1.7rem,4.5vw,3.2rem);
+  font-weight:700;line-height:1.28;letter-spacing:-.018em;
+  color:var(--tp);max-width:720px;margin-bottom:0;
+}
+.sub{
+  font-size:clamp(.9rem,2vw,1.06rem);
+  font-weight:300;color:var(--tm);
+  max-width:480px;margin-top:28px;line-height:2.1;
+}
+.quote-text{
+  font-size:clamp(1.25rem,3.5vw,2rem);
+  font-style:italic;font-weight:300;
+  color:var(--tp);max-width:680px;line-height:1.65;
+  position:relative;
+}
+.quote-text::before{
+  content:'\201C';position:absolute;
+  left:-.45em;top:-.1em;
+  font-size:3em;color:var(--gold);opacity:.25;line-height:1;
+}
+body.rtl .quote-text::before{left:auto;right:-.45em}
+.quote-attr{
+  margin-top:20px;font-size:.8rem;letter-spacing:.1em;
+  color:var(--tm);text-transform:uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   CHOICE CHIPS
+═══════════════════════════════════════════════ */
+.chips{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;max-width:680px;margin-top:28px;
+}
+.chip{
+  padding:12px 22px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.04);
+  font-size:.95rem;color:#cfcfcf;
+  cursor:pointer;transition:.25s var(--ease);
+  user-select:none;font-family:inherit;
+}
+.chip:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+.chip.picked{
+  background:var(--rose);border-color:var(--rose);
+  color:#fff;box-shadow:0 4px 24px rgba(255,77,77,.35);
+}
+
+/* ═══════════════════════════════════════════════
+   GALLERY LAYOUT
+═══════════════════════════════════════════════ */
+.gal-instruction{
+  width:100%;max-width:840px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:16px 22px;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+}
+.gal-instruction .gal-eye{font-size:1.5rem;flex-shrink:0}
+.gal-instruction p{
+  font-size:1rem;color:var(--ts);
+  line-height:1.55;text-align:left;margin:0;font-weight:400;
+}
+body.rtl .gal-instruction p{text-align:right}
+.gallery{
+  display:flex;gap:18px;flex-wrap:wrap;
+  justify-content:center;
+  max-width:880px;width:100%;
+  flex-shrink:0;
+}
+.gal-item{
+  flex:1;min-width:240px;max-width:340px;
+  border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.13);
+  cursor:pointer;transition:.3s var(--ease);
+  display:flex;flex-direction:column;
+  background:rgba(255,255,255,.04);
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+.gal-item:hover{
+  transform:scale(1.02);
+  border-color:rgba(255,255,255,.4);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+}
+.gal-item img{
+  width:100%;aspect-ratio:unset;
+  height:auto;max-height:70vh;
+  object-fit:contain;
+  display:block;background:#0d0d1a;
+  border-radius:16px 16px 0 0;
+}
+.gal-caption{
+  padding:11px 16px;font-size:.8rem;font-weight:500;
+  color:var(--ts);background:rgba(15,15,16,.85);
+  line-height:1.45;text-align:center;
+  border-top:1px solid rgba(255,255,255,.07);letter-spacing:.02em;
+}
+.gal-ask{
+  margin-top:24px;margin-bottom:8px;
+  padding:14px 28px;border-radius:50px;
+  border:1px dashed rgba(255,255,255,.22);
+  font-size:1rem;color:var(--tm);
+  font-style:italic;max-width:520px;flex-shrink:0;
+}
+
+/* ═══════════════════════════════════════════════
+   INSTRUCTION BOX
+═══════════════════════════════════════════════ */
+.instr-box{
+  margin-top:28px;padding:24px 30px;
+  border-radius:18px;
+  border:1.5px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  max-width:560px;text-align:left;
+}
+body.rtl .instr-box{text-align:right}
+.instr-box ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.instr-box li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.92rem;color:var(--ts);line-height:1.55;
+}
+.instr-box li::before{content:'→';color:var(--gold);flex-shrink:0;margin-top:1px}
+body.rtl .instr-box li::before{content:'←'}
+
+/* ═══════════════════════════════════════════════
+   REFLECTION TEXTAREA
+═══════════════════════════════════════════════ */
+.ref-wrap{width:100%;max-width:580px;margin-top:24px}
+.ref-area{
+  width:100%;height:130px;resize:none;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:16px 18px;
+  color:var(--tp);font-family:inherit;font-size:.95rem;
+  line-height:1.6;outline:none;transition:.2s;
+}
+.ref-area:focus{border-color:var(--rose);background:rgba(255,77,77,.05)}
+.ref-save{
+  margin-top:10px;padding:10px 28px;
+  border-radius:50px;border:none;cursor:pointer;
+  background:#FF4D4D;color:#fff;
+  font-family:inherit;font-size:.85rem;font-weight:700;transition:.2s;
+}
+.ref-save:hover{background:#e03333}
+.ref-saved{display:none;margin-top:8px;font-size:.8rem;color:var(--tm)}
+
+/* ═══════════════════════════════════════════════
+   CLOSING SCREEN
+═══════════════════════════════════════════════ */
+.close-badge{
+  width:80px;height:80px;border-radius:50%;
+  background:#FF4D4D;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin-bottom:24px;
+  box-shadow:0 8px 40px rgba(255,77,77,.35);
+}
+.close-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.btn-outline{
+  padding:12px 26px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:transparent;color:var(--ts);
+  font-family:inherit;font-size:.88rem;cursor:pointer;
+  text-decoration:none;transition:.2s;
+}
+.btn-outline:hover{border-color:rgba(255,255,255,.5);color:var(--tp)}
+.btn-gold{
+  padding:12px 26px;border-radius:50px;border:none;
+  background:#FF4D4D;
+  color:#fff;font-family:inherit;font-size:.88rem;
+  font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;
+}
+.btn-gold:hover{background:#e03333}
+
+/* ═══════════════════════════════════════════════
+   NAV BAR
+═══════════════════════════════════════════════ */
+#nav-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  height:80px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:0 24px;
+  background:rgba(13,13,26,.95);
+  border-top:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+}
+#back-btn{
+  width:48px;height:48px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);
+  font-size:1.2rem;transition:.2s;flex-shrink:0;
+}
+#back-btn:hover{background:rgba(255,255,255,.14);color:var(--tp)}
+#back-btn:disabled{opacity:.18;cursor:default;pointer-events:none}
+#next-btn{
+  padding:15px 52px;
+  background:#FF4D4D;
+  border:none;border-radius:50px;
+  color:#fff;font-family:inherit;font-size:1rem;font-weight:800;
+  letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+  transition:.25s var(--ease);white-space:nowrap;
+}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+#next-btn.gold-btn{
+  background:#FF4D4D;color:#fff;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+}
+
+/* ═══════════════════════════════════════════════
+   FULLSCREEN BTN
+═══════════════════════════════════════════════ */
+#fs-btn{
+  position:fixed;top:60px;right:16px;z-index:200;
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);
+  font-size:.85rem;transition:.2s;
+}
+#fs-btn:hover{color:var(--tp);background:rgba(255,255,255,.12)}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:760px){
+  .gallery{flex-direction:column;align-items:center;gap:14px}
+  .gal-item{max-width:min(94vw,480px);min-width:unset;width:100%;flex:none}
+  .gal-item img{aspect-ratio:unset;height:auto;max-height:70vh}
+  .screen--gallery{padding-left:14px;padding-right:14px;padding-bottom:130px}
+  .gal-instruction{margin-bottom:16px}
+}
+@media(max-width:600px){
+  .big{font-size:clamp(1.6rem,8vw,2.4rem)}
+  #next-btn{padding:14px 36px;font-size:.95rem}
+  .gal-instruction{padding:10px 14px}
+  .gal-ask{padding:10px 18px;font-size:.88rem}
+}
+
+/* ═══════════════════════════════════════════════
+   RTL
+═══════════════════════════════════════════════ */
+body.rtl{direction:rtl}
+body.rtl .label,
+body.rtl .big,
+body.rtl .sub,
+body.rtl .gal-ask,
+body.rtl .gal-caption,
+body.rtl .instr-box,
+body.rtl .ref-wrap,
+body.rtl .quote-attr,
+body.rtl .close-btns{text-align:right}
+body.rtl .quote-text{text-align:center}
+body.rtl .quote-text::before{left:auto;right:-.45em}
+body.rtl .instr-box li::before{content:'←'}
+body.rtl #hud{flex-direction:row-reverse}
+body.rtl #back-btn svg{transform:scaleX(-1)}
+body.rtl #progress{flex-direction:row-reverse;direction:rtl}
+body.rtl .gal-instruction{flex-direction:row-reverse}
+body.rtl .gal-instruction p{text-align:right}
+body.rtl .chips{flex-direction:row-reverse;flex-wrap:wrap}
+body.rtl .close-btns{flex-direction:row-reverse}
+body.rtl #hud-lang{flex-direction:row-reverse}
+</style>
+<link rel="stylesheet" href="../css/lesson-responsive.css"/>
+</head>
+<body class="dark">
+<script src="../js/app-init.js"></script>
+
+<!-- HUD -->
+<nav id="hud">
+  <a id="hud-back" href="../course.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="t-back">Back to Course</span>
+  </a>
+  <span id="hud-badge"><span id="t-unit">Personal Experience</span></span>
+  <div id="hud-spacer"></div>
+  <div id="hud-lang">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">עברית</button>
+  </div>
+  <span id="hud-step">1 / 15</span>
+</nav>
+
+<!-- Fullscreen btn -->
+<button id="fs-btn" title="Classroom mode" onclick="toggleFS()">⛶</button>
+
+<!-- PROGRESS DOTS (built by LS_buildDots) -->
+<div id="progress"></div>
+
+<!-- STAGE -->
+<main id="stage">
+
+  <!-- ══ SCREEN 0 — Opening ══ -->
+  <section class="screen active" id="s0" data-bg="#1a0a12">
+    <div class="blob" style="width:500px;height:500px;background:var(--rose);top:-100px;left:-80px"></div>
+    <div class="blob" style="width:350px;height:350px;background:var(--violet);bottom:0;right:-60px;animation-delay:3s"></div>
+    <p class="label" id="t0-label">Unit: Personal Experience as Inspiration</p>
+    <h1 class="big" id="t0-big">Some artists don't paint<br/>only what they see —<br/>they paint what they experience.</h1>
+  </section>
+
+  <!-- ══ SCREEN 1 — Quote ══ -->
+  <section class="screen" id="s1" data-bg="#0f1020">
+    <div class="blob" style="width:400px;height:400px;background:var(--gold);top:0;right:-60px;opacity:.12"></div>
+    <p class="label" id="t1-label">Frida Kahlo</p>
+    <blockquote class="quote-text" id="t1-quote">I paint my own reality.</blockquote>
+    <p class="quote-attr" id="t1-attr">— Frida Kahlo</p>
+  </section>
+
+  <!-- ══ SCREEN 2 — Inspiration: Frida Kahlo artworks ══ -->
+  <section class="screen screen--gallery" id="s2" data-bg="#0a0f1a">
+    <div class="blob" style="width:450px;height:450px;background:var(--violet);bottom:-100px;left:-80px;opacity:.15"></div>
+    <div class="gal-instruction">
+      <span class="gal-eye">👁</span>
+      <p id="t2-instr"><strong>Notice:</strong> The paintings don't just show a figure — they build a personal world.</p>
+    </div>
+    <div class="gallery">
+      <div class="gal-item">
+        <img src="https://www.fridakahlo.org/images/paintings/self-portrait-with-monkeys-1943.jpg!HD.jpg" alt="Self-Portrait with Monkeys, 1943"
+             onerror="this.src='https://sspark.genspark.ai/cfimages?u1=ZeElcR2%2FvfCF8%2BGy2ndsqxagA4bvd6DZCC%2BLAo41bpKB%2B41CCVsUsHuQ%2BVHF9Xv7brKG0VH1jCb1GNc4xhUGkUyJWbXbb%2FHdhwrXAdWF2F6yDe60DM9ZOFiJ53A%2B3LccuONB5C78DQ%3D%3D&u2=3JcHSOK8GTyHT1ez&width=2560'"/>
+        <div class="gal-caption" id="t2-cap1">Self-Portrait with Monkeys, 1943</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://www.fridakahlo.org/images/paintings/self-portrait-with-braid-1941.jpg!HD.jpg" alt="Self-Portrait with Braid, 1941"
+             onerror="this.src='https://sspark.genspark.ai/cfimages?u1=OhG9rYPeKeuFEQrVAp3Yon3rYfah6weVyrtZcaVsoubODxu3aSDBTCanfy8Wl41a1KvjbN3UdDCzh3psTBrg90jr4EFdgclvw9LieKsUC4whYMCFqCnJAt7Zz096W882%2BGSCIfI%3D&u2=9RJuZ9Bt4GwGd4Ci&width=2560'"/>
+        <div class="gal-caption" id="t2-cap2">Self-Portrait with Braid, 1941</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://www.fridakahlo.org/images/paintings/self-portrait-with-bonito-1941.jpg!HD.jpg" alt="Self-Portrait with Bonito, 1941"
+             onerror="this.src='https://sspark.genspark.ai/cfimages?u1=6XLnhQsh2PXdn8wN0DDkq%2BqVT93eMjwAg2llQv1J2e7aIr6KN8b2wb0dIKgOaeFOvEwYsEpA%2FQOrCWay7gim4Z%2F1kBH5y6DBgpQ229DxI9frqPyuVIRvKpZLKFbDUyw31M0XwQbHAszy909bEnLJNMwQNtYXuY3K%2FAJyDUa2asSIVyFabKuPB4fuY5ue6z3DiDov1nHzhJ0%3D&u2=PN2dd%2B25xxlGc3Wk&width=2560'"/>
+        <div class="gal-caption" id="t2-cap3">Self-Portrait with Bonito, 1941</div>
+      </div>
+    </div>
+    <p class="gal-ask" id="t2-ask">What is happening inside these paintings?</p>
+  </section>
+
+  <!-- ══ SCREEN 3 — Observation ══ -->
+  <section class="screen" id="s3" data-bg="#100a1a">
+    <div class="blob" style="width:420px;height:420px;background:var(--violet);top:-80px;right:-60px;opacity:.18"></div>
+    <p class="label" id="t3-label">Look closely</p>
+    <h2 class="big" id="t3-big">What do you see<br/>in the paintings?</h2>
+    <p class="sub" id="t3-sub">Not just what is drawn —<br/>but what is happening there.</p>
+  </section>
+
+  <!-- ══ SCREEN 4 — Breakdown ══ -->
+  <section class="screen" id="s4" data-bg="#0d0d1a">
+    <div class="blob" style="width:400px;height:400px;background:var(--rose);bottom:-60px;left:-60px;opacity:.15"></div>
+    <p class="label" id="t4-label">The building blocks</p>
+    <h2 class="big" id="t4-big">What builds the painting?</h2>
+    <div class="instr-box" id="s4-instr"></div>
+  </section>
+
+  <!-- ══ SCREEN 5 — Understanding ══ -->
+  <section class="screen" id="s5" data-bg="#0a1018">
+    <div class="blob" style="width:400px;height:400px;background:var(--blue);top:-80px;left:-60px;opacity:.18"></div>
+    <p class="label" id="t5-label">The idea</p>
+    <h2 class="big" id="t5-big">The painting doesn't<br/>show a single moment.</h2>
+    <p class="sub" id="t5-sub">It connects different elements —<br/>to express an inner experience.</p>
+  </section>
+
+  <!-- ══ SCREEN 6 — Choose experience (DYNAMIC: selection) ══ -->
+  <section class="screen" id="s6" data-bg="#120a14">
+    <div class="blob" style="width:380px;height:380px;background:var(--rose);top:-60px;right:-60px;opacity:.18"></div>
+    <p class="label" id="t6-label">Your turn</p>
+    <h2 class="big" id="t6-big">Choose a personal experience.</h2>
+    <p class="sub" id="t6-sub">Something that happened,<br/>you felt, or stayed with you.</p>
+    <div class="chips" id="exp-chips">
+      <button class="chip" onclick="pick(this,'exp-chips')">A goodbye</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">Being proud of myself</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">A moment of fear</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">Feeling lonely</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">Being misunderstood</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">A big change</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">A place I love</button>
+      <button class="chip" onclick="pick(this,'exp-chips')">Something I lost</button>
+    </div>
+  </section>
+
+  <!-- ══ SCREEN 7 — Elements (DYNAMIC: development) ══ -->
+  <section class="screen" id="s7" data-bg="#0d0a12">
+    <div class="blob" style="width:420px;height:420px;background:var(--violet);bottom:-60px;right:-60px;opacity:.18"></div>
+    <p class="label" id="t7-label">Choose elements</p>
+    <h2 class="big" id="t7-big">What can appear<br/>in your drawing?</h2>
+    <div class="chips" id="elem-chips">
+      <button class="chip" onclick="pick(this,'elem-chips')">figure</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">place</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">object</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">color</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">animal</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">plant</button>
+      <button class="chip" onclick="pick(this,'elem-chips')">personal symbol</button>
+    </div>
+  </section>
+
+  <!-- ══ SCREEN 8 — Start drawing (DYNAMIC: action) ══ -->
+  <section class="screen" id="s8" data-bg="#0a0d0f">
+    <div class="blob" style="width:380px;height:380px;background:var(--teal);top:-60px;left:-60px;opacity:.15"></div>
+    <p class="label" id="t8-label">Start drawing</p>
+    <h2 class="big" id="t8-big">Arrange the elements<br/>on the page.</h2>
+    <p class="sub" id="t8-sub">They don't need to be realistic —<br/>only connected to your experience.</p>
+  </section>
+
+  <!-- ══ SCREEN 9 — Connection ══ -->
+  <section class="screen" id="s9" data-bg="#0a0f14">
+    <div class="blob" style="width:400px;height:400px;background:var(--blue);bottom:-60px;right:-60px;opacity:.15"></div>
+    <p class="label" id="t9-label">Add connection</p>
+    <h2 class="big" id="t9-big">Add a connection<br/>between elements.</h2>
+    <div class="instr-box" id="s9-instr"></div>
+  </section>
+
+  <!-- ══ SCREEN 10 — Depth ══ -->
+  <section class="screen" id="s10" data-bg="#0d0a0f">
+    <div class="blob" style="width:420px;height:420px;background:var(--rose);top:-80px;right:-60px;opacity:.15"></div>
+    <p class="label" id="t10-label">Add feeling</p>
+    <h2 class="big" id="t10-big">Add something that<br/>expresses how you felt.</h2>
+    <div class="instr-box" id="s10-instr"></div>
+  </section>
+
+  <!-- ══ SCREEN 11 — Personal layer ══ -->
+  <section class="screen" id="s11" data-bg="#12090e">
+    <div class="blob" style="width:360px;height:360px;background:var(--gold);bottom:-60px;left:-60px;opacity:.12"></div>
+    <p class="label" id="t11-label">Your mark</p>
+    <h2 class="big" id="t11-big">Add a small detail<br/>that only you understand.</h2>
+  </section>
+
+  <!-- ══ SCREEN 12 — Pause ══ -->
+  <section class="screen" id="s12" data-bg="#0d0d1a">
+    <div class="blob" style="width:480px;height:480px;background:var(--violet);top:-100px;left:50%;transform:translateX(-50%);opacity:.1"></div>
+    <p class="label" id="t12-label">Pause</p>
+    <h2 class="big" id="t12-big">Pause.<br/>Look at your drawing.</h2>
+  </section>
+
+  <!-- ══ SCREEN 13 — Connection to idea ══ -->
+  <section class="screen" id="s13" data-bg="#0f0a14">
+    <div class="blob" style="width:400px;height:400px;background:var(--rose);bottom:-60px;right:-60px;opacity:.15"></div>
+    <p class="label" id="t13-label">Like Frida Kahlo</p>
+    <h2 class="big" id="t13-big">You didn't just draw<br/>what is seen.</h2>
+    <p class="sub" id="t13-sub">You created a painting<br/>that holds an experience.</p>
+  </section>
+
+  <!-- ══ SCREEN 14 — Reflection ══ -->
+  <section class="screen" id="s14" data-bg="#12090e">
+    <div class="blob" style="width:380px;height:380px;background:var(--gold);top:-60px;right:-60px;opacity:.12"></div>
+    <p class="label" id="t14-label">Reflection</p>
+    <h2 class="big" id="t14-big">Which part of your drawing<br/>tells the most?</h2>
+    <p class="sub" id="t14-sub">About your experience.</p>
+    <div class="ref-wrap">
+      <textarea class="ref-area" id="reflection-input" rows="4"></textarea>
+      <button class="ref-save" id="ref-save-btn" onclick="saveRef()">Save ✓</button>
+      <p class="ref-saved" id="ref-saved-msg">Saved.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- NAV BAR -->
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Continue →</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     LESSON SYSTEM + INLINE SCRIPT
+═══════════════════════════════════════════════ -->
+<script src="js/lesson-system.js"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+const TOTAL   = 15;   // screens 0–14
+const GOLD_AT = 13;   // gold btn from screen 13 onward
+
+let cur    = 0;
+let busy   = false;
+let he     = (localStorage.getItem('sourcesLang') || 'en') === 'he';
+let touchX = 0;
+
+/* ═══════════════════════════════════════════════
+   STRINGS (bilingual)
+═══════════════════════════════════════════════ */
+const T = {
+  en: {
+    back: 'Back to Course',
+    unit: 'Personal Experience',
+
+    s: [
+      /* 0 — Opening */
+      { label: 'Unit: Personal Experience as Inspiration',
+        big: "Some artists don't paint<br/>only what they see —<br/>they paint what they experience." },
+
+      /* 1 — Quote */
+      { label: 'Frida Kahlo',
+        quote: 'I paint my own reality.',
+        attr: '— Frida Kahlo' },
+
+      /* 2 — Inspiration gallery */
+      { instr: '<strong>Notice:</strong> The paintings don\'t just show a figure — they build a personal world.',
+        cap1: 'Self-Portrait with Monkeys, 1943',
+        cap2: 'Self-Portrait with Braid, 1941',
+        cap3: 'Self-Portrait with Bonito, 1941',
+        ask: 'What is happening inside these paintings?' },
+
+      /* 3 — Observation */
+      { label: 'Look closely',
+        big: 'What do you see<br/>in the paintings?',
+        sub: 'Not just what is drawn —<br/>but what is happening there.' },
+
+      /* 4 — Breakdown */
+      { label: 'The building blocks',
+        big: 'What builds the painting?',
+        i: ['figure', 'place', 'objects or symbols', 'color'] },
+
+      /* 5 — Understanding */
+      { label: 'The idea',
+        big: "The painting doesn't<br/>show a single moment.",
+        sub: 'It connects different elements —<br/>to express an inner experience.' },
+
+      /* 6 — Choose experience */
+      { label: 'Your turn',
+        big: 'Choose a personal experience.',
+        sub: 'Something that happened,<br/>you felt, or stayed with you.',
+        chips: ['A goodbye','Being proud of myself','A moment of fear','Feeling lonely',
+                'Being misunderstood','A big change','A place I love','Something I lost'] },
+
+      /* 7 — Elements */
+      { label: 'Choose elements',
+        big: 'What can appear<br/>in your drawing?',
+        chips: ['figure','place','object','color','animal','plant','personal symbol'] },
+
+      /* 8 — Start drawing */
+      { label: 'Start drawing',
+        big: 'Arrange the elements<br/>on the page.',
+        sub: "They don't need to be realistic —<br/>only connected to your experience." },
+
+      /* 9 — Connection */
+      { label: 'Add connection',
+        big: 'Add a connection<br/>between elements.',
+        i: ['a connecting line', 'shared color', 'close placement', 'an unexpected link'] },
+
+      /* 10 — Depth */
+      { label: 'Add feeling',
+        big: 'Add something that<br/>expresses how you felt.',
+        i: ['strong or soft color', 'change in scale', 'movement', 'another layer'] },
+
+      /* 11 — Personal layer */
+      { label: 'Your mark',
+        big: 'Add a small detail<br/>that only you understand.' },
+
+      /* 12 — Pause */
+      { label: 'Pause',
+        big: 'Pause.<br/>Look at your drawing.' },
+
+      /* 13 — Connection to idea */
+      { label: 'Like Frida Kahlo',
+        big: "You didn't just draw<br/>what is seen.",
+        sub: 'You created a painting<br/>that holds an experience.' },
+
+      /* 14 — Reflection */
+      { label: 'Reflection',
+        big: 'Which part of your drawing<br/>tells the most?',
+        sub: 'About your experience.',
+        ph: 'The part that tells the most is…',
+        save: 'Save ✓', saved: 'Saved.' }
+    ],
+
+    btn: [
+      'Continue →',   // 0
+      'Continue →',   // 1
+      'Continue →',   // 2
+      'Continue →',   // 3
+      'Continue →',   // 4
+      'Continue →',   // 5
+      'Choose →',     // 6
+      'Choose →',     // 7
+      'Continue →',   // 8
+      'Continue →',   // 9
+      'Continue →',   // 10
+      'Continue →',   // 11
+      'Continue →',   // 12
+      'Continue →',   // 13
+      'Finish'        // 14
+    ]
+  },
+
+  he: {
+    back: 'חזרה לקורס',
+    unit: 'חוויה אישית',
+
+    s: [
+      /* 0 */
+      { label: 'יחידה: חוויה אישית כמקור השראה',
+        big: 'יש אמנים שלא מציירים רק את מה שהם רואים —<br/>הם מציירים את מה שהם חווים.' },
+
+      /* 1 */
+      { label: 'פרידה קאלו',
+        quote: 'אני מציירת את המציאות שלי.',
+        attr: '— פרידה קאלו' },
+
+      /* 2 */
+      { instr: '<strong>שימי לב:</strong> הציורים לא מתארים רק דמות — הם מרכיבים עולם אישי.',
+        cap1: 'דיוקן עצמי עם קופים, 1943',
+        cap2: 'דיוקן עצמי עם צמה, 1941',
+        cap3: 'דיוקן עצמי עם בוניטו, 1941',
+        ask: 'מה קורה בתוך הציורים האלה?' },
+
+      /* 3 */
+      { label: 'הסתכלי מקרוב',
+        big: 'מה את רואה<br/>בציורים?',
+        sub: 'לא רק מה מצויר —<br/>אלא מה קורה שם.' },
+
+      /* 4 */
+      { label: 'מה מרכיב את הציור',
+        big: 'מה מרכיב את הציור?',
+        i: ['דמות', 'מקום', 'חפצים או סמלים', 'צבע'] },
+
+      /* 5 */
+      { label: 'הרעיון',
+        big: 'הציור לא מציג<br/>רגע אחד.',
+        sub: 'הוא מחבר כמה דברים יחד —<br/>כדי לבטא חוויה פנימית.' },
+
+      /* 6 */
+      { label: 'התור שלך',
+        big: 'בחרי חוויה אישית.',
+        sub: 'משהו שקרה, הרגשת<br/>או נשאר איתך.',
+        chips: ['פרידה','גאווה בעצמי','רגע של פחד','בדידות',
+                'אי-הבנה','שינוי גדול','מקום שאני אוהבת','משהו שאיבדתי'] },
+
+      /* 7 */
+      { label: 'בחרי מרכיבים',
+        big: 'מה יכול להופיע<br/>בציור שלך?',
+        chips: ['דמות','מקום','חפץ','צבע','חיה','צמח','סמל אישי'] },
+
+      /* 8 */
+      { label: 'התחילי לצייר',
+        big: 'סדרי את המרכיבים<br/>על הדף.',
+        sub: 'הם לא חייבים להיות מציאותיים —<br/>רק קשורים לחוויה שלך.' },
+
+      /* 9 */
+      { label: 'הוסיפי חיבור',
+        big: 'הוסיפי קשר<br/>בין הדברים.',
+        i: ['קו שמחבר', 'צבע משותף', 'מיקום קרוב', 'חיבור לא צפוי'] },
+
+      /* 10 */
+      { label: 'הוסיפי תחושה',
+        big: 'הוסיפי משהו שמבטא<br/>את מה שהרגשת.',
+        i: ['צבע חזק או עדין', 'שינוי בגודל', 'תנועה', 'שכבה נוספת'] },
+
+      /* 11 */
+      { label: 'הסימן שלך',
+        big: 'הוסיפי פרט קטן<br/>שרק את יודעת מה הוא מסמל.' },
+
+      /* 12 */
+      { label: 'עצרי',
+        big: 'תעצרי רגע.<br/>תסתכלי על הציור שלך.' },
+
+      /* 13 */
+      { label: 'כמו פרידה קאלו',
+        big: 'לא ציירת רק<br/>מה רואים.',
+        sub: 'יצרת ציור שמכיל<br/>חוויה אישית.' },
+
+      /* 14 */
+      { label: 'רפלקציה',
+        big: 'איזה חלק בציור<br/>מספר הכי הרבה?',
+        sub: 'על החוויה שלך.',
+        ph: 'החלק שמספר הכי הרבה הוא…',
+        save: 'שמור ✓', saved: 'נשמר.' }
+    ],
+
+    btn: [
+      '← המשך',   // 0
+      '← המשך',   // 1
+      '← המשך',   // 2
+      '← המשך',   // 3
+      '← המשך',   // 4
+      '← המשך',   // 5
+      '← בחר',    // 6
+      '← בחר',    // 7
+      '← המשך',   // 8
+      '← המשך',   // 9
+      '← המשך',   // 10
+      '← המשך',   // 11
+      '← המשך',   // 12
+      '← המשך',   // 13
+      '← סיום'    // 14
+    ]
+  }
+};
+
+/* ═══════════════════════════════════════════════
+   LANGUAGE
+═══════════════════════════════════════════════ */
+function setLang(l) {
+  he = (l === 'he');
+  localStorage.setItem('sourcesLang', l);
+  document.documentElement.lang = l;
+  document.body.classList.toggle('he', he);
+  document.body.classList.toggle('rtl', he);
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.body.dir             = he ? 'rtl' : 'ltr';
+  const pg = document.getElementById('progress');
+  if (pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
+  });
+  applyStrings();
+  updateBtn();
+  updateHud();
+}
+
+function applyStrings() {
+  const lang = he ? 'he' : 'en';
+  const d    = T[lang];
+  const s    = d.s;
+
+  document.getElementById('t-back').textContent    = d.back;
+  document.getElementById('t-unit').textContent    = d.unit;
+
+  /* Screen 0 */
+  el('t0-label').textContent = s[0].label;
+  el('t0-big').innerHTML     = s[0].big;
+
+  /* Screen 1 */
+  el('t1-label').textContent = s[1].label;
+  el('t1-quote').innerHTML   = s[1].quote;
+  el('t1-attr').textContent  = s[1].attr;
+
+  /* Screen 2 — gallery */
+  el('t2-instr').innerHTML   = s[2].instr;
+  el('t2-cap1').textContent  = s[2].cap1;
+  el('t2-cap2').textContent  = s[2].cap2;
+  el('t2-cap3').textContent  = s[2].cap3;
+  el('t2-ask').textContent   = s[2].ask;
+
+  /* Screen 3 */
+  el('t3-label').textContent = s[3].label;
+  el('t3-big').innerHTML     = s[3].big;
+  el('t3-sub').innerHTML     = s[3].sub;
+
+  /* Screen 4 — instr list */
+  el('t4-label').textContent = s[4].label;
+  el('t4-big').innerHTML     = s[4].big;
+  renderInstrBlock('s4-instr', s[4].i);
+
+  /* Screen 5 */
+  el('t5-label').textContent = s[5].label;
+  el('t5-big').innerHTML     = s[5].big;
+  el('t5-sub').innerHTML     = s[5].sub;
+
+  /* Screen 6 — chips */
+  el('t6-label').textContent = s[6].label;
+  el('t6-big').innerHTML     = s[6].big;
+  el('t6-sub').innerHTML     = s[6].sub;
+  renderChips('exp-chips', s[6].chips, 'exp-chips');
+
+  /* Screen 7 — chips */
+  el('t7-label').textContent = s[7].label;
+  el('t7-big').innerHTML     = s[7].big;
+  renderChips('elem-chips', s[7].chips, 'elem-chips');
+
+  /* Screen 8 */
+  el('t8-label').textContent = s[8].label;
+  el('t8-big').innerHTML     = s[8].big;
+  el('t8-sub').innerHTML     = s[8].sub;
+
+  /* Screen 9 — instr list */
+  el('t9-label').textContent = s[9].label;
+  el('t9-big').innerHTML     = s[9].big;
+  renderInstrBlock('s9-instr', s[9].i);
+
+  /* Screen 10 — instr list */
+  el('t10-label').textContent = s[10].label;
+  el('t10-big').innerHTML     = s[10].big;
+  renderInstrBlock('s10-instr', s[10].i);
+
+  /* Screen 11 */
+  el('t11-label').textContent = s[11].label;
+  el('t11-big').innerHTML     = s[11].big;
+
+  /* Screen 12 */
+  el('t12-label').textContent = s[12].label;
+  el('t12-big').innerHTML     = s[12].big;
+
+  /* Screen 13 */
+  el('t13-label').textContent = s[13].label;
+  el('t13-big').innerHTML     = s[13].big;
+  el('t13-sub').innerHTML     = s[13].sub;
+
+  /* Screen 14 */
+  el('t14-label').textContent = s[14].label;
+  el('t14-big').innerHTML     = s[14].big;
+  el('t14-sub').textContent   = s[14].sub;
+  el('reflection-input').placeholder = s[14].ph;
+  el('ref-save-btn').textContent     = s[14].save;
+  el('ref-saved-msg').textContent    = s[14].saved;
+}
+
+function el(id) { return document.getElementById(id); }
+
+/* ═══════════════════════════════════════════════
+   CHIP RENDERER
+═══════════════════════════════════════════════ */
+function renderChips(containerId, labels, groupId) {
+  const wrap = document.getElementById(containerId);
+  if (!wrap || !labels) return;
+  wrap.innerHTML = labels.map(txt =>
+    `<button class="chip" onclick="pick(this,'${groupId}')">${txt}</button>`
+  ).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   INSTRUCTION BOX RENDERER (delegates to lesson-system.js)
+═══════════════════════════════════════════════ */
+function renderInstrBlock(containerId, lines) {
+  /* renderInstrBlock is defined in lesson-system.js — call it directly */
+  const el = document.getElementById(containerId);
+  if (!el || !lines) return;
+  const isRTL = document.body.classList.contains('rtl');
+  el.innerHTML = '<ul>' + lines.map(l =>
+    `<li style="text-align:${isRTL ? 'right' : 'left'}">${l}</li>`
+  ).join('') + '</ul>';
+}
+
+/* ═══════════════════════════════════════════════
+   HUD STEP COUNTER
+═══════════════════════════════════════════════ */
+function updateHud() {
+  const display = cur < TOTAL - 1 ? (cur + 1) + ' / ' + TOTAL : '✓';
+  document.getElementById('hud-step').textContent = display;
+}
+
+/* ═══════════════════════════════════════════════
+   DOTS + BUTTON — lesson-system.js delegates
+═══════════════════════════════════════════════ */
+function buildDots()   { LS_buildDots(TOTAL, go); }
+function refreshDots() { LS_refreshDots(cur); }
+function updateBtn()   {
+  updateLessonBtn(
+    document.getElementById('next-btn'),
+    T[he ? 'he' : 'en'].btn,
+    cur, GOLD_AT, he
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   BACKGROUND per screen
+═══════════════════════════════════════════════ */
+function setBg(idx) {
+  const sc = document.getElementById('s' + idx);
+  if (!sc) return;
+  document.body.style.background = sc.dataset.bg || '#0d0d1a';
+}
+
+/* ═══════════════════════════════════════════════
+   BACK BUTTON STATE
+═══════════════════════════════════════════════ */
+function updateBackBtn() {
+  document.getElementById('back-btn').disabled = (cur === 0);
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function go(n) {
+  if (n < 0 || n >= TOTAL || busy) return;
+  busy = true;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.add('leaving');
+  setTimeout(() => {
+    prev.classList.remove('active', 'leaving');
+    cur = n;
+    const next = document.getElementById('s' + cur);
+    next.classList.add('active');
+    next.scrollTop = 0;
+    setBg(cur);
+    refreshDots();
+    updateBtn();
+    updateHud();
+    updateBackBtn();
+    busy = false;
+  }, 380);
+}
+
+function advance() { if(busy) return; if(cur === TOTAL - 1) finishLesson(); else go(cur + 1); }
+function goBack()  { if (!busy && cur > 0)          go(cur - 1); }
+
+/* ═══════════════════════════════════════════════
+   INTERACTIONS
+═══════════════════════════════════════════════ */
+function pick(btn, groupId) {
+  document.getElementById(groupId)
+    .querySelectorAll('.chip')
+    .forEach(c => c.classList.remove('picked'));
+  btn.classList.add('picked');
+}
+
+/* ═══════════════════════════════════════════════
+   REFLECTION
+═══════════════════════════════════════════════ */
+function saveRef() {
+  const txt = document.getElementById('reflection-input').value.trim();
+  if (!txt) return;
+  const key = 'frida-kahlo-reflection';
+  const stored = JSON.parse(localStorage.getItem(key) || '[]');
+  stored.push({ text: txt, date: new Date().toISOString() });
+  localStorage.setItem(key, JSON.stringify(stored));
+  const msg = document.getElementById('ref-saved-msg');
+  msg.style.display = 'block';
+  msg.style.opacity = '1';
+}
+
+/* ═══════════════════════════════════════════════
+   FULLSCREEN
+═══════════════════════════════════════════════ */
+function toggleFS() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   KEYBOARD
+═══════════════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA') return;
+  if (e.key === ' ')          { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
+  if (e.key === 'f' || e.key === 'F') toggleFS();
+});
+
+/* ═══════════════════════════════════════════════
+   TOUCH SWIPE
+═══════════════════════════════════════════════ */
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (he) {
+    if (dx >  60) advance();
+    if (dx < -60) goBack();
+  } else {
+    if (dx < -60) advance();
+    if (dx >  60) goBack();
+  }
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════
+   INIT — setLang MUST run before buildDots
+═══════════════════════════════════════════════ */
+setLang(he ? 'he' : 'en');   // sets RTL class, applies all strings
+document.body.classList.remove('lang-loading'); /* reveal after lang applied */
+buildDots();                  // builds dots with correct RTL direction
+refreshDots();                // syncs active dot to cur=0
+updateBtn();                  // syncs button label to screen 0
+setBg(0);
+updateBackBtn();
+</script>
+</body>
+</html>

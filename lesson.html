@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור דוגמה — מקורות השראה</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+textarea{font-family:inherit;outline:none;border:none;resize:none}
+
+:root{
+  --gold:#c9a96e;
+  --rose:#FF4D4D;
+  --violet:#7c6fcd;
+  --ink:#0f0f10;
+  --u1:#FF4D4D;
+  --speed:600ms;
+  --tp:#ffffff;
+  --ts:#cfcfcf;
+  --tm:#8a8a8a;
+}
+
+/* ── BODY ── */
+body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
+
+/* ════════════════════════════════
+   STAGE
+════════════════════════════════ */
+#stage{
+  position:fixed;
+  top:55px;       /* below HUD */
+  bottom:88px;    /* nav-bar bottom:20px + height≈50px + safe gap */
+  left:0;right:0;
+  overflow:hidden;
+  /* dvh accounts for mobile browser chrome collapse */
+  height:calc(100svh - 55px - 88px);
+  height:calc(100dvh - 55px - 88px);
+}
+
+/* ════════════════════════════════
+   SCREENS
+════════════════════════════════ */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px 32px 16px;
+  text-align:center;
+  opacity:0;pointer-events:none;
+  transform:translateY(36px) scale(.985);
+  transition:opacity var(--speed) ease,
+             transform var(--speed) cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{
+  opacity:1;pointer-events:all;
+  transform:translateY(0) scale(1);
+}
+.screen.leaving{
+  opacity:0;
+  transform:translateY(-28px) scale(1.01);
+  transition:opacity 380ms ease,
+             transform 380ms cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+
+/* scroll-heavy screens align top */
+.screen--scroll{
+  justify-content:flex-start;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+/* ── Ambient BG ── */
+.bg{
+  position:absolute;inset:0;z-index:0;
+  pointer-events:none;overflow:hidden;
+}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(100px);
+  animation:bfloat 14s ease-in-out infinite;
+}
+@keyframes bfloat{
+  0%,100%{transform:translate(0,0)}
+  40%{transform:translate(28px,-22px)}
+  70%{transform:translate(-18px,18px)}
+}
+
+/* ── Content wrapper ── */
+.sc{
+  position:relative;z-index:2;
+  max-width:680px;width:100%;
+}
+
+/* ── Eyebrow ── */
+.eyebrow{
+  font-size:.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  color:var(--tm);
+  margin-bottom:28px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+}
+[dir="rtl"] .eyebrow{flex-direction:row-reverse;justify-content:flex-end}
+.ey-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent,var(--gold));
+  animation:pulse 2.8s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.4);opacity:.9}}
+
+/* ── BIG TEXT ── */
+.big{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1.6rem,4.2vw,3rem);
+  font-weight:700;color:var(--tp);line-height:1.3;
+  letter-spacing:-.02em;
+}
+.big em{font-style:normal;color:var(--gold)}
+[dir="rtl"] .big{letter-spacing:0;text-align:right}
+
+.mid{
+  font-size:clamp(1.1rem,2.8vw,1.9rem);
+  font-family:'Sora',sans-serif;font-weight:600;
+  color:var(--ts);line-height:1.5;
+}
+[dir="rtl"] .mid{text-align:right}
+
+/* ── SUB TEXT ── */
+.sub{
+  font-size:clamp(.88rem,1.9vw,1.04rem);
+  color:var(--tm);line-height:2;
+  max-width:500px;
+  font-weight:300;
+}
+[dir="rtl"] .sub{text-align:right}
+
+/* ── BILINGUAL BLOCK ── */
+/* language visibility controlled by lesson-responsive.css via html[lang] */
+.bilingual{
+  display:flex;flex-direction:column;gap:10px;
+  width:100%;max-width:560px;
+}
+.bi-he{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(1.5rem,4vw,2.6rem);
+  font-weight:700;color:var(--tp);line-height:1.35;
+  text-align:right;direction:rtl;
+}
+.bi-he-attr{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(.88rem,1.8vw,1rem);
+  color:var(--tm);text-align:right;direction:rtl;
+  margin-top:4px;
+}
+.bi-en{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1rem,2.5vw,1.55rem);
+  font-weight:400;font-style:italic;
+  color:var(--ts);line-height:1.45;
+  text-align:left;direction:ltr;
+  opacity:.8;
+}
+.bi-en-attr{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(.76rem,1.5vw,.88rem);
+  color:var(--tm);text-align:left;direction:ltr;
+  margin-top:2px;
+}
+
+/* ── ACCENT LINE ── */
+.aline{
+  width:28px;height:1.5px;border-radius:2px;
+  background:var(--gold);opacity:.6;
+  margin:20px auto;
+  animation:lineGrow .9s ease forwards;
+  transform-origin:center;
+}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+[dir="rtl"] .aline{margin-left:auto;margin-right:0}
+
+/* ── CAPTION BILINGUAL ── */
+/* language visibility controlled by lesson-responsive.css via html[lang] */
+.cap-block{
+  margin-top:14px;
+  display:flex;flex-direction:column;gap:4px;
+  max-width:400px;
+  margin-left:auto;margin-right:auto;
+  text-align:center;
+}
+.cap-he{
+  font-family:'Heebo',sans-serif;
+  font-size:.82rem;color:var(--ts);
+  direction:rtl;font-weight:400;
+}
+.cap-en{
+  font-family:'Inter',sans-serif;
+  font-size:.74rem;color:var(--tm);
+  direction:ltr;font-style:italic;
+}
+
+/* ════════════════════════════════
+   GALLERY
+════════════════════════════════ */
+.gallery-wrap{
+  width:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:0 0 4px;
+}
+.artwork-card{
+  width:100%;
+  max-width:min(88vw, 500px);
+  margin:0 auto;
+  border-radius:4px;
+  overflow:visible;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),
+             0 4px 18px rgba(0,0,0,.35),
+             0 0 80px rgba(201,169,110,.08);
+  animation:artFloat 6s ease-in-out infinite alternate;
+}
+@keyframes artFloat{
+  from{transform:translateY(0px)}
+  to{transform:translateY(-5px)}
+}
+.artwork-card img{
+  width:100%;
+  height:auto;
+  max-height:38vh;
+  display:block;
+  object-fit:contain;
+  border-radius:3px;
+  background:#141420;
+}
+/* fallback placeholder when image fails */
+.artwork-card img.broken{
+  min-height:160px;
+  background:linear-gradient(135deg,#1a1a2e,#2a1a3e);
+}
+
+.artwork-meta{
+  margin-top:12px;
+  text-align:center;
+  padding:0 8px;
+}
+.artwork-meta-artist{
+  font-size:.63rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.16em;
+  color:var(--tm);margin-bottom:4px;
+}
+.artwork-meta-title{
+  font-size:.8rem;font-weight:400;
+  font-style:italic;color:var(--ts);
+}
+.artwork-meta-year{
+  font-size:.7rem;color:var(--tm);
+  margin-right:6px;font-style:normal;
+}
+
+/* ════════════════════════════════
+   ARTWORK + ACTION — combined layout
+════════════════════════════════ */
+.action-block{
+  margin-top:16px;
+  width:100%;
+  max-width:min(88vw,500px);
+  margin-left:auto;margin-right:auto;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  padding:14px 18px 12px;
+}
+.action-label{
+  font-size:.58rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:7px;
+}
+[dir="rtl"] .action-label{flex-direction:row-reverse;justify-content:flex-end}
+.action-label::before{
+  content:'';display:inline-block;
+  width:16px;height:1.5px;background:var(--gold);opacity:.7;
+}
+.instr-he{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(1.3rem,3.8vw,2.2rem);
+  font-weight:700;color:var(--tp);
+  text-align:right;direction:rtl;line-height:1.35;
+}
+.instr-he-sub{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(.82rem,1.9vw,.98rem);
+  color:var(--tm);text-align:right;direction:rtl;
+  font-weight:300;line-height:1.8;margin-top:5px;
+}
+.instr-en{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(.88rem,2vw,1.15rem);
+  font-weight:400;font-style:italic;
+  color:var(--ts);opacity:.75;
+  text-align:left;direction:ltr;line-height:1.5;
+  margin-top:6px;
+}
+.instr-en-sub{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(.72rem,1.5vw,.84rem);
+  color:var(--tm);opacity:.7;
+  text-align:left;direction:ltr;
+  font-style:italic;line-height:1.7;
+}
+.instr-divider{
+  width:100%;height:1px;
+  background:rgba(255,255,255,.06);
+  margin:8px 0;
+}
+
+/* ── standalone instruction block (S6, S7) ── */
+.instruction-block{
+  display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:520px;
+}
+
+/* ════════════════════════════════
+   EMOTION CHIPS (S1)
+════════════════════════════════ */
+.emotion-grid{
+  display:flex;flex-wrap:wrap;
+  gap:10px;justify-content:center;
+  margin-top:24px;
+  direction:rtl;
+}
+.emotion-chip{
+  padding:10px 20px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  transition:all .22s;flex-shrink:0;
+}
+.emotion-chip:hover{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.26);
+  transform:translateY(-2px);
+}
+.emotion-chip.picked{
+  background:rgba(255,77,77,.15);
+  border-color:var(--rose);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+.chip-he{
+  font-family:'Heebo',sans-serif;
+  font-size:.95rem;font-weight:700;color:var(--tp);
+}
+.chip-en{
+  font-family:'Inter',sans-serif;
+  font-size:.66rem;color:var(--tm);font-weight:400;
+}
+
+/* ════════════════════════════════
+   COLOR GRID (S2) — 2×3, LARGE SQUARES, NO TEXT
+════════════════════════════════ */
+.color-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:24px;
+  width:100%;
+  max-width:400px;
+  margin-left:auto;margin-right:auto;
+}
+.color-sq{
+  aspect-ratio:1/1;
+  border-radius:8px;
+  border:3px solid transparent;
+  cursor:pointer;
+  transition:all .22s;
+  position:relative;
+}
+.color-sq:hover{
+  transform:scale(1.05);
+  filter:brightness(1.1);
+}
+.color-sq.picked{
+  border-color:#fff;
+  transform:scale(1.08);
+  box-shadow:0 0 24px rgba(255,255,255,.3);
+}
+
+/* ════════════════════════════════
+   CLOSING (S7)
+════════════════════════════════ */
+.closing-block{
+  display:flex;flex-direction:column;gap:14px;
+  width:100%;max-width:540px;
+  align-items:center;
+}
+/* language visibility controlled by lesson-responsive.css via html[lang] */
+.close-he{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(1.5rem,4vw,2.6rem);
+  font-weight:700;color:var(--tp);
+  text-align:right;direction:rtl;line-height:1.4;
+  width:100%;
+}
+.close-en{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(.95rem,2.4vw,1.4rem);
+  font-weight:300;font-style:italic;
+  color:var(--ts);opacity:.7;
+  text-align:left;direction:ltr;line-height:1.6;
+  width:100%;
+}
+.complete-icon{
+  width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#d4b87a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.9rem;margin:0 auto 16px;
+  box-shadow:0 0 36px rgba(201,169,110,.2);
+}
+.complete-btns{
+  display:flex;gap:12px;justify-content:center;
+  flex-wrap:wrap;margin-top:22px;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:12px;
+  background:#FF4D4D;color:#fff;
+  font-size:.9rem;font-weight:700;
+  text-decoration:none;transition:.2s;
+}
+.btn-gold:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 24px;border-radius:12px;
+  background:transparent;color:var(--ts);
+  border:1.5px solid rgba(255,255,255,.15);
+  font-size:.9rem;font-weight:600;
+  cursor:pointer;transition:.2s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.35);color:var(--tp)}
+
+/* ════════════════════════════════
+   HUD
+════════════════════════════════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:55px;padding:0 16px;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(13,13,26,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+[dir="rtl"] #hud{flex-direction:row-reverse}
+#hud-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:.78rem;color:var(--tm);
+  text-decoration:none;transition:.2s;flex-shrink:0;
+}
+#hud-back:hover{color:var(--tp)}
+[dir="rtl"] #hud-back svg{transform:scaleX(-1)}
+#hud-badge{
+  padding:4px 11px;border-radius:20px;
+  background:rgba(255,77,77,.1);color:#FF4D4D;
+  font-size:.66rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;
+  flex-shrink:0;
+}
+#hud-spacer{flex:1}
+#hud-step{font-size:.72rem;font-weight:700;color:var(--tm);flex-shrink:0}
+
+/* Language toggle */
+#lang-toggle{
+  display:flex;align-items:center;
+  background:rgba(255,255,255,.07);
+  border-radius:8px;overflow:hidden;flex-shrink:0;
+}
+.lang-btn{
+  padding:5px 10px;font-size:.72rem;font-weight:700;
+  color:var(--tm);background:transparent;
+  transition:.2s;border:none;cursor:pointer;
+}
+.lang-btn.active{background:rgba(201,169,110,.18);color:var(--gold)}
+
+/* Classroom btn */
+#cls-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:7px;
+  background:rgba(255,255,255,.07);color:var(--tm);
+  font-size:.7rem;font-weight:700;transition:.2s;flex-shrink:0;
+}
+#cls-btn:hover{background:rgba(255,255,255,.13);color:#fff}
+
+/* ── PROGRESS BAR ── */
+#prog{
+  position:fixed;top:55px;left:0;right:0;z-index:199;
+  height:3px;background:rgba(255,255,255,.06);
+}
+#prog-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--rose),var(--gold));
+  transition:width .55s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px rgba(232,93,117,.4);
+}
+#prog-dots{
+  position:fixed;top:55px;left:0;right:0;z-index:198;
+  height:3px;pointer-events:none;
+}
+.pdot{
+  position:absolute;top:-3.5px;transform:translateX(-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:rgba(255,255,255,.07);
+  border:2px solid rgba(255,255,255,.1);
+  transition:.3s;cursor:pointer;pointer-events:all;
+}
+.pdot.done{background:rgba(201,168,76,.7);border-color:var(--gold)}
+.pdot.now{background:var(--rose);border-color:var(--rose);box-shadow:0 0 9px rgba(232,93,117,.6)}
+
+/* ════════════════════════════════
+   NAV BAR — floating pill, bottom fixed
+   !important overrides lesson-responsive.css section 10
+════════════════════════════════ */
+#nav-bar{
+  position:fixed !important;
+  bottom:max(20px, env(safe-area-inset-bottom, 20px)) !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  z-index:400 !important;
+  display:flex !important;
+  align-items:center;gap:12px;
+  width:auto !important;
+  padding-bottom:0 !important;
+}
+[dir="rtl"] #nav-bar{flex-direction:row-reverse}
+
+#back-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:50px;height:50px;
+  background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  color:rgba(255,255,255,.7);
+  font-size:1.2rem;
+  transition:all .22s;flex-shrink:0;
+}
+#back-btn:hover{background:rgba(255,255,255,.18);color:#fff;transform:scale(1.07)}
+#back-btn:disabled{opacity:.2;cursor:default;pointer-events:none}
+[dir="rtl"] #back-btn svg{transform:scaleX(-1)}
+
+#next-btn{
+  padding:14px 48px;
+  background:#FF4D4D;
+  color:#fff;
+  font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;
+  border-radius:50px;letter-spacing:.03em;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);
+  transition:all .25s;
+  white-space:nowrap;
+}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+
+/* ════════════════════════════════
+   MOBILE
+════════════════════════════════ */
+@media(max-width:540px){
+  .screen{padding:18px 18px 12px}
+  .screen--scroll{padding-top:14px;padding-bottom:14px}
+  .bi-he{font-size:clamp(1.3rem,6.5vw,2rem)}
+  .bi-en{font-size:clamp(.88rem,4vw,1.1rem)}
+  .artwork-card img{max-height:30vh}
+  .color-grid{max-width:300px;gap:9px}
+  #next-btn{padding:13px 34px;font-size:.9rem}
+  #cls-btn span{display:none}
+  .action-block{padding:11px 14px 10px}
+  .instr-he{font-size:clamp(1.1rem,5.5vw,1.8rem)}
+}
+
+/* Short screens */
+@media(max-height:620px){
+  .artwork-card img{max-height:26vh}
+  .bi-he{font-size:clamp(1.1rem,4vw,1.6rem)}
+  .instr-he{font-size:clamp(1.1rem,4vw,1.8rem)}
+  .eyebrow{margin-bottom:14px}
+  .aline{margin:12px auto}
+  .action-block{margin-top:10px}
+}
+</style>
+<link rel="stylesheet" href="css/lesson-responsive.css"/>
+</head>
+<body>
+
+<!-- ══ HUD ══ -->
+<header id="hud">
+  <a href="course.html" id="hud-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-he="הקורס" data-en="Course">הקורס</span>
+  </a>
+  <div id="hud-badge"><span data-he="שיעור דוגמה" data-en="Example Lesson">שיעור דוגמה</span></div>
+  <div id="hud-spacer"></div>
+  <span id="hud-step">1 / 7</span>
+  <div id="lang-toggle">
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn active" onclick="setLang('he')">עב</button>
+  </div>
+  <button id="cls-btn" onclick="toggleClassroom()">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 4V1h3M9 1h3v3M12 9v3H9M4 12H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-he="מצב כיתה" data-en="Classroom">מצב כיתה</span>
+  </button>
+</header>
+
+<!-- ══ PROGRESS ══ -->
+<div id="prog"><div id="prog-fill"></div></div>
+<div id="prog-dots"></div>
+
+<!-- ════════════════════════════════
+     STAGE — 7 screens
+════════════════════════════════ -->
+<main id="stage">
+
+<!-- ══════════════════════════════════════
+     S1 — Phase 1 Connect: Emotion Selection
+══════════════════════════════════════ -->
+<section class="screen screen--scroll active" id="s1" style="--accent:var(--rose)">
+  <div class="bg">
+    <div class="blob" style="width:480px;height:480px;background:#e85d75;opacity:.09;top:-100px;right:-70px;animation-delay:3s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#c9a96e;opacity:.07;bottom:-30px;left:5%;animation-delay:8s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:var(--rose)"></div>
+      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+    </div>
+    <div class="instruction-block">
+      <div class="instr-he">מה נוכח בך עכשיו?</div>
+      <div class="instr-he-sub">אל תחשוב — תרגיש. בחר עד שלושה רגשות.</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">What is present in you right now?</div>
+      <div class="instr-en-sub">Don't think — feel. Choose up to three emotions.</div>
+    </div>
+    <div class="emotion-grid" id="emotion-chips">
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">עצב</span><span class="chip-en">Sadness</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">כעס</span><span class="chip-en">Anger</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">שקט</span><span class="chip-en">Calm</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">חרדה</span><span class="chip-en">Anxiety</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">שמחה</span><span class="chip-en">Joy</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">כובד</span><span class="chip-en">Weight</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">תקווה</span><span class="chip-en">Hope</span>
+      </button>
+      <button class="emotion-chip" onclick="pickEmotion(this)">
+        <span class="chip-he">בלבול</span><span class="chip-en">Confusion</span>
+      </button>
+    </div>
+    <p id="emotion-resp" style="margin-top:14px;font-size:.82rem;color:var(--tm);min-height:20px;font-style:italic"></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S2 — Phase 1 Connect: Color Selection
+══════════════════════════════════════ -->
+<section class="screen screen--scroll" id="s2" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:460px;height:460px;background:#c9a96e;opacity:.09;top:-80px;left:-80px;animation-delay:0s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#e85d75;opacity:.07;bottom:-40px;right:10%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot"></div>
+      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+    </div>
+    <div class="instruction-block">
+      <div class="instr-he">איזה צבע הוא הרגש הזה?</div>
+      <div class="instr-he-sub">מהיר. אינטואיטיבי. אין תשובה נכונה.</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">What color is this feeling?</div>
+      <div class="instr-en-sub">Fast. Intuitive. No right answer.</div>
+    </div>
+    <div class="color-grid" id="color-grid">
+      <!-- Row 1 -->
+      <button class="color-sq" style="background:#8B1A1A" onclick="pickColor(this)" aria-label="Deep red"></button>
+      <button class="color-sq" style="background:#1a2e6e" onclick="pickColor(this)" aria-label="Deep blue"></button>
+      <button class="color-sq" style="background:#d4b800" onclick="pickColor(this)" aria-label="Yellow"></button>
+      <!-- Row 2 -->
+      <button class="color-sq" style="background:#1a1a1a" onclick="pickColor(this)" aria-label="Black"></button>
+      <button class="color-sq" style="background:#c97ca0" onclick="pickColor(this)" aria-label="Pink"></button>
+      <button class="color-sq" style="background:#1a3d2b" onclick="pickColor(this)" aria-label="Dark green"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S3 — Phase 2 Inspire+Act: Rothko
+══════════════════════════════════════ -->
+<section class="screen screen--scroll" id="s3" style="--accent:#9b7fd4">
+  <div class="bg">
+    <div class="blob" style="width:520px;height:520px;background:#7c6fcd;opacity:.1;top:-100px;left:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c97cc9;opacity:.08;bottom:-50px;right:8%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#9b7fd4"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/rothko-colorfield.jpg"
+          alt="No. 61 (Rust and Blue) — Mark Rothko, 1953"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Rothko No. 61 (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Mark Rothko</div>
+        <div class="artwork-meta-title">
+          <span data-he="מס׳ 61 (חלודה וכחול)" data-en="No. 61 (Rust and Blue)">מס׳ 61 (חלודה וכחול)</span>
+          <span class="artwork-meta-year">1953</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
+      <div class="instr-he">הניחו כתם אחד גדול.</div>
+      <div class="instr-he-sub">לא ציור — כתם. מלא. בלי לחשוב על מיקום.</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">Place one large mark.</div>
+      <div class="instr-en-sub">Not a drawing — a mark. Full. Don't think about placement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S4 — Phase 2 Inspire+Act: Frankenthaler
+══════════════════════════════════════ -->
+<section class="screen screen--scroll" id="s4" style="--accent:#a8c0e8">
+  <div class="bg">
+    <div class="blob" style="width:520px;height:520px;background:#a8c0e8;opacity:.08;top:-120px;left:-90px;animation-delay:2s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#7c6fcd;opacity:.08;bottom:-40px;right:8%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#a8c0e8"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/frankenthaler-mountains.jpg"
+          alt="Mountains and Sea — Helen Frankenthaler, 1952"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Frankenthaler Mountains and Sea (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Helen Frankenthaler</div>
+        <div class="artwork-meta-title">
+          <span data-he="הרים וים" data-en="Mountains and Sea">הרים וים</span>
+          <span class="artwork-meta-year">1952</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
+      <div class="instr-he">הוסיפו כתם שני.</div>
+      <div class="instr-he-sub">תנו לו להיות קרוב או רחוק מהראשון. תנו להם לדבר.</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">Add a second mark.</div>
+      <div class="instr-en-sub">Let it be close or far from the first. Let them speak to each other.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S5 — Phase 2 Inspire+Act: Kline
+══════════════════════════════════════ -->
+<section class="screen screen--scroll" id="s5" style="--accent:#c97cc9">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.09;top:-100px;right:-70px;animation-delay:0s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.09;bottom:-40px;left:10%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#c97cc9"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/kline-mahoning.jpg"
+          alt="Mahoning — Franz Kline, 1956"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Kline Mahoning (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Franz Kline</div>
+        <div class="artwork-meta-title">
+          <span data-he="מהונינג" data-en="Mahoning">מהונינג</span>
+          <span class="artwork-meta-year">1956</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
+      <div class="instr-he">תנו לצבע לנוע.</div>
+      <div class="instr-he-sub">להתפשט. להיעצר. להתערבב. הגוף מצייר — לא רק היד.</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">Let the color move.</div>
+      <div class="instr-en-sub">Spread. Stop. Mix. The body paints — not just the hand.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S6 — Phase 3 Pause: Quiet Observation
+══════════════════════════════════════ -->
+<section class="screen" id="s6" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:580px;height:580px;background:#c9a96e;opacity:.09;top:-150px;right:-100px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#7c6fcd;opacity:.07;bottom:-50px;left:5%;animation-delay:7s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow">
+      <div class="ey-dot"></div>
+      <span data-he="שלב 3 — עצירה" data-en="Phase 3 — Pause">שלב 3 — עצירה</span>
+    </div>
+    <div class="instruction-block">
+      <div class="instr-he">עצרו. הסתכלו על הדף.</div>
+      <div class="instr-he-sub">אל תשפטו — רק שימו לב. מה הדף אומר לכם?</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">Stop. Look at the page.</div>
+      <div class="instr-en-sub">Don't judge — just notice. What is the page saying to you?</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S7 — Phase 4 Close: Warm Ending
+══════════════════════════════════════ -->
+<section class="screen" id="s7" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
+    <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.07;bottom:-60px;right:-60px;animation-delay:4s"></div>
+    <div class="blob" style="width:200px;height:200px;background:#7c6fcd;opacity:.1;top:35%;right:12%;animation-delay:2s"></div>
+  </div>
+  <div class="sc">
+    <div class="complete-icon">✦</div>
+    <div class="closing-block">
+      <div class="close-he">הציור לא מתאר משהו. הוא יוצר תחושה.</div>
+      <div class="close-en">The painting doesn't describe something. It creates a feeling.</div>
+    </div>
+    <div class="complete-btns">
+      <a href="course.html" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l6 6-6 6M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-he="חזרה לקורס" data-en="Back to Course">חזרה לקורס</span>
+      </a>
+      <button class="btn-ghost" onclick="go(1)">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M11 2.5A5.5 5.5 0 102 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M1 7V11h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-he="שוב מההתחלה" data-en="Review">שוב מההתחלה</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ NAV BAR ══ -->
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled title="Back">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button id="next-btn" onclick="advance()">בחר ←</button>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+const TOTAL = 7;
+let cur = 1;
+let busy = false;
+let lang = localStorage.getItem('sourcesLang') || localStorage.getItem('lesson-lang') || 'he';
+
+// Selections
+let pickedEmotions = [];   // up to 3
+let pickedColor    = null;
+
+// ══════════════════════════════════════
+// BUTTON LABELS — bilingual per screen
+// ══════════════════════════════════════
+const BTN = {
+  he: {
+    1: 'בחר ←',
+    2: 'בחר ←',
+    3: 'המשך ←',
+    4: 'המשך ←',
+    5: 'המשך ←',
+    6: 'המשך ←',
+    7: null      // closing screen — no next-btn
+  },
+  en: {
+    1: 'Choose →',
+    2: 'Choose →',
+    3: 'Continue →',
+    4: 'Continue →',
+    5: 'Continue →',
+    6: 'Continue →',
+    7: null
+  }
+};
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildDots();
+  applyLang();
+  updateProgress();
+  updateBtn();
+});
+
+// ══════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('sourcesLang', l);
+  localStorage.setItem('lesson-lang', l);
+  applyLang();
+  updateBtn();
+}
+
+function applyLang() {
+  const isHe = lang === 'he';
+  document.documentElement.lang = lang;
+  document.body.dir = isHe ? 'rtl' : 'ltr';
+  document.body.style.fontFamily = isHe ? "'Heebo', sans-serif" : "'Inter', sans-serif";
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active',
+      (b.textContent.trim() === 'EN' && !isHe) ||
+      (b.textContent.trim() === 'עב' && isHe)
+    );
+  });
+
+  // swap [data-he] / [data-en]
+  document.querySelectorAll('[data-he]').forEach(el => {
+    const val = el.getAttribute(`data-${lang}`);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+
+  // nav-bar direction
+  const nav = document.getElementById('nav-bar');
+  if (nav) nav.style.flexDirection = isHe ? 'row-reverse' : 'row';
+
+  // hud direction
+  const hud = document.getElementById('hud');
+  if (hud) hud.style.flexDirection = isHe ? 'row-reverse' : 'row';
+}
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+function advance() {
+  if (busy || cur >= TOTAL) return;
+  go(cur + 1);
+}
+function goBack() {
+  if (busy || cur <= 1) return;
+  go(cur - 1);
+}
+
+function go(n) {
+  if (busy || n < 1 || n > TOTAL) return;
+  busy = true;
+
+  const prev = document.getElementById(`s${cur}`);
+  prev.classList.remove('active');
+  prev.classList.add('leaving');
+  setTimeout(() => prev.classList.remove('leaving'), 420);
+
+  cur = n;
+  setTimeout(() => {
+    const next = document.getElementById(`s${cur}`);
+    next.scrollTop = 0;
+    next.classList.add('active');
+    busy = false;
+  }, 80);
+
+  updateProgress();
+  updateDots();
+  updateBtn();
+  document.getElementById('hud-step').textContent = `${cur} / ${TOTAL}`;
+}
+
+// ══════════════════════════════════════
+// PROGRESS
+// ══════════════════════════════════════
+function updateProgress() {
+  const pct = ((cur - 1) / (TOTAL - 1)) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+function buildDots() {
+  const wrap = document.getElementById('prog-dots');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'pdot'; d.id = `dot-${i}`;
+    d.style.left = ((i - 1) / (TOTAL - 1) * 100) + '%';
+    d.onclick = () => go(i);
+    wrap.appendChild(d);
+  }
+  updateDots();
+}
+function updateDots() {
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.getElementById(`dot-${i}`);
+    if (!d) continue;
+    d.classList.remove('done','now');
+    if (i < cur)  d.classList.add('done');
+    if (i === cur) d.classList.add('now');
+  }
+}
+
+// ══════════════════════════════════════
+// BUTTON
+// ══════════════════════════════════════
+function updateBtn() {
+  const btn  = document.getElementById('next-btn');
+  const back = document.getElementById('back-btn');
+  const label = BTN[lang][cur];
+
+  if (!label) {
+    btn.style.display = 'none';
+  } else {
+    btn.style.display = '';
+    btn.textContent   = label;
+  }
+
+  if (back) back.disabled = (cur <= 1);
+}
+
+// ══════════════════════════════════════
+// EMOTION SELECTION (S1) — max 3
+// ══════════════════════════════════════
+function pickEmotion(btn) {
+  const isAlreadyPicked = btn.classList.contains('picked');
+  if (isAlreadyPicked) {
+    btn.classList.remove('picked');
+    pickedEmotions = pickedEmotions.filter(b => b !== btn);
+  } else {
+    if (pickedEmotions.length >= 3) return; // max 3
+    btn.classList.add('picked');
+    pickedEmotions.push(btn);
+  }
+  // feedback count
+  const resp = document.getElementById('emotion-resp');
+  if (pickedEmotions.length > 0) {
+    resp.textContent = lang === 'he'
+      ? `בחרת ${pickedEmotions.length} רגש${pickedEmotions.length > 1 ? 'ות' : ''}`
+      : `${pickedEmotions.length} emotion${pickedEmotions.length > 1 ? 's' : ''} selected`;
+  } else {
+    resp.textContent = '';
+  }
+}
+
+// ══════════════════════════════════════
+// COLOR SELECTION (S2)
+// ══════════════════════════════════════
+function pickColor(btn) {
+  document.querySelectorAll('#color-grid .color-sq').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  pickedColor = btn.style.background;
+}
+
+// ══════════════════════════════════════
+// CLASSROOM MODE
+// ══════════════════════════════════════
+function toggleClassroom() {
+  const el = document.documentElement;
+  if (!document.fullscreenElement) {
+    el.requestFullscreen && el.requestFullscreen();
+  } else {
+    document.exitFullscreen && document.exitFullscreen();
+  }
+}
+
+// ══════════════════════════════════════
+// KEYBOARD + SWIPE
+// ══════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (['TEXTAREA','INPUT'].includes(document.activeElement.tagName)) return;
+  const isHe = lang === 'he';
+  if (e.key === ' ')         { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowRight'){ e.preventDefault(); isHe ? goBack()  : advance(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); isHe ? advance() : goBack();  }
+  if (e.key === 'f' || e.key === 'F') toggleClassroom();
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive:true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  const isHe = lang === 'he';
+  if (Math.abs(dx) > 55) {
+    if (isHe) { dx > 0 ? advance() : goBack(); }
+    else       { dx < 0 ? advance() : goBack(); }
+  }
+}, { passive:true });
+</script>
+</body>
+</html>

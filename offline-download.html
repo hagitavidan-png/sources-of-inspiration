@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CreativeEdu – הורד את כל הקבצים (Offline)</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100%}
+body{font-family:'Heebo',sans-serif;background:#f0f2ff;color:#1e293b;line-height:1.6;direction:rtl;overflow-x:hidden;width:100%;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none}
+
+.header{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 60%,#0f172a 100%);padding:56px 24px 44px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(108,99,255,.35) 0%,transparent 70%)}
+.header-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
+.header-logo{display:inline-flex;align-items:center;gap:10px;color:white;font-size:1.4rem;font-weight:800;font-family:'Sora',sans-serif;margin-bottom:24px}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#6c63ff,#a855f7);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.header h1{color:white;font-size:clamp(1.5rem,3.5vw,2.2rem);font-family:'Sora',sans-serif;margin-bottom:10px}
+.header p{color:rgba(255,255,255,.7);font-size:.95rem;max-width:520px;margin:0 auto 20px}
+.green-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);color:#4ecdc4;padding:6px 16px;border-radius:20px;font-size:.82rem;font-weight:700}
+
+.container{max-width:860px;margin:0 auto;padding:0 20px}
+
+.info-box{background:white;border-radius:18px;padding:24px 28px;margin:28px auto;max-width:860px;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1.5px solid #e2e8f0}
+.info-box h2{font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;align-items:flex-start;gap:12px}
+.snum{width:26px;height:26px;border-radius:50%;background:#6c63ff;color:white;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.stext{font-size:.88rem;color:#475569;line-height:1.6}
+.stext strong{color:#1e293b}
+.file-tree{background:#0f172a;border-radius:10px;padding:16px 20px;margin-top:14px;font-family:monospace;font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.9}
+.ft-folder{color:#60a5fa;font-weight:700}
+.ft-html{color:#a5f3fc}
+.ft-css{color:#f9a8d4}
+.ft-js{color:#fde68a}
+.ind{padding-right:18px}
+
+.dl-all{background:linear-gradient(135deg,#6c63ff 0%,#a855f7 100%);border-radius:18px;padding:28px;text-align:center;margin:24px auto;max-width:860px;color:white;position:relative;overflow:hidden}
+.dl-all::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(255,255,255,.08) 0%,transparent 70%)}
+.dl-all-inner{position:relative;z-index:2}
+.dl-all h3{font-size:1.35rem;margin-bottom:8px;font-family:'Sora',sans-serif}
+.dl-all p{color:rgba(255,255,255,.78);margin-bottom:20px;font-size:.9rem}
+.btn-all{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:white;color:#6c63ff;border-radius:12px;font-size:.95rem;font-weight:700;transition:all .2s}
+.btn-all:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+
+.section-title{font-size:1.1rem;font-weight:700;color:#1e293b;margin:32px 0 16px;max-width:860px;margin-right:auto;margin-left:auto;padding:0 20px;display:flex;align-items:center;gap:10px}
+.scount{background:#6c63ff;color:white;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
+
+.grid{max-width:860px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:14px}
+
+.card{background:white;border-radius:14px;padding:18px 22px;box-shadow:0 2px 12px rgba(0,0,0,.05);border:1.5px solid #e2e8f0;transition:all .2s}
+.card:hover{border-color:#6c63ff;box-shadow:0 4px 18px rgba(108,99,255,.1)}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.ficon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ficon.html{background:rgba(239,68,68,.1)}
+.ficon.css{background:rgba(59,130,246,.1)}
+.ficon.js{background:rgba(234,179,8,.1)}
+.card-info{flex:1;min-width:0}
+.card-name{font-size:.95rem;font-weight:700;color:#1e293b;margin-bottom:2px}
+.card-desc{font-size:.78rem;color:#64748b;line-height:1.4}
+.card-sz{font-size:.72rem;color:#94a3b8;background:#f8f9ff;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.card-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.fpath{font-family:monospace;font-size:.73rem;background:#f8fafc;color:#475569;border:1px solid #e2e8f0;padding:3px 8px;border-radius:5px;direction:ltr;text-align:left}
+.btn-dl{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#6c63ff;color:white;border-radius:9px;font-size:.84rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-dl:hover{background:#5a52d5;transform:translateY(-1px)}
+.btn-cp{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:white;color:#6c63ff;border:1.5px solid #6c63ff;border-radius:9px;font-size:.84rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-cp:hover{background:#f0f0ff}
+.btn-cp.ok{background:#4ecdc4;border-color:#4ecdc4;color:white}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#1e293b;color:white;padding:11px 22px;border-radius:9px;font-size:.85rem;font-weight:600;z-index:9999;transition:transform .3s;box-shadow:0 6px 20px rgba(0,0,0,.3);direction:rtl}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.footer{text-align:center;padding:36px 24px;color:#94a3b8;font-size:.83rem;border-top:1px solid #e2e8f0;background:white;margin-top:40px}
+
+@media(max-width:600px){
+  .card-actions{flex-direction:column;align-items:stretch}
+  .btn-dl,.btn-cp{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <div class="logo-icon">✦</div>
+      CreativeEdu
+    </div>
+    <h1>📁 הורדת קבצי הפרויקט</h1>
+    <p>כל הקבצים מוטמעים בדף זה. לחצי על "הורד" ליד כל קובץ — עובד גם בלי אינטרנט!</p>
+    <div class="green-badge">✅ עובד Offline – ללא שרת</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="info-box">
+    <h2>📋 הוראות – 3 צעדים</h2>
+    <div class="steps">
+      <div class="step"><div class="snum">1</div><div class="stext">צרי תיקייה חדשה בשם <strong>creativeedu</strong> במחשב שלך, ובתוכה שתי תיקיות משנה: <strong>css/</strong> ו-<strong>js/</strong></div></div>
+      <div class="step"><div class="snum">2</div><div class="stext">הורד כל קובץ לתיקייה הנכונה לפי הנתיב שמוצג (לדוגמה: <strong>css/main.css</strong> → שמרי בתיקייה <strong>css/</strong>)</div></div>
+      <div class="step"><div class="snum">3</div><div class="stext">פתחי את <strong>creativeedu/index.html</strong> בדפדפן Chrome/Edge/Firefox – האתר יעלה מיד!</div></div>
+    </div>
+    <div class="file-tree">
+      <div><span class="ft-folder">📁 creativeedu/</span></div>
+      <div class="ind"><span class="ft-html">📄 index.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← דף הבית</span></div>
+      <div class="ind"><span class="ft-html">📄 platform.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← הפלטפורמה</span></div>
+      <div class="ind"><span class="ft-html">📄 pricing.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← מחירים</span></div>
+      <div class="ind"><span class="ft-html">📄 about.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← אודות</span></div>
+      <div class="ind"><span class="ft-html">📄 contact.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← צור קשר</span></div>
+      <div class="ind"><span class="ft-html">📄 trial.html</span> &nbsp;<span style="color:#8A8A8A;font-size:.75rem">← ניסיון חינם</span></div>
+      <div class="ind"><span class="ft-folder">📁 css/</span><span class="ind"><span class="ft-css">main.css</span></span></div>
+      <div class="ind"><span class="ft-folder">📁 js/</span><span class="ind"><span class="ft-js">main.js</span></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL IN ONE -->
+<div class="dl-all">
+  <div class="dl-all-inner">
+    <h3>⚡ הורד את כל הקבצים בלחיצה אחת</h3>
+    <p>ייצור קובץ HTML אחד עם כל הקוד — פתחי אותו, העתיקי כל קטע לקובץ נפרד</p>
+    <button class="btn-all" onclick="downloadBundle()">⬇️ הורד חבילה מלאה</button>
+  </div>
+</div>
+
+<!-- HTML FILES -->
+<div class="section-title"><span class="scount">6</span> דפי HTML</div>
+<div class="grid" id="html-cards">
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">🏠</div>
+      <div class="card-info">
+        <div class="card-name">index.html – דף הבית הראשי</div>
+        <div class="card-desc">Hero, Benefits tabs, Video Demo, How It Works, Platform Preview, Testimonials, Pricing, FAQ, CTA, Footer</div>
+      </div>
+      <div class="card-sz">~66 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/index.html</span>
+      <button class="btn-dl" onclick="dl('index.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('index.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">🖥️</div>
+      <div class="card-info">
+        <div class="card-name">platform.html – הפלטפורמה</div>
+        <div class="card-desc">Dashboard mockup מלא, 5 Features tabs, Age groups, Security strip, CTA</div>
+      </div>
+      <div class="card-sz">~51 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/platform.html</span>
+      <button class="btn-dl" onclick="dl('platform.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('platform.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">💰</div>
+      <div class="card-info">
+        <div class="card-name">pricing.html – מחירים</div>
+        <div class="card-desc">Billing toggle, 3 תוכניות, Comparison table, FAQ, 30-day guarantee</div>
+      </div>
+      <div class="card-sz">~38 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/pricing.html</span>
+      <button class="btn-dl" onclick="dl('pricing.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('pricing.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">👤</div>
+      <div class="card-info">
+        <div class="card-name">about.html – אודות</div>
+        <div class="card-desc">סיפור המייסדת (חגית אבידן), Timeline 2020-2025, Mission & Values</div>
+      </div>
+      <div class="card-sz">~28 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/about.html</span>
+      <button class="btn-dl" onclick="dl('about.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('about.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">📬</div>
+      <div class="card-info">
+        <div class="card-name">contact.html – צור קשר</div>
+        <div class="card-desc">Contact/Demo form עם validation, success state, FAQ, trust indicators</div>
+      </div>
+      <div class="card-sz">~25 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/contact.html</span>
+      <button class="btn-dl" onclick="dl('contact.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('contact.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon html">🚀</div>
+      <div class="card-info">
+        <div class="card-name">trial.html – ניסיון חינם</div>
+        <div class="card-desc">3-step signup, Google/Microsoft login, password strength, plan selector</div>
+      </div>
+      <div class="card-sz">~26 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/trial.html</span>
+      <button class="btn-dl" onclick="dl('trial.html')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('trial.html', this)">📋 העתק</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- CSS + JS -->
+<div class="section-title"><span class="scount">2</span> CSS ו-JavaScript</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon css">🎨</div>
+      <div class="card-info">
+        <div class="card-name">css/main.css – עיצוב ראשי</div>
+        <div class="card-desc">CSS Variables, Navbar, Hero, Benefits, Pricing, Testimonials, Footer, Responsive, Animations, RTL</div>
+      </div>
+      <div class="card-sz">~30 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/css/main.css</span>
+      <button class="btn-dl" onclick="dl('css/main.css')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('css/main.css', this)">📋 העתק</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="ficon js">⚡</div>
+      <div class="card-info">
+        <div class="card-name">js/main.js – JavaScript משותף</div>
+        <div class="card-desc">Navbar scroll, Hamburger, Fade-up animations, EN/HE language toggle, FAQ, Pricing toggle</div>
+      </div>
+      <div class="card-sz">~5 KB</div>
+    </div>
+    <div class="card-actions">
+      <span class="fpath">creativeedu/js/main.js</span>
+      <button class="btn-dl" onclick="dl('js/main.js')">⬇️ הורד</button>
+      <button class="btn-cp" onclick="cp('js/main.js', this)">📋 העתק</button>
+    </div>
+  </div>
+
+</div>
+
+<div style="height:60px"></div>
+
+<footer class="footer">
+  <p>© 2025 <strong style="color:#6c63ff">CreativeEdu</strong> – Interactive Art Platform for Schools</p>
+  <p style="margin-top:6px">Made with ❤️ for art teachers everywhere</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  ALL FILE CONTENTS ARE LOADED VIA THE PREVIEW SERVER
+//  OR FETCHED FROM THE SAME FOLDER
+// ══════════════════════════════════════════════════════
+
+const FILE_MAP = {
+  'index.html':       'creativeedu/index.html',
+  'platform.html':    'creativeedu/platform.html',
+  'pricing.html':     'creativeedu/pricing.html',
+  'about.html':       'creativeedu/about.html',
+  'contact.html':     'creativeedu/contact.html',
+  'trial.html':       'creativeedu/trial.html',
+  'css/main.css':     'creativeedu/css/main.css',
+  'js/main.js':       'creativeedu/js/main.js'
+};
+
+async function fetchContent(key) {
+  const path = FILE_MAP[key] || key;
+  try {
+    const r = await fetch(path);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.text();
+  } catch(e) {
+    // Try relative path
+    try {
+      const r2 = await fetch(key);
+      if (!r2.ok) throw new Error('HTTP ' + r2.status);
+      return await r2.text();
+    } catch(e2) {
+      return null;
+    }
+  }
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+async function dl(key) {
+  toast('⏳ מכין להורדה...');
+  const content = await fetchContent(key);
+  if (!content) { toast('❌ שגיאה. נסי "העתק" במקום.'); return; }
+  
+  const name = key.split('/').pop();
+  const mime = key.endsWith('.css') ? 'text/css' :
+               key.endsWith('.js') ? 'application/javascript' :
+               'text/html';
+  const blob = new Blob([content], { type: mime + ';charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('✅ ' + name + ' הורד!');
+}
+
+async function cp(key, btn) {
+  toast('⏳ טוען...');
+  const content = await fetchContent(key);
+  if (!content) { toast('❌ שגיאה בטעינה.'); return; }
+  
+  const orig = btn.innerHTML;
+  try {
+    await navigator.clipboard.writeText(content);
+  } catch(e) {
+    const ta = document.createElement('textarea');
+    ta.value = content;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;right:0';
+    document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  btn.innerHTML = '✅ הועתק!';
+  btn.classList.add('ok');
+  toast('✅ הקוד הועתק ללוח!');
+  setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('ok'); }, 2500);
+}
+
+async function downloadBundle() {
+  toast('⏳ מכין חבילה מלאה...');
+  
+  const files = [
+    'index.html', 'platform.html', 'pricing.html',
+    'about.html', 'contact.html', 'trial.html',
+    'css/main.css', 'js/main.js'
+  ];
+  
+  const descriptions = {
+    'index.html': 'דף הבית הראשי – שמור כ: creativeedu/index.html',
+    'platform.html': 'דף הפלטפורמה – שמור כ: creativeedu/platform.html',
+    'pricing.html': 'דף המחירים – שמור כ: creativeedu/pricing.html',
+    'about.html': 'דף אודות – שמור כ: creativeedu/about.html',
+    'contact.html': 'דף צור קשר – שמור כ: creativeedu/contact.html',
+    'trial.html': 'דף ניסיון חינם – שמור כ: creativeedu/trial.html',
+    'css/main.css': 'עיצוב ראשי – שמור כ: creativeedu/css/main.css',
+    'js/main.js': 'JavaScript משותף – שמור כ: creativeedu/js/main.js'
+  };
+  
+  let html = `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CreativeEdu – חבילת קבצים מלאה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Heebo',sans-serif;background:#f0f2ff;color:#1e293b;direction:rtl;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#0f172a,#1e1b4b,#0f172a);padding:40px 24px;text-align:center;color:white}
+.hdr h1{font-size:1.8rem;font-family:'Sora',sans-serif;margin-bottom:8px}
+.hdr p{color:rgba(255,255,255,.7);font-size:.92rem}
+.main{max-width:900px;margin:0 auto;padding:32px 20px}
+.inst{background:white;border-radius:16px;padding:24px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1.5px solid #e2e8f0}
+.inst h2{color:#6c63ff;font-size:1.05rem;margin-bottom:14px}
+.inst ol{padding-right:20px;color:#475569;font-size:.9rem;line-height:2}
+.inst li strong{color:#1e293b}
+.inst code{background:#f0f2ff;padding:2px 6px;border-radius:4px;font-family:monospace;color:#6c63ff;font-size:.88rem}
+.file-block{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1.5px solid #e2e8f0}
+.fb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px;flex-wrap:wrap}
+.fb-name{font-size:1rem;font-weight:700;color:#1e293b}
+.fb-desc{font-size:.8rem;color:#64748b;margin-bottom:12px}
+.fb-path{font-family:monospace;font-size:.78rem;background:#f0f2ff;color:#6c63ff;border:1px solid #c4b5fd;padding:4px 10px;border-radius:6px;direction:ltr;display:inline-block}
+.copy-btn{background:#6c63ff;color:white;border:none;padding:8px 18px;border-radius:8px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:'Heebo',sans-serif;transition:.2s}
+.copy-btn:hover{background:#5a52d5}
+pre{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:10px;overflow:auto;font-size:.73rem;line-height:1.65;direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-all;max-height:380px;margin-top:10px}
+.ftr{text-align:center;padding:32px;color:#94a3b8;font-size:.83rem;border-top:1px solid #e2e8f0;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>✦ CreativeEdu – חבילת קבצים מלאה</h1>
+<p>העתיקי כל קטע קוד לקובץ נפרד בנתיב הנכון</p>
+</div>
+<div class="main">
+<div class="inst">
+<h2>📋 הוראות</h2>
+<ol>
+<li>צרי תיקייה בשם <code>creativeedu</code> ובתוכה <code>css/</code> ו-<code>js/</code></li>
+<li>לכל קובץ: לחצי <strong>"העתק"</strong>, פתחי Notepad/VS Code, הדביקי ושמרי בנתיב הנכון</li>
+<li>פתחי <code>creativeedu/index.html</code> בדפדפן לצפייה באתר</li>
+</ol>
+</div>
+<script>
+function copyCode(id, btn) {
+  var el = document.getElementById(id);
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(el.textContent).then(function() { flashBtn(btn); }).catch(function() { fallbackCopy(el, btn); });
+  } else { fallbackCopy(el, btn); }
+}
+function fallbackCopy(el, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = el.textContent;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;right:0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  flashBtn(btn);
+}
+function flashBtn(btn) {
+  var orig = btn.textContent;
+  btn.textContent = '✅ הועתק!';
+  btn.style.background = '#4ecdc4';
+  setTimeout(function() { btn.textContent = orig; btn.style.background = '#6c63ff'; }, 2000);
+}
+<\/script>`;
+  
+  for (const key of files) {
+    const content = await fetchContent(key);
+    if (!content) continue;
+    const escaped = content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const id = 'f_' + key.replace(/[^a-z0-9]/gi,'_');
+    const name = key.split('/').pop();
+    html += `
+<div class="file-block">
+  <div class="fb-header">
+    <span class="fb-name">📄 ${name}</span>
+    <button class="copy-btn" onclick="copyCode('${id}', this)">📋 העתק קוד</button>
+  </div>
+  <div class="fb-desc">${descriptions[key] || key}</div>
+  <span class="fb-path">${key}</span>
+  <pre id="${id}">${escaped}</pre>
+</div>`;
+  }
+  
+  html += `</div>
+<div class="ftr"><p>© 2025 CreativeEdu – All rights reserved</p></div>
+</body></html>`;
+  
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'creativeedu-bundle.html';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('✅ החבילה הורדה! פתחי creativeedu-bundle.html');
+}
+</script>
+</body>
+</html>

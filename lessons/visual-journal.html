@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lesson-type="regular">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Visual Personal Journal — Sources of Inspiration</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+textarea{font-family:inherit;outline:none;border:none;resize:none}
+
+:root{
+  --gold:#c9a96e;
+  --rose:#FF4D4D;
+  --violet:#7c6fcd;
+  --ink:#0f0f10;
+  --speed:620ms;
+  --tp:#ffffff;--ts:#cfcfcf;--tm:#8a8a8a;
+}
+
+body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--tp)}
+
+/* ════ STAGE & SCREENS ════ */
+#stage{position:fixed;inset:0;overflow:hidden}
+
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:68px 32px 100px;
+  text-align:center;
+  opacity:0;pointer-events:none;
+  transform:translateY(38px) scale(.984);
+  transition:opacity var(--speed) ease, transform var(--speed) cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.screen.leaving{
+  opacity:0;transform:translateY(-26px) scale(1.01);
+  transition:opacity 360ms ease, transform 360ms cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+
+/* ── Ambient BG ── */
+.bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{
+  position:absolute;border-radius:50%;filter:blur(100px);
+  animation:bfloat 14s ease-in-out infinite;
+}
+@keyframes bfloat{
+  0%,100%{transform:translate(0,0)}
+  40%{transform:translate(28px,-22px)}
+  70%{transform:translate(-18px,18px)}
+}
+
+/* ── Content ── */
+.sc{position:relative;z-index:2;max-width:680px;width:100%}
+
+/* ── Eyebrow ── */
+.eyebrow{
+  font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;
+  color:#8a8a8a;margin-bottom:36px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+}
+.ey-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent,var(--gold));
+  animation:dp 2.8s ease-in-out infinite;
+}
+@keyframes dp{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.4);opacity:.9}}
+
+/* ── Big text ── */
+.big{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1.7rem,4.5vw,3.2rem);
+  font-weight:700;color:#fff;line-height:1.28;letter-spacing:-.02em;
+  margin-bottom:0;
+}
+.big em{font-style:normal;color:var(--accent,var(--gold))}
+[dir="rtl"] .big{letter-spacing:0;font-family:'Heebo',sans-serif}
+
+.mid{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(1.15rem,3vw,2rem);
+  font-weight:600;color:#cfcfcf;line-height:1.45;margin-bottom:0;
+}
+[dir="rtl"] .mid{font-family:'Heebo',sans-serif}
+
+.sub{
+  font-size:clamp(.9rem,2vw,1.06rem);font-weight:300;
+  color:#8a8a8a;line-height:2.1;
+  max-width:480px;margin:0 auto;
+}
+
+/* ── Gallery rhythm ── */
+.big + .aline { margin-top:32px }
+.big + .sub   { margin-top:28px }
+.mid + .aline { margin-top:26px }
+.mid + .sub   { margin-top:20px }
+.aline + .sub { margin-top:0 }
+
+/* ── Accent line ── */
+.aline{
+  width:28px;height:1.5px;border-radius:2px;
+  background:var(--accent,var(--gold));opacity:.55;margin:28px auto;
+  animation:lineG .9s ease forwards;transform-origin:center;
+}
+@keyframes lineG{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ── Choice grid ── */
+.choices{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;margin-top:26px;
+}
+.choice-btn{
+  padding:11px 20px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:30px;font-size:.88rem;font-weight:600;
+  color:#CFCFCF;
+  transition:all .22s;display:flex;align-items:center;gap:7px;
+}
+.choice-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3);color:#fff;transform:translateY(-2px)}
+.choice-btn.picked{
+  background:rgba(var(--acc-rgb,176,124,201),.18);
+  border-color:var(--accent,var(--violet));color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(0,0,0,.22);
+}
+
+/* ── Colour swatches ── */
+.swatches{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:26px}
+.swatch{
+  width:50px;height:50px;border-radius:50%;
+  border:3px solid transparent;transition:all .2s;
+  transform:scale(.88);cursor:pointer;position:relative;
+}
+.swatch:hover{transform:scale(1.06)}
+.swatch.picked{border-color:#fff;transform:scale(1.2);box-shadow:0 0 18px rgba(255,255,255,.22)}
+.sw-name{
+  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  font-size:.57rem;font-weight:700;color:var(--tm);white-space:nowrap;pointer-events:none;
+}
+
+/* ── Shape cards ── */
+.shapes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.shape-btn{
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  padding:16px 18px;min-width:85px;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);
+  border-radius:16px;font-size:.78rem;font-weight:600;color:var(--tm);
+  transition:all .22s;cursor:pointer;
+}
+.shape-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.24);color:#fff}
+.shape-btn.picked{background:rgba(255,77,77,.1);border-color:var(--rose);color:#fff}
+.sh-icon{font-size:1.9rem;line-height:1}
+
+/* ── Response ── */
+.resp{margin-top:18px;font-size:.9rem;color:var(--tm);min-height:20px;font-style:italic;transition:.4s}
+
+/* ── Reflection ── */
+.ref-ta{
+  width:100%;max-width:540px;min-height:120px;display:block;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:15px 18px;
+  font-size:.97rem;color:#fff;line-height:1.75;
+  transition:.2s;margin:18px auto 0;
+}
+.ref-ta:focus{border-color:rgba(176,124,201,.38);background:rgba(255,255,255,.09)}
+.ref-ta::placeholder{color:rgba(255,255,255,.2)}
+.save-btn{
+  margin-top:12px;display:inline-flex;align-items:center;gap:7px;
+  padding:10px 24px;border-radius:10px;
+  background:#FF4D4D;color:#fff;font-size:.86rem;font-weight:700;transition:.2s;
+}
+.save-btn:hover{background:#e03333;transform:translateY(-1px)}
+.saved-ok{
+  display:none;align-items:center;gap:6px;
+  margin-top:10px;padding:8px 15px;
+  background:rgba(255,255,255,.06);color:var(--ts);
+  border:1px solid rgba(255,255,255,.12);border-radius:9px;font-size:.82rem;
+}
+.saved-ok.show{display:inline-flex}
+
+/* ════ HUD ════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:52px;padding:0 18px;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(13,13,26,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+[dir="rtl"] #hud{flex-direction:row-reverse}
+#hud-back{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--tm);text-decoration:none;transition:.2s;flex-shrink:0}
+#hud-back:hover{color:rgba(255,255,255,.7)}
+[dir="rtl"] #hud-back svg{transform:scaleX(-1)}
+#hud-badge{padding:4px 12px;border-radius:20px;background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.22);color:var(--rose);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;flex-shrink:0}
+#hud-sp{flex:1}
+#hud-step{font-size:.72rem;font-weight:700;color:var(--tm);flex-shrink:0}
+
+/* Lang toggle */
+#lang-toggle{display:flex;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang-btn{padding:5px 11px;font-size:.72rem;font-weight:700;color:var(--tm);background:transparent;transition:.2s;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(201,168,76,.2);color:var(--gold)}
+
+/* Classroom btn */
+#cls-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;background:rgba(255,255,255,.07);color:var(--tm);font-size:.7rem;font-weight:700;transition:.2s;flex-shrink:0}
+#cls-btn:hover{background:rgba(255,255,255,.13);color:#fff}
+
+/* ── PROGRESS ── */
+#prog{position:fixed;top:52px;left:0;right:0;z-index:199;height:3px;background:rgba(255,255,255,.06)}
+#prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--rose),var(--gold));transition:width .55s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(255,77,77,.35)}
+#progress{position:fixed;top:52px;left:0;right:0;z-index:198;height:3px;pointer-events:none;display:flex;flex-direction:row}
+.pdot{position:relative;top:-3.5px;width:9px;height:9px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.1);transition:.3s;cursor:pointer;pointer-events:all}
+.pdot.done{background:rgba(201,168,76,.7);border-color:var(--gold)}
+.pdot.now{background:var(--rose);border-color:var(--rose);box-shadow:0 0 9px rgba(255,77,77,.55)}
+
+/* ════ NAV BUTTONS ════ */
+#nav-bar{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:300;
+  display:flex;align-items:center;gap:12px;
+}
+[dir="rtl"] #nav-bar{flex-direction:row-reverse}
+
+#back-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;
+  background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  color:rgba(255,255,255,.7);
+  transition:all .22s;flex-shrink:0;
+}
+#back-btn:hover{background:rgba(255,255,255,.18);color:#fff;transform:scale(1.07)}
+#back-btn:disabled{opacity:.2;cursor:default;pointer-events:none}
+[dir="rtl"] #back-btn svg{transform:scaleX(-1)}
+
+#next-btn{
+  padding:15px 52px;
+  background:#FF4D4D;
+  color:#fff;font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;
+  border-radius:50px;letter-spacing:.03em;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);transition:all .25s;white-space:nowrap;
+}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn.gold-btn{background:#FF4D4D;color:#fff;box-shadow:0 8px 32px rgba(255,77,77,.32)}
+#next-btn.gold-btn:hover{background:#e03333;transform:translateY(-3px)}
+#hint{display:none}
+
+/* ── Complete ── */
+.complete-icon{width:76px;height:76px;border-radius:50%;background:#FF4D4D;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 22px;box-shadow:0 0 40px rgba(255,77,77,.28)}
+.complete-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:12px;background:#FF4D4D;color:#fff;font-size:.9rem;font-weight:700;text-decoration:none;transition:.2s}
+.btn-gold:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;background:transparent;color:#8A8A8A;border:1.5px solid rgba(255,255,255,.18);font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.38);color:#fff}
+
+[dir="rtl"] .eyebrow{flex-direction:row-reverse}
+[dir="rtl"] .choices,[dir="rtl"] .complete-btns{direction:rtl}
+/* Full text-alignment for RTL */
+[dir="rtl"] .big,
+[dir="rtl"] .mid,
+[dir="rtl"] .sub  { text-align:right; }
+[dir="rtl"] .aline{ margin-left:auto; margin-right:0; }
+[dir="rtl"] .resp  { text-align:right; }
+[dir="rtl"] #hud-step { order:-1; }
+/* Lang toggle — עב button appears on right in RTL */
+[dir="rtl"] #lang-toggle { flex-direction:row-reverse; }
+
+@media(max-width:540px){
+  .screen{padding:62px 22px 95px}
+  .big{font-size:clamp(1.6rem,8vw,2.4rem)}
+  #next-btn{padding:13px 36px;font-size:.9rem}
+  .swatch{width:40px;height:40px}
+  .shape-btn{min-width:72px;padding:12px 12px}
+  #cls-btn span{display:none}
+}
+</style>
+<link rel="stylesheet" href="../css/lesson-responsive.css"/>
+</head>
+<body class="dark">
+<script src="../js/app-init.js"></script>
+
+<!-- ══ HUD ══ -->
+<header id="hud">
+  <a href="../course.html" id="hud-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Course" data-he="הקורס">Course</span>
+  </a>
+  <div id="hud-badge">🪞 <span data-en="Personal Experience" data-he="חוויה אישית">Personal Experience</span></div>
+  <div id="hud-sp"></div>
+  <span id="hud-step">1 / 11</span>
+  <div id="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">עב</button>
+  </div>
+  <button id="cls-btn" onclick="toggleClassroom()">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 4V1h3M9 1h3v3M12 9v3H9M4 12H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Classroom" data-he="מצב כיתה">Classroom</span>
+  </button>
+</header>
+
+<div id="prog"><div id="prog-fill"></div></div>
+<div id="progress"></div>
+
+<!-- ════════════════════════════════ STAGE ════════════════════════════════ -->
+<main id="stage">
+
+<!-- S1: Opening -->
+<section class="screen active" id="s1" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:600px;height:600px;background:#c9a96e;opacity:.1;top:-160px;left:-120px;animation-delay:0s"></div>
+    <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.08;bottom:-60px;right:-60px;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="Visual Personal Journal · Lesson 0.2" data-he="יומן חזותי אישי · שיעור 0.2">Visual Personal Journal · Lesson 0.2</span></div>
+    <h1 class="big" data-en="Your life is not separate<br>from your <em>art.</em>" data-he="חייך אינם נפרדים<br>מה<em>אמנות</em> שלך.">Your life is not separate<br>from your <em>art.</em></h1>
+    <div class="aline"></div>
+    <p class="sub" data-en="It is your source." data-he="היא המקור שלך.">It is your source.</p>
+  </div>
+</section>
+
+<!-- S2: Pause -->
+<section class="screen" id="s2" style="--accent:#a8c0e8;--acc-rgb:168,192,232">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#a8c0e8;opacity:.08;top:-80px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.1;bottom:-30px;left:5%;animation-delay:7s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#a8c0e8"></div><span data-en="Pause" data-he="עצור לרגע">Pause</span></div>
+    <h2 class="big" style="font-size:clamp(1.7rem,4.5vw,3.5rem)" data-en="Think about a <em>small moment</em><br>from your life." data-he="חשוב על <em>רגע קטן</em><br>מחייך.">Think about a <em>small moment</em><br>from your life.</h2>
+    <div class="aline" style="background:#a8c0e8"></div>
+    <p class="sub" data-en="Not a big event. A quiet, ordinary moment that stayed with you." data-he="לא אירוע גדול. רגע שקט ורגיל שנשאר אצלך.">Not a big event. A quiet, ordinary moment that stayed with you.</p>
+  </div>
+</section>
+
+<!-- S3: Focus -->
+<section class="screen" id="s3" style="--accent:var(--rose);--acc-rgb:232,93,117">
+  <div class="bg">
+    <div class="blob" style="width:480px;height:480px;background:#e85d75;opacity:.1;top:-90px;left:-70px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c9a96e;opacity:.07;bottom:-40px;right:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-en="Focus" data-he="התמקד">Focus</span></div>
+    <h2 class="big" style="font-size:clamp(1.6rem,4.5vw,3.4rem)" data-en="Choose <em>one moment</em><br>that stayed with you." data-he="בחר <em>רגע אחד</em><br>שנשאר אצלך.">Choose <em>one moment</em><br>that stayed with you.</h2>
+    <div class="aline" style="background:var(--rose)"></div>
+    <div class="choices" id="focus-prompts">
+      <button class="choice-btn" onclick="pick(this,'focus-prompts')" data-en="A morning with strange light" data-he="בוקר עם אור מוזר">A morning with strange light</button>
+      <button class="choice-btn" onclick="pick(this,'focus-prompts')" data-en="A silence that lasted too long" data-he="שתיקה שנמשכה זמן רב">A silence that lasted too long</button>
+      <button class="choice-btn" onclick="pick(this,'focus-prompts')" data-en="A place I keep returning to" data-he="מקום שאני תמיד חוזר אליו">A place I keep returning to</button>
+      <button class="choice-btn" onclick="pick(this,'focus-prompts')" data-en="Something someone said" data-he="משהו שמישהו אמר">Something someone said</button>
+      <button class="choice-btn" onclick="pick(this,'focus-prompts')" data-en="My own moment →" data-he="הרגע שלי →">My own moment →</button>
+    </div>
+  </div>
+</section>
+
+<!-- S4: Emotion -->
+<section class="screen" id="s4" style="--accent:#c97cc9;--acc-rgb:201,124,201">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.1;top:-100px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.1;bottom:-30px;left:8%;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#c97cc9"></div><span data-en="Emotion" data-he="רגש">Emotion</span></div>
+    <h2 class="big" style="font-size:clamp(1.7rem,4.5vw,3.5rem)" data-en="What did you <em>feel?</em>" data-he="מה <em>הרגשת?</em>">What did you <em>feel?</em></h2>
+    <div class="aline" style="background:#c97cc9"></div>
+    <p class="sub" style="margin-bottom:4px" data-en="Not what happened. What the moment felt like — inside." data-he="לא מה שקרה. מה הרגע הרגיש — מבפנים.">Not what happened. What the moment felt like — inside.</p>
+    <div class="choices" id="emotion-btns">
+      <button class="choice-btn" onclick="pickEmotion(this,'Tender','עדין')">🌸 <span data-en="Tender" data-he="עדין">Tender</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Lonely','בדידות')">🌑 <span data-en="Lonely" data-he="בדידות">Lonely</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Restless','חסר מנוחה')">⚡ <span data-en="Restless" data-he="חסר מנוחה">Restless</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Sad','עצוב')">🌊 <span data-en="Sad" data-he="עצוב">Sad</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Warm','חמים')">🔆 <span data-en="Warm" data-he="חמים">Warm</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Confused','מבולבל')">🌀 <span data-en="Confused" data-he="מבולבל">Confused</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Angry','כועס')">🔥 <span data-en="Angry" data-he="כועס">Angry</span></button>
+      <button class="choice-btn" onclick="pickEmotion(this,'Peaceful','שלו')">🍃 <span data-en="Peaceful" data-he="שלו">Peaceful</span></button>
+    </div>
+    <p class="resp" id="emotion-resp"></p>
+  </div>
+</section>
+
+<!-- S5: Colour -->
+<section class="screen" id="s5" style="--accent:var(--gold);--acc-rgb:201,168,76">
+  <div class="bg">
+    <div class="blob" style="width:550px;height:550px;background:#c9a96e;opacity:.09;top:-120px;left:-100px;animation-delay:0s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#e85d75;opacity:.08;bottom:-40px;right:5%;animation-delay:4s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="Colour" data-he="צבע">Colour</span></div>
+    <h2 class="big" style="font-size:clamp(1.7rem,4.5vw,3.4rem)" data-en="If this feeling had a <em>colour</em> —<br>what is it?" data-he="אם לרגש הזה היה <em>צבע</em> —<br>מה הוא?">If this feeling had a <em>colour</em> —<br>what is it?</h2>
+    <div class="aline"></div>
+    <div class="swatches" id="colour-sw">
+      <button class="swatch" style="background:#1e3a7a" onclick="pickCol(this,'Deep Blue','כחול עמוק')"><span class="sw-name" data-en="Deep Blue" data-he="כחול עמוק">Deep Blue</span></button>
+      <button class="swatch" style="background:#5c7cba" onclick="pickCol(this,'Steel','פלדה')"><span class="sw-name" data-en="Steel" data-he="פלדה">Steel</span></button>
+      <button class="swatch" style="background:#7c3aed" onclick="pickCol(this,'Violet','סגול')"><span class="sw-name" data-en="Violet" data-he="סגול">Violet</span></button>
+      <button class="swatch" style="background:#c97cc9" onclick="pickCol(this,'Lavender','לבנדר')"><span class="sw-name" data-en="Lavender" data-he="לבנדר">Lavender</span></button>
+      <button class="swatch" style="background:#e85d75" onclick="pickCol(this,'Rose','ורד')"><span class="sw-name" data-en="Rose" data-he="ורד">Rose</span></button>
+      <button class="swatch" style="background:#e87c3a" onclick="pickCol(this,'Amber','ענבר')"><span class="sw-name" data-en="Amber" data-he="ענבר">Amber</span></button>
+      <button class="swatch" style="background:#c9a96e" onclick="pickCol(this,'Gold','זהב')"><span class="sw-name" data-en="Gold" data-he="זהב">Gold</span></button>
+      <button class="swatch" style="background:#6b8c7a" onclick="pickCol(this,'Sage','ירוק אפור')"><span class="sw-name" data-en="Sage" data-he="ירוק אפור">Sage</span></button>
+      <button class="swatch" style="background:#3a3a5a" onclick="pickCol(this,'Dark','כהה')"><span class="sw-name" data-en="Dark" data-he="כהה">Dark</span></button>
+      <button class="swatch" style="background:#e0dcd0" onclick="pickCol(this,'Pale','בהיר')"><span class="sw-name" data-en="Pale" data-he="בהיר">Pale</span></button>
+    </div>
+    <p class="resp" id="col-resp"></p>
+  </div>
+</section>
+
+<!-- S6: Shape -->
+<section class="screen" id="s6" style="--accent:#6db88a;--acc-rgb:109,184,138">
+  <div class="bg">
+    <div class="blob" style="width:480px;height:480px;background:#6db88a;opacity:.09;top:-80px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#a8c0e8;opacity:.1;bottom:-30px;left:6%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#6db88a"></div><span data-en="Shape" data-he="צורה">Shape</span></div>
+    <h2 class="big" style="font-size:clamp(1.7rem,4.5vw,3.4rem)" data-en="What <em>shape</em> does it have?" data-he="איזו <em>צורה</em> יש לה?">What <em>shape</em> does it have?</h2>
+    <div class="aline" style="background:#6db88a"></div>
+    <p class="sub" data-en="Not a literal shape. A feeling of shape." data-he="לא צורה ממשית. תחושה של צורה.">Not a literal shape. A feeling of shape.</p>
+    <div class="shapes">
+      <button class="shape-btn" onclick="pickShape(this,'Soft','רך')"><span class="sh-icon">🔵</span><span data-en="Soft" data-he="רך">Soft</span></button>
+      <button class="shape-btn" onclick="pickShape(this,'Sharp','חד')"><span class="sh-icon">⬡</span><span data-en="Sharp" data-he="חד">Sharp</span></button>
+      <button class="shape-btn" onclick="pickShape(this,'Broken','שבור')"><span class="sh-icon">🪟</span><span data-en="Broken" data-he="שבור">Broken</span></button>
+      <button class="shape-btn" onclick="pickShape(this,'Flowing','זורם')"><span class="sh-icon">〰️</span><span data-en="Flowing" data-he="זורם">Flowing</span></button>
+      <button class="shape-btn" onclick="pickShape(this,'Heavy','כבד')"><span class="sh-icon">⬛</span><span data-en="Heavy" data-he="כבד">Heavy</span></button>
+      <button class="shape-btn" onclick="pickShape(this,'Scattered','מפוזר')"><span class="sh-icon">✦</span><span data-en="Scattered" data-he="מפוזר">Scattered</span></button>
+    </div>
+    <p class="resp" id="shape-resp"></p>
+  </div>
+</section>
+
+<!-- S7: Start Drawing -->
+<section class="screen" id="s7" style="--accent:var(--rose);--acc-rgb:232,93,117">
+  <div class="bg">
+    <div class="blob" style="width:600px;height:600px;background:#e85d75;opacity:.1;top:-180px;left:-100px;animation-delay:0s"></div>
+    <div class="blob" style="width:320px;height:320px;background:#7c6fcd;opacity:.09;bottom:-60px;right:-40px;animation-delay:5s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-en="Start" data-he="התחל">Start</span></div>
+    <h1 class="big" style="font-size:clamp(2rem,5.5vw,4rem)" data-en="<em>Start drawing</em><br>the feeling,<br>not the story." data-he="<em>התחל לצייר</em><br>את הרגש,<br>לא את הסיפור."><em>Start drawing</em><br>the feeling,<br>not the story.</h1>
+    <div class="aline" style="background:var(--rose)"></div>
+    <p class="sub" data-en="Use the colour and shape you chose.<br>No objects. No narrative. Just the feeling." data-he="השתמש בצבע ובצורה שבחרת.<br>ללא עצמים. ללא נרטיב. רק הרגש.">Use the colour and shape you chose.<br>No objects. No narrative. Just the feeling.</p>
+  </div>
+</section>
+
+<!-- S8: Personal Layer -->
+<section class="screen" id="s8" style="--accent:var(--gold);--acc-rgb:201,168,76">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#c9a96e;opacity:.1;top:-100px;right:-100px;animation-delay:3s"></div>
+    <div class="blob" style="width:260px;height:260px;background:#e85d75;opacity:.09;bottom:0;left:8%;animation-delay:7s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot"></div><span data-en="Personal Layer" data-he="שכבה אישית">Personal Layer</span></div>
+    <h2 class="big" style="font-size:clamp(1.6rem,4.5vw,3.4rem)" data-en="Add something<br><em>only you</em> understand." data-he="הוסף משהו<br>ש<em>רק אתה</em> מבין.">Add something<br><em>only you</em> understand.</h2>
+    <div class="aline"></div>
+    <p class="sub" data-en="A hidden word. A mark. A detail no one will notice unless you tell them." data-he="מילה מוסתרת. סימן. פרט שאף אחד לא ישים לב אליו אלא אם תגיד להם.">A hidden word. A mark. A detail no one will notice unless you tell them.</p>
+  </div>
+</section>
+
+<!-- S9: Deepen -->
+<section class="screen" id="s9" style="--accent:#a0b8e8;--acc-rgb:160,184,232">
+  <div class="bg">
+    <div class="blob" style="width:550px;height:550px;background:#a0b8e8;opacity:.09;top:-120px;left:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c9a96e;opacity:.08;bottom:-40px;right:5%;animation-delay:4s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:#a0b8e8"></div><span data-en="Deepen" data-he="עמק">Deepen</span></div>
+    <h2 class="big" style="font-size:clamp(1.6rem,4.5vw,3.4rem)" data-en="Make it <em>more personal.</em><br>Less perfect." data-he="עשה אותו <em>יותר אישי.</em><br>פחות מושלם.">Make it <em>more personal.</em><br>Less perfect.</h2>
+    <div class="aline" style="background:#a0b8e8"></div>
+    <p class="sub" data-en="The places where it breaks or becomes uncertain<br>— those are the most honest parts." data-he="המקומות שבהם זה נשבר או הופך לא-בטוח<br>— אלה החלקים הכי כנים.">The places where it breaks or becomes uncertain<br>— those are the most honest parts.</p>
+  </div>
+</section>
+
+<!-- S10: Reflection -->
+<section class="screen" id="s10" style="--accent:var(--violet);--acc-rgb:176,124,201">
+  <div class="bg">
+    <div class="blob" style="width:500px;height:500px;background:#b07cc9;opacity:.1;top:-80px;right:-80px;animation-delay:2s"></div>
+    <div class="blob" style="width:280px;height:280px;background:#c97cc9;opacity:.09;bottom:10px;left:5%;animation-delay:6s"></div>
+  </div>
+  <div class="sc">
+    <div class="eyebrow"><div class="ey-dot" style="background:var(--violet)"></div><span data-en="Reflection" data-he="הרהור">Reflection</span></div>
+    <h2 class="mid" data-en="What did you <em style='color:var(--gold)'>discover?</em>" data-he="מה <em style='color:var(--gold)'>גילית?</em>">What did you <em style="color:var(--gold)">discover?</em></h2>
+    <div class="aline" style="background:var(--violet)"></div>
+    <textarea class="ref-ta" id="ref-text"
+      data-placeholder-en="Write anything — what surprised you, what felt true…"
+      data-placeholder-he="כתוב כל דבר — מה הפתיע אותך, מה הרגיש נכון..."
+      placeholder="Write anything — what surprised you, what felt true…"></textarea>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="save-btn" onclick="saveRef()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-en="Save" data-he="שמור">Save</span>
+      </button>
+      <span class="saved-ok" id="saved-ok">✓ <span data-en="Saved" data-he="נשמר">Saved</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- S11: Closing -->
+<section class="screen" id="s11" style="--accent:var(--gold)">
+  <div class="bg">
+    <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
+    <div class="blob" style="width:380px;height:380px;background:#e85d75;opacity:.07;bottom:-80px;right:-60px;animation-delay:4s"></div>
+    <div class="blob" style="width:200px;height:200px;background:#7c6fcd;opacity:.1;top:35%;right:10%;animation-delay:2s"></div>
+  </div>
+  <div class="sc">
+    <div class="complete-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l2.4 7.4H22l-6 4.3 2.3 7.3L12 17l-6.3 4 2.3-7.3-6-4.3h7.6L12 2z" fill="rgba(255,255,255,.9)"/>
+      </svg>
+    </div>
+    <h1 class="big" style="font-size:clamp(1.8rem,5vw,3.8rem)" data-en="Your life is something<br>you <em>create from.</em>" data-he="חייך הם משהו<br>ש<em>יוצרים ממנו.</em>">Your life is something<br>you <em>create from.</em></h1>
+    <div class="aline"></div>
+    <p class="sub" data-en="Every moment you've lived is material.<br>You don't need to look anywhere else." data-he="כל רגע שחווית הוא חומר גלם.<br>אתה לא צריך לחפש בשום מקום אחר.">Every moment you've lived is material.<br>You don't need to look anywhere else.</p>
+    <div class="complete-btns">
+      <a href="../course.html" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l6 6-6 6M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-en="All Units" data-he="כל היחידות">All Units</span>
+      </a>
+      <button class="btn-ghost" onclick="go(1)">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M11 2.5A5.5 5.5 0 102 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M1 7V11h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-en="Start Again" data-he="התחל מחדש">Start Again</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="nav-bar">
+  <button id="back-btn" onclick="goBack()" disabled title="Back">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button id="next-btn" onclick="advance()">Begin →</button>
+</div>
+
+<script src="js/lesson-system.js"></script>
+<script>
+const TOTAL = 11;
+const GOLD_AT = 9;
+let cur = 1;
+let busy = false;
+let he = (localStorage.getItem('sourcesLang') || 'en') === 'he';
+
+/* ── Button labels (semantic keys for lesson-system) ── */
+const T = {
+  en:{ btn:[null,"I'm ready →","I have a moment →","I found it →","I know the feeling →",
+             "I have a colour →","I have a shape →","I'm drawing →","I've added it →",
+             "It's done →","I've reflected →",null] },
+  he:{ btn:[null,"← אני מוכן","← יש לי רגע","← מצאתי","← אני יודע את הרגש",
+             "← יש לי צבע","← יש לי צורה","← מצייר","← הוספתי",
+             "← גמרתי","← הרהרתי",null] }
+};
+
+// ── Lang ──
+function setLang(l) {
+  he = (l === 'he');
+  localStorage.setItem('sourcesLang', l);  // persist to shared key
+  localStorage.setItem('vjl-lang', l);
+  document.documentElement.lang = l;
+  document.body.dir = he ? 'rtl' : 'ltr';
+  document.body.classList.toggle('rtl', he);
+  document.body.style.fontFamily = he ? "'Heebo',sans-serif" : "'Inter',sans-serif";
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active',
+      (b.textContent.trim()==='EN' && !he)||(b.textContent.trim()==='עב' && he));
+  });
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const v = el.getAttribute(`data-${l}`);
+    if (!v) return;
+    if (el.tagName==='TEXTAREA'||el.tagName==='INPUT') el.placeholder = v;
+    else el.innerHTML = v;
+  });
+  const ta = document.getElementById('ref-text');
+  if (ta) ta.placeholder = ta.getAttribute(`data-placeholder-${l}`) || '';
+  // re-render emotion/colour/shape responses if already picked
+  const erEl = document.getElementById('emotion-resp');
+  if (erEl && erEl._key) erEl.textContent = EMOTION_MSG[l][erEl._key] || '';
+  const crEl = document.getElementById('col-resp');
+  if (crEl && crEl._key) crEl.textContent = COL_MSG[l][crEl._key] || '';
+  const srEl = document.getElementById('shape-resp');
+  if (srEl && srEl._key) srEl.textContent = SHAPE_MSG[l][srEl._key] || '';
+  updateBtn();
+}
+
+// ── Nav ──
+function advance() { if(busy) return; if(cur === TOTAL) finishLesson(); else go(cur+1); }
+function goBack()  { if (!busy && cur > 1)  go(cur-1); }
+function go(n) {
+  if (busy||n<1||n>TOTAL) return; busy = true;
+  const prev = document.getElementById(`s${cur}`);
+  prev.classList.remove('active'); prev.classList.add('leaving');
+  setTimeout(() => prev.classList.remove('leaving'), 400);
+  cur = n;
+  setTimeout(() => {
+    const next = document.getElementById(`s${cur}`);
+    next.scrollTop = 0; next.classList.add('active'); busy = false;
+  }, 80);
+  updateProgress();
+  refreshDots();   // sync dots to cur
+  updateBtn();     // sync button to cur
+  document.getElementById('hud-step').textContent = `${cur} / ${TOTAL}`;
+}
+
+// ── Progress bar ──
+function updateProgress() {
+  document.getElementById('prog-fill').style.width = ((cur-1)/(TOTAL-1)*100)+'%';
+}
+
+/* ── DOTS + BUTTON — lesson-system.js delegates ── */
+function buildDots()  { LS_buildDots(TOTAL, go); }
+function refreshDots(){ LS_refreshDots(cur); }
+function updateBtn()  {
+  updateLessonBtn(
+    document.getElementById('next-btn'),
+    T[he ? 'he' : 'en'].btn,
+    cur, GOLD_AT, he
+  );
+  const back = document.getElementById('back-btn');
+  if (back) back.disabled = (cur <= 1);
+}
+
+// ── Interactions ──
+const EMOTION_MSG = {
+  en:{Tender:'Tender — soft and careful. A feeling that asks to be held gently.',
+      Lonely:'Lonely — the kind of quiet that gets loud.',
+      Restless:"Restless — something moving inside that can't find its place.",
+      Sad:'Sad — heavy, honest, real.',
+      Warm:'Warm — something that made you feel safe.',
+      Confused:"Confused — when you can't find the edges of what you feel.",
+      Angry:"Angry — sharp and clear. Don't soften it.",
+      Peaceful:'Peaceful — a feeling worth studying.'},
+  he:{Tender:'עדין — רך וזהיר. רגש שמבקש להיות מוחזק בעדינות.',
+      Lonely:'בדידות — הסוג של השקט שמתחיל לרעוש.',
+      Restless:'חסר מנוחה — משהו נע בפנים שלא מוצא את מקומו.',
+      Sad:'עצוב — כבד, כנה, אמיתי.',
+      Warm:'חמים — משהו שגרם לך להרגיש בטוח.',
+      Confused:'מבולבל — כשאתה לא יכול למצוא את גבולות הרגש.',
+      Angry:'כועס — חד וברור. אל תרכך את זה.',
+      Peaceful:'שלו — רגש שראוי ללמוד אותו.'}
+};
+function pickEmotion(btn, keyEn, keyHe) {
+  document.querySelectorAll('#emotion-btns .choice-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  const el = document.getElementById('emotion-resp');
+  el._key = keyEn;
+  el.textContent = EMOTION_MSG[he ? 'he' : 'en'][keyEn] || '';
+}
+
+const COL_MSG = {
+  en:{'Deep Blue':'Cold, watery, quiet. Many artists agree.','Steel':'Distant. Like light through a cloudy sky.',
+      Violet:'Between sadness and something stranger.','Lavender':'Light grief. Memory with soft edges.',
+      Rose:'Tender pain. Something that still hurt.','Amber':'Warm but preserved. Like light through old glass.',
+      Gold:'Grief can be golden — precious and heavy.','Sage':'Quietly grieving. Still growing.',
+      Dark:'Not absence. Fullness that absorbs everything.','Pale':'Faded. Still here. A colour that remembers.'},
+  he:{'Deep Blue':'קר, מימי, שקט. אמנים רבים מסכימים.','Steel':'מרוחק. כמו אור דרך שמיים מעוננים.',
+      Violet:'בין עצב למשהו זר יותר.','Lavender':'אבל קל. זיכרון עם קצוות רכים.',
+      Rose:'כאב עדין. משהו שעדיין כאב.','Amber':'חמים אך שמור. כמו אור דרך זכוכית ישנה.',
+      Gold:'אבל יכול להיות זהוב — יקר וכבד.','Sage':'מתאבל בשקט. עדיין גדל.',
+      Dark:'לא היעדר. מלאות שסופגת הכל.','Pale':'דהוי. עדיין כאן. צבע שזוכר.'}
+};
+function pickCol(btn, keyEn, keyHe) {
+  document.querySelectorAll('#colour-sw .swatch').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  const el = document.getElementById('col-resp');
+  el._key = keyEn;
+  el.textContent = COL_MSG[he ? 'he' : 'en'][keyEn] || '';
+}
+
+const SHAPE_MSG = {
+  en:{Soft:'Soft — something that wants to be held.',Sharp:'Jagged — honesty with edges.',
+      Broken:'Fragmented — multiple truths at once.',Flowing:"Fluid — it changes as you hold it.",
+      Heavy:'Heavy — a weight that needs to be seen.',Scattered:'Light but everywhere at once.'},
+  he:{Soft:'רך — משהו שרוצה להיות מוחזק.',Sharp:'חד — כנות עם קצוות.',
+      Broken:'שבור — מספר אמיתות בו-זמנית.',Flowing:'זורם — הוא משתנה כשאתה מחזיק בו.',
+      Heavy:'כבד — משקל שצריך להיראות.',Scattered:'קל אבל בכל מקום בו-זמנית.'}
+};
+function pickShape(btn, keyEn, keyHe) {
+  document.querySelectorAll('.shapes .shape-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+  const el = document.getElementById('shape-resp');
+  el._key = keyEn;
+  el.textContent = SHAPE_MSG[he ? 'he' : 'en'][keyEn] || '';
+}
+
+function pick(btn, groupId) {
+  document.querySelectorAll(`#${groupId} .choice-btn`).forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+}
+
+// ── Reflection ──
+function saveRef() {
+  const t = document.getElementById('ref-text').value.trim();
+  if (!t) return;
+  localStorage.setItem('vpj-ref', t);
+  const ok = document.getElementById('saved-ok');
+  ok.classList.add('show');
+  setTimeout(() => ok.classList.remove('show'), 2500);
+}
+function loadRef() {
+  const s = localStorage.getItem('vpj-ref');
+  if (s) document.getElementById('ref-text').value = s;
+}
+
+// ── Classroom ──
+function toggleClassroom() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+// ── Keys & swipe ──
+document.addEventListener('keydown', e => {
+  if (['TEXTAREA','INPUT'].includes(document.activeElement.tagName)) return;
+  if (e.key===' ') { e.preventDefault(); advance(); }
+  // RTL: ArrowLeft = advance (reading direction), ArrowRight = back
+  if (e.key==='ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
+  if (e.key==='ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
+  if (e.key==='f'||e.key==='F') toggleClassroom();
+});
+let tx=0;
+document.addEventListener('touchstart', e => tx=e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX-tx;
+  if (Math.abs(dx)>55) {
+    // RTL: swipe-right = advance, swipe-left = back
+    if(he){ dx>0 ? advance() : goBack(); }
+    else  { dx<0 ? advance() : goBack(); }
+  }
+},{passive:true});
+
+/* ── INIT — setLang MUST run before buildDots ── */
+setLang(he ? 'he' : 'en');   // sets RTL class, language, updates btn
+document.body.classList.remove('lang-loading'); /* reveal after lang applied */
+buildDots();                  // builds dots with correct RTL direction
+refreshDots();                // syncs active dot to cur=1
+updateBtn();                  // syncs button label to screen 1
+updateProgress();
+loadRef();
+</script>
+</body>
+</html>
