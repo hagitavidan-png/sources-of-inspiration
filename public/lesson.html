@@ -235,7 +235,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 .artwork-card img{
   width:100%;
   height:auto;
-  max-height:42vh;
+  max-height:38vh;
   display:block;
   object-fit:contain;
   border-radius:3px;
@@ -267,7 +267,70 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 
 /* ════════════════════════════════
-   EMOTION CHIPS (S4)
+   ARTWORK + ACTION — combined layout
+════════════════════════════════ */
+.action-block{
+  margin-top:16px;
+  width:100%;
+  max-width:min(88vw,500px);
+  margin-left:auto;margin-right:auto;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  padding:14px 18px 12px;
+}
+.action-label{
+  font-size:.58rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;
+  color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:7px;
+}
+[dir="rtl"] .action-label{flex-direction:row-reverse;justify-content:flex-end}
+.action-label::before{
+  content:'';display:inline-block;
+  width:16px;height:1.5px;background:var(--gold);opacity:.7;
+}
+.instr-he{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(1.3rem,3.8vw,2.2rem);
+  font-weight:700;color:var(--tp);
+  text-align:right;direction:rtl;line-height:1.35;
+}
+.instr-he-sub{
+  font-family:'Heebo',sans-serif;
+  font-size:clamp(.82rem,1.9vw,.98rem);
+  color:var(--tm);text-align:right;direction:rtl;
+  font-weight:300;line-height:1.8;margin-top:5px;
+}
+.instr-en{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(.88rem,2vw,1.15rem);
+  font-weight:400;font-style:italic;
+  color:var(--ts);opacity:.75;
+  text-align:left;direction:ltr;line-height:1.5;
+  margin-top:6px;
+}
+.instr-en-sub{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(.72rem,1.5vw,.84rem);
+  color:var(--tm);opacity:.7;
+  text-align:left;direction:ltr;
+  font-style:italic;line-height:1.7;
+}
+.instr-divider{
+  width:100%;height:1px;
+  background:rgba(255,255,255,.06);
+  margin:8px 0;
+}
+
+/* ── standalone instruction block (S6, S7) ── */
+.instruction-block{
+  display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:520px;
+}
+
+/* ════════════════════════════════
+   EMOTION CHIPS (S1)
 ════════════════════════════════ */
 .emotion-grid{
   display:flex;flex-wrap:wrap;
@@ -304,7 +367,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 
 /* ════════════════════════════════
-   COLOR GRID (S5) — 2×3, LARGE SQUARES
+   COLOR GRID (S2) — 2×3, LARGE SQUARES, NO TEXT
 ════════════════════════════════ */
 .color-grid{
   display:grid;
@@ -334,95 +397,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 
 /* ════════════════════════════════
-   INSTRUCTION SCREENS (S6-S8)
-════════════════════════════════ */
-.instruction-block{
-  display:flex;flex-direction:column;gap:12px;
-  width:100%;max-width:520px;
-}
-.instr-he{
-  font-family:'Heebo',sans-serif;
-  font-size:clamp(1.6rem,4.2vw,2.8rem);
-  font-weight:700;color:var(--tp);
-  text-align:right;direction:rtl;line-height:1.3;
-}
-.instr-he-sub{
-  font-family:'Heebo',sans-serif;
-  font-size:clamp(.88rem,2vw,1.05rem);
-  color:var(--tm);text-align:right;direction:rtl;
-  font-weight:300;line-height:1.8;margin-top:4px;
-}
-.instr-en{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(.95rem,2.2vw,1.3rem);
-  font-weight:400;font-style:italic;
-  color:var(--ts);opacity:.75;
-  text-align:left;direction:ltr;line-height:1.5;
-}
-.instr-en-sub{
-  font-family:'Inter',sans-serif;
-  font-size:clamp(.76rem,1.6vw,.9rem);
-  color:var(--tm);opacity:.7;
-  text-align:left;direction:ltr;
-  font-style:italic;line-height:1.7;
-}
-.instr-divider{
-  width:100%;height:1px;
-  background:rgba(255,255,255,.06);
-  margin:8px 0;
-}
-
-/* ════════════════════════════════
-   TIMER (S9)
-════════════════════════════════ */
-#timer-display{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(4rem,14vw,8rem);
-  font-weight:900;color:#fff;
-  letter-spacing:-.04em;line-height:1;
-  margin-bottom:10px;
-  transition:color .3s;
-}
-.timer-bar-wrap{
-  width:260px;height:5px;
-  background:rgba(255,255,255,.07);
-  border-radius:4px;margin:0 auto 20px;
-}
-#timer-bar{
-  height:100%;width:100%;border-radius:4px;
-  background:linear-gradient(90deg,var(--gold),var(--rose));
-  transition:width .8s linear;
-}
-.timer-btns{
-  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
-}
-.timer-btns button{
-  padding:11px 24px;border-radius:10px;
-  font-size:.9rem;font-weight:800;transition:.2s;
-}
-.timer-btns button:hover{transform:translateY(-2px);filter:brightness(1.1)}
-#t-start{background:var(--gold);color:#0d0d1a}
-#t-reset{background:rgba(255,255,255,.08);color:var(--tm)}
-#t-finish{
-  background:rgba(255,255,255,.08);color:var(--ts);
-  border:1.5px solid rgba(255,255,255,.15);
-  font-size:.85rem;
-}
-/* language visibility controlled by lesson-responsive.css via html[lang] */
-.timer-sub-he{
-  font-family:'Heebo',sans-serif;
-  font-size:.88rem;color:var(--tm);
-  margin-top:16px;direction:rtl;
-}
-.timer-sub-en{
-  font-family:'Inter',sans-serif;
-  font-size:.78rem;color:var(--tm);
-  margin-top:4px;direction:ltr;font-style:italic;
-  opacity:.7;
-}
-
-/* ════════════════════════════════
-   CLOSING (S10)
+   CLOSING (S7)
 ════════════════════════════════ */
 .closing-block{
   display:flex;flex-direction:column;gap:14px;
@@ -598,21 +573,22 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   .screen--scroll{padding-top:14px;padding-bottom:14px}
   .bi-he{font-size:clamp(1.3rem,6.5vw,2rem)}
   .bi-en{font-size:clamp(.88rem,4vw,1.1rem)}
-  .artwork-card img{max-height:35vh}
+  .artwork-card img{max-height:30vh}
   .color-grid{max-width:300px;gap:9px}
-  #timer-display{font-size:clamp(3.5rem,18vw,6rem)}
   #next-btn{padding:13px 34px;font-size:.9rem}
   #cls-btn span{display:none}
+  .action-block{padding:11px 14px 10px}
+  .instr-he{font-size:clamp(1.1rem,5.5vw,1.8rem)}
 }
 
 /* Short screens */
 @media(max-height:620px){
-  .artwork-card img{max-height:28vh}
+  .artwork-card img{max-height:26vh}
   .bi-he{font-size:clamp(1.1rem,4vw,1.6rem)}
   .instr-he{font-size:clamp(1.1rem,4vw,1.8rem)}
-  #timer-display{font-size:clamp(3rem,10vw,5rem)}
   .eyebrow{margin-bottom:14px}
   .aline{margin:12px auto}
+  .action-block{margin-top:10px}
 }
 </style>
 <link rel="stylesheet" href="css/lesson-responsive.css"/>
@@ -627,7 +603,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   </a>
   <div id="hud-badge"><span data-he="שיעור דוגמה" data-en="Example Lesson">שיעור דוגמה</span></div>
   <div id="hud-spacer"></div>
-  <span id="hud-step">1 / 10</span>
+  <span id="hud-step">1 / 7</span>
   <div id="lang-toggle">
     <button class="lang-btn" onclick="setLang('en')">EN</button>
     <button class="lang-btn active" onclick="setLang('he')">עב</button>
@@ -643,112 +619,29 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 <div id="prog-dots"></div>
 
 <!-- ════════════════════════════════
-     STAGE — 10 screens
+     STAGE — 7 screens
 ════════════════════════════════ -->
 <main id="stage">
 
 <!-- ══════════════════════════════════════
-     S1 — Opening Quote (Munch)
+     S1 — Phase 1 Connect: Emotion Selection
 ══════════════════════════════════════ -->
-<section class="screen active" id="s1" style="--accent:var(--gold)">
-  <div class="bg">
-    <div class="blob" style="width:600px;height:600px;background:#c9a96e;opacity:.08;top:-180px;left:-120px;animation-delay:0s"></div>
-    <div class="blob" style="width:360px;height:360px;background:#7c6fcd;opacity:.07;bottom:-80px;right:-60px;animation-delay:6s"></div>
-  </div>
-  <div class="sc">
-    <div class="eyebrow"><div class="ey-dot"></div><span data-he="פתיחה" data-en="Opening">פתיחה</span></div>
-    <div class="bilingual">
-      <div class="bi-he">"אני מצייר את מה שהרגשתי — לא את מה שראיתי."</div>
-      <div class="bi-he-attr">— אדוורד מונק</div>
-      <div class="aline" style="margin:16px 0"></div>
-      <div class="bi-en">"I paint what I felt — not what I saw."</div>
-      <div class="bi-en-attr">— Edvard Munch</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S2 — Artwork 1: The Scream
-══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s2" style="--accent:var(--rose)">
-  <div class="bg">
-    <div class="blob" style="width:500px;height:500px;background:#e85d75;opacity:.09;top:-120px;right:-80px;animation-delay:2s"></div>
-    <div class="blob" style="width:280px;height:280px;background:#c9a96e;opacity:.07;bottom:-40px;left:5%;animation-delay:7s"></div>
-  </div>
-  <div class="sc">
-    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-he="יצירה ראשונה" data-en="First Artwork">יצירה ראשונה</span></div>
-    <div class="gallery-wrap">
-      <div class="artwork-card">
-        <img
-          src="lessons/images/munch-scream.jpg"
-          alt="The Scream — Edvard Munch, 1893"
-          loading="lazy"
-          onerror="this.classList.add('broken');this.alt='The Scream — Edvard Munch, 1893 (תמונה לא זמינה)'"/>
-      </div>
-      <div class="artwork-meta">
-        <div class="artwork-meta-artist">Edvard Munch</div>
-        <div class="artwork-meta-title">
-          <span data-he="הצעקה" data-en="The Scream">הצעקה</span>
-          <span class="artwork-meta-year">1893</span>
-        </div>
-      </div>
-      <div class="cap-block">
-        <div class="cap-he">הצבע כאן לא מתאר מציאות — הוא מתאר רגש.</div>
-        <div class="cap-en">Color here doesn't describe reality — it describes feeling.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S3 — Artwork 2: Rothko
-══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s3" style="--accent:#9b7fd4">
-  <div class="bg">
-    <div class="blob" style="width:520px;height:520px;background:#7c6fcd;opacity:.1;top:-100px;left:-80px;animation-delay:1s"></div>
-    <div class="blob" style="width:300px;height:300px;background:#c97cc9;opacity:.08;bottom:-50px;right:8%;animation-delay:5s"></div>
-  </div>
-  <div class="sc">
-    <div class="eyebrow"><div class="ey-dot" style="background:#9b7fd4"></div><span data-he="יצירה שנייה" data-en="Second Artwork">יצירה שנייה</span></div>
-    <div class="gallery-wrap">
-      <div class="artwork-card">
-        <img
-          src="lessons/images/rothko-colorfield.jpg"
-          alt="No. 61 (Rust and Blue) — Mark Rothko, 1953"
-          loading="lazy"
-          onerror="this.classList.add('broken');this.alt='Rothko No. 61 (תמונה לא זמינה)'"/>
-      </div>
-      <div class="artwork-meta">
-        <div class="artwork-meta-artist">Mark Rothko</div>
-        <div class="artwork-meta-title">
-          <span data-he="מס׳ 61 (חלודה וכחול)" data-en="No. 61 (Rust and Blue)">מס׳ 61 (חלודה וכחול)</span>
-          <span class="artwork-meta-year">1953</span>
-        </div>
-      </div>
-      <div class="cap-block">
-        <div class="cap-he">רות&#x05E7;&#x05D5; רצה שאנשים יבכו מול ציוריו.</div>
-        <div class="cap-en">Rothko wanted people to weep before his paintings.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S4 — Emotion Selection
-══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s4" style="--accent:var(--rose)">
+<section class="screen screen--scroll active" id="s1" style="--accent:var(--rose)">
   <div class="bg">
     <div class="blob" style="width:480px;height:480px;background:#e85d75;opacity:.09;top:-100px;right:-70px;animation-delay:3s"></div>
     <div class="blob" style="width:260px;height:260px;background:#c9a96e;opacity:.07;bottom:-30px;left:5%;animation-delay:8s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot" style="background:var(--rose)"></div><span data-he="שלב חיבור" data-en="Connect Phase">שלב חיבור</span></div>
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:var(--rose)"></div>
+      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+    </div>
     <div class="instruction-block">
       <div class="instr-he">מה נוכח בך עכשיו?</div>
-      <div class="instr-he-sub">אל תחשוב — תרגיש.</div>
+      <div class="instr-he-sub">אל תחשוב — תרגיש. בחר עד שלושה רגשות.</div>
       <div class="instr-divider"></div>
       <div class="instr-en">What is present in you right now?</div>
-      <div class="instr-en-sub">Don't think — feel.</div>
+      <div class="instr-en-sub">Don't think — feel. Choose up to three emotions.</div>
     </div>
     <div class="emotion-grid" id="emotion-chips">
       <button class="emotion-chip" onclick="pickEmotion(this)">
@@ -781,15 +674,18 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 </section>
 
 <!-- ══════════════════════════════════════
-     S5 — Color Selection (2×3 large squares)
+     S2 — Phase 1 Connect: Color Selection
 ══════════════════════════════════════ -->
-<section class="screen screen--scroll" id="s5" style="--accent:var(--gold)">
+<section class="screen screen--scroll" id="s2" style="--accent:var(--gold)">
   <div class="bg">
     <div class="blob" style="width:460px;height:460px;background:#c9a96e;opacity:.09;top:-80px;left:-80px;animation-delay:0s"></div>
     <div class="blob" style="width:280px;height:280px;background:#e85d75;opacity:.07;bottom:-40px;right:10%;animation-delay:5s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot"></div><span data-he="בחירת צבע" data-en="Color Selection">בחירת צבע</span></div>
+    <div class="eyebrow">
+      <div class="ey-dot"></div>
+      <span data-he="שלב 1 — חיבור" data-en="Phase 1 — Connect">שלב 1 — חיבור</span>
+    </div>
     <div class="instruction-block">
       <div class="instr-he">איזה צבע הוא הרגש הזה?</div>
       <div class="instr-he-sub">מהיר. אינטואיטיבי. אין תשובה נכונה.</div>
@@ -811,56 +707,116 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 </section>
 
 <!-- ══════════════════════════════════════
-     S6 — First Mark
+     S3 — Phase 2 Inspire+Act: Rothko
 ══════════════════════════════════════ -->
-<section class="screen" id="s6" style="--accent:var(--gold)">
+<section class="screen screen--scroll" id="s3" style="--accent:#9b7fd4">
   <div class="bg">
-    <div class="blob" style="width:580px;height:580px;background:#c9a96e;opacity:.09;top:-150px;right:-100px;animation-delay:1s"></div>
-    <div class="blob" style="width:300px;height:300px;background:#e85d75;opacity:.07;bottom:-50px;left:5%;animation-delay:7s"></div>
+    <div class="blob" style="width:520px;height:520px;background:#7c6fcd;opacity:.1;top:-100px;left:-80px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#c97cc9;opacity:.08;bottom:-50px;right:8%;animation-delay:5s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot"></div><span data-he="שלב יצירה · 1/3" data-en="Create Phase · 1/3">שלב יצירה · 1/3</span></div>
-    <div class="instruction-block">
-      <div class="instr-he">הניחו כתם אחד על הדף.</div>
-      <div class="instr-he-sub">לא ציור — כתם. בלי לחשוב על מיקום.</div>
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#9b7fd4"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/rothko-colorfield.jpg"
+          alt="No. 61 (Rust and Blue) — Mark Rothko, 1953"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Rothko No. 61 (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Mark Rothko</div>
+        <div class="artwork-meta-title">
+          <span data-he="מס׳ 61 (חלודה וכחול)" data-en="No. 61 (Rust and Blue)">מס׳ 61 (חלודה וכחול)</span>
+          <span class="artwork-meta-year">1953</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
+      <div class="instr-he">הניחו כתם אחד גדול.</div>
+      <div class="instr-he-sub">לא ציור — כתם. מלא. בלי לחשוב על מיקום.</div>
       <div class="instr-divider"></div>
-      <div class="instr-en">Place one mark on the page.</div>
-      <div class="instr-en-sub">Not a drawing — a mark. Don't think about placement.</div>
+      <div class="instr-en">Place one large mark.</div>
+      <div class="instr-en-sub">Not a drawing — a mark. Full. Don't think about placement.</div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S7 — Relationship (Second Mark)
+     S4 — Phase 2 Inspire+Act: Frankenthaler
 ══════════════════════════════════════ -->
-<section class="screen" id="s7" style="--accent:#a8c0e8">
+<section class="screen screen--scroll" id="s4" style="--accent:#a8c0e8">
   <div class="bg">
     <div class="blob" style="width:520px;height:520px;background:#a8c0e8;opacity:.08;top:-120px;left:-90px;animation-delay:2s"></div>
     <div class="blob" style="width:260px;height:260px;background:#7c6fcd;opacity:.08;bottom:-40px;right:8%;animation-delay:6s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot" style="background:#a8c0e8"></div><span data-he="שלב יצירה · 2/3" data-en="Create Phase · 2/3">שלב יצירה · 2/3</span></div>
-    <div class="instruction-block">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#a8c0e8"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/frankenthaler-mountains.jpg"
+          alt="Mountains and Sea — Helen Frankenthaler, 1952"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Frankenthaler Mountains and Sea (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Helen Frankenthaler</div>
+        <div class="artwork-meta-title">
+          <span data-he="הרים וים" data-en="Mountains and Sea">הרים וים</span>
+          <span class="artwork-meta-year">1952</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
       <div class="instr-he">הוסיפו כתם שני.</div>
-      <div class="instr-he-sub">תנו לו להיות קרוב או רחוק. תנו להם לדבר.</div>
+      <div class="instr-he-sub">תנו לו להיות קרוב או רחוק מהראשון. תנו להם לדבר.</div>
       <div class="instr-divider"></div>
       <div class="instr-en">Add a second mark.</div>
-      <div class="instr-en-sub">Let it be close or far. Let them speak to each other.</div>
+      <div class="instr-en-sub">Let it be close or far from the first. Let them speak to each other.</div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S8 — Movement
+     S5 — Phase 2 Inspire+Act: Kline
 ══════════════════════════════════════ -->
-<section class="screen" id="s8" style="--accent:#c97cc9">
+<section class="screen screen--scroll" id="s5" style="--accent:#c97cc9">
   <div class="bg">
     <div class="blob" style="width:500px;height:500px;background:#c97cc9;opacity:.09;top:-100px;right:-70px;animation-delay:0s"></div>
     <div class="blob" style="width:280px;height:280px;background:#7c6fcd;opacity:.09;bottom:-40px;left:10%;animation-delay:5s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot" style="background:#c97cc9"></div><span data-he="שלב יצירה · 3/3" data-en="Create Phase · 3/3">שלב יצירה · 3/3</span></div>
-    <div class="instruction-block">
+    <div class="eyebrow">
+      <div class="ey-dot" style="background:#c97cc9"></div>
+      <span data-he="שלב 2 — השראה ויצירה" data-en="Phase 2 — Inspire &amp; Act">שלב 2 — השראה ויצירה</span>
+    </div>
+    <div class="gallery-wrap">
+      <div class="artwork-card">
+        <img
+          src="lessons/images/kline-mahoning.jpg"
+          alt="Mahoning — Franz Kline, 1956"
+          loading="lazy"
+          onerror="this.classList.add('broken');this.alt='Kline Mahoning (תמונה לא זמינה)'"/>
+      </div>
+      <div class="artwork-meta">
+        <div class="artwork-meta-artist">Franz Kline</div>
+        <div class="artwork-meta-title">
+          <span data-he="מהונינג" data-en="Mahoning">מהונינג</span>
+          <span class="artwork-meta-year">1956</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-label" data-he="פעולה" data-en="Action">פעולה</div>
       <div class="instr-he">תנו לצבע לנוע.</div>
       <div class="instr-he-sub">להתפשט. להיעצר. להתערבב. הגוף מצייר — לא רק היד.</div>
       <div class="instr-divider"></div>
@@ -871,31 +827,32 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 </section>
 
 <!-- ══════════════════════════════════════
-     S9 — Timer
+     S6 — Phase 3 Pause: Quiet Observation
 ══════════════════════════════════════ -->
-<section class="screen" id="s9" style="--accent:var(--gold)">
+<section class="screen" id="s6" style="--accent:var(--gold)">
   <div class="bg">
-    <div class="blob" style="width:560px;height:560px;background:#c9a96e;opacity:.1;top:-120px;left:-90px;animation-delay:0s"></div>
-    <div class="blob" style="width:280px;height:280px;background:#e85d75;opacity:.08;bottom:-40px;right:8%;animation-delay:4s"></div>
+    <div class="blob" style="width:580px;height:580px;background:#c9a96e;opacity:.09;top:-150px;right:-100px;animation-delay:1s"></div>
+    <div class="blob" style="width:300px;height:300px;background:#7c6fcd;opacity:.07;bottom:-50px;left:5%;animation-delay:7s"></div>
   </div>
   <div class="sc">
-    <div class="eyebrow"><div class="ey-dot"></div><span data-he="המשיכו לצייר" data-en="Keep Drawing">המשיכו לצייר</span></div>
-    <div id="timer-display">20:00</div>
-    <div class="timer-bar-wrap"><div id="timer-bar"></div></div>
-    <div class="timer-btns">
-      <button id="t-start" onclick="toggleTimer()">▶ <span data-he="התחל" data-en="Start">התחל</span></button>
-      <button id="t-reset" onclick="resetTimer()">↺ <span data-he="אפס" data-en="Reset">אפס</span></button>
-      <button id="t-finish" onclick="advance()"><span data-he="סיימתי לצייר" data-en="Finished Drawing">סיימתי לצייר</span></button>
+    <div class="eyebrow">
+      <div class="ey-dot"></div>
+      <span data-he="שלב 3 — עצירה" data-en="Phase 3 — Pause">שלב 3 — עצירה</span>
     </div>
-    <div class="timer-sub-he">צייר בזמן שהטיימר רץ. אל תעצור.</div>
-    <div class="timer-sub-en">Draw while the timer runs. Don't stop.</div>
+    <div class="instruction-block">
+      <div class="instr-he">עצרו. הסתכלו על הדף.</div>
+      <div class="instr-he-sub">אל תשפטו — רק שימו לב. מה הדף אומר לכם?</div>
+      <div class="instr-divider"></div>
+      <div class="instr-en">Stop. Look at the page.</div>
+      <div class="instr-en-sub">Don't judge — just notice. What is the page saying to you?</div>
+    </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S10 — Closing
+     S7 — Phase 4 Close: Warm Ending
 ══════════════════════════════════════ -->
-<section class="screen" id="s10" style="--accent:var(--gold)">
+<section class="screen" id="s7" style="--accent:var(--gold)">
   <div class="bg">
     <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
     <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.07;bottom:-60px;right:-60px;animation-delay:4s"></div>
@@ -927,23 +884,17 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <button id="back-btn" onclick="goBack()" disabled title="Back">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
-  <button id="next-btn" onclick="advance()">המשך ←</button>
+  <button id="next-btn" onclick="advance()">בחר ←</button>
 </div>
 
 <script>
 // ══════════════════════════════════════
 // STATE
 // ══════════════════════════════════════
-const TOTAL = 10;
+const TOTAL = 7;
 let cur = 1;
 let busy = false;
 let lang = localStorage.getItem('sourcesLang') || localStorage.getItem('lesson-lang') || 'he';
-
-// Timer
-let timerOn   = false;
-let timerSec  = 20 * 60;
-let timerInt  = null;
-const TIMER_TOTAL = 20 * 60;
 
 // Selections
 let pickedEmotions = [];   // up to 3
@@ -954,18 +905,22 @@ let pickedColor    = null;
 // ══════════════════════════════════════
 const BTN = {
   he: {
-    1:'המשך ←', 2:'המשך ←', 3:'המשך ←',
-    4:'בחר ←',  5:'בחר ←',
-    6:'המשך ←', 7:'המשך ←', 8:'המשך ←',
-    9:null,     // timer screen — finish btn handles advance
-    10:null     // closing — no next-btn
+    1: 'בחר ←',
+    2: 'בחר ←',
+    3: 'המשך ←',
+    4: 'המשך ←',
+    5: 'המשך ←',
+    6: 'המשך ←',
+    7: null      // closing screen — no next-btn
   },
   en: {
-    1:'Continue →', 2:'Continue →', 3:'Continue →',
-    4:'Choose →',   5:'Choose →',
-    6:'Continue →', 7:'Continue →', 8:'Continue →',
-    9:null,
-    10:null
+    1: 'Choose →',
+    2: 'Choose →',
+    3: 'Continue →',
+    4: 'Continue →',
+    5: 'Continue →',
+    6: 'Continue →',
+    7: null
   }
 };
 
@@ -1013,18 +968,6 @@ function applyLang() {
       el.innerHTML = val;
     }
   });
-
-  // timer start button text
-  const ts = document.getElementById('t-start');
-  if (ts && !timerOn) {
-    ts.innerHTML = isHe ? '▶ התחל' : '▶ Start';
-  }
-  // timer reset
-  const tr = document.getElementById('t-reset');
-  if (tr) tr.innerHTML = isHe ? '↺ אפס' : '↺ Reset';
-  // timer finish
-  const tf = document.getElementById('t-finish');
-  if (tf) tf.innerHTML = isHe ? 'סיימתי לצייר' : 'Finished Drawing';
 
   // nav-bar direction
   const nav = document.getElementById('nav-bar');
@@ -1117,7 +1060,7 @@ function updateBtn() {
 }
 
 // ══════════════════════════════════════
-// EMOTION SELECTION (S4) — max 3
+// EMOTION SELECTION (S1) — max 3
 // ══════════════════════════════════════
 function pickEmotion(btn) {
   const isAlreadyPicked = btn.classList.contains('picked');
@@ -1141,61 +1084,12 @@ function pickEmotion(btn) {
 }
 
 // ══════════════════════════════════════
-// COLOR SELECTION (S5)
+// COLOR SELECTION (S2)
 // ══════════════════════════════════════
 function pickColor(btn) {
   document.querySelectorAll('#color-grid .color-sq').forEach(b => b.classList.remove('picked'));
   btn.classList.add('picked');
   pickedColor = btn.style.background;
-}
-
-// ══════════════════════════════════════
-// TIMER (S9)
-// ══════════════════════════════════════
-function toggleTimer() {
-  if (timerOn) {
-    clearInterval(timerInt);
-    timerOn = false;
-    const startBtn = document.getElementById('t-start');
-    startBtn.innerHTML = lang === 'he' ? '▶ המשך' : '▶ Resume';
-    document.getElementById('timer-display').style.color = '#fff';
-  } else {
-    timerOn = true;
-    const startBtn = document.getElementById('t-start');
-    startBtn.innerHTML = lang === 'he' ? '⏸ השהה' : '⏸ Pause';
-    document.getElementById('timer-display').style.color = 'var(--gold)';
-    timerInt = setInterval(tick, 1000);
-  }
-}
-
-function tick() {
-  if (timerSec <= 0) {
-    clearInterval(timerInt);
-    timerOn = false;
-    document.getElementById('timer-display').textContent = lang === 'he' ? 'זמן!' : 'Time!';
-    document.getElementById('timer-display').style.color = 'var(--rose)';
-    document.getElementById('timer-bar').style.width = '0%';
-    return;
-  }
-  timerSec--;
-  const m = Math.floor(timerSec / 60);
-  const s = timerSec % 60;
-  document.getElementById('timer-display').textContent =
-    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  document.getElementById('timer-bar').style.width = (timerSec / TIMER_TOTAL * 100) + '%';
-  if (timerSec <= 120)
-    document.getElementById('timer-display').style.color = 'var(--rose)';
-}
-
-function resetTimer() {
-  clearInterval(timerInt);
-  timerOn  = false;
-  timerSec = TIMER_TOTAL;
-  document.getElementById('timer-display').textContent = '20:00';
-  document.getElementById('timer-display').style.color = '#fff';
-  document.getElementById('timer-bar').style.width = '100%';
-  const startBtn = document.getElementById('t-start');
-  startBtn.innerHTML = lang === 'he' ? '▶ התחל' : '▶ Start';
 }
 
 // ══════════════════════════════════════
