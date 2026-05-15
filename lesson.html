@@ -129,6 +129,21 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.4);opacity:.9}}
 
+/* ── LANGUAGE VISIBILITY — default HE mode ──
+   EN elements hidden by default; lesson-responsive.css handles toggle.
+   Defined here (before the external CSS) to prevent any flash of EN text. */
+.bi-en, .bi-en-sub, .bi-en-attr,
+.bi-sep,
+.card-en,
+.chip-en,
+.close-en,
+.instr-en, .instr-en-sub,
+.cap-en,
+.timer-sub-en,
+.instr-divider {
+  display: none !important;
+}
+
 /* ── BILINGUAL BLOCK — text screens ── */
 .bi-block{
   display:flex;flex-direction:column;

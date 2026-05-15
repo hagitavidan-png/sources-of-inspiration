@@ -358,7 +358,7 @@ body:has(#prog-fill) #nav-bar {
    We only hide the instruction/caption/chip/timer secondary language.
    ══════════════════════════════════════════════════════════════ */
 
-/* ── Default: hide the secondary-language elements ── */
+/* ── Default: hide all EN-only elements by default (HE is the default lang) ── */
 /* These elements are only meaningful when shown one at a time */
 .bi-en,
 .bi-en-sub,
@@ -368,6 +368,7 @@ body:has(#prog-fill) #nav-bar {
 .instr-en-sub,
 .cap-en,
 .chip-en,
+.card-en,
 .timer-sub-en,
 .close-en,
 .instr-divider {
@@ -382,6 +383,7 @@ html[lang="he"] .instr-he,
 html[lang="he"] .instr-he-sub,
 html[lang="he"] .cap-he,
 html[lang="he"] .chip-he,
+html[lang="he"] .card-he,
 html[lang="he"] .timer-sub-he,
 html[lang="he"] .close-he {
   display: block !important;
@@ -395,6 +397,7 @@ html[lang="he"] .instr-en,
 html[lang="he"] .instr-en-sub,
 html[lang="he"] .cap-en,
 html[lang="he"] .chip-en,
+html[lang="he"] .card-en,
 html[lang="he"] .timer-sub-en,
 html[lang="he"] .close-en,
 html[lang="he"] .instr-divider {
@@ -409,6 +412,7 @@ html[lang="en"] .bi-sep,
 html[lang="en"] .instr-en,
 html[lang="en"] .instr-en-sub,
 html[lang="en"] .cap-en,
+html[lang="en"] .card-en,
 html[lang="en"] .timer-sub-en,
 html[lang="en"] .close-en {
   display: block !important;
@@ -426,6 +430,7 @@ html[lang="en"] .instr-he,
 html[lang="en"] .instr-he-sub,
 html[lang="en"] .cap-he,
 html[lang="en"] .chip-he,
+html[lang="en"] .card-he,
 html[lang="en"] .timer-sub-he,
 html[lang="en"] .close-he,
 html[lang="en"] .instr-divider {
@@ -449,6 +454,8 @@ html[lang="en"] .emotion-chip {
   align-items: center !important;
 }
 
-/* chip-he is a span inside the chip — inline-block is fine */
+/* chip-he / card-he are spans inside the chip/card — inline-block is fine */
 html[lang="he"] .chip-he { display: inline-block !important; }
 html[lang="en"] .chip-en { display: inline-block !important; }
+html[lang="he"] .card-he { display: inline-block !important; }
+html[lang="en"] .card-en { display: inline-block !important; }
