@@ -74,10 +74,14 @@
 
   /** Get current language: 'he' or 'en' */
   function getLang() {
-    return (
-      document.documentElement.lang ||
-      document.body.classList.contains('rtl') ? 'he' : 'en'
-    ) === 'he' ? 'he' : 'en';
+    const htmlLang = document.documentElement.lang;
+    if (htmlLang === 'he' || htmlLang === 'en') return htmlLang;
+    if (document.body.classList.contains('rtl')) return 'he';
+    if (document.body.dir === 'rtl') return 'he';
+    // fallback: check localStorage (used by some lessons)
+    const stored = localStorage.getItem('sourcesLang') || localStorage.getItem('lesson-lang');
+    if (stored === 'he' || stored === 'en') return stored;
+    return 'he'; // default Hebrew
   }
 
   // ── RENDER ─────────────────────────────────────────────────────────────────
@@ -218,7 +222,8 @@
 
   function init() {
     injectStyles();
-    render();
+    // Small delay so lesson JS has time to set lang/dir on <html>
+    setTimeout(render, 120);
   }
 
   // Run after DOM is ready
