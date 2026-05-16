@@ -83,8 +83,9 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   justify-content:flex-start;
   padding-top:14px;
   padding-bottom:10px;
-  overflow-y:auto; /* allow scroll if content exceeds viewport */
+  overflow-y:scroll; /* scroll within fixed stage */
   overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
 }
 
 /* ── Ambient BG ── */
@@ -109,6 +110,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   max-width:660px;width:100%;
   display:flex;flex-direction:column;
   align-items:stretch; /* stretch = children fill full width, text-align/direction handle alignment */
+  flex-shrink:0;
 }
 
 /* ── Eyebrow ── */
@@ -639,7 +641,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   .select-grid{max-width:480px}
 }
 </style>
-<link rel="stylesheet" href="css/lesson-responsive.css"/>
+<link rel="stylesheet" href="css/lesson-responsive.css?v=10"/>
 </head>
 <body>
 
