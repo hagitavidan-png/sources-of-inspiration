@@ -486,10 +486,10 @@ html[lang="en"] body {
   direction: ltr !important;
 }
 
-/* ── 2. Screen containers: text-align AND align-items follow direction ──
-   KEY: In a flex-column container, align-items controls the cross axis (horizontal).
-   RTL: align-items:flex-start = right side. align-items:flex-end = left side.
-   So in Hebrew we use flex-start to push content to the RIGHT edge. ── */
+/* ── 2. Screen containers: text-align follows direction ──
+   IMPORTANT: align-items in flex-column is NOT direction-aware — flex-start is always
+   physically LEFT regardless of RTL. So we do NOT use align-items for text direction.
+   Instead: width:100% on children + text-align drives alignment. ── */
 html[lang="he"] .screen,
 html[lang="he"] .sc,
 html[lang="he"] .bi-block,
@@ -497,7 +497,6 @@ html[lang="he"] .art-text,
 html[lang="he"] .action-block,
 html[lang="he"] .closing-block {
   text-align: right !important;
-  align-items: flex-start !important;
 }
 html[lang="en"] .screen,
 html[lang="en"] .sc,
@@ -506,7 +505,13 @@ html[lang="en"] .art-text,
 html[lang="en"] .action-block,
 html[lang="en"] .closing-block {
   text-align: left !important;
-  align-items: flex-start !important;
+}
+
+/* ── 2b. All direct text children of .sc must be full width so text-align works ── */
+html[lang="he"] .sc > *,
+html[lang="en"] .sc > * {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* ── 3. Eyebrow labels — flex row direction ── */
@@ -519,16 +524,24 @@ html[lang="en"] .eyebrow {
   justify-content: flex-start !important;
 }
 
-/* ── 4. Selection cards — alignment and text direction ──
-   KEY: flex-direction:column → align-items controls horizontal axis.
-   flex-start = RIGHT in RTL (same logic as .screen Rule 2) ── */
+/* ── 4. Selection cards — text direction only (width:100% already set) ── */
 html[lang="he"] .select-card {
-  align-items: flex-start !important;
   text-align: right !important;
 }
 html[lang="en"] .select-card {
-  align-items: flex-start !important;
   text-align: left !important;
+}
+
+/* card-he / card-en spans — full width so text-align takes effect ── */
+html[lang="he"] .card-he,
+html[lang="he"] .card-en {
+  width: 100% !important;
+  display: block !important;
+}
+html[lang="en"] .card-he,
+html[lang="en"] .card-en {
+  width: 100% !important;
+  display: block !important;
 }
 
 /* ── 4b. Elements that must stay centered regardless of language ──
