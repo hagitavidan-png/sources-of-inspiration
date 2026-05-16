@@ -564,10 +564,10 @@ html[lang="en"] .sc > * {
   max-width: 100% !important;
 }
 
-/* ── 3. Eyebrow labels — flex row direction, full width for alignment ── */
+/* ── 3. Eyebrow labels — RTL pushes content to the right ── */
 html[lang="he"] .eyebrow {
   flex-direction: row-reverse !important;
-  justify-content: flex-start !important;
+  justify-content: flex-end !important;
   width: 100% !important;
 }
 html[lang="en"] .eyebrow {
