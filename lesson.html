@@ -312,10 +312,11 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  margin-top:16px;
+  margin-top:12px;
   width:100%;
-  max-width:min(86vw,380px);
-  flex-shrink:0;
+  max-width:min(86vw,320px);
+  flex-shrink:1; /* allow shrinking to fit viewport */
+  min-height:0;
 }
 .color-sq{
   aspect-ratio:1/1;
@@ -323,6 +324,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   border:3px solid transparent;
   cursor:pointer;
   transition:all .22s;
+  min-width:0;min-height:0; /* allow grid to shrink */
 }
 .color-sq:hover{
   transform:scale(1.05);
@@ -1063,7 +1065,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 ══════════════════════════════════════ -->
 <section class="screen" id="s12" style="--accent:var(--gold)">
   <div class="bg">
-    <div class="blob" style="width:700px;height:700px;background:#c9a96e;opacity:.1;top:-200px;left:-150px;animation-delay:0s"></div>
+    <div class="blob" style="width:400px;height:400px;background:#c9a96e;opacity:.07;top:-120px;left:-100px;animation-delay:0s"></div>
     <div class="blob" style="width:350px;height:350px;background:#e85d75;opacity:.07;bottom:-60px;right:-60px;animation-delay:4s"></div>
     <div class="blob" style="width:200px;height:200px;background:#7c6fcd;opacity:.1;top:35%;right:12%;animation-delay:2s"></div>
   </div>

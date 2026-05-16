@@ -529,14 +529,16 @@ html[lang="en"] .sc > * {
   max-width: 100% !important;
 }
 
-/* ── 3. Eyebrow labels — flex row direction ── */
+/* ── 3. Eyebrow labels — flex row direction, full width for alignment ── */
 html[lang="he"] .eyebrow {
   flex-direction: row-reverse !important;
   justify-content: flex-start !important;
+  width: 100% !important;
 }
 html[lang="en"] .eyebrow {
   flex-direction: row !important;
   justify-content: flex-start !important;
+  width: 100% !important;
 }
 
 /* ── 4. Selection cards — text direction only (width:100% already set) ── */
@@ -579,6 +581,8 @@ html[lang="en"] .emotion-grid {
 }
 
 /* ── 6. Action label (S9/S10) — flex row direction ── */
+html[lang="he"] .action-block { width: 100% !important; }
+html[lang="en"] .action-block { width: 100% !important; }
 html[lang="he"] .action-label {
   flex-direction: row-reverse !important;
   justify-content: flex-start !important;
@@ -674,15 +678,19 @@ html[lang="he"] #fs-btn {
   .screen--choice .eyebrow  { margin-bottom: 6px !important; }
   .screen--choice .bi-block { margin-bottom: 4px !important; }
   .screen--choice .bi-he    { font-size: clamp(1.1rem, 3.5vw, 1.6rem) !important; }
+  /* color grid — squeeze squares so all 6 fit */
+  .color-grid { max-width: min(80vw, 260px) !important; gap: 8px !important; margin-top: 8px !important; }
 }
 @media (max-height: 720px) {
   .screen--choice { padding-top: 8px !important; padding-bottom: 6px !important; }
   .select-grid    { gap: 4px !important; margin-top: 6px !important; }
   .select-card    { padding: 7px 14px !important; min-height: 36px !important; }
   .bi-block       { margin-bottom: 0 !important; }
+  .color-grid     { max-width: min(76vw, 240px) !important; gap: 7px !important; }
 }
 @media (max-height: 620px) {
   .screen--choice { padding-top: 4px !important; }
   .select-grid    { gap: 3px !important; margin-top: 4px !important; }
   .select-card    { padding: 6px 12px !important; min-height: 32px !important; }
+  .color-grid     { max-width: min(72vw, 210px) !important; gap: 6px !important; }
 }
