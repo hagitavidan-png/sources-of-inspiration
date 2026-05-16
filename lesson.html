@@ -83,7 +83,8 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   justify-content:flex-start;
   padding-top:14px;
   padding-bottom:10px;
-  overflow:hidden; /* prevent any accidental scroll */
+  overflow-y:auto; /* allow scroll if content exceeds viewport */
+  overflow-x:hidden;
 }
 
 /* ── Ambient BG ── */
@@ -338,21 +339,21 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 ════════════════════════════════ */
 .select-grid{
   display:flex;flex-direction:column;
-  gap:6px;
-  margin-top:10px;
+  gap:5px;
+  margin-top:8px;
   width:100%;max-width:440px;
   flex-shrink:0;
 }
 .select-card{
   width:100%;
-  padding:10px 16px;
+  padding:9px 16px;
   background:rgba(255,255,255,.06);
   border:1.5px solid rgba(255,255,255,.1);
   border-radius:10px;
   display:block; /* block not flex — text-align+direction RTL work natively */
   cursor:pointer;
   transition:all .22s;
-  min-height:44px; /* touch-friendly floor */
+  min-height:40px; /* touch-friendly floor, reduced to fit 5 cards */
   text-align:right; /* default for HE; overridden to left for EN by Section 14 */
 }
 .select-card:hover{
@@ -1113,15 +1114,15 @@ let pickedMark     = null;
 const BTN = {
   he: {
     1:'המשך ←', 2:'המשך ←', 3:'המשך ←', 4:'המשך ←',
-    5:'בחר ←',  6:'בחר ←',
-    7:'בחר ←',  8:'בחר ←',
+    5:'המשך ←',  6:'המשך ←',
+    7:'המשך ←',  8:'המשך ←',
     9:'המשך ←', 10:'המשך ←',
     11:'המשך ←', 12: null
   },
   en: {
     1:'Continue →', 2:'Continue →', 3:'Continue →', 4:'Continue →',
-    5:'Choose →',   6:'Choose →',
-    7:'Choose →',   8:'Choose →',
+    5:'Continue →',   6:'Continue →',
+    7:'Continue →',   8:'Continue →',
     9:'Continue →', 10:'Continue →',
     11:'Continue →', 12: null
   }
