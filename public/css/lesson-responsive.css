@@ -458,11 +458,14 @@ html[lang="en"] .emotion-chip {
   align-items: center !important;
 }
 
-/* chip-he / card-he are spans inside the chip/card — inline-block is fine */
+/* chip-he / chip-en are spans inside chips — inline-block is correct for chips */
 html[lang="he"] .chip-he { display: inline-block !important; }
 html[lang="en"] .chip-en { display: inline-block !important; }
-html[lang="he"] .card-he { display: inline-block !important; }
-html[lang="en"] .card-en { display: inline-block !important; }
+/* card-he / card-en are spans inside select-cards — block so width:100% + text-align work */
+/* display:block here is safe: card-en is already display:none from the hide rules above;
+   card-he is already display:block from line 393; this just makes it explicit for Section 14 */
+html[lang="he"] .card-he { display: block !important; }
+html[lang="en"] .card-en { display: block !important; }
 
 
 /* ══════════════════════════════════════════════════════════════
@@ -532,17 +535,12 @@ html[lang="en"] .select-card {
   text-align: left !important;
 }
 
-/* card-he / card-en spans — full width so text-align takes effect ── */
-html[lang="he"] .card-he,
-html[lang="he"] .card-en {
-  width: 100% !important;
-  display: block !important;
-}
-html[lang="en"] .card-he,
-html[lang="en"] .card-en {
-  width: 100% !important;
-  display: block !important;
-}
+/* card-he / card-en — full width for text-align to work.
+   IMPORTANT: do NOT set display here — visibility is controlled by
+   the language toggle rules (display:none/block) elsewhere.
+   Only the SHOWN card gets display:block from those rules. */
+html[lang="he"] .card-he { width: 100% !important; }
+html[lang="en"] .card-en { width: 100% !important; }
 
 /* ── 4b. Elements that must stay centered regardless of language ──
    Artwork, gallery, chips grid, complete-icon — purely visual, not text-flow. ── */
@@ -653,4 +651,17 @@ html[lang="en"] #hud-lang {
 html[lang="he"] #fs-btn {
   right: auto !important;
   left: 12px !important;
+}
+
+/* ── 16. Choice screens on small/short phones — fit 5 cards without clipping ── */
+@media (max-height: 720px) {
+  .screen--choice { padding-top: 8px !important; padding-bottom: 6px !important; }
+  .select-grid    { gap: 4px !important; margin-top: 6px !important; }
+  .select-card    { padding: 7px 14px !important; min-height: 36px !important; }
+  .bi-block       { margin-bottom: 0 !important; }
+}
+@media (max-height: 620px) {
+  .screen--choice { padding-top: 4px !important; }
+  .select-grid    { gap: 3px !important; margin-top: 4px !important; }
+  .select-card    { padding: 6px 12px !important; min-height: 32px !important; }
 }
