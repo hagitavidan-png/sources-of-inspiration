@@ -519,9 +519,11 @@ html[lang="en"] .eyebrow {
   justify-content: flex-start !important;
 }
 
-/* ── 4. Selection cards — alignment and text direction ── */
+/* ── 4. Selection cards — alignment and text direction ──
+   KEY: flex-direction:column → align-items controls horizontal axis.
+   flex-start = RIGHT in RTL (same logic as .screen Rule 2) ── */
 html[lang="he"] .select-card {
-  align-items: flex-end !important;
+  align-items: flex-start !important;
   text-align: right !important;
 }
 html[lang="en"] .select-card {

@@ -350,7 +350,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   border:1.5px solid rgba(255,255,255,.1);
   border-radius:10px;
   display:flex;flex-direction:column;
-  align-items:flex-end;
+  align-items:flex-start; /* direction-aware: flex-start=right in RTL, left in LTR */
   gap:1px;
   cursor:pointer;
   transition:all .22s;
