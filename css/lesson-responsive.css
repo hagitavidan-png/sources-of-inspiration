@@ -501,6 +501,39 @@ html[lang="en"] body {
   direction: ltr !important;
 }
 
+/* ── 1b. GLOBAL text-align: every non-flex element in HE mode aligns right ──
+   This is the single sweeping rule that catches ALL Hebrew text automatically.
+   Flex containers are excluded because text-align has no effect on them —
+   they are handled individually below with flex-direction/justify-content. ── */
+html[lang="he"] * {
+  text-align: right !important;
+}
+html[lang="en"] * {
+  text-align: left !important;
+}
+
+/* ── 1c. Re-center elements that must always be centered (visual, not text) ── */
+html[lang="he"] .complete-icon,
+html[lang="he"] .emotion-chip,
+html[lang="he"] .artwork-card img,
+html[lang="he"] .gallery-wrap,
+html[lang="he"] .color-grid,
+html[lang="he"] .btn-primary,
+html[lang="he"] .btn-ghost,
+html[lang="he"] .complete-btns,
+html[lang="he"] #progress,
+html[lang="en"] .complete-icon,
+html[lang="en"] .emotion-chip,
+html[lang="en"] .artwork-card img,
+html[lang="en"] .gallery-wrap,
+html[lang="en"] .color-grid,
+html[lang="en"] .btn-primary,
+html[lang="en"] .btn-ghost,
+html[lang="en"] .complete-btns,
+html[lang="en"] #progress {
+  text-align: center !important;
+}
+
 /* ── 2. Screen containers: text-align follows direction ──
    IMPORTANT: align-items in flex-column is NOT direction-aware — flex-start is always
    physically LEFT regardless of RTL. So we do NOT use align-items for text direction.
