@@ -563,10 +563,11 @@ body.rtl #hud-lang { flex-direction:row-reverse; }
     flex: none !important;
   }
   .gal-item img {
-    aspect-ratio: 4/3 !important;
-    object-fit: cover !important;
-    max-height: none !important;
+    aspect-ratio: unset !important;
+    object-fit: contain !important;
+    max-height: 60vw !important;
     height: auto !important;
+    background: #0d0d1a;
   }
   .screen--gallery {
     padding-bottom: 140px !important;
