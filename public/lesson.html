@@ -48,7 +48,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 .screen{
   position:absolute;inset:0;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  align-items:center;justify-content:center; /* center kept for vertical/horizontal centering of .sc block */
   padding:20px 28px 12px;
   opacity:0;pointer-events:none;
   transform:translateY(36px) scale(.985);
@@ -107,7 +107,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   position:relative;z-index:2;
   max-width:660px;width:100%;
   display:flex;flex-direction:column;
-  align-items:center;
+  align-items:stretch; /* stretch = children fill full width, text-align/direction handle alignment */
 }
 
 /* ── Eyebrow ── */
@@ -349,12 +349,11 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   background:rgba(255,255,255,.06);
   border:1.5px solid rgba(255,255,255,.1);
   border-radius:10px;
-  display:flex;flex-direction:column;
-  align-items:flex-start; /* direction-aware: flex-start=right in RTL, left in LTR */
-  gap:1px;
+  display:block; /* block not flex — text-align+direction RTL work natively */
   cursor:pointer;
   transition:all .22s;
   min-height:44px; /* touch-friendly floor */
+  text-align:right; /* default for HE; overridden to left for EN by Section 14 */
 }
 .select-card:hover{
   background:rgba(255,255,255,.1);
