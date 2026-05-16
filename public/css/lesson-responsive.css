@@ -501,14 +501,16 @@ html[lang="en"] body {
   direction: ltr !important;
 }
 
-/* ── 1b. GLOBAL text-align: every non-flex element in HE mode aligns right ──
-   This is the single sweeping rule that catches ALL Hebrew text automatically.
-   Flex containers are excluded because text-align has no effect on them —
-   they are handled individually below with flex-direction/justify-content. ── */
+/* ── 1b. GLOBAL direction + text-align: sweeping rule for ALL Hebrew elements ──
+   direction:rtl is inherited from html/body but we re-enforce on * to defeat
+   any inline-style or third-party override. text-align:right covers all block
+   elements. Flex containers rely on direction inheritance + justify-content. ── */
 html[lang="he"] * {
+  direction: rtl !important;
   text-align: right !important;
 }
 html[lang="en"] * {
+  direction: ltr !important;
   text-align: left !important;
 }
 
