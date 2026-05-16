@@ -620,7 +620,7 @@ html[lang="he"] .action-block { width: 100% !important; }
 html[lang="en"] .action-block { width: 100% !important; }
 html[lang="he"] .action-label {
   flex-direction: row-reverse !important;
-  justify-content: flex-start !important;
+  justify-content: flex-end !important;
   width: 100% !important;
   text-align: right !important;
 }
