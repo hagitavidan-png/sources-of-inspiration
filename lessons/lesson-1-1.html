@@ -113,7 +113,10 @@ body.rtl #hud{flex-direction:row-reverse}
   color:#fff;box-shadow:0 4px 24px rgba(255,77,77,.32)}
 
 /* ── CLOSE SCREEN ── */
-.close-badge{display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2rem;}
+.close-badge {
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0; flex-shrink: 0; font-size: 2rem;
+}
 .close-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
 .btn-outline{padding:12px 26px;border-radius:50px;
   border:1.5px solid rgba(255,255,255,.18);background:transparent;
@@ -170,6 +173,14 @@ body.rtl .chips{flex-direction:row-reverse;flex-wrap:wrap}
 body.rtl .close-btns{flex-direction:row-reverse}
 body.rtl #hud-lang{flex-direction:row-reverse}
 body.rtl .obs-list{text-align:right}
+
+/* ── QA: fs-btn RTL positioning ── */
+body.rtl #fs-btn,
+html[lang="he"] #fs-btn {
+  right: auto !important;
+  left: 16px !important;
+}
+
 </style>
 <link rel="stylesheet" href="../css/lesson-responsive.css"/>
 </head>

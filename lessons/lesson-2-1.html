@@ -137,7 +137,10 @@ body.rtl #hud{flex-direction:row-reverse}
 .instr-note em{color:var(--gold);font-style:normal}
 
 /* ── CLOSE SCREEN ── */
-.close-badge{display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2rem;}
+.close-badge {
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0; flex-shrink: 0; font-size: 2rem;
+}
 .close-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
 .btn-outline{padding:12px 26px;border-radius:50px;
   border:1.5px solid rgba(255,255,255,.18);background:transparent;
@@ -196,6 +199,14 @@ body.rtl .close-btns{flex-direction:row-reverse}
 body.rtl #hud-lang{flex-direction:row-reverse}
 body.rtl .obs-list{text-align:right}
 body.rtl .dual-artworks{flex-direction:row-reverse}
+
+/* ── QA: fs-btn RTL positioning ── */
+body.rtl #fs-btn,
+html[lang="he"] #fs-btn {
+  right: auto !important;
+  left: 16px !important;
+}
+
 </style>
 <link rel="stylesheet" href="../css/lesson-responsive.css"/>
 </head>

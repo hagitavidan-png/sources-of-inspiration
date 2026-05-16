@@ -376,9 +376,9 @@ body.rtl .gal-instruction p{text-align:right}
 /* ═══════════════════════════════════
    CLOSING
 ═══════════════════════════════════ */
-.close-badge{
-  display:flex;align-items:center;justify-content:center;
-  font-size:2rem;margin-bottom:16px;
+.close-badge {
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0; flex-shrink: 0; font-size: 2rem;
 }
 .close-btns{
   display:flex;gap:12px;flex-wrap:wrap;
@@ -546,6 +546,45 @@ body.rtl #hud-lang { flex-direction:row-reverse; }
     height: auto !important;
     object-fit: contain !important;
   }
+}
+
+
+/* ── QA: Gallery mobile — single column, no artwork cropping ── */
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+  .gal-item {
+    min-width: unset !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    flex: none !important;
+  }
+  .gal-item img {
+    aspect-ratio: 4/3 !important;
+    object-fit: cover !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+  .screen--gallery {
+    padding-bottom: 140px !important;
+  }
+}
+
+
+/* ── QA: fs-btn RTL positioning ── */
+body.rtl #fs-btn,
+html[lang="he"] #fs-btn {
+  right: auto !important;
+  left: 16px !important;
+}
+
+
+/* ── QA: progress dots clearance on gallery screens ── */
+.screen--gallery {
+  padding-bottom: 140px;
 }
 
 </style>
