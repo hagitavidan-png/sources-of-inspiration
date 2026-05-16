@@ -461,11 +461,23 @@ html[lang="en"] .emotion-chip {
 /* chip-he / chip-en are spans inside chips — inline-block is correct for chips */
 html[lang="he"] .chip-he { display: inline-block !important; }
 html[lang="en"] .chip-en { display: inline-block !important; }
-/* card-he / card-en are spans inside select-cards — block so width:100% + text-align work */
-/* display:block here is safe: card-en is already display:none from the hide rules above;
-   card-he is already display:block from line 393; this just makes it explicit for Section 14 */
+/* card-he shown in HE, card-en shown in EN */
 html[lang="he"] .card-he { display: block !important; }
 html[lang="en"] .card-en { display: block !important; }
+/* HARD ENFORCE: card-en MUST be hidden in HE mode — high-specificity override */
+html[lang="he"] .select-card .card-en,
+html[lang="he"] .select-grid .card-en,
+html[lang="he"] .card-en {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* HARD ENFORCE: card-he MUST be hidden in EN mode */
+html[lang="en"] .select-card .card-he,
+html[lang="en"] .select-grid .card-he,
+html[lang="en"] .card-he {
+  display: none !important;
+  visibility: hidden !important;
+}
 
 
 /* ══════════════════════════════════════════════════════════════
@@ -570,10 +582,14 @@ html[lang="en"] .emotion-grid {
 html[lang="he"] .action-label {
   flex-direction: row-reverse !important;
   justify-content: flex-start !important;
+  width: 100% !important;
+  text-align: right !important;
 }
 html[lang="en"] .action-label {
   flex-direction: row !important;
   justify-content: flex-start !important;
+  width: 100% !important;
+  text-align: left !important;
 }
 
 /* ── 7. HUD — flex row direction ── */
@@ -654,6 +670,11 @@ html[lang="he"] #fs-btn {
 }
 
 /* ── 16. Choice screens on small/short phones — fit 5 cards without clipping ── */
+@media (max-height: 780px) {
+  .screen--choice .eyebrow  { margin-bottom: 6px !important; }
+  .screen--choice .bi-block { margin-bottom: 4px !important; }
+  .screen--choice .bi-he    { font-size: clamp(1.1rem, 3.5vw, 1.6rem) !important; }
+}
 @media (max-height: 720px) {
   .screen--choice { padding-top: 8px !important; padding-bottom: 6px !important; }
   .select-grid    { gap: 4px !important; margin-top: 6px !important; }
