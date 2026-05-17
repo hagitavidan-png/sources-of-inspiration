@@ -44,8 +44,8 @@ button{cursor:pointer;font-family:inherit;border:none}
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.08);transition:.3s}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.nav-logo{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:#0d0d1a;display:flex;align-items:center;gap:8px}
-.nav-logo span{color:var(--gold)}
+.nav-logo{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:#0d0d1a;display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;flex-shrink:1}
+.nav-logo-mark{color:var(--gold)}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-size:.85rem;font-weight:500;color:rgba(13,13,26,.55);transition:.2s}
 .nav-links a:hover,.nav-links a.active{color:#0d0d1a}
@@ -336,6 +336,10 @@ footer{background:#f0ede6;border-top:1px solid rgba(0,0,0,.08);padding:60px 0 40
   .lr-duration{display:none}
   .footer-inner{flex-direction:column}
   .footer-bottom{flex-direction:column;text-align:center}
+  .nav-inner{gap:10px}
+  .nav-logo{font-size:.85rem;gap:5px}
+  .lang-toggle button{padding:4px 8px;font-size:.68rem}
+  #theme-toggle{padding:4px 8px;font-size:.75rem}
 }
 @media(max-width:540px){
   .lr-head{gap:10px;padding:14px 14px}
@@ -424,7 +428,10 @@ body.dark .footer-copy{color:rgba(232,230,225,.32)}
 <!-- ── NAV ── -->
 <nav id="nav">
   <div class="container nav-inner">
-    <a href="index.html" class="nav-logo">✦ <span>Sources</span> of Inspiration</a>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">✦</div>
+      <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
+    </a>
     <div class="nav-links">
       <a href="index.html" data-en="Home" data-he="בית">Home</a>
       <a href="course.html" class="active" data-en="The Course" data-he="הקורס">The Course</a>

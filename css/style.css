@@ -250,6 +250,7 @@ body.dark #nav-lang-toggle button:hover:not(.active) { color: #e8e6e1; border-co
 
 /* mobile menu */
 #mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; }
+#mobile-menu.open { display: block; }
 #mobile-menu a { display: block; padding: 12px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: .95rem; }
 #mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; }
 body.dark #mobile-menu { background: rgba(15,15,18,.98); border-bottom-color: rgba(255,255,255,.07); }
