@@ -663,6 +663,23 @@ html[lang="he"] #fs-btn {
     </div>
   </section>
 
+  <!-- ══ SCREEN 15 — Closing ══ -->
+  <section class="screen" id="s15" data-bg="#0d0d1a">
+    <div class="blob" style="width:480px;height:480px;background:var(--rose);top:-100px;left:-80px;opacity:.15"></div>
+    <div class="blob" style="width:320px;height:320px;background:var(--gold);bottom:-60px;right:-60px;opacity:.12;animation-delay:4s"></div>
+    <div class="close-badge">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l2.4 7.4H22l-6 4.3 2.3 7.3L12 17l-6.3 4 2.3-7.3-6-4.3h7.6L12 2z" fill="rgba(255,255,255,.9)"/>
+      </svg>
+    </div>
+    <p class="label" id="t15-label">Lesson complete</p>
+    <h2 class="big" id="t15-big">You painted<br/>your own reality.</h2>
+    <p class="sub" id="t15-sub">Like Frida — you connected personal experience<br/>to something visual and expressive.</p>
+    <div class="close-btns">
+      <a href="../course.html" class="btn-outline" id="t15-back">← Back to Course</a>
+    </div>
+  </section>
+
 </main>
 
 <!-- NAV BAR -->
@@ -683,8 +700,8 @@ html[lang="he"] #fs-btn {
 /* ═══════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════ */
-const TOTAL   = 15;   // screens 0–14
-const GOLD_AT = 13;   // gold btn from screen 13 onward
+const TOTAL   = 16;   // screens 0–15
+const GOLD_AT = 14;   // gold btn from screen 14 onward
 
 let cur    = 0;
 let busy   = false;
@@ -776,7 +793,13 @@ const T = {
         big: 'Which part of your drawing<br/>tells the most?',
         sub: 'About your experience.',
         ph: 'The part that tells the most is…',
-        save: 'Save ✓', saved: 'Saved.' }
+        save: 'Save ✓', saved: 'Saved.' },
+
+      /* 15 — Closing */
+      { label: 'Lesson complete',
+        big: 'You painted<br/>your own reality.',
+        sub: 'Like Frida — you connected personal experience<br/>to something visual and expressive.',
+        back: '← Back to Course' }
     ],
 
     btn: [
@@ -794,7 +817,8 @@ const T = {
       'Continue →',   // 11
       'Continue →',   // 12
       'Continue →',   // 13
-      'Finish'        // 14
+      'Save & Finish →', // 14
+      ''              // 15 — closing, no next btn
     ]
   },
 
@@ -879,7 +903,13 @@ const T = {
         big: 'איזה חלק בציור<br/>מספר הכי הרבה?',
         sub: 'על החוויה שלך.',
         ph: 'החלק שמספר הכי הרבה הוא…',
-        save: 'שמור ✓', saved: 'נשמר.' }
+        save: 'שמור ✓', saved: 'נשמר.' },
+
+      /* 15 */
+      { label: 'השיעור הסתיים',
+        big: 'ציירת את<br/>המציאות שלך.',
+        sub: 'כמו פרידה — חיברת בין חוויה אישית<br/>למשהו חזותי ומבוטא.',
+        back: 'חזרה לקורס ←' }
     ],
 
     btn: [
@@ -897,7 +927,8 @@ const T = {
       '← המשך',   // 11
       '← המשך',   // 12
       '← המשך',   // 13
-      '← סיום'    // 14
+      '← שמור וסיים', // 14
+      ''              // 15 — מסך סיום
     ]
   }
 };
@@ -1008,6 +1039,14 @@ function applyStrings() {
   el('reflection-input').placeholder = s[14].ph;
   el('ref-save-btn').textContent     = s[14].save;
   el('ref-saved-msg').textContent    = s[14].saved;
+
+  /* Screen 15 — closing */
+  if (s[15]) {
+    const l15 = el('t15-label'); if (l15) l15.textContent = s[15].label;
+    const b15 = el('t15-big');   if (b15) b15.innerHTML   = s[15].big;
+    const sub15 = el('t15-sub'); if (sub15) sub15.innerHTML = s[15].sub;
+    const bk15 = el('t15-back'); if (bk15) bk15.textContent = s[15].back;
+  }
 }
 
 function el(id) { return document.getElementById(id); }
