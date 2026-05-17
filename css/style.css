@@ -186,6 +186,9 @@ body.dark #nav {
   background: rgba(15,15,18,.97);
   border-bottom-color: rgba(255,255,255,.07);
 }
+/* Dark mode nav-logo text: override var(--ink) which is near-black and invisible on dark nav bg */
+body.dark .nav-logo { color: #e8e6e1; }
+body.dark .nav-logo span { color: #e8e6e1 !important; }
 .nav-inner { height: 100%; display: flex; align-items: center; gap: 16px; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 .nav-logo { display: flex; align-items: center; gap: 12px; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--ink); flex-shrink: 0; }
 .nav-logo-mark { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), #e8c460); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
@@ -818,24 +821,25 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   }
 
   /* Nav */
-  .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }
-  /* nav-logo: shrinkable so the span never crowds the actions area.
-     overflow:visible on the container — clipping is on the span only.
-     Font reduced to ensure full Hebrew title fits even on 360px screens. */
-  .nav-logo    { flex-shrink: 1; min-width: 0; overflow: visible; }
+  /* nav-inner: no space-between — logo grows to fill, actions pushed by margin-left:auto */
+  .nav-inner   { gap: 0; padding: 0 16px; }
+  /* nav-logo: flex:1 1 auto lets it GROW and fill available space naturally.
+     min-width:0 still needed so it can shrink below its content if required.
+     max-width caps the logo so it can't consume the full bar on huge screens. */
+  .nav-logo    { flex: 1 1 auto; min-width: 0; overflow: visible; max-width: calc(100vw - 186px); }
   .nav-logo-mark { flex-shrink: 0; }
+  /* span stays as inline (default) — do NOT set display:block inside a flex container;
+     overflow+ellipsis works fine on inline boxes when the parent has min-width:0 */
   .nav-logo span {
-    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: .78rem;         /* smaller on mobile — text still legible */
     min-width: 0;
-    /* leave room for: 16px pad + mark 38px + gap 12px + actions ~120px + hamburger 40px = 226px */
-    max-width: calc(100vw - 226px);
   }
   .nav-links   { display: none !important; }
-  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; }
+  /* margin-left:auto pushes actions to the far right in LTR (gap:0 on nav-inner) */
+  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; margin-left: auto; }
   .nav-actions > a.btn { display: none !important; }
 
   /* Both lang buttons always visible on mobile */
@@ -853,9 +857,13 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     min-width: 28px;
     white-space: nowrap;
   }
-  #nav-hamburger { display: flex !important; margin-left: 6px; }
-  /* In RTL hamburger is on the left: use margin-right instead of margin-left */
-  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 6px; }
+  #nav-hamburger { display: flex !important; flex-shrink: 0; margin-left: 4px; }
+  /* In RTL the whole nav-inner is row-reversed, so hamburger is on the left;
+     margin-right pushes it away from the actions cluster */
+  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 4px; }
+  /* RTL: actions are already reversed by global [dir=rtl] .nav-actions rule;
+     use margin-right:auto to push them to the far left (which is the right visually) */
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
   /* Theme toggle: compact on mobile so it doesn't crowd the actions row */
   #theme-toggle { padding: 4px 8px; font-size: .8rem; }
 
