@@ -299,10 +299,11 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
     <div class="nav-actions">
       <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
       <a href="#trial" class="btn btn-gold btn-sm" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
-      <div id="nav-lang-toggle" style="display:flex;gap:4px;align-items:center;margin-left:8px">
-        <button id="btn-en" class="active" onclick="setLang('en')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">EN</button>
-        <button id="btn-he" onclick="setLang('he')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">עברית</button>
+      <div id="nav-lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-he" onclick="setLang('he')">עברית</button>
       </div>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
     </div>
     <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -315,9 +316,9 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
   <div class="mob-actions">
     <a href="#trial" class="btn btn-gold btn-sm" style="flex:1;justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
   </div>
-  <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
-    <button id="mob-btn-en" onclick="setLang('en')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">EN</button>
-    <button id="mob-btn-he" onclick="setLang('he')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">עברית</button>
+  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
+    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
+    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
   </div>
 </div>
 

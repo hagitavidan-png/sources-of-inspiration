@@ -8,56 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="css/style.css" />
 <style>
 /* ── RESET & BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 
 /* ── SCROLL OFFSET — sticky nav + tabs compensation ──
-   Unit sections scroll to precisely below the sticky header + tabs bar.
-   Using dynamic measurement in scrollToUnit(); CSS covers direct anchor hits. */
+   Unit sections scroll to precisely below the sticky header + tabs bar. */
 [id], section {
-  scroll-margin-top: calc(57px + 46px + 16px); /* nav ~57px + tabs ~46px + breathing room */
-}
-body{font-family:'Inter',sans-serif;background:#f7f6f2;color:#0d0d1a;line-height:1.65;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:inherit;border:none}
-.container{max-width:1100px;margin:0 auto;padding:0 28px}
-
-:root{
-  --ink:#0d0d1a;
-  --ink-soft:#1a1a2e;
-  --gold:#c9a96e;
-  --gold-lt:#e8d08a;
-  --gold-dk:#c9a96e;
-  --white:#ffffff;
-  --gray-300:#d0d0d8;
-  --gray-500:#888898;
-  --u1:#E04D4D;
-  --u2:#4CAF7D;
-  --u3:#7B61FF;
-  --u4:#C9A96E;
-  --u5:#4A90E2;
-  --u6:#c84c8e;
+  scroll-margin-top: calc(var(--nav-h) + 46px + 16px);
 }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.08);transition:.3s}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.nav-logo{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:#0d0d1a;display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;flex-shrink:1}
-.nav-logo-mark{color:var(--gold)}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{font-size:.85rem;font-weight:500;color:rgba(13,13,26,.55);transition:.2s}
-.nav-links a:hover,.nav-links a.active{color:#0d0d1a}
-.nav-cta{padding:8px 20px;background:var(--gold);color:#0d0d1a;border-radius:8px;font-size:.82rem;font-weight:700;transition:.2s}
-.nav-cta:hover{background:#e8c460;transform:translateY(-1px)}
-.lang-toggle{display:flex;gap:4px;align-items:center}
-.lang-toggle button{padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:.2s;font-family:inherit}
-.lang-toggle button.active{background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.6);color:var(--gold-dk)}
-.lang-toggle button:hover:not(.active){color:#0d0d1a;border-color:rgba(0,0,0,.35)}
-/* RTL support */
-/* Lang toggle — עברית button on right in RTL */
-[dir="rtl"] .lang-toggle{flex-direction:row-reverse}
+/* ── COURSE-SPECIFIC RTL ── */
 [dir="rtl"] .unit-tabs{direction:rtl}
 [dir="rtl"] .ch-eyebrow{flex-direction:row-reverse;justify-content:center}
 [dir="rtl"] .course-stats{flex-direction:row-reverse}
@@ -69,13 +32,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rg
 [dir="rtl"] .artist-spotlight{direction:rtl}
 [dir="rtl"] .footer-inner{direction:rtl}
 [dir="rtl"] .lesson-row:hover{transform:translateX(-3px)}
-.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:#0d0d1a;border-radius:2px;transition:.3s}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(247,246,242,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:700;color:rgba(13,13,26,.75)}
-.mobile-menu a:hover{color:#0d0d1a}
-@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
 
 /* ── HERO ── */
 .course-hero{
@@ -336,10 +292,6 @@ footer{background:#f0ede6;border-top:1px solid rgba(0,0,0,.08);padding:60px 0 40
   .lr-duration{display:none}
   .footer-inner{flex-direction:column}
   .footer-bottom{flex-direction:column;text-align:center}
-  .nav-inner{gap:10px}
-  .nav-logo{font-size:.85rem;gap:5px}
-  .lang-toggle button{padding:4px 8px;font-size:.68rem}
-  #theme-toggle{padding:4px 8px;font-size:.75rem}
 }
 @media(max-width:540px){
   .lr-head{gap:10px;padding:14px 14px}
@@ -351,16 +303,6 @@ footer{background:#f0ede6;border-top:1px solid rgba(0,0,0,.08);padding:60px 0 40
 
 /* ── DARK MODE ── */
 body.dark{background:#0f0f12;color:#e8e6e1}
-body.dark nav{background:rgba(15,15,18,.97);border-bottom-color:rgba(255,255,255,.07)}
-body.dark .nav-logo{color:#e8e6e1}
-body.dark .nav-links a{color:rgba(232,230,225,.45)}
-body.dark .nav-links a:hover,body.dark .nav-links a.active{color:#e8e6e1}
-body.dark .lang-toggle button{border-color:rgba(255,255,255,.15);color:rgba(232,230,225,.45)}
-body.dark .lang-toggle button:hover:not(.active){color:#e8e6e1;border-color:rgba(255,255,255,.4)}
-body.dark .hamburger span{background:#e8e6e1}
-body.dark .mobile-menu{background:rgba(15,15,18,.98)}
-body.dark .mobile-menu a{color:rgba(232,230,225,.75)}
-body.dark .mobile-menu a:hover{color:#e8e6e1}
 /* Hero */
 body.dark .course-hero{background:linear-gradient(160deg,#0f0f12 0%,#141420 100%)}
 body.dark .course-hero h1{color:#e8e6e1}
@@ -427,34 +369,43 @@ body.dark .footer-copy{color:rgba(232,230,225,.32)}
 
 <!-- ── NAV ── -->
 <nav id="nav">
-  <div class="container nav-inner">
+  <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <div class="nav-logo-mark">✦</div>
       <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
     </a>
     <div class="nav-links">
-      <a href="index.html" data-en="Home" data-he="בית">Home</a>
-      <a href="course.html" class="active" data-en="The Course" data-he="הקורס">The Course</a>
-      <a href="lesson.html" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
-      <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
-      <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
-      <a href="teachers.html#trial" class="nav-cta" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+      <a href="index.html" class="nav-link" data-en="Home" data-he="בית">Home</a>
+      <a href="course.html" class="nav-link active" data-en="The Course" data-he="הקורס">The Course</a>
+      <a href="lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+      <a href="teachers.html" class="nav-link" data-en="For Teachers" data-he="למורים">For Teachers</a>
+      <a href="index.html#pricing" class="nav-link" data-en="Pricing" data-he="מחירון">Pricing</a>
     </div>
-    <div class="lang-toggle">
-      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-      <button id="btn-he" onclick="setLang('he')">עברית</button>
+    <div class="nav-actions">
+      <a href="teachers.html#trial" class="btn btn-gold btn-sm" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+      <div id="nav-lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-he" onclick="setLang('he')">עברית</button>
+      </div>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
     </div>
-    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 11px;font-size:.82rem;cursor:pointer;color:rgba(232,230,225,.6);transition:.2s;margin-left:4px">☀️</button>
-    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" onclick="toggleMenu()" data-en="Home" data-he="בית">Home</a>
-  <a href="course.html" onclick="toggleMenu()" data-en="The Course" data-he="הקורס">The Course</a>
-  <a href="lesson.html" onclick="toggleMenu()" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
-  <a href="teachers.html" onclick="toggleMenu()" data-en="For Teachers" data-he="למורים">For Teachers</a>
-  <a href="index.html#pricing" onclick="toggleMenu()" data-en="Pricing" data-he="מחירון">Pricing</a>
-  <a href="teachers.html#trial" onclick="toggleMenu()" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+
+<div id="mobile-menu">
+  <a href="index.html" data-en="Home" data-he="בית">Home</a>
+  <a href="course.html" data-en="The Course" data-he="הקורס">The Course</a>
+  <a href="lesson.html" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+  <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
+  <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+  <div class="mob-actions">
+    <a href="teachers.html#trial" class="btn btn-gold btn-sm" style="flex:1;justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+  </div>
+  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
+    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
+    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
+  </div>
 </div>
 
 <!-- ── HERO ── */-->
@@ -1456,10 +1407,27 @@ body.dark .footer-copy{color:rgba(232,230,225,.32)}
 </footer>
 
 <script>
-// ── NAV ──────────────────────────────────────────
-function toggleMenu() {
-  document.getElementById('mobile-menu').classList.toggle('open');
-}
+// ── NAV: hamburger (canonical — matches index.html / teachers.html) ──────
+(function() {
+  var burger  = document.getElementById('nav-hamburger');
+  var mobMenu = document.getElementById('mobile-menu');
+  if (burger && mobMenu) {
+    burger.addEventListener('click', function() {
+      burger.classList.toggle('open');
+      mobMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!burger.contains(e.target) && !mobMenu.contains(e.target)) {
+        burger.classList.remove('open');
+        mobMenu.classList.remove('open');
+      }
+    });
+  }
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, {passive: true});
+})();
 
 // ── UNIT TABS ─────────────────────────────────────
 function scrollToUnit(id, tab) {
