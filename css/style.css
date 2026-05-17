@@ -850,6 +850,10 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     white-space: nowrap;
   }
   #nav-hamburger { display: flex !important; margin-left: 6px; }
+  /* In RTL hamburger is on the left: use margin-right instead of margin-left */
+  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 6px; }
+  /* Theme toggle: compact on mobile so it doesn't crowd the actions row */
+  #theme-toggle { padding: 4px 8px; font-size: .8rem; }
 
   /* Hero */
   #hero { min-height: auto !important; height: auto !important; overflow: hidden; align-items: flex-start; }
