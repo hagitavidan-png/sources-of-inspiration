@@ -819,16 +819,20 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
 
   /* Nav */
   .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }
-  /* nav-logo: flex-shrink:0 keeps it from collapsing entirely;
-     min-width:0 lets the inner <span> shrink so it won't overflow right into
-     the actions area. The span gets text-overflow:ellipsis below. */
-  .nav-logo    { flex-shrink: 0; min-width: 0; overflow: hidden; }
+  /* nav-logo: shrinkable so the span never crowds the actions area.
+     overflow:visible on the container — clipping is on the span only.
+     Font reduced to ensure full Hebrew title fits even on 360px screens. */
+  .nav-logo    { flex-shrink: 1; min-width: 0; overflow: visible; }
+  .nav-logo-mark { flex-shrink: 0; }
   .nav-logo span {
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    /* 38px mark + 12px gap + 12px margin on each side + ~120px for actions area */
-    max-width: calc(100vw - 200px);
+    font-size: .78rem;         /* smaller on mobile — text still legible */
+    min-width: 0;
+    /* leave room for: 16px pad + mark 38px + gap 12px + actions ~120px + hamburger 40px = 226px */
+    max-width: calc(100vw - 226px);
   }
   .nav-links   { display: none !important; }
   .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; }
