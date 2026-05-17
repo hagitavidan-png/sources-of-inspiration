@@ -819,7 +819,17 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
 
   /* Nav */
   .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }
-  .nav-logo    { flex-shrink: 0; }
+  /* nav-logo: flex-shrink:0 keeps it from collapsing entirely;
+     min-width:0 lets the inner <span> shrink so it won't overflow right into
+     the actions area. The span gets text-overflow:ellipsis below. */
+  .nav-logo    { flex-shrink: 0; min-width: 0; overflow: hidden; }
+  .nav-logo span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* 38px mark + 12px gap + 12px margin on each side + ~120px for actions area */
+    max-width: calc(100vw - 200px);
+  }
   .nav-links   { display: none !important; }
   .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; }
   .nav-actions > a.btn { display: none !important; }
@@ -907,6 +917,25 @@ body {
 }
 .unit-card:active {
   transform: translateY(-2px) scale(.99);
+}
+
+/* ══════════════════════════════
+   THEME TOGGLE — global
+══════════════════════════════ */
+#theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(13,13,26,.15);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: .85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition);
+  line-height: 1;
+}
+body.dark #theme-toggle {
+  border-color: rgba(255,255,255,.15);
+  color: rgba(232,230,225,.7);
 }
 
 /* ══════════════════════════════

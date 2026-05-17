@@ -24,7 +24,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 .teacher-hero h1{font-size:clamp(2rem,4vw,3.2rem);color:#0d0d1a;margin-bottom:20px;line-height:1.15}
 .teacher-hero h1 em{font-style:normal;color:var(--gold-dk)}
 .teacher-hero p{font-size:1.05rem;color:rgba(13,13,26,.6);line-height:1.8;margin-bottom:32px;max-width:480px}
-.th-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.th-ctas{display:flex;gap:14px;flex-wrap:wrap;max-width:100%;overflow:visible;box-sizing:border-box}
 
 /* Hero visual / stats card */
 .th-visual{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:32px;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
@@ -228,7 +228,11 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
    Reversing .nav-actions again pushes the EN button off-screen on tablet/mobile.   */
 [dir="rtl"] .teacher-hero .container { direction: rtl; }
 [dir="rtl"] .th-left { text-align: right; }
-[dir="rtl"] .th-ctas { justify-content: flex-start; flex-direction: row-reverse; }
+/* th-ctas RTL: keep LTR flex row direction (row-reverse was pushing buttons
+   off the left viewport edge). Align to flex-end so buttons sit at the RIGHT
+   side in RTL context (where text starts). flex-wrap ensures they stack on
+   very narrow screens rather than overflow. */
+[dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
 [dir="rtl"] .section-header { text-align: right; }
 [dir="rtl"] .benefits-grid { direction: rtl; }
 [dir="rtl"] .benefit-card { text-align: right; }
