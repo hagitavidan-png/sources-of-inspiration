@@ -59,76 +59,38 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
    nav-inner reversal is the single source of truth — reversing children
    again causes a double-reversal that hides the EN button on tablet/mobile.
    JS (app-init.js) also does NOT set flexDirection inline (removed v20250507f). */
-/* ═══════════════════════════════════════════════════════════════
-   RTL GLOBAL LAYOUT
-   Philosophy:
-   • Nav: row-reverse is the single source of truth
-   • Asymmetric content (hero text, cards): text-align:right / direction:rtl
-   • Symmetric sections (section-header, pricing, CTA): STAY centered —
-     do NOT set direction:rtl on centered containers; that breaks margin:auto
-     and causes the "everything glued to right edge" effect.
-   • Flex rows of items: row-reverse to read right→left
-   • Centered flex groups: keep justify-content:center in RTL
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Nav ── */
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 [dir="rtl"] .nav-links { flex-direction: row-reverse; }
-
-/* ── Hero (desktop: 2-col, text on left/right) ── */
-[dir="rtl"] .hero-grid  { direction: rtl; }
-[dir="rtl"] .hero-text  { text-align: right; }
-/* eyebrow pill: right-align in RTL desktop, recentered on mobile via media query */
+[dir="rtl"] .hero-grid { direction: rtl; }
+[dir="rtl"] .hero-text { text-align: right; }
 [dir="rtl"] .hero-eyebrow { justify-content: flex-end; }
-/* CTA buttons: right-aligned on desktop (they follow the text block);
-   on mobile they are force-centered via the ≤768px block below */
-[dir="rtl"] .hero-cta   { justify-content: flex-end; }
-[dir="rtl"] .hero-proof { flex-direction: row-reverse; justify-content: flex-end; }
-[dir="rtl"] .proof-item { align-items: flex-start; } /* don't glue to right on proof row */
-
-/* ── Unit cards (asymmetric card content) ── */
-[dir="rtl"] .units-grid          { direction: rtl; }
-[dir="rtl"] .unit-card           { text-align: right; direction: rtl; }
-[dir="rtl"] .unit-card-header    { flex-direction: row-reverse; }
-[dir="rtl"] .unit-card-meta      { flex-direction: row-reverse; justify-content: flex-end; }
-[dir="rtl"] .unit-meta-item      { flex-direction: row-reverse; }
+[dir="rtl"] .hero-cta { justify-content: flex-start; }
+[dir="rtl"] .hero-proof { flex-direction: row-reverse; }
+[dir="rtl"] .units-grid { direction: rtl; }
+[dir="rtl"] .unit-card { text-align: right; direction: rtl; }
+[dir="rtl"] .unit-card-header { flex-direction: row-reverse; }
+[dir="rtl"] .unit-card-meta { flex-direction: row-reverse; justify-content: flex-end; }
+[dir="rtl"] .unit-meta-item { flex-direction: row-reverse; }
 [dir="rtl"] .unit-lessons-preview { direction: rtl; }
-[dir="rtl"] .lesson-preview-row  { flex-direction: row-reverse; justify-content: flex-end; text-align: right; }
-
-/* ── Why / Testimonials / Pricing cards ── */
-[dir="rtl"] .why-grid        { direction: rtl; }
-[dir="rtl"] .why-card        { text-align: right; }
-[dir="rtl"] .testi-grid      { direction: rtl; }
-[dir="rtl"] .testi-card      { text-align: right; }
-[dir="rtl"] .testi-author    { flex-direction: row-reverse; }
-[dir="rtl"] .pricing-grid    { direction: rtl; }
-[dir="rtl"] .price-features  { text-align: right; }
-[dir="rtl"] .pf-row          { flex-direction: row-reverse; justify-content: flex-end; }
-
-/* ── Section headers: CENTERED in both LTR and RTL ──────────────
-   Do NOT set direction:rtl here — it breaks margin:0 auto on <p>
-   and causes the heading to flush hard to the right edge.
-   The text content is Hebrew so the browser renders it right-to-left
-   naturally; we just need to right-align the text within the centered block. */
-[dir="rtl"] .section-header      { text-align: right; }
-[dir="rtl"] .section-header h2   { text-align: right; }
-/* Paragraph inside section-header: keep centered block, right-align text */
-[dir="rtl"] .section-header p    { text-align: right; margin-left: auto; margin-right: 0; }
-
-/* ── Lesson preview / feature lists ── */
-[dir="rtl"] .preview-grid     { direction: rtl; }
-[dir="rtl"] .preview-features { direction: rtl; }
-[dir="rtl"] .pf-item          { flex-direction: row-reverse; text-align: right; }
-
-/* ── CTA section: keep centered ── */
-[dir="rtl"] .cta-inner { direction: rtl; text-align: center; }
-[dir="rtl"] .cta-btns  { flex-direction: row-reverse; justify-content: center; }
-
-/* ── Footer ── */
-[dir="rtl"] .footer-grid   { direction: rtl; }
-[dir="rtl"] .footer-brand  { text-align: right; }
-[dir="rtl"] .footer-links  { text-align: right; }
+[dir="rtl"] .lesson-preview-row { flex-direction: row-reverse; justify-content: flex-end; text-align: right; }
+[dir="rtl"] .why-grid { direction: rtl; }
+[dir="rtl"] .why-card { text-align: right; }
+[dir="rtl"] .testi-grid { direction: rtl; }
+[dir="rtl"] .testi-card { text-align: right; }
+[dir="rtl"] .testi-author { flex-direction: row-reverse; }
+[dir="rtl"] .pricing-grid { direction: rtl; }
+[dir="rtl"] .price-features { text-align: right; }
+[dir="rtl"] .pf-row { flex-direction: row-reverse; justify-content: flex-end; }
+[dir="rtl"] .footer-grid { direction: rtl; }
+[dir="rtl"] .footer-brand { text-align: right; }
+[dir="rtl"] .footer-links { text-align: right; }
 [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
+[dir="rtl"] .section-header { direction: rtl; }
+[dir="rtl"] .preview-grid { direction: rtl; }
+[dir="rtl"] .preview-features { direction: rtl; }
+[dir="rtl"] .pf-item { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .cta-inner { direction: rtl; }
+[dir="rtl"] .cta-btns { flex-direction: row-reverse; justify-content: center; }
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -916,16 +878,6 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .hero-eyebrow { justify-content: center; }
   .hero-cta     { justify-content: center; flex-wrap: wrap; gap: 10px; }
   .hero-proof   { justify-content: center; gap: 20px; }
-  /* RTL mobile balance: override desktop right-flush rules so centered sections
-     stay visually centered on a single-column layout. */
-  [dir="rtl"] .hero-text    { text-align: center; }
-  [dir="rtl"] .hero-eyebrow { justify-content: center; }
-  [dir="rtl"] .hero-cta     { justify-content: center; }
-  [dir="rtl"] .hero-proof   { justify-content: center; flex-direction: row; }
-  [dir="rtl"] .proof-item   { align-items: center; }
-  [dir="rtl"] .section-header   { text-align: center; }
-  [dir="rtl"] .section-header h2 { text-align: center; }
-  [dir="rtl"] .section-header p  { text-align: center; margin: 0 auto; }
   #hero h1      { font-size: clamp(2rem, 8vw, 3rem); }
 
   /* All sections natural height */
@@ -1003,21 +955,18 @@ body.dark #theme-toggle {
 }
 
 /* ══════════════════════════════
-   RTL SUPPLEMENTAL OVERRIDES
-   (additions that don't live in the main RTL block above)
+   RTL GLOBAL OVERRIDES
 ══════════════════════════════ */
 [dir="rtl"] #nav .nav-links { margin-left: 0; margin-right: auto; }
 [dir="rtl"] #nav .nav-actions { flex-direction: row-reverse; }
 [dir="rtl"] #mobile-menu a { text-align: right; }
-/* Buttons: row-reverse mirrors icon+label order for RTL reading;
-   btn-gold is primary CTA and intentionally stays row (no icon flip) */
+[dir="rtl"] .hero-eyebrow { direction: rtl; }
 [dir="rtl"] .btn { flex-direction: row-reverse; }
 [dir="rtl"] .btn-gold { flex-direction: row; }
-/* Card header inner content: direction:rtl so numbers/labels read R→L */
 [dir="rtl"] .unit-card-header { direction: rtl; }
-/* Why/testi/price cards: text right-aligned; direction:rtl for list markers */
-[dir="rtl"] .why-card   { text-align: right; direction: rtl; }
-[dir="rtl"] .testi-card { text-align: right; direction: rtl; }
-[dir="rtl"] .price-card { text-align: right; direction: rtl; }
-/* CTA section buttons: row-reversed but keep centered */
-[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; justify-content: center; }
+[dir="rtl"] .why-card { text-align: right; direction: rtl; }
+[dir="rtl"] .testi-card { direction: rtl; text-align: right; }
+[dir="rtl"] .price-card { direction: rtl; text-align: right; }
+[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; }
+[dir="rtl"] .section-header { direction: rtl; }
+[dir="rtl"] .proof-item { align-items: flex-end; }
