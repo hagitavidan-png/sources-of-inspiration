@@ -252,11 +252,11 @@ body.dark #nav-lang-toggle button.active {
 body.dark #nav-lang-toggle button:hover:not(.active) { color: #e8e6e1; border-color: rgba(232,230,225,.45); }
 
 /* mobile menu */
-#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; }
+#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; height: auto; }
 #mobile-menu.open { display: block; }
 #mobile-menu a { display: block; padding: 14px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: 1rem; font-weight: 500; }
 [dir="rtl"] #mobile-menu a { text-align: right; padding-right: 4px; }
-#mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; }
+#mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; padding-bottom: 4px; }
 body.dark #mobile-menu { background: rgba(15,15,18,.98); border-bottom-color: rgba(255,255,255,.07); }
 body.dark #mobile-menu a { color: rgba(232,230,225,.75); border-bottom-color: rgba(255,255,255,.07); }
 
@@ -882,6 +882,11 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .hero-cta     { justify-content: center; flex-wrap: wrap; gap: 10px; }
   .hero-proof   { justify-content: center; gap: 20px; }
   #hero h1      { font-size: clamp(2rem, 8vw, 3rem); }
+  /* RTL mobile: single-column layout — everything centered, same as LTR */
+  [dir="rtl"] .hero-text    { text-align: center; }
+  [dir="rtl"] .hero-eyebrow { justify-content: center; }
+  [dir="rtl"] .hero-cta     { justify-content: center; }
+  [dir="rtl"] .hero-proof   { justify-content: center; flex-direction: row; }
 
   /* All sections natural height */
   #units, #why, #lesson-preview, #testimonials,
