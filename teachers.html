@@ -199,6 +199,23 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 .final-cta p{font-size:1rem;color:var(--gray-700);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
 .final-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
+/* RTL support — desktop defaults */
+[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
+/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly. */
+[dir="rtl"] .teacher-hero .container { direction: rtl; }
+[dir="rtl"] .th-left { text-align: right; }
+[dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
+[dir="rtl"] .section-header { text-align: right; }
+[dir="rtl"] .benefits-grid { direction: rtl; }
+[dir="rtl"] .benefit-card { text-align: right; }
+[dir="rtl"] .how-steps { direction: rtl; }
+[dir="rtl"] .cd-grid { direction: rtl; }
+[dir="rtl"] .pricing-cards { direction: rtl; }
+[dir="rtl"] .testimonials-grid { direction: rtl; }
+[dir="rtl"] .testimonial-card { text-align: right; }
+[dir="rtl"] .faq-q { flex-direction: row-reverse; }
+[dir="rtl"] .footer-grid { direction: rtl; }
+
 /* Responsive */
 @media(max-width:1024px){
   .teacher-hero .container{grid-template-columns:1fr;gap:40px}
@@ -213,9 +230,15 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 }
 @media(max-width:768px){
   .teacher-hero{padding:120px 0 64px}
-  /* On mobile, th-left spans full width — center the CTA buttons */
+  /* On mobile, th-left spans full width — center everything */
   .th-ctas{justify-content:center}
-  [dir="rtl"] .th-ctas{justify-content:center}
+  [dir="rtl"] .th-ctas { justify-content: center; }
+  /* RTL mobile: center hero text + badge (overrides desktop right-align above) */
+  [dir="rtl"] .th-left { text-align: center; }
+  [dir="rtl"] .th-tag { margin-left: auto; margin-right: auto; }
+  /* RTL mobile: section-headers in centered sections stay centered */
+  [dir="rtl"] .section-header { text-align: center; }
+  [dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
   .benefits-grid{grid-template-columns:1fr}
   .how-steps{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
@@ -224,28 +247,6 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
   .testimonials-grid{grid-template-columns:1fr}
   .th-stats{grid-template-columns:1fr 1fr}
 }
-
-/* RTL support */
-[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
-/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly.
-   Reversing .nav-actions again pushes the EN button off-screen on tablet/mobile.   */
-[dir="rtl"] .teacher-hero .container { direction: rtl; }
-[dir="rtl"] .th-left { text-align: right; }
-/* th-ctas RTL: keep LTR flex row direction (row-reverse was pushing buttons
-   off the left viewport edge). Align to flex-end so buttons sit at the RIGHT
-   side in RTL context (where text starts). flex-wrap ensures they stack on
-   very narrow screens rather than overflow. */
-[dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
-[dir="rtl"] .section-header { text-align: right; }
-[dir="rtl"] .benefits-grid { direction: rtl; }
-[dir="rtl"] .benefit-card { text-align: right; }
-[dir="rtl"] .how-steps { direction: rtl; }
-[dir="rtl"] .cd-grid { direction: rtl; }
-[dir="rtl"] .pricing-cards { direction: rtl; }
-[dir="rtl"] .testimonials-grid { direction: rtl; }
-[dir="rtl"] .testimonial-card { text-align: right; }
-[dir="rtl"] .faq-q { flex-direction: row-reverse; }
-[dir="rtl"] .footer-grid { direction: rtl; }
 [dir="rtl"] #mobile-menu { direction: rtl; }
 
 /* ── DARK MODE ── */
@@ -321,7 +322,7 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
   <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
   <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
   <div class="mob-actions">
-    <a href="#trial" class="btn btn-gold btn-sm" style="flex:1;justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+    <a href="#trial" class="btn btn-gold btn-sm" style="justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
   </div>
   <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
     <button id="mob-btn-en" onclick="setLang('en')">EN</button>

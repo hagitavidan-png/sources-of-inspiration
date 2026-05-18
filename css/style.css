@@ -87,10 +87,18 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .footer-brand { text-align: right; }
 [dir="rtl"] .footer-links { text-align: right; }
 [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
-/* section-header: do NOT use direction:rtl — it breaks margin:0 auto centering.
-   Text is Hebrew so it renders RTL naturally. Keep centered layout. */
+/* section-header RTL:
+   - Default (non-centered): right-align text
+   - Sections with explicit style="text-align:center" keep their centering
+     because inline styles have higher specificity than class rules.
+   - We do NOT add direction:rtl — that breaks margin:0 auto centering. */
 [dir="rtl"] .section-header { text-align: right; }
 [dir="rtl"] .section-header p { text-align: right; margin-left: auto; margin-right: 0; }
+/* Hero section-header (index/course) stays centered in RTL on mobile */
+[dir="rtl"] #hero .section-header,
+[dir="rtl"] .hero-section .section-header { text-align: center; }
+[dir="rtl"] #hero .section-header p,
+[dir="rtl"] .hero-section .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
 [dir="rtl"] .preview-grid { direction: rtl; }
 [dir="rtl"] .preview-features { direction: rtl; }
 [dir="rtl"] .pf-item { flex-direction: row-reverse; text-align: right; }
@@ -792,8 +800,8 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
 
   /* ── MOBILE MENU when open on tablet ──── */
   #mobile-menu     { padding: 20px 24px; overflow-y: auto; max-height: calc(100vh - var(--nav-h)); }
-  .mob-actions     { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-  .mob-actions .btn { flex: 1; min-width: 140px; justify-content: center; text-align: center; }
+  .mob-actions     { flex-direction: row; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .mob-actions .btn { min-width: 140px; justify-content: center; text-align: center; }
   #mob-lang-toggle { justify-content: center; margin-top: 10px; }
   #mob-lang-toggle button { flex-shrink: 0; min-width: 36px; display: inline-flex !important; }
   [dir="rtl"] #mobile-menu a { text-align: right; }
@@ -892,6 +900,9 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   [dir="rtl"] .hero-eyebrow { justify-content: center; }
   [dir="rtl"] .hero-cta     { justify-content: center; }
   [dir="rtl"] .hero-proof   { justify-content: center; flex-direction: row; }
+  /* RTL mobile: section-headers in centered sections stay centered */
+  [dir="rtl"] .section-header { text-align: center; }
+  [dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
 
   /* All sections natural height */
   #units, #why, #lesson-preview, #testimonials,
