@@ -620,9 +620,12 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .nav-inner {
     gap: 0;
     padding: 0 24px;
-    /* LTR: logo ← space → actions  |  RTL: actions ← space → logo */
     justify-content: space-between;
   }
+  /* RTL mobile: keep logo on LEFT, hamburger on RIGHT — same visual as LTR.
+     The global [dir=rtl] .nav-inner { row-reverse } is for desktop only.
+     On mobile single-column, visual balance = logo left / actions right. */
+  [dir="rtl"] .nav-inner { flex-direction: row; }
   .nav-logo  { flex-shrink: 0; }
   .nav-links { display: none !important; }
 
@@ -655,14 +658,9 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     touch-action: manipulation;
   }
 
-  /* Hamburger */
-  #nav-hamburger {
-    display: flex !important;
-    flex-shrink: 0;
-    margin-left: 8px;
-  }
-  /* In RTL the hamburger sits on the left — add margin-right instead */
-  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 8px; }
+  /* Hamburger always on the right (row layout in mobile) */
+  #nav-hamburger { display: flex !important; flex-shrink: 0; margin-left: 8px; }
+  [dir="rtl"] #nav-hamburger { margin-left: 8px; margin-right: 0; }
 
   /* ── HERO ────────────────────────────────────────────────
      FIX A: min-height:auto — no longer forces full-screen
