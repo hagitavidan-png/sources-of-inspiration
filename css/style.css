@@ -858,12 +858,11 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     white-space: nowrap;
   }
   #nav-hamburger { display: flex !important; flex-shrink: 0; margin-left: 4px; }
-  /* In RTL the whole nav-inner is row-reversed, so hamburger is on the left;
-     margin-right pushes it away from the actions cluster */
   [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 4px; }
-  /* RTL: actions are already reversed by global [dir=rtl] .nav-actions rule;
-     use margin-right:auto to push them to the far left (which is the right visually) */
-  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  /* RTL mobile: nav-inner is already row-reversed, so logo is on the right
+     and actions are on the left naturally. No margin-auto needed — that was
+     pushing actions further left and compressing the logo into the right corner. */
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: 0; }
   /* Theme toggle: compact on mobile so it doesn't crowd the actions row */
   #theme-toggle { padding: 4px 8px; font-size: .8rem; }
 
