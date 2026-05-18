@@ -62,10 +62,12 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 [dir="rtl"] .nav-links { flex-direction: row-reverse; }
 [dir="rtl"] .hero-grid { direction: rtl; }
-[dir="rtl"] .hero-text { text-align: right; }
+/* Hero text: right-aligned on DESKTOP (2-col layout).
+   On mobile (single col) these are overridden to center in the @media ≤768px block. */
+[dir="rtl"] .hero-text    { text-align: right; }
 [dir="rtl"] .hero-eyebrow { justify-content: flex-end; }
-[dir="rtl"] .hero-cta { justify-content: flex-start; }
-[dir="rtl"] .hero-proof { flex-direction: row-reverse; }
+[dir="rtl"] .hero-cta     { justify-content: flex-end; }
+[dir="rtl"] .hero-proof   { flex-direction: row-reverse; justify-content: flex-end; }
 [dir="rtl"] .units-grid { direction: rtl; }
 [dir="rtl"] .unit-card { text-align: right; direction: rtl; }
 [dir="rtl"] .unit-card-header { flex-direction: row-reverse; }
@@ -85,7 +87,10 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .footer-brand { text-align: right; }
 [dir="rtl"] .footer-links { text-align: right; }
 [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
-[dir="rtl"] .section-header { direction: rtl; }
+/* section-header: do NOT use direction:rtl — it breaks margin:0 auto centering.
+   Text is Hebrew so it renders RTL naturally. Keep centered layout. */
+[dir="rtl"] .section-header { text-align: right; }
+[dir="rtl"] .section-header p { text-align: right; margin-left: auto; margin-right: 0; }
 [dir="rtl"] .preview-grid { direction: rtl; }
 [dir="rtl"] .preview-features { direction: rtl; }
 [dir="rtl"] .pf-item { flex-direction: row-reverse; text-align: right; }
@@ -963,18 +968,16 @@ body.dark #theme-toggle {
 }
 
 /* ══════════════════════════════
-   RTL GLOBAL OVERRIDES
+   RTL SUPPLEMENTAL OVERRIDES
 ══════════════════════════════ */
 [dir="rtl"] #nav .nav-links { margin-left: 0; margin-right: auto; }
 [dir="rtl"] #nav .nav-actions { flex-direction: row-reverse; }
-/* RTL mobile-menu link alignment handled near the #mobile-menu block above */
-[dir="rtl"] .hero-eyebrow { direction: rtl; }
 [dir="rtl"] .btn { flex-direction: row-reverse; }
 [dir="rtl"] .btn-gold { flex-direction: row; }
 [dir="rtl"] .unit-card-header { direction: rtl; }
-[dir="rtl"] .why-card { text-align: right; direction: rtl; }
-[dir="rtl"] .testi-card { direction: rtl; text-align: right; }
-[dir="rtl"] .price-card { direction: rtl; text-align: right; }
-[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; }
-[dir="rtl"] .section-header { direction: rtl; }
-[dir="rtl"] .proof-item { align-items: flex-end; }
+[dir="rtl"] .why-card   { text-align: right; direction: rtl; }
+[dir="rtl"] .testi-card { text-align: right; direction: rtl; }
+[dir="rtl"] .price-card { text-align: right; direction: rtl; }
+[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; justify-content: center; }
+/* proof-item: flex-start so stats don't hug the right edge */
+[dir="rtl"] .proof-item { align-items: flex-start; }
