@@ -254,7 +254,8 @@ body.dark #nav-lang-toggle button:hover:not(.active) { color: #e8e6e1; border-co
 /* mobile menu */
 #mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; }
 #mobile-menu.open { display: block; }
-#mobile-menu a { display: block; padding: 12px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: .95rem; }
+#mobile-menu a { display: block; padding: 14px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: 1rem; font-weight: 500; }
+[dir="rtl"] #mobile-menu a { text-align: right; padding-right: 4px; }
 #mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; }
 body.dark #mobile-menu { background: rgba(15,15,18,.98); border-bottom-color: rgba(255,255,255,.07); }
 body.dark #mobile-menu a { color: rgba(232,230,225,.75); border-bottom-color: rgba(255,255,255,.07); }
@@ -785,11 +786,14 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .cta-btns .btn { width: 100%; max-width: 360px; justify-content: center; }
 
   /* ── MOBILE MENU when open on tablet ──── */
-  #mobile-menu     { padding: 16px 24px; overflow-y: auto; max-height: calc(100vh - var(--nav-h)); }
+  #mobile-menu     { padding: 20px 24px; overflow-y: auto; max-height: calc(100vh - var(--nav-h)); }
   .mob-actions     { flex-direction: row; flex-wrap: wrap; gap: 10px; }
   .mob-actions .btn { flex: 1; min-width: 140px; justify-content: center; text-align: center; }
   #mob-lang-toggle { justify-content: center; margin-top: 10px; }
   #mob-lang-toggle button { flex-shrink: 0; min-width: 36px; display: inline-flex !important; }
+  [dir="rtl"] #mobile-menu a { text-align: right; }
+  [dir="rtl"] .mob-actions  { flex-direction: row-reverse; }
+  [dir="rtl"] #mob-lang-toggle { justify-content: center; }
 }
 
 /* ─────────────────────────────────────────
@@ -958,7 +962,7 @@ body.dark #theme-toggle {
 ══════════════════════════════ */
 [dir="rtl"] #nav .nav-links { margin-left: 0; margin-right: auto; }
 [dir="rtl"] #nav .nav-actions { flex-direction: row-reverse; }
-[dir="rtl"] #mobile-menu a { text-align: right; }
+/* RTL mobile-menu link alignment handled near the #mobile-menu block above */
 [dir="rtl"] .hero-eyebrow { direction: rtl; }
 [dir="rtl"] .btn { flex-direction: row-reverse; }
 [dir="rtl"] .btn-gold { flex-direction: row; }
