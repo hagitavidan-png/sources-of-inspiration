@@ -215,7 +215,6 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
   .teacher-hero{padding:120px 0 64px}
   /* On mobile, th-left spans full width — center the CTA buttons */
   .th-ctas{justify-content:center}
-  [dir="rtl"] .th-ctas{justify-content:center}
   .benefits-grid{grid-template-columns:1fr}
   .how-steps{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
@@ -227,26 +226,54 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 
 /* RTL support */
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
-/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly.
-   Reversing .nav-actions again pushes the EN button off-screen on tablet/mobile.   */
+/* Hero container: direction:rtl so grid flows R→L on desktop 2-col layout */
 [dir="rtl"] .teacher-hero .container { direction: rtl; }
+/* th-left text: right-align on desktop (single paragraph reading direction) */
 [dir="rtl"] .th-left { text-align: right; }
-/* th-ctas RTL: keep LTR flex row direction (row-reverse was pushing buttons
-   off the left viewport edge). Align to flex-end so buttons sit at the RIGHT
-   side in RTL context (where text starts). flex-wrap ensures they stack on
-   very narrow screens rather than overflow. */
+/* CTA buttons desktop: right-aligned to follow the text block.
+   On mobile the @media block below overrides to center. */
 [dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
-[dir="rtl"] .section-header { text-align: right; }
-[dir="rtl"] .benefits-grid { direction: rtl; }
-[dir="rtl"] .benefit-card { text-align: right; }
-[dir="rtl"] .how-steps { direction: rtl; }
-[dir="rtl"] .cd-grid { direction: rtl; }
-[dir="rtl"] .pricing-cards { direction: rtl; }
+/* Section headers: right-align text but DO NOT set direction:rtl on the container —
+   that breaks margin:0 auto centering and glues everything to the right edge. */
+[dir="rtl"] .section-header     { text-align: right; }
+[dir="rtl"] .section-header h2  { text-align: right; }
+[dir="rtl"] .section-header p   { text-align: right; margin-left: auto; margin-right: 0; }
+/* Grids: direction:rtl makes grid flow right-to-left (cards start from right) */
+[dir="rtl"] .benefits-grid     { direction: rtl; }
+[dir="rtl"] .benefit-card      { text-align: right; }
+[dir="rtl"] .how-steps         { direction: rtl; }
+[dir="rtl"] .cd-grid           { direction: rtl; }
+[dir="rtl"] .pricing-cards     { direction: rtl; }
 [dir="rtl"] .testimonials-grid { direction: rtl; }
-[dir="rtl"] .testimonial-card { text-align: right; }
-[dir="rtl"] .faq-q { flex-direction: row-reverse; }
-[dir="rtl"] .footer-grid { direction: rtl; }
-[dir="rtl"] #mobile-menu { direction: rtl; }
+[dir="rtl"] .testimonial-card  { text-align: right; }
+[dir="rtl"] .faq-q             { flex-direction: row-reverse; }
+[dir="rtl"] .footer-grid       { direction: rtl; }
+[dir="rtl"] #mobile-menu       { direction: rtl; }
+/* Trial form: right-align labels and inputs in RTL */
+[dir="rtl"] .form-group        { text-align: right; }
+[dir="rtl"] .trial-perks       { flex-direction: row-reverse; justify-content: center; }
+/* Curriculum detail units */
+[dir="rtl"] .cd-unit           { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .cd-feature        { flex-direction: row-reverse; text-align: right; }
+/* How-steps: centered on both LTR and RTL */
+[dir="rtl"] .how-step          { text-align: center; }
+/* Pricing card content */
+[dir="rtl"] .price-card        { text-align: right; direction: rtl; }
+[dir="rtl"] .price-features li { flex-direction: row-reverse; justify-content: flex-end; }
+/* Teacher quote border: flip border from left to right */
+[dir="rtl"] .th-teacher-quote  { border-left: none; border-right: 3px solid var(--gold);
+                                   border-radius: 12px 0 0 12px; text-align: right; }
+/* Final CTA section — keep centered */
+[dir="rtl"] .final-cta-actions { justify-content: center; flex-direction: row-reverse; }
+/* Mobile overrides: on single-column layout, center everything */
+@media (max-width: 768px) {
+  [dir="rtl"] .th-ctas         { justify-content: center; }
+  [dir="rtl"] .th-left         { text-align: center; }
+  [dir="rtl"] .section-header  { text-align: center; }
+  [dir="rtl"] .section-header h2 { text-align: center; }
+  [dir="rtl"] .section-header p  { text-align: center; margin: 0 auto; }
+  [dir="rtl"] .trial-perks     { flex-direction: row; flex-wrap: wrap; }
+}
 
 /* ── DARK MODE ── */
 body.dark{background:#0f0f12 !important;color:#e8e6e1}
