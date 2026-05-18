@@ -87,14 +87,13 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .footer-brand { text-align: right; }
 [dir="rtl"] .footer-links { text-align: right; }
 [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
-/* section-header RTL:
-   - Default (non-centered): right-align text
-   - Sections with explicit style="text-align:center" keep their centering
-     because inline styles have higher specificity than class rules.
-   - We do NOT add direction:rtl — that breaks margin:0 auto centering. */
-[dir="rtl"] .section-header { text-align: right; }
-[dir="rtl"] .section-header p { text-align: right; margin-left: auto; margin-right: 0; }
-/* Hero section-header (index/course) stays centered in RTL on mobile */
+/* ── UNIFIED RTL ALIGNMENT RULES ──────────────────────────────────────
+   section-header: always centered in both LTR and RTL (it IS a centered
+   component by design — h2 + subtitle, max-width container, margin:0 auto).
+   We do NOT set direction:rtl on it — that breaks margin:0 auto centering. */
+[dir="rtl"] .section-header   { text-align: center; }
+[dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
+/* Hero section-header also centered */
 [dir="rtl"] #hero .section-header,
 [dir="rtl"] .hero-section .section-header { text-align: center; }
 [dir="rtl"] #hero .section-header p,
@@ -893,14 +892,11 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .hero-cta     { justify-content: center; flex-wrap: wrap; gap: 10px; }
   .hero-proof   { justify-content: center; gap: 20px; }
   #hero h1      { font-size: clamp(2rem, 8vw, 3rem); }
-  /* RTL mobile: single-column layout — everything centered, same as LTR */
+  /* RTL mobile: hero stays centered */
   [dir="rtl"] .hero-text    { text-align: center; }
   [dir="rtl"] .hero-eyebrow { justify-content: center; }
   [dir="rtl"] .hero-cta     { justify-content: center; }
   [dir="rtl"] .hero-proof   { justify-content: center; flex-direction: row; }
-  /* RTL mobile: section-headers in centered sections stay centered */
-  [dir="rtl"] .section-header { text-align: center; }
-  [dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
 
   /* All sections natural height */
   #units, #why, #lesson-preview, #testimonials,

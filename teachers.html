@@ -205,7 +205,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 [dir="rtl"] .teacher-hero .container { direction: rtl; }
 [dir="rtl"] .th-left { text-align: right; }
 [dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
-[dir="rtl"] .section-header { text-align: right; }
+[dir="rtl"] .section-header { text-align: center; }
 [dir="rtl"] .benefits-grid { direction: rtl; }
 [dir="rtl"] .benefit-card { text-align: right; }
 [dir="rtl"] .how-steps { direction: rtl; }
@@ -230,13 +230,9 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 }
 @media(max-width:768px){
   .teacher-hero{padding:120px 0 64px}
-  /* On mobile, th-left spans full width — center the CTA buttons only */
+  /* On mobile, th-left spans full width — center the CTA buttons */
   .th-ctas{justify-content:center}
   [dir="rtl"] .th-ctas { justify-content: center; }
-  /* RTL mobile: hero title stays right-aligned (RTL natural reading direction) */
-  /* section-headers in explicitly centered sections stay centered */
-  [dir="rtl"] .section-header { text-align: center; }
-  [dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
   .benefits-grid{grid-template-columns:1fr}
   .how-steps{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
