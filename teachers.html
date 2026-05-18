@@ -230,13 +230,11 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 }
 @media(max-width:768px){
   .teacher-hero{padding:120px 0 64px}
-  /* On mobile, th-left spans full width — center everything */
+  /* On mobile, th-left spans full width — center the CTA buttons only */
   .th-ctas{justify-content:center}
   [dir="rtl"] .th-ctas { justify-content: center; }
-  /* RTL mobile: center hero text + badge (overrides desktop right-align above) */
-  [dir="rtl"] .th-left { text-align: center; }
-  [dir="rtl"] .th-tag { margin-left: auto; margin-right: auto; }
-  /* RTL mobile: section-headers in centered sections stay centered */
+  /* RTL mobile: hero title stays right-aligned (RTL natural reading direction) */
+  /* section-headers in explicitly centered sections stay centered */
   [dir="rtl"] .section-header { text-align: center; }
   [dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
   .benefits-grid{grid-template-columns:1fr}
@@ -258,8 +256,10 @@ body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;ba
 body.dark #nav-hamburger span,body.dark .hamburger span{background:#e8e6e1 !important}
 body.dark #mobile-menu{background:rgba(15,15,18,.98) !important;border-color:rgba(255,255,255,.07) !important}
 body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
-/* Light sections */
-body.dark .teacher-hero,
+/* Dark mode backgrounds */
+/* Hero gets same deep navy gradient as index hero */
+body.dark .teacher-hero { background: linear-gradient(155deg, #0d0d18 0%, #111124 60%, #0f0f1a 100%) !important; }
+/* Other sections get dark background */
 body.dark .benefits-section,
 body.dark .how-works,
 body.dark .preview-section,
@@ -267,7 +267,7 @@ body.dark .testimonials,
 body.dark .faq-section,
 body.dark .pricing-section,
 body.dark .trial-section,
-body.dark section{background:#0f0f12 !important}
+body.dark section { background: #0f0f12 !important; }
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
 body.dark p,body.dark .unit-desc,body.dark .teacher-hero p,body.dark .benefit-card p{color:rgba(232,230,225,.58) !important}
 body.dark .th-visual,body.dark .benefit-card,body.dark .how-step,body.dark .testi-card,body.dark .faq-item,body.dark .pricing-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
