@@ -733,51 +733,55 @@ body.dark .cs-label,.dark .stat-label{color:rgba(232,230,225,.4) !important}
 // ── PAGE-SPECIFIC JS (index.html) ──────────────────────────
 // Dark mode, language init, toggleTheme, setLang → app-init.js
 
-// Navbar scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+document.addEventListener('DOMContentLoaded', function() {
 
-// Hamburger — uses .open class (matches style.css #mobile-menu.open rule)
-const burger = document.getElementById('nav-hamburger');
-const mobMenu = document.getElementById('mobile-menu');
-if(burger && mobMenu){
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobMenu.classList.toggle('open');
-  });
-  document.addEventListener('click', e => {
-    if(!burger.contains(e.target) && !mobMenu.contains(e.target)){
-      burger.classList.remove('open');
-      mobMenu.classList.remove('open');
-    }
-  });
-}
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
 
-// Fade-up
-if('IntersectionObserver' in window){
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-} else {
-  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-}
+  // Hamburger — uses .open class (matches style.css #mobile-menu.open rule)
+  const burger = document.getElementById('nav-hamburger');
+  const mobMenu = document.getElementById('mobile-menu');
+  if(burger && mobMenu){
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', e => {
+      if(!burger.contains(e.target) && !mobMenu.contains(e.target)){
+        burger.classList.remove('open');
+        mobMenu.classList.remove('open');
+      }
+    });
+  }
 
-// Smooth scroll for all in-page anchor links (#section)
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      // Close mobile menu if open
-      const burger = document.getElementById('nav-hamburger');
-      const mobMenu = document.getElementById('mobile-menu');
-      if(burger && mobMenu){ burger.classList.remove('open'); mobMenu.classList.remove('open'); }
-      // Smooth scroll — scrollIntoView feels slower/more natural than scrollTo
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  // Fade-up
+  if('IntersectionObserver' in window){
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
+
+  // Smooth scroll for all in-page anchor links (#section)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        // Close mobile menu if open
+        const burger = document.getElementById('nav-hamburger');
+        const mobMenu = document.getElementById('mobile-menu');
+        if(burger && mobMenu){ burger.classList.remove('open'); mobMenu.classList.remove('open'); }
+        // Smooth scroll — scrollIntoView feels slower/more natural than scrollTo
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-});
+
+}); // end DOMContentLoaded
 </script>
 
 </body>
