@@ -868,6 +868,37 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
   </div>
 </section>
 
+<!-- ══ CONTACT ══ -->
+<section id="contact" style="padding:80px 24px;background:var(--surface-2,#f5f4f0)">
+  <div class="container" style="max-width:640px;margin:0 auto;text-align:center">
+    <div class="section-tag" style="color:var(--gold-lt,#c9a84c);margin-bottom:16px" data-en="✦ Contact Us" data-he="✦ צרו קשר">✦ Contact Us</div>
+    <h2 class="section-header" style="margin-bottom:12px" data-en="Get in Touch" data-he="דברו איתנו">Get in Touch</h2>
+    <p style="color:var(--text-2,#555);margin-bottom:32px" data-en="Have a question about licensing, curriculum, or getting your school started? We'd love to hear from you." data-he="שאלות על רישיון, תכנית לימודים, או איך להתחיל בבית הספר שלכם? שמחים לשמוע.">Have a question about licensing, curriculum, or getting your school started? We'd love to hear from you.</p>
+    <form id="contact-form" onsubmit="submitContact(event)" style="display:flex;flex-direction:column;gap:16px;text-align:start">
+      <input type="text"  name="name"    required placeholder="שם מלא / Full Name"    style="padding:14px 16px;border:1.5px solid var(--border,#ddd);border-radius:10px;font-size:1rem;background:var(--surface-1,#fff);color:var(--ink,#0d0d1a)">
+      <input type="email" name="email"   required placeholder="אימייל / Email"         style="padding:14px 16px;border:1.5px solid var(--border,#ddd);border-radius:10px;font-size:1rem;background:var(--surface-1,#fff);color:var(--ink,#0d0d1a)">
+      <input type="text"  name="school"           placeholder="בית ספר / School Name" style="padding:14px 16px;border:1.5px solid var(--border,#ddd);border-radius:10px;font-size:1rem;background:var(--surface-1,#fff);color:var(--ink,#0d0d1a)">
+      <textarea name="message" rows="4" placeholder="הודעה / Message" style="padding:14px 16px;border:1.5px solid var(--border,#ddd);border-radius:10px;font-size:1rem;resize:vertical;background:var(--surface-1,#fff);color:var(--ink,#0d0d1a)"></textarea>
+      <button type="submit" class="btn btn-gold btn-lg" style="align-self:center" data-en="Send Message" data-he="שלחו הודעה">שלחו הודעה</button>
+    </form>
+    <div id="contact-success" style="display:none;margin-top:24px;padding:20px;background:rgba(201,168,76,.12);border-radius:12px;color:var(--gold-lt,#c9a84c);font-weight:600" data-en="✅ Message sent! We'll be in touch within 1 business day." data-he="✅ ההודעה נשלחה! נחזור אליכם תוך יום עסקים אחד.">✅ ההודעה נשלחה! נחזור אליכם תוך יום עסקים אחד.</div>
+  </div>
+</section>
+<script>
+function submitContact(e){
+  e.preventDefault();
+  document.getElementById('contact-form').style.display='none';
+  document.getElementById('contact-success').style.display='block';
+}
+</script>
+<style>
+body.dark #contact { background: rgba(255,255,255,.04) !important; }
+body.dark #contact input,
+body.dark #contact textarea { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.12) !important; color: #f0ede6 !important; }
+body.dark #contact input::placeholder,
+body.dark #contact textarea::placeholder { color: rgba(240,237,230,.4); }
+</style>
+
 <!-- ══ FOOTER ══ -->
 <footer id="footer">
   <div class="footer-inner">
