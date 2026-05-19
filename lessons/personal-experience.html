@@ -1,1227 +1,487 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-lesson-type="regular">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Emotion, Color and Mark — Sources of Inspiration</title>
+<title>חוויה אישית — יחידה 1 — מקורות השראה באמנות</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="../css/style.css?v=20250519"/>
+<script src="../js/app-init.js?v=20250507g"></script>
 <style>
-/* ══════════════════════════════════════
-   RESET & ROOT
-══════════════════════════════════════ */
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
-
+/* ── PAGE-LOCAL TOKENS ── */
 :root {
-  --bg:        #0f0f10;
-  --rose:      #FF4D4D;
-  --gold:      #c9a96e;
-  --violet:    #7c5cbf;
-  --amber:     #e8a030;
-  --green:     #4caf82;
-  --blue:      #4a7fa5;
-  --teal:      #3dbcaa;
-  --tp:        #ffffff;
-  --ts:        #cfcfcf;
-  --tm:        rgba(255,255,255,.62);  /* was #8a8a8a — lifted for readability */
-  --font-en:   'Sora',  sans-serif;
-  --font-he:   'Heebo', sans-serif;
-  --ease:      cubic-bezier(.4,0,.2,1);
-  --nav-h:     52px;
-  --bar-h:     78px;
-  /* safe-bot = nav-bar height + progress-dots zone + breathing room */
-  --safe-bot:  calc(var(--bar-h) + 48px);
-  /* safe-area insets for notch/home-bar devices */
-  --sa-top:    env(safe-area-inset-top,    0px);
-  --sa-bot:    env(safe-area-inset-bottom, 0px);
+  --gold: #c9a84c;
+  --gold-lt: #e8c460;
+  --gold-dk: #9a7a2e;
+  --ink: #0d0d1a;
+  --surface-1: #ffffff;
+  --surface-2: #f5f4f0;
+  --text-2: #555;
+  --border: #e0ddd5;
+}
+body.dark {
+  --ink: #f0ede6;
+  --surface-1: #12121f;
+  --surface-2: #1a1a2e;
+  --text-2: rgba(240,237,230,.6);
+  --border: rgba(255,255,255,.1);
 }
 
-html, body {
-  height:100%; width:100%;
-  overflow:hidden;
-  background:var(--bg);
-  color:var(--tp);
-  -webkit-tap-highlight-color:transparent;
+/* ── HERO ── */
+.lesson-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(155deg, #f7f5ef 0%, #ede8df 100%);
+  padding: 100px 24px 60px;
+  position: relative;
+  overflow: hidden;
 }
-body     { font-family:var(--font-en) }
-body.he  { font-family:var(--font-he) }
-body.rtl { direction:rtl }
-
-/* ══════════════════════════════════════
-   HUD — top bar
-══════════════════════════════════════ */
-#hud {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  height:var(--nav-h);
-  background:rgba(13,13,26,.97);
-  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.055);
-  display:flex; align-items:center; gap:8px; padding:0 16px;
+body.dark .lesson-hero {
+  background: linear-gradient(155deg, #0d0d18 0%, #111124 60%, #0f0f1a 100%) !important;
 }
-body.rtl #hud { flex-direction:row-reverse }
-
-#hud-back {
-  display:flex; align-items:center; gap:5px;
-  font-size:.72rem; color:var(--tm); text-decoration:none;
-  transition:color .2s; flex-shrink:0; white-space:nowrap;
+.lesson-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,.12) 0%, transparent 70%);
+  pointer-events: none;
 }
-#hud-back:hover { color:var(--tp) }
-body.rtl #hud-back svg { transform:scaleX(-1) }
-
-#hud-badge {
-  padding:3px 10px; border-radius:20px;
-  background:rgba(255,77,77,.1); border:1px solid rgba(255,77,77,.2);
-  font-size:.58rem; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--rose); white-space:nowrap; flex-shrink:0;
+.hero-unit-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,.15);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-bottom: 20px;
 }
-
-#hud-spacer { flex:1; min-width:0 }
-
-#hud-lang {
-  display:flex; gap:4px; flex-shrink:0; min-width:fit-content;
+.lesson-hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 16px;
 }
-body.rtl #hud-lang { flex-direction:row-reverse }
-
-.lang-btn {
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:5px 11px; border-radius:20px;
-  border:1px solid rgba(255,255,255,.18);
-  background:transparent; color:rgba(255,255,255,.5);
-  font-size:.67rem; letter-spacing:.04em; cursor:pointer;
-  transition:.2s; font-family:inherit; white-space:nowrap;
-  flex-shrink:0; min-width:30px; min-height:30px;
+.lesson-hero .hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-2);
+  max-width: 560px;
+  line-height: 1.65;
+  margin-bottom: 32px;
 }
-.lang-btn.active {
-  background:rgba(201,169,110,.16);
-  border-color:rgba(201,169,110,.5);
-  color:var(--gold);
+.hero-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
-.lang-btn:hover:not(.active) {
-  color:rgba(255,255,255,.85);
-  border-color:rgba(255,255,255,.35);
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  color: var(--text-2);
 }
-
-#hud-step {
-  font-size:.64rem; color:var(--tm); letter-spacing:.04em;
-  flex-shrink:0; white-space:nowrap; min-width:38px; text-align:center;
-}
-
-/* ══════════════════════════════════════
-   PROGRESS DOTS
-══════════════════════════════════════ */
-#progress {
-  position:fixed;
-  bottom:calc(var(--bar-h) + 10px);
-  left:50%; transform:translateX(-50%);
-  z-index:150; display:flex; gap:7px; align-items:center;
-  pointer-events:none;
-}
-body.rtl #progress { flex-direction:row-reverse }
-
-.pdot {
-  width:7px; height:7px; border-radius:50%;
-  background:rgba(255,255,255,.11);
-  border:1px solid rgba(255,255,255,.15);
-  transition:.32s var(--ease);
-}
-.pdot.now {
-  background:var(--rose); border-color:var(--rose);
-  box-shadow:0 0 9px rgba(255,77,77,.38);
-  width:22px; border-radius:4px;
+.hero-meta-item i { color: var(--gold); }
+.hero-cta-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-/* ══════════════════════════════════════
-   STAGE & SCREENS
-══════════════════════════════════════ */
-#stage {
-  position:fixed;
-  top:var(--nav-h);
-  bottom:var(--bar-h);
-  left:0; right:0;
-  /* overflow:visible so flex centering never clips content */
-  overflow:hidden;
-  /* dvh fallback chain for mobile browsers with collapsing chrome */
-  height:calc(100svh - var(--nav-h) - var(--bar-h));
-  height:calc(100dvh - var(--nav-h) - var(--bar-h));
+/* ── LESSON CONTENT ── */
+.lesson-content {
+  padding: 72px 24px;
+  background: var(--surface-1);
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: 1fr; }
 }
 
-.screen {
-  position:absolute; inset:0;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  /* horizontal pad generous; vertical pad minimal — let flex-gap breathe */
-  padding:clamp(12px,2.5vh,32px) clamp(16px,4vw,40px);
-  opacity:0; pointer-events:none;
-  transform:translateY(28px);
-  transition:opacity .55s var(--ease), transform .55s var(--ease);
-  text-align:center;
-  /* no overflow:hidden here — clipping is handled by #stage */
-  overflow:visible;
-  /* gap between flex children scales with viewport height */
-  gap:clamp(6px,1.4vh,18px);
+/* ── LESSON MODULES ── */
+.lesson-modules h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 28px;
 }
-.screen.active  { opacity:1; pointer-events:all; transform:translateY(0) }
-.screen.leaving {
-  opacity:0; transform:translateY(-24px);
-  transition:opacity .32s var(--ease), transform .32s var(--ease);
+.module-card {
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color .2s, box-shadow .2s;
+  cursor: pointer;
 }
+.module-card:hover {
+  border-color: rgba(201,168,76,.5);
+  box-shadow: 0 4px 20px rgba(201,168,76,.12);
+}
+.module-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.15);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.module-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.module-info p {
+  font-size: .88rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.module-duration {
+  margin-right: auto;
+  font-size: .8rem;
+  color: var(--text-2);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+[dir="rtl"] .module-duration { margin-right: 0; margin-left: auto; }
 
-/* scrollable screens */
-.screen--scroll {
-  justify-content:flex-start;
-  overflow-y:auto; overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  padding-top:clamp(16px,2.5vh,28px);
-  padding-bottom:var(--safe-bot);
-  scrollbar-width:none;
-  overscroll-behavior:contain;
-  scroll-behavior:smooth;
-  gap:0;
+/* ── SIDEBAR ── */
+.lesson-sidebar h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
 }
-.screen--scroll::-webkit-scrollbar { display:none }
+.sidebar-card {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.sidebar-card .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
+.sidebar-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+.sidebar-stat:last-child { border-bottom: none; }
+.sidebar-stat .label { color: var(--text-2); }
+.sidebar-stat .value { font-weight: 600; color: var(--ink); }
 
-/* color-grid screen — non-scrolling, flex-start so grid can grow */
-.screen--grid {
-  justify-content:flex-start;
-  overflow:hidden;
-  /* tighter top padding so grid gets more vertical room */
-  padding-top:clamp(14px,2vh,24px);
-  padding-bottom:clamp(14px,2vh,24px);
+/* ── COMING-SOON BANNER ── */
+.coming-soon-banner {
+  background: linear-gradient(135deg, rgba(201,168,76,.12) 0%, rgba(201,168,76,.06) 100%);
+  border: 1.5px dashed rgba(201,168,76,.4);
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-top: 32px;
 }
+.coming-soon-banner i { font-size: 2rem; color: var(--gold); margin-bottom: 12px; display: block; }
+.coming-soon-banner h3 { font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.coming-soon-banner p { font-size: .9rem; color: var(--text-2); margin-bottom: 20px; }
 
-/* ── ambient blobs ── */
-.blob {
-  position:absolute; border-radius:50%; filter:blur(90px);
-  opacity:.14; pointer-events:none;
-  animation:drift 15s ease-in-out infinite alternate;
+/* ── BACK NAV ── */
+.breadcrumb {
+  padding: 16px 24px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  font-size: .85rem;
+  color: var(--text-2);
 }
-@keyframes drift {
-  from { transform:translate(0,0)       scale(1)    }
-  to   { transform:translate(24px,14px) scale(1.06) }
-}
-
-/* ══════════════════════════════════════
-   TYPOGRAPHY
-══════════════════════════════════════ */
-.label {
-  /* min 14px → comfortable 16px eyebrow on mobile */
-  font-size:clamp(.82rem,1.6vw,.95rem);
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--tm); flex-shrink:1;
-  /* margin replaced by parent gap — keep a small bottom nudge */
-  margin-bottom:0;
-}
-.big {
-  font-size:clamp(1.5rem,4.2vw,3rem);
-  font-weight:700; line-height:1.26; letter-spacing:-.018em;
-  color:var(--tp); max-width:700px;
-  /* allow the title to shrink on very short viewports */
-  flex-shrink:1; min-height:0;
-}
-.big em { font-style:normal; color:var(--gold) }
-
-.sub {
-  font-size:clamp(.9rem,1.8vw,1.02rem); font-weight:300;
-  color:var(--tm); max-width:440px;
-  /* margin-top handled by parent gap */
-  margin-top:0; line-height:1.85; flex-shrink:1;
-}
-
-.aline {
-  width:24px; height:1.5px; border-radius:2px;
-  background:var(--accent-line, var(--gold)); opacity:.5;
-  /* margin handled by parent gap */
-  margin:0 auto; flex-shrink:1;
-}
-
-/* RTL typography */
-body.rtl .big   { letter-spacing:0; line-height:1.38 }
-body.rtl .sub   { line-height:2.0 }
-body.rtl .label,
-body.rtl .big,
-body.rtl .sub   { text-align:center }
-body.rtl .aline { margin-left:auto; margin-right:auto }
-
-/* ══════════════════════════════════════
-   SCREEN 2 — ARTWORK MOMENT
-   Four artworks, stacked vertically.
-   Two artist sections with divider.
-   object-fit:contain, no cropping.
-══════════════════════════════════════ */
-.artwork-stack {
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  width:100%;
-  max-width:640px;
-  margin-top:16px;
-  flex-shrink:0;
-}
-
-/* artist section groups two cards */
-.artist-section {
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-/* artist name above each section */
-.artist-section-name {
-  font-size:.78rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--tm);
-  padding:0 2px;
-  margin-bottom:4px;
-  flex-shrink:0;
-}
-body.rtl .artist-section-name { letter-spacing:.04em; text-align:right }
-
-/* divider between Rothko and Kandinsky */
-.artist-divider {
-  width:100%;
-  height:1px;
-  background:rgba(255,255,255,.07);
-  margin:24px 0;
-  flex-shrink:0;
-  position:relative;
-}
-.artist-divider::after {
-  content:'';
-  position:absolute;
-  left:50%; top:50%;
-  transform:translate(-50%,-50%);
-  width:48px; height:1px;
-  background:rgba(255,255,255,.22);
-}
-
-.artwork-card {
-  width:100%;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:14px;
-  overflow:hidden;
-  flex-shrink:0;
-}
-
-.artwork-img-wrap {
-  width:100%;
-  /* 4:3 ratio — consistent across all cards */
-  aspect-ratio:4/3;
-  background:#0a0a0e;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden;
-}
-
-.artwork-img {
-  width:100%; height:100%;
-  object-fit:contain;
-  display:block;
-}
-
-/* graceful fallback: colored placeholder when image 404 */
-.artwork-img-wrap.fallback {
-  background:linear-gradient(135deg,#1a1028,#0d1a28);
-}
-
-.artwork-meta {
-  padding:12px 16px 14px;
-  text-align:left;
-}
-body.rtl .artwork-meta { text-align:right }
-
-.artwork-artist {
-  /* raised from .72rem: readable on mobile without squinting */
-  font-size:clamp(.8rem,1.6vw,.92rem); font-weight:600;
-  color:var(--ts); letter-spacing:.02em;
-  margin-bottom:5px;
-}
-
-.artwork-caption {
-  /* raised from .8rem: easier to read italics */
-  font-size:clamp(.85rem,1.7vw,.96rem); font-weight:300;
-  color:rgba(255,255,255,.58); line-height:1.65;
-  font-style:italic;
-}
-body.rtl .artwork-caption { line-height:1.85 }
-
-/* ══════════════════════════════════════
-   SCREEN 3 — 2×3 COLOR GRID
-   Six equal squares. No text. No horizontal scroll.
-   Grid grows to fill all remaining vertical space after
-   label + subtitle. Never scrolls, never clips.
-══════════════════════════════════════ */
-.color-grid-wrap {
-  /* expand to fill all vertical space after label + subtitle + gaps */
-  flex:1 1 0;
-  min-height:0;                /* let it shrink below natural content height */
-  width:100%;
-  max-width:520px;             /* comfortable ceiling on large screens */
-  display:flex;
-  flex-direction:column;
-}
-
-.color-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:repeat(3, 1fr);
-  gap:clamp(8px,1.6vh,14px);
-  /* fill the full height of the wrapper so tiles use all available space */
-  flex:1 1 0;
-  min-height:0;
-  width:100%;
-}
-
-.color-sq {
-  width:100%; height:100%;
-  border-radius:12px;
-  border:none;
-  min-height:48px;             /* comfortable touch target floor */
-  flex-shrink:0;
-  transition:transform .18s var(--ease), opacity .18s;
-}
-.color-sq:hover { transform:scale(1.025); opacity:.88 }
-
-/* ══════════════════════════════════════
-   SCREEN 4 — EMOTION CHIPS
-══════════════════════════════════════ */
-.chips {
-  display:flex; flex-wrap:wrap; gap:9px;
-  justify-content:center; max-width:560px;
-  /* margin-top via parent gap */
-  margin-top:0; flex-shrink:1;
-}
-body.rtl .chips { flex-direction:row-reverse; flex-wrap:wrap }
-
-.chip {
-  padding:11px 20px; border-radius:50px;
-  border:1.5px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.04);
-  font-size:.88rem; color:var(--ts);
-  cursor:pointer; transition:.22s var(--ease);
-  user-select:none; font-family:inherit;
-  min-height:44px; display:inline-flex; align-items:center;
-}
-.chip:hover {
-  background:rgba(255,255,255,.1);
-  border-color:rgba(255,255,255,.3); color:var(--tp);
-}
-.chip.picked {
-  background:var(--rose); border-color:var(--rose);
-  color:#fff; box-shadow:0 4px 18px rgba(255,77,77,.3);
-}
-body.rtl .chip { letter-spacing:0 }
-
-/* ══════════════════════════════════════
-   SCREENS 5–7 — CREATE (breathable)
-══════════════════════════════════════ */
-.screen--create .big {
-  font-size:clamp(1.7rem,4.8vw,3.2rem);
-  letter-spacing:-.022em;
-}
-.screen--create .sub { line-height:2.0 }
-
-/* ══════════════════════════════════════
-   SCREEN 8 — PAUSE visual
-══════════════════════════════════════ */
-.pause-visual {
-  width:clamp(44px,6vh,56px); height:clamp(44px,6vh,56px); border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.13);
-  display:flex; align-items:center; justify-content:center;
-  /* margin handled by parent gap */
-  margin-bottom:0; flex-shrink:0;
-  animation:pulse-ring 3.2s ease-in-out infinite;
-}
-@keyframes pulse-ring {
-  0%,100% { box-shadow:0 0 0 0    rgba(255,255,255,.08) }
-  50%      { box-shadow:0 0 0 16px rgba(255,255,255,.0)  }
-}
-
-/* ══════════════════════════════════════
-   SCREEN 9 — CLOSING
-══════════════════════════════════════ */
-.close-badge {
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 0; flex-shrink: 0; font-size: 2rem;
-}
-.close-btns {
-  display:flex; gap:12px; flex-wrap:wrap;
-  justify-content:center; margin-top:0;
-  flex-direction:column; align-items:center; flex-shrink:0;
-}
-@media(min-width:440px) { .close-btns { flex-direction:row } }
-body.rtl .close-btns {
-  flex-direction:row-reverse; flex-wrap:wrap; justify-content:center;
-}
-.btn-outline {
-  padding:13px 28px; border-radius:50px;
-  border:1.5px solid rgba(255,255,255,.2); background:transparent;
-  color:var(--ts); font-family:inherit; font-size:.9rem;
-  cursor:pointer; text-decoration:none;
-  display:inline-flex; align-items:center; gap:6px;
-  transition:.2s; min-height:48px;
-}
-.btn-outline:hover { border-color:rgba(255,255,255,.44); color:var(--tp) }
-
-/* ══════════════════════════════════════
-   NAV BAR — sticky CTA
-══════════════════════════════════════ */
-#nav-bar {
-  position:fixed; bottom:0; left:0; right:0; z-index:200;
-  height:var(--bar-h);
-  display:flex; align-items:center; justify-content:center; gap:14px;
-  padding:0 20px;
-  background:rgba(13,13,26,.98);
-  border-top:1px solid rgba(255,255,255,.055);
-  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-}
-
-#back-btn {
-  width:46px; height:46px; border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.17);
-  background:rgba(255,255,255,.055);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; color:var(--tm); transition:.2s; flex-shrink:0;
-}
-#back-btn:hover  { background:rgba(255,255,255,.13); color:var(--tp) }
-#back-btn:disabled { opacity:.17; cursor:default; pointer-events:none }
-body.rtl #back-btn svg { transform:scaleX(-1) }
-
-#next-btn {
-  padding:14px 44px; background:var(--rose);
-  border:none; border-radius:50px; color:#fff;
-  font-family:inherit; font-size:.96rem; font-weight:800;
-  letter-spacing:.03em; cursor:pointer;
-  box-shadow:0 8px 26px rgba(255,77,77,.3);
-  transition:.25s var(--ease); white-space:nowrap;
-  flex:1; max-width:272px;
-}
-#next-btn:hover  { background:#e03333; transform:translateY(-2px); box-shadow:0 12px 34px rgba(255,77,77,.4) }
-#next-btn:active { transform:translateY(0) }
-#next-btn.gold-btn {
-  background:var(--gold); color:#0f0f10;
-  box-shadow:0 8px 26px rgba(201,169,110,.3);
-}
-#next-btn.gold-btn:hover { background:#b8943a; transform:translateY(-2px) }
-
-/* fullscreen btn */
-#fs-btn {
-  position:fixed; top:calc(var(--nav-h) + 8px); right:12px; z-index:300;
-  width:32px; height:32px; border-radius:8px;
-  border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; color:var(--tm); font-size:.8rem; transition:.2s;
-}
-#fs-btn:hover { color:var(--tp); background:rgba(255,255,255,.11) }
-body.rtl #fs-btn { right:auto; left:12px }
-
-/* ══════════════════════════════════════
-   RESPONSIVE — TABLET 769–1180px
-══════════════════════════════════════ */
-@media(min-width:769px) and (max-width:1180px) {
-  :root { --nav-h:52px; --bar-h:78px; --safe-bot:calc(var(--bar-h) + 48px) }
-  #hud  { gap:10px; padding:0 18px }
-  .screen { gap:clamp(8px,1.6vh,20px) }
-  .big  { font-size:clamp(1.6rem,3.8vw,2.6rem) }
-  .chips { max-width:640px }
-  .artwork-stack { max-width:680px }
-  .color-grid-wrap { max-width:520px }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — MOBILE ≤768px
-══════════════════════════════════════ */
-@media(max-width:768px) {
-  :root {
-    --nav-h:48px;
-    --bar-h:66px;
-    --safe-bot:calc(var(--bar-h) + 44px);
-  }
-  #hud  { gap:6px; padding:0 12px }
-  #hud-badge { display:none }
-  .screen { gap:clamp(6px,1.2vh,14px) }
-  .label  { font-size:clamp(.78rem,3.5vw,.9rem); letter-spacing:.14em }
-  .big    { font-size:clamp(1.35rem,6.5vw,2rem) }
-  .sub    { font-size:clamp(.86rem,3.8vw,.97rem); line-height:1.75 }
-  #next-btn { padding:13px 28px; font-size:.91rem }
-  .chip   { padding:9px 14px; font-size:.83rem; min-height:40px }
-  .chips  { gap:7px }
-  .artwork-stack  { gap:16px; margin-top:12px }
-  .artwork-meta   { padding:10px 14px 12px }
-  .artwork-artist { font-size:clamp(.78rem,3.2vw,.88rem) }
-  .artwork-caption{ font-size:clamp(.82rem,3.4vw,.92rem) }
-  .color-grid-wrap { max-width:100%; margin-top:10px }
-  .color-grid { gap:8px }
-  .color-sq { border-radius:8px }
-  #progress { bottom:calc(var(--bar-h) + 6px) }
-  .screen--create .big { font-size:clamp(1.5rem,7vw,2.4rem) }
-  .artist-divider { margin:18px 0 }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — SMALL PHONE ≤480px
-══════════════════════════════════════ */
-@media(max-width:480px) {
-  :root {
-    --nav-h:46px;
-    --bar-h:62px;
-    --safe-bot:calc(var(--bar-h) + 40px);
-  }
-  #hud  { gap:4px; padding:0 10px }
-  .screen { gap:clamp(5px,1vh,10px) }
-  .label  { font-size:clamp(.76rem,3.8vw,.88rem); letter-spacing:.12em }
-  .big    { font-size:clamp(1.25rem,7vw,1.85rem) }
-  .sub    { font-size:clamp(.84rem,4vw,.94rem); line-height:1.65 }
-  .chip   { padding:8px 12px; font-size:.8rem; min-height:38px }
-  .chips  { gap:6px }
-  .artwork-stack  { gap:14px; margin-top:10px }
-  .artwork-meta   { padding:9px 12px 10px }
-  .color-grid { gap:6px }
-  .screen--create .big { font-size:clamp(1.3rem,8vw,1.9rem) }
-  .artist-divider { margin:14px 0 }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — EXTRA-SMALL ≤380px
-══════════════════════════════════════ */
-@media(max-width:380px) {
-  :root { --nav-h:44px; --bar-h:60px; --safe-bot:calc(var(--bar-h) + 36px) }
-  #hud-step { display:none }
-  .lang-btn { padding:4px 8px; font-size:.62rem }
-  .big { font-size:clamp(1.15rem,8.5vw,1.65rem) }
-  .chips { gap:5px }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — SHORT VIEWPORT ≤680px tall
-   Landscape phone, split-screen tablet.
-   Gap-based spacing already helps; this
-   tightens the floor further.
-══════════════════════════════════════ */
-@media(max-height:680px) {
-  .screen { gap:clamp(4px,.9vh,10px) }
-  .big    { font-size:clamp(1.15rem,4.5vw,1.75rem); line-height:1.22 }
-  .sub    { line-height:1.6 }
-  .artwork-img-wrap { aspect-ratio:16/9 }  /* shorter image on short screens */
-  .color-grid-wrap { margin-top:6px }
-  .pause-visual    { width:40px; height:40px }
-  .close-badge     { width:48px; height:48px }
-}
-@media(max-height:520px) {
-  .screen { gap:clamp(3px,.7vh,7px) }
-  .big    { font-size:clamp(1.05rem,4vw,1.5rem); line-height:1.18 }
-  .sub    { line-height:1.5; font-size:clamp(.8rem,3.5vw,.9rem) }
-  .label  { font-size:clamp(.72rem,3vw,.82rem) }
-}
-
-/* ══════════════════════════════════════
-   RTL EXTRAS
-══════════════════════════════════════ */
-body.rtl #hud          { flex-direction:row-reverse }
-body.rtl #back-btn svg { transform:scaleX(-1) }
-body.rtl #progress     { flex-direction:row-reverse; direction:rtl }
-body.rtl #hud-lang     { flex-direction:row-reverse }
+.breadcrumb a { color: var(--gold); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 8px; opacity: .4; }
 </style>
-<link rel="stylesheet" href="../css/lesson-responsive.css"/>
 </head>
-<body class="dark">
-<script src="../js/app-init.js"></script>
+<body>
 
-<!-- ══ HUD ══ -->
-<nav id="hud">
-  <a id="hud-back" href="../course.html">
-    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span id="t-back">Back to Course</span>
-  </a>
-  <span id="hud-badge"><span id="t-unit">Personal Experience</span></span>
-  <div id="hud-spacer"></div>
-  <div id="hud-lang">
-    <button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button>
-    <button class="lang-btn"        onclick="setLang('he')" aria-label="עברית">עברית</button>
+<!-- ══ NAV (identical to index.html) ══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-mark">✦</div>
+      <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
+    </a>
+    <div class="nav-links">
+      <a href="../course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
+      <a href="../lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
+      <a href="../teachers.html" class="nav-link" data-en="For Teachers" data-he="למורים">For Teachers</a>
+      <a href="../index.html#pricing" class="nav-link" data-en="Pricing" data-he="מחירון">Pricing</a>
+    </div>
+    <div class="nav-actions">
+      <a href="../course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
+      <a href="../teachers.html#trial" class="btn btn-gold btn-sm" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+      <div id="nav-lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-he" onclick="setLang('he')">עברית</button>
+      </div>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
+    </div>
+    <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-  <span id="hud-step">1&thinsp;/&thinsp;9</span>
 </nav>
 
-<button id="fs-btn" title="Classroom mode" onclick="toggleFS()">⛶</button>
-
-<!-- ════════════════════ STAGE ════════════════════ -->
-<main id="stage">
-
-  <!-- ══ S0 — ENTER ══
-       Phase 1: atmosphere only, no tasks -->
-  <section class="screen active" id="s0" data-bg="#0d0d1a">
-    <div class="blob" style="width:500px;height:500px;background:var(--rose);top:-130px;left:-100px;opacity:.12"></div>
-    <div class="blob" style="width:340px;height:340px;background:var(--violet);bottom:-60px;right:-60px;opacity:.11;animation-delay:5s"></div>
-    <p class="label" id="t0-label">Personal Experience</p>
-    <h1 class="big" id="t0-big">Emotion, Color<br>and Mark</h1>
-    <div class="aline"></div>
-    <p class="sub" id="t0-sub">What color is an emotion?</p>
-  </section>
-
-  <!-- ══ S1 — ARTIST INSPIRATION ══
-       Phase 2: three artworks stacked vertically (Matisse, Van Gogh, Picasso).
-       No swipe — only CTA advances. Museum-pace vertical scroll. -->
-  <section class="screen screen--scroll" id="s1" data-bg="#0a0c10" data-no-swipe="true">
-    <div class="blob" style="width:360px;height:360px;background:var(--blue);top:-80px;right:-50px;opacity:.09;position:fixed;pointer-events:none"></div>
-
-    <p class="label" id="t1-label">A moment with art</p>
-
-    <div class="artwork-stack" id="artwork-stack">
-
-      <!-- Artwork 0: Matisse – The Red Room -->
-      <article class="artwork-card" id="aw0">
-        <div class="artwork-img-wrap" id="aw0-wrap">
-          <img
-            class="artwork-img"
-            src="images/matisse-red-room.jpg"
-            alt="Henri Matisse — The Red Room (Harmony in Red), 1908"
-            loading="lazy"
-            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
-          />
-        </div>
-        <div class="artwork-meta">
-          <p class="artwork-artist" id="aw0-artist">Henri Matisse &nbsp;·&nbsp; 1908</p>
-          <p class="artwork-caption" id="aw0-caption">Color can fill an entire room — and change everything you feel.</p>
-        </div>
-      </article>
-
-      <!-- Artwork 1: Van Gogh – Sunflowers -->
-      <article class="artwork-card" id="aw1">
-        <div class="artwork-img-wrap" id="aw1-wrap">
-          <img
-            class="artwork-img"
-            src="images/vangogh-sunflowers.jpg"
-            alt="Vincent van Gogh — Sunflowers, 1888"
-            loading="lazy"
-            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
-          />
-        </div>
-        <div class="artwork-meta">
-          <p class="artwork-artist" id="aw1-artist">Vincent van Gogh &nbsp;·&nbsp; 1888</p>
-          <p class="artwork-caption" id="aw1-caption">Energy and life — through a single color.</p>
-        </div>
-      </article>
-
-      <!-- Artwork 2: Picasso – The Old Guitarist -->
-      <article class="artwork-card" id="aw2">
-        <div class="artwork-img-wrap" id="aw2-wrap">
-          <img
-            class="artwork-img"
-            src="images/picasso-old-guitarist.jpg"
-            alt="Pablo Picasso — The Old Guitarist, 1903–1904"
-            loading="lazy"
-            onerror="this.closest('.artwork-img-wrap').classList.add('fallback');this.style.display='none'"
-          />
-        </div>
-        <div class="artwork-meta">
-          <p class="artwork-artist" id="aw2-artist">Pablo Picasso &nbsp;·&nbsp; 1903–1904</p>
-          <p class="artwork-caption" id="aw2-caption">When one color dominates — it becomes a complete emotion.</p>
-        </div>
-      </article>
-
-    </div><!-- /artwork-stack -->
-  </section>
-
-  <!-- ══ S2 — COLOR GRID ══
-       Phase 2: pure color, 2×3 grid. No text. No swipe. -->
-  <section class="screen screen--grid" id="s2" data-bg="#0c0b09" data-no-swipe="true">
-    <div class="blob" style="width:400px;height:400px;background:var(--amber);top:-90px;right:-60px;opacity:.08;position:fixed;pointer-events:none"></div>
-
-    <p class="label" id="t2-label">Color is a language</p>
-    <p class="sub" id="t2-sub" style="margin-top:0;margin-bottom:0;color:var(--ts);font-size:clamp(.92rem,2.1vw,1.05rem);font-weight:400">Look. What do you feel?</p>
-
-    <div class="color-grid-wrap">
-      <div class="color-grid" id="color-grid" aria-label="Color fields">
-        <!-- Row 1 -->
-        <div class="color-sq" style="background:linear-gradient(145deg,#6e0d0d,#bf2020)" role="img" aria-label="Deep red"></div>
-        <div class="color-sq" style="background:linear-gradient(145deg,#091530,#1a3470)" role="img" aria-label="Deep blue"></div>
-        <!-- Row 2 -->
-        <div class="color-sq" style="background:linear-gradient(145deg,#876000,#c8a000)" role="img" aria-label="Yellow"></div>
-        <div class="color-sq" style="background:linear-gradient(145deg,#060608,#141418)" role="img" aria-label="Black"></div>
-        <!-- Row 3 -->
-        <div class="color-sq" style="background:linear-gradient(145deg,#6e1535,#b85070)" role="img" aria-label="Pink"></div>
-        <div class="color-sq" style="background:linear-gradient(145deg,#073a1e,#0f6634)" role="img" aria-label="Deep green"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S3 — EMOTION SELECTION ══
-       Phase 3: connect — after viewing art and color. -->
-  <section class="screen screen--scroll" id="s3" data-bg="#0d0d1a">
-    <div class="blob" style="width:420px;height:420px;background:var(--violet);bottom:-80px;left:-60px;opacity:.13"></div>
-    <p class="label" id="t3-label">What comes up?</p>
-    <h2 class="big" id="t3-big">Which emotions<br>are present right now?</h2>
-    <p class="sub" id="t3-sub">After what you saw — what comes up?</p>
-    <div class="chips" id="emo-chips">
-      <button class="chip" onclick="pickMulti(this)" id="ec0">Angry</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec1">Tender</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec2">Anxious</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec3">Calm</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec4">Heavy</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec5">Sad</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec6">Pride</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec7">Confused</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec8">Hope</button>
-      <button class="chip" onclick="pickMulti(this)" id="ec9">Lonely</button>
-    </div>
-  </section>
-
-  <!-- ══ S4 — FIRST MARK ══
-       Phase 4 Create — one breath per screen. -->
-  <section class="screen screen--create" id="s4" data-bg="#120f0a">
-    <div class="blob" style="width:460px;height:460px;background:var(--amber);bottom:-80px;right:-60px;opacity:.12"></div>
-    <p class="label" id="t4-label">First mark</p>
-    <h2 class="big" id="t4-big">Take a color that feels<br>right for your emotion.</h2>
-    <div class="aline" style="--accent-line:var(--amber)"></div>
-    <p class="sub" id="t4-sub">Place one mark on the page.<br>Don't think about placement.</p>
-  </section>
-
-  <!-- ══ S5 — EXPAND ══ -->
-  <section class="screen screen--create" id="s5" data-bg="#0a100d">
-    <div class="blob" style="width:420px;height:420px;background:var(--green);top:-70px;left:-60px;opacity:.11"></div>
-    <p class="label" id="t5-label">Expand</p>
-    <h2 class="big" id="t5-big">Add more marks.</h2>
-    <div class="aline" style="--accent-line:var(--green)"></div>
-    <p class="sub" id="t5-sub">Let them touch.<br>Move apart. Change.</p>
-  </section>
-
-  <!-- ══ S6 — MOVEMENT ══ -->
-  <section class="screen screen--create" id="s6" data-bg="#090e10">
-    <div class="blob" style="width:480px;height:480px;background:var(--teal);bottom:-90px;right:-65px;opacity:.1"></div>
-    <div class="blob" style="width:260px;height:260px;background:var(--violet);top:10%;left:5%;opacity:.09;animation-delay:6s"></div>
-    <p class="label" id="t6-label">Movement</p>
-    <h2 class="big" id="t6-big">Let the color move.</h2>
-    <div class="aline" style="--accent-line:var(--teal)"></div>
-    <p class="sub" id="t6-sub">Spread. Stop. Mix.</p>
-  </section>
-
-  <!-- ══ S7 — PAUSE ══
-       Strongest screen — keep almost unchanged. -->
-  <section class="screen" id="s7" data-bg="#0d0d1a">
-    <div class="blob" style="width:540px;height:540px;background:rgba(255,255,255,.016);top:-100px;right:-70px"></div>
-    <div class="blob" style="width:300px;height:300px;background:var(--violet);bottom:-50px;left:10%;opacity:.09;animation-delay:5s"></div>
-    <div class="pause-visual">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.28)" stroke-width="1.2" fill="none"/>
-        <line x1="9"  y1="8"  x2="9"  y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <line x1="15" y1="8"  x2="15" y2="16" stroke="white" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <p class="label" id="t7-label">Pause</p>
-    <h2 class="big" id="t7-big" style="font-size:clamp(1.8rem,5vw,3.4rem)">Pause for a moment.</h2>
-    <div class="aline"></div>
-    <p class="sub" id="t7-sub">Look at what was created.</p>
-  </section>
-
-  <!-- ══ S8 — CLOSING ══ -->
-  <section class="screen" id="s8" data-bg="#1a0a12">
-    <div class="blob" style="width:440px;height:440px;background:var(--rose);bottom:-80px;left:-60px;opacity:.13"></div>
-    <div class="blob" style="width:260px;height:260px;background:var(--gold);top:-45px;right:8%;opacity:.09;animation-delay:3s"></div>
-    <div class="close-badge">
-      <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
-        <path d="M6 17 Q11 9 17 17 Q23 25 28 17" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <circle cx="17" cy="17" r="11" stroke="white" stroke-width="1.4" opacity=".4" fill="none"/>
-      </svg>
-    </div>
-    <h2 class="big" id="t8-big">The painting doesn't<br>describe something.</h2>
-    <div class="aline" style="--accent-line:var(--rose)"></div>
-    <p class="sub" id="t8-sub">It creates a feeling.</p>
-    <div class="close-btns">
-      <a class="btn-outline" href="../course.html" id="t8-back-link">
-        <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span id="t8-back-lbl">Back to Course</span>
-      </a>
-    </div>
-  </section>
-
-</main>
-
-<div id="progress"></div>
-
-<div id="nav-bar">
-  <button id="back-btn" onclick="goBack()" disabled aria-label="Previous">
-    <svg width="17" height="17" viewBox="0 0 18 18" fill="none">
-      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-  <button id="next-btn" onclick="advance()">Continue →</button>
+<div id="mobile-menu">
+  <a href="../course.html" data-en="The Course" data-he="הקורס">The Course</a>
+  <a href="../lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
+  <a href="../teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
+  <a href="../index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+  <div class="mob-actions">
+    <a href="../teachers.html#trial" class="btn btn-gold btn-sm" style="justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+  </div>
+  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
+    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
+    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
+  </div>
 </div>
 
-<script src="js/lesson-system.js"></script>
+<!-- ══ BREADCRUMB ══ -->
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <a href="../index.html" data-en="Home" data-he="בית">Home</a>
+  <span class="sep">›</span>
+  <a href="../course.html" data-en="The Course" data-he="הקורס">The Course</a>
+  <span class="sep">›</span>
+  <span data-en="Unit 1: Personal Experience" data-he="יחידה 1: חוויה אישית">Unit 1: חוויה אישית</span>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="lesson-hero">
+  <div class="container" style="position:relative;z-index:1;max-width:760px">
+    <div class="hero-unit-tag fade-up">
+      <i class="fas fa-star"></i>
+      <span data-en="Unit 1 of 7" data-he="יחידה 1 מתוך 7">יחידה 1 מתוך 7</span>
+    </div>
+    <h1 class="fade-up">
+      <span data-en="Personal Experience" data-he="חוויה אישית">חוויה אישית</span>
+    </h1>
+    <p class="hero-sub fade-up" data-en="Students explore their own memories and lived experiences as a rich source of artistic inspiration — from childhood moments to sensory impressions." data-he="תלמידים חוקרים זיכרונות אישיים וחוויות חיים כמקור עשיר להשראה אמנותית — מרגעי ילדות ועד תחושות חושיות.">תלמידים חוקרים זיכרונות אישיים וחוויות חיים כמקור עשיר להשראה אמנותית — מרגעי ילדות ועד תחושות חושיות.</p>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-item"><i class="fas fa-clock"></i> <span data-en="6 lessons · ~45 min each" data-he="6 שיעורים · כ-45 דקות כל אחד">6 שיעורים · כ-45 דקות כל אחד</span></div>
+      <div class="hero-meta-item"><i class="fas fa-layer-group"></i> <span data-en="Grades 7–12" data-he="כיתות ז׳–י״ב">כיתות ז׳–י״ב</span></div>
+      <div class="hero-meta-item"><i class="fas fa-palette"></i> <span data-en="Drawing, Painting, Mixed Media" data-he="רישום, ציור, מדיה מעורבת">רישום, ציור, מדיה מעורבת</span></div>
+    </div>
+    <div class="hero-cta-group fade-up">
+      <a href="../lesson.html" class="btn btn-gold btn-lg">
+        <i class="fa-solid fa-play"></i>
+        <span data-en="Try Demo Lesson" data-he="נסו שיעור דמו">נסו שיעור דמו</span>
+      </a>
+      <a href="../teachers.html#trial" class="btn btn-outline-white btn-lg">
+        <i class="fa-solid fa-rocket"></i>
+        <span data-en="Start Free Trial" data-he="התנסות חינם">התנסות חינם</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LESSON MODULES ══ -->
+<section class="lesson-content">
+  <div class="content-grid">
+
+    <!-- Main: lesson list -->
+    <div class="lesson-modules">
+      <h2 data-en="Lessons in This Unit" data-he="שיעורים ביחידה">שיעורים ביחידה</h2>
+
+      <div class="module-card fade-up">
+        <div class="module-num">1</div>
+        <div class="module-info">
+          <h3 data-en="Opening the Memory Archive" data-he="פתיחת ארכיון הזיכרונות">פתיחת ארכיון הזיכרונות</h3>
+          <p data-en="Introduction to personal experience as an art source. Students map childhood memories through free-writing and quick sketches." data-he="הכרת החוויה האישית כמקור לאמנות. מיפוי זיכרונות ילדות בכתיבה חופשית וסקיצות מהירות.">הכרת החוויה האישית כמקור לאמנות. מיפוי זיכרונות ילדות בכתיבה חופשית וסקיצות מהירות.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <div class="module-card fade-up">
+        <div class="module-num">2</div>
+        <div class="module-info">
+          <h3 data-en="Sensory Mapping" data-he="מיפוי חושי">מיפוי חושי</h3>
+          <p data-en="Translating smells, sounds, and textures from memory into visual language — line, color, and form." data-he="תרגום ריחות, צלילים ומרקמים מהזיכרון לשפה ויזואלית — קו, צבע וצורה.">תרגום ריחות, צלילים ומרקמים מהזיכרון לשפה ויזואלית — קו, צבע וצורה.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <div class="module-card fade-up">
+        <div class="module-num">3</div>
+        <div class="module-info">
+          <h3 data-en="Emotional Color Study" data-he="מחקר צבע רגשי">מחקר צבע רגשי</h3>
+          <p data-en="Connecting emotional memories to color palettes. Students create personal color charts based on lived experience." data-he="קישור זיכרונות רגשיים לפלטות צבע. יצירת לוחות צבע אישיים המבוססים על חוויה חיה.">קישור זיכרונות רגשיים לפלטות צבע. יצירת לוחות צבע אישיים המבוססים על חוויה חיה.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <div class="module-card fade-up">
+        <div class="module-num">4</div>
+        <div class="module-info">
+          <h3 data-en="Composition of Feeling" data-he="קומפוזיציה של תחושה">קומפוזיציה של תחושה</h3>
+          <p data-en="Building compositions that capture a specific emotional moment — using space, scale, and contrast." data-he="בניית קומפוזיציות שמלכדות רגע רגשי מסוים — שימוש במרחב, גודל וניגוד.">בניית קומפוזיציות שמלכדות רגע רגשי מסוים — שימוש במרחב, גודל וניגוד.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <div class="module-card fade-up">
+        <div class="module-num">5</div>
+        <div class="module-info">
+          <h3 data-en="Mixed Media — Layers of Self" data-he="מדיה מעורבת — שכבות של עצמי">מדיה מעורבת — שכבות של עצמי</h3>
+          <p data-en="Using collage, photography, and drawing together to create layered self-portraits from personal history." data-he="שימוש בקולאז׳, צילום ורישום יחד ליצירת דיוקנאות עצמיים רב-שכבתיים מהיסטוריה אישית.">שימוש בקולאז׳, צילום ורישום יחד ליצירת דיוקנאות עצמיים רב-שכבתיים מהיסטוריה אישית.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <div class="module-card fade-up">
+        <div class="module-num">6</div>
+        <div class="module-info">
+          <h3 data-en="Final Project: My Story in Art" data-he="פרויקט סיום: הסיפור שלי באמנות">פרויקט סיום: הסיפור שלי באמנות</h3>
+          <p data-en="Students present a final artwork that tells a personal story, with an artist statement reflecting their creative process." data-he="תלמידים מציגים יצירה סיום שמספרת סיפור אישי, עם הצהרת אמן המשקפת את תהליכם היצירתי.">תלמידים מציגים יצירה סיום שמספרת סיפור אישי, עם הצהרת אמן המשקפת את תהליכם היצירתי.</p>
+        </div>
+        <span class="module-duration">45 דק׳</span>
+      </div>
+
+      <!-- Coming soon banner -->
+      <div class="coming-soon-banner fade-up">
+        <i class="fas fa-lock"></i>
+        <h3 data-en="Full Lessons Available in Trial" data-he="שיעורים מלאים זמינים בהתנסות">שיעורים מלאים זמינים בהתנסות</h3>
+        <p data-en="Start your free 14-day trial to access all lesson plans, worksheets, teacher guides, and assessment tools for this unit." data-he="התחילו את ההתנסות החינמית ל-14 יום כדי לגשת לכל תכניות השיעורים, דפי העבודה, מדריכי המורה וכלי ההערכה ליחידה זו.">התחילו את ההתנסות החינמית ל-14 יום כדי לגשת לכל תכניות השיעורים, דפי העבודה, מדריכי המורה וכלי ההערכה ליחידה זו.</p>
+        <a href="../teachers.html#trial" class="btn btn-gold">
+          <i class="fas fa-rocket"></i>
+          <span data-en="Start Free Trial" data-he="התחילו התנסות חינם">התחילו התנסות חינם</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lesson-sidebar">
+      <div class="sidebar-card">
+        <h3 data-en="Unit Overview" data-he="סקירת היחידה">סקירת היחידה</h3>
+        <div class="sidebar-stat">
+          <span class="label" data-en="Lessons" data-he="שיעורים">שיעורים</span>
+          <span class="value">6</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="label" data-en="Total Time" data-he="זמן כולל">זמן כולל</span>
+          <span class="value" data-en="~4.5 hours" data-he="כ-4.5 שעות">כ-4.5 שעות</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="label" data-en="Grades" data-he="כיתות">כיתות</span>
+          <span class="value" data-en="7–12" data-he="ז׳–י״ב">ז׳–י״ב</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="label" data-en="Materials" data-he="חומרים">חומרים</span>
+          <span class="value" data-en="Included" data-he="כלולים">כלולים</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="label" data-en="Language" data-he="שפה">שפה</span>
+          <span class="value" data-en="HE / EN" data-he="עברית / אנגלית">עברית / אנגלית</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3 data-en="What's Included" data-he="מה כלול">מה כלול</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;padding:0">
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="6 full lesson plans" data-he="6 תכניות שיעור מלאות">6 תכניות שיעור מלאות</span></li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="Student worksheets (PDF)" data-he="דפי עבודה לתלמידים (PDF)">דפי עבודה לתלמידים (PDF)</span></li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="Teacher guide &amp; notes" data-he="מדריך מורה והערות">מדריך מורה והערות</span></li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="Assessment rubrics" data-he="רובריקות הערכה">רובריקות הערכה</span></li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="Artwork examples gallery" data-he="גלריית יצירות לדוגמה">גלריית יצירות לדוגמה</span></li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink)"><i class="fas fa-check-circle" style="color:var(--gold)"></i> <span data-en="Bilingual (HE / EN)" data-he="דו-לשוני (עברית / אנגלית)">דו-לשוני (עברית / אנגלית)</span></li>
+        </ul>
+      </div>
+
+      <a href="../teachers.html#trial" class="btn btn-gold" style="width:100%;justify-content:center;margin-bottom:12px">
+        <i class="fas fa-rocket"></i>
+        <span data-en="Start Free Trial" data-he="התנסות חינם">התנסות חינם</span>
+      </a>
+      <a href="../course.html" class="btn btn-outline" style="width:100%;justify-content:center">
+        <i class="fas fa-th-large"></i>
+        <span data-en="All 7 Units" data-he="כל 7 היחידות">כל 7 היחידות</span>
+      </a>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo-mark" style="width:36px;height:36px;font-size:1.2rem">✦</div>
+      <div>
+        <div style="font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:1rem;margin-bottom:2px">Sources of Inspiration in Art</div>
+        <div style="font-size:.78rem;color:rgba(13,13,26,.4)" data-en="Premium Creativity Curriculum for Schools" data-he="תכנית יצירתיות מתקדמת לבתי ספר">Premium Creativity Curriculum for Schools</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="Curriculum" data-he="תכנית לימודים">Curriculum</div>
+        <a href="../course.html" data-en="The 7 Units" data-he="7 היחידות">The 7 Units</a>
+        <a href="../lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
+        <a href="../index.html#pricing" data-en="Pricing" data-he="מחירון">מחירון</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="For Schools" data-he="לבתי ספר">לבתי ספר</div>
+        <a href="../teachers.html" data-en="Teacher Resources" data-he="משאבים למורים">משאבים למורים</a>
+        <a href="../teachers.html#trial" data-en="Free Trial" data-he="התנסות חינם">התנסות חינם</a>
+        <a href="../teachers.html#contact" data-en="Contact Us" data-he="צרו קשר">צרו קשר</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div data-en="© 2025 Sources of Inspiration in Art. All rights reserved." data-he="© 2025 מקורות השראה באמנות. כל הזכויות שמורות.">© 2025 Sources of Inspiration in Art. כל הזכויות שמורות.</div>
+  </div>
+</footer>
+
 <script>
-/* ════════════════════════════════════════
-   STATE
-════════════════════════════════════════ */
-const TOTAL     = 9;
-const GOLD_FROM = 99;  /* gold CTA disabled — all screens use standard red */
-let cur    = 0;
-let busy   = false;
-let he     = (localStorage.getItem('sourcesLang') || 'en') === 'he';
-let touchX = 0;
-let touchY = 0;
-
-/* ════════════════════════════════════════
-   BILINGUAL STRINGS
-════════════════════════════════════════ */
-const T = {
-  en: {
-    back: 'Back to Course',
-    unit: 'Personal Experience',
-    s: [
-      /* s0 — Enter */
-      {
-        label:   'Personal Experience',
-        big:     'Emotion, Color<br>and Mark',
-        sub:     'What color is an emotion?'
-      },
-      /* s1 — Artist inspiration */
-      {
-        label:    'A moment with art',
-        artworks: [
-          {
-            artist:  'Henri Matisse · 1908',
-            caption: 'Color can fill an entire room — and change everything you feel.'
-          },
-          {
-            artist:  'Vincent van Gogh · 1888',
-            caption: 'Energy and life — through a single color.'
-          },
-          {
-            artist:  'Pablo Picasso · 1903–1904',
-            caption: 'When one color dominates — it becomes a complete emotion.'
-          }
-        ]
-      },
-      /* s2 — Color grid */
-      {
-        label: 'Color is a language',
-        sub:   'Look. What do you feel?'
-      },
-      /* s3 — Emotion selection */
-      {
-        label: 'What comes up?',
-        big:   'Which emotions<br>are present right now?',
-        sub:   'After what you saw — what comes up?',
-        chips: ['Angry','Tender','Anxious','Calm','Heavy','Sad','Pride','Confused','Hope','Lonely']
-      },
-      /* s4 — First mark */
-      {
-        label: 'First mark',
-        big:   'Take a color that feels<br>right for your emotion.',
-        sub:   "Place one mark on the page.<br>Don't think about placement."
-      },
-      /* s5 — Expand */
-      {
-        label: 'Expand',
-        big:   'Add more marks.',
-        sub:   'Let them touch.<br>Move apart. Change.'
-      },
-      /* s6 — Movement */
-      {
-        label: 'Movement',
-        big:   'Let the color move.',
-        sub:   'Spread. Stop. Mix.'
-      },
-      /* s7 — Pause */
-      {
-        label: 'Pause',
-        big:   'Pause for a moment.',
-        sub:   'Look at what was created.'
-      },
-      /* s8 — Closing */
-      {
-        big:     "The painting doesn't<br>describe something.",
-        sub:     'It creates a feeling.',
-        backLbl: 'Back to Course'
-      }
-    ],
-    btn: ['Continue','Continue','Continue','Choose','Continue','Continue','Continue','Continue','Finish']
-  },
-
-  he: {
-    back: 'חזרה לקורס',
-    unit: 'חוויה אישית',
-    s: [
-      /* s0 */
-      {
-        label: 'חוויה אישית',
-        big:   'רגש, צבע וכתם',
-        sub:   'איזה צבע הוא רגש?'
-      },
-      /* s1 */
-      {
-        label:    'רגע עם יצירה',
-        artworks: [
-          {
-            artist:  'אנרי מאטיס · 1908',
-            caption: 'צבע יכול למלא חדר שלם — ולשנות את כל התחושה.'
-          },
-          {
-            artist:  'וינסנט ואן גוך · 1888',
-            caption: 'אנרגיה וחיות — דרך צבע אחד בלבד.'
-          },
-          {
-            artist:  'פבלו פיקאסו · 1903–1904',
-            caption: 'כשצבע אחד שולט — הוא הופך לרגש שלם.'
-          }
-        ]
-      },
-      /* s2 */
-      {
-        label: 'צבע הוא שפה',
-        sub:   'הסתכלו. מה אתם מרגישים?'
-      },
-      /* s3 */
-      {
-        label: 'מה עולה?',
-        big:   'איזה רגשות נוכחים עכשיו?',
-        sub:   'אחרי מה שראיתם — מה עולה?',
-        chips: ['כועס','עדין','חרדה','רגוע','כבד','עצוב','גאווה','מבולבל','תקווה','בודד']
-      },
-      /* s4 */
-      {
-        label: 'כתם ראשון',
-        big:   'קחו צבע שמרגיש נכון<br>לרגש שבחרתם.',
-        sub:   'הניחו כתם אחד על הדף.<br>בלי לחשוב על מיקום.'
-      },
-      /* s5 */
-      {
-        label: 'הרחבה',
-        big:   'הוסיפו כתמים נוספים.',
-        sub:   'תנו להם לגעת.<br>להתרחק. להשתנות.'
-      },
-      /* s6 */
-      {
-        label: 'תנועה',
-        big:   'תנו לצבע לנוע.',
-        sub:   'להתפשט. להיעצר. להתערבב.'
-      },
-      /* s7 */
-      {
-        label: 'עצרו',
-        big:   'עצרו רגע.',
-        sub:   'הסתכלו על מה שנוצר.'
-      },
-      /* s8 */
-      {
-        big:     'הציור לא מתאר משהו.',
-        sub:     'הוא יוצר תחושה.',
-        backLbl: 'חזרה לקורס'
-      }
-    ],
-    btn: ['המשך','המשך','המשך','בחר','המשך','המשך','המשך','המשך','סיום']
-  }
-};
-
-/* ════════════════════════════════════════
-   LANGUAGE
-════════════════════════════════════════ */
-function setLang(l) {
-  he = (l === 'he');
-  localStorage.setItem('sourcesLang', l);
-  // Set lang + dir on <html> — CSS html[lang] rules in lesson-responsive.css
-  // handle ALL direction/alignment globally. No inline style overrides needed.
-  document.documentElement.lang = l;
-  document.documentElement.dir = he ? 'rtl' : 'ltr';
-  document.body.classList.toggle('he',  he);
-  document.body.classList.toggle('rtl', he);
-  document.body.dir = he ? 'rtl' : 'ltr';
-  // Do NOT set inline flexDirection — CSS handles it via html[lang] selectors
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
-  });
-  applyStrings();
-  updateBtn();
-  updateHud();
-}
-
-function applyStrings() {
-  const d = T[he ? 'he' : 'en'];
-
-  /* HUD */
-  const bEl = document.getElementById('t-back');
-  if (bEl) bEl.textContent = d.back;
-  const uEl = document.getElementById('t-unit');
-  if (uEl) uEl.textContent = d.unit;
-
-  d.s.forEach((s, i) => {
-    const el = document.getElementById('s' + i);
-    if (!el) return;
-
-    /* label */
-    const lbl = el.querySelector('.label');
-    if (lbl && s.label !== undefined) lbl.textContent = s.label;
-
-    /* big heading */
-    const big = el.querySelector('.big');
-    if (big && s.big !== undefined) big.innerHTML = s.big;
-
-    /* sub — also handles screens with .sub but no .big (e.g. s2 color grid) */
-    const sub = el.querySelector('.sub');
-    if (sub && s.sub !== undefined) sub.innerHTML = s.sub;
-
-    /* artwork captions + section names (s1) */
-    if (s.artworks) {
-      s.artworks.forEach((aw, j) => {
-        const artistEl  = document.getElementById('aw' + j + '-artist');
-        const captionEl = document.getElementById('aw' + j + '-caption');
-        if (artistEl)  artistEl.textContent  = aw.artist;
-        if (captionEl) captionEl.textContent = aw.caption;
-      });
-    }
-    if (s.sec) {
-      s.sec.forEach((name, j) => {
-        const secEl = document.getElementById('t1-sec' + j);
-        if (secEl) secEl.textContent = name;
-      });
-    }
-
-    /* emotion chips (s3) */
-    if (s.chips) {
-      el.querySelectorAll('.chip').forEach((btn, j) => {
-        if (s.chips[j] !== undefined) btn.textContent = s.chips[j];
-      });
-    }
-
-    /* closing back label (s8) */
-    if (s.backLbl !== undefined) {
-      const bl = document.getElementById('t8-back-lbl');
-      if (bl) bl.textContent = s.backLbl;
-    }
+// ── Mobile hamburger ──
+const burger = document.getElementById('nav-hamburger');
+const mMenu  = document.getElementById('mobile-menu');
+if (burger && mMenu) {
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    mMenu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
   });
 }
 
-/* ════════════════════════════════════════
-   HUD STEP COUNTER
-════════════════════════════════════════ */
-function updateHud() {
-  const el = document.getElementById('hud-step');
-  if (!el) return;
-  el.textContent = cur < TOTAL - 1 ? (cur + 1) + ' / ' + TOTAL : '✓';
-}
+// ── Fade-up on scroll ──
+const fades = document.querySelectorAll('.fade-up');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+fades.forEach(el => io.observe(el));
 
-/* ════════════════════════════════════════
-   DOTS + BUTTON
-════════════════════════════════════════ */
-function buildDots()   { LS_buildDots(TOTAL, go); }
-function refreshDots() { LS_refreshDots(cur); }
-function updateBtn() {
-  updateLessonBtn(
-    document.getElementById('next-btn'),
-    T[he ? 'he' : 'en'].btn,
-    cur, GOLD_FROM, he
-  );
-}
-
-/* ════════════════════════════════════════
-   BACKGROUND PER SCREEN
-════════════════════════════════════════ */
-function setBg(idx) {
-  const el = document.getElementById('s' + idx);
-  if (el) document.body.style.background = el.dataset.bg || '#0d0d1a';
-}
-
-/* ════════════════════════════════════════
-   NAVIGATION
-════════════════════════════════════════ */
-function go(n) {
-  if (n < 0 || n >= TOTAL || busy) return;
-  busy = true;
-  const prev = document.getElementById('s' + cur);
-  prev.classList.add('leaving');
-  setTimeout(() => {
-    prev.classList.remove('active', 'leaving');
-    cur = n;
-    const next = document.getElementById('s' + cur);
-    next.classList.add('active');
-    next.scrollTop = 0;
-    setBg(cur);
-    refreshDots();
-    updateBtn();
-    updateHud();
-    updateBackBtn();
-    busy = false;
-  }, 360);
-}
-
-function advance() {
-  if (busy) return;
-  if (cur === TOTAL - 1) finishLesson(); else go(cur + 1);
-}
-function goBack() {
-  if (!busy && cur > 0) go(cur - 1);
-}
-function updateBackBtn() {
-  document.getElementById('back-btn').disabled = (cur === 0);
-}
-
-/* ════════════════════════════════════════
-   MULTI-SELECT CHIPS
-════════════════════════════════════════ */
-function pickMulti(btn) { btn.classList.toggle('picked'); }
-
-/* ════════════════════════════════════════
-   FULLSCREEN
-════════════════════════════════════════ */
-function toggleFS() {
-  if (!document.fullscreenElement)
-    document.documentElement.requestFullscreen().catch(() => {});
-  else document.exitFullscreen();
-}
-
-/* ════════════════════════════════════════
-   KEYBOARD
-════════════════════════════════════════ */
-document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
-  if (e.key === ' ')          { e.preventDefault(); advance(); }
-  if (e.key === 'ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
-  if (e.key === 'ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
-  if (e.key === 'f' || e.key === 'F') toggleFS();
-});
-
-/* ════════════════════════════════════════
-   TOUCH SWIPE
-   — Disabled on screens with data-no-swipe="true" (s1, s2)
-   — Vertical scroll also suppressed: |dy| > |dx| → ignore
-════════════════════════════════════════ */
-document.addEventListener('touchstart', e => {
-  touchX = e.touches[0].clientX;
-  touchY = e.touches[0].clientY;
-}, { passive: true });
-
-document.addEventListener('touchend', e => {
-  /* disable swipe on flagged screens */
-  const screenEl = document.getElementById('s' + cur);
-  if (screenEl && screenEl.dataset.noSwipe === 'true') return;
-
-  const dx = e.changedTouches[0].clientX - touchX;
-  const dy = e.changedTouches[0].clientY - touchY;
-
-  /* ignore if vertical scroll dominates */
-  if (Math.abs(dy) > Math.abs(dx)) return;
-  if (Math.abs(dx) < 52) return;
-
-  if (he) { if (dx > 0) advance(); else goBack(); }
-  else    { if (dx < 0) advance(); else goBack(); }
-}, { passive: true });
-
-/* ════════════════════════════════════════
-   INIT
-════════════════════════════════════════ */
-setLang(he ? 'he' : 'en');
-document.body.classList.remove('lang-loading');
-buildDots();
-refreshDots();
-updateBtn();
-setBg(0);
-updateBackBtn();
+// ── Language + Theme ──
+setLang(currentLang);
+_syncThemeBtn();
 </script>
-<script src="js/course-progression.js"></script>
 </body>
 </html>
