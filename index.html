@@ -765,14 +765,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
   }
 
-  // Close mobile menu on any in-page anchor click
+  // Close mobile menu on any link click inside mobile-menu, or any #anchor link anywhere
   document.addEventListener('click', function(e) {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
     const burger = document.getElementById('nav-hamburger');
     const mobMenu = document.getElementById('mobile-menu');
-    if (burger) burger.classList.remove('open');
-    if (mobMenu) mobMenu.classList.remove('open');
+    if (e.target.closest('#mobile-menu a') || e.target.closest('a[href^="#"]')) {
+      if (burger) burger.classList.remove('open');
+      if (mobMenu) mobMenu.classList.remove('open');
+    }
     // scroll-behavior:smooth on <html> handles the smooth scroll — no JS needed
   });
 
