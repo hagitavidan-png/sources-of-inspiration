@@ -766,19 +766,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Smooth scroll for all in-page anchor links (#section)
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        // Close mobile menu if open
-        const burger = document.getElementById('nav-hamburger');
-        const mobMenu = document.getElementById('mobile-menu');
-        if(burger && mobMenu){ burger.classList.remove('open'); mobMenu.classList.remove('open'); }
-        // Smooth scroll — scrollIntoView feels slower/more natural than scrollTo
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const burger = document.getElementById('nav-hamburger');
+    const mobMenu = document.getElementById('mobile-menu');
+    if (burger && mobMenu) {
+      burger.classList.remove('open');
+      mobMenu.classList.remove('open');
+    }
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
 }); // end DOMContentLoaded
