@@ -276,13 +276,12 @@ body.dark #nav-lang-toggle button.active {
 body.dark #nav-lang-toggle button:hover:not(.active) { color: #e8e6e1; border-color: rgba(232,230,225,.45); }
 
 /* mobile menu */
-#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; height: auto; overflow: hidden; box-sizing: border-box; }
+#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; height: auto; overflow: hidden; box-sizing: border-box; width: 100%; }
 #mobile-menu.open { display: block; }
-#mobile-menu a { display: block; padding: 14px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: 1rem; font-weight: 500; }
+#mobile-menu a { display: block; padding: 14px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: 1rem; font-weight: 500; width: 100%; box-sizing: border-box; }
 [dir="rtl"] #mobile-menu a { text-align: right; padding-right: 4px; }
-#mobile-menu .mob-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-bottom: 4px; width: 100%; box-sizing: border-box; }
-#mobile-menu .mob-actions .btn { flex: 1 1 auto; min-width: 120px; max-width: 100%; justify-content: center; text-align: center; box-sizing: border-box; }
-[dir="rtl"] #mobile-menu .mob-actions { flex-direction: row-reverse; justify-content: flex-end; }
+#mobile-menu .mob-actions { display: block; margin-top: 16px; padding-bottom: 4px; width: 100%; box-sizing: border-box; }
+#mobile-menu .mob-actions .btn { display: block !important; width: 100% !important; max-width: 100% !important; text-align: center; justify-content: center; box-sizing: border-box; margin-bottom: 8px; }
 body.dark #mobile-menu { background: rgba(15,15,18,.98); border-bottom-color: rgba(255,255,255,.07); }
 body.dark #mobile-menu a { color: rgba(232,230,225,.75); border-bottom-color: rgba(255,255,255,.07); }
 
