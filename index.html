@@ -769,14 +769,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const navEl = document.getElementById('nav');
-      const navH  = navEl ? navEl.getBoundingClientRect().height : 72;
-      const top   = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
       // Close mobile menu if open
       const burger = document.getElementById('nav-hamburger');
       const mobMenu = document.getElementById('mobile-menu');
       if(burger && mobMenu){ burger.classList.remove('open'); mobMenu.classList.remove('open'); }
+      // Smooth scroll — scrollIntoView feels slower/more natural than scrollTo
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
