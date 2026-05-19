@@ -1,3 +1,5 @@
+@import './tokens.css';
+
 /* ============================================================
    Sources of Inspiration in Art — Global CSS
    Premium School Curriculum Platform
@@ -62,10 +64,12 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 [dir="rtl"] .nav-links { flex-direction: row-reverse; }
 [dir="rtl"] .hero-grid { direction: rtl; }
-[dir="rtl"] .hero-text { text-align: right; }
+/* Hero text: right-aligned on DESKTOP (2-col layout).
+   On mobile (single col) these are overridden to center in the @media ≤768px block. */
+[dir="rtl"] .hero-text    { text-align: right; }
 [dir="rtl"] .hero-eyebrow { justify-content: flex-end; }
-[dir="rtl"] .hero-cta { justify-content: flex-start; }
-[dir="rtl"] .hero-proof { flex-direction: row-reverse; }
+[dir="rtl"] .hero-cta     { justify-content: flex-end; }
+[dir="rtl"] .hero-proof   { flex-direction: row-reverse; justify-content: flex-end; }
 [dir="rtl"] .units-grid { direction: rtl; }
 [dir="rtl"] .unit-card { text-align: right; direction: rtl; }
 [dir="rtl"] .unit-card-header { flex-direction: row-reverse; }
@@ -85,7 +89,17 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .footer-brand { text-align: right; }
 [dir="rtl"] .footer-links { text-align: right; }
 [dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
-[dir="rtl"] .section-header { direction: rtl; }
+/* ── UNIFIED RTL ALIGNMENT RULES ──────────────────────────────────────
+   section-header: always centered in both LTR and RTL (it IS a centered
+   component by design — h2 + subtitle, max-width container, margin:0 auto).
+   We do NOT set direction:rtl on it — that breaks margin:0 auto centering. */
+[dir="rtl"] .section-header   { text-align: center; }
+[dir="rtl"] .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
+/* Hero section-header also centered */
+[dir="rtl"] #hero .section-header,
+[dir="rtl"] .hero-section .section-header { text-align: center; }
+[dir="rtl"] #hero .section-header p,
+[dir="rtl"] .hero-section .section-header p { text-align: center; margin-left: auto; margin-right: auto; }
 [dir="rtl"] .preview-grid { direction: rtl; }
 [dir="rtl"] .preview-features { direction: rtl; }
 [dir="rtl"] .pf-item { flex-direction: row-reverse; text-align: right; }
@@ -186,6 +200,9 @@ body.dark #nav {
   background: rgba(15,15,18,.97);
   border-bottom-color: rgba(255,255,255,.07);
 }
+/* Dark mode nav-logo text: override var(--ink) which is near-black and invisible on dark nav bg */
+body.dark .nav-logo { color: #e8e6e1; }
+body.dark .nav-logo span { color: #e8e6e1 !important; }
 .nav-inner { height: 100%; display: flex; align-items: center; gap: 16px; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 .nav-logo { display: flex; align-items: center; gap: 12px; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--ink); flex-shrink: 0; }
 .nav-logo-mark { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), #e8c460); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
@@ -249,9 +266,11 @@ body.dark #nav-lang-toggle button.active {
 body.dark #nav-lang-toggle button:hover:not(.active) { color: #e8e6e1; border-color: rgba(232,230,225,.45); }
 
 /* mobile menu */
-#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; }
-#mobile-menu a { display: block; padding: 12px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: .95rem; }
-#mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; }
+#mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: #f7f6f2; border-bottom: 1px solid rgba(0,0,0,.08); z-index: 999; padding: 16px 24px; height: auto; }
+#mobile-menu.open { display: block; }
+#mobile-menu a { display: block; padding: 14px 0; color: rgba(13,13,26,.75); border-bottom: 1px solid rgba(0,0,0,.06); font-size: 1rem; font-weight: 500; }
+[dir="rtl"] #mobile-menu a { text-align: right; padding-right: 4px; }
+#mobile-menu .mob-actions { display: flex; gap: 10px; margin-top: 16px; padding-bottom: 4px; }
 body.dark #mobile-menu { background: rgba(15,15,18,.98); border-bottom-color: rgba(255,255,255,.07); }
 body.dark #mobile-menu a { color: rgba(232,230,225,.75); border-bottom-color: rgba(255,255,255,.07); }
 
@@ -602,9 +621,12 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .nav-inner {
     gap: 0;
     padding: 0 24px;
-    /* LTR: logo ← space → actions  |  RTL: actions ← space → logo */
     justify-content: space-between;
   }
+  /* RTL mobile: keep logo on LEFT, hamburger on RIGHT — same visual as LTR.
+     The global [dir=rtl] .nav-inner { row-reverse } is for desktop only.
+     On mobile single-column, visual balance = logo left / actions right. */
+  [dir="rtl"] .nav-inner { flex-direction: row; }
   .nav-logo  { flex-shrink: 0; }
   .nav-links { display: none !important; }
 
@@ -637,14 +659,9 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     touch-action: manipulation;
   }
 
-  /* Hamburger */
-  #nav-hamburger {
-    display: flex !important;
-    flex-shrink: 0;
-    margin-left: 8px;
-  }
-  /* In RTL the hamburger sits on the left — add margin-right instead */
-  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 8px; }
+  /* Hamburger always on the right (row layout in mobile) */
+  #nav-hamburger { display: flex !important; flex-shrink: 0; margin-left: 8px; }
+  [dir="rtl"] #nav-hamburger { margin-left: 8px; margin-right: 0; }
 
   /* ── HERO ────────────────────────────────────────────────
      FIX A: min-height:auto — no longer forces full-screen
@@ -781,11 +798,14 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .cta-btns .btn { width: 100%; max-width: 360px; justify-content: center; }
 
   /* ── MOBILE MENU when open on tablet ──── */
-  #mobile-menu     { padding: 16px 24px; overflow-y: auto; max-height: calc(100vh - var(--nav-h)); }
-  .mob-actions     { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-  .mob-actions .btn { flex: 1; min-width: 140px; justify-content: center; text-align: center; }
+  #mobile-menu     { padding: 20px 24px; overflow-y: auto; max-height: calc(100vh - var(--nav-h)); }
+  .mob-actions     { flex-direction: row; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .mob-actions .btn { min-width: 140px; justify-content: center; text-align: center; }
   #mob-lang-toggle { justify-content: center; margin-top: 10px; }
   #mob-lang-toggle button { flex-shrink: 0; min-width: 36px; display: inline-flex !important; }
+  [dir="rtl"] #mobile-menu a { text-align: right; }
+  [dir="rtl"] .mob-actions  { flex-direction: row-reverse; }
+  [dir="rtl"] #mob-lang-toggle { justify-content: center; }
 }
 
 /* ─────────────────────────────────────────
@@ -817,10 +837,25 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   }
 
   /* Nav */
-  .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }
-  .nav-logo    { flex-shrink: 0; }
+  /* nav-inner: no space-between — logo grows to fill, actions pushed by margin-left:auto */
+  .nav-inner   { gap: 0; padding: 0 16px; }
+  /* nav-logo: flex:1 1 auto lets it GROW and fill available space naturally.
+     min-width:0 still needed so it can shrink below its content if required.
+     max-width caps the logo so it can't consume the full bar on huge screens. */
+  .nav-logo    { flex: 1 1 auto; min-width: 0; overflow: visible; max-width: calc(100vw - 186px); }
+  .nav-logo-mark { flex-shrink: 0; }
+  /* span stays as inline (default) — do NOT set display:block inside a flex container;
+     overflow+ellipsis works fine on inline boxes when the parent has min-width:0 */
+  .nav-logo span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: .78rem;         /* smaller on mobile — text still legible */
+    min-width: 0;
+  }
   .nav-links   { display: none !important; }
-  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; }
+  /* margin-left:auto pushes actions to the far right in LTR (gap:0 on nav-inner) */
+  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; margin-left: auto; }
   .nav-actions > a.btn { display: none !important; }
 
   /* Both lang buttons always visible on mobile */
@@ -838,7 +873,14 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     min-width: 28px;
     white-space: nowrap;
   }
-  #nav-hamburger { display: flex !important; margin-left: 6px; }
+  #nav-hamburger { display: flex !important; flex-shrink: 0; margin-left: 4px; }
+  [dir="rtl"] #nav-hamburger { margin-left: 0; margin-right: 4px; }
+  /* RTL mobile: nav-inner is already row-reversed, so logo is on the right
+     and actions are on the left naturally. No margin-auto needed — that was
+     pushing actions further left and compressing the logo into the right corner. */
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: 0; }
+  /* Theme toggle: compact on mobile so it doesn't crowd the actions row */
+  #theme-toggle { padding: 4px 8px; font-size: .8rem; }
 
   /* Hero */
   #hero { min-height: auto !important; height: auto !important; overflow: hidden; align-items: flex-start; }
@@ -852,6 +894,11 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .hero-cta     { justify-content: center; flex-wrap: wrap; gap: 10px; }
   .hero-proof   { justify-content: center; gap: 20px; }
   #hero h1      { font-size: clamp(2rem, 8vw, 3rem); }
+  /* RTL mobile: hero stays centered */
+  [dir="rtl"] .hero-text    { text-align: center; }
+  [dir="rtl"] .hero-eyebrow { justify-content: center; }
+  [dir="rtl"] .hero-cta     { justify-content: center; }
+  [dir="rtl"] .hero-proof   { justify-content: center; flex-direction: row; }
 
   /* All sections natural height */
   #units, #why, #lesson-preview, #testimonials,
@@ -909,18 +956,35 @@ body {
 }
 
 /* ══════════════════════════════
-   RTL GLOBAL OVERRIDES
+   THEME TOGGLE — global
+══════════════════════════════ */
+#theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(13,13,26,.15);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: .85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition);
+  line-height: 1;
+}
+body.dark #theme-toggle {
+  border-color: rgba(255,255,255,.15);
+  color: rgba(232,230,225,.7);
+}
+
+/* ══════════════════════════════
+   RTL SUPPLEMENTAL OVERRIDES
 ══════════════════════════════ */
 [dir="rtl"] #nav .nav-links { margin-left: 0; margin-right: auto; }
 [dir="rtl"] #nav .nav-actions { flex-direction: row-reverse; }
-[dir="rtl"] #mobile-menu a { text-align: right; }
-[dir="rtl"] .hero-eyebrow { direction: rtl; }
 [dir="rtl"] .btn { flex-direction: row-reverse; }
 [dir="rtl"] .btn-gold { flex-direction: row; }
 [dir="rtl"] .unit-card-header { direction: rtl; }
-[dir="rtl"] .why-card { text-align: right; direction: rtl; }
-[dir="rtl"] .testi-card { direction: rtl; text-align: right; }
-[dir="rtl"] .price-card { direction: rtl; text-align: right; }
-[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; }
-[dir="rtl"] .section-header { direction: rtl; }
-[dir="rtl"] .proof-item { align-items: flex-end; }
+[dir="rtl"] .why-card   { text-align: right; direction: rtl; }
+[dir="rtl"] .testi-card { text-align: right; direction: rtl; }
+[dir="rtl"] .price-card { text-align: right; direction: rtl; }
+[dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; justify-content: center; }
+/* proof-item: flex-start so stats don't hug the right edge */
+[dir="rtl"] .proof-item { align-items: flex-start; }

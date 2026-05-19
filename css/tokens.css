@@ -1,0 +1,163 @@
+/* ============================================================
+   tokens.css — Design Tokens
+   מקורות השראה באמנות / Sources of Inspiration in Art
+   Single source of truth for all design variables.
+   ============================================================ */
+
+:root {
+
+  /* ── COLORS — BRAND ─────────────────────────────────────── */
+
+  /* Gold accent (primary brand color) */
+  --gold:        #c9a84c;   /* Main gold */
+  --gold-lt:     #e8d08a;   /* Light gold — hover, highlights */
+  --gold-dk:     #9a7a2e;   /* Dark gold — text on light bg */
+  --shadow-gold: 0 8px 32px rgba(201,168,76,.3);
+
+  /* Ink (dark text / dark background base) */
+  --ink:         #0d0d1a;   /* Near-black — main dark bg & text */
+  --ink-soft:    #2d2d45;   /* Softer dark — secondary bg */
+
+  /* ── COLORS — NEUTRALS ──────────────────────────────────── */
+
+  --white:       #ffffff;
+  --cream:       #faf8f3;   /* Warm white — light section bg */
+  --warm:        #f5f0e8;   /* Warm beige — alternate section bg */
+  --rose:        #e8d5d0;   /* Soft rose tint */
+  --sage:        #c8d8c0;   /* Soft sage green tint */
+  --sky:         #c8d8e8;   /* Soft sky blue tint */
+  --lavender:    #d8d0e8;   /* Soft lavender tint */
+
+  --gray-100:    #f1f1f1;
+  --gray-300:    #d0d0d8;
+  --gray-500:    #888898;
+  --gray-700:    #444458;
+
+  /* ── COLORS — DARK MODE ─────────────────────────────────── */
+
+  --dark-bg:          #0f0f12;   /* Main dark background */
+  --dark-bg-alt:      #111118;   /* Alternate dark section */
+  --dark-bg-card:     #161620;   /* Card background in dark mode */
+  --dark-bg-elevated: #1c1c28;   /* Elevated element (stat boxes etc) */
+  --dark-text:        #e8e6e1;   /* Primary text in dark mode */
+  --dark-text-muted:  rgba(232,230,225,.55); /* Secondary text */
+  --dark-border:      rgba(255,255,255,.07);  /* Subtle borders */
+
+  /* ── COLORS — HERO BACKGROUNDS ─────────────────────────── */
+  /* All hero sections use the same navy gradient in dark mode */
+  --hero-dark-gradient: linear-gradient(155deg, #0d0d18 0%, #111124 60%, #0f0f1a 100%);
+
+  /* ── COLORS — UNIT ACCENTS ──────────────────────────────── */
+
+  --u1: #e85d75;   /* Unit 1 — Emotion / Vision — rose */
+  --u2: #4caf7d;   /* Unit 2 — Nature — green */
+  --u3: #7c6fcd;   /* Unit 3 — Music & Rhythm — purple */
+  --u4: #e8935d;   /* Unit 4 — Memory & Identity — amber */
+  --u5: #3fa8c8;   /* Unit 5 — Culture & Symbols — teal */
+  --u6: #c84c8e;   /* Unit 6 — Personal Style — magenta */
+
+  /* ── TYPOGRAPHY — FONTS ─────────────────────────────────── */
+
+  --font-heading: 'Sora', 'Arial Hebrew', sans-serif;  /* Headings */
+  --font-body:    'Inter', 'Arial Hebrew', sans-serif; /* Body text */
+
+  /* ── TYPOGRAPHY — SIZES ─────────────────────────────────── */
+
+  --text-xs:   0.72rem;   /* ~11.5px — labels, captions, badges */
+  --text-sm:   0.80rem;   /* ~12.8px — small UI text */
+  --text-base: 1.00rem;   /* 16px — body default */
+  --text-lg:   1.05rem;   /* ~16.8px — slightly larger body */
+  --text-xl:   1.20rem;   /* ~19px — lead text */
+  --text-2xl:  1.50rem;   /* 24px — small headings */
+  --text-3xl:  2.00rem;   /* 32px — section headings */
+  --text-4xl:  3.00rem;   /* 48px — hero headings */
+
+  /* ── TYPOGRAPHY — WEIGHTS ───────────────────────────────── */
+
+  --font-regular:   400;
+  --font-medium:    500;
+  --font-semibold:  600;
+  --font-bold:      700;
+  --font-extrabold: 800;
+
+  /* ── TYPOGRAPHY — LINE HEIGHTS ──────────────────────────── */
+
+  --leading-tight:   1.15;   /* Headings */
+  --leading-normal:  1.65;   /* Body default */
+  --leading-relaxed: 1.85;   /* Long-form reading */
+
+  /* ── SPACING ────────────────────────────────────────────── */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-30:  120px;
+
+  /* Section padding — desktop */
+  --section-py-desktop: 96px;
+  /* Section padding — tablet */
+  --section-py-tablet:  72px;
+  /* Section padding — mobile */
+  --section-py-mobile:  56px;
+
+  /* ── LAYOUT — MAX WIDTHS ────────────────────────────────── */
+
+  --max-w-narrow:  640px;   /* Single-column text (articles, FAQs) */
+  --max-w-content: 840px;   /* Standard content width */
+  --max-w-wide:    1180px;  /* Full layout (nav, section containers) */
+
+  /* ── LAYOUT — BREAKPOINTS ───────────────────────────────── */
+  /* Used as reference — actual @media queries use these values:  */
+  /* --bp-mobile:  768px  */
+  /* --bp-tablet:  1024px */
+  /* --bp-desktop: 1180px */
+
+  /* ── LAYOUT — NAV ───────────────────────────────────────── */
+
+  --nav-h: 72px;   /* Fixed navbar height — used for padding-top offsets */
+
+  /* ── BORDER RADIUS ──────────────────────────────────────── */
+
+  --radius-sm:  8px;    /* Small — tags, badges, small buttons */
+  --radius:     14px;   /* Default — cards, inputs */
+  --radius-lg:  22px;   /* Large — big cards, panels */
+  --radius-xl:  32px;   /* Extra large — hero cards */
+  --radius-full: 9999px; /* Fully rounded — pills, avatars */
+
+  /* ── Z-INDEX LAYERS ─────────────────────────────────────── */
+
+  --z-base:    1;
+  --z-above:   10;
+  --z-header:  100;
+  --z-menu:    999;
+  --z-modal:   1000;
+  --z-overlay: 1100;
+
+  /* ── SHADOWS ────────────────────────────────────────────── */
+
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.07);    /* Subtle — hover states */
+  --shadow:      0 6px 24px rgba(0,0,0,.10);   /* Default — cards */
+  --shadow-lg:   0 16px 48px rgba(0,0,0,.14);  /* Strong — modals, popovers */
+  --shadow-gold: 0 8px 32px rgba(201,168,76,.3); /* Gold glow — CTA buttons */
+
+  /* ── TRANSITIONS ────────────────────────────────────────── */
+
+  --transition-fast:   .15s cubic-bezier(.4,0,.2,1);
+  --transition:        .25s cubic-bezier(.4,0,.2,1);  /* Default */
+  --transition-slow:   .45s cubic-bezier(.4,0,.2,1);
+
+  /* ── OPACITY ────────────────────────────────────────────── */
+
+  --opacity-disabled: 0.4;
+  --opacity-muted:    0.55;
+  --opacity-subtle:   0.07;
+
+}
+
+/* tokens.css — Last updated: May 2026 */

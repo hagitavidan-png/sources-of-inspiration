@@ -17,14 +17,14 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 
 /* Teacher Hero */
 .teacher-hero{background:linear-gradient(155deg,#f7f6f2 0%,#eef0f5 100%);padding:140px 0 80px;position:relative;overflow:hidden}
-.teacher-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(201,168,76,.1) 0%,transparent 60%)}
-.teacher-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(63,168,200,.06) 0%,transparent 60%)}
+.teacher-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(201,168,76,.1) 0%,transparent 60%);pointer-events:none}
+.teacher-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(63,168,200,.06) 0%,transparent 60%);pointer-events:none}
 .teacher-hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .th-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:6px 16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-dk);margin-bottom:24px}
 .teacher-hero h1{font-size:clamp(2rem,4vw,3.2rem);color:#0d0d1a;margin-bottom:20px;line-height:1.15}
 .teacher-hero h1 em{font-style:normal;color:var(--gold-dk)}
 .teacher-hero p{font-size:1.05rem;color:rgba(13,13,26,.6);line-height:1.8;margin-bottom:32px;max-width:480px}
-.th-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.th-ctas{display:flex;gap:14px;flex-wrap:wrap;max-width:100%;overflow:visible;box-sizing:border-box}
 
 /* Hero visual / stats card */
 .th-visual{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:32px;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
@@ -199,6 +199,23 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 .final-cta p{font-size:1rem;color:var(--gray-700);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
 .final-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
+/* RTL support — desktop defaults */
+[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
+/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly. */
+[dir="rtl"] .teacher-hero .container { direction: rtl; }
+[dir="rtl"] .th-left { text-align: right; }
+[dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
+[dir="rtl"] .section-header { text-align: center; }
+[dir="rtl"] .benefits-grid { direction: rtl; }
+[dir="rtl"] .benefit-card { text-align: right; }
+[dir="rtl"] .how-steps { direction: rtl; }
+[dir="rtl"] .cd-grid { direction: rtl; }
+[dir="rtl"] .pricing-cards { direction: rtl; }
+[dir="rtl"] .testimonials-grid { direction: rtl; }
+[dir="rtl"] .testimonial-card { text-align: right; }
+[dir="rtl"] .faq-q { flex-direction: row-reverse; }
+[dir="rtl"] .footer-grid { direction: rtl; }
+
 /* Responsive */
 @media(max-width:1024px){
   .teacher-hero .container{grid-template-columns:1fr;gap:40px}
@@ -213,6 +230,9 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 }
 @media(max-width:768px){
   .teacher-hero{padding:120px 0 64px}
+  /* On mobile, th-left spans full width — center the CTA buttons */
+  .th-ctas{justify-content:center}
+  [dir="rtl"] .th-ctas { justify-content: center; }
   .benefits-grid{grid-template-columns:1fr}
   .how-steps{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
@@ -221,24 +241,6 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
   .testimonials-grid{grid-template-columns:1fr}
   .th-stats{grid-template-columns:1fr 1fr}
 }
-
-/* RTL support */
-[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
-/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly.
-   Reversing .nav-actions again pushes the EN button off-screen on tablet/mobile.   */
-[dir="rtl"] .teacher-hero .container { direction: rtl; }
-[dir="rtl"] .th-left { text-align: right; }
-[dir="rtl"] .th-ctas { justify-content: flex-start; flex-direction: row-reverse; }
-[dir="rtl"] .section-header { text-align: right; }
-[dir="rtl"] .benefits-grid { direction: rtl; }
-[dir="rtl"] .benefit-card { text-align: right; }
-[dir="rtl"] .how-steps { direction: rtl; }
-[dir="rtl"] .cd-grid { direction: rtl; }
-[dir="rtl"] .pricing-cards { direction: rtl; }
-[dir="rtl"] .testimonials-grid { direction: rtl; }
-[dir="rtl"] .testimonial-card { text-align: right; }
-[dir="rtl"] .faq-q { flex-direction: row-reverse; }
-[dir="rtl"] .footer-grid { direction: rtl; }
 [dir="rtl"] #mobile-menu { direction: rtl; }
 
 /* ── DARK MODE ── */
@@ -250,8 +252,10 @@ body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;ba
 body.dark #nav-hamburger span,body.dark .hamburger span{background:#e8e6e1 !important}
 body.dark #mobile-menu{background:rgba(15,15,18,.98) !important;border-color:rgba(255,255,255,.07) !important}
 body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
-/* Light sections */
-body.dark .teacher-hero,
+/* Dark mode backgrounds */
+/* Hero gets same deep navy gradient as index hero */
+body.dark .teacher-hero { background: linear-gradient(155deg, #0d0d18 0%, #111124 60%, #0f0f1a 100%) !important; }
+/* Other sections get dark background */
 body.dark .benefits-section,
 body.dark .how-works,
 body.dark .preview-section,
@@ -259,7 +263,7 @@ body.dark .testimonials,
 body.dark .faq-section,
 body.dark .pricing-section,
 body.dark .trial-section,
-body.dark section{background:#0f0f12 !important}
+body.dark section { background: #0f0f12 !important; }
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
 body.dark p,body.dark .unit-desc,body.dark .teacher-hero p,body.dark .benefit-card p{color:rgba(232,230,225,.58) !important}
 body.dark .th-visual,body.dark .benefit-card,body.dark .how-step,body.dark .testi-card,body.dark .faq-item,body.dark .pricing-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
@@ -288,7 +292,7 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <div class="nav-logo-mark">✦</div>
-      <span>Sources of Inspiration</span>
+      <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
     </a>
     <div class="nav-links">
       <a href="course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
@@ -299,10 +303,11 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
     <div class="nav-actions">
       <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
       <a href="#trial" class="btn btn-gold btn-sm" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
-      <div id="nav-lang-toggle" style="display:flex;gap:4px;align-items:center;margin-left:8px">
-        <button id="btn-en" class="active" onclick="setLang('en')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">EN</button>
-        <button id="btn-he" onclick="setLang('he')" style="padding:5px 11px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;color:rgba(13,13,26,.5);font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit">עברית</button>
+      <div id="nav-lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-he" onclick="setLang('he')">עברית</button>
       </div>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
     </div>
     <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -313,11 +318,11 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
   <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
   <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
   <div class="mob-actions">
-    <a href="#trial" class="btn btn-gold btn-sm" style="flex:1;justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
+    <a href="#trial" class="btn btn-gold btn-sm" style="justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
   </div>
-  <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
-    <button id="mob-btn-en" onclick="setLang('en')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">EN</button>
-    <button id="mob-btn-he" onclick="setLang('he')" style="padding:6px 16px;border-radius:20px;border:1px solid rgba(0,0,0,.2);background:transparent;color:rgba(13,13,26,.7);font-size:.8rem;font-weight:700;cursor:pointer">עברית</button>
+  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
+    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
+    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
   </div>
 </div>
 
