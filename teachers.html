@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <style>
 /* ── MOBILE VIEWPORT / RTL BIDI-SHIFT FIX ── */
-html { overflow-x: hidden !important; overflow-y: scroll !important; width: 100% !important; max-width: 100% !important; }
+html { overflow-x: hidden !important; overflow-y: scroll !important; width: 100% !important; max-width: 100% !important; scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h, 72px) + 16px); }
 body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !important; position: relative; left: 0 !important; right: 0 !important; }
 /* ── Page-specific styles ── */
 
@@ -122,8 +122,8 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 .price-cta-ghost:hover{background:rgba(0,0,0,.08);color:var(--ink)}
 
 /* Comparison table */
-.compare-section{padding:64px 0 80px;background:#f7f6f2}
-.compare-table{width:100%;border-collapse:collapse;margin-top:40px}
+.compare-section{padding:64px 0 80px;background:#f7f6f2;overflow-x:hidden}
+.compare-table{width:100%;max-width:100%;border-collapse:collapse;margin-top:40px;box-sizing:border-box}
 .compare-table th{padding:14px 20px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(13,13,26,.4);border-bottom:1px solid rgba(0,0,0,.08)}
 .compare-table th:not(:first-child){text-align:center}
 .compare-table td{padding:16px 20px;border-bottom:1px solid rgba(0,0,0,.05);font-size:.88rem;color:var(--gray-700)}
@@ -250,7 +250,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 
 /* ── DARK MODE ── */
 body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
-body.dark nav#nav{background:rgba(15,15,18,.97) !important;border-bottom-color:rgba(255,255,255,.07) !important}
+body.dark nav#nav{background:color-mix(in srgb, var(--color-bg-primary) 97%, transparent) !important;border-bottom-color:rgba(255,255,255,.07) !important}
 body.dark .nav-logo,body.dark .nav-logo span{color:#e8e6e1 !important}
 body.dark .nav-link{color:rgba(232,230,225,.45) !important}
 body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;background:rgba(255,255,255,.06) !important}
@@ -645,7 +645,7 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
       <div class="section-tag" style="color:var(--gold-lt)" data-en="✦ Compare Plans" data-he="✦ השוואת תכניות">✦ Compare Plans</div>
       <h2 data-en="Full Feature Comparison" data-he="השוואת תכונות מלאה">Full Feature Comparison</h2>
     </div>
-    <div style="overflow-x:auto" class="fade-up">
+    <div style="overflow-x:auto; max-width:100%; box-sizing:border-box;" class="fade-up">
       <table class="compare-table">
         <thead>
           <tr>
