@@ -15,11 +15,12 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
 textarea{font-family:inherit;outline:none;border:none;resize:none}
 
 :root{
-  --gold:#c9a96e;
-  --rose:#FF4D4D;
+  --gold:#c9a84c;
+  --gold-dk:#9a7a2e;
+  --rose:#e85d75;
   --violet:#7c6fcd;
-  --ink:#0f0f10;
-  --u1:#FF4D4D;
+  --ink:#0d0d1a;
+  --u1:#e85d75;
   --speed:600ms;
   --tp:#ffffff;
   --ts:#cfcfcf;
@@ -233,7 +234,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 }
 .artwork-card img.broken{
   min-height:120px;
-  background:linear-gradient(135deg,#1a1a2e,#2a1a3e);
+  background:linear-gradient(135deg,#111124,#0f0f1a);
 }
 .artwork-meta{
   margin-top:8px;
@@ -291,7 +292,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   transform:translateY(-2px);
 }
 .emotion-chip.picked{
-  background:rgba(255,77,77,.15);
+  background:rgba(201,168,76,.18);
   border-color:var(--rose);
   transform:translateY(-2px);
   box-shadow:0 6px 20px rgba(0,0,0,.25);
@@ -366,7 +367,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   transform:translateY(-1px);
 }
 .select-card.picked{
-  background:rgba(255,77,77,.13);
+  background:rgba(201,168,76,.15);
   border-color:var(--rose);
   box-shadow:0 4px 18px rgba(0,0,0,.2);
 }
@@ -436,14 +437,14 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   display:flex;gap:10px;justify-content:center;
   flex-wrap:wrap;margin-top:18px;flex-shrink:0;
 }
-.btn-primary{
+.btn-primary-red-UNUSED{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 26px;border-radius:12px;
-  background:#FF4D4D;color:#fff;
+  background:linear-gradient(135deg,var(--gold),#e8c460);color:#0d0d1a;
   font-size:.88rem;font-weight:700;
   text-decoration:none;transition:.2s;
 }
-.btn-primary:hover{background:#e03333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,77,.32)}
+.btn-primary-red-UNUSED:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.35)}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 22px;border-radius:12px;
@@ -475,7 +476,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 /* #hud-back svg mirror set by html[lang] rule in lesson-responsive.css */
 #hud-badge{
   padding:4px 11px;border-radius:20px;
-  background:rgba(255,77,77,.1);color:#FF4D4D;
+  background:rgba(201,168,76,.15);color:var(--gold);
   font-size:.65rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.07em;
   flex-shrink:0;
@@ -564,15 +565,15 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 
 #next-btn{
   padding:14px 48px;
-  background:#FF4D4D;
-  color:#fff;
+  background:linear-gradient(135deg,var(--gold),#e8c460);
+  color:#0d0d1a;
   font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;
   border-radius:50px;letter-spacing:.03em;
-  box-shadow:0 8px 32px rgba(255,77,77,.32);
+  box-shadow:0 8px 32px rgba(201,168,76,.35);
   transition:all .25s;
   white-space:nowrap;
 }
-#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:hover{filter:brightness(1.08);transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,168,76,.45)}
 #next-btn:active{transform:translateY(0)}
 
 /* ════════════════════════════════
