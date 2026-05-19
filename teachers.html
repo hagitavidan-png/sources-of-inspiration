@@ -204,6 +204,11 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 /* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly. */
 [dir="rtl"] .teacher-hero .container { direction: rtl; }
 [dir="rtl"] .th-left { text-align: right; }
+/* Hero heading always centered; body text right in RTL */
+[dir="rtl"] .teacher-hero h1,
+[dir="rtl"] .teacher-hero h2 { text-align: center; }
+.teacher-hero h1,
+.teacher-hero h2 { text-align: center; }
 [dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
 [dir="rtl"] .section-header { text-align: center; }
 [dir="rtl"] .benefits-grid { direction: rtl; }
@@ -244,7 +249,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 [dir="rtl"] #mobile-menu { direction: rtl; }
 
 /* ── DARK MODE ── */
-body.dark{background:#0f0f12 !important;color:#e8e6e1}
+body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
 body.dark nav#nav{background:rgba(15,15,18,.97) !important;border-bottom-color:rgba(255,255,255,.07) !important}
 body.dark .nav-logo,body.dark .nav-logo span{color:#e8e6e1 !important}
 body.dark .nav-link{color:rgba(232,230,225,.45) !important}
@@ -263,7 +268,7 @@ body.dark .testimonials,
 body.dark .faq-section,
 body.dark .pricing-section,
 body.dark .trial-section,
-body.dark section { background: #0f0f12 !important; }
+body.dark section { background: var(--color-bg-primary) !important; }
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
 body.dark p,body.dark .unit-desc,body.dark .teacher-hero p,body.dark .benefit-card p{color:rgba(232,230,225,.58) !important}
 body.dark .th-visual,body.dark .benefit-card,body.dark .how-step,body.dark .testi-card,body.dark .faq-item,body.dark .pricing-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}

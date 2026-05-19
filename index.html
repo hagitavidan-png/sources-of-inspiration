@@ -30,7 +30,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 
 /* ── DARK MODE ── */
-body.dark{background:#0f0f12 !important;color:#e8e6e1}
+body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
 body.dark #site-header,
 body.dark nav#nav{background:rgba(15,15,18,.97) !important;border-bottom-color:rgba(255,255,255,.07) !important}
 body.dark .nav-logo,
@@ -42,12 +42,12 @@ body.dark #mobile-menu{background:rgba(15,15,18,.98) !important;border-bottom-co
 body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
 /* ── Sections: force dark backgrounds ── */
 body.dark #units,body.dark #why{background:#111118 !important}
-body.dark #lesson-preview,body.dark #pricing{background:#0f0f12 !important}
+body.dark #lesson-preview,body.dark #pricing{background:var(--color-bg-primary) !important}
 body.dark #testimonials{background:#111118 !important}
 body.dark #cta{background:linear-gradient(135deg,#111118 0%,#0f0f1a 100%) !important;border-top-color:rgba(255,255,255,.07) !important}
 /* Light sections (legacy IDs) */
 body.dark #about,body.dark #main-quote,body.dark .benefits-section,
-body.dark .how-works,body.dark #lessons{background:#0f0f12 !important}
+body.dark .how-works,body.dark #lessons{background:var(--color-bg-primary) !important}
 body.dark #about *,body.dark .about-text p{color:rgba(232,230,225,.6) !important}
 /* Typography */
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
@@ -117,7 +117,7 @@ body.dark .cs-label,.dark .stat-label{color:rgba(232,230,225,.4) !important}
       <a href="course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
       <a href="lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
       <a href="teachers.html" class="nav-link" data-en="For Teachers" data-he="למורים">For Teachers</a>
-      <a href="index.html#pricing" class="nav-link" data-en="Pricing" data-he="מחירון">Pricing</a>
+      <a href="#pricing" class="nav-link" data-en="Pricing" data-he="מחירון">Pricing</a>
     </div>
     <div class="nav-actions">
       <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
@@ -136,7 +136,7 @@ body.dark .cs-label,.dark .stat-label{color:rgba(232,230,225,.4) !important}
   <a href="course.html" data-en="The Course" data-he="הקורס">The Course</a>
   <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
   <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
-  <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+  <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
   <div class="mob-actions">
     <a href="teachers.html#trial" class="btn btn-gold btn-sm" style="justify-content:center" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
   </div>
@@ -708,7 +708,7 @@ body.dark .cs-label,.dark .stat-label{color:rgba(232,230,225,.4) !important}
       <div class="footer-col">
         <h4 data-en="Schools" data-he="בתי ספר">Schools</h4>
         <div class="footer-links">
-          <a href="index.html#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
+          <a href="#pricing" data-en="Pricing" data-he="מחירון">Pricing</a>
           <a href="teachers.html#trial" data-en="Free Trial" data-he="התנסות חינם">Free Trial</a>
           <a href="teachers.html#contact" data-en="Book Demo" data-he="קבע הדגמה">Book Demo</a>
         </div>
@@ -762,6 +762,24 @@ if('IntersectionObserver' in window){
 } else {
   document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
 }
+
+// Smooth scroll for all in-page anchor links (#section)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const navEl = document.getElementById('nav');
+      const navH  = navEl ? navEl.getBoundingClientRect().height : 72;
+      const top   = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+      // Close mobile menu if open
+      const burger = document.getElementById('nav-hamburger');
+      const mobMenu = document.getElementById('mobile-menu');
+      if(burger && mobMenu){ burger.classList.remove('open'); mobMenu.classList.remove('open'); }
+    }
+  });
+});
 </script>
 
 </body>

@@ -64,9 +64,19 @@ body.dark .lang-toggle button:hover:not(.active) { color:#e8e6e1; border-color:r
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 [dir="rtl"] .nav-links { flex-direction: row-reverse; }
 [dir="rtl"] .hero-grid { direction: rtl; }
-/* Hero text: right-aligned on DESKTOP (2-col layout).
-   On mobile (single col) these are overridden to center in the @media ≤768px block. */
+/* Hero headings (h1, h2, .hero-title, .hero-subtitle): ALWAYS centered in both languages.
+   Body text (p, .hero-desc): right-aligned in RTL, left-aligned in LTR.
+   On mobile (≤768px) everything is overridden to center (see @media block below). */
 [dir="rtl"] .hero-text    { text-align: right; }
+[dir="rtl"] .hero-text h1,
+[dir="rtl"] .hero-text h2,
+[dir="rtl"] .hero-title,
+[dir="rtl"] .hero-subtitle { text-align: center; }
+/* LTR (default): hero headings also centered */
+.hero-text h1,
+.hero-text h2,
+.hero-title,
+.hero-subtitle { text-align: center; }
 [dir="rtl"] .hero-eyebrow { justify-content: flex-end; }
 [dir="rtl"] .hero-cta     { justify-content: flex-end; }
 [dir="rtl"] .hero-proof   { flex-direction: row-reverse; justify-content: flex-end; }

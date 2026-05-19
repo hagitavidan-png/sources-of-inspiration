@@ -13,6 +13,8 @@
 /* ── RESET & BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
+/* Prevent horizontal overflow / page cutoff */
+html, body { overflow-x: hidden !important; max-width: 100% !important; }
 
 /* ── SCROLL OFFSET — sticky nav + tabs compensation ──
    Unit sections scroll to precisely below the sticky header + tabs bar. */
@@ -32,6 +34,10 @@ html{scroll-behavior:smooth;font-size:16px}
 [dir="rtl"] .artist-spotlight{direction:rtl}
 [dir="rtl"] .footer-inner{direction:rtl}
 [dir="rtl"] .lesson-row:hover{transform:translateX(-3px)}
+/* Hero heading always centered; body p right-aligned in RTL */
+[dir="rtl"] .course-hero h1,
+[dir="rtl"] .course-hero h2 { text-align: center; }
+[dir="rtl"] .course-hero p  { text-align: right; }
 
 /* ── HERO ── */
 .course-hero{
@@ -302,7 +308,7 @@ footer{background:#f0ede6;border-top:1px solid rgba(0,0,0,.08);padding:60px 0 40
 }
 
 /* ── DARK MODE ── */
-body.dark{background:#0f0f12;color:#e8e6e1}
+body.dark{background:var(--color-bg-primary);color:#e8e6e1}
 /* Hero */
 body.dark .course-hero{background:linear-gradient(160deg,#0d0d18 0%,#111124 60%,#0f0f1a 100%)}
 body.dark .course-hero h1{color:#e8e6e1}
