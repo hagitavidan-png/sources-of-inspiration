@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -765,20 +765,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
   }
 
-  // Smooth scroll for all in-page anchor links (#section)
+  // Close mobile menu on any in-page anchor click
   document.addEventListener('click', function(e) {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
     const burger = document.getElementById('nav-hamburger');
     const mobMenu = document.getElementById('mobile-menu');
     if (burger && mobMenu) {
       burger.classList.remove('open');
       mobMenu.classList.remove('open');
     }
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // scroll-behavior:smooth on <html> handles the smooth scroll — no JS needed
   });
 
 }); // end DOMContentLoaded
