@@ -771,10 +771,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!a) return;
     const burger = document.getElementById('nav-hamburger');
     const mobMenu = document.getElementById('mobile-menu');
-    if (burger && mobMenu) {
-      burger.classList.remove('open');
-      mobMenu.classList.remove('open');
-    }
+    if (burger) burger.classList.remove('open');
+    if (mobMenu) mobMenu.classList.remove('open');
     // scroll-behavior:smooth on <html> handles the smooth scroll — no JS needed
   });
 
