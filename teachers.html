@@ -204,6 +204,11 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 /* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly. */
 [dir="rtl"] .teacher-hero .container { direction: rtl; }
 [dir="rtl"] .th-left { text-align: right; }
+/* Hero heading always centered; body text right in RTL */
+[dir="rtl"] .teacher-hero h1,
+[dir="rtl"] .teacher-hero h2 { text-align: center; }
+.teacher-hero h1,
+.teacher-hero h2 { text-align: center; }
 [dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
 [dir="rtl"] .section-header { text-align: center; }
 [dir="rtl"] .benefits-grid { direction: rtl; }
