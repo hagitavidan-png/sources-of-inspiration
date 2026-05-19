@@ -30,7 +30,7 @@ body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !i
 [dir="rtl"] .nav-inner { flex-direction: row-reverse; }
 
 /* ── DARK MODE ── */
-body.dark{background:#0f0f12 !important;color:#e8e6e1}
+body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
 body.dark #site-header,
 body.dark nav#nav{background:rgba(15,15,18,.97) !important;border-bottom-color:rgba(255,255,255,.07) !important}
 body.dark .nav-logo,
@@ -42,12 +42,12 @@ body.dark #mobile-menu{background:rgba(15,15,18,.98) !important;border-bottom-co
 body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
 /* ── Sections: force dark backgrounds ── */
 body.dark #units,body.dark #why{background:#111118 !important}
-body.dark #lesson-preview,body.dark #pricing{background:#0f0f12 !important}
+body.dark #lesson-preview,body.dark #pricing{background:var(--color-bg-primary) !important}
 body.dark #testimonials{background:#111118 !important}
 body.dark #cta{background:linear-gradient(135deg,#111118 0%,#0f0f1a 100%) !important;border-top-color:rgba(255,255,255,.07) !important}
 /* Light sections (legacy IDs) */
 body.dark #about,body.dark #main-quote,body.dark .benefits-section,
-body.dark .how-works,body.dark #lessons{background:#0f0f12 !important}
+body.dark .how-works,body.dark #lessons{background:var(--color-bg-primary) !important}
 body.dark #about *,body.dark .about-text p{color:rgba(232,230,225,.6) !important}
 /* Typography */
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}

@@ -35,7 +35,8 @@
 
   /* ── COLORS — DARK MODE ─────────────────────────────────── */
 
-  --dark-bg:          #0f0f12;   /* Main dark background */
+  --color-bg-primary: #0f0f12;   /* ★ Canonical dark bg — use instead of #000/#0f0f0f/black */
+  --dark-bg:          #0f0f12;   /* alias → same value */
   --dark-bg-alt:      #111118;   /* Alternate dark section */
   --dark-bg-card:     #161620;   /* Card background in dark mode */
   --dark-bg-elevated: #1c1c28;   /* Elevated element (stat boxes etc) */
