@@ -19,6 +19,23 @@
     return el;
   }
   function paragraph(parent, text, className='stage-copy') { parent.append(element('p',className,t(text))); }
+  function artworks(parent, items) {
+    if (!items?.length) return;
+    const gallery=element('div','flow-gallery');
+    items.forEach(art=>{
+      const figure=element('figure','flow-art');
+      const link=element('a','flow-art-link');link.href=art.src;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label',ui('הגדלת היצירה: ','Enlarge artwork: ')+t(art.alt));
+      const img=document.createElement('img');img.src=art.src;img.alt=t(art.alt);img.loading='lazy';img.decoding='async';
+      img.addEventListener('error',()=>{img.hidden=true;figure.classList.add('image-unavailable');link.append(element('span','flow-image-error',ui('התמונה לא נטענה. פתיחת מקור התמונה','Image did not load. Open image source')));});
+      link.append(img);const caption=element('figcaption','',t(art.caption));
+      if(art.sourceHref){const source=element('a','flow-art-source',ui('ליצירה באתר המוזיאון','View artwork at the museum'));source.href=art.sourceHref;source.target='_blank';source.rel='noopener';caption.append(source);}
+      figure.append(link,caption);gallery.append(figure);
+    });parent.append(gallery);
+  }
+  function quote(parent, item) {
+    if (!item) return;
+    const block=element('blockquote','flow-quote');paragraph(block,item.text,'');block.append(element('cite','',t(item.author)));parent.append(block);
+  }
   function palette(editable) {
     const grid = element('div','emotion-palette');
     state.emotions.forEach(id => {
@@ -76,12 +93,22 @@
       figure.append(img,element('figcaption','',t(current.artwork.caption)));stage.append(figure);
     }
     (current.paragraphs||[]).forEach(p=>paragraph(stage,p));
+    artworks(stage,current.artworks);
+    (current.sections||[]).forEach(section=>{
+      const block=element('section','flow-section');
+      if(section.heading)block.append(element('h2','',t(section.heading)));
+      (section.paragraphs||[]).forEach(p=>paragraph(block,p));
+      artworks(block,section.artworks);
+      if(section.list?.length){const ul=element('ul','flow-prompts');section.list.forEach(p=>ul.append(element('li','',t(p))));block.append(ul);}
+      quote(block,section.quote);stage.append(block);
+    });
+    quote(stage,current.quote);
     if(current.id==='opening'){
       const meta=element('dl','flow-meta');
       [[ui('זמן השיעור','Lesson time'),data.time],[ui('מה להכין','What to prepare'),data.materials]].forEach(([label,value])=>{const row=element('div');row.append(element('dt','',label),element('dd','',t(value)));meta.append(row);});stage.append(meta);
     }
     if(current.interaction==='emotion')emotionActivity();
-    if(['create','reflect'].includes(current.id)&&state.emotions.length)stage.append(palette(false));
+    if(current.interaction!=='emotion'&&['create','reflect'].includes(current.id)&&state.emotions.length)stage.append(palette(false));
     if(current.checklist?.length){
       const checklist=element('div','flow-checklist');
       current.checklist.forEach((text,index)=>{const id=current.id+'-'+index;const label=element('label');const input=document.createElement('input');input.type='checkbox';input.checked=!!state.checks[id];input.addEventListener('change',()=>state.checks[id]=input.checked);label.append(input,element('span','',t(text)));checklist.append(label);});stage.append(checklist);

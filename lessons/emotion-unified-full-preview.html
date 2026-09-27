@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no" class="notranslate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="noindex">
+  <title>רגש כמקור השראה | טיוטה מאוחדת מלאה</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/lesson-flow.css?v=20260927-full">
+</head>
+<body class="dark lesson-preview">
+  <script src="../js/app-init.js?v=20260927-structure"></script>
+  <header class="flow-header">
+    <a class="flow-return" href="../course.html#unit01"><span aria-hidden="true">↗</span><span data-he="ליחידה" data-en="Unit menu">ליחידה</span></a>
+    <div class="flow-language" role="group" aria-label="Language">
+      <button id="btn-he" type="button" onclick="setLang('he')">עברית</button>
+      <button id="btn-en" type="button" onclick="setLang('en')">EN</button>
+    </div>
+    <details class="flow-context">
+      <summary data-he="☰ ניווט" data-en="☰ Menu">☰ ניווט</summary>
+      <nav aria-label="Site navigation">
+        <a href="../index.html" data-he="דף הבית" data-en="Home">דף הבית</a>
+        <a href="../course.html#unit01" data-he="תפריט היחידה" data-en="Unit menu">תפריט היחידה</a>
+        <a href="emotion-unified-preview.html" data-he="לטיוטה הראשונה" data-en="First draft">לטיוטה הראשונה</a>
+        <a href="../course.html" data-he="תכנית הלימודים" data-en="Curriculum">תכנית הלימודים</a>
+        <button id="flow-theme" type="button" onclick="toggleTheme()" data-he="החלפת מצב תצוגה" data-en="Switch colour theme">החלפת מצב תצוגה</button>
+      </nav>
+    </details>
+  </header>
+  <div class="flow-layout">
+    <aside class="flow-outline" aria-labelledby="outline-title">
+      <p class="flow-eyebrow" data-he="טיוטה 2: שיעור מאוחד" data-en="Draft 2: combined lesson">טיוטה 2: שיעור מאוחד</p>
+      <h2 id="outline-title" data-he="מסלול השיעור" data-en="Lesson journey">מסלול השיעור</h2>
+      <ol id="stage-list"></ol>
+    </aside>
+    <main id="flow-main">
+      <div class="flow-mobile-steps">
+        <label for="stage-select" data-he="שלבי השיעור" data-en="Lesson stages">שלבי השיעור</label>
+        <select id="stage-select"></select>
+      </div>
+      <p id="flow-lesson-name"></p>
+      <div class="flow-position"><span id="stage-count"></span><span class="flow-draft" data-he="טיוטה 2: שיעור מאוחד" data-en="Draft 2: combined lesson">טיוטה 2: שיעור מאוחד</span></div>
+      <progress id="flow-progress" max="6" value="1" aria-label="Lesson progress"></progress>
+      <article id="flow-stage" aria-labelledby="stage-title"></article>
+      <footer class="flow-controls">
+        <button id="flow-prev" type="button"></button>
+        <button id="flow-next" type="button"></button>
+        <a id="flow-finish" href="../course.html#unit01" hidden data-he="סיום וחזרה ליחידה" data-en="Finish and return to unit">סיום וחזרה ליחידה</a>
+      </footer>
+      <details class="flow-sources">
+        <summary data-he="למערכים המקוריים" data-en="Original lesson plans">למערכים המקוריים</summary>
+        <div id="flow-source-links"></div>
+      </details>
+    </main>
+  </div>
+  <noscript><p>כדי לפתוח את טיוטת השיעור יש להפעיל JavaScript. <a href="lesson-02.html">למערך המקורי</a></p></noscript>
+  <script src="../data/emotion-unified-full-preview.js?v=20260927-full"></script>
+  <script src="../js/lesson-flow.js?v=20260927-full"></script>
+</body>
+</html>

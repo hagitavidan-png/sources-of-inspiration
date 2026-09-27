@@ -51,6 +51,18 @@ progress::-moz-progress-bar { background:var(--gold); }
 .flow-art { margin:0 0 28px; border:1px solid var(--line); padding:16px; border-radius:18px; background:var(--surface); }
 .flow-art img { display:block; max-width:100%; max-height:470px; width:auto; height:auto; margin:auto; border-radius:8px; }
 .flow-art figcaption { margin-top:14px; color:var(--muted); font-size:15px; text-align:center; }
+.flow-section { margin-block:30px; padding-block-start:24px; border-top:1px solid var(--line); }
+.flow-section h2 { font-size:26px; line-height:1.4; margin:0 0 18px; }
+.flow-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-block:24px; }
+.flow-gallery .flow-art { min-width:0; margin:0; padding:12px; }
+.flow-gallery img { max-height:320px; }
+.flow-gallery .flow-art-link { display:grid; place-items:center; min-height:180px; text-decoration:none; }
+.flow-art-source { display:block; padding:10px 0 0; min-height:44px; }
+.flow-image-error { display:block; padding:24px 12px; font-size:16px; color:var(--muted); text-decoration:underline; }
+.flow-gallery .image-unavailable .flow-art-link { min-height:44px; }
+.flow-quote { margin:28px 0; padding:20px 24px; border-inline-start:3px solid var(--gold); background:var(--surface); border-radius:8px; }
+.flow-quote p { font-size:21px; }
+.flow-quote cite { font-size:16px; color:var(--muted); }
 .flow-prompts { border-inline-start:3px solid var(--gold); padding-inline-start:24px; margin:26px 0; }
 .flow-prompts li { margin-block:10px; padding-inline-start:4px; }
 .flow-extension,.flow-sources { margin:24px 0; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
@@ -96,4 +108,5 @@ progress::-moz-progress-bar { background:var(--gold); }
   .flow-context > summary { padding-inline:4px; }
   .flow-controls :is(button,a) { padding-inline:14px; font-size:16px; }
 }
+@media(max-width:600px) { .flow-gallery { grid-template-columns:1fr; } }
 @media(prefers-reduced-motion:reduce) { * { scroll-behavior:auto; } }
