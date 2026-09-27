@@ -279,6 +279,10 @@ body:not(.dark) #hero {
 .hb2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(201,168,76,.18), transparent); bottom: -100px; left: -100px; }
 .hb3 { width: 400px; height: 400px; background: radial-gradient(circle, var(--gold), transparent); top: 30%; left: 40%; opacity: .1; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 100px 0; position: relative; z-index: 2; }
+/* This container is a flex item: an automatic width can retain the
+   grid's intrinsic width and overflow a narrow viewport in either direction. */
+#hero > .container { width: 100%; min-width: 0; }
+.hero-grid > * { min-width: 0; }
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.3); color: var(--gold); padding: 7px 16px; border-radius: 20px; font-size: .8rem; font-weight: 700; margin-bottom: 28px; letter-spacing: .06em; text-transform: uppercase; }
 body:not(.dark) .hero-eyebrow { color: var(--gold-dk); }
 .hero-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse-dot 2s infinite; }
@@ -817,10 +821,12 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   }
 
   /* Nav */
-  .nav-inner   { gap: 0; padding: 0 16px; justify-content: space-between; }
-  .nav-logo    { flex-shrink: 0; }
+  .nav-inner   { gap: 10px; padding: 0 16px; justify-content: space-between; }
+  .nav-logo    { flex: 1 1 0; min-width: 0; gap: 6px; font-size: .75rem; line-height: 1.25; }
+  .nav-logo-mark { flex-shrink: 0; width: 28px; height: 28px; }
+  .nav-logo > span { min-width: 0; overflow-wrap: anywhere; }
   .nav-links   { display: none !important; }
-  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; }
+  .nav-actions { gap: 8px; flex-shrink: 0; display: flex !important; align-items: center; margin: 0; }
   .nav-actions > a.btn { display: none !important; }
 
   /* Both lang buttons always visible on mobile */
@@ -838,7 +844,7 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
     min-width: 28px;
     white-space: nowrap;
   }
-  #nav-hamburger { display: flex !important; margin-left: 6px; }
+  #nav-hamburger { display: flex !important; margin: 0; }
 
   /* Hero */
   #hero { min-height: auto !important; height: auto !important; overflow: hidden; align-items: flex-start; }
@@ -846,8 +852,10 @@ body.dark .footer-social:hover { background: var(--gold) !important; color: var(
   .hero-badge,
   .hero-badge-1,
   .hero-badge-2 { display: none !important; visibility: hidden !important; position: static !important; }
-  .hero-grid    { grid-template-columns: 1fr; gap: 0; padding: 60px 0 56px; align-items: start; }
-  .hero-text    { text-align: center; }
+  .hero-grid    { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 60px 0 56px; align-items: start; }
+  .hero-text, [dir="rtl"] .hero-text { text-align: center; }
+  .hero-eyebrow { max-width: 100%; }
+  .hero-dot { flex-shrink: 0; }
   .hero-eyebrow { justify-content: center; }
   .hero-cta     { justify-content: center; flex-wrap: wrap; gap: 10px; }
   .hero-proof   { justify-content: center; gap: 20px; }
