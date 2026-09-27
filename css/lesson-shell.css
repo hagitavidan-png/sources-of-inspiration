@@ -1,0 +1,43 @@
+/* One shared shell; important overrides retire the older per-lesson rules. */
+html body.lesson-shell { --nav-h:104px; --bar-h:96px; }
+html body.lesson-shell #hud { box-sizing:border-box; position:fixed; top:0; inset-inline:0; z-index:100; height:104px!important; display:grid!important; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:44px 36px; align-content:center; align-items:center; gap:4px 12px!important; padding:8px 16px!important; background:#0d0d1a; border-bottom:1px solid #ffffff12; }
+html body.lesson-shell #hud-back { grid-area:1/1; display:inline-flex; align-items:center; gap:6px; min-width:0; font-size:14px!important; color:#d6d3cc; text-decoration:none; }
+html body.lesson-shell #hud :is(#hud-lang,#lang-toggle) { grid-area:1/2; display:flex; gap:2px; border:0; background:#ffffff08; border-radius:10px; padding:0; margin:0; }
+html body.lesson-shell #hud .lang-btn { min-width:44px; min-height:44px; padding:6px 10px; border:0; border-radius:8px; font-size:14px!important; color:#cbc8c2; background:transparent; }
+html body.lesson-shell #hud .lang-btn.active { background:#c9a84c30; color:#e6c767; }
+html body.lesson-shell #hud-step { grid-area:2/1; justify-self:start; font-size:13px!important; color:#bdb9b0; margin:0; direction:ltr!important; }
+html body.lesson-shell #hud :is(#hud-badge,#hud-spacer) { display:none!important; }
+html body.lesson-shell #hud .shell-fullscreen { grid-area:2/2; position:static!important; justify-self:end; min-width:44px; min-height:36px; padding:4px 10px; border:0; border-radius:8px; color:#ccc; background:transparent; }
+html body.lesson-shell #hud .shell-fullscreen span { display:none; }
+html body.lesson-shell #lesson-intro { position:fixed; z-index:20; top:104px; bottom:calc(140px + env(safe-area-inset-bottom)); inset-inline:0; overflow-y:auto; padding:28px 20px; background:radial-gradient(ellipse at top,var(--intro-tint,#242033),#10101d 75%); color:#f2f0eb; }
+html body.lesson-shell .intro-inner { max-width:660px; margin-inline:auto; }
+html body.lesson-shell #lesson-intro * { box-sizing:border-box; direction:inherit!important; text-align:start!important; letter-spacing:normal!important; }
+html body.lesson-shell #lesson-intro .intro-unit { margin:0 0 12px; font-size:14px!important; line-height:1.65!important; color:#d7ba69; }
+html body.lesson-shell #lesson-intro h1 { margin:0 0 16px; font-size:clamp(26px,4vw,38px)!important; line-height:1.35!important; font-weight:700; }
+html body.lesson-shell #lesson-intro .intro-description { margin:0 0 22px; font-size:18px!important; line-height:1.7!important; color:#e0ddd6; }
+html body.lesson-shell .intro-details { margin:0; padding-top:16px; border-top:1px solid #c9a84c40; display:grid; gap:12px; }
+html body.lesson-shell .intro-details dt { font-size:13px!important; color:#d7ba69; margin-bottom:3px; }
+html body.lesson-shell .intro-details dd { margin:0; font-size:16px!important; line-height:1.6!important; color:#e0ddd6; }
+html body.lesson-shell #intro-start,html body.lesson-shell #next-btn { min-height:48px!important; min-width:140px; max-width:100%; padding:12px 26px!important; border:0; border-radius:28px; background:#d7b650!important; color:#17151d!important; box-shadow:none!important; font-size:18px!important; font-weight:700; cursor:pointer; }
+html body.lesson-shell #next-btn[data-shell-label] { font-size:0!important; }
+html body.lesson-shell #next-btn[data-shell-label] > * { display:none!important; }
+html body.lesson-shell #next-btn[data-shell-label]::after { content:attr(data-shell-label); font-size:18px; }
+html body.lesson-shell #nav-bar { box-sizing:border-box; position:fixed; inset-inline:0; bottom:calc(44px + env(safe-area-inset-bottom))!important; min-height:96px; display:flex; align-items:center; justify-content:center; gap:16px; padding:16px!important; background:#111118; z-index:50; }
+html body.lesson-intro-open #nav-bar > :not(#intro-start) { display:none!important; }
+html body.lesson-intro-open :is(#stage,#progress) { visibility:hidden!important; }
+html body.lesson-intro-open #stage * { visibility:hidden!important; }
+html body.lesson-shell [hidden] { display:none!important; }
+html[data-reading="article"] body.lesson-shell :is(#site-header,.lesson-hero,.lesson-progress-bar) { display:none!important; }
+html[data-reading="article"] body.lesson-intro-open :is(.lesson-body,footer) { display:none!important; }
+html[data-reading="article"] body.lesson-shell { padding-top:104px; }
+@media(min-width:700px){ html body.lesson-shell #lesson-intro { padding:40px 32px; } }
+@media(max-height:680px){ html body.lesson-shell #lesson-intro { padding:18px 16px; } html body.lesson-shell #lesson-intro h1 { font-size:26px!important; margin-bottom:10px; } html body.lesson-shell #lesson-intro .intro-description { font-size:17px!important; line-height:1.55!important; margin-bottom:14px; } }
+/* The shared counter replaces the different older dot/line indicators. */
+html body.lesson-shell :is(#progress,#prog,#prog-dots) { display:none!important; }
+html body.lesson-shell #lesson-intro h1 { color:#f2f0eb!important; }
+html body.lesson-shell #lesson-intro .intro-description { color:#e0ddd6!important; }
+html body.lesson-shell #lesson-intro .intro-unit { color:#d7ba69!important; }
+html body.lesson-shell #lesson-intro .intro-details dt { color:#d7ba69!important; }
+html body.lesson-shell #lesson-intro .intro-details dd { color:#e0ddd6!important; }
+html body.lesson-shell #hud [data-language="he"] { direction:rtl!important; text-align:center!important; }
+html body.lesson-shell #hud [data-language="en"] { direction:ltr!important; text-align:center!important; }
