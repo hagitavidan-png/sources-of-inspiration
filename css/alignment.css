@@ -1,0 +1,8 @@
+/* Reading direction for labels is separate from navigation layout. */
+html[lang="he"] :is(.nav-logo span, .footer-logo-text) { direction:rtl; unicode-bidi:isolate; }
+#btn-he, #mob-btn-he { direction:rtl !important; unicode-bidi:isolate; }
+#btn-en, #mob-btn-en { direction:ltr !important; unicode-bidi:isolate; }
+html[data-reading="article"] :is(.timer-clock,.timer-display) { direction:ltr !important; unicode-bidi:isolate; text-align:center !important; }
+html[data-reading="page"] :is(.faq-q, .compare-table th:first-child, .compare-table td:first-child) { text-align:start; }
+
+html[data-reading] bdi[dir="ltr"] { direction:ltr !important; unicode-bidi:isolate; }

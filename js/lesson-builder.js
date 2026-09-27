@@ -191,7 +191,7 @@
         html += `
         <div class="exercise-timer-wrap">
           <div class="exercise-timer-display">
-            <div class="timer-badge"><i class="fa-solid fa-stopwatch"></i> ${L(tLabel.he, tLabel.en)}</div>
+            <div class="timer-badge"><i class="fa-solid fa-stopwatch"></i> <span data-he="${safeAttr(tLabel.he)}" data-en="${safeAttr(tLabel.en)}">${L(tLabel.he, tLabel.en)}</span></div>
             <div class="timer-clock" data-seconds="${secs}">${mm}:${ss}</div>
           </div>
           <div class="timer-buttons">
@@ -222,7 +222,7 @@
         <div class="course-completion-block fade-in">
           <div class="completion-icon">🎉</div>
           <h2 data-he="${safeAttr(ct.he)}" data-en="${safeAttr(ct.en)}">${L(ct.he, ct.en)}</h2>
-          <p>${L(cx.he, cx.en)}</p>
+          <p data-he="${safeAttr(cx.he)}" data-en="${safeAttr(cx.en)}">${L(cx.he, cx.en)}</p>
           <div class="completion-links">
             ${(d.completionLinks || []).map(link => `
               <a href="${link.href}" target="_blank" class="completion-link">
@@ -236,10 +236,12 @@
     /* ציטוט */
     if (d.quote) {
       const q = d.quote;
+      const authorNames = {"פול סזאן": "Paul Cézanne", "חגית אבידן": "Hagit Avidan", "אלברכט דורר": "Albrecht Dürer", "רמברנדט ון ריין": "Rembrandt van Rijn", "אדוארד הופר": "Edward Hopper", "אדגר דגא": "Edgar Degas", "וסילי קנדינסקי": "Wassily Kandinsky", "פבלו פיקאסו": "Pablo Picasso", "קלוד מונה": "Claude Monet", "פרידה קאלו": "Frida Kahlo", "לאונרדו דה וינצ'י": "Leonardo da Vinci", "אנרי מאטיס": "Henri Matisse"};
+      const authorEn = d.quoteAuthorEn || authorNames[d.quoteAuthor] || d.quoteAuthor;
       html += `
         <div class="lesson-quote fade-in">
           <p class="lesson-quote-text" data-he="${safeAttr(q.he)}" data-en="${safeAttr(q.en)}">${L(q.he, q.en)}</p>
-          <p class="lesson-quote-author">${d.quoteAuthor || ''}</p>
+          <p class="lesson-quote-author" data-he="${safeAttr(d.quoteAuthor)}" data-en="${safeAttr(authorEn)}">${L(d.quoteAuthor, authorEn)}</p>
         </div>`;
     }
 
