@@ -1000,3 +1000,20 @@ body.dark #theme-toggle {
 [dir="rtl"] #cta .cta-btns { flex-direction: row-reverse; justify-content: center; }
 /* proof-item: flex-start so stats don't hug the right edge */
 [dir="rtl"] .proof-item { align-items: flex-start; }
+
+/* Responsive homepage and shared header: constrain content, not just overflow. */
+#hero > .container { width: 100%; min-width: 0; }
+.hero-grid > * { min-width: 0; }
+[dir="rtl"] #nav .nav-actions { flex-direction: row; }
+@media (max-width: 768px) {
+  #nav .nav-inner { direction: ltr; flex-direction: row; gap: 10px; padding: 0 16px; }
+  #nav .nav-logo { flex: 1 1 0; min-width: 0; max-width: none; gap: 6px; line-height: 1.25; }
+  #nav .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+  #nav .nav-logo span { white-space: normal; overflow: visible; overflow-wrap: anywhere; font-size: .75rem; }
+  #nav .nav-actions { flex-shrink: 0; margin: 0; }
+  #nav #nav-hamburger { flex-shrink: 0; margin: 0; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-eyebrow { max-width: 100%; }
+  .hero-dot { flex-shrink: 0; }
+  .hero-cta .btn { max-width: 100%; white-space: normal; justify-content: center; }
+}
