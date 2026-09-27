@@ -58,7 +58,7 @@
       return;
     }
 
-    const lang = localStorage.getItem('7d-lang') || 'he';
+    const lang = (localStorage.getItem('sourcesLang') || localStorage.getItem('7d-lang')) || 'he';
     const L = (he, en) => lang === 'en' ? (en || he || '') : (he || '');
     const safeAttr = (s) => (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
@@ -332,7 +332,7 @@
         if (running) {
           clearInterval(interval);
           running = false;
-          startBtn.textContent = localStorage.getItem('7d-lang') === 'en' ? 'Continue' : 'המשך';
+          startBtn.textContent = (localStorage.getItem('sourcesLang') || localStorage.getItem('7d-lang')) === 'en' ? 'Continue' : 'המשך';
         } else {
           if (remaining <= 0) remaining = totalSeconds;
           interval = setInterval(() => {
@@ -341,7 +341,7 @@
             if (remaining <= 0) { clearInterval(interval); running = false; startBtn.textContent = '✓'; }
           }, 1000);
           running = true;
-          startBtn.textContent = localStorage.getItem('7d-lang') === 'en' ? 'Pause' : 'הפסק';
+          startBtn.textContent = (localStorage.getItem('sourcesLang') || localStorage.getItem('7d-lang')) === 'en' ? 'Pause' : 'הפסק';
         }
       });
     }
@@ -352,7 +352,7 @@
         running = false;
         remaining = totalSeconds;
         updateDisplay();
-        if (startBtn) startBtn.textContent = localStorage.getItem('7d-lang') === 'en' ? 'Start Lesson' : 'התחל שיעור';
+        if (startBtn) startBtn.textContent = (localStorage.getItem('sourcesLang') || localStorage.getItem('7d-lang')) === 'en' ? 'Start Lesson' : 'התחל שיעור';
       });
     }
 

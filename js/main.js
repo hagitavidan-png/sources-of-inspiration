@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── LANGUAGE TOGGLE ── */
   const langBtn = document.getElementById('lang-toggle');
-  let currentLang = localStorage.getItem('7d-lang') || 'he';
+  let currentLang = localStorage.getItem('sourcesLang') || localStorage.getItem('7d-lang') || 'he';
   applyLang(currentLang);
 
   // חשוף גלובלית כדי ש-lesson-builder.js יוכל לקרוא לה
@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyLang(lang) {
+    localStorage.setItem('sourcesLang', lang);
+    localStorage.setItem('7d-lang', lang);
     document.documentElement.lang = lang;
     document.body.classList.toggle('lang-he', lang === 'he');
     document.body.classList.toggle('lang-en', lang === 'en');

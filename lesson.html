@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html data-reading="slides" lang="he" dir="rtl">
+<html translate="no" class="notranslate" data-reading="slides" lang="he" dir="rtl">
 <head>
+<meta name="google" content="notranslate">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>שיעור דוגמה: מקורות השראה</title>
@@ -645,7 +646,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
 <link rel="stylesheet" href="css/lesson-responsive.css?v=13"/>
 <link rel="stylesheet" href="css/reading.css?v=20260927-all"/>
 <link rel="stylesheet" href="css/navigation.css?v=20260927-dock"/>
-<link rel="stylesheet" href="css/alignment.css?v=20260927-align"/>
+<link rel="stylesheet" href="css/alignment.css?v=20260927-language"/>
 </head>
 <body>
 
@@ -660,7 +661,7 @@ body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--tp)}
   <span id="hud-step">1 / 12</span>
   <div id="lang-toggle">
     <button class="lang-btn" onclick="setLang('en')">EN</button>
-    <button class="lang-btn active" onclick="setLang('he')">עב</button>
+    <button class="lang-btn active" onclick="setLang('he')">עברית</button>
   </div>
   <button id="cls-btn" onclick="toggleClassroom()">
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 4V1h3M9 1h3v3M12 9v3H9M4 12H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1165,7 +1166,7 @@ function applyLang() {
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active',
       (b.textContent.trim() === 'EN' && !isHe) ||
-      (b.textContent.trim() === 'עב' && isHe)
+      (b.textContent.trim() === 'עברית' && isHe)
     );
   });
 

@@ -6,3 +6,6 @@ html[data-reading="article"] :is(.timer-clock,.timer-display) { direction:ltr !i
 html[data-reading="page"] :is(.faq-q, .compare-table th:first-child, .compare-table td:first-child) { text-align:start; }
 
 html[data-reading] bdi[dir="ltr"] { direction:ltr !important; unicode-bidi:isolate; }
+
+/* Keep slide fractions readable in both language directions. */
+html[data-reading="slides"] #hud-step, html[data-reading="slides"] #hud-step * { direction:ltr !important; unicode-bidi:isolate; text-align:center !important; }

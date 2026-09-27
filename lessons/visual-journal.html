@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html data-reading="slides" lang="en" dir="ltr" data-lesson-type="regular">
+<html translate="no" class="notranslate" data-reading="slides" lang="en" dir="ltr" data-lesson-type="regular">
 <head>
+<meta name="google" content="notranslate">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Visual Personal Journal: Sources of Inspiration</title>
@@ -283,7 +284,7 @@ body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--tp)}
 <link rel="stylesheet" href="../css/lesson-responsive.css"/>
 <link rel="stylesheet" href="../css/reading.css?v=20260927-all"/>
 <link rel="stylesheet" href="../css/navigation.css?v=20260927-dock"/>
-<link rel="stylesheet" href="../css/alignment.css?v=20260927-align"/>
+<link rel="stylesheet" href="../css/alignment.css?v=20260927-language"/>
 </head>
 <body class="dark">
 <script src="../js/app-init.js"></script>
@@ -299,7 +300,7 @@ body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--tp)}
   <span id="hud-step">1 / 11</span>
   <div id="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('he')">עב</button>
+    <button class="lang-btn" onclick="setLang('he')">עברית</button>
   </div>
   <button id="cls-btn" onclick="toggleClassroom()">
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 4V1h3M9 1h3v3M12 9v3H9M4 12H1V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -563,12 +564,13 @@ function setLang(l) {
   localStorage.setItem('sourcesLang', l);  // persist to shared key
   localStorage.setItem('vjl-lang', l);
   document.documentElement.lang = l;
+  document.documentElement.dir = he ? 'rtl' : 'ltr';
   document.body.dir = he ? 'rtl' : 'ltr';
   document.body.classList.toggle('rtl', he);
   document.body.style.fontFamily = he ? "'Heebo',sans-serif" : "'Inter',sans-serif";
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active',
-      (b.textContent.trim()==='EN' && !he)||(b.textContent.trim()==='עב' && he));
+      (b.textContent.trim()==='EN' && !he)||(b.textContent.trim()==='עברית' && he));
   });
   document.querySelectorAll('[data-en]').forEach(el => {
     const v = el.getAttribute(`data-${l}`);
