@@ -373,11 +373,11 @@ body.dark .footer-copy{color:rgba(232,230,225,.32)}
 <link rel="stylesheet" href="css/reading.css?v=20260927-all"/>
 <link rel="stylesheet" href="css/navigation.css?v=20260927-dock"/>
 <link rel="stylesheet" href="css/alignment.css?v=20260927-language"/>
-<link rel="stylesheet" href="css/unit-menu.css?v=20260927-demo-menu">
+<link rel="stylesheet" href="css/unit-menu.css?v=20260927-structure">
 </head>
 <body class="dark">
 <!-- Shared init: dark mode flash-prevention + language bootstrap -->
-<script src="js/app-init.js"></script>
+<script src="js/app-init.js?v=20260927-structure"></script>
 
 <!-- ── NAV ── -->
 <nav id="nav">
@@ -435,7 +435,7 @@ body.dark .footer-copy{color:rgba(232,230,225,.32)}
       <div class="cs-item"><div class="cs-num">2</div><div class="cs-label" data-en="Languages" data-he="שפות">Languages</div></div>
     </div>
     <div style="margin-top:28px;display:flex;justify-content:center">
-      <a href="lessons/personal-experience.html"
+      <a href="lesson.html"
          style="display:inline-flex;align-items:center;gap:9px;padding:13px 32px;
                 border-radius:50px;background:linear-gradient(135deg,#E04D4D,#c9462f);
                 color:#fff;font-family:inherit;font-size:.95rem;font-weight:700;
@@ -1508,7 +1508,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── LANGUAGE SWITCH ────────────────────────────────
-// currentLang is provided by app-init.js (global var)
+// currentLang is provided by app-init.js?v=20260927-structure (global var)
 
 // Full translation map for Unit 02–06 lesson rows (title / subtitle / desc)
 const TRANSLATIONS = {
@@ -1772,7 +1772,7 @@ function applyTranslations(lang) {
 }
 
 // ── LANGUAGE: course.html override ─────────────────────────────────────────
-// app-init.js provides the base setLang(). We redefine it here to add the
+// app-init.js?v=20260927-structure provides the base setLang(). We redefine it here to add the
 // course-specific TRANSLATIONS dictionary step before the standard swap.
 function setLang(l) {
   currentLang = l;
@@ -1797,14 +1797,14 @@ function setLang(l) {
   });
 }
 
-// Apply on load (currentLang comes from app-init.js)
+// Apply on load (currentLang comes from app-init.js?v=20260927-structure)
 setLang(currentLang);
 
-// ── THEME: sync icon on load (toggleTheme lives in app-init.js) ──────────────
+// ── THEME: sync icon on load (toggleTheme lives in app-init.js?v=20260927-structure) ──────────────
 _syncThemeBtn();
 </script>
 <script src="js/navigation-data.js?v=20260927-nav"></script>
-<script src="js/navigation.js?v=20260927-dock"></script>
-<script src="js/unit-menu.js?v=20260927-demo-menu"></script>
+<script src="js/navigation.js?v=20260927-structure"></script>
+<script src="js/unit-menu.js?v=20260927-structure"></script>
 </body>
 </html>

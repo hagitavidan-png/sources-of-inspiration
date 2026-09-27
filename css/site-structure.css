@@ -1,0 +1,10 @@
+body.compact-unit-overview .units-grid { align-items:start; }
+body.compact-unit-overview .unit-card { cursor:default; }
+body.compact-unit-overview .unit-card:hover { transform:none; }
+.unit-overview-link { display:block; color:inherit; text-decoration:none; }
+body.compact-unit-overview .unit-card-header { padding:20px 22px; min-height:112px; }
+body.compact-unit-overview .unit-card-header::before { pointer-events:none; }
+body.compact-unit-overview .unit-num-large { display:none; }
+.unit-overview-details > summary { padding:12px 22px; min-height:44px; cursor:pointer; color:inherit; border-top:1px solid #c9a84c30; }
+.unit-overview-link:focus-visible,.unit-overview-details > summary:focus-visible,.canonical-unit-link:focus-visible { outline:3px solid #c9a84c; outline-offset:-3px; }
+.canonical-unit-link { display:block; width:fit-content; min-height:44px; padding:10px 16px; border:1px solid #c9a84c; border-radius:22px; margin-bottom:20px; color:inherit; font-weight:600; }

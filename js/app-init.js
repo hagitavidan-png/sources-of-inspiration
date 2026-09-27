@@ -30,6 +30,13 @@
   }
 })();
 
+function _savedSiteLanguage() {
+  try {
+    var saved = localStorage.getItem('sourcesLang');
+    return saved === 'he' || saved === 'en' ? saved : 'en';
+  } catch (e) { return 'en'; }
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    2.  LANGUAGE FLASH PREVENTION
    Runs immediately on <script> parse — before any HTML is rendered.
@@ -47,7 +54,7 @@
     document.body.classList.add('lang-loading');
 
     /* Read saved lang; default is English */
-    var l = localStorage.getItem('sourcesLang') || 'en';
+    var l = _savedSiteLanguage();
 
     /* Set html attributes immediately — before any paint */
     document.documentElement.lang = l;
@@ -97,9 +104,7 @@ document.addEventListener('DOMContentLoaded', _syncThemeBtn);
 ────────────────────────────────────────────────────────────────────────────── */
 
 /** Reads saved language; defaults to English. */
-var currentLang = (function () {
-  try { return localStorage.getItem('sourcesLang') || 'en'; } catch (e) { return 'en'; }
-})();
+var currentLang = _savedSiteLanguage();
 
 /**
  * Set the site language.

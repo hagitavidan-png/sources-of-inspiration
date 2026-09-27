@@ -20,3 +20,5 @@ body.unit-menus .lr-head .lr-action { display:none; }
 
 .unit-demo-link { display:block; padding:16px; margin-bottom:16px; border:1px solid #c9a84c; border-radius:12px; color:inherit; font-weight:600; text-decoration:underline; line-height:1.6; }
 .unit-demo-link:focus-visible { outline:3px solid #c9a84c; outline-offset:3px; }
+
+.additional-unit-overview { display:inline-block; color:inherit; text-decoration:underline; min-height:44px; padding:12px 0; }

@@ -293,7 +293,7 @@ body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
 </head>
 <body class="dark">
 <!-- Shared init: dark mode flash-prevention + language bootstrap -->
-<script src="js/app-init.js"></script>
+<script src="js/app-init.js?v=20260927-structure"></script>
 
 <!-- ══ NAVBAR ══ -->
 <nav id="nav">
@@ -1031,13 +1031,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── LANGUAGE + THEME: handled by app-init.js ─────────────────────────────
+// ── LANGUAGE + THEME: handled by app-init.js?v=20260927-structure ─────────────────────────────
 // setLang(), toggleTheme(), currentLang, _syncThemeBtn() are all global.
-// Apply language on load (currentLang set by app-init.js).
+// Apply language on load (currentLang set by app-init.js?v=20260927-structure).
 setLang(currentLang);
 _syncThemeBtn();
 </script>
 <script src="js/navigation-data.js?v=20260927-nav"></script>
-<script src="js/navigation.js?v=20260927-dock"></script>
+<script src="js/navigation.js?v=20260927-structure"></script>
 </body>
 </html>

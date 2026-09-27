@@ -256,8 +256,8 @@ function getScreenTemplate(key, lang) {
    ─────────────────────────────────────────────────────
    finishLesson()
    Reads data-lesson-type from <html> element:
-     "regular"  → navigate to ../course.html (unit lesson list)
-     "summary"  → navigate to ../../index.html (main units list)
+     "regular"  → navigate to its unit in ../course.html
+     "summary"  → navigate to the same unit menu
    Falls back to ../course.html if attribute is missing.
 ═══════════════════════════════════════════════════════ */
 
@@ -267,12 +267,10 @@ function getScreenTemplate(key, lang) {
  * on the final screen. Navigates based on lesson type.
  */
 function finishLesson() {
-  const lessonType = document.documentElement.dataset.lessonType || 'regular';
-  if (lessonType === 'summary') {
-    window.location.href = '../../index.html';
-  } else {
-    window.location.href = '../course.html';
-  }
+  const filename = location.pathname.split('/').pop();
+  const unit = (window.ART_NAVIGATION?.units || []).find(u =>
+    u.lessons.some(l => l.path.split('/').pop() === filename));
+  window.location.href = '../course.html' + (unit ? '#' + unit.id : '');
 }
 
 

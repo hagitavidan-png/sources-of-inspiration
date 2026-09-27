@@ -4,9 +4,9 @@
   if (!units.length) return;
   const he = () => document.documentElement.lang === 'he';
   const items = [];
-  let demoLink;
+  let additionalOverview;
   function labels() {
-    if(demoLink)demoLink.textContent=he()?'שיעור לדוגמה: רגש, צבע וציור מופשט':'Sample lesson: Emotion, Colour and Abstract Painting';
+    if(additionalOverview)additionalOverview.textContent=he()?'סקירה נוספת של היחידה':'Additional unit overview';
     items.forEach(({button,panel}) => {button.textContent = panel.hidden ? (he()?'לשיעורי היחידה':'View unit lessons') : (he()?'סגירת רשימת השיעורים':'Close lesson list');});
     document.querySelectorAll('.unit-extra-details > summary').forEach(s=>{s.textContent=he()?'פרטי היחידה':'Unit details';});
     document.querySelectorAll('.lesson-details-toggle').forEach(b=>{b.textContent=he()?'פרטי השיעור':'Lesson details';});
@@ -27,7 +27,7 @@
     const button=document.createElement('button');button.type='button';button.className='unit-menu-toggle';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',panel.id);
     const approach=panel.querySelector(':scope > .approach-bar');
     if(approach){const details=document.createElement('details');details.className='unit-extra-details';const summary=document.createElement('summary');details.append(summary,approach);panel.append(details);}
-    if(unit.id==='unit01'){demoLink=document.createElement('a');demoLink.href='lesson.html';demoLink.className='unit-demo-link';panel.prepend(demoLink);}
+    if(unit.id==='unit01'){const extra=panel.querySelector('.unit-extra-details');if(extra){additionalOverview=document.createElement('a');additionalOverview.href='lessons/personal-experience.html';additionalOverview.className='additional-unit-overview';extra.append(additionalOverview);}}
     container.append(button,panel);items.push({unit,button,panel});
     button.addEventListener('click',()=>{
       const opening=panel.hidden;openUnit(opening?unit.id:null,true);
