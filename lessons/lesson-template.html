@@ -88,7 +88,7 @@
 <!-- ─ SCRIPTS ─────────────────────────────────────────────
      סקריפט השיעור נטען דינמית מ-URL param ?lesson=01
      אפשר גם לפרוס כל שיעור בנפרד: lesson-01.html עם
-     <script src="../data/lesson-01.js"> לפני main.js
+     <script src="../data/lesson-01.js?v=20260927-copy"> לפני main.js
 ──────────────────────────────────────────────────────── -->
 <script src="../js/main.js"></script>
 <script>
@@ -104,7 +104,7 @@
 
   /* ── מצא את נתוני השיעור ─────────────────────────────── */
   function getLessonData() {
-    /* שיטה 1: משתנה גלובלי (lesson-01.html עם <script src="../data/lesson-01.js">) */
+    /* שיטה 1: משתנה גלובלי (lesson-01.html עם <script src="../data/lesson-01.js?v=20260927-copy">) */
     const globalVars = Object.keys(window).filter(k => /^LESSON_\d+$/.test(k));
     if (globalVars.length > 0) {
       return window[globalVars[0]];
@@ -131,7 +131,7 @@
     const t = (obj) => (obj && typeof obj === 'object') ? (obj[lang] || obj.he || '') : (obj || '');
 
     /* ── כותרת הדף ── */
-    document.title = `שיעור ${d.num} – ${t(d.titleHe ? {he:d.titleHe,en:d.titleEn} : d.titleHe)} | 7 Diamonds`;
+    document.title = `שיעור ${d.num}, ${t(d.titleHe ? {he:d.titleHe,en:d.titleEn} : d.titleHe)} | 7 Diamonds`;
 
     /* ── צבע יחידה ── */
     document.documentElement.style.setProperty('--unit-color', d.unitColor || '#c9a96e');
@@ -173,7 +173,7 @@
 
     /* בנר סיום */
     const completionMsg = d.isLastLesson
-      ? `<strong>כל הכבוד!</strong> קראת את השיעור עד הסוף — את סיימת את הקורס!`
+      ? `<strong>כל הכבוד!</strong> קראת את השיעור עד הסוף, את סיימת את הקורס!`
       : `<strong>כל הכבוד!</strong> קראת את השיעור עד הסוף.`;
     html += `<div class="lesson-complete-banner"><i class="fa-solid fa-circle-check"></i><p>${completionMsg}</p></div>`;
 

@@ -63,7 +63,7 @@
     const safeAttr = (s) => (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
     /* ── כותרת הדף ── */
-    document.title = `שיעור ${d.num} – ${d.titleHe || ''} | 7 Diamonds`;
+    document.title = `שיעור ${d.num}: ${d.titleHe || ''} | 7 Diamonds`;
 
     /* ── צבע יחידה ── */
     document.documentElement.style.setProperty('--unit-color', d.unitColor || '#c9a84c');
@@ -103,7 +103,7 @@
     /* בנר סיום */
     html += `<div class="lesson-complete-banner">
       <i class="fa-solid fa-circle-check"></i>
-      <p><strong>כל הכבוד!</strong> ${d.isLastLesson ? 'קראת את השיעור עד הסוף — את סיימת את הקורס!' : 'קראת את השיעור עד הסוף.'}</p>
+      <p><strong>כל הכבוד!</strong> ${d.isLastLesson ? 'הגעת לסוף השיעור האחרון. כל הכבוד על השלמת הקורס!' : 'קראת את השיעור עד הסוף.'}</p>
     </div>`;
 
     /* פסקת פתיחה */

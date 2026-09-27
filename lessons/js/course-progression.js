@@ -28,8 +28,8 @@
     },
     {
       id: 'unit01',
-      name_he: 'יחידה 1 — מקורות ההשראה',
-      name_en: 'Unit 1 — Sources of Inspiration',
+      name_he: 'יחידה 1: מקורות ההשראה',
+      name_en: 'Unit 1: Sources of Inspiration',
       lessons: [
         'lesson-1-1.html',
         'emotion-drawing.html',
@@ -89,7 +89,7 @@
   function render() {
     const file = currentFile();
     const pos  = findPosition(file);
-    if (!pos) return; // lesson not in map — nothing to inject
+    if (!pos) return; // lesson not in map, nothing to inject
 
     const { u, li } = pos;
     const unit    = COURSE_MAP[u];

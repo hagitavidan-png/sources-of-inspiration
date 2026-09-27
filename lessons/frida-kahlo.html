@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Frida Kahlo — How Artists Turn Personal Experience into Art</title>
+<title>Frida Kahlo: How Artists Turn Personal Experience into Art</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
@@ -509,7 +509,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:500px;height:500px;background:var(--rose);top:-100px;left:-80px"></div>
     <div class="blob" style="width:350px;height:350px;background:var(--violet);bottom:0;right:-60px;animation-delay:3s"></div>
     <p class="label" id="t0-label">Unit: Personal Experience as Inspiration</p>
-    <h1 class="big" id="t0-big">Some artists don't paint<br/>only what they see —<br/>they paint what they experience.</h1>
+    <h1 class="big" id="t0-big">Some artists don't paint<br/>only what they see, <br/>they paint what they experience.</h1>
   </section>
 
   <!-- ══ SCREEN 1 — Quote ══ -->
@@ -517,7 +517,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:400px;height:400px;background:var(--gold);top:0;right:-60px;opacity:.12"></div>
     <p class="label" id="t1-label">Frida Kahlo</p>
     <blockquote class="quote-text" id="t1-quote">I paint my own reality.</blockquote>
-    <p class="quote-attr" id="t1-attr">— Frida Kahlo</p>
+    <p class="quote-attr" id="t1-attr">Frida Kahlo</p>
   </section>
 
   <!-- ══ SCREEN 2 — Inspiration: Frida Kahlo artworks ══ -->
@@ -525,7 +525,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:450px;height:450px;background:var(--violet);bottom:-100px;left:-80px;opacity:.15"></div>
     <div class="gal-instruction">
       <span class="gal-eye">👁</span>
-      <p id="t2-instr"><strong>Notice:</strong> The paintings don't just show a figure — they build a personal world.</p>
+      <p id="t2-instr"><strong>Notice:</strong> The paintings don't just show a figure, they build a personal world.</p>
     </div>
     <div class="gallery">
       <div class="gal-item">
@@ -552,7 +552,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:420px;height:420px;background:var(--violet);top:-80px;right:-60px;opacity:.18"></div>
     <p class="label" id="t3-label">Look closely</p>
     <h2 class="big" id="t3-big">What do you see<br/>in the paintings?</h2>
-    <p class="sub" id="t3-sub">Not just what is drawn —<br/>but what is happening there.</p>
+    <p class="sub" id="t3-sub">Not just what is drawn, <br/>but what is happening there.</p>
   </section>
 
   <!-- ══ SCREEN 4 — Breakdown ══ -->
@@ -568,7 +568,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:400px;height:400px;background:var(--blue);top:-80px;left:-60px;opacity:.18"></div>
     <p class="label" id="t5-label">The idea</p>
     <h2 class="big" id="t5-big">The painting doesn't<br/>show a single moment.</h2>
-    <p class="sub" id="t5-sub">It connects different elements —<br/>to express an inner experience.</p>
+    <p class="sub" id="t5-sub">It connects different elements, <br/>to express an inner experience.</p>
   </section>
 
   <!-- ══ SCREEN 6 — Choose experience (DYNAMIC: selection) ══ -->
@@ -610,7 +610,7 @@ html[lang="he"] #fs-btn {
     <div class="blob" style="width:380px;height:380px;background:var(--teal);top:-60px;left:-60px;opacity:.15"></div>
     <p class="label" id="t8-label">Start drawing</p>
     <h2 class="big" id="t8-big">Arrange the elements<br/>on the page.</h2>
-    <p class="sub" id="t8-sub">They don't need to be realistic —<br/>only connected to your experience.</p>
+    <p class="sub" id="t8-sub">They don't need to be realistic, <br/>only connected to your experience.</p>
   </section>
 
   <!-- ══ SCREEN 9 — Connection ══ -->
@@ -675,7 +675,7 @@ html[lang="he"] #fs-btn {
     </div>
     <p class="label" id="t15-label">Lesson complete</p>
     <h2 class="big" id="t15-big">You painted<br/>your own reality.</h2>
-    <p class="sub" id="t15-sub">Like Frida — you connected personal experience<br/>to something visual and expressive.</p>
+    <p class="sub" id="t15-sub">Like Frida, you connected personal experience<br/>to something visual and expressive.</p>
     <div class="close-btns">
       <a href="../course.html" class="btn-outline" id="t15-back">← Back to Course</a>
     </div>
@@ -696,7 +696,7 @@ html[lang="he"] #fs-btn {
 <!-- ═══════════════════════════════════════════════
      LESSON SYSTEM + INLINE SCRIPT
 ═══════════════════════════════════════════════ -->
-<script src="js/lesson-system.js"></script>
+<script src="js/lesson-system.js?v=20260927-copy"></script>
 <script>
 /* ═══════════════════════════════════════════════
    STATE
@@ -720,15 +720,15 @@ const T = {
     s: [
       /* 0 — Opening */
       { label: 'Unit: Personal Experience as Inspiration',
-        big: "Some artists don't paint<br/>only what they see —<br/>they paint what they experience." },
+        big: "Some artists don't paint<br/>only what they see, <br/>they paint what they experience." },
 
       /* 1 — Quote */
       { label: 'Frida Kahlo',
         quote: 'I paint my own reality.',
-        attr: '— Frida Kahlo' },
+        attr: 'Frida Kahlo' },
 
       /* 2 — Inspiration gallery */
-      { instr: '<strong>Notice:</strong> The paintings don\'t just show a figure — they build a personal world.',
+      { instr: '<strong>Notice:</strong> The paintings don\'t just show a figure, they build a personal world.',
         cap1: 'Self-Portrait with Monkeys, 1943',
         cap2: 'Self-Portrait with Braid, 1941',
         cap3: 'Self-Portrait with Bonito, 1941',
@@ -737,7 +737,7 @@ const T = {
       /* 3 — Observation */
       { label: 'Look closely',
         big: 'What do you see<br/>in the paintings?',
-        sub: 'Not just what is drawn —<br/>but what is happening there.' },
+        sub: 'Not just what is drawn, <br/>but what is happening there.' },
 
       /* 4 — Breakdown */
       { label: 'The building blocks',
@@ -747,7 +747,7 @@ const T = {
       /* 5 — Understanding */
       { label: 'The idea',
         big: "The painting doesn't<br/>show a single moment.",
-        sub: 'It connects different elements —<br/>to express an inner experience.' },
+        sub: 'It connects different elements, <br/>to express an inner experience.' },
 
       /* 6 — Choose experience */
       { label: 'Your turn',
@@ -764,7 +764,7 @@ const T = {
       /* 8 — Start drawing */
       { label: 'Start drawing',
         big: 'Arrange the elements<br/>on the page.',
-        sub: "They don't need to be realistic —<br/>only connected to your experience." },
+        sub: "They don't need to be realistic, <br/>only connected to your experience." },
 
       /* 9 — Connection */
       { label: 'Add connection',
@@ -799,7 +799,7 @@ const T = {
       /* 15 — Closing */
       { label: 'Lesson complete',
         big: 'You painted<br/>your own reality.',
-        sub: 'Like Frida — you connected personal experience<br/>to something visual and expressive.',
+        sub: 'Like Frida, you connected personal experience<br/>to something visual and expressive.',
         back: '← Back to Course' }
     ],
 
@@ -819,7 +819,7 @@ const T = {
       'Continue →',   // 12
       'Continue →',   // 13
       'Save & Finish →', // 14
-      ''              // 15 — closing, no next btn
+      ''              // 15, closing, no next btn
     ]
   },
 
@@ -830,15 +830,15 @@ const T = {
     s: [
       /* 0 */
       { label: 'יחידה: חוויה אישית כמקור השראה',
-        big: 'יש אמנים שלא מציירים רק את מה שהם רואים —<br/>הם מציירים את מה שהם חווים.' },
+        big: 'יש אמנים שלא מציירים רק את מה שהם רואים, <br/>הם מציירים את מה שהם חווים.' },
 
       /* 1 */
       { label: 'פרידה קאלו',
         quote: 'אני מציירת את המציאות שלי.',
-        attr: '— פרידה קאלו' },
+        attr: 'פרידה קאלו' },
 
       /* 2 */
-      { instr: '<strong>שימי לב:</strong> הציורים לא מתארים רק דמות — הם מרכיבים עולם אישי.',
+      { instr: '<strong>שימי לב:</strong> הציורים לא מתארים רק דמות, הם מרכיבים עולם אישי.',
         cap1: 'דיוקן עצמי עם קופים, 1943',
         cap2: 'דיוקן עצמי עם צמה, 1941',
         cap3: 'דיוקן עצמי עם בוניטו, 1941',
@@ -847,7 +847,7 @@ const T = {
       /* 3 */
       { label: 'הסתכלי מקרוב',
         big: 'מה את רואה<br/>בציורים?',
-        sub: 'לא רק מה מצויר —<br/>אלא מה קורה שם.' },
+        sub: 'לא רק מה מצויר, <br/>אלא מה קורה שם.' },
 
       /* 4 */
       { label: 'מה מרכיב את הציור',
@@ -857,7 +857,7 @@ const T = {
       /* 5 */
       { label: 'הרעיון',
         big: 'הציור לא מציג<br/>רגע אחד.',
-        sub: 'הוא מחבר כמה דברים יחד —<br/>כדי לבטא חוויה פנימית.' },
+        sub: 'הוא מחבר כמה דברים יחד, <br/>כדי לבטא חוויה פנימית.' },
 
       /* 6 */
       { label: 'התור שלך',
@@ -874,7 +874,7 @@ const T = {
       /* 8 */
       { label: 'התחילי לצייר',
         big: 'סדרי את המרכיבים<br/>על הדף.',
-        sub: 'הם לא חייבים להיות מציאותיים —<br/>רק קשורים לחוויה שלך.' },
+        sub: 'הם לא חייבים להיות מציאותיים, <br/>רק קשורים לחוויה שלך.' },
 
       /* 9 */
       { label: 'הוסיפי חיבור',
@@ -909,7 +909,7 @@ const T = {
       /* 15 */
       { label: 'השיעור הסתיים',
         big: 'ציירת את<br/>המציאות שלך.',
-        sub: 'כמו פרידה — חיברת בין חוויה אישית<br/>למשהו חזותי ומבוטא.',
+        sub: 'כמו פרידה, חיברת בין חוויה אישית<br/>למשהו חזותי ומבוטא.',
         back: 'חזרה לקורס ←' }
     ],
 
@@ -929,7 +929,7 @@ const T = {
       '← המשך',   // 12
       '← המשך',   // 13
       '← שמור וסיים', // 14
-      ''              // 15 — מסך סיום
+      ''              // 15, מסך סיום
     ]
   }
 };
@@ -1212,6 +1212,6 @@ updateBtn();                  // syncs button label to screen 0
 setBg(0);
 updateBackBtn();
 </script>
-<script src="js/course-progression.js"></script>
+<script src="js/course-progression.js?v=20260927-copy"></script>
 </body>
 </html>

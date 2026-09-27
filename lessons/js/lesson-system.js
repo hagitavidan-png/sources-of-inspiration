@@ -151,14 +151,14 @@ const ACTION_CUES = {
     'fill-30':    'Fill about 30% of the page.',
     'no-lift':    'Don\'t lift your hand.',
     'keep-going': 'Keep going.',
-    'no-judge':   'Don\'t judge — just look.'
+    'no-judge':   'Don\'t judge, just look.'
   },
   he: {
     'one-minute': 'עבדו במשך דקה.',
     'fill-30':    'מלאו כ-30% מהדף.',
     'no-lift':    'אל תרימו את היד.',
     'keep-going': 'המשיכו.',
-    'no-judge':   'אל תשפטו — פשוט תסתכלו.'
+    'no-judge':   'אל תשפטו, פשוט תסתכלו.'
   }
 };
 
@@ -228,14 +228,14 @@ const SCREEN_TEMPLATES = {
   /* Color layer screen instructions */
   color_guidance: {
     en: [
-      'Let the color move along the lines — not fill them.',
-      'Work in layers — build the color gradually.',
-      'There is no right or wrong — only movement.'
+      'Let the color move along the lines, not fill them.',
+      'Work in layers, build the color gradually.',
+      'There is no right or wrong, only movement.'
     ],
     he: [
-      'תנו לצבע לנוע על הקווים — לא למלא אותם.',
+      'תנו לצבע לנוע על הקווים, לא למלא אותם.',
       'הוסיפו בהדרגה. שכבה על שכבה.',
-      'אין נכון או לא נכון — רק תנועה.'
+      'אין נכון או לא נכון, רק תנועה.'
     ]
   }
 };

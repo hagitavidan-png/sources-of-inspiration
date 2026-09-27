@@ -8,13 +8,13 @@
 
 /* ── 1. רשימת כל היחידות לפי סדר ─────────────────────────── */
 const ALL_UNITS = [
-  UNIT_0,   // data/unit-0.js  – יחידת פתיחה
-  UNIT_1,   // data/unit-1.js  – העולם הפנימי
-  UNIT_2,   // data/unit-2.js  – העולם הטבעי
-  UNIT_3,   // data/unit-3.js  – מוזיקה ואבסטרקט
-  UNIT_4,   // data/unit-4.js  – העולם האורבני
-  UNIT_5,   // data/unit-5.js  – העולם הביתי
-  UNIT_6,   // data/unit-6.js  – פרוטוקול הסטודיו
+  UNIT_0,   // data/unit-0.js, יחידת פתיחה
+  UNIT_1,   // data/unit-1.js, העולם הפנימי
+  UNIT_2,   // data/unit-2.js, העולם הטבעי
+  UNIT_3,   // data/unit-3.js, מוזיקה ואבסטרקט
+  UNIT_4,   // data/unit-4.js, העולם האורבני
+  UNIT_5,   // data/unit-5.js, העולם הביתי
+  UNIT_6,   // data/unit-6.js, פרוטוקול הסטודיו
 
   /* ── הוספת יחידה חדשה:
      1. צור data/unit-7.js עם const UNIT_7 = { ... }

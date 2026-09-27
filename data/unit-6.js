@@ -20,8 +20,8 @@ const UNIT_6 = {
       id: 'lesson-14',
       num: '14',
       file: 'lessons/lesson-14.html',
-      titleHe: 'ללמוד מאמנים – שאל למה, לא מה',
-      titleEn: 'Learn from Artists – Ask Why, Not What',
+      titleHe: 'ללמוד מאמנים, שאל למה, לא מה',
+      titleEn: 'Learn from Artists, Ask Why, Not What',
       metaHe: '5 טכניקות + המניפסט שלך | ∞',
       metaEn: '5 Techniques + Your Manifesto | ∞',
     }
