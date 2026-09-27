@@ -151,3 +151,5 @@ html[data-reading="slides"] .screen .artwork-meta-year { font-size: 1rem !import
  html[data-reading="page"] .teacher-hero .container { grid-template-columns: minmax(0,1fr); }
  html[data-reading="page"] .th-stats { grid-template-columns: minmax(0,1fr); }
 }
+html[data-reading="page"] body.dark :is(.btn-outline, .btn-ghost) { color: #f3f1ec !important; border-color: #85828e !important; }
+html[data-reading="page"] body.dark :is(.th-tag, .th-quote-author) { color: #dcc16f !important; }
