@@ -12,6 +12,7 @@
     document.querySelectorAll('.lesson-details-toggle').forEach(b=>{b.textContent=he()?'פרטי השיעור':'Lesson details';});
   }
   function openUnit(id, updateAddress=false) {
+    if(id)window.dispatchEvent(new CustomEvent('course-menu-open',{detail:'units'}));
     items.forEach(({unit,button,panel})=>{
       const open=unit.id===id;
       panel.hidden=!open;button.setAttribute('aria-expanded',String(open));unit.classList.toggle('unit-menu-open',open);
@@ -61,5 +62,6 @@
   document.body.classList.add('unit-menus');
   new MutationObserver(labels).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   window.addEventListener('hashchange',restore);window.addEventListener('pageshow',restore);
+  window.addEventListener('course-menu-open',event=>{if(event.detail==='additional')openUnit(null);});
   restore();labels();
 })();

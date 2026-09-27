@@ -13,9 +13,19 @@
   const isPreview = ['lesson.html', 'public/lesson.html'].includes(path);
   const fixedUnit = match || (path === 'lessons/personal-experience.html' ? data.units[1] : null);
   const currentLesson = match?.lessons.find(l => l.path === path);
+  function inAdditionalLessons() {
+    if (path !== 'course.html') return false;
+    const section = document.getElementById('additional-lessons');
+    const rect = section?.getBoundingClientRect();
+    return !!rect && rect.top <= Math.max(220, innerHeight / 2) && rect.bottom > 100;
+  }
   function unitNow() {
     if (fixedUnit) return fixedUnit;
     if (path !== 'course.html') return null;
+    if (inAdditionalLessons()) {
+      const group = document.querySelector('.additional-lesson-group[open]');
+      return data.legacy.find(u => 'additional-' + u.id === group?.id) || null;
+    }
     return [...data.units].reverse().find(u => {
       const el = document.getElementById(u.id);
       return el && el.getBoundingClientRect().top <= 220;
@@ -48,7 +58,7 @@
   function showUnit(unit) {
     const section = document.createElement('section');
     const heading = document.createElement('h3');
-    heading.textContent = t('תפריט היחידה: ', 'Unit menu: ') + text(unit.title);
+    heading.textContent = (unit.id.startsWith('legacy') ? t('תפריט השיעורים: ', 'Lesson menu: ') : t('תפריט היחידה: ', 'Unit menu: ')) + text(unit.title);
     section.append(heading);
     if (unit.lessons.length) {
       const list = document.createElement('ol');
@@ -72,7 +82,7 @@
     content.replaceChildren();
     const locationText = document.createElement('p'); locationText.className = 'art-current-location';
     const pages = {
-      'index.html': t('דף הבית', 'Home'), 'course.html': t('תכנית הלימודים', 'Curriculum'),
+      'index.html': t('דף הבית', 'Home'), 'course.html': inAdditionalLessons() ? t('שיעורים נוספים', 'Additional lessons') : t('תכנית הלימודים', 'Curriculum'),
       'teachers.html': t('למורים ולבתי ספר', 'Teachers and schools'),
       'download.html': t('הורדות', 'Downloads'), 'offline-download.html': t('הורדה לשימוש ללא אינטרנט', 'Offline downloads')
     };
@@ -80,7 +90,9 @@
     content.append(locationText);
     const routes = document.createElement('nav'); routes.setAttribute('aria-label', t('מעבר בין דפי האתר', 'Site navigation'));
     if (unit && !unit.id.startsWith('legacy')) routes.append(link(t('חזרה לעמוד היחידה', 'Back to the unit'), 'course.html#' + unit.id));
+    if (unit?.id.startsWith('legacy')) routes.append(link(t('חזרה לתפריט השיעורים', 'Back to lesson menu'), 'course.html#additional-' + unit.id));
     routes.append(link(t('כל יחידות הלימוד', 'All course units'), 'course.html', path === 'course.html'));
+    routes.append(link(t('שיעורים נוספים', 'Additional lessons'), 'course.html#additional-lessons'));
     routes.append(link(t('שיעור לדוגמה', 'Sample lesson'), 'lesson.html', isPreview));
     routes.append(link(t('דף הבית', 'Home'), 'index.html', path === 'index.html'));
     if (document.referrer && new URL(document.referrer).origin === location.origin && history.length > 1) {
@@ -97,9 +109,10 @@
     const parentLink = document.querySelector('#hud-back, .lesson-back');
     if (parentLink) {
       const hasUnitPage = unit && !unit.id.startsWith('legacy');
-      parentLink.href = url(hasUnitPage ? 'course.html#' + unit.id : 'course.html');
+      const additionalGroup = unit?.id.startsWith('legacy');
+      parentLink.href = url(hasUnitPage ? 'course.html#' + unit.id : additionalGroup ? 'course.html#additional-' + unit.id : 'course.html');
       const parentLabel = parentLink.querySelector('span') || parentLink;
-      parentLabel.textContent = hasUnitPage ? t('חזרה ליחידה', 'Back to unit') : t('לתכנית הלימודים', 'Curriculum');
+      parentLabel.textContent = hasUnitPage ? t('חזרה ליחידה', 'Back to unit') : additionalGroup ? t('חזרה לתפריט השיעורים', 'Back to lesson menu') : t('לתכנית הלימודים', 'Curriculum');
     }
     if (unit && !unit.id.startsWith('legacy')) {
       document.querySelectorAll('#stage a[href]').forEach(a => {

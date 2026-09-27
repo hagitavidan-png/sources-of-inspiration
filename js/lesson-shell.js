@@ -14,8 +14,8 @@
       hud = document.createElement('header'); hud.id = 'hud';
       hud.innerHTML = '<a id="hud-back"><span></span></a><span id="hud-step"></span><div id="hud-lang"><button type="button" class="lang-btn" data-language="en">EN</button><button type="button" class="lang-btn" data-language="he">עברית</button></div>';
       body.prepend(hud);
-      const unit = (window.ART_NAVIGATION?.units || []).find(u=>u.lessons.some(l=>l.path.endsWith('/'+file)));
-      hud.querySelector('a').href = '../course.html'+(unit ? '#'+unit.id : '');
+      const unit = [...(window.ART_NAVIGATION?.units || []), ...(window.ART_NAVIGATION?.legacy || [])].find(u=>u.lessons.some(l=>l.path.endsWith('/'+file)));
+      hud.querySelector('a').href = '../course.html'+(unit ? '#'+(unit.id.startsWith('legacy')?'additional-':'')+unit.id : '');
       hud.querySelectorAll('[data-language]').forEach(b=>b.addEventListener('click',()=>{
         if(document.documentElement.lang!==b.dataset.language) document.getElementById('lang-toggle').click();
       }));
@@ -40,7 +40,7 @@
       start.textContent=he?'מתחילים':'Start lesson';
       if(open&&counter)counter.textContent=he?'פתיחה':'Introduction';
       if(full)full.setAttribute('aria-label',he?'מסך מלא':'Full screen');
-      if(article){hud.querySelector('#hud-back span').textContent=he?'לתכנית הלימודים':'Curriculum';hud.querySelectorAll('[data-language]').forEach(b=>{b.classList.toggle('active',b.dataset.language===l);b.setAttribute('aria-pressed',String(b.dataset.language===l));});}
+      if(article){hud.querySelector('#hud-back span').textContent=hud.querySelector('a').hash.startsWith('#additional-')?(he?'חזרה לתפריט השיעורים':'Back to lesson menu'):(he?'לתכנית הלימודים':'Curriculum');hud.querySelectorAll('[data-language]').forEach(b=>{b.classList.toggle('active',b.dataset.language===l);b.setAttribute('aria-pressed',String(b.dataset.language===l));});}
       else hud.querySelectorAll('.lang-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
       normalizeNext();
     }

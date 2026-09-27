@@ -267,7 +267,7 @@
     if (prev) {
       html += `<a href="${prev.file}" class="lesson-nav-btn"><i class="fa-solid fa-arrow-right"></i><span data-he="שיעור קודם" data-en="Previous">${L('שיעור קודם', 'Previous')}</span></a>`;
     }
-    html += `<a href="../course.html" class="lesson-nav-btn"><i class="fa-solid fa-grid-2"></i><span data-he="כל השיעורים" data-en="All Lessons">${L('כל השיעורים', 'All Lessons')}</span></a>`;
+    html += `<a href="../course.html#additional-lessons" class="lesson-nav-btn"><i class="fa-solid fa-grid-2"></i><span data-he="כל השיעורים" data-en="All Lessons">${L('כל השיעורים', 'All Lessons')}</span></a>`;
     if (next) {
       html += `<a href="${next.file}" class="lesson-nav-btn primary"><span data-he="שיעור הבא: ${safeAttr(next.titleHe)}" data-en="Next: ${safeAttr(next.titleEn||next.titleHe)}">${L(`שיעור הבא: ${next.titleHe}`, `Next: ${next.titleEn || next.titleHe}`)}</span><i class="fa-solid fa-arrow-left"></i></a>`;
     } else if (d.isLastLesson) {
