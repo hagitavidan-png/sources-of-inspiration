@@ -1058,3 +1058,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 @media (max-width: 359px) {
   #nav .nav-logo span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 }
+
+/* Make the main title readable in phone and tablet layouts. */
+@media (max-width: 1024px) {
+  #hero h1 { font-size: clamp(2.75rem, 9vw, 5rem); line-height: 1.15; margin-bottom: 24px; }
+}
