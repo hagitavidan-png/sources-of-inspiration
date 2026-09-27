@@ -1,6 +1,11 @@
-#art-navigation-button { position:fixed; z-index:1100; inset-inline-end:16px; bottom:calc(16px + env(safe-area-inset-bottom)); min-height:44px; padding:7px 12px; border:1px solid #e0bf64; border-radius:22px; background:#181820; color:#f7e3a4; font-weight:700; line-height:1.4; font-family:inherit; font-size:14px; cursor:pointer; box-shadow:0 3px 16px #0006; }
-html[data-reading="slides"] #art-navigation-button { bottom:calc(108px + env(safe-area-inset-bottom)); }
-html[data-reading="slides"] .screen { padding-bottom:110px !important; }
+/* Navigation has its own strip instead of floating over lesson text. */
+#art-navigation-dock { position:fixed; z-index:1100; bottom:0; inset-inline:0; min-height:44px; padding:0 12px env(safe-area-inset-bottom); display:flex; align-items:center; justify-content:flex-end; background:#111118; border-top:1px solid #ffffff20; box-sizing:border-box; }
+#art-navigation-button { position:relative; min-height:44px; padding:4px 10px; border:0; border-radius:0; background:transparent; color:#dcc16f; font-family:inherit; font-size:13px; line-height:1.4; font-weight:600; cursor:pointer; box-shadow:none; }
+html[data-reading="page"] body, html[data-reading="article"] body { padding-bottom:calc(60px + env(safe-area-inset-bottom)); }
+html[data-reading="slides"] #stage { bottom:calc(var(--bar-h) + 44px + env(safe-area-inset-bottom)) !important; height:calc(100dvh - var(--nav-h) - var(--bar-h) - 44px - env(safe-area-inset-bottom)) !important; }
+html[data-reading="slides"] #nav-bar, html[data-reading="slides"] body:has(#prog-fill) #nav-bar { bottom:calc(44px + env(safe-area-inset-bottom)) !important; }
+html[data-reading="slides"] #progress { bottom:calc(126px + env(safe-area-inset-bottom)) !important; }
+html[data-reading="slides"] .screen { padding-bottom:48px !important; }
 #art-navigation-dialog { position:fixed; inset:0; margin:auto; width:min(560px,calc(100% - 24px)); max-width:calc(100% - 24px); max-height:calc(100dvh - 32px); padding:0; border:1px solid #aa8a45; border-radius:18px; background:#171722; color:#f2f0e9; z-index:20000; overflow-y:auto; box-sizing:border-box; font-family:inherit; }
 #art-navigation-dialog::backdrop { background:#000b; }
 #art-navigation-dialog header { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 20px; background:#171722; border-bottom:1px solid #ffffff26; }

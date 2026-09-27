@@ -35,7 +35,10 @@
   header.append(title, close);
   const content = document.createElement('div'); content.className = 'art-navigation-content';
   dialog.append(header, content);
-  document.body.append(launcher, dialog);
+  const dock = document.createElement('div');
+  dock.id = 'art-navigation-dock';
+  dock.append(launcher);
+  document.body.append(dock, dialog);
   function link(label, target, current = false) {
     const a = document.createElement('a'); a.textContent = label; a.href = url(target);
     if (current) a.setAttribute('aria-current', 'page');
