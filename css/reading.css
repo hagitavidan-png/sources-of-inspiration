@@ -1,0 +1,153 @@
+/* Shared reading and touch layout. Loaded after each page's own styles. */
+html[data-reading] { font-size: 16px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html[data-reading] body { font-size: 18px; line-height: 1.7; }
+html[data-reading] :is(p, li, label, input, textarea, select) { font-size: 1.125rem !important; line-height: 1.75 !important; }
+html[data-reading] :is(button, .btn, [role="button"], .lesson-nav-btn) { font-size: 1rem; min-height: 44px; }
+html[data-reading] :is(input, textarea, select) { max-width: 100%; }
+html[data-reading] :is(a, button, input, textarea, select, [tabindex]):focus-visible { outline: 3px solid #be8e28; outline-offset: 4px; }
+html[data-reading] :is(.fade-up, .fade-in) { opacity: 1 !important; transform: none !important; }
+html[data-reading] :is(.tag, .label, .eyebrow, .hero-eyebrow, .unit-card-num, .unit-meta-item, .lesson-item-meta, .footer-copy, .footer-tagline, .stat-label, .proof-label) { font-size: .9375rem !important; line-height: 1.5 !important; }
+html[data-reading="page"] :is(.unit-title, .unit-card-title, .lesson-item-title, .resource-title, .feature-title) { font-size: 1.375rem !important; line-height: 1.45 !important; }
+html[data-reading="page"] :is(.unit-desc, .lesson-preview-row, .pf-row, .testi-quote, .feature-desc, .resource-desc, .as-pill, .approach-tag) { font-size: 1.0625rem !important; line-height: 1.7 !important; }
+html[data-reading="page"] body.dark :is(p, li, .unit-desc, .unit-card-desc, .lesson-item-meta, .lesson-preview-row, .pf-row, .testi-quote, .feature-desc, .resource-desc, .footer-tagline) { color: #d6d3cc !important; }
+html[data-reading="page"] body.dark :is(.unit-title, .unit-card-title, .lesson-item-title, h1, h2, h3, h4) { color: #f3f1ec !important; }
+html[data-reading="page"] :is(.btn, .unit-lesson-item, .lesson-pill) { white-space: normal; overflow-wrap: anywhere; }
+html[data-reading="page"] .unit-lesson-item { min-width: 0; }
+html[data-reading="page"] #mobile-menu { overflow-y: auto; max-height: calc(100dvh - var(--nav-h, 88px)); }
+html[data-reading="page"] :is(.unit-card, .price-card, .why-card, .testi-card) { min-width: 0; }
+@media (max-width: 1024px) {
+  html[data-reading="page"] :is(.units-grid, .why-grid, .testi-grid, .pricing-grid, .preview-grid) { grid-template-columns: minmax(0, 1fr); }
+  html[data-reading="page"] :is(.section-header h2, .course-hero h1, .teachers-hero h1, .page-hero h1) { font-size: clamp(2rem, 6vw, 3.75rem) !important; line-height: 1.3 !important; }
+  html[data-reading="page"] .price-card.featured { transform: none; }
+}
+@media (max-width: 768px) {
+  html[data-reading="page"] :is(.container, .unit-section, .course-container) { max-width: 100%; }
+  html[data-reading="page"] :is(.hero-cta, .cta-btns, .trial-btns) { flex-wrap: wrap; }
+  html[data-reading="page"] :is(.hero-cta, .cta-btns) > .btn { width: 100%; min-height: 52px; }
+  html[data-reading="page"] .unit-lesson-item { flex-wrap: wrap; gap: 12px; }
+  html[data-reading="page"] .lesson-item-text { flex: 1 1 180px; min-width: 0; }
+}
+
+/* Slide lessons: readable text takes priority over squeezing into one screen.
+   Longer screens scroll inside the stage; navigation stays outside it. */
+html[data-reading="slides"] { --nav-h: 72px; --bar-h: 96px; --lr-stage-bot: 96px; }
+html[data-reading="slides"] body { --nav-h: 72px; --bar-h: 96px; }
+html[data-reading="slides"] #hud { height: var(--nav-h) !important; padding: 8px 16px !important; gap: 8px !important; }
+html[data-reading="slides"] #hud :is(a, button) { min-height: 44px; display: inline-flex; align-items: center; font-size: 1rem !important; }
+html[data-reading="slides"] #hud :is(.lang-btn, #fs-btn, #cls-btn) { min-width: 44px; padding: 6px 10px; }
+html[data-reading="slides"] #hud :is(#hud-step, #hud-badge) { font-size: .875rem !important; color: #d6d3cc !important; }
+html[data-reading="slides"] #fs-btn { position: static !important; }
+html[data-reading="slides"] #stage { top: var(--nav-h) !important; bottom: var(--bar-h) !important; height: calc(100dvh - var(--nav-h) - var(--bar-h)) !important; }
+html[data-reading="slides"] .screen { overflow-y: auto !important; overflow-x: hidden !important; justify-content: flex-start !important; padding: 28px 20px 48px !important; gap: 20px !important; overscroll-behavior: contain; scrollbar-width: thin !important; }
+html[data-reading="slides"] .screen:not(.active) { visibility: hidden; }
+html[data-reading="slides"] .screen.active { visibility: visible; }
+html[data-reading="slides"] .screen > * { flex-shrink: 0 !important; min-height: auto !important; }
+html[data-reading="slides"] .screen :is(.big, h1, h2, .bi-he, .bi-en) { font-size: clamp(1.5rem, 4vw, 2.5rem) !important; line-height: 1.5 !important; }
+html[data-reading="slides"] .screen :is(.sub, .body-text, .instr-he, .instr-en, .gal-ask, .synthesis-text, .action-block, .close-text, .timer-sub) { font-size: 1.125rem !important; line-height: 1.8 !important; color: #d6d3cc !important; }
+html[data-reading="slides"] .screen :is(.label, .eyebrow, .quote-attr, .artwork-meta, .cap-he, .cap-en, .art-cap, .gal-cap, .timer-sub-he, .timer-sub-en, .chip-he, .chip-en) { font-size: 1rem !important; line-height: 1.65 !important; color: #ccc8bf !important; }
+html[data-reading="slides"] .screen :is(.select-card, .emotion-chip, .chip, .timer-btn, .close-btn, .complete-btn) { min-height: 48px !important; font-size: 1rem !important; padding: 10px 14px !important; }
+html[data-reading="slides"] .screen :is(.select-grid, .emotion-grid, .chips) { max-height: none !important; flex-shrink: 0 !important; }
+html[data-reading="slides"] .screen img { width: auto; max-width: 100%; max-height: 45dvh !important; object-fit: contain !important; }
+html[data-reading="slides"] #nav-bar { bottom: 0 !important; min-height: 80px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important; background: #111118; }
+html[data-reading="slides"] #nav-bar :is(#next-btn, #back-btn) { min-height: 48px !important; font-size: 1.125rem !important; }
+html[data-reading="slides"] #progress { top: auto !important; bottom: 82px !important; max-width: calc(100% - 40px); overflow-x: auto; }
+@media (max-width: 600px) {
+  html[data-reading="slides"], html[data-reading="slides"] body { --nav-h: 104px; }
+  html[data-reading="slides"] #hud { flex-wrap: wrap; align-content: center; }
+  html[data-reading="slides"] #hud-badge { display: none !important; }
+  html[data-reading="slides"] #hud-back { flex: 1 1 auto; }
+  html[data-reading="slides"] #hud-spacer { display: none; }
+  html[data-reading="slides"] #hud-lang { flex-shrink: 0; }
+  html[data-reading="slides"] .screen { padding: 24px 16px 40px !important; }
+  html[data-reading="slides"] .screen :is(.gallery-grid, .artwork-grid) { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* Original long-form lessons had lost their layout stylesheet. */
+html[data-reading="article"] { --header-h: 76px; }
+html[data-reading="article"] body { background: #faf8f3 !important; color: #292723; }
+html[data-reading="article"] #site-header { position: sticky; top: 0; z-index: 1000; background: #faf8f3; border-bottom: 1px solid #d8d2c4; }
+html[data-reading="article"] .header-inner { display: flex; align-items: center; gap: 16px; padding: 12px 20px; max-width: 1100px; margin: auto; min-height: 76px; }
+html[data-reading="article"] .logo { display: flex; gap: 8px; font-size: 1.125rem; font-weight: 700; }
+html[data-reading="article"] .header-actions { display: flex; gap: 8px; margin-inline-start: auto; }
+html[data-reading="article"] #main-nav { display: flex; gap: 8px; }
+html[data-reading="article"] #lang-toggle { border: 1px solid #8c6b24; padding: 8px 14px; border-radius: 20px; color: #574012; background: transparent; }
+html[data-reading="article"] #hamburger { display: none; width: 44px; background: transparent; padding: 8px; }
+html[data-reading="article"] #hamburger span { display: block; height: 2px; background: #292723; margin: 5px 0; }
+html[data-reading="article"] .lesson-hero { padding: 44px 0 !important; background: #20202d; color: #f3f1ec; }
+html[data-reading="article"] :is(.lesson-hero h1, .lesson-hero p) { color: #f3f1ec; }
+html[data-reading="article"] .lesson-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 20px 0; }
+html[data-reading="article"] :is(.lesson-hero-meta, .lesson-nav-footer, .timer-buttons) { display: flex; flex-wrap: wrap; gap: 16px; }
+html[data-reading="article"] .lesson-container { max-width: 880px; margin: auto; padding: 36px 24px 64px; }
+html[data-reading="article"] :is(p, li, .technique-desc, .checklist-text, .artist-style, .gallery-caption) { color: #403d37 !important; font-size: 1.125rem; }
+html[data-reading="article"] :is(.lesson-section-title, .exercise-title, .reflection-block h3) { font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.5; margin: 32px 0 16px; }
+html[data-reading="article"] :is(.artist-card-full, .technique-card, .exercise-block, .reflection-block, .lesson-inspiration-block, .lesson-quote) { background: #fff; border: 1px solid #ddd6c8; border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+html[data-reading="article"] :is(.artist-cards-grid, .techniques-grid) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+html[data-reading="article"] .artist-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+html[data-reading="article"] :is(.artist-name, .technique-title) { font-size: 1.375rem; font-weight: 700; }
+html[data-reading="article"] .artist-gallery img { max-height: 420px; width: 100%; object-fit: contain; }
+html[data-reading="article"] .gallery-caption { padding: 12px 0 24px; }
+html[data-reading="article"] .checklist-item { display: flex; gap: 12px; padding: 14px 0; cursor: pointer; }
+html[data-reading="article"] .checklist-checkbox { width: 24px; height: 24px; flex-shrink: 0; border: 2px solid #806221; border-radius: 4px; }
+html[data-reading="article"] .checklist-item.checked .checklist-checkbox { background: #806221; }
+html[data-reading="article"] :is(.timer-btn, .reflection-save, .lesson-nav-btn) { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border: 1px solid #806221; border-radius: 10px; color: #40300d; background: #f6ecd6; }
+html[data-reading="article"] .timer-clock { font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+html[data-reading="article"] .reflection-textarea { display: block; width: 100%; min-height: 160px; margin: 16px 0; padding: 16px; border: 1px solid #aaa; border-radius: 8px; }
+html[data-reading="article"] :is(.lesson-complete-banner, .reflection-saved) { display: none; }
+html[data-reading="article"] footer { padding: 32px 24px; text-align: center; border-top: 1px solid #ddd6c8; }
+html[data-reading="article"] .footer-socials { display: flex; justify-content: center; gap: 16px; }
+@media (max-width: 768px) {
+  html[data-reading="article"] :is(.artist-cards-grid, .techniques-grid) { grid-template-columns: minmax(0,1fr); }
+  html[data-reading="article"] #hamburger { display: block; }
+  html[data-reading="article"] #main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #faf8f3; padding: 16px; }
+  html[data-reading="article"] #main-nav.open { display: flex; flex-direction: column; }
+  html[data-reading="article"] .lesson-container { padding-inline: 16px; }
+  html[data-reading="article"] :is(.artist-card-full, .technique-card, .exercise-block, .reflection-block) { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-reading] *, html[data-reading] *::before, html[data-reading] *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+/* Supporting lesson text is content, not a miniature caption. */
+html[data-reading="slides"] .screen :is(.bi-he-sub, .bi-en-sub, .artwork-note, .artwork-title-line, .artwork-artist, .quote-attr, .gal-ask, .gallery-caption, .synthesis-item, .step-text) { font-size: 1.125rem !important; line-height: 1.75 !important; color: #d6d3cc !important; opacity: 1 !important; font-style: normal; }
+html[data-reading="page"] :is(.lr-title, .unit-title) { font-size: 1.375rem !important; line-height: 1.45 !important; }
+html[data-reading="page"] :is(.lr-subtitle, .lx-desc, .lx-meta-row, .lr-action, .lx-cta, .resource-meta, .footer-col a) { font-size: 1rem !important; line-height: 1.65 !important; }
+html[data-reading="page"] :is(.lr-tag, .lr-duration, .unit-tab, .ch-eyebrow, .cs-label) { font-size: .9375rem !important; line-height: 1.5 !important; }
+html[data-reading="page"] body.dark :is(.lr-subtitle, .lr-duration, .lx-desc, .lx-meta-row, .ch-eyebrow, .cs-label, .footer-col a) { color: #ccc8bf !important; }
+html[data-reading="page"] body.dark :is(.lr-title, .unit-title) { color: #f3f1ec !important; }
+html[data-reading="page"] .lesson-row.open .lr-expand { max-height: none; }
+html[data-reading="page"] :is(.unit-tab, .lr-action, .lx-cta) { min-height: 44px; }
+@media (max-width: 768px) {
+  html[data-reading="page"] .lr-head { flex-wrap: wrap; gap: 12px; padding: 18px 16px; }
+  html[data-reading="page"] .lr-info { flex: 1 1 180px; }
+  html[data-reading="page"] .lr-right { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+  html[data-reading="page"] .lx-desc { min-width: 0; }
+}
+/* Secondary information must also be readable without magnification. */
+html[data-reading="page"] :is(h4, code, th, td, .file-name, .file-size, .stext, .ft-folder, .ft-html, .ft-css, .ft-js, .card-name, .card-desc, .card-sz, .fpath, .testi-name, .testi-role, .price-plan, .price-per, .price-popular, .green-badge, .unit-meta-tag, .approach-label, .lr-num, .as-label, .th-tag, .th-visual-title, .th-stat-label, .th-quote-author, .cd-unit-tag, .cd-unit-name, .cd-unit-count, .ptoggle-label, .ptoggle-badge, .price-desc, .billing-period, .price-orig-val, .price-cta, .price-featured-badge, .price-period, .tbt-tag, .form-note, .tc-name, .tc-role) { font-size: 1rem !important; line-height: 1.65 !important; }
+html[data-reading="page"] .step-text { min-width: 0; overflow-wrap: anywhere; }
+html[data-reading="page"] code { overflow-wrap: anywhere; }
+html[data-reading="page"] body.dark :is(.testi-role, .th-visual-title, .th-stat-label, .th-quote-author, .price-desc, .price-period, .form-note, .tc-role, .compare-table th, .compare-table td) { color: #ccc8bf !important; }
+html[data-reading="slides"] .screen .artwork-meta-year { font-size: 1rem !important; }
+@media (max-width: 768px) {
+ html[data-reading="page"] .compare-table { table-layout: fixed; }
+ html[data-reading="page"] .compare-table :is(th,td) { padding: 12px 6px; overflow-wrap: anywhere; letter-spacing: normal; }
+}
+html[data-reading="slides"] .screen :is(.gal-caption, .action-label, .obs-item, .card-he, .card-en, .close-en, .btn-outline, [id^="lc"], [id^="cc"], #t10-back-lbl) { font-size: 1.125rem !important; line-height: 1.7 !important; }
+html[data-reading="slides"] .screen :is(.gal-caption, .artwork-meta, .artwork-note, .sub) span { font-size: inherit !important; }
+html[data-reading="slides"] .screen .btn-outline { min-height: 48px; white-space: normal; }
+html[data-reading="slides"] .screen :is(.q-card, .q-card em, [id$="back-lbl"]) { font-size: 1.125rem !important; line-height: 1.7 !important; }
+html[data-reading="slides"] #nav-bar { width: 100%; max-width: 760px; justify-content: center; box-sizing: border-box; }
+html[data-reading="slides"] #next-btn { min-width: 0; max-width: calc(100% - 64px); padding: 12px 24px !important; white-space: normal !important; line-height: 1.3; }
+html[data-reading="slides"] .swatches { gap: 48px 36px; padding: 0 24px 36px; }
+html[data-reading="slides"] .sw-name { font-size: 1rem !important; line-height: 1.4; bottom: -30px; color: #ddd !important; }
+html[data-reading="slides"] #nav-bar { width: 100% !important; left: 50% !important; right: auto !important; transform: translateX(-50%) !important; }
+html[data-reading="slides"] #next-btn { flex: 0 1 auto; }
+html[data-reading="slides"] body:has(#prog-fill) #nav-bar { width: 100% !important; bottom: 0 !important; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important; }
+html[data-reading="page"] :is(.teacher-hero .container > *, .th-stat, .th-visual) { min-width: 0; }
+html[data-reading="page"] .th-tag { max-width: 100%; overflow-wrap: anywhere; }
+html[data-reading="page"] .th-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+html[data-reading="page"] :is(.module-duration, .value), html[data-reading="article"] .nav-link { font-size: 1rem !important; }
+html[data-reading="slides"] .screen .artwork-meta-year { font-size: 1rem !important; }
+@media(max-width:600px) {
+ html[data-reading="page"] .teacher-hero .container { grid-template-columns: minmax(0,1fr); }
+ html[data-reading="page"] .th-stats { grid-template-columns: minmax(0,1fr); }
+}

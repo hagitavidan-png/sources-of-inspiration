@@ -18,6 +18,25 @@
 
   /* ── מצא את נתוני השיעור ─────────────────────────────── */
   function getLessonData() {
+    // Classic data scripts declare lexical constants, not window properties.
+    const loaded = [
+      typeof LESSON_01 !== 'undefined' ? LESSON_01 : null,
+      typeof LESSON_02 !== 'undefined' ? LESSON_02 : null,
+      typeof LESSON_03 !== 'undefined' ? LESSON_03 : null,
+      typeof LESSON_04 !== 'undefined' ? LESSON_04 : null,
+      typeof LESSON_05 !== 'undefined' ? LESSON_05 : null,
+      typeof LESSON_06 !== 'undefined' ? LESSON_06 : null,
+      typeof LESSON_07 !== 'undefined' ? LESSON_07 : null,
+      typeof LESSON_08 !== 'undefined' ? LESSON_08 : null,
+      typeof LESSON_09 !== 'undefined' ? LESSON_09 : null,
+      typeof LESSON_10 !== 'undefined' ? LESSON_10 : null,
+      typeof LESSON_11 !== 'undefined' ? LESSON_11 : null,
+      typeof LESSON_12 !== 'undefined' ? LESSON_12 : null,
+      typeof LESSON_13 !== 'undefined' ? LESSON_13 : null,
+      typeof LESSON_14 !== 'undefined' ? LESSON_14 : null
+    ].filter(Boolean);
+    if (loaded.length) return loaded[0];
+
     // שיטה 1: חפש משתנה LESSON_XX גלובלי
     const keys = Object.keys(window).filter(k => /^LESSON_\d+$/.test(k));
     if (keys.length > 0) return window[keys[0]];
