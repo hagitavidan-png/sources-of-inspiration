@@ -324,7 +324,7 @@
       other.type = 'text';
       other.id = name + 'Other';
       other.className = 'other-text';
-      other.placeholder = 'פרטו כאן';
+      other.placeholder = 'פרטו כאן (לא חובה)';
       other.hidden = true;
       box.appendChild(other);
       const otherBox = document.getElementById(name + '-' + (all.length - 1));
@@ -380,16 +380,12 @@
       let filled = kind === 'text'
         ? field.querySelector('input').value.trim() !== ''
         : field.querySelector('input:checked') !== null;
-      if (filled && kind === 'check') {
-        const other = field.querySelector('.other-text');
-        if (other && !other.hidden && other.value.trim() === '') filled = false;
-      }
       if (!filled) {
         ok = false;
         field.classList.add('invalid');
         const err = document.createElement('p');
         err.className = 'err';
-        err.textContent = kind === 'text' ? 'יש למלא את שם הקבוצה' : 'יש לבחור תשובה (ואם נבחר "אחר", לפרט)';
+        err.textContent = kind === 'text' ? 'יש למלא את שם הקבוצה' : 'יש לבחור לפחות תשובה אחת';
         field.appendChild(err);
       }
     });
