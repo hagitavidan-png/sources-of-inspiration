@@ -246,15 +246,6 @@
     if (e.key === 'ArrowRight') show(current - 1);
   });
 
-  document.querySelectorAll('[data-survey]').forEach(a => a.addEventListener('click', e => {
-    const fromSurvey = /google(usercontent)?\.com/.test(document.referrer);
-    if (fromSurvey && history.length === 1) {
-      e.preventDefault();
-      window.close();
-      setTimeout(() => { location.href = a.href; }, 300);
-    }
-  }));
-
   show(0);
 </script>
 </body>
