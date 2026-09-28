@@ -37,6 +37,19 @@ function doGet() {
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
+// קבלת תשובות מדף הסקר כשהוא מתארח באתר חיצוני (GitHub Pages)
+function doPost(e) {
+  let result;
+  try {
+    submitResponse(JSON.parse(e.postData.contents));
+    result = { ok: true };
+  } catch (err) {
+    result = { ok: false, error: String(err && err.message || err) };
+  }
+  return ContentService.createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function setup() {
   const ss = SpreadsheetApp.create(TITLE + ' (תשובות)');
   const sheet = ss.getSheets()[0];

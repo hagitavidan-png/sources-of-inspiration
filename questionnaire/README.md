@@ -20,6 +20,17 @@
 
 ---
 
+## אירוח באתר הארגון (na-tel-aviv.github.io)
+
+כך כתובת הסקר תהיה `https://na-tel-aviv.github.io/survey.html`, בלי שם אישי. התשובות עדיין נשמרות בגיליון Google.
+
+1. בצעו את שלבים 1–5 של האפשרות המומלצת למעלה, רצוי מחשבון Gmail של השירות ולא מחשבון אישי. העתיקו את קישור ה-`/exec`.
+2. בקובץ `github-pages-survey.html` החליפו את `REPLACE_WITH_APPS_SCRIPT_EXEC_URL` בקישור ה-`/exec`.
+3. העלו את הקובץ למאגר `na-tel-aviv/na-tel-aviv.github.io` בשם `survey.html` (ב-GitHub: **Add file** ← **Upload files**).
+4. בדף הבית כדאי להוסיף כפתור "שאלון למצפוני קבוצות" שמקשר ל-`survey.html`.
+
+---
+
 ## אפשרות א': Google Forms (אוטומטי, כ-2 דקות)
 
 הסקריפט `create-google-form.gs` בונה את כל הטופס בלחיצה אחת, כולל הדילוג המותנה וגיליון תשובות.
