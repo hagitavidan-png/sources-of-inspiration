@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html translate="no" class="notranslate" lang="he" dir="rtl" data-lesson-type="regular">
+<head>
+<meta name="google" content="notranslate">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>טיוטה · שיעור 1.1: חוויה אישית כמקור ליצירה · מקורות השראה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<!--
+  PREVIEW DRAFT — Lesson 1.1 (new version): "Personal Experience as a Source for Creation"
+  Separate page. Does not replace lessons/lesson-1-1.html and is not linked from the site navigation.
+  Hebrew only at this stage.
+-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f10;--rose:#FF4D4D;--gold:#c9a96e;
+  --blue:#4a7fa5;--teal:#3dbcaa;--violet:#7c5cbf;
+  --amber:#e8a030;--green:#4caf82;--white:#ffffff;
+  --muted:#8a8a8a;
+  --tp:#ffffff;--ts:#cfcfcf;--tm:#8a8a8a;
+  --line:rgba(255,255,255,.1);--card:rgba(255,255,255,.04);
+  --font-en:'Sora',sans-serif;--font-he:'Heebo',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(--tp)}
+body{font-family:var(--font-he);transition:background .8s var(--ease)}
+
+/* ── HUD (same as lesson pages) ── */
+#hud{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;
+  background:rgba(13,13,26,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;gap:12px;padding:0 20px}
+#hud-back{display:flex;align-items:center;gap:6px;font-size:.75rem;
+  color:var(--tm);text-decoration:none;transition:color .2s;white-space:nowrap}
+#hud-back:hover{color:var(--tp)}
+#hud-badge{padding:3px 11px;border-radius:20px;white-space:nowrap;
+  background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.22);
+  font-size:.65rem;letter-spacing:.08em;color:var(--rose)}
+#hud-draft{padding:3px 10px;border-radius:20px;white-space:nowrap;
+  border:1px dashed rgba(201,169,110,.5);color:var(--gold);font-size:.65rem;letter-spacing:.06em}
+#hud-spacer{flex:1}
+#hud-lang{display:flex;gap:4px}
+.lang-btn{padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:var(--tm);font-size:.7rem;
+  letter-spacing:.06em;cursor:pointer;transition:.2s;font-family:inherit}
+.lang-btn.active{background:rgba(201,169,110,.15);border-color:rgba(201,169,110,.45);color:var(--gold)}
+.lang-btn:disabled{opacity:.35;cursor:default}
+#hud-step{font-size:.7rem;color:var(--tm);letter-spacing:.04em;white-space:nowrap;font-family:var(--font-en)}
+
+/* ── PROGRESS DOTS ── */
+#progress{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  z-index:100;display:flex;gap:6px;align-items:center}
+.pdot{width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:.3s var(--ease)}
+.pdot.now{background:var(--rose);border-color:var(--rose);
+  box-shadow:0 0 10px rgba(255,77,77,.4);width:20px;border-radius:4px}
+
+/* ── BACKGROUND GLOW (one fixed layer, colors change per screen) ── */
+#glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.16;
+  transition:background 1s var(--ease);animation:drift 12s ease-in-out infinite alternate}
+#blob-a{width:460px;height:460px;top:-120px;left:-100px}
+#blob-b{width:360px;height:360px;bottom:40px;right:-80px;animation-delay:4s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,20px) scale(1.08)}}
+
+/* ── STAGE / SCREENS ── */
+#stage{position:fixed;inset:52px 0 80px 0;overflow:hidden;z-index:1}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:32px 28px 40px;
+  opacity:0;pointer-events:none;transform:translateY(32px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.leaving{opacity:0;transform:translateY(-28px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease)}
+/* single content column; margin:auto centers it and lets it scroll when taller than the stage */
+.wrap{position:relative;width:min(640px,100%);margin:auto 0;
+  display:flex;flex-direction:column;gap:clamp(12px,2.2vh,22px)}
+.wrap--wide{width:min(960px,100%)}
+
+/* ── TYPOGRAPHY ── */
+.label{font-size:.7rem;letter-spacing:.14em;color:var(--tm)}
+.label b{color:var(--rose);font-weight:600}
+.big{font-size:clamp(1.7rem,4.5vw,3.2rem);font-weight:700;line-height:1.3;color:var(--tp)}
+.big .gold,.gold{color:var(--gold)}
+.sub{font-size:clamp(.95rem,2vw,1.08rem);font-weight:300;color:var(--tm);line-height:1.9}
+.body-text{font-size:clamp(.98rem,2.1vw,1.12rem);font-weight:300;color:var(--ts);line-height:1.9}
+.quote{font-size:clamp(1.3rem,3.2vw,2rem);font-weight:600;line-height:1.5;color:var(--tp)}
+
+/* ── TAGS / CHIPS ── */
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:8px 16px;border-radius:50px;border:1px solid var(--line);
+  background:var(--card);font-size:.9rem;color:var(--ts)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:12px 22px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.15);background:var(--card);
+  font-size:.95rem;color:var(--ts);cursor:pointer;
+  transition:.25s var(--ease);user-select:none;font-family:inherit}
+.chip:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:var(--tp)}
+.chip.picked{background:var(--rose);border-color:var(--rose);
+  color:#fff;box-shadow:0 4px 24px rgba(255,77,77,.32)}
+
+/* ── PROMPTS / FIELDS ── */
+.prompt{border-inline-start:3px solid var(--rose);padding:14px 18px;
+  background:var(--card);border-radius:12px;color:var(--ts);
+  font-size:clamp(.98rem,2vw,1.1rem);line-height:1.7}
+.prompt--gold{border-inline-start-color:var(--gold)}
+.prompt small{display:block;color:var(--tm);font-size:.82rem;margin-top:4px}
+.field{width:100%;min-height:88px;background:rgba(255,255,255,.035);
+  border:1.5px solid rgba(255,255,255,.12);border-radius:14px;color:var(--tp);
+  font-family:inherit;font-size:16px;line-height:1.65;padding:14px 16px;resize:none;direction:rtl;
+  transition:border-color .2s}
+.field::placeholder{color:rgba(255,255,255,.3)}
+.field:focus{outline:none;border-color:rgba(201,169,110,.55)}
+.echo{display:none;font-size:.88rem;color:var(--tm);line-height:1.6}
+.echo.on{display:block}
+.echo b{color:var(--gold);font-weight:600}
+.cues{display:flex;flex-wrap:wrap;gap:8px}
+.cue{font-size:.76rem;color:rgba(245,243,239,.55);background:var(--card);
+  border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:5px 12px}
+
+/* ── ARTIST SCREENS ── */
+.artist{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,48px);align-items:center}
+.fig{display:flex;flex-direction:column;gap:10px;align-items:center}
+.fig img{display:block;width:auto;max-width:100%;height:auto;border-radius:12px;
+  box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 60px rgba(201,169,110,.08)}
+.screen .fig img{max-height:min(52vh,460px) !important}
+.fig-ph{width:min(300px,100%);aspect-ratio:4/5;border-radius:12px;border:1px solid var(--line);
+  background:radial-gradient(120% 90% at 50% 20%,rgba(201,169,110,.10),rgba(255,255,255,.02) 60%);
+  display:flex;align-items:center;justify-content:center}
+.fig-ph svg{width:70%;height:auto;opacity:.75}
+.fig figcaption{font-size:.78rem;color:var(--tm);line-height:1.5;text-align:center !important}
+.artist-text{display:flex;flex-direction:column;gap:14px}
+.artist-years{font-family:var(--font-en);font-size:.72rem;letter-spacing:.12em;color:var(--tm)}
+.artist-roster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.roster-card{padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--card)}
+.roster-card b{display:block;font-size:1.1rem;margin-bottom:6px}
+.roster-card span{font-size:.86rem;color:var(--tm);line-height:1.6}
+
+/* ── OBSERVATION REVEAL ── */
+.reveal{min-height:96px;transition:opacity .3s var(--ease)}
+.reveal .who{display:block;font-size:.72rem;letter-spacing:.1em;color:var(--gold);margin-bottom:4px}
+
+/* ── EXPERIMENT LAB ── */
+.lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lab-tile{padding:18px 16px;border-radius:16px;border:1.5px solid var(--line);
+  background:var(--card);color:var(--tp);font-family:inherit;display:flex;flex-direction:column;gap:6px}
+button.lab-tile{cursor:pointer;transition:.25s var(--ease)}
+button.lab-tile:hover{border-color:rgba(255,255,255,.3)}
+.lab-tile.picked{border-color:var(--rose);background:rgba(255,77,77,.1);box-shadow:0 4px 24px rgba(255,77,77,.2)}
+.lab-num{font-family:var(--font-en);font-weight:600;font-size:.78rem;color:var(--rose);letter-spacing:.08em}
+.lab-name{font-size:1.15rem;font-weight:700}
+.lab-q{font-size:.86rem;color:var(--tm);line-height:1.55}
+.track{display:flex;gap:6px;flex-wrap:wrap}
+.tpill{font-size:.72rem;padding:4px 11px;border-radius:20px;border:1px solid var(--line);color:var(--tm)}
+.tpill.now{border-color:rgba(255,77,77,.6);color:var(--tp)}
+.tpill.done{border-color:rgba(201,169,110,.5);color:var(--gold)}
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{padding:12px 18px;border-radius:14px;border:1px solid var(--line);background:var(--card);
+  font-size:clamp(.94rem,2vw,1.04rem);color:var(--ts);line-height:1.6}
+.done-btn{align-self:flex-start;padding:11px 22px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.18);background:transparent;color:var(--ts);
+  font-family:inherit;font-size:.9rem;cursor:pointer;transition:.2s}
+.done-btn:hover{border-color:rgba(255,255,255,.4);color:var(--tp)}
+.done-btn.on{border-color:rgba(201,169,110,.55);background:rgba(201,169,110,.12);color:var(--gold)}
+
+/* ── CLOSE SCREEN ── */
+.close-badge{width:64px;height:64px;border-radius:50%;background:#FF4D4D;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 32px rgba(255,77,77,.3)}
+.close-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-outline{padding:12px 26px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,.18);background:transparent;
+  color:var(--ts);font-family:inherit;font-size:.88rem;
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;
+  gap:6px;transition:.2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.4);color:var(--tp)}
+
+/* ── NAV BAR (same as lesson pages) ── */
+#nav-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;height:80px;
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:0 24px;
+  background:rgba(13,13,26,.95);border-top:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px)}
+#back-btn{width:48px;height:48px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tm);font-size:1.2rem;transition:.2s;flex-shrink:0}
+#back-btn:hover{background:rgba(255,255,255,.14);color:var(--tp)}
+#back-btn:disabled{opacity:.18;cursor:default;pointer-events:none}
+#next-btn{padding:15px 52px;background:#FF4D4D;
+  border:none;border-radius:50px;color:#fff;font-family:inherit;
+  font-size:1rem;font-weight:800;letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 8px 32px rgba(255,77,77,.32);transition:.25s var(--ease);white-space:nowrap}
+#next-btn:hover{background:#e03333;transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,77,77,.42)}
+#next-btn:active{transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .artist{grid-template-columns:1fr;gap:18px}
+  .screen .fig img{max-height:30vh !important}
+  .fig-ph{width:min(200px,60%)}
+}
+@media(max-width:600px){
+  #hud{padding:0 12px;gap:8px}
+  #hud-back span{display:none}
+  .big{font-size:clamp(1.45rem,7vw,2rem)}
+  #next-btn{padding:14px 36px;font-size:.95rem}
+  .chip{padding:10px 16px}
+  .artist-roster,.lab{grid-template-columns:1fr;gap:8px}
+  .roster-card,.lab-tile{padding:12px 14px}
+  .lab-tile{display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:2px;align-items:baseline}
+  .lab-tile .lab-q{grid-column:1 / -1}
+  .field{min-height:76px}
+  .screen .fig img{max-height:24vh !important}
+  .fig-ph{width:auto;height:22vh}
+  .artist-text{gap:10px}
+}
+/* landscape phones: keep image and text side by side */
+@media(max-height:560px) and (min-width:600px){
+  .artist{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:24px}
+  .screen .fig img{max-height:58vh !important}
+  .fig-ph{width:auto;height:50vh}
+}
+@media(max-width:380px){
+  #hud-draft{display:none}
+}
+</style>
+<link rel="stylesheet" href="../css/lesson-responsive.css"/>
+<style>
+/* Scrollable content screens: keep the column centered when it fits (margin:auto on .wrap) */
+.screen.screen--scroll{justify-content:flex-start !important}
+.screen .wrap > *{flex-shrink:0}
+.screen .wrap{padding-bottom:18px}
+</style>
+</head>
+<body class="dark he rtl" dir="rtl">
+
+<nav id="hud">
+  <a id="hud-back" href="../course.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>חזרה לקורס</span>
+  </a>
+  <span id="hud-badge">שיעור 1.1</span>
+  <span id="hud-draft">טיוטה · Preview</span>
+  <div id="hud-spacer"></div>
+  <div id="hud-lang">
+    <button class="lang-btn active" type="button">עברית</button>
+    <button class="lang-btn" type="button" disabled title="English version coming later">EN</button>
+  </div>
+  <span id="hud-step">1 / 19</span>
+</nav>
+
+<div id="glow"><div class="blob" id="blob-a"></div><div class="blob" id="blob-b"></div></div>
+
+<main id="stage">
+
+  <!-- s0 — Opening -->
+  <section class="screen screen--scroll active" id="s0" data-bg="#0d0d1a" data-glow="rose,violet">
+    <div class="wrap">
+      <p class="label">יחידה 1 · חוויה אישית כמקור השראה · <b>שיעור 1.1</b></p>
+      <h1 class="big">איך חוויה<br>הופכת ליצירה?</h1>
+      <p class="sub">בשיעור הזה נצא מחוויה אישית אחת,<br>ונבדוק איך צבע, קו וקומפוזיציה יכולים לתת לה צורה.</p>
+    </div>
+  </section>
+
+  <!-- s1 — Starting points -->
+  <section class="screen screen--scroll" id="s1" data-bg="#0d0d1a" data-glow="violet,blue">
+    <div class="wrap">
+      <p class="label">נקודות מוצא</p>
+      <h2 class="big">יצירה יכולה להתחיל מ…</h2>
+      <div class="tags">
+        <span class="tag">זיכרון</span><span class="tag">מקום</span><span class="tag">אדם</span>
+        <span class="tag">אירוע</span><span class="tag">תחושה</span>
+      </div>
+      <p class="body-text">החוויה היא נקודת המוצא, לא התוכן.<br>לא צריך לצייר את מה שקרה, כדי שהציור יישא משהו ממנו.</p>
+    </div>
+  </section>
+
+  <!-- s2 — Three artists (overview) -->
+  <section class="screen screen--scroll" id="s2" data-bg="#110e10" data-glow="amber,rose">
+    <div class="wrap wrap--wide">
+      <p class="label">מקורות השראה</p>
+      <h2 class="big">שלושה אמנים.<br>שלוש דרכים להפוך חוויה ליצירה.</h2>
+      <div class="artist-roster">
+        <div class="roster-card"><b>פרידה קאלו</b><span>הגוף, הכאב והזהות הופכים לסמלים.</span></div>
+        <div class="roster-card"><b>אדוורד מונק</b><span>תחושה פנימית הופכת לצבע, לקו ולמרחב.</span></div>
+        <div class="roster-card"><b>לואיז בורז'ואה</b><span>זיכרון ילדות הופך לצורה ולחומר.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s3 — Frida Kahlo -->
+  <section class="screen screen--scroll" id="s3" data-bg="#120c0a" data-glow="rose,green">
+    <div class="wrap wrap--wide">
+      <div class="artist">
+        <figure class="fig">
+          <img id="kahlo-img" src="https://www.fridakahlo.org/images/paintings/self-portrait-with-monkeys-1943.jpg!HD.jpg"
+               alt="פרידה קאלו, דיוקן עצמי עם קופים, 1943" loading="lazy">
+          <div class="fig-ph" id="kahlo-ph" hidden aria-hidden="true">
+            <svg viewBox="0 0 100 120" fill="none" stroke="rgba(201,169,110,.8)" stroke-width="1.2">
+              <ellipse cx="50" cy="48" rx="20" ry="25"/><path d="M30 100c4-16 36-16 40 0"/>
+              <path d="M22 30c10-12 46-12 56 0" opacity=".5"/><path d="M15 70c-6 12-2 26 8 30M85 70c6 12 2 26-8 30" opacity=".5"/>
+            </svg>
+          </div>
+          <figcaption>דיוקן עצמי עם קופים, 1943</figcaption>
+        </figure>
+        <div class="artist-text">
+          <p class="artist-years">FRIDA KAHLO · 1907–1954</p>
+          <h2 class="big">פרידה קאלו</h2>
+          <p class="body-text">בגיל 18 נפצעה קשה בתאונת אוטובוס, והחלה לצייר כשהיא מרותקת למיטה, מול מראה.<br>היא ציירה את עצמה שוב ושוב, אבל לא כתיעוד. הגוף, הכאב, הזהות והשורשים המקסיקניים הפכו לשפה של סמלים.</p>
+          <div class="prompt prompt--gold">החוויה הופכת ל<b>סמלים</b>: שורשים, קוצים, בעלי חיים, בגדים מסורתיים, מבט ישיר.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s4 — Edvard Munch -->
+  <section class="screen screen--scroll" id="s4" data-bg="#140c07" data-glow="amber,blue">
+    <div class="wrap wrap--wide">
+      <div class="artist">
+        <figure class="fig">
+          <img src="images/munch-scream.jpg" alt="אדוורד מונק, הצעקה, 1893" loading="lazy"
+               onerror="this.style.display='none'">
+          <figcaption>הצעקה, 1893</figcaption>
+        </figure>
+        <div class="artist-text">
+          <p class="artist-years">EDVARD MUNCH · 1863–1944</p>
+          <h2 class="big">אדוורד מונק</h2>
+          <p class="body-text">מונק כתב על ערב שבו הלך עם חברים, והשמיים נצבעו פתאום אדום כדם. הוא עצר, רועד, וחש "צעקה אינסופית שעוברת בטבע".<br>הוא לא צייר את הנוף כפי שנראה, אלא את התחושה.</p>
+          <div class="prompt prompt--gold">החוויה הופכת ל<b>צבע, קו ומרחב</b>: שמיים לא טבעיים, קווים מתפתלים, גשר שנמתח באלכסון.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s5 — Louise Bourgeois -->
+  <section class="screen screen--scroll" id="s5" data-bg="#0c0c12" data-glow="violet,teal">
+    <div class="wrap wrap--wide">
+      <div class="artist">
+        <figure class="fig">
+          <div class="fig-ph" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" stroke="rgba(201,169,110,.85)" stroke-width="1.1" stroke-linecap="round">
+              <ellipse cx="50" cy="34" rx="9" ry="7"/>
+              <path d="M44 38C30 44 18 64 10 92M56 38c14 6 26 26 34 54M46 39c-8 10-14 30-16 53M54 39c8 10 14 30 16 53"/>
+              <path d="M43 34C28 30 16 38 8 52M57 34c15-4 27 4 35 18M45 31c-10-8-24-8-32 0M55 31c10-8 24-8 32 0" opacity=".6"/>
+            </svg>
+          </div>
+          <figcaption>אמא (<bdi>Maman</bdi>), 1999 · פלדה, נירוסטה ושיש</figcaption>
+        </figure>
+        <div class="artist-text">
+          <p class="artist-years">LOUISE BOURGEOIS · 1911–2010</p>
+          <h2 class="big">לואיז בורז'ואה</h2>
+          <p class="body-text">כל חייה חזרה בורז'ואה לזיכרונות הילדות שלה בצרפת. אמה עבדה בבית המלאכה המשפחתי בתיקון שטיחי קיר.<br>העכביש הענק שבנתה, טווה, מתקן, מגונן, הוא מחווה לאמה.</p>
+          <div class="prompt prompt--gold">החוויה הופכת ל<b>צורה, חומר וגודל</b>: עכביש בגובה של כמעט עשרה מטרים, והצופה עומד מתחתיו, קטן.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s6 — Looking: from story to visual language -->
+  <section class="screen screen--scroll" id="s6" data-bg="#0d0d1a" data-glow="blue,violet">
+    <div class="wrap">
+      <p class="label">התבוננות · מהסיפור אל השפה החזותית</p>
+      <h2 class="big">מה ביצירה גורם לנו<br>לחוות אותה כך?</h2>
+      <p class="sub">בחרו מרכיב אחד וראו איך הוא פועל.</p>
+      <div class="chips" id="look-chips">
+        <button class="chip" type="button" data-k="color">צבע</button>
+        <button class="chip" type="button" data-k="line">קו</button>
+        <button class="chip" type="button" data-k="shape">צורה</button>
+        <button class="chip" type="button" data-k="space">מרחב</button>
+        <button class="chip" type="button" data-k="comp">קומפוזיציה</button>
+      </div>
+      <div class="prompt reveal" id="look-reveal"><span class="who">רמז</span>הסיפור של האמן מסביר מאיפה הגיעה היצירה. השפה החזותית מסבירה למה היא פועלת עלינו.</div>
+    </div>
+  </section>
+
+  <!-- s7 — Personal starting point: choose -->
+  <section class="screen screen--scroll" id="s7" data-bg="#120a10" data-glow="rose,amber">
+    <div class="wrap">
+      <p class="label">נקודת מוצא אישית</p>
+      <h2 class="big">עכשיו המבט מסתובב פנימה.<br><span class="gold">בחרו חוויה אחת.</span></h2>
+      <div class="chips" id="exp-chips">
+        <button class="chip" type="button">זיכרון</button>
+        <button class="chip" type="button">מקום</button>
+        <button class="chip" type="button">אדם</button>
+        <button class="chip" type="button">מפגש</button>
+        <button class="chip" type="button">רגע</button>
+        <button class="chip" type="button">תחושה</button>
+      </div>
+      <textarea class="field" id="exp-text" rows="2" placeholder="במילה או במשפט: איזו חוויה?"></textarea>
+      <p class="sub">הכתיבה לא נשמרת ולא נשלחת לשום מקום. היא רק עוזרת לכם לחשוב.</p>
+    </div>
+  </section>
+
+  <!-- s8 — Detail -->
+  <section class="screen screen--scroll" id="s8" data-bg="#0d0d1a" data-glow="violet,rose">
+    <div class="wrap">
+      <p class="label">נקודת מוצא אישית · 1 / 2</p>
+      <h2 class="big">איזה פרט מהחוויה<br>נשאר איתכם במיוחד?</h2>
+      <p class="echo" data-echo>החוויה שלכם: <b></b></p>
+      <textarea class="field" id="exp-detail" rows="3" placeholder="צבע, אור, צליל, תנועה, חפץ, משפט, מרחק…"></textarea>
+    </div>
+  </section>
+
+  <!-- s9 — What to convey -->
+  <section class="screen screen--scroll" id="s9" data-bg="#0d0d1a" data-glow="blue,teal">
+    <div class="wrap">
+      <p class="label">נקודת מוצא אישית · 2 / 2</p>
+      <h2 class="big">מה הייתם רוצים להעביר ממנה,<br><span class="gold">בלי לצייר בהכרח את מה שקרה?</span></h2>
+      <textarea class="field" id="exp-convey" rows="3" placeholder="למשל: שקט, מתח, מרחק, חום, משהו שנגמר…"></textarea>
+    </div>
+  </section>
+
+  <!-- s10 — Experiment lab intro -->
+  <section class="screen screen--scroll" id="s10" data-bg="#0f0d18" data-glow="rose,blue">
+    <div class="wrap wrap--wide">
+      <p class="label">מעבדת ניסויים</p>
+      <h2 class="big">שלושה ניסויים.<br><span class="gold">חוויה אחת.</span></h2>
+      <p class="body-text">לא שלושה נושאים ולא שלוש יצירות. שלוש דרכים חזותיות לבדוק את <b>אותה</b> חוויה.</p>
+      <p class="echo" data-echo>אותה חוויה בשלושת הניסויים: <b></b></p>
+      <div class="lab">
+        <div class="lab-tile"><span class="lab-num">01</span><span class="lab-name">צבע</span><span class="lab-q">אילו צבעים שייכים לחוויה?</span></div>
+        <div class="lab-tile"><span class="lab-num">02</span><span class="lab-name">קו ותנועה</span><span class="lab-q">איך החוויה נעה?</span></div>
+        <div class="lab-tile"><span class="lab-num">03</span><span class="lab-name">מרחב וקומפוזיציה</span><span class="lab-q">מה קרוב, מה רחוק, מה נשאר ריק?</span></div>
+      </div>
+      <div class="cues"><span class="cue">3 דפים קטנים (A5)</span><span class="cue">כ-10 דקות לכל ניסוי</span><span class="cue">לא מחפשים תוצאה גמורה</span></div>
+    </div>
+  </section>
+
+  <!-- s11 — Experiment 01: Color -->
+  <section class="screen screen--scroll" id="s11" data-bg="#140c07" data-glow="amber,rose" data-exp="1">
+    <div class="wrap">
+      <div class="track" data-track></div>
+      <p class="label"><b>ניסוי 01</b> · כ-10 דקות</p>
+      <h2 class="big">צבע</h2>
+      <p class="echo" data-echo>אותה חוויה: <b></b></p>
+      <div class="steps">
+        <div class="step">בחרו 2–4 צבעים ששייכים לחוויה, לא בהכרח הצבעים "האמיתיים" שלה.</div>
+        <div class="step">עבדו בכתמים ובשכבות. בלי קווי מתאר ובלי דמויות.</div>
+        <div class="step">שימו לב: איזה צבע גדול? איזה קטן? איפה הם נוגעים?</div>
+      </div>
+      <button class="done-btn" type="button" data-done="1">✓ הניסוי מוכן</button>
+    </div>
+  </section>
+
+  <!-- s12 — Experiment 02: Line & movement -->
+  <section class="screen screen--scroll" id="s12" data-bg="#0d0d1a" data-glow="violet,blue" data-exp="2">
+    <div class="wrap">
+      <div class="track" data-track></div>
+      <p class="label"><b>ניסוי 02</b> · כ-10 דקות</p>
+      <h2 class="big">קו ותנועה</h2>
+      <p class="echo" data-echo>אותה חוויה: <b></b></p>
+      <div class="steps">
+        <div class="step">עבדו רק בקו: עיפרון, פחם או טוש.</div>
+        <div class="step">איך החוויה זזה? מהירה או איטית, רציפה או שבורה, חזקה או חלשה.</div>
+        <div class="step">שנו לחץ, קצב וכיוון. תנו ליד להוביל לפני שהראש מתכנן.</div>
+      </div>
+      <button class="done-btn" type="button" data-done="2">✓ הניסוי מוכן</button>
+    </div>
+  </section>
+
+  <!-- s13 — Experiment 03: Space & composition -->
+  <section class="screen screen--scroll" id="s13" data-bg="#0a100d" data-glow="teal,green" data-exp="3">
+    <div class="wrap">
+      <div class="track" data-track></div>
+      <p class="label"><b>ניסוי 03</b> · כ-10 דקות</p>
+      <h2 class="big">מרחב וקומפוזיציה</h2>
+      <p class="echo" data-echo>אותה חוויה: <b></b></p>
+      <div class="steps">
+        <div class="step">בנו את החוויה כסידור של צורות פשוטות על הדף.</div>
+        <div class="step">מה קרוב ומה רחוק? מה גדול ומה קטן? מה צפוף?</div>
+        <div class="step">החליטו איפה נשאר ריק. גם הריק הוא חלק מהחוויה.</div>
+      </div>
+      <button class="done-btn" type="button" data-done="3">✓ הניסוי מוכן</button>
+    </div>
+  </section>
+
+  <!-- s14 — Choose a direction -->
+  <section class="screen screen--scroll" id="s14" data-bg="#120a10" data-glow="rose,violet">
+    <div class="wrap wrap--wide">
+      <p class="label">בחירת כיוון</p>
+      <p class="sub">הניחו את שלושת הניסויים זה לצד זה והתבוננו בהם.</p>
+      <h2 class="big">אל תבחרו את היפה ביותר.<br><span class="gold">בחרו את זה שאתם רוצים לדעת לאן הוא יכול להתפתח.</span></h2>
+      <div class="lab" id="pick-lab">
+        <button class="lab-tile" type="button" data-pick="1"><span class="lab-num">01</span><span class="lab-name">צבע</span></button>
+        <button class="lab-tile" type="button" data-pick="2"><span class="lab-num">02</span><span class="lab-name">קו ותנועה</span></button>
+        <button class="lab-tile" type="button" data-pick="3"><span class="lab-num">03</span><span class="lab-name">מרחב וקומפוזיציה</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- s15 — Develop one work -->
+  <section class="screen screen--scroll" id="s15" data-bg="#0f0d18" data-glow="amber,violet">
+    <div class="wrap">
+      <p class="label">פיתוח יצירה אחת</p>
+      <h2 class="big">הסקיצה היא נקודת מוצא.<br><span class="gold">לא תוכנית שחייבים להעתיק.</span></h2>
+      <p class="body-text">עברו לדף גדול יותר, ופתחו את הניסוי שבחרתם.</p>
+      <div class="prompt" id="dev-hint" hidden></div>
+      <div class="tags"><span class="tag">להגדיל</span><span class="tag">להוסיף</span><span class="tag">לכסות</span><span class="tag">להזיז</span><span class="tag">להגזים</span><span class="tag">לוותר</span></div>
+    </div>
+  </section>
+
+  <!-- s16 — One pause -->
+  <section class="screen screen--scroll" id="s16" data-bg="#0d0d1a" data-glow="blue,rose">
+    <div class="wrap">
+      <p class="label">עצירה אחת באמצע העבודה</p>
+      <h2 class="big">הרחיקו את הדף.<br>התבוננו.</h2>
+      <div class="steps">
+        <div class="prompt">מה כבר עובד בציור?</div>
+        <div class="prompt">מה דבר אחד שאני רוצה לחזק?</div>
+      </div>
+      <div class="cues"><span class="cue">ואז, חזרו לעבודה.</span></div>
+    </div>
+  </section>
+
+  <!-- s17 — Reflect on the process -->
+  <section class="screen screen--scroll" id="s17" data-bg="#0a0f18" data-glow="teal,violet">
+    <div class="wrap">
+      <p class="label">התבוננות בתהליך</p>
+      <h2 class="big">הציבו את הניסויים<br>לצד העבודה.</h2>
+      <div class="steps">
+        <div class="prompt">מה השתנה בדרך?</div>
+        <div class="prompt">איזו בחירה חזותית הפכה משמעותית?</div>
+        <div class="prompt">מה הופיע שלא תכננתם מראש?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s18 — Closing -->
+  <section class="screen screen--scroll" id="s18" data-bg="#1a0a12" data-glow="rose,amber">
+    <div class="wrap">
+      <div class="close-badge">
+        <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
+          <path d="M6 17 Q11 9 17 17 Q23 25 28 17" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <circle cx="17" cy="17" r="11" stroke="white" stroke-width="1.5" opacity=".45" fill="none"/>
+        </svg>
+      </div>
+      <h2 class="big">החוויה הייתה נקודת המוצא.<br><span class="gold">היצירה מצאה את הדרך שלה.</span></h2>
+      <p class="sub">בשיעורים הבאים ביחידה נעמיק בכל פעם בהיבט אחד: קו, צבע, קומפוזיציה, זיכרון ויומן חזותי.</p>
+      <div class="close-btns">
+        <a class="btn-outline" href="../course.html">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>חזרה לקורס</span>
+        </a>
+        <button class="btn-outline" type="button" onclick="go(0)">מההתחלה</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="progress"></div>
+
+<div id="nav-bar">
+  <button id="back-btn" type="button" onclick="goBack()" disabled aria-label="הקודם">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="next-btn" type="button" onclick="advance()">← התחל</button>
+</div>
+
+<script src="js/lesson-system.js"></script>
+<script>
+/* ── STATE ── */
+const TOTAL = document.querySelectorAll('#stage .screen').length;
+let cur = 0, busy = false, touchX = 0;
+const state = { type:'', text:'', done:{}, pick:0 };
+
+/* Semantic button keys (resolved by lesson-system.js) */
+const BTN = Array.from({length:TOTAL}, (_, i) => i === 0 ? 'begin' : i === TOTAL - 1 ? 'finish' : 'continue');
+BTN[7] = 'choose'; BTN[14] = 'choose';
+
+const GLOW = {rose:'#FF4D4D',violet:'#7c5cbf',blue:'#4a7fa5',teal:'#3dbcaa',amber:'#e8a030',green:'#4caf82'};
+const EXP_NAMES = {1:'צבע',2:'קו ותנועה',3:'מרחב וקומפוזיציה'};
+
+/* Observation: each visual element shown through one of the three artists */
+const LOOK = {
+  color:{who:'צבע · אדוורד מונק', txt:'השמיים בצעקה כתומים-אדומים. זה לא הצבע "הנכון" של שקיעה, אבל הוא נכון לתחושה. הצבע נושא את החוויה.'},
+  line: {who:'קו · אדוורד מונק', txt:'אותם קווים מתפתלים עוברים מהשמיים, דרך המים, אל הדמות. אין גבול ברור בין האדם לנוף, והכול רועד יחד.'},
+  shape:{who:'צורה · פרידה קאלו', txt:'פרטים קטנים, עלים, קופים, שיער קלוע, הופכים לסמלים אישיים. הצורה אומרת משהו שהדמות לא אומרת במילים.'},
+  space:{who:'מרחב · לואיז בורז\'ואה', txt:'העכביש ענק, והצופה עומד מתחתיו. היחס בין הגודל של הגוף שלנו לגודל היצירה הוא חלק מהחוויה.'},
+  comp: {who:'קומפוזיציה · פרידה קאלו', txt:'היא ממקמת את עצמה במרכז, חזיתית, מביטה ישר אלינו. הקומפוזיציה לא מאפשרת לחמוק מהמבט.'}
+};
+const DEV_HINT = {
+  1:'כיוון הצבע: המשיכו לבנות שכבות, ותנו ליחסים בין הצבעים להוביל את המבנה של הדף.',
+  2:'כיוון הקו והתנועה: תנו לקו לארגן את הדף. הוסיפו צבע רק אם הוא מחזק את התנועה.',
+  3:'כיוון המרחב והקומפוזיציה: הגדילו את היחסים. מה קרוב, מה רחוק, ומה נשאר ריק.'
+};
+
+/* ── LANGUAGE (Hebrew-only preview) ── */
+function applyLang(){
+  document.documentElement.lang = 'he';
+  document.documentElement.dir = 'rtl';
+  document.body.dir = 'rtl';
+  document.body.classList.add('he','rtl');
+}
+
+/* ── HUD / DOTS / BUTTON ── */
+function updateHud(){ document.getElementById('hud-step').textContent = cur < TOTAL - 1 ? (cur + 1) + ' / ' + TOTAL : '✓'; }
+function updateBtn(){ updateLessonBtn(document.getElementById('next-btn'), BTN, cur, undefined, true); }
+function updateBackBtn(){ document.getElementById('back-btn').disabled = (cur === 0); }
+
+/* ── BACKGROUND ── */
+function setBg(idx){
+  const el = document.getElementById('s' + idx);
+  if(!el) return;
+  document.body.style.background = el.dataset.bg || '#0d0d1a';
+  const [a, b] = (el.dataset.glow || 'rose,violet').split(',');
+  document.getElementById('blob-a').style.background = GLOW[a];
+  document.getElementById('blob-b').style.background = GLOW[b];
+}
+
+/* ── PERSONAL ECHO: repeat the chosen experience on later screens ── */
+function experienceLabel(){
+  const t = state.text.trim();
+  if(t) return t.length > 70 ? t.slice(0, 70) + '…' : t;
+  return state.type;
+}
+function refreshEcho(){
+  const label = experienceLabel();
+  document.querySelectorAll('[data-echo]').forEach(el => {
+    el.classList.toggle('on', !!label);
+    el.querySelector('b').textContent = label;
+  });
+}
+function refreshTracks(){
+  document.querySelectorAll('[data-track]').forEach(tr => {
+    const now = +tr.closest('.screen').dataset.exp;
+    tr.innerHTML = '';
+    [1,2,3].forEach(n => {
+      const p = document.createElement('span');
+      p.className = 'tpill' + (n === now ? ' now' : '') + (state.done[n] ? ' done' : '');
+      p.textContent = (state.done[n] ? '✓ ' : '') + '0' + n + ' ' + EXP_NAMES[n];
+      tr.appendChild(p);
+    });
+  });
+}
+function refreshDevHint(){
+  const h = document.getElementById('dev-hint');
+  h.hidden = !state.pick;
+  if(state.pick) h.textContent = DEV_HINT[state.pick];
+}
+
+/* ── NAVIGATION ── */
+function go(n){
+  if(n < 0 || n >= TOTAL || busy || n === cur) return;
+  busy = true;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.add('leaving');
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  setTimeout(() => {
+    prev.classList.remove('active', 'leaving');
+    cur = n;
+    const next = document.getElementById('s' + cur);
+    next.classList.add('active');
+    next.scrollTop = 0;
+    setBg(cur); LS_refreshDots(cur); updateBtn(); updateHud(); updateBackBtn();
+    busy = false;
+  }, 380);
+}
+function advance(){ if(busy) return; if(cur === TOTAL - 1) finishLesson(); else go(cur + 1); }
+function goBack(){ if(!busy && cur > 0) go(cur - 1); }
+
+/* ── INTERACTIONS ── */
+document.querySelectorAll('#look-chips .chip').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('#look-chips .chip').forEach(c => c.classList.toggle('picked', c === btn));
+  const d = LOOK[btn.dataset.k], box = document.getElementById('look-reveal');
+  box.innerHTML = '';
+  const who = document.createElement('span'); who.className = 'who'; who.textContent = d.who;
+  box.appendChild(who); box.appendChild(document.createTextNode(d.txt));
+}));
+document.querySelectorAll('#exp-chips .chip').forEach(btn => btn.addEventListener('click', () => {
+  const on = !btn.classList.contains('picked');
+  document.querySelectorAll('#exp-chips .chip').forEach(c => c.classList.remove('picked'));
+  btn.classList.toggle('picked', on);
+  state.type = on ? btn.textContent.trim() : '';
+  refreshEcho();
+}));
+document.getElementById('exp-text').addEventListener('input', e => { state.text = e.target.value; refreshEcho(); });
+document.querySelectorAll('[data-done]').forEach(btn => btn.addEventListener('click', () => {
+  const n = +btn.dataset.done;
+  state.done[n] = !state.done[n];
+  btn.classList.toggle('on', state.done[n]);
+  refreshTracks();
+}));
+document.querySelectorAll('[data-pick]').forEach(btn => btn.addEventListener('click', () => {
+  state.pick = +btn.dataset.pick;
+  document.querySelectorAll('[data-pick]').forEach(b => b.classList.toggle('picked', b === btn));
+  refreshDevHint();
+}));
+
+/* Frida Kahlo image: same sources as lessons/frida-kahlo.html, then a drawn placeholder */
+(function(){
+  const img = document.getElementById('kahlo-img');
+  const fallbacks = ['https://sspark.genspark.ai/cfimages?u1=ZeElcR2%2FvfCF8%2BGy2ndsqxagA4bvd6DZCC%2BLAo41bpKB%2B41CCVsUsHuQ%2BVHF9Xv7brKG0VH1jCb1GNc4xhUGkUyJWbXbb%2FHdhwrXAdWF2F6yDe60DM9ZOFiJ53A%2B3LccuONB5C78DQ%3D%3D&u2=3JcHSOK8GTyHT1ez&width=2560'];
+  img.addEventListener('error', () => {
+    if(fallbacks.length){ img.src = fallbacks.shift(); return; }
+    img.style.display = 'none';
+    document.getElementById('kahlo-ph').hidden = false;
+  });
+})();
+
+/* ── KEYBOARD ── */
+document.addEventListener('keydown', e => {
+  if(e.target.tagName === 'TEXTAREA') return;
+  if(e.key === ' '){ e.preventDefault(); advance(); }
+  if(e.key === 'ArrowRight'){ e.preventDefault(); goBack(); }
+  if(e.key === 'ArrowLeft'){ e.preventDefault(); advance(); }
+});
+
+/* ── TOUCH (RTL: swipe right = next) ── */
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  if(e.target.tagName === 'TEXTAREA') return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(dx > 60) advance(); if(dx < -60) goBack();
+});
+
+/* ── INIT ── */
+applyLang();
+LS_buildDots(TOTAL, go);
+LS_refreshDots(cur);
+refreshTracks(); refreshEcho(); refreshDevHint();
+updateBtn(); updateHud(); setBg(0); updateBackBtn();
+</script>
+</body>
+</html>
