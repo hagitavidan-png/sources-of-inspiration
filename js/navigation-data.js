@@ -11,8 +11,8 @@ window.ART_NAVIGATION = {
     {
       "id": "unit01",
       "title": {
-        "he": "חוויה אישית כהשראה",
-        "en": "Personal Experience as Inspiration"
+        "he": "חוויה אישית כמקור השראה",
+        "en": "Personal Experience as a Source of Inspiration"
       },
       "lessons": [
         {
@@ -74,8 +74,8 @@ window.ART_NAVIGATION = {
         {
           "path": "lessons/unit-summary.html",
           "title": {
-            "he": "✦ הסיפור האישי שלי בתמונות פרויקט מסכם",
-            "en": "✦ My Personal Story in Images Capstone"
+            "he": "✦ סיכום היחידה: מה נשאר איתי",
+            "en": "✦ Unit Summary: What Stays With Me"
           }
         }
       ]

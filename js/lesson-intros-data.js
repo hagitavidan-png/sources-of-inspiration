@@ -5,8 +5,8 @@ window.ART_LESSON_INTROS = {
       "en": "Emotion in Visual Language"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.1",
     "time": {
@@ -28,8 +28,8 @@ window.ART_LESSON_INTROS = {
       "en": "How Emotion Becomes a Drawing"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.2",
     "time": {
@@ -51,8 +51,8 @@ window.ART_LESSON_INTROS = {
       "en": "Emotion as Composition"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.3",
     "time": {
@@ -74,8 +74,8 @@ window.ART_LESSON_INTROS = {
       "en": "How Memory Becomes a Drawing"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.4",
     "time": {
@@ -97,8 +97,8 @@ window.ART_LESSON_INTROS = {
       "en": "How a Personal Journal Becomes an Artwork"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.5",
     "time": {
@@ -120,8 +120,8 @@ window.ART_LESSON_INTROS = {
       "en": "Artists as Inspiration, Frida Kahlo"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.6",
     "time": {
@@ -143,8 +143,8 @@ window.ART_LESSON_INTROS = {
       "en": "Personal Experience as a Source, Part 1: Experiments"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.7",
     "time": {
@@ -166,8 +166,8 @@ window.ART_LESSON_INTROS = {
       "en": "Personal Experience as a Source, Part 2: Developing a Work"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.8",
     "time": {
@@ -185,25 +185,25 @@ window.ART_LESSON_INTROS = {
   },
   "unit-summary.html": {
     "title": {
-      "he": "✦ הסיפור האישי שלי בתמונות פרויקט מסכם",
-      "en": "✦ My Personal Story in Images Capstone"
+      "he": "✦ סיכום היחידה: מה נשאר איתי",
+      "en": "✦ Unit Summary: What Stays With Me"
     },
     "unit": {
-      "he": "חוויה אישית כהשראה",
-      "en": "Personal Experience as Inspiration"
+      "he": "חוויה אישית כמקור השראה",
+      "en": "Personal Experience as a Source of Inspiration"
     },
     "number": "1.9",
     "time": {
-      "he": "60+ דקות",
-      "en": "60+ min"
+      "he": "30 דקות",
+      "en": "30 min"
     },
     "description": {
-      "he": "נאסוף את הרעיונות והעבודות שיצרנו לאורך היחידה. נבחר מתוכם כיוון לפרויקט מסכם שמספר סיפור אישי בתמונות.",
-      "en": "Gather the ideas and artworks developed throughout the unit. Choose a direction for a final project that tells a personal story in images."
+      "he": "נחזור לעבודות שיצרנו לאורך היחידה ונתבונן בהן. נבחר ציור אחד, נשאל מה מופיע בו ומה נשאר איתנו מהיחידה.",
+      "en": "Return to the work made throughout the unit and look at it. Choose one painting, ask what appears in it, and what stays with you from the unit."
     },
     "materials": {
-      "he": "היומן והעבודות הקודמות, נייר וכלי ציור לבחירה",
-      "en": "Your journal and previous work, paper and drawing materials of your choice"
+      "he": "העבודות שיצרתם ביחידה ומשהו לכתוב בו",
+      "en": "The work you made in this unit and something to write in"
     }
   },
   "lesson-2-1.html": {

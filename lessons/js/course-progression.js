@@ -28,8 +28,8 @@
     },
     {
       id: 'unit01',
-      name_he: 'יחידה 1: מקורות ההשראה',
-      name_en: 'Unit 1: Sources of Inspiration',
+      name_he: 'יחידה 1: חוויה אישית כמקור השראה',
+      name_en: 'Unit 1: Personal Experience as a Source of Inspiration',
       lessons: [
         'lesson-1-1.html',
         'emotion-drawing.html',
