@@ -29,7 +29,7 @@ const CLOSING =
   'השירות מתחיל בנו, ויש מקום לקול שלכם.\n' +
   'מוזמנים להצטרף, להקשיב ולחשוב יחד איך לחזק את השירות עבור הקבוצות בתל אביב על מנת לשאת את הבשורה.\n\n' +
   'להצטרפות לקבוצת הוואטסאפ: ' + WHATSAPP_LINK + '\n' +
-  'לעלון ההסבר על היוזמה: ' + LEAFLET_LINK;
+  'לעלון המידע: ' + LEAFLET_LINK;
 
 function createForm() {
   const form = FormApp.create(FORM_TITLE);
