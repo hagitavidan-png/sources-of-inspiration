@@ -632,8 +632,8 @@ body.rtl #look-chips{flex-direction:row !important}
   <span id="hud-badge">🪞 <span id="t-unit">חוויה אישית</span></span>
   <div id="hud-spacer"></div>
   <div id="hud-lang">
-    <button class="lang-btn" disabled>EN</button>
-    <button class="lang-btn active">עברית</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn active" onclick="setLang('he')">עברית</button>
   </div>
   <span id="hud-step">1 / 13</span>
 </nav>
@@ -844,12 +844,96 @@ body.rtl #look-chips{flex-direction:row !important}
 const TOTAL = 14;   // screens 0-13
 let cur  = 0;
 let busy = false;
-const he = true;    // Hebrew only for now
+let he = (function(){ try { return (localStorage.getItem('sourcesLang') || 'en') === 'he'; } catch(e) { return false; } })();
 let touchX = 0;
 let choices = { look:'', experience:'', direction:'' };
 
 /* ─── STRINGS ───────────────────── */
 const T = {
+  en:{
+    back:'Back to Course', unit:'Personal Experience',
+    s:[
+      { label:'Unit: Personal Experience as a Source of Inspiration',
+        big:'How does an experience<br>become art?',
+        sub:'A memory, a place, a person, a moment.<br>You don\'t need to draw what happened.' },
+
+      { label:'Kahlo',
+        quote:'I never painted dreams.<br>I painted my own reality.',
+        attr:'Frida Kahlo',
+        sub:'At 18 she was badly hurt in an accident and began painting from her bed.<br>Her body, her pain and her identity became paintings.' },
+
+      { label:'Munch',
+        quote:'I do not paint what I see,<br>but what I saw.',
+        attr:'Edvard Munch',
+        sub:'One evening the sky turned red,<br>and he felt a scream passing through nature.' },
+
+      { label:'Bourgeois',
+        quote:'My childhood has never lost its magic,<br>its mystery or its drama.',
+        attr:'Louise Bourgeois',
+        sub:'Her mother repaired tapestries.<br>Years later she built her a giant spider, a weaver and a protector.' },
+
+      { label:'Look at the works',
+        big:'What makes you feel them this way?',
+        cap1:'A direct gaze, symbols all around',
+        cap2:'Winding lines, a red sky',
+        cap3:'A huge body on thin legs',
+        ask:'Colour? Line? Shape? Space?',
+        alts:['Frida Kahlo, Self-Portrait with Monkeys, 1943','Edvard Munch, The Scream, 1893','Louise Bourgeois, Maman, 1999'] },
+
+      { label:'Choose one',
+        big:'What is strongest<br>in these works?',
+        sub:'Not the story. What you see.',
+        chips:['Colour','Line','Shape','Space','Composition'] },
+
+      { label:'Think of yourself',
+        big:'Choose one experience.',
+        sub:'Something that happened, or something that stayed with you.',
+        chips:['A childhood memory','A place I loved','Someone close','A meeting',
+               'A quiet moment','A goodbye','A journey','Something that changed'] },
+
+      { label:'What stayed',
+        big:'Which detail<br>stayed with you?',
+        sub:'A colour, a light, a sound, an object, a movement.',
+        ph:'The detail that stayed with me…' },
+
+      { label:'What to pass on',
+        big:'What would you like<br>to pass on from it?',
+        sub:'Without drawing what happened.',
+        ph:'I want people to feel…' },
+
+      { label:'Experiment lab',
+        big:'One experience.<br>Three experiments.',
+        sub:'Three small sheets. The same experience on each.',
+        i:['01 · Colour','02 · Line and movement','03 · Space and composition'] },
+
+      { label:'Experiment 01 · 10 minutes',
+        big:'Colour.',
+        sub:'Which colours belong to the experience?',
+        i:['Choose two to four colours.',
+           'Work in patches. No outlines.',
+           'The colour doesn\'t have to be "right".'] },
+
+      { label:'Experiment 02 · 10 minutes',
+        big:'Line and movement.',
+        sub:'How does the experience move?',
+        i:['Draw only with line: pencil, charcoal or marker.',
+           'Fast or slow. Continuous or broken.',
+           'Change pressure, pace and direction.'] },
+
+      { label:'Experiment 03 · 10 minutes',
+        big:'Space and composition.',
+        sub:'What is close, and what is far?',
+        i:['Use simple shapes.',
+           'What is big? What is small? What is crowded?',
+           'Leave some space empty.'] },
+
+      { label:'Lesson complete',
+        big:'Three sheets<br>from one experience.',
+        sub:'Keep them.<br>Next lesson we will choose one and develop it into a work.',
+        back:'← Back to Course', again:'Start again ↺' }
+    ],
+    btn:['Begin →','Continue →','Continue →','Continue →','Continue →','Choose →','Choose →','Continue →','Continue →','Continue →','Continue →','Continue →','Finish →','']
+  },
   he:{
     back:'חזרה לקורס', unit:'חוויה אישית',
     s:[
@@ -877,7 +961,8 @@ const T = {
         cap1:'מבט ישיר, סמלים מסביב',
         cap2:'קווים מתפתלים, שמיים אדומים',
         cap3:'גוף ענק על רגליים דקות',
-        ask:'צבע? קו? צורה? מרחב?' },
+        ask:'צבע? קו? צורה? מרחב?',
+        alts:['פרידה קאלו, דיוקן עצמי עם קופים, 1943','אדוורד מונק, הצעקה, 1893','לואיז בורז׳ואה, Maman, 1999'] },
 
       { label:'בחרו אחד',
         big:'מה הכי חזק<br>ביצירות האלה?',
@@ -935,21 +1020,29 @@ const T = {
   }
 };
 
-/* ─── LANGUAGE (Hebrew only for now; the saved site language is not changed) ─── */
-function setLang(){
-  document.documentElement.lang = 'he';
-  document.documentElement.dir  = 'rtl';
-  document.body.classList.add('he','rtl');
-  document.body.dir = 'rtl';
+/* ─── LANGUAGE ───────────────────── */
+function setLang(l){
+  he = (l === 'he');
+  try { localStorage.setItem('sourcesLang', l); } catch(e) {}
+  document.documentElement.lang = l;
+  document.documentElement.dir  = he ? 'rtl' : 'ltr';
+  document.body.classList.toggle('he',  he);
+  document.body.classList.toggle('rtl', he);
+  document.body.dir = he ? 'rtl' : 'ltr';
   const pg = document.getElementById('progress');
-  if(pg) pg.style.flexDirection = 'row-reverse';
+  if(pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('#hud-lang .lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
+  });
+  const fs = document.getElementById('fs-btn');
+  if(fs) fs.title = he ? 'מסך מלא' : 'Full screen';
   applyStrings();
   updateBtn();
   updateHud();
 }
 
 function applyStrings(){
-  const d = T.he;
+  const d = T[he ? 'he' : 'en'];
   document.getElementById('t-back').textContent = d.back;
   document.getElementById('t-unit').textContent = d.unit;
 
@@ -976,6 +1069,7 @@ function applyStrings(){
       if(e && s[k]) e.textContent = s[k];
     });
     if(s.ask){ const e=el.querySelector('.gal-ask'); if(e) e.textContent=s.ask; }
+    if(s.alts){ el.querySelectorAll('.gal-item').forEach((g,j)=>{ const m=g.querySelector('img,.gal-sketch'); if(!m||!s.alts[j]) return; if(m.tagName==='IMG') m.alt=s.alts[j]; else m.setAttribute('aria-label',s.alts[j]); }); }
 
     if(s.chips){
       const btns = el.querySelectorAll('.chips .chip');
@@ -1007,7 +1101,7 @@ function updateHud(){
 /* ─── DOTS + BUTTON — lesson-system.js ─── */
 function buildDots()  { LS_buildDots(TOTAL, go); }
 function refreshDots(){ LS_refreshDots(cur); }
-function updateBtn()  { updateLessonBtn(document.getElementById('next-btn'), T.he.btn, cur, TOTAL-2, he); }
+function updateBtn()  { updateLessonBtn(document.getElementById('next-btn'), T[he ? 'he' : 'en'].btn, cur, TOTAL-2, he); }
 
 /* ─── BACK BUTTON ───────────────── */
 function updateBackBtn(){ document.getElementById('back-btn').disabled = (cur === 0); }
@@ -1092,22 +1186,22 @@ function toggleFS(){
 document.addEventListener('keydown', e=>{
   if(e.target.tagName==='TEXTAREA') return;
   if(e.key===' ') { e.preventDefault(); advance(); }
-  if(e.key==='ArrowRight') { e.preventDefault(); goBack(); }
-  if(e.key==='ArrowLeft')  { e.preventDefault(); advance(); }
+  if(e.key==='ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
+  if(e.key==='ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
   if(e.key==='f'||e.key==='F') toggleFS();
 });
 
-/* ─── TOUCH SWIPE (RTL: swipe right = next) ─── */
+/* ─── TOUCH SWIPE (RTL: swipe right = next; LTR: swipe left = next) ─── */
 document.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; });
 document.addEventListener('touchend',   e=>{
   if(e.target.tagName==='TEXTAREA') return;
   const dx = e.changedTouches[0].clientX - touchX;
-  if(dx >  60) advance();
-  if(dx < -60) goBack();
+  if(he){ if(dx >  60) advance(); if(dx < -60) goBack(); }
+  else  { if(dx < -60) advance(); if(dx >  60) goBack(); }
 });
 
 /* ─── INIT ──────────────────────── */
-setLang('he');
+setLang(he ? 'he' : 'en');
 document.body.classList.remove('lang-loading');
 buildDots();
 refreshDots();

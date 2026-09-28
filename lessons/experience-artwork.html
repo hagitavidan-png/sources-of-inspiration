@@ -632,8 +632,8 @@ body.rtl #look-chips{flex-direction:row !important}
   <span id="hud-badge">🪞 <span id="t-unit">חוויה אישית</span></span>
   <div id="hud-spacer"></div>
   <div id="hud-lang">
-    <button class="lang-btn" disabled>EN</button>
-    <button class="lang-btn active">עברית</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn active" onclick="setLang('he')">עברית</button>
   </div>
   <span id="hud-step">1 / 7</span>
 </nav>
@@ -774,12 +774,56 @@ body.rtl #look-chips{flex-direction:row !important}
 const TOTAL = 8;   // screens 0-7
 let cur  = 0;
 let busy = false;
-const he = true;    // Hebrew only for now
+let he = (function(){ try { return (localStorage.getItem('sourcesLang') || 'en') === 'he'; } catch(e) { return false; } })();
 let touchX = 0;
 let choices = { look:'', experience:'', direction:'' };
 
 /* ─── STRINGS ───────────────────── */
 const T = {
+  en:{
+    back:'Back to Course', unit:'Personal Experience',
+    s:[
+      { label:'Unit: Personal Experience as a Source of Inspiration',
+        big:'Back to the<br>three experiments.',
+        sub:'Bring the sheets from the last lesson.' },
+
+      { label:'Before you continue',
+        big:'What did you want to pass on<br>from the experience?',
+        sub:'Remember for a moment, before you choose.' },
+
+      { label:'Lay the three sheets side by side',
+        big:'Don\'t choose<br>the most beautiful one.',
+        sub:'Choose the one you want to know<br>where it could go.',
+        comp:['Colour','Line and movement','Space and composition'] },
+
+      { label:'Develop',
+        big:'Move to a large sheet.',
+        sub:'The sketch is a starting point,<br>not a plan.',
+        i:['Enlarge, move, cover.',
+           'Let go of what doesn\'t work.',
+           'Let the painting change.'] },
+
+      { label:'Pause',
+        big:'Stop.<br>Look at your painting.',
+        sub:'What is already working?<br>What is one thing you want to strengthen?' },
+
+      { label:'Looking back',
+        big:'Place the experiments<br>next to the work.',
+        i:['What changed along the way?',
+           'Which visual choice became important?',
+           'What appeared that you didn\'t plan?'] },
+
+      { label:'Reflection',
+        big:'What appeared<br>that you didn\'t plan?',
+        ph:'I didn\'t plan that…', save:'Save ✓', saved:'Saved.' },
+
+      { label:'Lesson complete',
+        big:'The experience was<br>the starting point.',
+        sub:'The work found<br>its own way.',
+        back:'← Back to Course', again:'Start again ↺' }
+    ],
+    btn:['Begin →','Continue →','Choose →','Continue →','Continue →','Continue →','Finish →','']
+  },
   he:{
     back:'חזרה לקורס', unit:'חוויה אישית',
     s:[
@@ -826,21 +870,29 @@ const T = {
   }
 };
 
-/* ─── LANGUAGE (Hebrew only for now; the saved site language is not changed) ─── */
-function setLang(){
-  document.documentElement.lang = 'he';
-  document.documentElement.dir  = 'rtl';
-  document.body.classList.add('he','rtl');
-  document.body.dir = 'rtl';
+/* ─── LANGUAGE ───────────────────── */
+function setLang(l){
+  he = (l === 'he');
+  try { localStorage.setItem('sourcesLang', l); } catch(e) {}
+  document.documentElement.lang = l;
+  document.documentElement.dir  = he ? 'rtl' : 'ltr';
+  document.body.classList.toggle('he',  he);
+  document.body.classList.toggle('rtl', he);
+  document.body.dir = he ? 'rtl' : 'ltr';
   const pg = document.getElementById('progress');
-  if(pg) pg.style.flexDirection = 'row-reverse';
+  if(pg) pg.style.flexDirection = he ? 'row-reverse' : 'row';
+  document.querySelectorAll('#hud-lang .lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent.trim() === (he ? 'עברית' : 'EN'));
+  });
+  const fs = document.getElementById('fs-btn');
+  if(fs) fs.title = he ? 'מסך מלא' : 'Full screen';
   applyStrings();
   updateBtn();
   updateHud();
 }
 
 function applyStrings(){
-  const d = T.he;
+  const d = T[he ? 'he' : 'en'];
   document.getElementById('t-back').textContent = d.back;
   document.getElementById('t-unit').textContent = d.unit;
 
@@ -898,7 +950,7 @@ function updateHud(){
 /* ─── DOTS + BUTTON — lesson-system.js ─── */
 function buildDots()  { LS_buildDots(TOTAL, go); }
 function refreshDots(){ LS_refreshDots(cur); }
-function updateBtn()  { updateLessonBtn(document.getElementById('next-btn'), T.he.btn, cur, TOTAL-2, he); }
+function updateBtn()  { updateLessonBtn(document.getElementById('next-btn'), T[he ? 'he' : 'en'].btn, cur, TOTAL-2, he); }
 
 /* ─── BACK BUTTON ───────────────── */
 function updateBackBtn(){ document.getElementById('back-btn').disabled = (cur === 0); }
@@ -978,22 +1030,22 @@ function toggleFS(){
 document.addEventListener('keydown', e=>{
   if(e.target.tagName==='TEXTAREA') return;
   if(e.key===' ') { e.preventDefault(); advance(); }
-  if(e.key==='ArrowRight') { e.preventDefault(); goBack(); }
-  if(e.key==='ArrowLeft')  { e.preventDefault(); advance(); }
+  if(e.key==='ArrowRight') { e.preventDefault(); he ? goBack()  : advance(); }
+  if(e.key==='ArrowLeft')  { e.preventDefault(); he ? advance() : goBack();  }
   if(e.key==='f'||e.key==='F') toggleFS();
 });
 
-/* ─── TOUCH SWIPE (RTL: swipe right = next) ─── */
+/* ─── TOUCH SWIPE (RTL: swipe right = next; LTR: swipe left = next) ─── */
 document.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; });
 document.addEventListener('touchend',   e=>{
   if(e.target.tagName==='TEXTAREA') return;
   const dx = e.changedTouches[0].clientX - touchX;
-  if(dx >  60) advance();
-  if(dx < -60) goBack();
+  if(he){ if(dx >  60) advance(); if(dx < -60) goBack(); }
+  else  { if(dx < -60) advance(); if(dx >  60) goBack(); }
 });
 
 /* ─── INIT ──────────────────────── */
-setLang('he');
+setLang(he ? 'he' : 'en');
 document.body.classList.remove('lang-loading');
 buildDots();
 refreshDots();
