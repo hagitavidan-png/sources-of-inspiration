@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שאלון למצפוני קבוצות · תל אביב-יפו</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;800&family=Heebo:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #E6EDF4;
+    --card: #FFFFFF;
+    --shadow: #BCCCDC;
+    --navy: #153E67;
+    --navy-soft: #1E5282;
+    --heading: #1A4F80;
+    --text: #2A2F36;
+    --muted: #6B7480;
+    --line: #C9D5E1;
+    --teal: #1E8E98;
+    --teal-soft: #EAF6F6;
+    --teal-ink: #17545A;
+    --gold: #E9C26A;
+    --btn: #16578C;
+    --error: #B3261E;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 400 17px/1.75 "Heebo", "Arial Hebrew", Arial, sans-serif;
+    padding: 24px 16px 40px;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; display: grid; gap: 28px; }
+
+  /* כרטיס בסגנון העלון */
+  .card {
+    background: var(--card);
+    border-top: 8px solid var(--teal);
+    box-shadow: 12px 12px 0 var(--shadow);
+    padding: 40px 28px 44px;
+    display: grid;
+    gap: 22px;
+  }
+  .card.cover {
+    background: var(--navy);
+    border-top-color: var(--gold);
+    color: #fff;
+    text-align: center;
+  }
+  .eyebrow { color: #9FD3DA; font-size: 15px; }
+  h1, h2 {
+    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(34px, 9vw, 46px); }
+  h2 { font-size: 26px; color: var(--heading); }
+  .subtitle { font-size: 20px; margin: -6px 0 0; }
+  p { margin: 0; }
+  .note { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .cover .note { color: #C9D8E8; }
+
+  .quote {
+    background: var(--teal-soft);
+    border-right: 4px solid var(--teal);
+    border-radius: 4px;
+    padding: 16px 20px;
+    color: var(--teal-ink);
+    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+  .cover .quote {
+    background: var(--navy-soft);
+    border-right-color: var(--gold);
+    color: var(--gold);
+    text-align: right;
+  }
+
+  /* שדות */
+  .field { display: grid; gap: 10px; border: 0; margin: 0; padding: 0; min-width: 0; }
+  .label { font-weight: 700; color: var(--text); font-size: 17px; line-height: 1.5; padding: 0; }
+  .req { color: var(--teal); }
+  .hint { color: var(--muted); font-size: 14px; margin-top: -6px; }
+  input[type=text], input[type=time], textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--text);
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible, .opt:focus-within {
+    outline: 3px solid rgba(30, 142, 152, .35);
+    outline-offset: 2px;
+  }
+  .opts { display: grid; gap: 8px; }
+  .opts.days { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+  .opt {
+    display: flex; align-items: flex-start; gap: 10px;
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+    line-height: 1.5;
+    background: #fff;
+  }
+  .opt input { accent-color: var(--teal); width: 18px; height: 18px; margin: 3px 0 0; flex: none; }
+  .opt:has(input:checked) { border-color: var(--teal); background: var(--teal-soft); color: var(--teal-ink); font-weight: 500; }
+  .other-text { margin-top: 4px; }
+  .err { color: var(--error); font-size: 14px; font-weight: 500; }
+  .field.invalid .opt, .field.invalid input[type=text] { border-color: var(--error); }
+
+  /* ניווט */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .btn {
+    font: 700 18px "Heebo", Arial, sans-serif;
+    min-width: 120px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1.5px solid var(--btn);
+  }
+  .btn.primary { background: var(--btn); color: #fff; }
+  .btn.ghost { background: #fff; color: var(--btn); border-color: var(--line); }
+  .btn:disabled { opacity: .45; cursor: default; }
+  .counter { color: var(--heading); font-variant-numeric: tabular-nums; font-size: 17px; direction: ltr; }
+
+  .links { display: grid; gap: 12px; }
+  .link-btn {
+    display: block; text-align: center; text-decoration: none;
+    font-weight: 700; font-size: 18px;
+    padding: 14px 18px; border-radius: 6px;
+  }
+  .link-btn.wa { background: var(--gold); color: var(--navy); }
+  .link-btn.leaf { border: 1.5px solid #C9D8E8; color: #fff; }
+  .status { text-align: center; color: var(--muted); font-size: 15px; }
+
+  @media (max-width: 420px) {
+    .card { padding: 32px 20px 36px; box-shadow: 8px 8px 0 var(--shadow); }
+    .btn { min-width: 96px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: in .25s ease-out; }
+    @keyframes in { from { transform: translateY(6px); } to { transform: none; } }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <form id="survey" novalidate>
+
+    <!-- 1. פתיחה -->
+    <section class="card cover" data-step="intro">
+      <div class="eyebrow">יוזמה מקומית לשירות · תל אביב-יפו</div>
+      <h1>שאלון<br>למצפוני קבוצות</h1>
+      <p class="subtitle">בחינת צורכי השירות והאפשרות להקמת אזור תל אביב</p>
+      <div class="quote">״השאלון אינו הצבעה בעד או נגד הקמת אזור חדש. מטרתו לברר מהו מבנה השירות המתאים ביותר.״</div>
+      <p>חברים וחברות מצפון יקרים, בתל אביב-יפו פועלות כיום 52 קבוצות במספר מוקדי מפגשים. מתוך רצון לבחון את צורכי השירות של הקבוצות ואת הדרכים האפשריות לתת להם מענה מתאים, אנו מבקשים לבדוק מה עובד כיום, מה חסר ואיזה מבנה שירות יעזור לקבוצות לשאת את הבשורה בצורה הטובה ביותר.</p>
+      <p class="note">מומלץ למלא את השאלון לאחר דיון במצפון,<br>כך שהתשובות ישקפו ככל האפשר את קול הקבוצה.</p>
+    </section>
+
+    <!-- 2. פרטי הקבוצה -->
+    <section class="card" data-step="group" hidden>
+      <h2>פרטי הקבוצה</h2>
+      <div class="field" data-required="text">
+        <label class="label" for="group">שם הקבוצה <span class="req">*</span></label>
+        <input type="text" id="group" name="group" autocomplete="off">
+      </div>
+      <fieldset class="field" data-required="radio">
+        <legend class="label">יום המפגש <span class="req">*</span></legend>
+        <div class="opts days" id="day-opts"></div>
+      </fieldset>
+      <div class="field">
+        <label class="label" for="time">שעת המפגש</label>
+        <input type="time" id="time" name="time">
+      </div>
+      <div class="field">
+        <label class="label" for="place">מקום המפגש</label>
+        <input type="text" id="place" name="place" placeholder="כתובת או שם המקום">
+      </div>
+    </section>
+
+    <!-- 3. ייצוג באזור -->
+    <section class="card" data-step="rep" hidden>
+      <h2>ייצוג באזור</h2>
+      <fieldset class="field" data-required="radio">
+        <legend class="label">האם לקבוצה יש כיום שליח/ה לאזור והאם היא מיוצגת בישיבות אזור מרכז? <span class="req">*</span></legend>
+        <div class="opts" id="rep-opts"></div>
+      </fieldset>
+    </section>
+
+    <!-- 4. קשיים (מותנה) -->
+    <section class="card" data-step="difficulties" hidden>
+      <h2>השתתפות בישיבות האזור</h2>
+      <fieldset class="field" data-required="check">
+        <legend class="label">מה מקשה על הקבוצה להשתתף? <span class="req">*</span></legend>
+        <p class="hint">ניתן לבחור יותר מתשובה אחת</p>
+        <div class="opts" id="difficulties-opts"></div>
+      </fieldset>
+    </section>
+
+    <!-- 5. תחומים -->
+    <section class="card" data-step="areas" hidden>
+      <h2>תחומים לשיפור</h2>
+      <fieldset class="field" data-required="check">
+        <legend class="label">האם יש תחומים שבהם הקבוצה הייתה רוצה לראות שינוי, שיפור או מענה נוסף? <span class="req">*</span></legend>
+        <p class="hint">ניתן לבחור יותר מתשובה אחת</p>
+        <div class="opts" id="areas-opts"></div>
+      </fieldset>
+      <div class="field">
+        <label class="label" for="freeText">רוצים להרחיב?</label>
+        <textarea id="freeText" name="freeText" placeholder="מלל חופשי"></textarea>
+      </div>
+    </section>
+
+    <!-- 6. מבנה השירות -->
+    <section class="card" data-step="structure" hidden>
+      <h2>מבנה השירות</h2>
+      <fieldset class="field" data-required="radio">
+        <legend class="label">באיזו מידה הקבוצה מרגישה שצורכי השירות שלה מקבלים כיום מענה באזור? <span class="req">*</span></legend>
+        <div class="opts" id="needsMet-opts"></div>
+      </fieldset>
+      <fieldset class="field" data-required="radio">
+        <legend class="label">האם יש מקום לייעל את השירות ולהקים ועדת שירות נפרדת לעיר תל אביב? <span class="req">*</span></legend>
+        <div class="opts" id="separate-opts"></div>
+      </fieldset>
+    </section>
+
+    <!-- 7. השתתפות -->
+    <section class="card" data-step="involve" hidden>
+      <h2>השירות מתחיל בנו</h2>
+      <fieldset class="field" data-required="radio">
+        <legend class="label">האם מצפון קבוצתכם מעוניין לקחת חלק פעיל בוועדת אזור תל אביב החדשה? <span class="req">*</span></legend>
+        <div class="opts" id="involve-opts"></div>
+      </fieldset>
+      <div class="quote">״השירות מתחיל בנו, ויש מקום לקול שלכם.״</div>
+    </section>
+
+    <!-- 8. תודה -->
+    <section class="card cover" data-step="thanks" hidden>
+      <div class="eyebrow">התשובות התקבלו</div>
+      <h1>תודה רבה!</h1>
+      <p>מוזמנים להצטרף, להקשיב ולחשוב יחד איך לחזק את השירות עבור הקבוצות בתל אביב על מנת לשאת את הבשורה.</p>
+      <div class="links">
+        <a class="link-btn wa" id="wa-link" target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
+        <a class="link-btn leaf" id="leaf-link" target="_blank" rel="noopener">לעלון ההסבר על היוזמה</a>
+      </div>
+    </section>
+
+    <nav class="nav" id="nav">
+      <button type="button" class="btn ghost" id="prev">הקודם</button>
+      <span class="counter" id="counter"></span>
+      <button type="button" class="btn primary" id="next">הבא</button>
+    </nav>
+    <p class="status" id="status" role="status"></p>
+  </form>
+</main>
+
+<script>
+  const WHATSAPP_LINK = 'https://chat.whatsapp.com/EUOjk9FN8PeHu8zRY08g4K';
+  const LEAFLET_LINK = 'https://tel-aviv-service-leaflet.hag123.chatgpt.site/';
+
+  const REP_REGULAR = 'כן, באופן קבוע';
+  const OPTIONS = {
+    day: ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'],
+    rep: [REP_REGULAR, 'יש שליח/ה אך ההשתתפות אינה קבועה', 'אין כרגע שליח/ה'],
+    difficulties: [
+      'גודל ועדת האזור', 'משך הישיבות', 'מיקום / מרחק', 'יום או שעת הישיבה',
+      'אין כרגע משרת/ת לתפקיד', 'חוסר מידע או תקשורת',
+      'הקבוצה אינה מרגישה מספיק מחוברת לאזור', 'הקבוצה אינה מרגישה שהשתתפותה משפיעה',
+    ],
+    areas: [
+      'תקשורת בין הקבוצות', 'עידוד ומשיכת חברים לשירות', 'נגישות והשתתפות בוועדת השליחים',
+      'אפשרות הקבוצות להשמיע את קולן ולהשפיע', 'העברת מידע בין הקבוצות למבנה השירות ובחזרה',
+      'H&I – בתי חולים ומוסדות', 'יחסי ציבור / מידע לציבור', 'פיתוח חברותא',
+      'מידע עבור קבוצות באזור תל אביב-יפו ורשימות פגישות (אתר, ועדת מידע לקבוצות וכדומה)',
+      'ספרות', 'פעילויות ואירועי גיבוש',
+    ],
+    needsMet: ['במידה רבה מאוד', 'במידה רבה', 'באופן חלקי', 'במידה מועטה', 'בכלל לא', 'אין לנו מספיק מידע כדי לענות'],
+    separate: [
+      'כן, בהחלט – תל אביב דורשת מיקוד, משאבים ושירות ייעודיים שלא מקבלים מענה כרגע',
+      'אולי, יש לבחון את המשאבים והמוכנות של החברים לשרת',
+      'לא, עדיף להשאיר את המצב הקיים ולתקן את הבעיות בתוך האזור הקיים',
+      'אין דעה מגובשת / נדרש דיון נוסף בקבוצה',
+    ],
+    involve: ['כן, נשלח שליח/ה לפגישה הקרובה', 'נרצה לקיים דיון נוסף במצפון הקבוצה', 'לא בשלב זה'],
+  };
+  const MULTI = { difficulties: 'סיבה אחרת', areas: 'אחר' };
+
+  // בניית אפשרויות הבחירה
+  for (const [name, values] of Object.entries(OPTIONS)) {
+    const box = document.getElementById(name + '-opts');
+    const type = MULTI[name] ? 'checkbox' : 'radio';
+    const all = MULTI[name] ? [...values, MULTI[name]] : values;
+    all.forEach((value, i) => {
+      const id = name + '-' + i;
+      const label = document.createElement('label');
+      label.className = 'opt';
+      label.htmlFor = id;
+      label.innerHTML = '<input type="' + type + '" id="' + id + '" name="' + name + '"><span></span>';
+      label.querySelector('input').value = value;
+      label.querySelector('span').textContent = value;
+      box.appendChild(label);
+    });
+    if (MULTI[name]) {
+      const other = document.createElement('input');
+      other.type = 'text';
+      other.id = name + 'Other';
+      other.className = 'other-text';
+      other.placeholder = 'פרטו כאן';
+      other.hidden = true;
+      box.appendChild(other);
+      const otherBox = document.getElementById(name + '-' + (all.length - 1));
+      otherBox.addEventListener('change', () => { other.hidden = !otherBox.checked; if (otherBox.checked) other.focus(); });
+    }
+  }
+  document.getElementById('wa-link').href = WHATSAPP_LINK;
+  document.getElementById('leaf-link').href = LEAFLET_LINK;
+
+  const form = document.getElementById('survey');
+  const steps = [...form.querySelectorAll('[data-step]')];
+  const byName = n => steps.find(s => s.dataset.step === n);
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  const status = document.getElementById('status');
+  let current = 'intro';
+
+  const checked = name => [...form.querySelectorAll('input[name="' + name + '"]:checked')].map(i => i.value);
+
+  // רצף העמודים; עמוד הקשיים מופיע רק למי שאין לו השתתפות קבועה
+  function flow() {
+    const rep = checked('rep')[0];
+    const f = ['intro', 'group', 'rep'];
+    if (rep && rep !== REP_REGULAR) f.push('difficulties');
+    return f.concat(['areas', 'structure', 'involve']);
+  }
+
+  function show(name) {
+    current = name;
+    steps.forEach(s => { s.hidden = s.dataset.step !== name; });
+    updateNav();
+    status.textContent = '';
+    window.scrollTo({ top: 0 });
+  }
+
+  function updateNav() {
+    const name = current;
+    const f = flow();
+    const i = f.indexOf(name);
+    document.getElementById('nav').hidden = name === 'thanks';
+    prevBtn.disabled = i === 0;
+    nextBtn.textContent = i === f.length - 1 ? 'שליחה' : 'הבא';
+    counter.textContent = (i + 1) + ' / ' + f.length;
+  }
+
+  function validate(step) {
+    let ok = true;
+    step.querySelectorAll('.field[data-required]').forEach(field => {
+      field.classList.remove('invalid');
+      field.querySelector('.err')?.remove();
+      const kind = field.dataset.required;
+      let filled = kind === 'text'
+        ? field.querySelector('input').value.trim() !== ''
+        : field.querySelector('input:checked') !== null;
+      if (filled && kind === 'check') {
+        const other = field.querySelector('.other-text');
+        if (other && !other.hidden && other.value.trim() === '') filled = false;
+      }
+      if (!filled) {
+        ok = false;
+        field.classList.add('invalid');
+        const err = document.createElement('p');
+        err.className = 'err';
+        err.textContent = kind === 'text' ? 'יש למלא את שם הקבוצה' : 'יש לבחור תשובה (ואם נבחר "אחר", לפרט)';
+        field.appendChild(err);
+      }
+    });
+    if (!ok) step.querySelector('.invalid')?.scrollIntoView({ block: 'center' });
+    return ok;
+  }
+
+  function collect() {
+    const val = id => document.getElementById(id).value.trim();
+    const hasDiff = flow().includes('difficulties');
+    const other = n => { const el = document.getElementById(n + 'Other'); return el.hidden ? '' : el.value.trim(); };
+    return {
+      group: val('group'), day: checked('day')[0] || '', time: val('time'), place: val('place'),
+      rep: checked('rep')[0] || '',
+      difficulties: hasDiff ? checked('difficulties').filter(v => v !== MULTI.difficulties) : [],
+      difficultiesOther: hasDiff ? other('difficulties') : '',
+      areas: checked('areas').filter(v => v !== MULTI.areas), areasOther: other('areas'),
+      freeText: val('freeText'),
+      needsMet: checked('needsMet')[0] || '', separate: checked('separate')[0] || '', involve: checked('involve')[0] || '',
+    };
+  }
+
+  function submit() {
+    nextBtn.disabled = prevBtn.disabled = true;
+    status.textContent = 'שולח…';
+    const done = () => show('thanks');
+    const fail = () => {
+      nextBtn.disabled = prevBtn.disabled = false;
+      status.textContent = 'השליחה לא הצליחה. בדקו את החיבור לאינטרנט ונסו שוב.';
+    };
+    if (window.google && google.script && google.script.run) {
+      google.script.run.withSuccessHandler(done).withFailureHandler(fail).submitResponse(collect());
+    } else {
+      done(); // תצוגה מקדימה מחוץ ל-Google Apps Script
+    }
+  }
+
+  nextBtn.addEventListener('click', () => {
+    const step = byName(current);
+    if (!validate(step)) return;
+    const f = flow();
+    const i = f.indexOf(current);
+    if (i === f.length - 1) submit(); else show(f[i + 1]);
+  });
+  prevBtn.addEventListener('click', () => {
+    const f = flow();
+    const i = f.indexOf(current);
+    if (i > 0) show(f[i - 1]);
+  });
+  form.addEventListener('input', e => {
+    const field = e.target.closest('.field.invalid');
+    if (field && e.target.value.trim()) { field.classList.remove('invalid'); field.querySelector('.err')?.remove(); }
+  });
+  form.addEventListener('change', e => {
+    const field = e.target.closest('.field.invalid');
+    if (field) { field.classList.remove('invalid'); field.querySelector('.err')?.remove(); }
+    if (e.target.name === 'rep') updateNav(); // עדכון מונה העמודים
+  });
+  form.addEventListener('submit', e => e.preventDefault());
+
+  show('intro');
+</script>
+</body>
+</html>
