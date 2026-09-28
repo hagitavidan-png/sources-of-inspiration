@@ -37,6 +37,8 @@
         'memory-drawing.html',
         'journal-artwork.html',
         'frida-kahlo.html',
+        'experience-experiments.html',
+        'experience-artwork.html',
         'unit-summary.html'
       ]
     },

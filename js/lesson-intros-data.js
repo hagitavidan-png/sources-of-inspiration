@@ -137,6 +137,52 @@ window.ART_LESSON_INTROS = {
       "en": "Paper or a visual journal, a pencil and colours of your choice"
     }
   },
+  "experience-experiments.html": {
+    "title": {
+      "he": "חוויה אישית כמקור ליצירה, חלק א: ניסויים",
+      "en": "Personal Experience as a Source, Part 1: Experiments"
+    },
+    "unit": {
+      "he": "חוויה אישית כהשראה",
+      "en": "Personal Experience as Inspiration"
+    },
+    "number": "1.7",
+    "time": {
+      "he": "45 דקות",
+      "en": "45 min"
+    },
+    "description": {
+      "he": "נכיר שלושה אמנים שיצרו מתוך החיים שלהם. נבחר חוויה אישית ונבדוק אותה בשלושה ניסויים: צבע, קו ומרחב.",
+      "en": "Meet three artists who worked from their own lives. Choose a personal experience and test it in three experiments: colour, line and space."
+    },
+    "materials": {
+      "he": "שלושה דפים קטנים, עיפרון, פחם או טוש, וצבעים לבחירה",
+      "en": "Three small sheets, a pencil, charcoal or marker, and colours of your choice"
+    }
+  },
+  "experience-artwork.html": {
+    "title": {
+      "he": "חוויה אישית כמקור ליצירה, חלק ב: פיתוח עבודה",
+      "en": "Personal Experience as a Source, Part 2: Developing a Work"
+    },
+    "unit": {
+      "he": "חוויה אישית כהשראה",
+      "en": "Personal Experience as Inspiration"
+    },
+    "number": "1.8",
+    "time": {
+      "he": "45 דקות",
+      "en": "45 min"
+    },
+    "description": {
+      "he": "נחזור לשלושת הניסויים, נבחר אחד ונפתח ממנו עבודה גדולה. בסוף נתבונן בדרך שעברנו.",
+      "en": "Return to the three experiments, choose one and develop it into a larger work. Then look back at the process."
+    },
+    "materials": {
+      "he": "שלושת הניסויים מהשיעור הקודם, דף גדול וצבעים לבחירה",
+      "en": "The three experiments from the previous lesson, a large sheet and colours of your choice"
+    }
+  },
   "unit-summary.html": {
     "title": {
       "he": "✦ הסיפור האישי שלי בתמונות פרויקט מסכם",
@@ -146,7 +192,7 @@ window.ART_LESSON_INTROS = {
       "he": "חוויה אישית כהשראה",
       "en": "Personal Experience as Inspiration"
     },
-    "number": "1.7",
+    "number": "1.9",
     "time": {
       "he": "60+ דקות",
       "en": "60+ min"

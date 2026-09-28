@@ -58,6 +58,20 @@ window.ART_NAVIGATION = {
           }
         },
         {
+          "path": "lessons/experience-experiments.html",
+          "title": {
+            "he": "חוויה אישית כמקור ליצירה, חלק א: ניסויים",
+            "en": "Personal Experience as a Source, Part 1: Experiments"
+          }
+        },
+        {
+          "path": "lessons/experience-artwork.html",
+          "title": {
+            "he": "חוויה אישית כמקור ליצירה, חלק ב: פיתוח עבודה",
+            "en": "Personal Experience as a Source, Part 2: Developing a Work"
+          }
+        },
+        {
           "path": "lessons/unit-summary.html",
           "title": {
             "he": "✦ הסיפור האישי שלי בתמונות פרויקט מסכם",

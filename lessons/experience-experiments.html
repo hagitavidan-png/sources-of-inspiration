@@ -4,9 +4,7 @@
 <meta name="google" content="notranslate">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="robots" content="noindex"/>
-<title>טיוטה · חוויה אישית כמקור ליצירה: מקורות השראה</title>
-<!-- Preview draft of the new Lesson 1.1. Separate page: lessons/lesson-1-1.html is unchanged. Hebrew only. -->
+<title>חוויה אישית כמקור ליצירה, חלק א: מקורות השראה</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Heebo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
@@ -637,7 +635,7 @@ body.rtl #look-chips{flex-direction:row !important}
     <button class="lang-btn" disabled>EN</button>
     <button class="lang-btn active">עברית</button>
   </div>
-  <span id="hud-step">1 / 18</span>
+  <span id="hud-step">1 / 13</span>
 </nav>
 
 <!-- Fullscreen -->
@@ -804,80 +802,9 @@ body.rtl #look-chips{flex-direction:row !important}
     <div class="instr-box"><ul><li></li><li></li><li></li></ul></div>
   </section>
 
-  <!-- ══ S13 · Choose a direction (selection) ══ -->
-  <section class="screen" id="s13" data-bg="#120a10">
-    <div class="blob" style="width:420px;height:420px;background:var(--rose);bottom:-80px;left:-60px;opacity:.12"></div>
-    <p class="label"></p>
-    <h2 class="big"></h2>
-    <p class="sub"></p>
-    <div class="comp-cards" id="comp-cards">
-      <div class="comp-card" onclick="pickComp(this)">
-        <svg viewBox="0 0 90 60">
-          <circle cx="32" cy="30" r="17" fill="rgba(232,160,48,.35)"/>
-          <circle cx="54" cy="26" r="13" fill="rgba(255,77,77,.35)"/>
-          <circle cx="50" cy="42" r="9" fill="rgba(124,92,191,.4)"/>
-        </svg>
-        <span id="cc0"></span>
-      </div>
-      <div class="comp-card" onclick="pickComp(this)">
-        <svg viewBox="0 0 90 60">
-          <path d="M6 34C16 14 24 50 36 30S54 12 62 32 78 46 86 22" fill="none" stroke="rgba(245,243,239,.55)" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M10 46L22 40 30 48 44 38" fill="none" stroke="rgba(245,243,239,.3)" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
-        <span id="cc1"></span>
-      </div>
-      <div class="comp-card" onclick="pickComp(this)">
-        <svg viewBox="0 0 90 60">
-          <rect x="8" y="10" width="34" height="34" rx="3" fill="none" stroke="rgba(245,243,239,.45)" stroke-width="1.5"/>
-          <rect x="62" y="38" width="12" height="12" rx="2" fill="none" stroke="rgba(245,243,239,.45)" stroke-width="1.5"/>
-          <circle cx="70" cy="16" r="3" fill="rgba(245,243,239,.45)"/>
-        </svg>
-        <span id="cc2"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S14 · Develop one work ══ -->
-  <section class="screen" id="s14" data-bg="#0f0d12">
-    <div class="blob" style="width:460px;height:460px;background:var(--amber);top:-100px;left:-80px;opacity:.1"></div>
-    <p class="label"></p>
-    <h2 class="big"></h2>
-    <p class="sub"></p>
-    <div class="instr-box"><ul><li></li><li></li><li></li></ul></div>
-  </section>
-
-  <!-- ══ S15 · Pause ══ -->
-  <section class="screen" id="s15" data-bg="#07070d">
-    <div class="blob" style="width:520px;height:520px;background:var(--blue);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.07"></div>
-    <p class="label"></p>
-    <h2 class="big"></h2>
-    <p class="sub"></p>
-  </section>
-
-  <!-- ══ S16 · Look at the process ══ -->
-  <section class="screen" id="s16" data-bg="#0a0c10">
-    <div class="blob" style="width:420px;height:420px;background:var(--gold);bottom:-60px;right:-60px;opacity:.1"></div>
-    <p class="label"></p>
-    <h2 class="big"></h2>
-    <div class="instr-box"><ul><li></li><li></li><li></li></ul></div>
-  </section>
-
-  <!-- ══ S17 · Reflection ══ -->
-  <section class="screen" id="s17" data-bg="#0d0a10">
-    <div class="blob" style="width:380px;height:380px;background:var(--rose);bottom:-80px;left:-60px;opacity:.15"></div>
-    <p class="label"></p>
-    <h2 class="big"></h2>
-    <div class="ref-wrap">
-      <textarea class="ref-area" id="reflection-input"></textarea>
-      <br/>
-      <button class="ref-save" onclick="saveRef()"></button>
-      <p class="ref-saved" id="ref-saved-msg"></p>
-    </div>
-  </section>
-
-  <!-- ══ S18 · Closing ══ -->
-  <section class="screen" id="s18" data-bg="#0d0d1a">
-    <div class="blob" style="width:480px;height:480px;background:var(--rose);top:-100px;left:-80px;opacity:.14"></div>
+  <!-- ══ S13 · Closing ══ -->
+  <section class="screen" id="s13" data-bg="#0d0d1a">
+    <div class="blob" style="width:480px;height:480px;background:var(--amber);top:-100px;left:-80px;opacity:.12"></div>
     <div class="blob" style="width:300px;height:300px;background:var(--gold);bottom:-60px;right:-60px;opacity:.1;animation-delay:4s"></div>
     <div class="close-badge">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -888,8 +815,8 @@ body.rtl #look-chips{flex-direction:row !important}
     <h2 class="big"></h2>
     <p class="sub"></p>
     <div class="close-btns">
-      <a href="../course.html#unit01" class="btn-outline" id="t18-back"></a>
-      <button class="btn-red" onclick="restart()" id="t18-again"></button>
+      <a href="../course.html#unit01" class="btn-outline"></a>
+      <button class="btn-red" onclick="restart()"></button>
     </div>
   </section>
 
@@ -914,10 +841,10 @@ body.rtl #look-chips{flex-direction:row !important}
 
 <script>
 /* ─── STATE ─────────────────────── */
-const TOTAL = 19;   // screens 0-18
+const TOTAL = 14;   // screens 0-13
 let cur  = 0;
 let busy = false;
-const he = true;    // Hebrew-only preview
+const he = true;    // Hebrew only for now
 let touchX = 0;
 let choices = { look:'', experience:'', direction:'' };
 
@@ -999,44 +926,16 @@ const T = {
            'מה גדול? מה קטן? מה צפוף?',
            'השאירו מקום ריק.'] },
 
-      { label:'הניחו את שלושת הדפים זה לצד זה',
-        big:'אל תבחרו<br>את היפה ביותר.',
-        sub:'בחרו את זה שאתם רוצים לדעת<br>לאן הוא יכול להתפתח.',
-        comp:['צבע','קו ותנועה','מרחב וקומפוזיציה'] },
-
-      { label:'פיתוח',
-        big:'עברו לדף גדול.',
-        sub:'הסקיצה היא נקודת מוצא,<br>לא תוכנית.',
-        i:['הגדילו, הזיזו, כסו.',
-           'ותרו על מה שלא עובד.',
-           'תנו לציור להשתנות.'] },
-
-      { label:'עצרו',
-        big:'עצרו.<br>הסתכלו על הציור.',
-        sub:'מה כבר עובד?<br>מה דבר אחד תרצו לחזק?' },
-
-      { label:'התבוננות',
-        big:'הניחו את הניסויים<br>ליד העבודה.',
-        i:['מה השתנה בדרך?',
-           'איזו בחירה חזותית הפכה משמעותית?',
-           'מה הופיע שלא תכננתם?'] },
-
-      { label:'רפלקציה',
-        big:'מה הופיע<br>שלא תכננתם?',
-        ph:'לא תכננתי ש…', save:'שמור ✓', saved:'נשמר.' },
-
       { label:'השיעור הסתיים',
-        big:'החוויה הייתה<br>נקודת המוצא.',
-        sub:'היצירה מצאה<br>את הדרך שלה.',
+        big:'שלושה דפים<br>מאותה חוויה.',
+        sub:'שמרו אותם.<br>בשיעור הבא נבחר אחד ונפתח ממנו עבודה.',
         back:'חזרה לקורס →', again:'↺ מההתחלה' }
     ],
-    btn:['← התחל','← המשך','← המשך','← המשך','← המשך','← בחר','← בחר','← המשך','← המשך',
-         '← המשך','← המשך','← המשך','← המשך','← בחר','← המשך','← המשך','← המשך',
-         '← סיום','']
+    btn:['← התחל','← המשך','← המשך','← המשך','← המשך','← בחר','← בחר','← המשך','← המשך','← המשך','← המשך','← המשך','← סיום','']
   }
 };
 
-/* ─── LANGUAGE (Hebrew-only preview; the saved site language is not changed) ─── */
+/* ─── LANGUAGE (Hebrew only for now; the saved site language is not changed) ─── */
 function setLang(){
   document.documentElement.lang = 'he';
   document.documentElement.dir  = 'rtl';
@@ -1094,8 +993,8 @@ function applyStrings(){
     if(s.save){ const sb=el.querySelector('.ref-save'); if(sb) sb.textContent=s.save; }
     if(s.saved){ const sm=document.getElementById('ref-saved-msg'); if(sm) sm.textContent=s.saved; }
 
-    if(s.back){ const ab=document.getElementById('t18-back'); if(ab) ab.textContent=s.back; }
-    if(s.again){ const ag=document.getElementById('t18-again'); if(ag) ag.textContent=s.again; }
+    if(s.back){ const ab=el.querySelector('.close-btns a'); if(ab) ab.textContent=s.back; }
+    if(s.again){ const ag=el.querySelector('.close-btns button'); if(ag) ag.textContent=s.again; }
   });
 }
 
@@ -1146,7 +1045,7 @@ function restart(){
   choices = { look:'', experience:'', direction:'' };
   document.querySelectorAll('.chip,.comp-card').forEach(c=>c.classList.remove('picked'));
   document.querySelectorAll('textarea').forEach(t=>{ t.value=''; });
-  document.getElementById('ref-saved-msg').style.display = 'none';
+  const sm = document.getElementById('ref-saved-msg'); if(sm) sm.style.display = 'none';
   go(0);
 }
 
@@ -1167,7 +1066,7 @@ function pickComp(card){
 function saveRef(){
   const txt = document.getElementById('reflection-input').value.trim();
   if(!txt) return;
-  const key    = 'lesson-1-1-preview-reflection';
+  const key    = 'experience-experiments-reflection';
   const stored = JSON.parse(localStorage.getItem(key)||'[]');
   stored.push({ text:txt, date:new Date().toISOString(), choices });
   localStorage.setItem(key, JSON.stringify(stored));
@@ -1220,19 +1119,6 @@ updateBackBtn();
 <script src="../js/navigation-data.js?v=20260927-nav"></script>
 <script src="../js/navigation.js?v=20260927-access"></script>
 <script src="../js/lesson-intros-data.js?v=20260927-intro"></script>
-<script>
-/* Opening card for this preview page only (the shared intro list is not changed) */
-window.ART_LESSON_INTROS = window.ART_LESSON_INTROS || {};
-window.ART_LESSON_INTROS['lesson-1-1-preview.html'] = {
-  title:{ he:'חוויה אישית כמקור ליצירה', en:'Personal Experience as a Source for Creation' },
-  unit:{ he:'חוויה אישית כהשראה', en:'Personal Experience as Inspiration' },
-  number:'1.1',
-  time:{ he:'90 דקות', en:'90 min' },
-  description:{ he:'נכיר שלושה אמנים שיצרו מתוך החיים שלהם. נבחר חוויה אישית, נבדוק אותה בצבע, בקו ובקומפוזיציה, וניצור ממנה עבודה.',
-                en:'Meet three artists who worked from their own lives. Choose a personal experience, test it in colour, line and composition, and develop it into a work.' },
-  materials:{ he:'שלושה דפים קטנים ודף גדול, עיפרון וצבעים לבחירה', en:'Three small sheets and one large sheet, a pencil and colours of your choice' }
-};
-</script>
 <script src="../js/lesson-shell.js?v=20260927-access"></script>
 </body>
 </html>
