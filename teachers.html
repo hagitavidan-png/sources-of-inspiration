@@ -284,6 +284,17 @@ body.dark .footer-brand,body.dark .footer-logo{color:#e8e6e1 !important}
 body.dark .footer-col h4{color:rgba(232,230,225,.35) !important}
 body.dark .footer-col a,body.dark .footer-tagline,body.dark .footer-copy{color:rgba(232,230,225,.45) !important}
 body.dark .footer-col a:hover{color:#e8e6e1 !important}
+/* Footer: links stacked in each column; site name readable in dark mode */
+#footer .footer-col{display:flex;flex-direction:column;gap:8px}
+#footer .footer-col a{display:block}
+body.dark #footer .footer-brand > div > div:first-child{color:#e8e6e1 !important}
+#footer .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start}
+#footer .footer-brand{display:flex;align-items:center;gap:12px}
+#footer .footer-inner > .footer-links{flex-direction:row;flex-wrap:wrap;gap:56px}
+#footer .footer-col-title{font-weight:700;margin-bottom:4px}
+#footer .footer-bottom{max-width:1100px;margin:32px auto 0;padding:20px 24px 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;border-top:1px solid rgba(0,0,0,.07)}
+body.dark #footer .footer-bottom{border-top-color:rgba(255,255,255,.07)}
+body.dark #footer .footer-brand > div > div:nth-child(2){color:rgba(232,230,225,.5) !important}
 body.dark .btn-outline{border-color:rgba(232,230,225,.3) !important;color:rgba(232,230,225,.7) !important}
 body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
 </style>
@@ -594,7 +605,7 @@ body.dark #contact textarea::placeholder { color: rgba(240,237,230,.4); }
     <div class="footer-brand">
       <div class="nav-logo-mark" style="width:36px;height:36px;font-size:1.2rem">✦</div>
       <div>
-        <div style="font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:1rem;margin-bottom:2px">Sources of Inspiration in Art</div>
+        <div style="font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:1rem;margin-bottom:2px" data-en="Sources of Inspiration in Art" data-he="מקורות השראה באמנות">Sources of Inspiration in Art</div>
         <div style="font-size:.78rem;color:rgba(13,13,26,.4)" data-en="Premium Creativity Curriculum for Schools" data-he="תכנית יצירתיות מתקדמת לבתי ספר">Premium Creativity Curriculum for Schools</div>
       </div>
     </div>
@@ -611,21 +622,10 @@ body.dark #contact textarea::placeholder { color: rgba(240,237,230,.4); }
         <a href="teachers.html" data-en="Teacher Resources" data-he="משאבים למורים">Teacher Resources</a>
         <a href="mailto:hagitavidan@gmail.com" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title" data-en="Company" data-he="אודות">Company</div>
-        <a href="#" data-en="About Us" data-he="עלינו">About Us</a>
-        <a href="#" data-en="Blog" data-he="בלוג">Blog</a>
-        <a href="#" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a>
-        <a href="#" data-en="Terms of Service" data-he="תנאי שירות">Terms of Service</a>
-      </div>
     </div>
   </div>
   <div class="footer-bottom">
     <div data-en="© 2025 Sources of Inspiration in Art. All rights reserved." data-he="© 2025 מקורות השראה באמנות. כל הזכויות שמורות.">© 2025 Sources of Inspiration in Art. All rights reserved.</div>
-    <div style="display:flex;gap:16px">
-      <a href="#" style="color:rgba(13,13,26,.45);font-size:.82rem">Privacy</a>
-      <a href="#" style="color:rgba(13,13,26,.45);font-size:.82rem">Terms</a>
-    </div>
   </div>
 </footer>
 
