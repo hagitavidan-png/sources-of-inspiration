@@ -5,13 +5,13 @@
  * הפעלה:
  * 1. היכנסו ל-https://script.google.com ולחצו "פרויקט חדש".
  * 2. מחקו את מה שיש בעורך והדביקו את כל הקובץ הזה.
- * 3. עדכנו את WHATSAPP_LINK למטה (קישור הזמנה לקבוצת הוואטסאפ).
+ * 3. (אופציונלי) אפשר לשנות את WHATSAPP_LINK למטה.
  * 4. בחרו בפונקציה createForm ולחצו "הפעלה" (Run), ואשרו הרשאות.
  * 5. ב"יומן ביצוע" (Execution log) יופיעו: קישור למילוי, קישור לעריכה וקישור לגיליון התשובות.
  */
 
 // קישור הזמנה לקבוצת הוואטסאפ (chat.whatsapp.com/...) או קישור ישיר למספר (https://wa.me/9725XXXXXXXX)
-const WHATSAPP_LINK = 'https://chat.whatsapp.com/REPLACE_ME';
+const WHATSAPP_LINK = 'https://chat.whatsapp.com/EUOjk9FN8PeHu8zRY08g4K';
 const LEAFLET_LINK = 'https://tel-aviv-service-leaflet.hag123.chatgpt.site/';
 
 const FORM_TITLE = 'שאלון למצפוני קבוצות בתל אביב-יפו';
