@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>שאלון למצפוני קבוצות · תל אביב-יפו</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;800&family=Heebo:wght@400;500;700&display=swap">
 <style>
+  /* הגופן מאתר הארגון; כתובת מלאה כדי שיעבוד גם כשהדף מוגש מ-Google Apps Script */
+  @font-face { font-family: "Meoded Pashut"; src: url("https://na-tel-aviv.github.io/meoded-pashut-light.woff") format("woff"); font-weight: 300; font-display: swap; }
+  @font-face { font-family: "Meoded Pashut"; src: url("https://na-tel-aviv.github.io/meoded-pashut-bold.woff") format("woff"); font-weight: 700; font-display: swap; }
   :root {
     --bg: #E3EFEE;
     --card: #FFFFFF;
@@ -31,7 +32,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font: 400 17px/1.75 "Heebo", "Arial Hebrew", Arial, sans-serif;
+    font: 300 20px/1.7 "Meoded Pashut", "Arial Hebrew", Arial, sans-serif;
     padding: 24px 16px 40px;
   }
   .wrap { max-width: 620px; margin: 0 auto; display: grid; gap: 28px; }
@@ -51,19 +52,19 @@
     color: #fff;
     text-align: center;
   }
-  .eyebrow { color: #A8E0DC; font-size: 15px; }
+  .eyebrow { color: #A8E0DC; font-size: 17px; }
   h1, h2 {
-    font-family: "Assistant", "Heebo", Arial, sans-serif;
-    font-weight: 800;
+    font-family: "Meoded Pashut", Arial, sans-serif;
+    font-weight: 700;
     line-height: 1.25;
     margin: 0;
     text-wrap: balance;
   }
-  h1 { font-size: clamp(34px, 9vw, 46px); }
-  h2 { font-size: 26px; color: var(--heading); }
-  .subtitle { font-size: 20px; margin: -6px 0 0; }
+  h1 { font-size: clamp(40px, 11vw, 54px); }
+  h2 { font-size: 29px; color: var(--heading); }
+  .subtitle { font-size: 22px; margin: -6px 0 0; }
   p { margin: 0; }
-  .note { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .note { color: var(--muted); font-size: 17px; line-height: 1.6; }
   .cover .note { color: #C4E0DE; }
 
   .quote {
@@ -72,9 +73,9 @@
     border-radius: 4px;
     padding: 16px 20px;
     color: var(--teal-ink);
-    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-family: "Meoded Pashut", Arial, sans-serif;
     font-weight: 700;
-    font-size: 19px;
+    font-size: 22px;
     line-height: 1.55;
   }
   .cover .quote {
@@ -86,9 +87,9 @@
 
   /* שדות */
   .field { display: grid; gap: 10px; border: 0; margin: 0; padding: 0; min-width: 0; }
-  .label { font-weight: 700; color: var(--text); font-size: 17px; line-height: 1.5; padding: 0; }
+  .label { font-weight: 700; color: var(--text); font-size: 20px; line-height: 1.5; padding: 0; }
   .req { color: var(--teal); }
-  .hint { color: var(--muted); font-size: 14px; margin-top: -6px; }
+  .hint { color: var(--muted); font-size: 17px; margin-top: -6px; }
   input[type=text], input[type=time], textarea {
     width: 100%;
     font: inherit;
@@ -115,9 +116,9 @@
     background: #fff;
   }
   .opt input { accent-color: var(--teal); width: 18px; height: 18px; margin: 3px 0 0; flex: none; }
-  .opt:has(input:checked) { border-color: var(--teal); background: var(--teal-soft); color: var(--teal-ink); font-weight: 500; }
+  .opt:has(input:checked) { border-color: var(--teal); background: var(--teal-soft); color: var(--teal-ink); font-weight: 700; }
   .other-text { margin-top: 4px; }
-  .err { color: var(--error); font-size: 14px; font-weight: 500; }
+  .err { color: var(--error); font-size: 17px; font-weight: 700; }
   .field.invalid .opt, .field.invalid input[type=text] { border-color: var(--error); }
 
   /* ניווט */
@@ -127,7 +128,7 @@
     padding-top: 20px;
   }
   .btn {
-    font: 700 18px "Heebo", Arial, sans-serif;
+    font: 700 20px "Meoded Pashut", Arial, sans-serif;
     min-width: 120px;
     padding: 12px 20px;
     border-radius: 6px;
@@ -137,17 +138,17 @@
   .btn.primary { background: var(--btn); color: #fff; }
   .btn.ghost { background: #fff; color: var(--btn); border-color: var(--line); }
   .btn:disabled { opacity: .45; cursor: default; }
-  .counter { color: var(--heading); font-variant-numeric: tabular-nums; font-size: 17px; direction: ltr; }
+  .counter { color: var(--heading); font-variant-numeric: tabular-nums; font-size: 19px; direction: ltr; }
 
   .links { display: grid; gap: 12px; }
   .link-btn {
     display: block; text-align: center; text-decoration: none;
-    font-weight: 700; font-size: 18px;
+    font-weight: 700; font-size: 20px;
     padding: 14px 18px; border-radius: 6px;
   }
   .link-btn.wa { background: var(--gold); color: var(--navy); }
   .link-btn.leaf { border: 1.5px solid #BFDCD9; color: #fff; }
-  .status { text-align: center; color: var(--muted); font-size: 15px; }
+  .status { text-align: center; color: var(--muted); font-size: 18px; }
 
   @media (max-width: 420px) {
     .card { padding: 32px 20px 36px; box-shadow: 8px 8px 0 var(--shadow); }
