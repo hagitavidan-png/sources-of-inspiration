@@ -12,7 +12,7 @@
 
 // קישור הזמנה לקבוצת הוואטסאפ (chat.whatsapp.com/...) או קישור ישיר למספר (https://wa.me/9725XXXXXXXX)
 const WHATSAPP_LINK = 'https://chat.whatsapp.com/EUOjk9FN8PeHu8zRY08g4K';
-const LEAFLET_LINK = 'https://tel-aviv-service-leaflet.hag123.chatgpt.site/';
+const LEAFLET_LINK = 'https://na-tel-aviv.github.io/leaflet.html';
 
 const FORM_TITLE = 'שאלון למצפוני קבוצות בתל אביב-יפו';
 

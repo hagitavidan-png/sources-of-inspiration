@@ -98,7 +98,7 @@
 > מוזמנים להצטרף, להקשיב ולחשוב יחד איך לחזק את השירות עבור הקבוצות בתל אביב על מנת לשאת את הבשורה.
 >
 > 💬 להצטרפות לקבוצת הוואטסאפ: https://chat.whatsapp.com/EUOjk9FN8PeHu8zRY08g4K
-> 📖 לעלון ההסבר על היוזמה: https://tel-aviv-service-leaflet.hag123.chatgpt.site/
+> 📖 לעלון ההסבר על היוזמה: https://na-tel-aviv.github.io/leaflet.html
 
 ---
 

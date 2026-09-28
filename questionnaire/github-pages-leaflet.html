@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#153E67">
+<meta name="description" content="עלון הסבר של היוזמה המקומית להקמת ועדת שירות אזור תל אביב: שאלות ותשובות לקבוצות.">
+<link rel="canonical" href="https://na-tel-aviv.github.io/leaflet.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="ועדת שירות אזור תל אביב · שאלות ותשובות לקבוצות">
+<meta property="og:description" content="עלון הסבר של היוזמה המקומית להקמת ועדת שירות אזור תל אביב.">
+<meta property="og:url" content="https://na-tel-aviv.github.io/leaflet.html">
+<meta property="og:image" content="https://na-tel-aviv.github.io/assets/tel-aviv-share.jpg">
+<title>ועדת שירות אזור תל אביב · שאלות ותשובות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;800&family=Heebo:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #E6EDF4;
+    --card: #FFFFFF;
+    --shadow: #BCCCDC;
+    --navy: #153E67;
+    --navy-soft: #1E5282;
+    --heading: #1A4F80;
+    --text: #2A2F36;
+    --muted: #6B7480;
+    --line: #C9D5E1;
+    --teal: #1E8E98;
+    --teal-soft: #EAF6F6;
+    --teal-ink: #17545A;
+    --gold: #E9C26A;
+    --btn: #16578C;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 400 18px/1.8 "Heebo", "Arial Hebrew", Arial, sans-serif;
+    padding: 24px 16px 40px;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; display: grid; gap: 28px; }
+
+  .card {
+    background: var(--card);
+    border-top: 8px solid var(--teal);
+    box-shadow: 12px 12px 0 var(--shadow);
+    padding: 44px 28px 48px;
+    display: grid;
+    gap: 22px;
+  }
+  .card.cover {
+    background: var(--navy);
+    border-top-color: var(--gold);
+    color: #fff;
+    text-align: center;
+  }
+  .eyebrow { color: #9FD3DA; font-size: 15px; }
+  h1, h2 {
+    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(36px, 10vw, 50px); }
+  h2 { font-size: 27px; color: var(--heading); }
+  h2:not(:first-child) { margin-top: 16px; }
+  p { margin: 0; }
+  .subtitle { font-size: 21px; }
+
+  blockquote {
+    margin: 0;
+    background: var(--teal-soft);
+    border-right: 4px solid var(--teal);
+    border-radius: 4px;
+    padding: 18px 22px;
+    color: var(--teal-ink);
+    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.55;
+  }
+  .cover blockquote {
+    background: var(--navy-soft);
+    border-right-color: var(--gold);
+    color: var(--gold);
+    text-align: right;
+  }
+  .source { color: var(--muted); font-size: 14px; line-height: 1.6; margin-top: -8px; }
+  .cover .source { color: #C9D8E8; margin-top: -8px; }
+  .imprint { color: #C9D8E8; font-size: 14px; line-height: 1.6; }
+  .fine { color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+  .nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .btn {
+    font: 700 18px "Heebo", Arial, sans-serif;
+    min-width: 120px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1.5px solid var(--btn);
+  }
+  .btn.primary { background: var(--btn); color: #fff; }
+  .btn.ghost { background: #fff; color: var(--btn); border-color: var(--line); }
+  .btn:disabled { opacity: .45; cursor: default; }
+  .btn:focus-visible { outline: 3px solid rgba(30, 142, 152, .35); outline-offset: 2px; }
+  .counter { color: var(--heading); font-variant-numeric: tabular-nums; font-size: 17px; }
+
+  @media (max-width: 420px) {
+    .card { padding: 36px 20px 40px; box-shadow: 8px 8px 0 var(--shadow); }
+    .btn { min-width: 96px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: in .25s ease-out; }
+    @keyframes in { from { transform: translateY(6px); } to { transform: none; } }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- 1 -->
+  <section class="card cover" data-page>
+    <div class="eyebrow">מכורים אנונימיים · יוזמה מקומית לשירות</div>
+    <h1>ועדת שירות<br>אזור תל אביב</h1>
+    <p class="subtitle">שאלות ותשובות לקבוצות</p>
+    <blockquote>״אין מספר קסם לחלוקת אזור, הסיבה האמיתית צריכה להיות תפקוד, לא צורה.״</blockquote>
+    <p class="source">מדריך מבנה השירות, עמ׳ 43</p>
+    <p>היוזמה להקמת ועדת שירות אזור תל אביב נועדה לברר עם הקבוצות כיצד אפשר לחזק את השירות המקומי, את הקשר ביניהן ואת נשיאת המסר בעיר. נקודת המוצא היא צורכי הקבוצות ורצונן לקחת חלק בשירות. התשובות להלן מציעות יישום של עקרונות המדריך ליוזמה; הציטוטים מובאים בנפרד כלשונם מן הקובץ המצורף.</p>
+    <p class="imprint">עלון הסבר של היוזמה המקומית<br>אינו פרסום רשמי של אנ״איי</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="card" data-page hidden>
+    <h2>מה זו ועדת שירות אזורית?</h2>
+    <p>ועדת שירות אזורית היא גוף שהקבוצות משתתפות בו באמצעות שליחיהן כדי לקיים יחד שירותים שקשה לקבוצה לקיים לבדה. היא אחראית כלפי הקבוצות שהיא משרתת. בין השירותים המתוארים במדריך: מידע לציבור, נשיאת המסר למוסדות ולבתי סוהר, רשימות פגישות, קו חם וספרות. היא גם מקום לשיתוף ניסיון ולתמיכה בין קבוצות.</p>
+    <blockquote>״ועדות שירות אזוריות אחראיות לקבוצות אותן הן משרתות.״</blockquote>
+    <p class="source">עמ׳ 10 במדריך, עמ׳ 24 בקובץ; פירוט השירותים בעמ׳ 8–9 ו־43 במדריך.</p>
+
+    <h2>למה צריך עוד אזור?</h2>
+    <p>אזור מקומי יכול לאפשר לקבוצות להקדיש יותר תשומת לב לצרכים המשותפים שלהן ולשירות בסביבתן. המדריך מכיר בכך שוועדה המשרתת יישובים רבים עשויה לבחון חלוקה לוועדות מקומיות. השאלה המנחה לגבי תל אביב היא כיצד ועדה מקומית תוכל לשפר את השירות לקבוצות ולמכורים בעיר. מספר הקבוצות הוא חלק מהתמונה; המבחן המרכזי הוא התועלת בשירות.</p>
+    <blockquote>״אין מספר קסם לחלוקת אזור, הסיבה האמיתית צריכה להיות תפקוד, לא צורה.״</blockquote>
+    <p class="source">עמ׳ 43 במדריך, עמ׳ 57 בקובץ.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="card" data-page hidden>
+    <h2>מה היתרון באזור תל אביב לקבוצות?</h2>
+    <p>היתרון האפשרי הוא מקום קבוע למפגש בין קבוצות תל אביב: שיתוף בקשיים ובהצלחות, תמיכה בקבוצות הזקוקות לעזרה ותכנון שירות המותאם לעיר. מסגרת מקומית יכולה להרחיב את ההשתתפות בשירות ולחזק את הקשר בין הקבוצות. את סדרי העדיפויות והיקף הפעילות ניתן לגבש עם הקבוצות, בהתאם לצרכים, למשרתים ולמשאבים הזמינים.</p>
+    <blockquote>״לועדה גדולה במיוחד יכול להיות מספיק כסף וכוח אדם כדי לנהל שירותים ישירים, אבל בגלל הגודל שלה לא תוכל לספק לקבוצות שלה את מסגרת השיתוף שהן צריכות כדי לתמוך אחת בשנייה.״</blockquote>
+    <p class="source">עמ׳ 43 במדריך, עמ׳ 57 בקובץ.</p>
+
+    <h2>האם נצטרך ללכת לשתי פגישות אזוריות?</h2>
+    <p>לא בהכרח. בפרקים הרלוונטיים אין הוראה המחייבת כל קבוצה להשתתף בשתי ועדות אזוריות בעקבות חלוקה. המדריך מתאר שליח שמייצג את קבוצתו בוועדה האזורית; הוא מזכיר גם התכנסות מחוזית, שהיא מסגרת אחרת. את הייצוג באזור החדש ואת התיאום בתקופת המעבר יש להסדיר מראש עם הקבוצות. אין להסיק ששיתוף פעולה בין אזורים מחייב כל שליח להגיע לשתי ישיבות אזוריות.</p>
+    <blockquote>״את התנאים ודרישות תפקיד השליחים קובעות הקבוצות שבוחרות אותם.״</blockquote>
+    <p class="source">עמ׳ 11 במדריך, עמ׳ 25 בקובץ. ההסבר על שתי פגישות הוא מסקנה מהתיאור, ולא כלל מפורש במדריך.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="card" data-page hidden>
+    <h2>האם זה יפגע באזור מרכז?</h2>
+    <p>הכוונה ביוזמה היא לחזק את השירות בתל אביב תוך שמירה על הקשר ושיתוף הפעולה עם אזור מרכז. אזורים נפרדים יכולים להמשיך לקיים פעילויות משותפות, לחלוק ניסיון ולסייע זה לזה. כדי שהשינוי ייטיב עם הקבוצות, יש לתת מענה להשפעתו על התקציב, המשרתים וההתחייבויות הקיימות.</p>
+    <blockquote>״הקבוצות שלכם לא עוברות גירושין! אתם מחלקים את מנגנון השירות, לא את החברותא.״</blockquote>
+    <p class="source">עמ׳ 44 במדריך, עמ׳ 58 בקובץ; שיתוף פעולה בין אזורים בעמ׳ 51 במדריך, עמ׳ 65 בקובץ.</p>
+
+    <h2>מי שותף לבחינת הקמת אזור תל אביב?</h2>
+    <p>היוזמה פתוחה לקבוצות תל אביב המעוניינות לבחון יחד כיצד לחזק את השירות בעיר. כל קבוצה מוזמנת להביא את ניסיונה, את צרכיה ואת מצפון הקבוצה שלה. מתוך השיתוף הזה נבחן איזו ועדת שירות תוכל לתת לקבוצות מענה מתאים.</p>
+    <blockquote>״בחנו את צרכי השירות באזורים שלכם, ערכו ניסיונות וגלו מה הכי טוב בשבילכם.״</blockquote>
+    <p class="source">עמ׳ 50 במדריך, עמ׳ 64 בקובץ.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="card" data-page hidden>
+    <h2>האם חייבים לפעול במבנה שירות אחד קבוע?</h2>
+    <p>המדריך מאפשר גמישות בארגון השירות. אפשר לבחון צרכים, לנסות דרכי עבודה ולבחור את מה שמשרת את הקהילה בצורה הטובה ביותר. הגמישות מותנית בכך שהדרך שנבחרה משרתת את צורכי הקהילה ואינה סותרת את המסורות ואת עקרונות השירות. עבור היוזמה בתל אביב, המשמעות היא שאפשר לפתח הצעה המתאימה לקבוצות המקומיות ולבחון אותה על פי תפקודה.</p>
+    <blockquote>״בחנו את צרכי השירות באזורים שלכם, ערכו ניסיונות וגלו מה הכי טוב בשבילכם.״</blockquote>
+    <p class="source">עמ׳ 50 במדריך, עמ׳ 64 בקובץ, תחת הכותרת ״תפקוד ולא צורה״.</p>
+
+    <h2>האם אזור נוסף מחייב להקים מחדש את כל השירותים?</h2>
+    <p>לא בהכרח. המדריך מתאר אפשרויות שבהן אזורים מתמקדים בתמיכה בקבוצות, וחלק מהשירותים מנוהלים או מתואמים במשותף. הוא מציג גם אפשרות להשאיר שירותים ישירים בוועדות האזוריות ולקיים פורום משותף לתיאום. לכן אפשר לבדוק אילו שירותים נכון לקיים מקומית ואילו נכון להמשיך יחד, בהתאם למשאבים ולהסכמות. הדוגמאות במדריך אינן מחייבות להקים גוף נוסף; הן ממחישות שאפשר להתאים את מבנה השירות לצורך.</p>
+    <blockquote>״לרוב הועדות האזוריות יש תפקיד כפול – הן גם תומכות בקבוצות וגם מנהלות שירותים ישירים.״</blockquote>
+    <p class="source">עמ׳ 43 במדריך, עמ׳ 57 בקובץ; אפשרויות לתיאום ולשירות משותף בעמ׳ 47–50 במדריך, עמ׳ 61–64 בקובץ.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="card" data-page hidden>
+    <h2>איך שומרים שהדיון על האזור יישאר ממוקד במטרה?</h2>
+    <p>מחזירים את השיחה לשאלה מה יעזור לקבוצות לשאת את המסר למכור שעדיין סובל. אפשר לבחון כל הצעה באמצעות שאלות מעשיות: האם היא מקלה על מכורים להגיע לפגישות? האם היא מחזקת קבוצות? האם היא מסייעת לקיים שירות נחוץ? המדריך מציע לעצור גם כשדיון מסתבך ולבחון את הקשר שלו למטרה העיקרית. כך אפשר לדבר על תועלת בשירות ולתת מקום לחששות ענייניים.</p>
+    <blockquote>״איך הדיון הזה קשור לנשיאת הבשורה?״</blockquote>
+    <p class="source">עמ׳ 26 במדריך, עמ׳ 40 בקובץ. השאלות המעשיות בתשובה הן יישום של הכיוון המוצע בעמ׳ 25–26.</p>
+    <blockquote>״ועדות אזוריות קיימות קודם כל כדי לעשות את קבוצות אנ איי יעילות יותר בנשיאת הבשורה למכור שעדיין סובל״</blockquote>
+    <p class="source">עמ׳ 25–26 במדריך, עמ׳ 39–40 בקובץ.</p>
+
+    <h2>על המקורות</h2>
+    <p class="fine">הציטוטים מתוך ״קובץ מבנה שירות סופי.pdf״, שכותרתו ״מדריך מבנה השירות של מכורים אנונימיים״, מתוך המדריך לשירות מקומי, גרסת 2002. בעמ׳ 4 בקובץ מצוין: ״טיוטה לא להפצה״ ו״ספרות זו היא תרגום לא מאושר לעברית, שנת 2010״. עלון זה הוא עיבוד הסברי המבוסס על הקובץ שסופק, ואינו פרסום רשמי של אנ״איי. מספרי העמודים מפנים הן למספור המודפס במדריך והן למיקום בקובץ.</p>
+  </section>
+
+  <nav class="nav" aria-label="מעבר בין עמודי העלון">
+    <button type="button" class="btn ghost" id="prev">הקודם</button>
+    <span class="counter" id="counter" aria-live="polite"></span>
+    <button type="button" class="btn primary" id="next">הבא</button>
+  </nav>
+</main>
+
+<script>
+  const pages = [...document.querySelectorAll('[data-page]')];
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  let current = 0;
+
+  function show(i) {
+    current = Math.max(0, Math.min(pages.length - 1, i));
+    pages.forEach((p, n) => { p.hidden = n !== current; });
+    prev.disabled = current === 0;
+    next.disabled = current === pages.length - 1;
+    counter.textContent = (current + 1) + ' / ' + pages.length;
+    window.scrollTo({ top: 0 });
+  }
+
+  next.addEventListener('click', () => show(current + 1));
+  prev.addEventListener('click', () => show(current - 1));
+  // בעברית חץ שמאלה = קדימה
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') show(current + 1);
+    if (e.key === 'ArrowRight') show(current - 1);
+  });
+
+  show(0);
+</script>
+</body>
+</html>
