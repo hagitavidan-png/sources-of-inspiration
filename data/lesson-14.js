@@ -83,11 +83,6 @@ const LESSON_14 = {
   isLastLesson: true,
   completionTitle: { he: 'סיימת את הקורס!', en: 'You Finished the Course!' },
   completionText: { he: '14 שיעורים. 6 יחידות. אינסוף השראה.<br>הניצוץ הוצת, עכשיו רק את יכולה לשמור על האש.', en: '14 lessons. 6 units. Infinite inspiration.<br>The spark has been lit, now only you can keep the flame.' },
-  completionLinks: [
-    { href: 'https://youtube.com/@hagitavidanart', icon: 'fa-brands fa-youtube', labelHe: 'YouTube, סרטוני ציור', labelEn: 'YouTube, Painting Videos' },
-    { href: 'https://www.instagram.com/hagitavidanart', icon: 'fa-brands fa-instagram', labelHe: 'Instagram, השראה יומית', labelEn: 'Instagram, Daily Inspiration' },
-    { href: 'https://bio.site/hagitavidan', icon: 'fa-solid fa-link', labelHe: 'Bio.site, כל הקישורים', labelEn: 'Bio.site, All Links' }
-  ],
 
   quote: { he: '"ללמוד לצייר הוא ללמוד לראות, לראות שהעולם יפה יותר ממה שחשבנו."', en: '"Learning to paint is learning to see, to see that the world is more beautiful than we thought."' },
   quoteAuthor: 'חגית אבידן',

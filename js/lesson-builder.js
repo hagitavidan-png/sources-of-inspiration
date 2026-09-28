@@ -63,7 +63,7 @@
     const safeAttr = (s) => (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
     /* ── כותרת הדף ── */
-    document.title = `שיעור ${d.num}: ${d.titleHe || ''} | 7 Diamonds`;
+    document.title = `שיעור ${d.num}: ${d.titleHe || ''} | מקורות השראה באמנות`;
 
     /* ── צבע יחידה ── */
     document.documentElement.style.setProperty('--unit-color', d.unitColor || '#c9a84c');
