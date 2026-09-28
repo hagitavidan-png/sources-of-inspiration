@@ -13,9 +13,9 @@
 <meta property="og:url" content="https://na-tel-aviv.github.io/leaflet.html">
 <meta property="og:image" content="https://na-tel-aviv.github.io/assets/tel-aviv-share.jpg">
 <title>ועדת שירות אזור תל אביב · שאלות ותשובות</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;800&family=Heebo:wght@400;500;700&display=swap">
 <style>
+  @font-face { font-family: "Meoded Pashut"; src: url("meoded-pashut-light.woff") format("woff"); font-weight: 300; font-display: swap; }
+  @font-face { font-family: "Meoded Pashut"; src: url("meoded-pashut-bold.woff") format("woff"); font-weight: 700; font-display: swap; }
   :root {
     --bg: #E8F1F8;
     --card: #FFFFFF;
@@ -39,7 +39,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font: 400 18px/1.8 "Heebo", "Arial Hebrew", Arial, sans-serif;
+    font: 300 20px/1.75 "Meoded Pashut", "Arial Hebrew", Arial, sans-serif;
     padding: 24px 16px 40px;
   }
   .wrap { max-width: 620px; margin: 0 auto; display: grid; gap: 28px; }
@@ -58,19 +58,19 @@
     color: #fff;
     text-align: center;
   }
-  .eyebrow { color: #9FD3DA; font-size: 15px; }
+  .eyebrow { color: #9FD3DA; font-size: 17px; }
   h1, h2 {
-    font-family: "Assistant", "Heebo", Arial, sans-serif;
-    font-weight: 800;
+    font-family: "Meoded Pashut", Arial, sans-serif;
+    font-weight: 700;
     line-height: 1.25;
     margin: 0;
     text-wrap: balance;
   }
-  h1 { font-size: clamp(36px, 10vw, 50px); }
-  h2 { font-size: 27px; color: var(--heading); }
+  h1 { font-size: clamp(42px, 11.5vw, 58px); }
+  h2 { font-size: 29px; color: var(--heading); }
   h2:not(:first-child) { margin-top: 16px; }
   p { margin: 0; }
-  .subtitle { font-size: 21px; }
+  .subtitle { font-size: 23px; }
 
   blockquote {
     margin: 0;
@@ -79,9 +79,9 @@
     border-radius: 4px;
     padding: 18px 22px;
     color: var(--teal-ink);
-    font-family: "Assistant", "Heebo", Arial, sans-serif;
+    font-family: "Meoded Pashut", Arial, sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.55;
   }
   .cover blockquote {
@@ -90,10 +90,10 @@
     color: var(--gold);
     text-align: right;
   }
-  .source { color: var(--muted); font-size: 14px; line-height: 1.6; margin-top: -8px; }
+  .source { color: var(--muted); font-size: 16px; line-height: 1.6; margin-top: -8px; }
   .cover .source { color: #C9D8E8; margin-top: -8px; }
-  .imprint { color: #C9D8E8; font-size: 14px; line-height: 1.6; }
-  .fine { color: var(--muted); font-size: 15px; line-height: 1.7; }
+  .imprint { color: #C9D8E8; font-size: 16px; line-height: 1.6; }
+  .fine { color: var(--muted); font-size: 17px; line-height: 1.7; }
 
   .nav {
     position: sticky;
@@ -104,7 +104,7 @@
     padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
   }
   .btn {
-    font: 700 18px "Heebo", Arial, sans-serif;
+    font: 700 20px "Meoded Pashut", Arial, sans-serif;
     min-width: 120px;
     padding: 12px 20px;
     border-radius: 6px;
@@ -115,7 +115,7 @@
   .btn.ghost { background: #fff; color: var(--btn); border-color: var(--line); }
   .btn:disabled { opacity: .45; cursor: default; }
   .btn:focus-visible { outline: 3px solid rgba(30, 142, 152, .35); outline-offset: 2px; }
-  .counter { color: #173D62; font-variant-numeric: tabular-nums; font-size: 17px; }
+  .counter { color: #173D62; font-variant-numeric: tabular-nums; font-size: 19px; }
 
   @media (max-width: 420px) {
     .card { padding: 36px 20px 40px; box-shadow: 8px 8px 0 var(--shadow); }
