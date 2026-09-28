@@ -157,6 +157,8 @@
   }
   .link-btn.wa { background: var(--gold); color: var(--navy); }
   .link-btn.leaf { border: 1.5px solid #BFDCD9; color: #fff; }
+  .wa-box { display: grid; gap: 12px; background: var(--teal-soft); border-radius: 6px; padding: 16px; }
+  .wa-box p { color: var(--teal-ink); font-weight: 700; }
   .status { text-align: center; color: var(--muted); font-size: 18px; }
 
   @media (max-width: 420px) {
@@ -180,6 +182,7 @@
       <p class="subtitle">בחינת צורכי השירות והאפשרות להקמת אזור תל אביב</p>
       <div class="quote">״השאלון אינו הצבעה בעד או נגד הקמת אזור חדש. מטרתו לברר מהו מבנה השירות המתאים ביותר.״</div>
       <p>חברים וחברות מצפון יקרים, בתל אביב-יפו פועלות כיום 52 קבוצות במספר מוקדי מפגשים. מתוך רצון לבחון את צורכי השירות של הקבוצות ואת הדרכים האפשריות לתת להם מענה מתאים, אנו מבקשים לבדוק מה עובד כיום, מה חסר ואיזה מבנה שירות יעזור לקבוצות לשאת את הבשורה בצורה הטובה ביותר.</p>
+      <a class="link-btn leaf" data-leaflet target="_blank" rel="noopener">לעלון ההסבר על היוזמה</a>
       <p class="note">מומלץ למלא את השאלון לאחר דיון במצפון,<br>כך שהתשובות ישקפו ככל האפשר את קול הקבוצה.</p>
     </section>
 
@@ -257,6 +260,10 @@
         <legend class="label">האם מצפון קבוצתכם מעוניין לקחת חלק פעיל בוועדת אזור תל אביב החדשה? <span class="req">*</span></legend>
         <div class="opts" id="involve-opts"></div>
       </fieldset>
+      <div class="wa-box" id="wa-box" hidden>
+        <p>מצוין! הצטרפו לקבוצת הוואטסאפ כדי לקבל עדכונים על הפגישה הקרובה.</p>
+        <a class="link-btn wa" id="wa-link" target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
+      </div>
       <div class="quote">״השירות מתחיל בנו, ויש מקום לקול שלכם.״</div>
     </section>
 
@@ -264,11 +271,7 @@
     <section class="card cover" data-step="thanks" hidden>
       <div class="eyebrow">התשובות התקבלו</div>
       <h1>תודה רבה!</h1>
-      <p>מוזמנים להצטרף, להקשיב ולחשוב יחד איך לחזק את השירות עבור הקבוצות בתל אביב על מנת לשאת את הבשורה.</p>
-      <div class="links">
-        <a class="link-btn wa" id="wa-link" target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
-        <a class="link-btn leaf" id="leaf-link" target="_blank" rel="noopener">לעלון ההסבר על היוזמה</a>
-      </div>
+      <a class="link-btn leaf" data-leaflet target="_blank" rel="noopener">לעלון ההסבר על היוזמה</a>
     </section>
 
     <nav class="nav" id="nav">
@@ -341,7 +344,8 @@
     }
   }
   document.getElementById('wa-link').href = WHATSAPP_LINK;
-  document.getElementById('leaf-link').href = LEAFLET_LINK;
+  document.querySelectorAll('[data-leaflet]').forEach(a => { a.href = LEAFLET_LINK; });
+  const WA_YES = OPTIONS.involve[0];
 
   const form = document.getElementById('survey');
   const steps = [...form.querySelectorAll('[data-step]')];
@@ -460,6 +464,7 @@
     const field = e.target.closest('.field.invalid');
     if (field) { field.classList.remove('invalid'); field.querySelector('.err')?.remove(); }
     if (e.target.name === 'rep') updateNav(); // עדכון מונה העמודים
+    if (e.target.name === 'involve') document.getElementById('wa-box').hidden = e.target.value !== WA_YES;
   });
   form.addEventListener('submit', e => e.preventDefault());
 
