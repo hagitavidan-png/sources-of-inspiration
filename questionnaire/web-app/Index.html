@@ -253,7 +253,7 @@
       </fieldset>
       <div class="wa-box" id="wa-box" hidden>
         <p>מצוין! הצטרפו לקבוצת הוואטסאפ כדי לקבל עדכונים על הפגישה הקרובה.</p>
-        <a class="link-btn wa" id="wa-link" target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
+        <a class="link-btn wa" data-wa target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
       </div>
       <div class="quote">השירות מתחיל בנו, ויש מקום לקול שלכם.</div>
     </section>
@@ -262,7 +262,11 @@
     <section class="card cover" data-step="thanks" hidden>
       <div class="eyebrow">התשובות התקבלו</div>
       <h1>תודה רבה!</h1>
-      <a class="link-btn leaf" data-leaflet target="_blank" rel="noopener">לעלון המידע</a>
+      <p>מוזמנים להצטרף, להקשיב ולחשוב יחד איך לחזק את השירות עבור הקבוצות בתל אביב על מנת לשאת את הבשורה.</p>
+      <div class="links">
+        <a class="link-btn wa" data-wa target="_blank" rel="noopener">להצטרפות לקבוצת הוואטסאפ</a>
+        <a class="link-btn leaf" data-leaflet target="_blank" rel="noopener">לעלון המידע</a>
+      </div>
     </section>
 
     <nav class="nav" id="nav">
@@ -334,7 +338,7 @@
       otherBox.addEventListener('change', () => { other.hidden = !otherBox.checked; if (otherBox.checked) other.focus(); });
     }
   }
-  document.getElementById('wa-link').href = WHATSAPP_LINK;
+  document.querySelectorAll('[data-wa]').forEach(a => { a.href = WHATSAPP_LINK; });
   document.querySelectorAll('[data-leaflet]').forEach(a => { a.href = LEAFLET_LINK; });
   const WA_YES = OPTIONS.involve[0];
 
