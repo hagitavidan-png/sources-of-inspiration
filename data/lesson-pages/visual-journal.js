@@ -5,7 +5,8 @@ window.LESSON_PAGE = {
  "slides": null,
  "variant": "v2",
  "layout": {
-  "create": "lab"
+  "create": "lab-sketch",
+  "end": "airy"
  },
  "number": "1.3",
  "unit": {
@@ -119,8 +120,8 @@ window.LESSON_PAGE = {
    "steps": [
     {
      "label": {
-      "he": "ניסוי 1 · מיקום",
-      "en": "Experiment 1 · Position"
+      "he": "מיקום",
+      "en": "Position"
      },
      "big": {
       "he": "איפה היא עומדת?",
@@ -146,8 +147,8 @@ window.LESSON_PAGE = {
     },
     {
      "label": {
-      "he": "ניסוי 2 · גודל ומרחב",
-      "en": "Experiment 2 · Size and space"
+      "he": "גודל ומרחב",
+      "en": "Size and space"
      },
      "big": {
       "he": "כמה מקום יש לה?",
@@ -170,8 +171,8 @@ window.LESSON_PAGE = {
     },
     {
      "label": {
-      "he": "ניסוי 3 · יחסים",
-      "en": "Experiment 3 · Relations"
+      "he": "יחסים",
+      "en": "Relations"
      },
      "big": {
       "he": "היא כבר לא לבד.",

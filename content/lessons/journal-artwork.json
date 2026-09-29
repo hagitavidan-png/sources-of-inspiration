@@ -1,33 +1,193 @@
 {
   "_note": "Lesson 1.5, new content approved by the author. Source for tools/build-lesson-data.js. The old slide lesson (lessons/journal-artwork.html) is not used for this page. Description and materials come from js/lesson-intros-data.js, which already match this lesson.",
-  "he": { "s": [
-    { "big": "כבר ציירתם הרבה.", "sub": "היום לא מתחילים מדף ריק." },
-    { "label": "הונדרטוואסר", "quote": "אני מצייר את מה שאני חי.", "attr": "הונדרטוואסר", "sub": "הספירלה חוזרת שוב ושוב בציורים שלו." },
-    { "label": "אספו", "big": "פזרו את העבודות שלכם.", "sub": "מהשיעורים הקודמים, מהיומן, סקיצות קטנות. הכול." },
-    { "label": "מסתכלים", "big": "הסתכלו עליהן יחד, לא אחת אחת.", "sub": "מה מופיע יותר מפעם אחת?" },
-    { "label": "מה חוזר?", "big": "מה חוזר אצלכם?", "chips": ["צבע", "צורה", "סוג קו", "מקום", "חפץ", "מילה", "סמל", "תחושה"], "i": ["סמנו בנקודה קטנה כל מקום שבו הוא מופיע."] },
-    { "label": "בחרו", "big": "בחרו דבר אחד.", "sub": "את זה שהכי מסקרן אתכם." },
-    { "label": "תנו לו שם", "big": "איך קוראים לו?", "sub": "מילה אחת או שתיים.", "ph": "המוטיב שלי הוא…" },
-    { "label": "שאלה", "big": "למה הוא חוזר?", "sub": "לא צריך לדעת. אפשר לנחש.", "ph": "אולי הוא חוזר כי…" },
-    { "label": "דף חדש", "big": "דף יומן חדש. מוטיב אחד.", "i": ["ציירו את המוטיב כמה פעמים על הדף.", "בכל פעם אחרת: גודל, צבע, כיוון.", "תנו לו לפגוש משהו חדש."] },
-    { "label": "הוסיפו מילים", "big": "גם מילים הן חלק מהדף.", "i": ["מה שכתבתם עליו.", "מילה שחוזרת אצלכם.", "משפט קצר, לא הסבר."] },
-    { "label": "עצרו", "big": "עצרו. הסתכלו על הדף.", "sub": "המוטיב עדיין אותו מוטיב? או שהפך למשהו אחר?" },
-    { "label": "רפלקציה", "big": "איפה עוד תרצו לפגוש אותו?", "ph": "הייתי רוצה לנסות אותו ב…" },
-    { "label": "השיעור הסתיים", "big": "זו כבר שפה.", "sub": "משהו שחוזר יכול להתחיל להפוך לחלק מהשפה שלכם." }
-  ] },
-  "en": { "s": [
-    { "big": "You have already made a lot.", "sub": "Today you don't start from a blank page." },
-    { "label": "Hundertwasser", "quote": "I draw what I live.", "attr": "Hundertwasser", "sub": "The spiral appears again and again in his paintings." },
-    { "label": "Gather", "big": "Spread out your work.", "sub": "From earlier lessons, from your journal, small sketches. Everything." },
-    { "label": "Looking", "big": "Look at them together, not one by one.", "sub": "What appears more than once?" },
-    { "label": "What repeats?", "big": "What keeps coming back in your work?", "chips": ["Colour", "Shape", "Kind of line", "Place", "Object", "Word", "Symbol", "Feeling"], "i": ["Mark each place where it appears with a small dot."] },
-    { "label": "Choose", "big": "Choose one thing.", "sub": "The one you are most curious about." },
-    { "label": "Name it", "big": "What is it called?", "sub": "One or two words.", "ph": "My motif is…" },
-    { "label": "A question", "big": "Why does it keep coming back?", "sub": "You don't need to know. You can guess.", "ph": "Maybe it comes back because…" },
-    { "label": "A new page", "big": "A new journal page. One motif.", "i": ["Draw the motif several times on the page.", "Each time differently: size, colour, direction.", "Let it meet something new."] },
-    { "label": "Add words", "big": "Words are part of the page too.", "i": ["What you wrote about it.", "A word that keeps coming back for you.", "A short sentence, not an explanation."] },
-    { "label": "Pause", "big": "Stop. Look at the page.", "sub": "Is the motif still the same motif? Or has it become something else?" },
-    { "label": "Reflection", "big": "Where else would you like to meet it?", "ph": "I would like to try it in…" },
-    { "label": "Lesson complete", "big": "This is already a language.", "sub": "Something that keeps coming back can start to become part of your language." }
-  ] }
+  "title": {
+    "he": "מה חוזר בעבודות שלי?",
+    "en": "What Keeps Returning in My Work?"
+  },
+  "subtitle": {
+    "he": "יומן וזיהוי מוטיבים חוזרים",
+    "en": "Journal pages and recurring motifs"
+  },
+  "he": {
+    "s": [
+      {
+        "big": "כבר ציירתם הרבה.",
+        "sub": "היום לא מתחילים מדף ריק."
+      },
+      {
+        "label": "הונדרטוואסר",
+        "quote": "אני מצייר את מה שאני חי.",
+        "attr": "הונדרטוואסר",
+        "sub": "הספירלה חוזרת שוב ושוב בציורים שלו."
+      },
+      {
+        "label": "אספו",
+        "big": "פזרו את העבודות שלכם.",
+        "sub": "מהשיעורים הקודמים, מהיומן, סקיצות קטנות. הכול."
+      },
+      {
+        "label": "מסתכלים",
+        "big": "הסתכלו עליהן יחד, לא אחת אחת.",
+        "sub": "מה מופיע יותר מפעם אחת?"
+      },
+      {
+        "label": "מה חוזר?",
+        "big": "מה חוזר אצלכם?",
+        "chips": [
+          "צבע",
+          "צורה",
+          "סוג קו",
+          "מקום",
+          "חפץ",
+          "מילה",
+          "סמל",
+          "תחושה"
+        ],
+        "i": [
+          "סמנו בנקודה קטנה כל מקום שבו הוא מופיע."
+        ]
+      },
+      {
+        "label": "בחרו",
+        "big": "בחרו דבר אחד.",
+        "sub": "את זה שהכי מסקרן אתכם."
+      },
+      {
+        "label": "תנו לו שם",
+        "big": "איך קוראים לו?",
+        "sub": "מילה אחת או שתיים.",
+        "ph": "המוטיב שלי הוא…"
+      },
+      {
+        "label": "שאלה",
+        "big": "למה הוא חוזר?",
+        "sub": "לא צריך לדעת. אפשר לנחש.",
+        "ph": "אולי הוא חוזר כי…"
+      },
+      {
+        "label": "דף חדש",
+        "big": "דף יומן חדש. מוטיב אחד.",
+        "i": [
+          "ציירו את המוטיב כמה פעמים על הדף.",
+          "בכל פעם אחרת: גודל, צבע, כיוון.",
+          "תנו לו לפגוש משהו חדש."
+        ]
+      },
+      {
+        "label": "הוסיפו מילים",
+        "big": "גם מילים הן חלק מהדף.",
+        "i": [
+          "מה שכתבתם עליו.",
+          "מילה שחוזרת אצלכם.",
+          "משפט קצר, לא הסבר."
+        ]
+      },
+      {
+        "label": "עצרו",
+        "big": "עצרו. הסתכלו על הדף.",
+        "sub": "המוטיב עדיין אותו מוטיב? או שהפך למשהו אחר?"
+      },
+      {
+        "label": "רפלקציה",
+        "big": "איפה עוד תרצו לפגוש אותו?",
+        "ph": "הייתי רוצה לנסות אותו ב…"
+      },
+      {
+        "label": "השיעור הסתיים",
+        "big": "זו כבר שפה.",
+        "sub": "משהו שחוזר יכול להתחיל להפוך לחלק מהשפה שלכם."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "You have already made a lot.",
+        "sub": "Today you don't start from a blank page."
+      },
+      {
+        "label": "Hundertwasser",
+        "quote": "I draw what I live.",
+        "attr": "Hundertwasser",
+        "sub": "The spiral appears again and again in his paintings."
+      },
+      {
+        "label": "Gather",
+        "big": "Spread out your work.",
+        "sub": "From earlier lessons, from your journal, small sketches. Everything."
+      },
+      {
+        "label": "Looking",
+        "big": "Look at them together, not one by one.",
+        "sub": "What appears more than once?"
+      },
+      {
+        "label": "What repeats?",
+        "big": "What keeps coming back in your work?",
+        "chips": [
+          "Colour",
+          "Shape",
+          "Kind of line",
+          "Place",
+          "Object",
+          "Word",
+          "Symbol",
+          "Feeling"
+        ],
+        "i": [
+          "Mark each place where it appears with a small dot."
+        ]
+      },
+      {
+        "label": "Choose",
+        "big": "Choose one thing.",
+        "sub": "The one you are most curious about."
+      },
+      {
+        "label": "Name it",
+        "big": "What is it called?",
+        "sub": "One or two words.",
+        "ph": "My motif is…"
+      },
+      {
+        "label": "A question",
+        "big": "Why does it keep coming back?",
+        "sub": "You don't need to know. You can guess.",
+        "ph": "Maybe it comes back because…"
+      },
+      {
+        "label": "A new page",
+        "big": "A new journal page. One motif.",
+        "i": [
+          "Draw the motif several times on the page.",
+          "Each time differently: size, colour, direction.",
+          "Let it meet something new."
+        ]
+      },
+      {
+        "label": "Add words",
+        "big": "Words are part of the page too.",
+        "i": [
+          "What you wrote about it.",
+          "A word that keeps coming back for you.",
+          "A short sentence, not an explanation."
+        ]
+      },
+      {
+        "label": "Pause",
+        "big": "Stop. Look at the page.",
+        "sub": "Is the motif still the same motif? Or has it become something else?"
+      },
+      {
+        "label": "Reflection",
+        "big": "Where else would you like to meet it?",
+        "ph": "I would like to try it in…"
+      },
+      {
+        "label": "Lesson complete",
+        "big": "This is already a language.",
+        "sub": "Something that keeps coming back can start to become part of your language."
+      }
+    ]
+  }
 }

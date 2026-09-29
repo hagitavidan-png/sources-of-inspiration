@@ -107,7 +107,8 @@ def _lesson_index():
         return {}
     import json
     txt = open(p, encoding='utf8').read()
-    return json.loads(txt[txt.index('{'):txt.rindex('}') + 1])
+    m = re.search(r'window\.LESSON_PAGES_INDEX = (\{.*?\});', txt, re.S)
+    return json.loads(m.group(1)) if m else {}
 
 
 NEW_LESSON_PAGES = _lesson_index()   # built by tools/build-lesson-data.js
@@ -426,7 +427,7 @@ def render(u, units):
 
 <script src="{B}js/navigation-data.js"></script>
 <script src="{B}data/lesson-pages/index.js"></script>
-<script src="{B}js/site-drawer.js?v=6" data-base="{B}"></script>
+<script src="{B}js/site-drawer.js?v=7" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>
 </html>

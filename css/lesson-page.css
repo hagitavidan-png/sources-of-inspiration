@@ -210,29 +210,39 @@
 /* composition sketches (1.3) */
 .lp-frames{display:flex;flex-wrap:wrap;gap:10px 12px;margin:18px 0 6px}
 .lp-frames svg{width:clamp(64px,9vw,96px);height:auto;overflow:hidden}
-.lp-frames rect{fill:#fbf9f4;stroke:var(--ink);stroke-width:1.2}
-.lp-frames circle{fill:var(--ink)}
+.lp-frames rect{fill:none;stroke:var(--ink-2);stroke-width:.8;vector-effect:non-scaling-stroke}
+.lp-frames circle{fill:var(--ink-2)}
 .lp-v2 .lp-sheet .lp-frames{gap:8px}
 .lp-v2 .lp-sheet .lp-frames svg{width:calc((100% - 16px) / 3);max-width:78px}
 .lp-v2 .lp-sheet .lp-frames ~ .lp-list{list-style:none;padding:0}
 /* after the experiments: compare, choose, develop */
 .lp-v2 .lp-after{margin-top:clamp(56px,8vw,96px)}
 
-/* an open notebook: two facing pages, then the page where you mark (1.5) */
-.lp-v2 .lp-layout-spread{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-.lp-v2 .lp-layout-spread::before,.lp-v2 .lp-layout-spread > .lp-sec-head{grid-column:1 / -1}
-.lp-v2 .lp-layout-spread > .lp-block{max-width:none;background:#fbf9f4;border:1px solid var(--rule);padding:clamp(22px,3vw,34px)}
-.lp-v2 .lp-layout-spread > .lp-block + .lp-block{border-top:1px solid var(--rule);padding-top:clamp(22px,3vw,34px)}
-.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){border-inline-end:0;background:linear-gradient(to left,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
-.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:linear-gradient(to right,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
-html[dir="ltr"] .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){background:linear-gradient(to right,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
-html[dir="ltr"] .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:linear-gradient(to left,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
-.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(n+3){grid-column:1 / -1;background:transparent;border:0;border-top:1px solid var(--rule-strong);margin-top:clamp(28px,4vw,44px);padding-inline:0}
-.lp-v2 .lp-layout-spread .lp-chip[aria-pressed="true"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:8px;vertical-align:middle}
-@media (max-width:700px){
-  .lp-v2 .lp-layout-spread{grid-template-columns:1fr}
-  .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){border-inline-end:1px solid var(--rule);background:#fbf9f4}
-  .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:#fbf9f4;border-top:0}
-}
+
 /* a single instruction needs no number */
 .lp-v2 .lp-list:has(> li:only-child){list-style:none;padding:0}
+
+/* ═══ 1.3 / 1.5 polish ═══ */
+
+/* lesson subtitle in the opening */
+.lp-v2 .lp-gate-sub{margin:clamp(14px,2vw,20px) 0 0;font-size:clamp(1.1rem,1.8vw,1.4rem);color:var(--ink-2)}
+
+/* 1.3: the lab as sketches in a notebook, no boxes; experiments marked with a small letter */
+.lp-v2 .lp-layout-lab-sketch .lp-lab{counter-reset:ex;gap:clamp(24px,3.5vw,44px)}
+.lp-v2 .lp-layout-lab-sketch .lp-sheet{background:none;border:0;border-top:1px solid var(--rule-strong);padding:16px 0 0;transform:none;counter-increment:ex}
+.lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(ex,hebrew);display:block;margin-bottom:10px;font-size:.78rem;letter-spacing:.08em;color:var(--muted)}
+html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(ex,upper-alpha)}
+.lp-v2 .lp-layout-lab-sketch .lp-sheet:hover{transform:none}
+/* more air between choose → develop, and pause → reflection */
+.lp-v2 .lp-layout-lab-sketch .lp-after .lp-block,.lp-v2 .lp-layout-airy .lp-block{padding-bottom:clamp(28px,4vw,44px)}
+.lp-v2 .lp-layout-lab-sketch .lp-after .lp-block + .lp-block,.lp-v2 .lp-layout-airy .lp-block + .lp-block{padding-top:clamp(36px,5vw,56px)}
+
+/* 1.5: earlier work spread out on the table */
+.lp-v2 .lp-desk{position:relative;max-width:720px;aspect-ratio:16/7;margin:clamp(8px,2vw,20px) 0 clamp(40px,6vw,64px)}
+.lp-v2 .lp-desk-page{position:absolute;width:26%;aspect-ratio:3/4;background:#faf7f0;border:1px solid var(--rule);box-shadow:0 1px 2px rgba(28,26,23,.06)}
+.lp-v2 .lp-desk-page i{position:absolute;top:8px;inset-inline-start:10px;font-style:normal;font-size:.8rem;letter-spacing:.04em;color:var(--muted)}
+.lp-v2 .lp-desk-0{inset-inline-start:3%;top:10%;transform:rotate(-5deg)}
+.lp-v2 .lp-desk-1{inset-inline-start:25%;top:0;transform:rotate(3deg)}
+.lp-v2 .lp-desk-2{inset-inline-start:47%;top:12%;transform:rotate(-2deg)}
+.lp-v2 .lp-desk-3{inset-inline-start:69%;top:3%;transform:rotate(4.5deg)}
+.lp-v2 .lp-layout-desk .lp-chip[aria-pressed="true"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:8px;vertical-align:middle}

@@ -1,6 +1,9 @@
 {
   "_note": "Lesson 1.3, new content approved by the author. Source for tools/build-lesson-data.js. The old slide lesson (lessons/visual-journal.html) is not used for this page.",
-  "time": { "he": "45 דקות", "en": "45 min" },
+  "time": {
+    "he": "45 דקות",
+    "en": "45 min"
+  },
   "description": {
     "he": "אותה צורה יכולה ליצור תחושה אחרת לגמרי. נבדוק מיקום, גודל ומרחב בשישה ניסויים קטנים, נבחר אחד ונפתח אותו לדף גדול.",
     "en": "The same shape can create a completely different feeling. We test position, size and space in six small experiments, choose one and develop it on a large sheet."
@@ -9,36 +12,246 @@
     "he": "דף אחד מחולק לשישה מלבנים, טוש שחור או עיפרון רך, דף גדול וצבעים לבחירה",
     "en": "One page divided into six rectangles, a black marker or soft pencil, a large sheet and colours of your choice"
   },
-  "he": { "s": [
-    { "big": "אותה צורה.<br>תחושה אחרת.", "sub": "הכול תלוי איפה היא נמצאת על הדף." },
-    { "label": "הוקוסאי", "art": { "img": "hokusai-great-wave-1831", "artist": "קצושיקה הוקוסאי", "title": "הגל הגדול מול קנגאווה, 1831", "note": "הגל ענק וקרוב. הר פוג׳י קטן ורחוק, כמעט באמצע." } },
-    { "label": "הסתכלו", "big": "מה כאן גדול? מה קטן?", "ask": "מה קרוב? מה רחוק? איפה נשאר מקום ריק?" },
-    { "label": "הכנה", "big": "דף אחד. שישה מלבנים.", "sub": "חלקו את הדף לשישה מלבנים. בכולם תופיע אותה צורה אחת: עיגול, כתם או קו עבה.", "frames": ["empty", "empty", "empty", "empty", "empty", "empty"] },
-    { "label": "ניסוי 1 · מיקום", "big": "איפה היא עומדת?", "i": ["מלבן 1: הצורה בדיוק במרכז.", "מלבן 2: הצורה בפינה.", "מלבן 3: הצורה נוגעת בקצה, חצי ממנה בחוץ."], "frames": ["center", "corner", "edge"] },
-    { "label": "ניסוי 2 · גודל ומרחב", "big": "כמה מקום יש לה?", "i": ["מלבן 4: הצורה ענקית, כמעט ממלאת את המלבן.", "מלבן 5: הצורה זעירה, והרבה ריק סביבה."], "frames": ["huge", "tiny"] },
-    { "label": "ניסוי 3 · יחסים", "big": "היא כבר לא לבד.", "i": ["מלבן 6: הוסיפו צורה שנייה.", "קרובה מאוד, נוגעת, או רחוקה מאוד."], "frames": ["pair"] },
-    { "label": "השוואה", "big": "הסתכלו על ששת המלבנים.", "sub": "איך מרגישה הצורה בכל אחד?", "chips": ["לבד", "לחוצה", "שקטה", "בורחת", "חזקה", "מחכה", "חופשית", "מאוימת"] },
-    { "label": "העיקרון", "big": "הצורה לא השתנתה.", "sub": "המקום, הגודל והמרחב סביבה שינו את התחושה." },
-    { "label": "בחרו", "big": "בחרו מלבן אחד.", "sub": "את זה שבו התחושה הכי חזקה." },
-    { "label": "פיתוח", "big": "העבירו אותו לדף גדול.", "i": ["שמרו על המיקום והגודל מהמלבן.", "עכשיו מותר להוסיף צבע וקו.", "החליטו מה מלא, ומה נשאר ריק."] },
-    { "label": "עצרו", "big": "מה הייתם מזיזים?", "sub": "נסו בדמיון: קצת הצידה, קצת גדול יותר. האם התחושה משתנה?" },
-    { "label": "רפלקציה", "big": "מה שינה את התחושה הכי הרבה?", "ph": "התחושה השתנתה כש…" },
-    { "label": "השיעור הסתיים", "big": "המקום הוא חלק מהמשמעות.", "sub": "לא רק מה מציירים, אלא איפה." }
-  ] },
-  "en": { "s": [
-    { "big": "The same shape.<br>A different feeling.", "sub": "It all depends on where it sits on the page." },
-    { "label": "Hokusai", "art": { "img": "hokusai-great-wave-1831", "artist": "Katsushika Hokusai", "title": "The Great Wave off Kanagawa, 1831", "note": "The wave is huge and close. Mount Fuji is small and far away, almost in the middle." } },
-    { "label": "Look", "big": "What is big here? What is small?", "ask": "What is close? What is far? Where is there empty space?" },
-    { "label": "Getting ready", "big": "One page. Six rectangles.", "sub": "Divide the page into six rectangles. The same single shape goes in each: a circle, a blot or a thick line.", "frames": ["empty", "empty", "empty", "empty", "empty", "empty"] },
-    { "label": "Experiment 1 · Position", "big": "Where does it stand?", "i": ["Rectangle 1: the shape exactly in the centre.", "Rectangle 2: the shape in a corner.", "Rectangle 3: the shape touches the edge, half of it outside."], "frames": ["center", "corner", "edge"] },
-    { "label": "Experiment 2 · Size and space", "big": "How much room does it have?", "i": ["Rectangle 4: the shape is huge, almost filling the rectangle.", "Rectangle 5: the shape is tiny, with a lot of empty space around it."], "frames": ["huge", "tiny"] },
-    { "label": "Experiment 3 · Relations", "big": "It is no longer alone.", "i": ["Rectangle 6: add a second shape.", "Very close, touching, or very far away."], "frames": ["pair"] },
-    { "label": "Compare", "big": "Look at the six rectangles.", "sub": "How does the shape feel in each one?", "chips": ["Alone", "Squeezed", "Calm", "Escaping", "Strong", "Waiting", "Free", "Threatened"] },
-    { "label": "The principle", "big": "The shape did not change.", "sub": "Its place, its size and the space around it changed the feeling." },
-    { "label": "Choose", "big": "Choose one rectangle.", "sub": "The one where the feeling is strongest." },
-    { "label": "Develop", "big": "Move it to a large sheet.", "i": ["Keep the position and size from the rectangle.", "Now you may add colour and line.", "Decide what is full and what stays empty."] },
-    { "label": "Pause", "big": "What would you move?", "sub": "Try it in your mind: a little to the side, a little bigger. Does the feeling change?" },
-    { "label": "Reflection", "big": "What changed the feeling the most?", "ph": "The feeling changed when…" },
-    { "label": "Lesson complete", "big": "Place is part of the meaning.", "sub": "Not only what you draw, but where." }
-  ] }
+  "he": {
+    "s": [
+      {
+        "big": "אותה צורה.<br>תחושה אחרת.",
+        "sub": "הכול תלוי איפה היא נמצאת על הדף."
+      },
+      {
+        "label": "הוקוסאי",
+        "art": {
+          "img": "hokusai-great-wave-1831",
+          "artist": "קצושיקה הוקוסאי",
+          "title": "הגל הגדול מול קנגאווה, 1831",
+          "note": "הגל ענק וקרוב. הר פוג׳י קטן ורחוק, כמעט באמצע."
+        }
+      },
+      {
+        "label": "הסתכלו",
+        "big": "מה כאן גדול? מה קטן?",
+        "ask": "מה קרוב? מה רחוק? איפה נשאר מקום ריק?"
+      },
+      {
+        "label": "הכנה",
+        "big": "דף אחד. שישה מלבנים.",
+        "sub": "חלקו את הדף לשישה מלבנים. בכולם תופיע אותה צורה אחת: עיגול, כתם או קו עבה.",
+        "frames": [
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty"
+        ]
+      },
+      {
+        "label": "מיקום",
+        "big": "איפה היא עומדת?",
+        "i": [
+          "מלבן 1: הצורה בדיוק במרכז.",
+          "מלבן 2: הצורה בפינה.",
+          "מלבן 3: הצורה נוגעת בקצה, חצי ממנה בחוץ."
+        ],
+        "frames": [
+          "center",
+          "corner",
+          "edge"
+        ]
+      },
+      {
+        "label": "גודל ומרחב",
+        "big": "כמה מקום יש לה?",
+        "i": [
+          "מלבן 4: הצורה ענקית, כמעט ממלאת את המלבן.",
+          "מלבן 5: הצורה זעירה, והרבה ריק סביבה."
+        ],
+        "frames": [
+          "huge",
+          "tiny"
+        ]
+      },
+      {
+        "label": "יחסים",
+        "big": "היא כבר לא לבד.",
+        "i": [
+          "מלבן 6: הוסיפו צורה שנייה.",
+          "קרובה מאוד, נוגעת, או רחוקה מאוד."
+        ],
+        "frames": [
+          "pair"
+        ]
+      },
+      {
+        "label": "השוואה",
+        "big": "הסתכלו על ששת המלבנים.",
+        "sub": "איך מרגישה הצורה בכל אחד?",
+        "chips": [
+          "לבד",
+          "לחוצה",
+          "שקטה",
+          "בורחת",
+          "חזקה",
+          "מחכה",
+          "חופשית",
+          "מאוימת"
+        ]
+      },
+      {
+        "label": "העיקרון",
+        "big": "הצורה לא השתנתה.",
+        "sub": "המקום, הגודל והמרחב סביבה שינו את התחושה."
+      },
+      {
+        "label": "בחרו",
+        "big": "בחרו מלבן אחד.",
+        "sub": "את זה שבו התחושה הכי חזקה."
+      },
+      {
+        "label": "פיתוח",
+        "big": "העבירו אותו לדף גדול.",
+        "i": [
+          "שמרו על המיקום והגודל מהמלבן.",
+          "עכשיו מותר להוסיף צבע וקו.",
+          "החליטו מה מלא, ומה נשאר ריק."
+        ]
+      },
+      {
+        "label": "עצרו",
+        "big": "מה הייתם מזיזים?",
+        "sub": "נסו בדמיון: קצת הצידה, קצת גדול יותר. האם התחושה משתנה?"
+      },
+      {
+        "label": "רפלקציה",
+        "big": "מה שינה את התחושה הכי הרבה?",
+        "ph": "התחושה השתנתה כש…"
+      },
+      {
+        "label": "השיעור הסתיים",
+        "big": "המקום הוא חלק מהמשמעות.",
+        "sub": "לא רק מה מציירים, אלא איפה."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "The same shape.<br>A different feeling.",
+        "sub": "It all depends on where it sits on the page."
+      },
+      {
+        "label": "Hokusai",
+        "art": {
+          "img": "hokusai-great-wave-1831",
+          "artist": "Katsushika Hokusai",
+          "title": "The Great Wave off Kanagawa, 1831",
+          "note": "The wave is huge and close. Mount Fuji is small and far away, almost in the middle."
+        }
+      },
+      {
+        "label": "Look",
+        "big": "What is big here? What is small?",
+        "ask": "What is close? What is far? Where is there empty space?"
+      },
+      {
+        "label": "Getting ready",
+        "big": "One page. Six rectangles.",
+        "sub": "Divide the page into six rectangles. The same single shape goes in each: a circle, a blot or a thick line.",
+        "frames": [
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty"
+        ]
+      },
+      {
+        "label": "Position",
+        "big": "Where does it stand?",
+        "i": [
+          "Rectangle 1: the shape exactly in the centre.",
+          "Rectangle 2: the shape in a corner.",
+          "Rectangle 3: the shape touches the edge, half of it outside."
+        ],
+        "frames": [
+          "center",
+          "corner",
+          "edge"
+        ]
+      },
+      {
+        "label": "Size and space",
+        "big": "How much room does it have?",
+        "i": [
+          "Rectangle 4: the shape is huge, almost filling the rectangle.",
+          "Rectangle 5: the shape is tiny, with a lot of empty space around it."
+        ],
+        "frames": [
+          "huge",
+          "tiny"
+        ]
+      },
+      {
+        "label": "Relations",
+        "big": "It is no longer alone.",
+        "i": [
+          "Rectangle 6: add a second shape.",
+          "Very close, touching, or very far away."
+        ],
+        "frames": [
+          "pair"
+        ]
+      },
+      {
+        "label": "Compare",
+        "big": "Look at the six rectangles.",
+        "sub": "How does the shape feel in each one?",
+        "chips": [
+          "Alone",
+          "Squeezed",
+          "Calm",
+          "Escaping",
+          "Strong",
+          "Waiting",
+          "Free",
+          "Threatened"
+        ]
+      },
+      {
+        "label": "The principle",
+        "big": "The shape did not change.",
+        "sub": "Its place, its size and the space around it changed the feeling."
+      },
+      {
+        "label": "Choose",
+        "big": "Choose one rectangle.",
+        "sub": "The one where the feeling is strongest."
+      },
+      {
+        "label": "Develop",
+        "big": "Move it to a large sheet.",
+        "i": [
+          "Keep the position and size from the rectangle.",
+          "Now you may add colour and line.",
+          "Decide what is full and what stays empty."
+        ]
+      },
+      {
+        "label": "Pause",
+        "big": "What would you move?",
+        "sub": "Try it in your mind: a little to the side, a little bigger. Does the feeling change?"
+      },
+      {
+        "label": "Reflection",
+        "big": "What changed the feeling the most?",
+        "ph": "The feeling changed when…"
+      },
+      {
+        "label": "Lesson complete",
+        "big": "Place is part of the meaning.",
+        "sub": "Not only what you draw, but where."
+      }
+    ]
+  }
 }

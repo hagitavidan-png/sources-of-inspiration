@@ -165,6 +165,7 @@
       ? '<div class="lp-gate rv">' +
         '<p class="lp-gate-kicker">' + tt('יחידה ' + D.unitNum + ' · שיעור ' + D.number, 'Unit ' + D.unitNum + ' · Lesson ' + D.number) + '</p>' +
         t(D.title, 'h1', 'ed-display lp-gate-title') +
+        t(D.subtitle, 'p', 'lp-gate-sub') +
         t(unitTitle, 'p', 'lp-gate-unit') +
         '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
         '</div>'
@@ -195,8 +196,14 @@
       if (D.materials && !createSteps) inner += '<p class="lp-mat-line rv">' + tt('חומרים', 'Materials', 'b') + ' ' + t(D.materials) + '</p>';
     }
     if (d.works && d.works.length) inner += works(d.works);
+    if (D.layout && D.layout[key] === 'desk' && D.desk) {
+      /* earlier work laid out on the table: blank pages marked with their lesson number */
+      inner += '<div class="lp-desk rv" aria-hidden="true">' + D.desk.map(function (n, k) {
+        return '<span class="lp-desk-page lp-desk-' + k + '"><i dir="ltr">' + esc(n) + '</i></span>';
+      }).join('') + '</div>';
+    }
     blocks.forEach(function (b) { inner += block(b); });
-    if (key === 'create' && D.layout && D.layout.create === 'lab') {
+    if (key === 'create' && D.layout && /^lab/.test(D.layout.create)) {
       /* lab: an opening, the materials, parallel experiment sheets, and the lesson's closing */
       (d.lead || []).forEach(function (b) { inner += block(b); });
       if (D.materials) inner += '<div class="lp-sub-sec lp-materials rv">' + tt('חומרים', 'Materials', 'h3', 'lp-sub-title') + t(D.materials, 'p') + '</div>';
@@ -228,7 +235,8 @@
     if (!l) return '<span></span>';
     var href = BASE + (PAGES[l.path] || l.path);
     var lab = dir === 'prev' ? { he: '→ השיעור הקודם', en: '← Previous lesson' } : { he: 'השיעור הבא ←', en: 'Next lesson →' };
-    return '<a class="un un-' + dir + '" href="' + href + '">' + t(lab, 'span', 'un-lab') + t(l.title, 'span', 'un-t') + '</a>';
+    var title = (window.LESSON_TITLES || {})[l.path] || l.title;
+    return '<a class="un un-' + dir + '" href="' + href + '">' + t(lab, 'span', 'un-lab') + t(title, 'span', 'un-t') + '</a>';
   }
   html += '<nav class="unit-nav lp-nav ed-wrap" aria-label="' + (L === 'he' ? 'ניווט בין שיעורים' : 'Lesson navigation') + '">' +
     link(flat[i - 1], 'prev') + link(flat[i + 1], 'next') + '</nav>';

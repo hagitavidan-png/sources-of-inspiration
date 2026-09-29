@@ -75,7 +75,7 @@
           var cur = l.path === here.lesson;
           html += '<li><a href="' + BASE + (LESSON_PAGES[l.path] || l.path) + '"' + (cur ? ' class="is-current" aria-current="page"' : '') + '>' +
             '<span class="ed-ln">' + n + '.' + (k + 1) + '</span>' +
-            '<span class="ed-lt">' + esc(l.title[L]) + (cur ? '<span class="ed-now">' + esc(t.here) + '</span>' : '') + '</span>' +
+            '<span class="ed-lt">' + esc(((window.LESSON_TITLES || {})[l.path] || l.title)[L]) + (cur ? '<span class="ed-now">' + esc(t.here) + '</span>' : '') + '</span>' +
             '</a></li>';
         });
         html += '</ol>';

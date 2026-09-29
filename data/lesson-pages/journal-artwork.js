@@ -5,8 +5,18 @@ window.LESSON_PAGE = {
  "slides": null,
  "variant": "v2",
  "layout": {
-  "look": "spread",
+  "look": "desk",
   "idea": "flow"
+ },
+ "desk": [
+  "1.1",
+  "1.2",
+  "1.3",
+  "1.4"
+ ],
+ "subtitle": {
+  "he": "יומן וזיהוי מוטיבים חוזרים",
+  "en": "Journal pages and recurring motifs"
  },
  "number": "1.5",
  "unit": {
@@ -15,8 +25,8 @@ window.LESSON_PAGE = {
  },
  "unitNum": "01",
  "title": {
-  "he": "כיצד יומן אישי הופך ליצירת אמנות",
-  "en": "How a Personal Journal Becomes an Artwork"
+  "he": "מה חוזר בעבודות שלי?",
+  "en": "What Keeps Returning in My Work?"
  },
  "time": {
   "he": "50 דקות",
