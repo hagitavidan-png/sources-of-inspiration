@@ -46,8 +46,15 @@ const MAP = {
   'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
   'journal-artwork': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
   'frida-kahlo': { explore: [0], sources: [1], look: [2, 3, 4, 5], idea: [6, 7], create: [8, 9, 10, 11], end: [12, 13, 14, 15] },
-  'experience-experiments': { hero: ['munch-scream', '50% 12%'],
-    explore: [0], sources: [1, 2, 3], look: [4, 5], idea: [6, 7, 8], create: [9, 10, 11, 12], end: [13] },
+  /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
+     from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
+     screen 9 opens it, 10-12 are three parallel experiments, 13 closes the lesson. */
+  'experience-experiments': { hero: ['munch-scream', '50% 12%'], variant: 'v2',
+    layout: { idea: 'flow', create: 'lab' },
+    explore: ['0:nolabel'],
+    sources: [{ s: 1, work: [4, 0] }, { s: 2, work: [4, 1] }, { s: 3, work: [4, 2] }],
+    look: ['4:text', 5], idea: [6, 7, 8],
+    create: { lead: [9], steps: [10, 11, 12], outro: [13] } },
   'experience-artwork': { explore: [0], idea: [1, 2], create: [3], end: [4, 5, 6, 7] },
   'unit-summary': { explore: [0, 1], look: [2, 3, 4, 5, 6, 7], end: [8, 9, 10, 11, 12, 13, 14] },
   'lesson-2-1': { hero: ['hokusai-great-wave-1831', '28% 18%'],
@@ -104,7 +111,9 @@ function addWorkTitles(sections) {
     for (const b of (sec.blocks || sec.steps || [])) {
       for (const w of (b.works || [])) {
         const en = (w.alt || '').split(',').slice(1).join(',').trim();
-        if (en && WORK_TITLES[en]) w.workTitle = { he: WORK_TITLES[en], en };
+        const heAlt = (w.altHe || '').split(',').slice(1).join(',').trim();   // the lesson's own Hebrew title
+        if (en && (heAlt || WORK_TITLES[en])) w.workTitle = { he: heAlt || WORK_TITLES[en], en };
+        delete w.altHe;
       }
     }
   }
@@ -167,7 +176,9 @@ function blockFromT(T, n, html) {
     if (he[c] == null) return;
     const im = imgs[k] || {};
     const alt = (en.alts && en.alts[k]) || im.alt || '';
-    works.push({ img: im.img, alt, artist: artistFromAlt(alt), title: bil(he[c], en[c]) });
+    const wk = { img: im.img, alt, artist: artistFromAlt(alt), title: bil(he[c], en[c]) };
+    if (he.alts && he.alts[k]) wk.altHe = he.alts[k];
+    works.push(wk);
   });
   // artwork screens: art0title / artTitle / art1Title …
   const names = artistNames(html);
@@ -229,7 +240,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=5">
-<link rel="stylesheet" href="../css/lesson-page.css?v=8">
+<link rel="stylesheet" href="../css/lesson-page.css?v=9">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -265,7 +276,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=5"></script>
+<script src="../js/lesson-page.js?v=6"></script>
 <script src="../js/site-drawer.js?v=6" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -284,15 +295,30 @@ for (const [id, m] of Object.entries(MAP)) {
   const sections = {};
   for (const key of ['explore', 'sources', 'look', 'idea', 'create', 'end']) {
     if (!m[key]) continue;
-    const blocks = m[key].map(spec => {
-      /* a screen number, or 'n:works' / 'n:text' to use only the artworks or only the rest of screen n */
+    /* a spec is a screen number; 'n:works' / 'n:text' use only the artworks or only the rest of screen n;
+       'n:nolabel' leaves out the screen's small label; { s: n, work: [m, k] } adds artwork k of screen m
+       to screen n (an artist next to their own work, shown without repeating the artist's name) */
+    const build = list => list.map(spec => {
+      if (typeof spec === 'object') {
+        const b = blockFromT(T, spec.s, screenHtml(src, spec.s));
+        const g = blockFromT(T, spec.work[0], screenHtml(src, spec.work[0]));
+        const w = g.works && g.works[spec.work[1]];
+        if (w) b.works = [Object.assign({}, w, { noArtist: true })];
+        return b;
+      }
       const [n, part] = String(spec).split(':');
       const html = screenHtml(src, n);
       const b = T ? blockFromT(T, Number(n), html) : blockFromDom(html);
       if (part === 'works') return b.works ? { works: b.works } : {};
       if (part === 'text') { delete b.works; }
+      if (part === 'nolabel') { delete b.label; }
       return b;
     }).filter(b => Object.keys(b).length);
+    if (key === STEPS_SECTION && !Array.isArray(m[key])) {
+      sections[key] = { lead: build(m[key].lead || []), steps: build(m[key].steps || []), outro: build(m[key].outro || []) };
+      continue;
+    }
+    const blocks = build(m[key]);
     sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
   }
   if (m.variant === 'v2') addWorkTitles(sections);
@@ -300,6 +326,7 @@ for (const [id, m] of Object.entries(MAP)) {
   const data = {
     id, path: file, slides: file,
     ...(m.variant ? { variant: m.variant } : {}),
+    ...(m.layout ? { layout: m.layout } : {}),
     number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
@@ -311,7 +338,7 @@ for (const [id, m] of Object.entries(MAP)) {
   fs.mkdirSync(path.join(ROOT, 'lesson-pages'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'), pageHtml(id, plain(intro.title.he)));
   index[file] = 'lesson-pages/' + id + '.html';
-  const count = Object.values(sections).reduce((a, s) => a + (s.blocks || s.steps).length, 0);
+  const count = Object.values(sections).reduce((a, s) => a + (s.blocks || []).length + (s.steps || []).length + (s.lead || []).length + (s.outro || []).length, 0);
   console.log(id.padEnd(24), count, 'blocks');
 }
 fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),

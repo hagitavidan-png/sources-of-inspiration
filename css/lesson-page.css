@@ -163,3 +163,44 @@
   .lp-v2 .lp-materials{padding:14px 0}
   .lp-v2 .lp-sub-title{margin-bottom:12px}
 }
+
+/* ═══ Pilot components used by 1.7 (only rendered where a lesson asks for them) ═══ */
+
+/* an artist's own work inside the artist's block; works without an image show their title as type */
+.lp-v2 .lp-ed-work.in-artist .lp-ed-title{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,2.8vw,2.3rem);line-height:1.05;color:var(--ink)}
+.lp-v2 .lp-ed-work.no-img{padding-top:18px;border-top:1px solid var(--rule-strong);max-width:560px}
+.lp-v2 .lp-ed-work.no-img figcaption{margin-top:0}
+
+/* idea as a flow in the artist's notebook */
+.lp-v2 .lp-layout-flow .lp-block + .lp-block{border-top:0;padding-top:0}
+.lp-v2 .lp-layout-flow .lp-block + .lp-block::before{content:"↓";display:block;margin:0 0 16px;font-size:1.3rem;line-height:1;color:var(--muted)}
+.lp-v2 .lp-layout-flow .lp-prompt textarea{border:0;padding:0;line-height:34px;min-height:102px;background:repeating-linear-gradient(to bottom,transparent 0 33px,var(--rule-strong) 33px 34px)}
+.lp-v2 .lp-layout-flow .lp-prompt textarea:focus{background:repeating-linear-gradient(to bottom,transparent 0 33px,var(--ink) 33px 34px)}
+
+/* making as a lab: three experiment sheets */
+.lp-v2 .lp-lab{list-style:none;margin:clamp(28px,4vw,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);align-items:start}
+.lp-v2 .lp-sheet{background:#fbf9f4;border:1px solid var(--rule);padding:22px 20px 24px;transition:transform .5s var(--ease)}
+.lp-v2 .lp-sheet-0{transform:rotate(-.7deg)}
+.lp-v2 .lp-sheet-1{transform:translateY(26px) rotate(.5deg)}
+.lp-v2 .lp-sheet-2{transform:translateY(8px) rotate(-.3deg)}
+.lp-v2 .lp-sheet:hover{transform:none}
+.lp-v2 .lp-sheet .lp-block{max-width:none;padding:0}
+.lp-v2 .lp-sheet .lp-label{letter-spacing:.1em}
+.lp-v2 .lp-sheet .lp-big{font-family:var(--f-display);font-weight:700;font-size:clamp(2.2rem,3.4vw,2.8rem);line-height:1;margin-bottom:8px}
+.lp-v2 .lp-sheet .lp-list{margin-top:10px}
+.lp-v2 .lp-sheet .lp-list li{padding:4px 0;font-size:.97rem}
+
+/* the lesson's closing, at the end of "making" */
+.lp-v2 .lp-closing{margin-top:clamp(64px,9vw,112px);padding-top:clamp(32px,5vw,52px);border-top:1.5px solid var(--ink);text-align:center}
+.lp-v2 .lp-closing .lp-block{max-width:none;padding:0}
+.lp-v2 .lp-closing .lp-big{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,5.4vw,4rem);line-height:1;margin-bottom:14px}
+.lp-v2 .lp-closing .lp-sub{font-size:1.1rem}
+
+@media (max-width:760px){
+  .lp-v2 .lp-lab{grid-template-columns:1fr;gap:16px}
+  .lp-v2 .lp-sheet,.lp-v2 .lp-sheet-0,.lp-v2 .lp-sheet-1,.lp-v2 .lp-sheet-2{transform:none}
+  .lp-v2 .lp-closing{margin-top:48px;padding-top:28px}
+}
+/* the lab's opening list already carries its own numbers (01 · 02 · 03) */
+.lp-v2 .lp-layout-lab > .lp-block .lp-list{list-style:none;padding:0}
+.lp-v2 .lp-layout-lab > .lp-block .lp-list li{padding:3px 0}

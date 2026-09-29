@@ -65,9 +65,10 @@
 
   /* pilot: artworks as a magazine sequence; images keep their full proportions (no crop) */
   function edWork(w, k) {
-    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + ' rv">' +
+    /* a work without a usable image is shown by its title only, set as part of the page */
+    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + ' rv">' +
       (w.img ? '<div class="lp-ed-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>' : '') +
-      '<figcaption>' + t(w.artist, 'b', 'lp-ed-artist') + t(w.workTitle, 'span', 'lp-ed-title') +
+      '<figcaption>' + (w.noArtist ? '' : t(w.artist, 'b', 'lp-ed-artist')) + t(w.workTitle, 'span', 'lp-ed-title') +
       t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') + '</figcaption></figure>';
   }
   function works(list) {
@@ -107,7 +108,8 @@
   function section(key, he, en, body, n) {
     if (V2) {
       /* pilot: a large, quiet station number marks each part of the lesson */
-      return '<section class="lp-sec lp-station" id="' + key + '" data-sec>' +
+      var lay = D.layout && D.layout[key] ? ' lp-layout-' + D.layout[key] : '';
+      return '<section class="lp-sec lp-station' + lay + '" id="' + key + '" data-sec>' +
         '<header class="lp-sec-head rv"><span class="lp-station-n" aria-hidden="true">0' + n + '</span>' + tt(he, en, 'h2', 'ed-display') + '</header>' +
         body + '</section>';
     }
@@ -163,7 +165,7 @@
   SECTIONS.forEach(function (s) {
     var key = s[0], d = S[key] || {};
     var blocks = d.blocks || [];
-    var createSteps = S.create && S.create.steps && S.create.steps.length;
+    var createSteps = S.create && ((S.create.steps && S.create.steps.length) || (S.create.lead && S.create.lead.length));
     var hasMaterials = key === 'create' && D.materials && createSteps;
     if (key !== 'explore' && !blocks.length && !(d.works && d.works.length) && !(d.steps && d.steps.length) && !hasMaterials) return;
     n++;
@@ -175,7 +177,13 @@
     }
     if (d.works && d.works.length) inner += works(d.works);
     blocks.forEach(function (b) { inner += block(b); });
-    if (key === 'create') {
+    if (key === 'create' && D.layout && D.layout.create === 'lab') {
+      /* lab: an opening, the materials, parallel experiment sheets, and the lesson's closing */
+      (d.lead || []).forEach(function (b) { inner += block(b); });
+      if (D.materials) inner += '<div class="lp-sub-sec lp-materials rv">' + tt('חומרים', 'Materials', 'h3', 'lp-sub-title') + t(D.materials, 'p') + '</div>';
+      inner += '<ol class="lp-lab">' + (d.steps || []).map(function (b, k) { return '<li class="lp-sheet lp-sheet-' + k + '">' + block(b) + '</li>'; }).join('') + '</ol>';
+      (d.outro || []).forEach(function (b) { inner += '<div class="lp-closing">' + block(b) + '</div>'; });
+    } else if (key === 'create') {
       if (d.steps && d.steps.length) {
         inner += '<div class="lp-sub-sec">' + tt('מתחילים', 'Getting started', 'h3', 'lp-sub-title rv') +
           '<ol class="lp-steps">' + d.steps.map(function (b) { return '<li>' + block(b) + '</li>'; }).join('') + '</ol></div>';

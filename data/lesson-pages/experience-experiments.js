@@ -3,6 +3,11 @@ window.LESSON_PAGE = {
  "id": "experience-experiments",
  "path": "lessons/experience-experiments.html",
  "slides": "lessons/experience-experiments.html",
+ "variant": "v2",
+ "layout": {
+  "idea": "flow",
+  "create": "lab"
+ },
  "number": "1.7",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -37,10 +42,6 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "יחידה: חוויה אישית כמקור השראה",
-      "en": "Unit: Personal Experience as a Source of Inspiration"
-     },
      "big": {
       "he": "איך חוויה<br>הופכת ליצירה?",
       "en": "How does an experience<br>become art?"
@@ -70,7 +71,26 @@ window.LESSON_PAGE = {
      "attr": {
       "he": "פרידה קאלו",
       "en": "Frida Kahlo"
-     }
+     },
+     "works": [
+      {
+       "img": null,
+       "alt": "Frida Kahlo, Self-Portrait with Monkeys, 1943",
+       "artist": {
+        "he": "פרידה קאלו",
+        "en": "Frida Kahlo"
+       },
+       "title": {
+        "he": "מבט ישיר, סמלים מסביב",
+        "en": "A direct gaze, symbols all around"
+       },
+       "noArtist": true,
+       "workTitle": {
+        "he": "דיוקן עצמי עם קופים, 1943",
+        "en": "Self-Portrait with Monkeys, 1943"
+       }
+      }
+     ]
     },
     {
      "label": {
@@ -88,7 +108,26 @@ window.LESSON_PAGE = {
      "attr": {
       "he": "אדוורד מונק",
       "en": "Edvard Munch"
-     }
+     },
+     "works": [
+      {
+       "img": "munch-scream",
+       "alt": "Edvard Munch, The Scream, 1893",
+       "artist": {
+        "he": "אדוורד מונק",
+        "en": "Edvard Munch"
+       },
+       "title": {
+        "he": "קווים מתפתלים, שמיים אדומים",
+        "en": "Winding lines, a red sky"
+       },
+       "noArtist": true,
+       "workTitle": {
+        "he": "הצעקה, 1893",
+        "en": "The Scream, 1893"
+       }
+      }
+     ]
     },
     {
      "label": {
@@ -106,7 +145,25 @@ window.LESSON_PAGE = {
      "attr": {
       "he": "לואיז בורז׳ואה",
       "en": "Louise Bourgeois"
-     }
+     },
+     "works": [
+      {
+       "alt": "Louise Bourgeois, Maman, 1999",
+       "artist": {
+        "he": "לואיז בורז׳ואה",
+        "en": "Louise Bourgeois"
+       },
+       "title": {
+        "he": "גוף ענק על רגליים דקות",
+        "en": "A huge body on thin legs"
+       },
+       "noArtist": true,
+       "workTitle": {
+        "he": "Maman, 1999",
+        "en": "Maman, 1999"
+       }
+      }
+     ]
     }
    ]
   },
@@ -124,44 +181,7 @@ window.LESSON_PAGE = {
      "ask": {
       "he": "צבע? קו? צורה? מרחב?",
       "en": "Colour? Line? Shape? Space?"
-     },
-     "works": [
-      {
-       "img": null,
-       "alt": "Frida Kahlo, Self-Portrait with Monkeys, 1943",
-       "artist": {
-        "he": "פרידה קאלו",
-        "en": "Frida Kahlo"
-       },
-       "title": {
-        "he": "מבט ישיר, סמלים מסביב",
-        "en": "A direct gaze, symbols all around"
-       }
-      },
-      {
-       "img": "munch-scream",
-       "alt": "Edvard Munch, The Scream, 1893",
-       "artist": {
-        "he": "אדוורד מונק",
-        "en": "Edvard Munch"
-       },
-       "title": {
-        "he": "קווים מתפתלים, שמיים אדומים",
-        "en": "Winding lines, a red sky"
-       }
-      },
-      {
-       "alt": "Louise Bourgeois, Maman, 1999",
-       "artist": {
-        "he": "לואיז בורז׳ואה",
-        "en": "Louise Bourgeois"
-       },
-       "title": {
-        "he": "גוף ענק על רגליים דקות",
-        "en": "A huge body on thin legs"
-       }
-      }
-     ]
+     }
     },
     {
      "label": {
@@ -272,7 +292,7 @@ window.LESSON_PAGE = {
    ]
   },
   "create": {
-   "steps": [
+   "lead": [
     {
      "label": {
       "he": "מעבדת ניסויים",
@@ -298,7 +318,9 @@ window.LESSON_PAGE = {
        "03 · Space and composition"
       ]
      }
-    },
+    }
+   ],
+   "steps": [
     {
      "label": {
       "he": "ניסוי 01 · 10 דקות",
@@ -377,10 +399,8 @@ window.LESSON_PAGE = {
       ]
      }
     }
-   ]
-  },
-  "end": {
-   "blocks": [
+   ],
+   "outro": [
     {
      "label": {
       "he": "השיעור הסתיים",
