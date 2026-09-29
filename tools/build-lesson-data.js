@@ -44,7 +44,7 @@ const MAP = {
      its looking task (label, question, "calm? tense? moving?") to "look". */
   /* screen 1: the sentence once attributed to Van Gogh is not in his letters (vangoghletters.org), so it is
      shown as our own text, without quotation marks or attribution (approved by the author) */
-  'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
+  'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2', noSlides: true,
     patch: { 1: { drop: ['label', 'quote', 'attr'],
                   big: { he: 'ציור לא חייב לתאר רק את מה שרואים. קו וצבע יכולים להעביר גם תחושה.',
                          en: "A drawing doesn't have to show only what you see. Line and colour can carry a feeling too." } } },
@@ -69,7 +69,7 @@ const MAP = {
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
      screen 9 opens it, 10-12 are three parallel experiments, 13 closes the lesson. */
-  'experience-experiments': { variant: 'v2',   /* no cover image: The Scream appears with Munch in "sources" */
+  'experience-experiments': { variant: 'v2', noSlides: true,   /* no cover image: The Scream appears with Munch in "sources" */
     layout: { idea: 'flow', create: 'lab' },
     explore: ['0:nolabel'],
     sources: [{ s: 1, work: [4, 0] }, { s: 2, work: [4, 1] }, { s: 3, work: [4, 2] }],
@@ -371,7 +371,8 @@ for (const [id, m] of Object.entries(MAP)) {
   const data = {
     id, path: file,
     /* the slide lesson is the classroom mode; for rewritten lessons it still holds the old content */
-    slides: m.authored ? null : file,
+    /* unit 1: no link to the old slides for now, they no longer match the lesson pages (author's decision) */
+    slides: m.authored || m.noSlides ? null : file,
     ...(m.variant ? { variant: m.variant } : {}),
     ...(m.layout ? { layout: m.layout } : {}),
     ...(m.desk ? { desk: m.desk } : {}),

@@ -2,7 +2,7 @@
 window.LESSON_PAGE = {
  "id": "emotion-drawing",
  "path": "lessons/emotion-drawing.html",
- "slides": "lessons/emotion-drawing.html",
+ "slides": null,
  "variant": "v2",
  "number": "1.2",
  "unit": {

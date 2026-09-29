@@ -293,6 +293,8 @@ def journey_row(l, lo, n, B):
 
 def render(u, units):
     cfg = UNITS[u['id']]
+    ko = (u.get('over') or {}).get('keys')
+    keys = (ko['he'], ko['en']) if ko else cfg['keys']
     idx = [x['id'] for x in units].index(u['id'])
     prev_u = units[idx - 1] if idx > 0 else None
     next_u = units[idx + 1] if idx < len(units) - 1 else None
@@ -447,7 +449,7 @@ def render(u, units):
       <div>
         <p class="ed-kicker">{t('יחידה ' + u['num'], 'Unit ' + u['num'])}</p>
         <h1 class="ed-display u-title">{t(u['title']['he'], u['title']['en'])}</h1>
-        <p class="u-keys">{t(*cfg['keys'])}</p>
+        <p class="u-keys">{t(*keys)}</p>
       </div>
     </div>
     <figure class="u-fig">

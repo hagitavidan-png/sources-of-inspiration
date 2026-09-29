@@ -2,7 +2,7 @@
 window.LESSON_PAGE = {
  "id": "experience-experiments",
  "path": "lessons/experience-experiments.html",
- "slides": "lessons/experience-experiments.html",
+ "slides": null,
  "variant": "v2",
  "layout": {
   "idea": "flow",
