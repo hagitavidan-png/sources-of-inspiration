@@ -100,7 +100,14 @@
 .lp-where{display:none}
 @media (max-width:720px){
   .lp-where{position:sticky;top:62px;z-index:35;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 16px;font-size:.86rem;font-weight:600;color:var(--ink);text-decoration:none;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-  .lp-where svg{color:var(--muted)}
+  .lp-where svg{color:var(--muted);flex-shrink:0}
+  .lp-where-in{display:flex;align-items:center;gap:7px;min-width:0}
+  .lp-where-menu{color:var(--ink) !important}
+  .lp-where-lab{font-weight:700}
+  .lp-where-dot{color:var(--muted);font-weight:400}
+  .lp-where-loc{font-weight:400;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .lp-where-chev{transition:transform .25s var(--ease)}
+  .lp-where[aria-expanded="true"] .lp-where-chev{transform:rotate(180deg)}
 }
 .crumb [aria-current]{color:var(--ink)}
 

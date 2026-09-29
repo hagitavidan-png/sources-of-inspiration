@@ -203,9 +203,14 @@
   var html = '';
   /* compact location for small screens; tapping it opens the contents drawer */
   if (posInUnit) {
-    html += '<a class="lp-where" href="#ed-drawer" data-open-contents>' +
-      tt('יחידה ' + unitN + ' · שיעור ' + posInUnit + ' מתוך ' + unitCount, 'Unit ' + unitN + ' · Lesson ' + posInUnit + ' of ' + unitCount) +
-      '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>';
+    /* phones: the main way into the contents: "☰ Contents · Unit 1 · Lesson 8 of 9 ⌄", the whole bar opens the drawer */
+    html += '<a class="lp-where" href="#ed-drawer" data-open-contents aria-expanded="false">' +
+      '<span class="lp-where-in">' +
+      '<svg class="lp-where-menu" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M1.5 7h11M1.5 10.5h11" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>' +
+      tt('תוכן', 'Contents', 'b', 'lp-where-lab') + '<span class="lp-where-dot" aria-hidden="true">·</span>' +
+      tt('יחידה ' + unitN + ' · שיעור ' + posInUnit + ' מתוך ' + unitCount, 'Unit ' + unitN + ' · Lesson ' + posInUnit + ' of ' + unitCount, 'span', 'lp-where-loc') +
+      '</span>' +
+      '<svg class="lp-where-chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>';
   }
   html += '<section class="lp-head ed-wrap">' +
     '<nav class="crumb rv" aria-label="' + (L === 'he' ? 'מיקום באתר' : 'Breadcrumb') + '">' +
@@ -298,6 +303,14 @@
 
   root.innerHTML = html;
   if (V2) root.classList.add('lp-v2');
+
+  /* the location bar shows whether the contents are open (the chevron turns) */
+  var where = root.querySelector('.lp-where');
+  if (where && 'MutationObserver' in window) {
+    new MutationObserver(function () {
+      where.setAttribute('aria-expanded', document.body.classList.contains('ed-open') ? 'true' : 'false');
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
 
   /* chips: simple toggle, nothing is stored */
   root.querySelectorAll('.lp-chip').forEach(function (c) {
