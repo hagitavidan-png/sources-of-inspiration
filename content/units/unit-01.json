@@ -1,0 +1,57 @@
+{
+  "_note": "Unit 1 page, content approved by the author. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lesson list is the unit's journey: a journey word, the lesson title, a short description and the time.",
+  "desc": {
+    "he": "החיים שלכם הם מקור ההשראה. ביחידה נתחיל מרגש ונגלה בהדרגה איך צבע, קו, קומפוזיציה, זיכרון, מוטיב וסמל יכולים להפוך לחומר ליצירה. משם נעבור לניסוי, לפיתוח עבודה ולהתבוננות בשפה האישית שמתחילה להיווצר.",
+    "en": "Your life is the source of inspiration. The unit starts from a feeling and discovers, step by step, how colour, line, composition, memory, motif and symbol can become material for art. From there it moves to experiments, to developing a work, and to looking at the personal language that begins to form."
+  },
+  "noApproach": true,
+  "lessons": {
+    "lessons/lesson-1-1.html": {
+      "step": { "he": "צבע", "en": "Colour" },
+      "sub": { "he": "רגש אחד, שניים־שלושה צבעים וכתמים שנפגשים. מה קורה לרגש כשהוא הופך לצבע?", "en": "One feeling, two or three colours, and patches that meet. What happens to a feeling when it becomes colour?" }
+    },
+    "lessons/emotion-drawing.html": {
+      "step": { "he": "קו", "en": "Line" },
+      "sub": { "he": "רגע אחד, רגש אחד, קו. איך הרגש זז על הדף ואיך הצבע מצטרף אליו.", "en": "One moment, one feeling, a line. How the feeling moves across the page, and how colour joins it." }
+    },
+    "lessons/visual-journal.html": {
+      "step": { "he": "קומפוזיציה", "en": "Composition" },
+      "sub": { "he": "אותה צורה, שישה מקומות על הדף. מיקום, גודל ומרחב משנים את התחושה.", "en": "The same shape, six places on the page. Position, size and space change the feeling." }
+    },
+    "lessons/memory-drawing.html": {
+      "step": { "he": "זיכרון", "en": "Memory" },
+      "sub": { "he": "זיכרון מגיע בשברים. מציירים את החלקים ומרכיבים אותם מחדש.", "en": "A memory comes in fragments. Draw the pieces and put them together again." }
+    },
+    "lessons/journal-artwork.html": {
+      "step": { "he": "מוטיב", "en": "Motif" },
+      "sub": { "he": "פורשים את העבודות הקודמות ומגלים מה חוזר בהן. מוטיב אחד הופך לנקודת מוצא לדף חדש.", "en": "Lay out your earlier work and discover what keeps returning. One motif becomes the starting point for a new page." }
+    },
+    "lessons/frida-kahlo.html": {
+      "step": { "he": "סמל", "en": "Symbol" },
+      "sub": { "he": "דימוי, מוטיב וסמל. בעקבות פרידה קאלו מחברים דימויים בעלי משמעות לעולם אישי.", "en": "Image, motif and symbol. Following Frida Kahlo, connect meaningful images into a personal world." }
+    },
+    "lessons/experience-experiments.html": {
+      "step": { "he": "ניסוי", "en": "Experiment" }
+    },
+    "lessons/experience-artwork.html": {
+      "step": { "he": "פיתוח", "en": "Development" }
+    },
+    "lessons/unit-summary.html": {
+      "step": { "he": "גילוי", "en": "Discovery" },
+      "sub": { "he": "פורשים את עבודות היחידה, מזהים מה השתנה ומה חוזר ושואלים איך אפשר לזהות את השפה האישית שלנו.", "en": "Lay out the unit's work, notice what changed and what keeps returning, and ask how your personal language can be recognised." },
+      "dur": "45 min"
+    }
+  },
+  "people": [
+    ["rothko", ["lessons/lesson-1-1.html"]],
+    ["munch", ["lessons/emotion-drawing.html", "lessons/experience-experiments.html"]],
+    ["kandinsky", ["lessons/emotion-drawing.html"]],
+    ["hokusai", ["lessons/emotion-drawing.html", "lessons/visual-journal.html"]],
+    ["turner", ["lessons/emotion-drawing.html"]],
+    ["monet", ["lessons/emotion-drawing.html"]],
+    ["chagall", ["lessons/memory-drawing.html"]],
+    ["hundertwasser", ["lessons/journal-artwork.html"]],
+    ["kahlo", ["lessons/frida-kahlo.html", "lessons/experience-experiments.html"]],
+    ["bourgeois", ["lessons/experience-experiments.html"]]
+  ]
+}

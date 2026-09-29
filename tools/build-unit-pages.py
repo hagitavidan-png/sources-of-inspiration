@@ -114,6 +114,28 @@ def _lesson_index():
 NEW_LESSON_PAGES = _lesson_index()   # built by tools/build-lesson-data.js
 
 
+def _lesson_titles():
+    """New titles of lessons whose content was rewritten (same source as the drawer and prev / next)."""
+    p = os.path.join(ROOT, 'data', 'lesson-pages', 'index.js')
+    if not os.path.exists(p):
+        return {}
+    import json
+    m = re.search(r'window\.LESSON_TITLES = (\{.*?\});', open(p, encoding='utf8').read(), re.S)
+    return json.loads(m.group(1)) if m else {}
+
+
+LESSON_TITLES = _lesson_titles()
+
+
+def _unit_content(uid):
+    """Approved unit texts that replace course.html for that unit's page (content/units/unit-NN.json)."""
+    p = os.path.join(ROOT, 'content', 'units', 'unit-' + uid[-2:] + '.json')
+    if not os.path.exists(p):
+        return None
+    import json
+    return json.load(open(p, encoding='utf8'))
+
+
 # ── helpers ───────────────────────────────────────────────────────
 def a(tag, name):
     m = re.search(r'\b' + name + r'="([^"]*)"', tag)
@@ -216,6 +238,20 @@ def parse():
                     if k and k not in u['people']:
                         u['people'].append(k)
         u['lessons'] = lessons
+        for l in lessons:
+            path = l['href'] or ''
+            if path in LESSON_TITLES:
+                l['title'] = LESSON_TITLES[path]
+        O = _unit_content(uid)
+        u['over'] = O
+        if O:
+            if O.get('desc'):
+                u['desc'] = O['desc']
+            if O.get('noApproach'):
+                u['approach'] = []
+            if O.get('people') is not None:
+                u['people'] = [k for k, _ in O['people']]
+                u['people_refs'] = dict((k, v) for k, v in O['people'])
         out.append(u)
     return out
 
@@ -229,6 +265,30 @@ def lessons_for(u, key):
                 nums.append(l)
                 break
     return nums
+
+
+def journey_row(l, lo, n, B):
+    """A lesson as a station of the unit's journey: number · journey word, title, short description, time."""
+    sub = lo.get('sub') or (l['desc'] if l['desc'] and l['desc']['he'] else l['sub']) or {'he': '', 'en': ''}
+    dur = lo.get('dur', l['dur'])
+    cap = f'<span class="cap">{t(l["cap"]["he"], l["cap"]["en"])}</span>' if l['cap']['he'] else ''
+    if l['href']:
+        act = f'<a class="ed-cta" href="{B}{NEW_LESSON_PAGES.get(l["href"], l["href"])}">{t("לשיעור", "Open lesson")}<span class="arr" data-he="←" data-en="→">←</span></a>'
+    else:
+        act = f'<span class="soon">{t("בפיתוח", "In development")}</span>'
+    return f'''
+      <li class="ls ls-j{'' if l['href'] else ' off'} rv">
+        <span class="ls-num">{n:02d}</span>
+        <div class="ls-main">
+          <p class="ls-step">{t(lo['step']['he'], lo['step']['en'])}</p>
+          <h3>{t(l['title']['he'], l['title']['en'])}{cap}</h3>
+          <p class="ls-sub">{t(sub['he'], sub['en'])}</p>
+        </div>
+        <div class="ls-side">
+          <span class="ls-dur">{t(dur_he(dur), dur)}</span>
+          {act}
+        </div>
+      </li>'''
 
 
 def render(u, units):
@@ -255,12 +315,15 @@ def render(u, units):
     for k in u['people']:
         he, en, _ = PEOPLE[k]
         refs = lessons_for(u, k)
+        if u.get('people_refs'):
+            refs = [l for l in u['lessons'] if l['href'] in u['people_refs'].get(k, [])]
         ref_html = ''
         if refs:
             links = []
             for l in refs:
                 if l['href']:
-                    links.append(f'<a href="{B}{l["href"]}">{l["num"]}</a>')
+                    href = NEW_LESSON_PAGES.get(l['href'], l['href']) if u.get('people_refs') else l['href']
+                    links.append(f'<a href="{B}{href}">{l["num"]}</a>')
                 else:
                     links.append(f'<span>{l["num"]}</span>')
             ref_html = f'<span class="p-ref">{t("שיעור", "Lesson", "span")} {" · ".join(links)}</span>'
@@ -296,7 +359,12 @@ def render(u, units):
   </section>'''
 
     rows = ''
-    for l in u['lessons']:
+    LO = (u.get('over') or {}).get('lessons') or {}
+    for k, l in enumerate(u['lessons']):
+        lo = LO.get(l['href'] or '')
+        if lo is not None:
+            rows += journey_row(l, lo, k + 1, B)
+            continue
         sub = l['sub'] or {'he': '', 'en': ''}
         cap = f'<span class="cap">{t(l["cap"]["he"], l["cap"]["en"])}</span>' if l['cap']['he'] else ''
         tags = ' · '.join(t(*tag_text(tg)) for tg in l['tags'])
@@ -349,7 +417,7 @@ def render(u, units):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{B}css/design-system.css?v=6">
-<link rel="stylesheet" href="{B}css/unit-page.css?v=2">
+<link rel="stylesheet" href="{B}css/unit-page.css?v={3 if u.get('over') else 2}">
 </head>
 <body class="ed" data-unit="{u['id']}">
 <script src="{B}js/app-init.js?v=20260927-structure"></script>

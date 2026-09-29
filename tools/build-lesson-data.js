@@ -42,7 +42,12 @@ const MAP = {
     explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11] },
   /* design pilot (variant 'v2'). Screen 2 is split: its artworks and captions go to "sources",
      its looking task (label, question, "calm? tense? moving?") to "look". */
+  /* screen 1: the sentence once attributed to Van Gogh is not in his letters (vangoghletters.org), so it is
+     shown as our own text, without quotation marks or attribution (approved by the author) */
   'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
+    patch: { 1: { drop: ['label', 'quote', 'attr'],
+                  big: { he: 'ציור לא חייב לתאר רק את מה שרואים. קו וצבע יכולים להעביר גם תחושה.',
+                         en: "A drawing doesn't have to show only what you see. Line and colour can carry a feeling too." } } },
     explore: [0], sources: [1, '2:works'], look: ['2:text'], idea: [3, 4, 5], create: [6, 7, 8, 9, 10], end: [12, 13, 14, 15] },
   /* (1.2 screen 11, "something only you understand", is kept for 1.6 only) */
   /* 1.3: new content (content/lessons/visual-journal.json), a composition lab */
@@ -346,6 +351,8 @@ for (const [id, m] of Object.entries(MAP)) {
       const [n, part] = String(spec).split(':');
       const html = screenHtml(src, n);
       const b = T ? blockFromT(T, Number(n), html) : blockFromDom(html);
+      const P = m.patch && m.patch[n];
+      if (P) { (P.drop || []).forEach(f => delete b[f]); for (const f in P) if (f !== 'drop') b[f] = P[f]; }
       if (part === 'works') return b.works ? { works: b.works } : {};
       if (part === 'text') { delete b.works; }
       if (part === 'nolabel') { delete b.label; }

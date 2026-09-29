@@ -56,21 +56,13 @@ window.LESSON_PAGE = {
   "sources": {
    "blocks": [
     {
-     "label": {
-      "he": "ואן גוך",
-      "en": "Van Gogh"
-     },
      "sub": {
       "he": "איך ייראה הרגש שלך כקו?",
       "en": "What would YOUR feeling look like as a line?"
      },
-     "quote": {
-      "he": "אני רוצה לצייר מה שאני מרגיש,<br>לא מה שאני רואה.",
-      "en": "I want to paint what I feel,<br>not what I see."
-     },
-     "attr": {
-      "he": "וינסנט ואן גוך",
-      "en": "Vincent van Gogh"
+     "big": {
+      "he": "ציור לא חייב לתאר רק את מה שרואים. קו וצבע יכולים להעביר גם תחושה.",
+      "en": "A drawing doesn't have to show only what you see. Line and colour can carry a feeling too."
      }
     },
     {

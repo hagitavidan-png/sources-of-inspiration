@@ -81,3 +81,7 @@
   .ls-num{font-size:2rem}
   .ls-side{grid-column:2;flex-direction:row;align-items:center;justify-content:space-between;min-width:0}
 }
+
+/* unit 1: the lesson list is the unit's journey (number · journey word, title, description, time) */
+.ls-step{margin:0 0 2px;font-family:var(--f-display);font-weight:700;font-size:1.7rem;line-height:1.05;color:var(--ink)}
+.ls-j h3{font-size:1.1rem;font-weight:600;color:var(--ink-2)}
