@@ -2,7 +2,14 @@
 window.LESSON_PAGE = {
  "id": "lesson-1-1",
  "path": "lessons/lesson-1-1.html",
- "slides": "lessons/lesson-1-1.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "look": "color",
+  "idea": "color",
+  "create": "color",
+  "end": "color"
+ },
  "number": "1.1",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -18,26 +25,18 @@ window.LESSON_PAGE = {
   "en": "45 min"
  },
  "intro": {
-  "he": "נחקור איך רגש יכול להפוך לצבע, לקו ולכתם. נתבונן ביצירות וניצור ציור מופשט מתוך תחושה אישית.",
-  "en": "Explore how a feeling becomes colour, line and shape. Look at artworks and create an abstract painting inspired by a personal emotion."
+  "he": "נחקור איך רגש יכול להפוך לצבע ולכתם. נתבונן ביצירה וניצור ציור מופשט מתוך תחושה.",
+  "en": "Explore how a feeling can become colour and patches. Look at a work of art and make an abstract painting from a feeling."
  },
  "materials": {
-  "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
-  "en": "Paper or a visual journal, a pencil and colours of your choice"
+  "he": "נייר או יומן חזותי וצבעים לבחירה",
+  "en": "Paper or a visual journal and colours of your choice"
  },
  "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "שיעור 1.1",
-      "en": "Lesson 1.1"
-     },
-     "big": {
-      "he": "רגש בשפה חזותית",
-      "en": "Emotion in<br>Visual Language"
-     },
      "sub": {
       "he": "בשיעור זה נשתמש ברגש כמקור השראה.<br>נעבוד עם כתמי צבע, לא דמויות, לא אובייקטים.<br>רק צבע, תחושה ויחסים.",
       "en": "In this lesson we use emotion as a source of inspiration.<br>Color patches, no figures, no objects.<br>Only color, sensation, and relationships."
@@ -48,17 +47,52 @@ window.LESSON_PAGE = {
   "sources": {
    "blocks": [
     {
-     "label": {
-      "he": "מארק רות'קו",
-      "en": "Mark Rothko"
-     },
-     "body": {
-      "he": "רותקו עבד כך.<br>העוצמה בציוריו נובעת מהיחסים בין הכתמים, <br>לא ממה שהם מציגים.",
-      "en": "Rothko worked this way.<br>The power in his paintings comes from the relationships between the patches, <br>not from what they depict."
-     },
+     "works": [
+      {
+       "img": null,
+       "alt": "Mark Rothko, Untitled (Violet, Black, Orange, Yellow on White and Red), 1949",
+       "artist": {
+        "he": "מארק רותקו",
+        "en": "Mark Rothko"
+       },
+       "workTitle": {
+        "he": "ללא כותרת (סגול, שחור, כתום, צהוב על לבן ואדום), 1949",
+        "en": "Untitled (Violet, Black, Orange, Yellow on White and Red), 1949"
+       },
+       "note": {
+        "he": "בציורים מהתקופה הזו רותקו הניח אזורי צבע מלבניים זה מעל זה, ושינה אותם: בהיר או כהה, שקוף או אטום, רווי או עמום.",
+        "en": "In paintings from this period Rothko placed rectangular areas of colour one above another, and varied them: light or dark, translucent or opaque, saturated or muted."
+       },
+       "link": {
+        "href": "https://www.guggenheim.org/artwork/3533",
+        "label": {
+         "he": "פתחו את היצירה באתר גוגנהיים ↗",
+         "en": "Open the work on the Guggenheim website ↗"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
      "big": {
-      "he": "ללא כותרת (סגול, שחור, כתום, צהוב…), 1949",
-      "en": "Untitled (Violet, Black, Orange, Yellow…), 1949"
+      "he": "הציור לא מתאר דמות או חפץ.<br>מה בכל זאת קורה בו?",
+      "en": "The painting does not show a figure or an object.<br>So what is happening in it?"
+     },
+     "lines": {
+      "he": [
+       "כמה אזורי צבע יש?",
+       "איפה שני צבעים נפגשים? הגבול חד או רך?",
+       "מה שקוף ומה אטום?"
+      ],
+      "en": [
+       "How many areas of colour are there?",
+       "Where do two colours meet? Is the edge sharp or soft?",
+       "What is translucent, and what is opaque?"
+      ]
      }
     }
    ]
@@ -66,17 +100,13 @@ window.LESSON_PAGE = {
   "idea": {
    "blocks": [
     {
-     "label": {
-      "he": "שלב 1",
-      "en": "Step 1"
-     },
      "big": {
-      "he": "בחרו 3–4 רגשות<br>שנוכחים עכשיו.",
-      "en": "Choose 3–4 emotions<br>present right now."
+      "he": "בחרו רגש אחד.",
+      "en": "Choose one feeling."
      },
      "sub": {
-      "he": "הם יהיו מקור ההשראה שלכם.",
-      "en": "They will be your source of inspiration."
+      "he": "רגש שנוכח עכשיו, או רגש שאתם מכירים ורוצים לעבוד איתו.",
+      "en": "A feeling you have right now, or one you know and want to work with."
      },
      "chips": {
       "he": [
@@ -106,17 +136,17 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 2",
-      "en": "Step 2"
-     },
      "big": {
-      "he": "לכל רגש, צבע אחד.",
-      "en": "One color<br>for each emotion."
+      "he": "אילו צבעים יש לרגש הזה?",
+      "en": "Which colours does this feeling have?"
      },
      "sub": {
-      "he": "התחילו מהרגש ובדקו איזה קו, כתם או צבע הוא מעורר בכם.",
-      "en": "Start with the feeling. Explore the lines, marks, or colours it brings to mind."
+      "he": "התחילו מהרגש ובדקו אילו צבעים הוא מעורר בכם. בחרו שניים או שלושה.",
+      "en": "Start with the feeling and notice which colours it brings to mind. Choose two or three."
+     },
+     "body": {
+      "he": "אין צבע נכון לרגש. יש את הצבעים שלכם.",
+      "en": "There is no right colour for a feeling. There are your colours."
      }
     }
    ]
@@ -124,10 +154,6 @@ window.LESSON_PAGE = {
   "create": {
    "steps": [
     {
-     "label": {
-      "he": "שלב 3",
-      "en": "Step 3"
-     },
      "big": {
       "he": "הניחו את הכתם הראשון על הדף.",
       "en": "Place the first patch<br>on the page."
@@ -136,6 +162,21 @@ window.LESSON_PAGE = {
       "he": "הניחו את הכתם במקום שבחרתם, בלי לתכנן מראש את כל הציור.",
       "en": "Place the mark where you choose, without planning the whole drawing in advance."
      }
+    },
+    {
+     "big": {
+      "he": "הניחו כתם שני שפוגש את הראשון.",
+      "en": "Place a second patch that meets the first."
+     },
+     "sub": {
+      "he": "במגע, בחפיפה או בערבוב.",
+      "en": "Touching, overlapping or blending."
+     },
+     "meet": [
+      "touch",
+      "overlap",
+      "blend"
+     ]
     },
     {
      "label": {
@@ -157,20 +198,6 @@ window.LESSON_PAGE = {
        "Flowing or cut",
        "Transparent or opaque"
       ]
-     }
-    },
-    {
-     "label": {
-      "he": "שלב 4",
-      "en": "Step 4"
-     },
-     "big": {
-      "he": "הוסיפו את שאר הכתמים.",
-      "en": "Add the rest<br>of the patches."
-     },
-     "sub": {
-      "he": "בחרו מיקום: במרכז או בצד, קרוב לכתם אחר או רחוק ממנו.",
-      "en": "Choose a position: in the centre or at the edge, close to another mark or farther away."
      }
     },
     {
@@ -214,32 +241,25 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "העיקרון",
-      "en": "The Principle"
+     "big": {
+      "he": "התחלתם מרגש.<br>מה קרה לו כשהפך לצבע?",
+      "en": "You started with a feeling.<br>What happened to it when it became colour?"
      },
+     "prompt": {
+      "he": "כשהרגש הפך לצבע…",
+      "en": "When the feeling became colour…"
+     }
+    },
+    {
      "big": {
       "he": "הציור נבנה בין הכתמים.",
       "en": "The painting is built<br>between the patches."
      },
      "sub": {
-      "he": "הרגש נתן נקודת מוצא. היחסים בין הצבעים והכתמים עזרו לבנות את הציור.",
-      "en": "The feeling gave you a starting point. Relationships between colours and marks helped you build the painting."
-     }
-    },
-    {
-     "label": {
-      "he": "סיום",
-      "en": "Done"
+      "he": "הרגש נתן נקודת מוצא. הצבעים התחילו לעשות משהו משלהם.",
+      "en": "The feeling was the starting point. The colours began to do something of their own."
      },
-     "big": {
-      "he": "כך נבנית שפה אמנותית.",
-      "en": "This is how<br>an artistic language is built."
-     },
-     "sub": {
-      "he": "",
-      "en": ""
-     }
+     "kind": "close"
     }
    ]
   }

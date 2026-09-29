@@ -419,3 +419,20 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 /* lesson pages, phones: the location bar opens the contents, so the floating button is not needed */
 @media (max-width:720px){.ed-toc-btn{display:none !important}}
 .lp-v2 .lp-bare .lp-block:first-of-type{margin-bottom:clamp(20px,3vw,32px)}
+
+/* ═══ 1.1: a feeling, colour, patches that meet ═══ */
+.lp-v2 .lp-layout-color .lp-block + .lp-block{border-top:0;padding-top:clamp(28px,4vw,48px)}
+.lp-v2 .lp-layout-color .lp-lines li,.lp-v2 .lp-layout-color .lp-lines li:first-child{border:0;padding:3px 0;font-size:1.12rem}
+/* two patches meeting: soft tones of the ink, no new colour */
+.lp-v2 .lp-meet{display:flex;gap:clamp(18px,3vw,32px);margin:20px 0 4px}
+.lp-v2 .lp-meet svg{width:64px;height:37px}
+.lp-v2 .lp-meet .a{fill:var(--ink);opacity:.16}
+.lp-v2 .lp-meet .b{fill:var(--ink);opacity:.34}
+.lp-v2 .lp-meet .s1{stop-color:var(--ink);stop-opacity:.16}
+.lp-v2 .lp-meet .s2{stop-color:var(--ink);stop-opacity:.34}
+/* the lesson ends on its principle */
+.lp-v2 .lp-kind-close{padding-top:clamp(40px,6vw,64px) !important}
+.lp-v2 .lp-kind-close .lp-big{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,5.4vw,4rem);line-height:1;margin-bottom:14px}
+@media (max-width:700px){
+  .lp-v2 .lp-layout-color .lp-sub,.lp-v2 .lp-layout-color .lp-lines li,.lp-v2 .lp-layout-color .lp-list li{font-size:1.12rem}
+}

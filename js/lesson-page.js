@@ -126,6 +126,18 @@
       return '<figure class="lp-sheet-pg lp-sheet-pg' + k + '">' + t(v, 'figcaption') + '<i class="lp-mark"></i></figure>';
     }).join('') + '</div>';
   }
+  /* two patches of colour meeting: touching, overlapping, blending (1.1) */
+  function meet(list) {
+    if (!list || !list.length) return '';
+    var M = {
+      touch: '<circle class="a" cx="15" cy="15" r="11"/><circle class="b" cx="37" cy="15" r="11"/>',
+      overlap: '<circle class="a" cx="19" cy="15" r="11"/><circle class="b" cx="33" cy="15" r="11"/>',
+      blend: '<defs><linearGradient id="lp-blend"><stop offset=".15" class="s1"/><stop offset=".85" class="s2"/></linearGradient></defs><ellipse cx="26" cy="15" rx="23" ry="11" fill="url(#lp-blend)"/>'
+    };
+    return '<div class="lp-meet" aria-hidden="true">' + list.map(function (k) {
+      return '<svg viewBox="0 0 52 30">' + (M[k] || '') + '</svg>';
+    }).join('') + '</div>';
+  }
   /* the unit's work laid out in order, like a small exhibition (1.9) */
   function wall(list) {
     if (!list || !list.length) return '';
@@ -163,6 +175,7 @@
       lines(b.lines) +
       lenses(b.lenses, b.lensLabel) +
       t(b.ask, 'p', 'lp-ask') +
+      meet(b.meet) +
       sheets(b.sheets) +
       prompts(b.prompts) +
       frames(b.frames) +

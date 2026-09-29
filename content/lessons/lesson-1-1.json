@@ -1,0 +1,186 @@
+{
+  "_note": "Lesson 1.1, revised content approved by the author: emotion stays the source of inspiration, colour is the visual tool. One emotion, two or three colours, first patch, a meeting between patches, blending or a boundary, looking. Existing screens are copied from lessons/lesson-1-1.html. Source for tools/build-lesson-data.js.",
+  "_sources": "Rothko: Guggenheim, Untitled (Violet, Black, Orange, Yellow on White and Red), 1949, oil on canvas (guggenheim.org/artwork/3533). The note follows the museum text (stacked rectangular fields; lightness or darkness, translucency or opacity, high or low saturation). Rights: Rothko's works are protected (Kate Rothko Prizel & Christopher Rothko / ARS, NY); no image is shown.",
+  "description": {
+    "he": "נחקור איך רגש יכול להפוך לצבע ולכתם. נתבונן ביצירה וניצור ציור מופשט מתוך תחושה.",
+    "en": "Explore how a feeling can become colour and patches. Look at a work of art and make an abstract painting from a feeling."
+  },
+  "materials": {
+    "he": "נייר או יומן חזותי וצבעים לבחירה",
+    "en": "Paper or a visual journal and colours of your choice"
+  },
+  "he": {
+    "s": [
+      {
+        "sub": "בשיעור זה נשתמש ברגש כמקור השראה.<br>נעבוד עם כתמי צבע, לא דמויות, לא אובייקטים.<br>רק צבע, תחושה ויחסים."
+      },
+      {
+        "art": {
+          "artist": "מארק רותקו",
+          "title": "ללא כותרת (סגול, שחור, כתום, צהוב על לבן ואדום), 1949",
+          "note": "בציורים מהתקופה הזו רותקו הניח אזורי צבע מלבניים זה מעל זה, ושינה אותם: בהיר או כהה, שקוף או אטום, רווי או עמום.",
+          "link": {
+            "href": "https://www.guggenheim.org/artwork/3533",
+            "label": "פתחו את היצירה באתר גוגנהיים ↗"
+          }
+        }
+      },
+      {
+        "big": "הציור לא מתאר דמות או חפץ.<br>מה בכל זאת קורה בו?",
+        "q0": "כמה אזורי צבע יש?",
+        "q1": "איפה שני צבעים נפגשים? הגבול חד או רך?",
+        "q2": "מה שקוף ומה אטום?"
+      },
+      {
+        "big": "בחרו רגש אחד.",
+        "sub": "רגש שנוכח עכשיו, או רגש שאתם מכירים ורוצים לעבוד איתו.",
+        "chips": [
+          "כבד",
+          "רגוע",
+          "חרדה",
+          "עדינות",
+          "כועס",
+          "בודד",
+          "תקווה",
+          "מבולבל",
+          "גאווה",
+          "עצוב"
+        ]
+      },
+      {
+        "big": "אילו צבעים יש לרגש הזה?",
+        "sub": "התחילו מהרגש ובדקו אילו צבעים הוא מעורר בכם. בחרו שניים או שלושה.",
+        "body": "אין צבע נכון לרגש. יש את הצבעים שלכם."
+      },
+      {
+        "big": "הניחו את הכתם הראשון על הדף.",
+        "sub": "הניחו את הכתם במקום שבחרתם, בלי לתכנן מראש את כל הציור."
+      },
+      {
+        "big": "הניחו כתם שני שפוגש את הראשון.",
+        "sub": "במגע, בחפיפה או בערבוב.",
+        "meet": [
+          "touch",
+          "overlap",
+          "blend"
+        ]
+      },
+      {
+        "label": "בזמן הציור",
+        "big": "שימו לב בזמן שאתם מציירים.",
+        "obs": [
+          "רך או חד",
+          "זורם או נחתך",
+          "שקוף או אטום"
+        ]
+      },
+      {
+        "label": "המשיכו",
+        "big": "אל תעצרו בין כתם לכתם.",
+        "sub": "התבוננו במעברים: איפה צבע מתערבב בצבע אחר, ואיפה נשאר ביניהם גבול ברור?"
+      },
+      {
+        "label": "התבוננות",
+        "big": "עצרו. התבוננו.",
+        "rel": [
+          "מי נוגע",
+          "מי מתערבב",
+          "מי נפרד"
+        ]
+      },
+      {
+        "big": "התחלתם מרגש.<br>מה קרה לו כשהפך לצבע?",
+        "ph": "כשהרגש הפך לצבע…"
+      },
+      {
+        "kind": "close",
+        "big": "הציור נבנה בין הכתמים.",
+        "sub": "הרגש נתן נקודת מוצא. הצבעים התחילו לעשות משהו משלהם."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "sub": "In this lesson we use emotion as a source of inspiration.<br>Color patches, no figures, no objects.<br>Only color, sensation, and relationships."
+      },
+      {
+        "art": {
+          "artist": "Mark Rothko",
+          "title": "Untitled (Violet, Black, Orange, Yellow on White and Red), 1949",
+          "note": "In paintings from this period Rothko placed rectangular areas of colour one above another, and varied them: light or dark, translucent or opaque, saturated or muted.",
+          "link": {
+            "href": "https://www.guggenheim.org/artwork/3533",
+            "label": "Open the work on the Guggenheim website ↗"
+          }
+        }
+      },
+      {
+        "big": "The painting does not show a figure or an object.<br>So what is happening in it?",
+        "q0": "How many areas of colour are there?",
+        "q1": "Where do two colours meet? Is the edge sharp or soft?",
+        "q2": "What is translucent, and what is opaque?"
+      },
+      {
+        "big": "Choose one feeling.",
+        "sub": "A feeling you have right now, or one you know and want to work with.",
+        "chips": [
+          "Heavy",
+          "Calm",
+          "Anxious",
+          "Tender",
+          "Angry",
+          "Lonely",
+          "Hopeful",
+          "Confused",
+          "Proud",
+          "Sad"
+        ]
+      },
+      {
+        "big": "Which colours does this feeling have?",
+        "sub": "Start with the feeling and notice which colours it brings to mind. Choose two or three.",
+        "body": "There is no right colour for a feeling. There are your colours."
+      },
+      {
+        "big": "Place the first patch<br>on the page.",
+        "sub": "Place the mark where you choose, without planning the whole drawing in advance."
+      },
+      {
+        "big": "Place a second patch that meets the first.",
+        "sub": "Touching, overlapping or blending."
+      },
+      {
+        "label": "While Painting",
+        "big": "Notice what happens<br>as you paint.",
+        "obs": [
+          "Soft or sharp",
+          "Flowing or cut",
+          "Transparent or opaque"
+        ]
+      },
+      {
+        "label": "Keep Going",
+        "big": "Don't stop<br>between patches.",
+        "sub": "Look at the transitions. Where do colours blend, and where is the boundary between them clear?"
+      },
+      {
+        "label": "Observe",
+        "big": "Stop.<br>Look.",
+        "rel": [
+          "Who touches",
+          "Who blends",
+          "Who separates"
+        ]
+      },
+      {
+        "big": "You started with a feeling.<br>What happened to it when it became colour?",
+        "ph": "When the feeling became colour…"
+      },
+      {
+        "big": "The painting is built<br>between the patches.",
+        "sub": "The feeling was the starting point. The colours began to do something of their own."
+      }
+    ]
+  }
+}

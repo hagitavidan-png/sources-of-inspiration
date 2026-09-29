@@ -37,7 +37,9 @@ const NAMES = {
 
 /* which screens go into which section, per lesson (screen numbers as in the lesson) */
 const MAP = {
-  'lesson-1-1': { explore: [0], sources: [1], idea: [2, 3], create: [4, 5, 6, 7], end: [8, 9, 10] },
+  /* 1.1: a feeling as the source, colour as the tool: one feeling, two or three colours, patches that meet */
+  'lesson-1-1': { authored: true, variant: 'v2', layout: { look: 'color', idea: 'color', create: 'color', end: 'color' },
+    explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11] },
   /* design pilot (variant 'v2'). Screen 2 is split: its artworks and captions go to "sources",
      its looking task (label, question, "calm? tense? moving?") to "look". */
   'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
@@ -189,7 +191,8 @@ function blockFromT(T, n, html) {
   if (Array.isArray(he.relIcons)) b.rel = he.relIcons;  // sketches of kinds of connection (1.6)
   if (he.kind) b.kind = he.kind;                          // a block with its own role in the layout (1.8, 1.9)
   if (Array.isArray(he.sheets)) b.sheets = { he: he.sheets, en: en.sheets || he.sheets };   // the three experiment sheets (1.8)
-  if (Array.isArray(he.wall)) b.wall = he.wall;           // the unit's work laid out in order (1.9)
+  if (Array.isArray(he.wall)) b.wall = he.wall;
+  if (Array.isArray(he.meet)) b.meet = he.meet;           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
   if (Array.isArray(he.ph2)) b.prompts = he.ph2.map((v, k) => bil(v, (en.ph2 || [])[k]));   // two writing spaces side by side
   if (Array.isArray(he.lens)) { b.lenses = { he: he.lens, en: en.lens || he.lens }; if (he.lensLabel) b.lensLabel = bil(he.lensLabel, en.lensLabel); }
 
@@ -271,7 +274,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=18">
+<link rel="stylesheet" href="../css/lesson-page.css?v=19">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -307,7 +310,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=16"></script>
+<script src="../js/lesson-page.js?v=17"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
