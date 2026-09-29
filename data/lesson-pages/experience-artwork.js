@@ -2,7 +2,14 @@
 window.LESSON_PAGE = {
  "id": "experience-artwork",
  "path": "lessons/experience-artwork.html",
- "slides": "lessons/experience-artwork.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "look": "studio",
+  "idea": "studio",
+  "create": "studio",
+  "end": "studio"
+ },
  "number": "1.8",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -30,10 +37,6 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "יחידה: חוויה אישית כמקור השראה",
-      "en": "Unit: Personal Experience as a Source of Inspiration"
-     },
      "big": {
       "he": "חוזרים לשלושת<br>הניסויים.",
       "en": "Back to the<br>three experiments."
@@ -42,11 +45,7 @@ window.LESSON_PAGE = {
       "he": "הביאו את הדפים מהשיעור הקודם.",
       "en": "Bring the sheets from the last lesson."
      }
-    }
-   ]
-  },
-  "idea": {
-   "blocks": [
+    },
     {
      "label": {
       "he": "לפני שממשיכים",
@@ -60,11 +59,55 @@ window.LESSON_PAGE = {
       "he": "היזכרו לרגע, לפני שבוחרים.",
       "en": "Remember for a moment, before you choose."
      }
-    },
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
     {
      "label": {
       "he": "הניחו את שלושת הדפים זה לצד זה",
       "en": "Lay the three sheets side by side"
+     },
+     "big": {
+      "he": "מה עובד בכל דף?",
+      "en": "What works on each sheet?"
+     },
+     "ask": {
+      "he": "סמנו בכל דף מקום אחד שעובד.",
+      "en": "Mark one place that works on each sheet."
+     },
+     "lines": {
+      "he": [
+       "מה מושך אתכם לחזור ולהסתכל?",
+       "איפה קורה משהו שמסקרן אתכם?"
+      ],
+      "en": [
+       "What makes you want to come back and look again?",
+       "Where is something happening that makes you curious?"
+      ]
+     },
+     "sheets": {
+      "he": [
+       "צבע",
+       "קו ותנועה",
+       "מרחב וקומפוזיציה"
+      ],
+      "en": [
+       "Colour",
+       "Line and movement",
+       "Space and composition"
+      ]
+     }
+    }
+   ]
+  },
+  "idea": {
+   "blocks": [
+    {
+     "label": {
+      "he": "בחרו דף אחד",
+      "en": "Choose one sheet"
      },
      "big": {
       "he": "אל תבחרו<br>את היפה ביותר.",
@@ -106,21 +149,20 @@ window.LESSON_PAGE = {
      },
      "list": {
       "he": [
+       "התחילו ממה שסימנתם.",
        "הגדילו, הזיזו, כסו.",
        "ותרו על מה שלא עובד.",
        "תנו לציור להשתנות."
       ],
       "en": [
+       "Start from what you marked.",
        "Enlarge, move, cover.",
        "Let go of what doesn't work.",
        "Let the painting change."
       ]
-     }
-    }
-   ]
-  },
-  "end": {
-   "blocks": [
+     },
+     "kind": "large"
+    },
     {
      "label": {
       "he": "עצרו",
@@ -133,8 +175,17 @@ window.LESSON_PAGE = {
      "sub": {
       "he": "מה כבר עובד?<br>מה דבר אחד תרצו לחזק?",
       "en": "What is already working?<br>What is one thing you want to strengthen?"
-     }
-    },
+     },
+     "body": {
+      "he": "התרחקו כמה צעדים, ואז המשיכו לעבוד.",
+      "en": "Step back a few paces, then keep working."
+     },
+     "kind": "pause"
+    }
+   ]
+  },
+  "end": {
+   "blocks": [
     {
      "label": {
       "he": "התבוננות",
@@ -147,13 +198,11 @@ window.LESSON_PAGE = {
      "list": {
       "he": [
        "מה השתנה בדרך?",
-       "איזו בחירה חזותית הפכה משמעותית?",
-       "מה הופיע שלא תכננתם?"
+       "איזו בחירה חזותית הפכה משמעותית?"
       ],
       "en": [
        "What changed along the way?",
-       "Which visual choice became important?",
-       "What appeared that you didn't plan?"
+       "Which visual choice became important?"
       ]
      }
     },
@@ -183,6 +232,10 @@ window.LESSON_PAGE = {
      "sub": {
       "he": "היצירה מצאה<br>את הדרך שלה.",
       "en": "The work found<br>its own way."
+     },
+     "body": {
+      "he": "שמרו את העבודה ואת שלושת הניסויים.<br>בשיעור הבא נסתכל על כל מה שיצרתם ביחידה.",
+      "en": "Keep the work and the three experiments.<br>Next lesson we will look at everything you made in this unit."
      }
     }
    ]

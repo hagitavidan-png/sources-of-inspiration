@@ -1,0 +1,115 @@
+{
+  "_note": "Lesson 1.8, revised content approved by the author. Existing screens are copied from lessons/experience-artwork.html; the looking step before choosing, the mid-development pause and the bridge to 1.9 were approved in chat. No new source of inspiration: the students' own experiments are the source. Source for tools/build-lesson-data.js.",
+  "he": {
+    "s": [
+      {
+        "big": "חוזרים לשלושת<br>הניסויים.",
+        "sub": "הביאו את הדפים מהשיעור הקודם."
+      },
+      {
+        "label": "לפני שממשיכים",
+        "big": "מה רציתם להעביר<br>מהחוויה?",
+        "sub": "היזכרו לרגע, לפני שבוחרים."
+      },
+      {
+        "label": "הניחו את שלושת הדפים זה לצד זה",
+        "big": "מה עובד בכל דף?",
+        "q0": "מה מושך אתכם לחזור ולהסתכל?",
+        "q1": "איפה קורה משהו שמסקרן אתכם?",
+        "ask": "סמנו בכל דף מקום אחד שעובד.",
+        "sheets": ["צבע", "קו ותנועה", "מרחב וקומפוזיציה"]
+      },
+      {
+        "label": "בחרו דף אחד",
+        "big": "אל תבחרו<br>את היפה ביותר.",
+        "sub": "בחרו את זה שאתם רוצים לדעת<br>לאן הוא יכול להתפתח.",
+        "comp": ["צבע", "קו ותנועה", "מרחב וקומפוזיציה"]
+      },
+      {
+        "kind": "large",
+        "label": "פיתוח",
+        "big": "עברו לדף גדול.",
+        "sub": "הסקיצה היא נקודת מוצא,<br>לא תוכנית.",
+        "i": ["התחילו ממה שסימנתם.", "הגדילו, הזיזו, כסו.", "ותרו על מה שלא עובד.", "תנו לציור להשתנות."]
+      },
+      {
+        "kind": "pause",
+        "label": "עצרו",
+        "big": "עצרו.<br>הסתכלו על הציור.",
+        "sub": "מה כבר עובד?<br>מה דבר אחד תרצו לחזק?",
+        "body": "התרחקו כמה צעדים, ואז המשיכו לעבוד."
+      },
+      {
+        "label": "התבוננות",
+        "big": "הניחו את הניסויים<br>ליד העבודה.",
+        "i": ["מה השתנה בדרך?", "איזו בחירה חזותית הפכה משמעותית?"]
+      },
+      {
+        "label": "רפלקציה",
+        "big": "מה הופיע<br>שלא תכננתם?",
+        "ph": "לא תכננתי ש…"
+      },
+      {
+        "label": "השיעור הסתיים",
+        "big": "החוויה הייתה<br>נקודת המוצא.",
+        "sub": "היצירה מצאה<br>את הדרך שלה.",
+        "body": "שמרו את העבודה ואת שלושת הניסויים.<br>בשיעור הבא נסתכל על כל מה שיצרתם ביחידה."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "Back to the<br>three experiments.",
+        "sub": "Bring the sheets from the last lesson."
+      },
+      {
+        "label": "Before you continue",
+        "big": "What did you want to pass on<br>from the experience?",
+        "sub": "Remember for a moment, before you choose."
+      },
+      {
+        "label": "Lay the three sheets side by side",
+        "big": "What works on each sheet?",
+        "q0": "What makes you want to come back and look again?",
+        "q1": "Where is something happening that makes you curious?",
+        "ask": "Mark one place that works on each sheet.",
+        "sheets": ["Colour", "Line and movement", "Space and composition"]
+      },
+      {
+        "label": "Choose one sheet",
+        "big": "Don't choose<br>the most beautiful one.",
+        "sub": "Choose the one you want to know<br>where it could go.",
+        "comp": ["Colour", "Line and movement", "Space and composition"]
+      },
+      {
+        "label": "Develop",
+        "big": "Move to a large sheet.",
+        "sub": "The sketch is a starting point,<br>not a plan.",
+        "i": ["Start from what you marked.", "Enlarge, move, cover.", "Let go of what doesn't work.", "Let the painting change."]
+      },
+      {
+        "label": "Pause",
+        "big": "Stop.<br>Look at your painting.",
+        "sub": "What is already working?<br>What is one thing you want to strengthen?",
+        "body": "Step back a few paces, then keep working."
+      },
+      {
+        "label": "Looking back",
+        "big": "Place the experiments<br>next to the work.",
+        "i": ["What changed along the way?", "Which visual choice became important?"]
+      },
+      {
+        "label": "Reflection",
+        "big": "What appeared<br>that you didn't plan?",
+        "ph": "I didn't plan that…"
+      },
+      {
+        "label": "Lesson complete",
+        "big": "The experience was<br>the starting point.",
+        "sub": "The work found<br>its own way.",
+        "body": "Keep the work and the three experiments.<br>Next lesson we will look at everything you made in this unit."
+      }
+    ]
+  }
+}

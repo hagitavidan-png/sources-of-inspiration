@@ -2,7 +2,12 @@
 window.LESSON_PAGE = {
  "id": "unit-summary",
  "path": "lessons/unit-summary.html",
- "slides": "lessons/unit-summary.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "look": "show",
+  "end": "show"
+ },
  "number": "1.9",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -14,12 +19,12 @@ window.LESSON_PAGE = {
   "en": "✦ Unit Summary: What Stays With Me"
  },
  "time": {
-  "he": "30 דקות",
-  "en": "30 min"
+  "he": "45 דקות",
+  "en": "45 min"
  },
  "intro": {
-  "he": "נחזור לעבודות שיצרנו לאורך היחידה ונתבונן בהן. נבחר ציור אחד, נשאל מה מופיע בו ומה נשאר איתנו מהיחידה.",
-  "en": "Return to the work made throughout the unit and look at it. Choose one painting, ask what appears in it, and what stays with you from the unit."
+  "he": "נפרוש את כל העבודות שיצרנו לאורך היחידה ונראה מה השתנה ומה חוזר. אחר כך נתבונן בעבודה אחת, ונשאל מה גילינו על הדרך שלנו לצייר.",
+  "en": "Lay out all the work made throughout the unit and see what changed and what keeps returning. Then look closely at one work, and ask what you discovered about the way you draw."
  },
  "materials": {
   "he": "העבודות שיצרתם ביחידה ומשהו לכתוב בו",
@@ -35,18 +40,14 @@ window.LESSON_PAGE = {
       "en": "Unit Summary"
      },
      "big": {
-      "he": "סיימתם יחידה.<br/>אבל מה נשאר?",
-      "en": "You finished a unit.<br/>But what stays?"
+      "he": "סיימתם יחידה.<br>אבל מה נשאר?",
+      "en": "You finished a unit.<br>But what stays?"
      }
     },
     {
-     "label": {
-      "he": "",
-      "en": ""
-     },
      "poem": {
-      "he": "במהלך השיעורים<br/>עצרתם <em>רגע</em>,<br/>הסתכלתם,<br/>וציירתם מתוך עצמכם.",
-      "en": "During the lessons<br/>you <em>paused</em>,<br/>looked,<br/>and drew from yourself."
+      "he": "במהלך השיעורים<br>עצרתם <em>רגע</em>,<br>הסתכלתם,<br>וציירתם מתוך עצמכם.",
+      "en": "During the lessons<br>you <em>paused</em>,<br>looked,<br>and drew from yourself."
      }
     }
    ]
@@ -55,28 +56,108 @@ window.LESSON_PAGE = {
    "blocks": [
     {
      "big": {
-      "he": "עכשיו לא מציירים.<br/>רק מסתכלים.",
-      "en": "Now we don't draw.<br/>We just look."
+      "he": "עכשיו לא מציירים.<br>רק מסתכלים.",
+      "en": "Now we don't draw.<br>We just look."
      }
     },
+    {
+     "big": {
+      "he": "פרשו את כל העבודות<br>מהיחידה.",
+      "en": "Lay out all the work<br>from this unit."
+     },
+     "sub": {
+      "he": "לפי הסדר, מהראשונה ועד העבודה שפיתחתם בשיעור הקודם.",
+      "en": "In order, from the first piece to the work you developed last lesson."
+     },
+     "wall": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "1.4",
+      "1.5",
+      "1.6",
+      "1.7",
+      "1.8"
+     ]
+    },
+    {
+     "big": {
+      "he": "מה השתנה?",
+      "en": "What changed?"
+     },
+     "lines": {
+      "he": [
+       "השוו את העבודה הראשונה לאחרונה.",
+       "מה אתם עושים היום שלא עשיתם בהתחלה?"
+      ],
+      "en": [
+       "Compare the first work with the last.",
+       "What do you do now that you didn't do at the start?"
+      ]
+     },
+     "prompts": [
+      {
+       "he": "בהתחלה…",
+       "en": "At the start…"
+      },
+      {
+       "he": "היום…",
+       "en": "Now…"
+      }
+     ]
+    },
+    {
+     "big": {
+      "he": "מה חוזר?",
+      "en": "What keeps returning?"
+     },
+     "sub": {
+      "he": "משהו שמופיע שוב ושוב, גם בלי שתכננתם.",
+      "en": "Something that appears again and again, even without planning it."
+     },
+     "ask": {
+      "he": "האם המוטיב שמצאתם באמצע היחידה עדיין שם?",
+      "en": "Is the motif you found in the middle of the unit still there?"
+     },
+     "lenses": {
+      "he": [
+       "צבע",
+       "קו",
+       "קומפוזיציה",
+       "זיכרון",
+       "מוטיב",
+       "סמל"
+      ],
+      "en": [
+       "Colour",
+       "Line",
+       "Composition",
+       "Memory",
+       "Motif",
+       "Symbol"
+      ]
+     },
+     "lensLabel": {
+      "he": "אפשר להסתכל דרך",
+      "en": "You can look through"
+     }
+    }
+   ]
+  },
+  "end": {
+   "blocks": [
     {
      "label": {
       "he": "חזרה",
       "en": "Return"
      },
      "big": {
-      "he": "הסתכלו על אחד הציורים<br/>שיצרתם.",
-      "en": "Look at one drawing<br/>you created."
+      "he": "הסתכלו על אחד הציורים<br>שיצרתם.",
+      "en": "Look at one drawing<br>you created."
      },
      "sub": {
-      "he": "לא כדי לשפוט, <br/>כדי לראות.",
-      "en": "Not to judge, <br/>but to see."
-     }
-    },
-    {
-     "big": {
-      "he": "מה קורה<br/>בציור שלכם?",
-      "en": "What is happening<br/>in your drawing?"
+      "he": "לא כדי לשפוט,<br>כדי לראות.",
+      "en": "Not to judge,<br>but to see."
      }
     },
     {
@@ -85,8 +166,8 @@ window.LESSON_PAGE = {
       "en": "Notice"
      },
      "big": {
-      "he": "איזה רגש<br/>מופיע שם?",
-      "en": "Which feeling<br/>appears there?"
+      "he": "איזה רגש<br>מופיע שם?",
+      "en": "Which feeling<br>appears there?"
      },
      "chips": {
       "he": [
@@ -109,28 +190,28 @@ window.LESSON_PAGE = {
     },
     {
      "big": {
-      "he": "איפה בציור<br/>זה מופיע?",
-      "en": "Where in the drawing<br/>do you see it?"
+      "he": "איפה בציור<br>זה מופיע?",
+      "en": "Where in the drawing<br>do you see it?"
+     },
+     "sub": {
+      "he": "בצבע? בקו? במקום על הדף?",
+      "en": "In the colour? In the line? In its place on the page?"
      }
     },
     {
      "poem": {
-      "he": "זה לא חייב להיות <em>ברור</em>.<br/>אבל זה שם.",
-      "en": "It doesn't have to be <em>clear</em>.<br/>But it's there."
+      "he": "זה לא חייב להיות <em>ברור</em>.<br>אבל זה שם.",
+      "en": "It doesn't have to be <em>clear</em>.<br>But it's there."
      }
-    }
-   ]
-  },
-  "end": {
-   "blocks": [
+    },
     {
      "label": {
       "he": "רפלקציה",
       "en": "Reflect"
      },
      "big": {
-      "he": "מה גיליתם<br/>על עצמכם?",
-      "en": "What did you discover<br/>about yourself?"
+      "he": "מה גיליתם<br>על הדרך שלכם לצייר?",
+      "en": "What did you discover<br>about the way you draw?"
      },
      "prompt": {
       "he": "דרך הציור גיליתי ש…",
@@ -138,45 +219,20 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "poem": {
-      "he": "לפעמים ציור<br/><em>מגלה משהו</em><br/>שלא ידענו להגיד.",
-      "en": "Sometimes a drawing<br/><em>reveals something</em><br/>we didn't know how to say."
-     }
-    },
-    {
-     "label": {
-      "he": "היחידה הזו",
-      "en": "This unit"
-     },
-     "poem": {
-      "he": "לא למדתם רק<br/>ל<em>צייר</em>.<br/>למדתם <em>להקשיב</em>.",
-      "en": "You didn't just learn<br/>to <em>draw</em>.<br/>You learned to <em>listen</em>."
-     }
-    },
-    {
-     "label": {
-      "he": "קחו איתכם",
-      "en": "Take with you"
-     },
      "big": {
-      "he": "מה אתם לוקחים<br/>איתכם מהיחידה?",
-      "en": "What are you taking<br/>with you from this unit?"
+      "he": "אם מישהו היה רואה את העבודות שלכם בלי השם שלכם,<br>איך היה מזהה שהן שלכם?",
+      "en": "If someone saw your work without your name,<br>how would they know it is yours?"
      },
      "prompt": {
-      "he": "מהיחידה הזאת נשאר איתי…",
-      "en": "I am taking with me…"
-     }
-    },
-    {
-     "big": {
-      "he": "השאירו רגע<br/>לעצמכם.",
-      "en": "Leave a moment<br/>for yourself."
-     }
+      "he": "אפשר לזהות את העבודות שלי לפי…",
+      "en": "You can recognise my work by…"
+     },
+     "kind": "key"
     },
     {
      "poem": {
-      "he": "הציור<br/>לא נגמר כאן.<br/>הוא <em>ממשיך איתכם</em>.",
-      "en": "The drawing<br/>doesn't end here.<br/>It <em>continues with you</em>."
+      "he": "הציור<br>לא נגמר כאן.<br>הוא <em>ממשיך איתכם</em>.",
+      "en": "The drawing<br>doesn't end here.<br>It <em>continues with you</em>."
      }
     },
     {
@@ -185,8 +241,8 @@ window.LESSON_PAGE = {
       "en": "Unit complete"
      },
      "big": {
-      "he": "אתם לא רק מציירים.<br/>אתם <em style=\"font-style:normal;color:var(--gold)\">רואים</em>.",
-      "en": "You're not only drawing.<br/>You are seeing."
+      "he": "אתם לא רק מציירים.<br>אתם <em>רואים</em>.",
+      "en": "You're not only drawing.<br>You are <em>seeing</em>."
      }
     }
    ]

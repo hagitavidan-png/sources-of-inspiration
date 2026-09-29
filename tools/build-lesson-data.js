@@ -68,8 +68,12 @@ const MAP = {
     sources: [{ s: 1, work: [4, 0] }, { s: 2, work: [4, 1] }, { s: 3, work: [4, 2] }],
     look: ['4:text', 5], idea: [6, 7, 8],
     create: { lead: [9], steps: [10, 11, 12], outro: [13] } },
-  'experience-artwork': { explore: [0], idea: [1, 2], create: [3], end: [4, 5, 6, 7] },
-  'unit-summary': { explore: [0, 1], look: [2, 3, 4, 5, 6, 7], end: [8, 9, 10, 11, 12, 13, 14] },
+  /* 1.8: a studio in progress: three sheets → one chosen → a large sheet → a pause → on */
+  'experience-artwork': { authored: true, variant: 'v2', layout: { look: 'studio', idea: 'studio', create: 'studio', end: 'studio' },
+    explore: [0, 1], look: [2], idea: [3], create: [4, 5], end: [6, 7, 8] },
+  /* 1.9: the unit's work laid out like a small exhibition: the journey, one work, discovery */
+  'unit-summary': { authored: true, variant: 'v2', layout: { look: 'show', end: 'show' },
+    explore: [0, 1], look: [2, 3, 4, 5], end: [6, 7, 8, 9, 10, 11, 12, 13] },
   'lesson-2-1': { hero: ['hokusai-great-wave-1831', '28% 18%'],
     explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
   'lesson-2-2': { hero: ['monet-haystacks-1891', '50% 70%'],
@@ -183,6 +187,11 @@ function blockFromT(T, n, html) {
   if (he.ph != null) b.prompt = bil(he.ph, en.ph);
   if (Array.isArray(he.frames)) b.frames = he.frames;   // composition sketches (1.3)
   if (Array.isArray(he.relIcons)) b.rel = he.relIcons;  // sketches of kinds of connection (1.6)
+  if (he.kind) b.kind = he.kind;                          // a block with its own role in the layout (1.8, 1.9)
+  if (Array.isArray(he.sheets)) b.sheets = { he: he.sheets, en: en.sheets || he.sheets };   // the three experiment sheets (1.8)
+  if (Array.isArray(he.wall)) b.wall = he.wall;           // the unit's work laid out in order (1.9)
+  if (Array.isArray(he.ph2)) b.prompts = he.ph2.map((v, k) => bil(v, (en.ph2 || [])[k]));   // two writing spaces side by side
+  if (Array.isArray(he.lens)) { b.lenses = { he: he.lens, en: en.lens || he.lens }; if (he.lensLabel) b.lensLabel = bil(he.lensLabel, en.lensLabel); }
 
   const imgs = screenImages(html);
   const works = [];
@@ -262,7 +271,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=15">
+<link rel="stylesheet" href="../css/lesson-page.css?v=16">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -298,7 +307,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=13"></script>
+<script src="../js/lesson-page.js?v=14"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>

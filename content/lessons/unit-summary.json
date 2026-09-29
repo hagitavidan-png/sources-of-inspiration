@@ -1,0 +1,138 @@
+{
+  "_note": "Lesson 1.9, revised content approved by the author: looking at the journey, then at one work, then discovery. Existing screens are copied from lessons/unit-summary.html; new and changed screens were approved in chat. Source for tools/build-lesson-data.js.",
+  "time": { "he": "45 דקות", "en": "45 min" },
+  "description": {
+    "he": "נפרוש את כל העבודות שיצרנו לאורך היחידה ונראה מה השתנה ומה חוזר. אחר כך נתבונן בעבודה אחת, ונשאל מה גילינו על הדרך שלנו לצייר.",
+    "en": "Lay out all the work made throughout the unit and see what changed and what keeps returning. Then look closely at one work, and ask what you discovered about the way you draw."
+  },
+  "he": {
+    "s": [
+      {
+        "label": "סיכום יחידה",
+        "big": "סיימתם יחידה.<br>אבל מה נשאר?"
+      },
+      {
+        "poem": "במהלך השיעורים<br>עצרתם <em>רגע</em>,<br>הסתכלתם,<br>וציירתם מתוך עצמכם."
+      },
+      {
+        "big": "עכשיו לא מציירים.<br>רק מסתכלים."
+      },
+      {
+        "big": "פרשו את כל העבודות<br>מהיחידה.",
+        "sub": "לפי הסדר, מהראשונה ועד העבודה שפיתחתם בשיעור הקודם.",
+        "wall": ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8"]
+      },
+      {
+        "big": "מה השתנה?",
+        "q0": "השוו את העבודה הראשונה לאחרונה.",
+        "q1": "מה אתם עושים היום שלא עשיתם בהתחלה?",
+        "ph2": ["בהתחלה…", "היום…"]
+      },
+      {
+        "big": "מה חוזר?",
+        "sub": "משהו שמופיע שוב ושוב, גם בלי שתכננתם.",
+        "lensLabel": "אפשר להסתכל דרך",
+        "lens": ["צבע", "קו", "קומפוזיציה", "זיכרון", "מוטיב", "סמל"],
+        "ask": "האם המוטיב שמצאתם באמצע היחידה עדיין שם?"
+      },
+      {
+        "label": "חזרה",
+        "big": "הסתכלו על אחד הציורים<br>שיצרתם.",
+        "sub": "לא כדי לשפוט,<br>כדי לראות."
+      },
+      {
+        "label": "שימו לב",
+        "big": "איזה רגש<br>מופיע שם?",
+        "chips": ["שקט", "בלבול", "כוח", "געגוע", "סקרנות", "אחר"]
+      },
+      {
+        "big": "איפה בציור<br>זה מופיע?",
+        "sub": "בצבע? בקו? במקום על הדף?"
+      },
+      {
+        "poem": "זה לא חייב להיות <em>ברור</em>.<br>אבל זה שם."
+      },
+      {
+        "label": "רפלקציה",
+        "big": "מה גיליתם<br>על הדרך שלכם לצייר?",
+        "ph": "דרך הציור גיליתי ש…"
+      },
+      {
+        "kind": "key",
+        "big": "אם מישהו היה רואה את העבודות שלכם בלי השם שלכם,<br>איך היה מזהה שהן שלכם?",
+        "ph": "אפשר לזהות את העבודות שלי לפי…"
+      },
+      {
+        "poem": "הציור<br>לא נגמר כאן.<br>הוא <em>ממשיך איתכם</em>."
+      },
+      {
+        "label": "היחידה הסתיימה",
+        "big": "אתם לא רק מציירים.<br>אתם <em>רואים</em>."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "label": "Unit Summary",
+        "big": "You finished a unit.<br>But what stays?"
+      },
+      {
+        "poem": "During the lessons<br>you <em>paused</em>,<br>looked,<br>and drew from yourself."
+      },
+      {
+        "big": "Now we don't draw.<br>We just look."
+      },
+      {
+        "big": "Lay out all the work<br>from this unit.",
+        "sub": "In order, from the first piece to the work you developed last lesson."
+      },
+      {
+        "big": "What changed?",
+        "q0": "Compare the first work with the last.",
+        "q1": "What do you do now that you didn't do at the start?",
+        "ph2": ["At the start…", "Now…"]
+      },
+      {
+        "big": "What keeps returning?",
+        "sub": "Something that appears again and again, even without planning it.",
+        "lensLabel": "You can look through",
+        "lens": ["Colour", "Line", "Composition", "Memory", "Motif", "Symbol"],
+        "ask": "Is the motif you found in the middle of the unit still there?"
+      },
+      {
+        "label": "Return",
+        "big": "Look at one drawing<br>you created.",
+        "sub": "Not to judge,<br>but to see."
+      },
+      {
+        "label": "Notice",
+        "big": "Which feeling<br>appears there?",
+        "chips": ["Calm", "Confusion", "Strength", "Longing", "Curiosity", "Other"]
+      },
+      {
+        "big": "Where in the drawing<br>do you see it?",
+        "sub": "In the colour? In the line? In its place on the page?"
+      },
+      {
+        "poem": "It doesn't have to be <em>clear</em>.<br>But it's there."
+      },
+      {
+        "label": "Reflect",
+        "big": "What did you discover<br>about the way you draw?",
+        "ph": "Through the drawing I discovered…"
+      },
+      {
+        "big": "If someone saw your work without your name,<br>how would they know it is yours?",
+        "ph": "You can recognise my work by…"
+      },
+      {
+        "poem": "The drawing<br>doesn't end here.<br>It <em>continues with you</em>."
+      },
+      {
+        "label": "Unit complete",
+        "big": "You're not only drawing.<br>You are <em>seeing</em>."
+      }
+    ]
+  }
+}

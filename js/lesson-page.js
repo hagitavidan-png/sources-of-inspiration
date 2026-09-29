@@ -118,18 +118,48 @@
       t(w.note, 'p', 'lp-work-note') + '</figure>';
   }
 
+  /* the three experiment sheets laid side by side, each with one marked place (1.8) */
+  function sheets(list) {
+    var a = items(list);
+    if (!a.length) return '';
+    return '<div class="lp-sheets" aria-hidden="true">' + a.map(function (v, k) {
+      return '<figure class="lp-sheet-pg lp-sheet-pg' + k + '"><span class="lp-sheet-n">0' + (k + 1) + '</span><i class="lp-mark"></i>' + t(v, 'figcaption') + '</figure>';
+    }).join('') + '</div>';
+  }
+  /* the unit's work laid out in order, like a small exhibition (1.9) */
+  function wall(list) {
+    if (!list || !list.length) return '';
+    return '<div class="lp-wall" aria-hidden="true">' + list.map(function (n, k) {
+      return '<span class="lp-wall-pc lp-wall-' + k + (k === list.length - 1 ? ' is-last' : '') + '"><i dir="ltr">' + esc(n) + '</i></span>';
+    }).join('') + '</div>';
+  }
+  /* lenses to look through: words set in a line, not buttons */
+  function lenses(list, label) {
+    var a = items(list);
+    if (!a.length) return '';
+    return '<p class="lp-lenses">' + t(label, 'span', 'lp-lenses-lab') + a.map(function (v) { return t(v, 'span', 'lp-lens'); }).join('') + '</p>';
+  }
+  function prompts(list) {
+    if (!list || !list.length) return '';
+    return '<div class="lp-diptych">' + list.map(prompt).join('') + '</div>';
+  }
+
   function block(b) {
     var quote = b.quote ? '<blockquote class="lp-quote">' + t(b.quote, 'p') + t(b.attr, 'cite') + '</blockquote>' : '';
-    return '<div class="lp-block rv">' +
+    return '<div class="lp-block rv' + (b.kind ? ' lp-kind-' + b.kind : '') + '">' +
       t(b.label, 'p', 'lp-label') +
       quote +
       t(b.big, 'h3', 'lp-big') +
       t(b.poem, 'p', 'lp-poem') +
       t(b.sub, 'p', 'lp-sub') +
       t(b.body, 'p', 'lp-sub') +
+      wall(b.wall) +
       (b.works && b.works.length ? works(b.works) : '') +
       lines(b.lines) +
+      lenses(b.lenses, b.lensLabel) +
       t(b.ask, 'p', 'lp-ask') +
+      sheets(b.sheets) +
+      prompts(b.prompts) +
       frames(b.frames) +
       steps(b.list, b.rel) +
       chips(b.chips) +
