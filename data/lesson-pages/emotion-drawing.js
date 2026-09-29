@@ -422,20 +422,6 @@ window.LESSON_PAGE = {
        "Color and line in conversation."
       ]
      }
-    },
-    {
-     "label": {
-      "he": "תעשו את זה שלכם",
-      "en": "Make it yours"
-     },
-     "big": {
-      "he": "הוסיפו סימן<br>אישי קטן אחד.",
-      "en": "Add one small<br>personal mark."
-     },
-     "sub": {
-      "he": "משהו שרק אתם מבינים.<br>לא צריך להסביר.",
-      "en": "Something only you understand.<br>No explanation needed."
-     }
     }
    ]
   },

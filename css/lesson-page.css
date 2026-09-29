@@ -204,3 +204,35 @@
 /* the lab's opening list already carries its own numbers (01 · 02 · 03) */
 .lp-v2 .lp-layout-lab > .lp-block .lp-list{list-style:none;padding:0}
 .lp-v2 .lp-layout-lab > .lp-block .lp-list li{padding:3px 0}
+
+/* ═══ Pilot components used by 1.3 and 1.5 ═══ */
+
+/* composition sketches (1.3) */
+.lp-frames{display:flex;flex-wrap:wrap;gap:10px 12px;margin:18px 0 6px}
+.lp-frames svg{width:clamp(64px,9vw,96px);height:auto;overflow:hidden}
+.lp-frames rect{fill:#fbf9f4;stroke:var(--ink);stroke-width:1.2}
+.lp-frames circle{fill:var(--ink)}
+.lp-v2 .lp-sheet .lp-frames{gap:8px}
+.lp-v2 .lp-sheet .lp-frames svg{width:calc((100% - 16px) / 3);max-width:78px}
+.lp-v2 .lp-sheet .lp-frames ~ .lp-list{list-style:none;padding:0}
+/* after the experiments: compare, choose, develop */
+.lp-v2 .lp-after{margin-top:clamp(56px,8vw,96px)}
+
+/* an open notebook: two facing pages, then the page where you mark (1.5) */
+.lp-v2 .lp-layout-spread{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.lp-v2 .lp-layout-spread::before,.lp-v2 .lp-layout-spread > .lp-sec-head{grid-column:1 / -1}
+.lp-v2 .lp-layout-spread > .lp-block{max-width:none;background:#fbf9f4;border:1px solid var(--rule);padding:clamp(22px,3vw,34px)}
+.lp-v2 .lp-layout-spread > .lp-block + .lp-block{border-top:1px solid var(--rule);padding-top:clamp(22px,3vw,34px)}
+.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){border-inline-end:0;background:linear-gradient(to left,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
+.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:linear-gradient(to right,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
+html[dir="ltr"] .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){background:linear-gradient(to right,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
+html[dir="ltr"] .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:linear-gradient(to left,rgba(28,26,23,.06),transparent 18%) #fbf9f4}
+.lp-v2 .lp-layout-spread > .lp-block:nth-of-type(n+3){grid-column:1 / -1;background:transparent;border:0;border-top:1px solid var(--rule-strong);margin-top:clamp(28px,4vw,44px);padding-inline:0}
+.lp-v2 .lp-layout-spread .lp-chip[aria-pressed="true"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:8px;vertical-align:middle}
+@media (max-width:700px){
+  .lp-v2 .lp-layout-spread{grid-template-columns:1fr}
+  .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(1){border-inline-end:1px solid var(--rule);background:#fbf9f4}
+  .lp-v2 .lp-layout-spread > .lp-block:nth-of-type(2){background:#fbf9f4;border-top:0}
+}
+/* a single instruction needs no number */
+.lp-v2 .lp-list:has(> li:only-child){list-style:none;padding:0}

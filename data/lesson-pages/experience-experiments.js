@@ -393,6 +393,7 @@ window.LESSON_PAGE = {
      }
     }
    ],
+   "after": [],
    "outro": [
     {
      "label": {

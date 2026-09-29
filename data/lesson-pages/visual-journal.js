@@ -2,7 +2,11 @@
 window.LESSON_PAGE = {
  "id": "visual-journal",
  "path": "lessons/visual-journal.html",
- "slides": "lessons/visual-journal.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "create": "lab"
+ },
  "number": "1.3",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -18,251 +22,308 @@ window.LESSON_PAGE = {
   "en": "45 min"
  },
  "intro": {
-  "he": "נבחר רגש ונחקור את הצבעים והצורות שמתאימים לו. נארגן אותם לקומפוזיציה אישית ביומן החזותי.",
-  "en": "Choose an emotion and explore colours and shapes that express it. Arrange them into a personal composition in your visual journal."
+  "he": "אותה צורה יכולה ליצור תחושה אחרת לגמרי. נבדוק מיקום, גודל ומרחב בשישה ניסויים קטנים, נבחר אחד ונפתח אותו לדף גדול.",
+  "en": "The same shape can create a completely different feeling. We test position, size and space in six small experiments, choose one and develop it on a large sheet."
  },
  "materials": {
-  "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
-  "en": "Paper or a visual journal, a pencil and colours of your choice"
+  "he": "דף אחד מחולק לשישה מלבנים, טוש שחור או עיפרון רך, דף גדול וצבעים לבחירה",
+  "en": "One page divided into six rectangles, a black marker or soft pencil, a large sheet and colours of your choice"
  },
  "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "רגש כקומפוזיציה · שיעור 1.3",
-      "en": "Emotion as Composition · Lesson 1.3"
-     },
      "big": {
-      "he": "החיים שלכם אינם נפרדים<br>מה<em>אמנות</em> שלכם.",
-      "en": "Your life is not separate<br>from your <em>art.</em>"
+      "he": "אותה צורה.<br>תחושה אחרת.",
+      "en": "The same shape.<br>A different feeling."
      },
      "sub": {
-      "he": "הם המקור שלכם.",
-      "en": "It is your source."
+      "he": "הכול תלוי איפה היא נמצאת על הדף.",
+      "en": "It all depends on where it sits on the page."
      }
     }
    ]
   },
-  "idea": {
+  "sources": {
    "blocks": [
     {
      "label": {
-      "he": "עצרו לרגע",
-      "en": "Pause"
+      "he": "הוקוסאי",
+      "en": "Hokusai"
      },
-     "big": {
-      "he": "חשבו על <em>רגע קטן</em><br>מהחיים שלכם.",
-      "en": "Think about a <em>small moment</em><br>from your life."
-     },
-     "sub": {
-      "he": "לא אירוע גדול. רגע שקט ורגיל שנשאר אצלכם.",
-      "en": "Not a big event. A quiet, ordinary moment that stayed with you."
-     }
-    },
+     "works": [
+      {
+       "img": "hokusai-great-wave-1831",
+       "alt": "Katsushika Hokusai, The Great Wave off Kanagawa, 1831",
+       "artist": {
+        "he": "קצושיקה הוקוסאי",
+        "en": "Katsushika Hokusai"
+       },
+       "workTitle": {
+        "he": "הגל הגדול מול קנגאווה, 1831",
+        "en": "The Great Wave off Kanagawa, 1831"
+       },
+       "note": {
+        "he": "הגל ענק וקרוב. הר פוג׳י קטן ורחוק, כמעט באמצע.",
+        "en": "The wave is huge and close. Mount Fuji is small and far away, almost in the middle."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
     {
      "label": {
-      "he": "התמקדו",
-      "en": "Focus"
+      "he": "הסתכלו",
+      "en": "Look"
      },
      "big": {
-      "he": "בחרו <em>רגע אחד</em><br>שנשאר אצלכם.",
-      "en": "Choose <em>one moment</em><br>that stayed with you."
+      "he": "מה כאן גדול? מה קטן?",
+      "en": "What is big here? What is small?"
      },
-     "chips": {
-      "he": [
-       "בוקר עם אור מוזר",
-       "שתיקה שנמשכה זמן רב",
-       "מקום שתמיד חוזרים אליו",
-       "משהו שמישהו אמר",
-       "הרגע שלי →"
-      ],
-      "en": [
-       "A morning with strange light",
-       "A silence that lasted too long",
-       "A place I keep returning to",
-       "Something someone said",
-       "My own moment →"
-      ]
-     }
-    },
-    {
-     "label": {
-      "he": "רגש",
-      "en": "Emotion"
-     },
-     "big": {
-      "he": "מה <em>הרגשתם?</em>",
-      "en": "What did you <em>feel?</em>"
-     },
-     "sub": {
-      "he": "לא מה שקרה. מה הרגע הרגיש, מבפנים.",
-      "en": "Not what happened. What the moment felt like, inside."
-     },
-     "chips": {
-      "he": [
-       "עדין",
-       "בדידות",
-       "חסר מנוחה",
-       "עצוב",
-       "חמים",
-       "מבולבל",
-       "כועס",
-       "שלו"
-      ],
-      "en": [
-       "Tender",
-       "Lonely",
-       "Restless",
-       "Sad",
-       "Warm",
-       "Confused",
-       "Angry",
-       "Peaceful"
-      ]
-     }
-    },
-    {
-     "label": {
-      "he": "צבע",
-      "en": "Colour"
-     },
-     "big": {
-      "he": "אם לרגש הזה היה <em>צבע</em>, <br>מה הוא?",
-      "en": "If this feeling had a <em>colour</em>, <br>what is it?"
-     },
-     "chips": {
-      "he": [
-       "כחול עמוק",
-       "פלדה",
-       "סגול",
-       "לבנדר",
-       "ורד",
-       "ענבר",
-       "זהב",
-       "ירוק אפור",
-       "כהה",
-       "בהיר"
-      ],
-      "en": [
-       "Deep Blue",
-       "Steel",
-       "Violet",
-       "Lavender",
-       "Rose",
-       "Amber",
-       "Gold",
-       "Sage",
-       "Dark",
-       "Pale"
-      ]
-     }
-    },
-    {
-     "label": {
-      "he": "צורה",
-      "en": "Shape"
-     },
-     "big": {
-      "he": "איזו <em>צורה</em> יש לה?",
-      "en": "What <em>shape</em> does it have?"
-     },
-     "sub": {
-      "he": "לא צורה ממשית. תחושה של צורה.",
-      "en": "Not a literal shape. A feeling of shape."
-     },
-     "chips": {
-      "he": [
-       "רך",
-       "חד",
-       "שבור",
-       "זורם",
-       "כבד",
-       "מפוזר"
-      ],
-      "en": [
-       "Soft",
-       "Sharp",
-       "Broken",
-       "Flowing",
-       "Heavy",
-       "Scattered"
-      ]
+     "ask": {
+      "he": "מה קרוב? מה רחוק? איפה נשאר מקום ריק?",
+      "en": "What is close? What is far? Where is there empty space?"
      }
     }
    ]
   },
   "create": {
+   "lead": [
+    {
+     "label": {
+      "he": "הכנה",
+      "en": "Getting ready"
+     },
+     "big": {
+      "he": "דף אחד. שישה מלבנים.",
+      "en": "One page. Six rectangles."
+     },
+     "sub": {
+      "he": "חלקו את הדף לשישה מלבנים. בכולם תופיע אותה צורה אחת: עיגול, כתם או קו עבה.",
+      "en": "Divide the page into six rectangles. The same single shape goes in each: a circle, a blot or a thick line."
+     },
+     "frames": [
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+     ]
+    }
+   ],
    "steps": [
     {
      "label": {
-      "he": "התחילו",
-      "en": "Start"
+      "he": "ניסוי 1 · מיקום",
+      "en": "Experiment 1 · Position"
      },
      "big": {
-      "he": "<em>התחילו לצייר</em><br>את הרגש,<br>לא את הסיפור.",
-      "en": "<em>Start drawing</em><br>the feeling,<br>not the story."
+      "he": "איפה היא עומדת?",
+      "en": "Where does it stand?"
+     },
+     "list": {
+      "he": [
+       "מלבן 1: הצורה בדיוק במרכז.",
+       "מלבן 2: הצורה בפינה.",
+       "מלבן 3: הצורה נוגעת בקצה, חצי ממנה בחוץ."
+      ],
+      "en": [
+       "Rectangle 1: the shape exactly in the centre.",
+       "Rectangle 2: the shape in a corner.",
+       "Rectangle 3: the shape touches the edge, half of it outside."
+      ]
+     },
+     "frames": [
+      "center",
+      "corner",
+      "edge"
+     ]
+    },
+    {
+     "label": {
+      "he": "ניסוי 2 · גודל ומרחב",
+      "en": "Experiment 2 · Size and space"
+     },
+     "big": {
+      "he": "כמה מקום יש לה?",
+      "en": "How much room does it have?"
+     },
+     "list": {
+      "he": [
+       "מלבן 4: הצורה ענקית, כמעט ממלאת את המלבן.",
+       "מלבן 5: הצורה זעירה, והרבה ריק סביבה."
+      ],
+      "en": [
+       "Rectangle 4: the shape is huge, almost filling the rectangle.",
+       "Rectangle 5: the shape is tiny, with a lot of empty space around it."
+      ]
+     },
+     "frames": [
+      "huge",
+      "tiny"
+     ]
+    },
+    {
+     "label": {
+      "he": "ניסוי 3 · יחסים",
+      "en": "Experiment 3 · Relations"
+     },
+     "big": {
+      "he": "היא כבר לא לבד.",
+      "en": "It is no longer alone."
+     },
+     "list": {
+      "he": [
+       "מלבן 6: הוסיפו צורה שנייה.",
+       "קרובה מאוד, נוגעת, או רחוקה מאוד."
+      ],
+      "en": [
+       "Rectangle 6: add a second shape.",
+       "Very close, touching, or very far away."
+      ]
+     },
+     "frames": [
+      "pair"
+     ]
+    }
+   ],
+   "after": [
+    {
+     "label": {
+      "he": "השוואה",
+      "en": "Compare"
+     },
+     "big": {
+      "he": "הסתכלו על ששת המלבנים.",
+      "en": "Look at the six rectangles."
      },
      "sub": {
-      "he": "השתמשו בצבע ובצורה שבחרתם.<br>ללא עצמים. ללא נרטיב. רק הרגש.",
-      "en": "Use the colour and shape you chose.<br>No objects. No narrative. Just the feeling."
+      "he": "איך מרגישה הצורה בכל אחד?",
+      "en": "How does the shape feel in each one?"
+     },
+     "chips": {
+      "he": [
+       "לבד",
+       "לחוצה",
+       "שקטה",
+       "בורחת",
+       "חזקה",
+       "מחכה",
+       "חופשית",
+       "מאוימת"
+      ],
+      "en": [
+       "Alone",
+       "Squeezed",
+       "Calm",
+       "Escaping",
+       "Strong",
+       "Waiting",
+       "Free",
+       "Threatened"
+      ]
      }
     },
     {
      "label": {
-      "he": "שכבה אישית",
-      "en": "Personal Layer"
+      "he": "העיקרון",
+      "en": "The principle"
      },
      "big": {
-      "he": "הוסיפו משהו<br>ש<em>רק אתם</em> מבינים.",
-      "en": "Add something<br><em>only you</em> understand."
+      "he": "הצורה לא השתנתה.",
+      "en": "The shape did not change."
      },
      "sub": {
-      "he": "מילה מוסתרת. סימן. פרט שאף אחד לא ישים לב אליו אלא אם תספרו עליו.",
-      "en": "A hidden word. A mark. A detail no one will notice unless you tell them."
+      "he": "המקום, הגודל והמרחב סביבה שינו את התחושה.",
+      "en": "Its place, its size and the space around it changed the feeling."
      }
     },
     {
      "label": {
-      "he": "העמיקו",
-      "en": "Deepen"
+      "he": "בחרו",
+      "en": "Choose"
      },
      "big": {
-      "he": "עשו אותו <em>יותר אישי.</em><br>פחות מושלם.",
-      "en": "Make it <em>more personal.</em><br>Less perfect."
+      "he": "בחרו מלבן אחד.",
+      "en": "Choose one rectangle."
      },
      "sub": {
-      "he": "המקומות שבהם זה נשבר או הופך לא-בטוח<br>אלה החלקים הכי כנים.",
-      "en": "The places where it breaks or becomes uncertain<br>those are the most honest parts."
+      "he": "את זה שבו התחושה הכי חזקה.",
+      "en": "The one where the feeling is strongest."
+     }
+    },
+    {
+     "label": {
+      "he": "פיתוח",
+      "en": "Develop"
+     },
+     "big": {
+      "he": "העבירו אותו לדף גדול.",
+      "en": "Move it to a large sheet."
+     },
+     "list": {
+      "he": [
+       "שמרו על המיקום והגודל מהמלבן.",
+       "עכשיו מותר להוסיף צבע וקו.",
+       "החליטו מה מלא, ומה נשאר ריק."
+      ],
+      "en": [
+       "Keep the position and size from the rectangle.",
+       "Now you may add colour and line.",
+       "Decide what is full and what stays empty."
+      ]
      }
     }
-   ]
+   ],
+   "outro": []
   },
   "end": {
    "blocks": [
     {
      "label": {
-      "he": "הרהור",
-      "en": "Reflection"
+      "he": "עצרו",
+      "en": "Pause"
      },
      "big": {
-      "he": "מה <em style='color:var(--gold)'>גיליתם?</em>",
-      "en": "What did you <em style='color:var(--gold)'>discover?</em>"
+      "he": "מה הייתם מזיזים?",
+      "en": "What would you move?"
      },
-     "prompt": {
-      "he": "כתבו כל דבר: מה הפתיע אתכם, מה הרגיש נכון...",
-      "en": "Write anything, what surprised you, what felt true…"
+     "sub": {
+      "he": "נסו בדמיון: קצת הצידה, קצת גדול יותר. האם התחושה משתנה?",
+      "en": "Try it in your mind: a little to the side, a little bigger. Does the feeling change?"
      }
     },
     {
+     "label": {
+      "he": "רפלקציה",
+      "en": "Reflection"
+     },
      "big": {
-      "he": "החיים שלכם הם משהו<br>ש<em>יוצרים ממנו.</em>",
-      "en": "Your life is something<br>you <em>create from.</em>"
+      "he": "מה שינה את התחושה הכי הרבה?",
+      "en": "What changed the feeling the most?"
+     },
+     "prompt": {
+      "he": "התחושה השתנתה כש…",
+      "en": "The feeling changed when…"
+     }
+    },
+    {
+     "label": {
+      "he": "השיעור הסתיים",
+      "en": "Lesson complete"
+     },
+     "big": {
+      "he": "המקום הוא חלק מהמשמעות.",
+      "en": "Place is part of the meaning."
      },
      "sub": {
-      "he": "כל רגע שחוויתם הוא חומר גלם.<br>לא צריך לחפש בשום מקום אחר.",
-      "en": "Every moment you've lived is material.<br>You don't need to look anywhere else."
+      "he": "לא רק מה מציירים, אלא איפה.",
+      "en": "Not only what you draw, but where."
      }
     }
    ]

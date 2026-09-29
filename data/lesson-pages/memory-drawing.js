@@ -267,20 +267,6 @@ window.LESSON_PAGE = {
        "Erase or cover something if it doesn't feel right."
       ]
      }
-    },
-    {
-     "label": {
-      "he": "תעשו את זה שלכם",
-      "en": "Make it yours"
-     },
-     "big": {
-      "he": "הוסיפו משהו קטן<br>שרק אתם מבינים.",
-      "en": "Add something small<br>that only you understand."
-     },
-     "sub": {
-      "he": "לא צריך להסביר.",
-      "en": "No explanation needed."
-     }
     }
    ]
   },

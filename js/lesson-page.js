@@ -76,6 +76,24 @@
               : '<div class="lp-works">' + list.map(work).join('') + '</div>';
   }
 
+  /* composition sketches: small rectangles with one shape placed in different ways (1.3) */
+  function frames(list) {
+    if (!list || !list.length) return '';
+    var SH = {
+      empty: '',
+      center: '<circle cx="40" cy="28" r="9"/>',
+      corner: '<circle cx="12" cy="12" r="7"/>',
+      edge: '<circle cx="80" cy="28" r="9"/>',
+      huge: '<circle cx="40" cy="28" r="24"/>',
+      tiny: '<circle cx="40" cy="28" r="2.4"/>',
+      pair: '<circle cx="33" cy="28" r="9"/><circle cx="51" cy="28" r="9"/>'
+    };
+    return '<div class="lp-frames" aria-hidden="true">' + list.map(function (f) {
+      return '<svg viewBox="0 0 80 56"><rect x=".75" y=".75" width="78.5" height="54.5"/>' +
+        '<g>' + (SH[f] || '') + '</g></svg>';
+    }).join('') + '</div>';
+  }
+
   function work(w) {
     var img = w.img
       ? '<div class="lp-work-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>'
@@ -97,6 +115,7 @@
       (b.works && b.works.length ? works(b.works) : '') +
       t(b.ask, 'p', 'lp-ask') +
       lines(b.lines) +
+      frames(b.frames) +
       steps(b.list) +
       chips(b.chips) +
       prompt(b.prompt) +
@@ -182,6 +201,8 @@
       (d.lead || []).forEach(function (b) { inner += block(b); });
       if (D.materials) inner += '<div class="lp-sub-sec lp-materials rv">' + tt('חומרים', 'Materials', 'h3', 'lp-sub-title') + t(D.materials, 'p') + '</div>';
       inner += '<ol class="lp-lab">' + (d.steps || []).map(function (b, k) { return '<li class="lp-sheet lp-sheet-' + k + '">' + block(b) + '</li>'; }).join('') + '</ol>';
+      /* what happens after the experiments (compare, choose, develop) */
+      if (d.after && d.after.length) inner += '<div class="lp-after">' + d.after.map(block).join('') + '</div>';
       (d.outro || []).forEach(function (b) { inner += '<div class="lp-closing">' + block(b) + '</div>'; });
     } else if (key === 'create') {
       if (d.steps && d.steps.length) {

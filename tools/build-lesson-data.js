@@ -41,10 +41,17 @@ const MAP = {
   /* design pilot (variant 'v2'). Screen 2 is split: its artworks and captions go to "sources",
      its looking task (label, question, "calm? tense? moving?") to "look". */
   'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
-    explore: [0], sources: [1, '2:works'], look: ['2:text'], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
-  'visual-journal': { dom: true, explore: [1], idea: [2, 3, 4, 5, 6], create: [7, 8, 9], end: [10, 11] },
-  'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
-  'journal-artwork': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
+    explore: [0], sources: [1, '2:works'], look: ['2:text'], idea: [3, 4, 5], create: [6, 7, 8, 9, 10], end: [12, 13, 14, 15] },
+  /* (1.2 screen 11, "something only you understand", is kept for 1.6 only) */
+  /* 1.3: new content (content/lessons/visual-journal.json), a composition lab */
+  'visual-journal': { authored: true, variant: 'v2', layout: { create: 'lab' },
+    explore: [0], sources: [1], look: [2],
+    create: { lead: [3], steps: [4, 5, 6], after: [7, 8, 9, 10] }, end: [11, 12, 13] },
+  /* screen 8 ("something only you understand") is kept for 1.6 only */
+  'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7], end: [9, 10, 11, 12] },
+  /* 1.5: new content (content/lessons/journal-artwork.json), browsing an artist's notebook */
+  'journal-artwork': { authored: true, variant: 'v2', layout: { look: 'spread', idea: 'flow' },
+    explore: [0], sources: [1], look: [2, 3, 4], idea: [5, 6, 7], create: [8, 9], end: [10, 11, 12] },
   'frida-kahlo': { explore: [0], sources: [1], look: [2, 3, 4, 5], idea: [6, 7], create: [8, 9, 10, 11], end: [12, 13, 14, 15] },
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
@@ -168,6 +175,7 @@ function blockFromT(T, n, html) {
   }
   if (ln.he.length) b.lines = ln;
   if (he.ph != null) b.prompt = bil(he.ph, en.ph);
+  if (Array.isArray(he.frames)) b.frames = he.frames;   // composition sketches (1.3)
 
   const imgs = screenImages(html);
   const works = [];
@@ -192,6 +200,12 @@ function blockFromT(T, n, html) {
     works.push({ img: im.img, alt: im.alt, artist: NAMES[artEn] ? bil(NAMES[artEn], artEn) : null,
                  title: bil(he[key], en[key]), note: bil(he[nk], en[nk]) });
     k++;
+  }
+  // authored lessons: { art: { img, artist, title, note } }
+  if (he.art) {
+    const A = he.art, E = en.art || {};
+    works.push({ img: PD.has(A.img) ? A.img : null, alt: (E.artist || '') + ', ' + (E.title || ''),
+                 artist: bil(A.artist, E.artist), workTitle: bil(A.title, E.title), note: bil(A.note, E.note) });
   }
   if (works.length) b.works = works;
   return b;
@@ -240,7 +254,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=5">
-<link rel="stylesheet" href="../css/lesson-page.css?v=9">
+<link rel="stylesheet" href="../css/lesson-page.css?v=10">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -276,7 +290,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=6"></script>
+<script src="../js/lesson-page.js?v=7"></script>
 <script src="../js/site-drawer.js?v=6" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -288,9 +302,11 @@ function pageHtml(id, title) {
 const index = {};
 for (const [id, m] of Object.entries(MAP)) {
   const file = 'lessons/' + id + '.html';
-  const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
-  const T = m.dom ? null : readT(src);
-  const intro = INTROS[id + '.html'];
+  const A = m.authored ? JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', id + '.json'), 'utf8')) : null;
+  const src = A ? '' : fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const T = A ? { he: A.he, en: A.en } : (m.dom ? null : readT(src));
+  const intro = Object.assign({}, INTROS[id + '.html'], A && A.time ? { time: A.time } : {},
+    A && A.description ? { description: A.description } : {}, A && A.materials ? { materials: A.materials } : {});
   if (!intro) throw new Error('no intro data for ' + id);
   const sections = {};
   for (const key of ['explore', 'sources', 'look', 'idea', 'create', 'end']) {
@@ -315,7 +331,8 @@ for (const [id, m] of Object.entries(MAP)) {
       return b;
     }).filter(b => Object.keys(b).length);
     if (key === STEPS_SECTION && !Array.isArray(m[key])) {
-      sections[key] = { lead: build(m[key].lead || []), steps: build(m[key].steps || []), outro: build(m[key].outro || []) };
+      sections[key] = { lead: build(m[key].lead || []), steps: build(m[key].steps || []),
+                        after: build(m[key].after || []), outro: build(m[key].outro || []) };
       continue;
     }
     const blocks = build(m[key]);
@@ -324,7 +341,9 @@ for (const [id, m] of Object.entries(MAP)) {
   if (m.variant === 'v2') addWorkTitles(sections);
   const u = unitOf(file);
   const data = {
-    id, path: file, slides: file,
+    id, path: file,
+    /* the slide lesson is the classroom mode; for rewritten lessons it still holds the old content */
+    slides: m.authored ? null : file,
     ...(m.variant ? { variant: m.variant } : {}),
     ...(m.layout ? { layout: m.layout } : {}),
     number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
@@ -338,7 +357,7 @@ for (const [id, m] of Object.entries(MAP)) {
   fs.mkdirSync(path.join(ROOT, 'lesson-pages'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'), pageHtml(id, plain(intro.title.he)));
   index[file] = 'lesson-pages/' + id + '.html';
-  const count = Object.values(sections).reduce((a, s) => a + (s.blocks || []).length + (s.steps || []).length + (s.lead || []).length + (s.outro || []).length, 0);
+  const count = Object.values(sections).reduce((a, s) => a + ['blocks', 'steps', 'lead', 'after', 'outro'].reduce((n, k) => n + (s[k] || []).length, 0), 0);
   console.log(id.padEnd(24), count, 'blocks');
 }
 fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),

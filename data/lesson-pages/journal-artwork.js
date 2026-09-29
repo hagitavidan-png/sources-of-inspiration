@@ -2,7 +2,12 @@
 window.LESSON_PAGE = {
  "id": "journal-artwork",
  "path": "lessons/journal-artwork.html",
- "slides": "lessons/journal-artwork.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "look": "spread",
+  "idea": "flow"
+ },
  "number": "1.5",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -30,17 +35,13 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "יחידה: חוויה אישית כמקור השראה",
-      "en": "Unit: Personal Experience as a Source of Inspiration"
-     },
      "big": {
-      "he": "יומן אישי<br>נבנה עם הזמן.",
-      "en": "A personal journal<br>builds over time."
+      "he": "כבר ציירתם הרבה.",
+      "en": "You have already made a lot."
      },
      "sub": {
-      "he": "רגעים ממנו יכולים להפוך ליצירה.",
-      "en": "Moments from it can become an artwork."
+      "he": "היום לא מתחילים מדף ריק.",
+      "en": "Today you don't start from a blank page."
      }
     }
    ]
@@ -49,19 +50,19 @@ window.LESSON_PAGE = {
    "blocks": [
     {
      "label": {
-      "he": "על ציור",
-      "en": "On drawing"
+      "he": "הונדרטוואסר",
+      "en": "Hundertwasser"
      },
      "sub": {
-      "he": "כל מה שעוברים עליכם הוא חומר.",
-      "en": "Everything you live through is material."
+      "he": "הספירלה חוזרת שוב ושוב בציורים שלו.",
+      "en": "The spiral appears again and again in his paintings."
      },
      "quote": {
       "he": "אני מצייר את מה שאני חי.",
       "en": "I draw what I live."
      },
      "attr": {
-      "he": "הונדרטווסר",
+      "he": "הונדרטוואסר",
       "en": "Hundertwasser"
      }
     }
@@ -71,46 +72,71 @@ window.LESSON_PAGE = {
    "blocks": [
     {
      "label": {
-      "he": "הסתכלו על הדפים",
-      "en": "Look at the pages"
+      "he": "אספו",
+      "en": "Gather"
      },
      "big": {
-      "he": "רגעים שונים<br>ביחד על דף אחד.",
-      "en": "Different moments<br>together on one page."
+      "he": "פזרו את העבודות שלכם.",
+      "en": "Spread out your work."
      },
-     "ask": {
-      "he": "מה אתם שמים לב אליו בכל דף?",
-      "en": "What do you notice on each page?"
+     "sub": {
+      "he": "מהשיעורים הקודמים, מהיומן, סקיצות קטנות. הכול.",
+      "en": "From earlier lessons, from your journal, small sketches. Everything."
+     }
+    },
+    {
+     "label": {
+      "he": "מסתכלים",
+      "en": "Looking"
      },
-     "works": [
-      {
-       "img": null,
-       "alt": "Mixed media sketchbook page",
-       "artist": null,
-       "title": {
-        "he": "ציורים וסימנים ביחד",
-        "en": "Drawings and marks together"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Open journal spread",
-       "artist": null,
-       "title": {
-        "he": "פתוח ולא גמור",
-        "en": "Open and unfinished"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Sketchbook with varied elements",
-       "artist": null,
-       "title": {
-        "he": "מילים, צורות, צבע",
-        "en": "Words, shapes, color"
-       }
-      }
-     ]
+     "big": {
+      "he": "הסתכלו עליהן יחד, לא אחת אחת.",
+      "en": "Look at them together, not one by one."
+     },
+     "sub": {
+      "he": "מה מופיע יותר מפעם אחת?",
+      "en": "What appears more than once?"
+     }
+    },
+    {
+     "label": {
+      "he": "מה חוזר?",
+      "en": "What repeats?"
+     },
+     "big": {
+      "he": "מה חוזר אצלכם?",
+      "en": "What keeps coming back in your work?"
+     },
+     "chips": {
+      "he": [
+       "צבע",
+       "צורה",
+       "סוג קו",
+       "מקום",
+       "חפץ",
+       "מילה",
+       "סמל",
+       "תחושה"
+      ],
+      "en": [
+       "Colour",
+       "Shape",
+       "Kind of line",
+       "Place",
+       "Object",
+       "Word",
+       "Symbol",
+       "Feeling"
+      ]
+     },
+     "list": {
+      "he": [
+       "סמנו בנקודה קטנה כל מקום שבו הוא מופיע."
+      ],
+      "en": [
+       "Mark each place where it appears with a small dot."
+      ]
+     }
     }
    ]
   },
@@ -118,74 +144,52 @@ window.LESSON_PAGE = {
    "blocks": [
     {
      "label": {
-      "he": "חשבו על השבוע שלכם",
-      "en": "Think about your week"
+      "he": "בחרו",
+      "en": "Choose"
      },
      "big": {
-      "he": "אילו רגעים<br>אתם לוקחים ממנו?",
-      "en": "Which moments<br>are you taking from it?"
+      "he": "בחרו דבר אחד.",
+      "en": "Choose one thing."
      },
      "sub": {
-      "he": "בחרו אחד או שניים.",
-      "en": "Choose one or two."
-     },
-     "chips": {
-      "he": [
-       "משהו שראיתי",
-       "משהו שהרגשתי",
-       "שיחה",
-       "משהו שקראתי",
-       "רגע שקט",
-       "משהו שהשתנה",
-       "משהו שהבחנתי בחוץ",
-       "משהו קטן, לא חשוב"
-      ],
-      "en": [
-       "Something I saw",
-       "Something I felt",
-       "A conversation",
-       "Something I read",
-       "A quiet moment",
-       "Something that changed",
-       "Something I noticed outside",
-       "Something small, not important"
-      ]
+      "he": "את זה שהכי מסקרן אתכם.",
+      "en": "The one you are most curious about."
      }
     },
     {
      "label": {
-      "he": "אספו את החלקים",
-      "en": "Collect the pieces"
+      "he": "תנו לו שם",
+      "en": "Name it"
      },
      "big": {
-      "he": "בחרו כמה דברים<br>מהשבוע שלכם.",
-      "en": "Choose a few things<br>from your week."
+      "he": "איך קוראים לו?",
+      "en": "What is it called?"
      },
      "sub": {
-      "he": "לא הכל. רק כמה.",
-      "en": "Not all. Just a few."
+      "he": "מילה אחת או שתיים.",
+      "en": "One or two words."
      },
-     "chips": {
-      "he": [
-       "רגע",
-       "משהו שראיתי",
-       "משהו ששמעתי",
-       "משהו שקראתי",
-       "משהו שכתבתי",
-       "צבע",
-       "צורה",
-       "תחושה"
-      ],
-      "en": [
-       "A moment",
-       "Something I saw",
-       "Something I heard",
-       "Something I read",
-       "Something I wrote",
-       "A color",
-       "A shape",
-       "A feeling"
-      ]
+     "prompt": {
+      "he": "המוטיב שלי הוא…",
+      "en": "My motif is…"
+     }
+    },
+    {
+     "label": {
+      "he": "שאלה",
+      "en": "A question"
+     },
+     "big": {
+      "he": "למה הוא חוזר?",
+      "en": "Why does it keep coming back?"
+     },
+     "sub": {
+      "he": "לא צריך לדעת. אפשר לנחש.",
+      "en": "You don't need to know. You can guess."
+     },
+     "prompt": {
+      "he": "אולי הוא חוזר כי…",
+      "en": "Maybe it comes back because…"
      }
     }
    ]
@@ -194,92 +198,46 @@ window.LESSON_PAGE = {
    "steps": [
     {
      "label": {
-      "he": "התחילו",
-      "en": "Begin"
+      "he": "דף חדש",
+      "en": "A new page"
      },
      "big": {
-      "he": "מקמו אותם<br>על הדף.",
-      "en": "Place them<br>on the page."
-     },
-     "sub": {
-      "he": "ציירו, כתבו, או סמנו.<br>לא צריך סדר.",
-      "en": "Draw, write, or mark.<br>No need for order."
+      "he": "דף יומן חדש. מוטיב אחד.",
+      "en": "A new journal page. One motif."
      },
      "list": {
       "he": [
-       "כל חלק יכול להיות בכל גודל.",
-       "אפשר לצייר, לכתוב, או רק לסמן.",
-       "תנו לדף להתמלא לאט."
+       "ציירו את המוטיב כמה פעמים על הדף.",
+       "בכל פעם אחרת: גודל, צבע, כיוון.",
+       "תנו לו לפגוש משהו חדש."
       ],
       "en": [
-       "Each piece can be any size.",
-       "You can draw it, write it, or just mark it.",
-       "Let the page fill slowly."
+       "Draw the motif several times on the page.",
+       "Each time differently: size, colour, direction.",
+       "Let it meet something new."
       ]
      }
     },
     {
      "label": {
-      "he": "איך הם יושבים",
-      "en": "How do they sit"
+      "he": "הוסיפו מילים",
+      "en": "Add words"
      },
      "big": {
-      "he": "איך החלקים<br>יושבים על הדף?",
-      "en": "How do the parts<br>sit on the page?"
-     },
-     "chips": {
-      "he": [
-       "קרוב אחד לשני",
-       "אחד על השני",
-       "רחוקים",
-       "מעורב / בלי כלל"
-      ],
-      "en": [
-       "Near each other",
-       "On top of each other",
-       "Far apart",
-       "Mixed / no rule"
-      ]
-     }
-    },
-    {
-     "label": {
-      "he": "המשיכו להוסיף",
-      "en": "Keep adding"
-     },
-     "big": {
-      "he": "המשיכו להוסיף<br>ולשנות.",
-      "en": "Keep adding<br>and changing."
-     },
-     "sub": {
-      "he": "הדף יכול להישאר פתוח ולא גמור.",
-      "en": "The page can stay open and unfinished."
+      "he": "גם מילים הן חלק מהדף.",
+      "en": "Words are part of the page too."
      },
      "list": {
       "he": [
-       "הוסיפו חלק חדש ליד משהו שכבר שם.",
-       "אפשר לשנות את הגודל של משהו.",
-       "השאירו מקום ריק, גם הוא שייך לשם."
+       "מה שכתבתם עליו.",
+       "מילה שחוזרת אצלכם.",
+       "משפט קצר, לא הסבר."
       ],
       "en": [
-       "Add a new piece next to something already there.",
-       "You can change the size of something.",
-       "Leave empty space, it belongs there too."
+       "What you wrote about it.",
+       "A word that keeps coming back for you.",
+       "A short sentence, not an explanation."
       ]
-     }
-    },
-    {
-     "label": {
-      "he": "תעשו את זה שלכם",
-      "en": "Make it yours"
-     },
-     "big": {
-      "he": "הוסיפו משהו קטן<br>שרק אתם מבינים.",
-      "en": "Add something small<br>that only you understand."
-     },
-     "sub": {
-      "he": "לא צריך להסביר.",
-      "en": "No need to explain it."
      }
     }
    ]
@@ -292,26 +250,12 @@ window.LESSON_PAGE = {
       "en": "Pause"
      },
      "big": {
-      "he": "עצרו והסתכלו<br>על הדף שלכם.",
-      "en": "Stop and look<br>at your page."
+      "he": "עצרו. הסתכלו על הדף.",
+      "en": "Stop. Look at the page."
      },
      "sub": {
-      "he": "פשוט תסתכלו. אל תשפטו.",
-      "en": "Just look. Don't judge."
-     }
-    },
-    {
-     "label": {
-      "he": "מה יצרתם",
-      "en": "What you made"
-     },
-     "big": {
-      "he": "זו לא תמונה אחת, <br>זה חלק מהזמן שלכם.",
-      "en": "This is not one image, <br>it is part of your time."
-     },
-     "sub": {
-      "he": "זה מקור ההשראה שלכם.",
-      "en": "This is your source of inspiration."
+      "he": "המוטיב עדיין אותו מוטיב? או שהפך למשהו אחר?",
+      "en": "Is the motif still the same motif? Or has it become something else?"
      }
     },
     {
@@ -320,12 +264,12 @@ window.LESSON_PAGE = {
       "en": "Reflection"
      },
      "big": {
-      "he": "מה בולט הכי הרבה<br>בדף שלכם?",
-      "en": "What stands out most<br>on your page?"
+      "he": "איפה עוד תרצו לפגוש אותו?",
+      "en": "Where else would you like to meet it?"
      },
      "prompt": {
-      "he": "מה שבולט הוא…",
-      "en": "What stands out is…"
+      "he": "הייתי רוצה לנסות אותו ב…",
+      "en": "I would like to try it in…"
      }
     },
     {
@@ -334,12 +278,12 @@ window.LESSON_PAGE = {
       "en": "Lesson complete"
      },
      "big": {
-      "he": "דף היומן שלכם<br>הפך ליצירה.",
-      "en": "Your journal page<br>is now an artwork."
+      "he": "זו כבר שפה.",
+      "en": "This is already a language."
      },
      "sub": {
-      "he": "לקחתם רגעים מהשבוע שלכם.<br>יצרתם משהו שרק אתם יכולתם ליצור.",
-      "en": "You took moments from your week.<br>You made something only you could make."
+      "he": "משהו שחוזר יכול להתחיל להפוך לחלק מהשפה שלכם.",
+      "en": "Something that keeps coming back can start to become part of your language."
      }
     }
    ]
