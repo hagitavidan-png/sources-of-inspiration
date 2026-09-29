@@ -123,15 +123,20 @@
     var a = items(list);
     if (!a.length) return '';
     return '<div class="lp-sheets" aria-hidden="true">' + a.map(function (v, k) {
-      return '<figure class="lp-sheet-pg lp-sheet-pg' + k + '"><span class="lp-sheet-n">0' + (k + 1) + '</span><i class="lp-mark"></i>' + t(v, 'figcaption') + '</figure>';
+      return '<figure class="lp-sheet-pg lp-sheet-pg' + k + '">' + t(v, 'figcaption') + '<i class="lp-mark"></i></figure>';
     }).join('') + '</div>';
   }
   /* the unit's work laid out in order, like a small exhibition (1.9) */
   function wall(list) {
     if (!list || !list.length) return '';
-    return '<div class="lp-wall" aria-hidden="true">' + list.map(function (n, k) {
+    /* two rows: one line on wide screens, two hanging lines on phones */
+    var half = Math.ceil(list.length / 2);
+    function pc(n, k) {
       return '<span class="lp-wall-pc lp-wall-' + k + (k === list.length - 1 ? ' is-last' : '') + '"><i dir="ltr">' + esc(n) + '</i></span>';
-    }).join('') + '</div>';
+    }
+    return '<div class="lp-wall" aria-hidden="true">' +
+      '<div class="lp-wall-row">' + list.slice(0, half).map(function (n, k) { return pc(n, k); }).join('') + '</div>' +
+      '<div class="lp-wall-row">' + list.slice(half).map(function (n, k) { return pc(n, k + half); }).join('') + '</div></div>';
   }
   /* lenses to look through: words set in a line, not buttons */
   function lenses(list, label) {
@@ -173,8 +178,10 @@
     if (V2) {
       /* pilot: a large, quiet station number marks each part of the lesson */
       var lay = D.layout && D.layout[key] ? ' lp-layout-' + D.layout[key] : '';
-      return '<section class="lp-sec lp-station' + lay + '" id="' + key + '" data-sec>' +
-        '<header class="lp-sec-head rv"><span class="lp-station-n" aria-hidden="true">0' + n + '</span>' + tt(he, en, 'h2', 'ed-display') + '</header>' +
+      /* a station can open without its generic title (1.9) */
+      var bare = D.noTitle && D.noTitle.indexOf(key) >= 0;
+      return '<section class="lp-sec lp-station' + lay + (bare ? ' lp-bare' : '') + '" id="' + key + '" data-sec>' +
+        '<header class="lp-sec-head rv"><span class="lp-station-n" aria-hidden="true">0' + n + '</span>' + (bare ? '' : tt(he, en, 'h2', 'ed-display')) + '</header>' +
         body + '</section>';
     }
     return '<section class="lp-sec" id="' + key + '" data-sec>' +
@@ -229,12 +236,15 @@
   var body = '', rail = '', n = 0;
   SECTIONS.forEach(function (s) {
     var key = s[0], d = S[key] || {};
-    var blocks = d.blocks || [];
+    var blocks = (d.blocks || []).slice();
     var createSteps = S.create && ((S.create.steps && S.create.steps.length) || (S.create.lead && S.create.lead.length));
     var hasMaterials = key === 'create' && D.materials && createSteps;
     if (key !== 'explore' && !blocks.length && !(d.works && d.works.length) && !(d.steps && d.steps.length) && !hasMaterials) return;
     n++;
     var inner = '';
+    /* a station without its title opens straight with its first screen (1.9) */
+    var bareOpen = key === 'explore' && D.noTitle && D.noTitle.indexOf(key) >= 0 && blocks.length;
+    if (bareOpen) inner += block(blocks.shift());
     if (key === 'explore') {
       inner += t(D.intro, 'p', 'lp-lead rv');
       /* no making steps in this lesson: the materials go at the start */
@@ -266,7 +276,7 @@
       }
     }
     body += section(key, s[1], s[2], inner, n);
-    rail += '<li><a href="#' + key + '"><span>0' + n + '</span>' + tt(s[1], s[2]) + '</a></li>';
+    rail += '<li><a href="#' + key + '"><span>0' + n + '</span>' + (D.noTitle && D.noTitle.indexOf(key) >= 0 ? '' : tt(s[1], s[2])) + '</a></li>';
   });
 
   html += '<div class="lp-body ed-wrap"><nav class="lp-rail" aria-label="' + (L === 'he' ? 'חלקי השיעור' : 'Lesson sections') + '"><ol>' + rail + '</ol></nav><div class="lp-main">' + body + '</div></div>';

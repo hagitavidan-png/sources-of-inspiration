@@ -72,7 +72,7 @@ const MAP = {
   'experience-artwork': { authored: true, variant: 'v2', layout: { look: 'studio', idea: 'studio', create: 'studio', end: 'studio' },
     explore: [0, 1], look: [2], idea: [3], create: [4, 5], end: [6, 7, 8] },
   /* 1.9: the unit's work laid out like a small exhibition: the journey, one work, discovery */
-  'unit-summary': { authored: true, variant: 'v2', layout: { look: 'show', end: 'show' },
+  'unit-summary': { authored: true, variant: 'v2', layout: { look: 'show', end: 'show' }, noTitle: ['explore'],
     explore: [0, 1], look: [2, 3, 4, 5], end: [6, 7, 8, 9, 10, 11, 12, 13] },
   'lesson-2-1': { hero: ['hokusai-great-wave-1831', '28% 18%'],
     explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
@@ -271,7 +271,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=16">
+<link rel="stylesheet" href="../css/lesson-page.css?v=17">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -307,7 +307,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=14"></script>
+<script src="../js/lesson-page.js?v=15"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -365,6 +365,7 @@ for (const [id, m] of Object.entries(MAP)) {
     ...(m.variant ? { variant: m.variant } : {}),
     ...(m.layout ? { layout: m.layout } : {}),
     ...(m.desk ? { desk: m.desk } : {}),
+    ...(m.noTitle ? { noTitle: m.noTitle } : {}),
     ...(A && A.subtitle ? { subtitle: A.subtitle } : {}),
     number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,

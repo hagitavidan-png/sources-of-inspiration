@@ -8,6 +8,9 @@ window.LESSON_PAGE = {
   "look": "show",
   "end": "show"
  },
+ "noTitle": [
+  "explore"
+ ],
  "number": "1.9",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
