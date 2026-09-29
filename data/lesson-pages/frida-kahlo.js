@@ -7,7 +7,9 @@ window.LESSON_PAGE = {
  "layout": {
   "sources": "pair",
   "look": "links",
-  "idea": "links"
+  "idea": "links",
+  "create": "rel",
+  "end": "rel"
  },
  "number": "1.6",
  "unit": {

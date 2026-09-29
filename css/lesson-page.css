@@ -289,22 +289,29 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-layout-pair .lp-ed-work.lp-window{max-width:none;height:100%}
 @media (max-width:760px){.lp-v2 .lp-layout-pair{grid-template-columns:1fr}.lp-v2 .lp-layout-pair > .lp-block + .lp-block{padding-top:18px}}
 
-/* looking and choosing: each step is a point, joined by a light dotted line */
-.lp-v2 .lp-layout-links > .lp-block{position:relative;padding-inline-start:30px}
+/* looking and choosing: plain blocks, the chain is the one connected element */
 .lp-v2 .lp-layout-links > .lp-block + .lp-block{border-top:0}
-.lp-v2 .lp-layout-links > .lp-block::before{content:"";position:absolute;inset-inline-start:3px;top:14px;width:9px;height:9px;border:1.5px solid var(--ink);border-radius:50%;background:var(--paper);z-index:1}
-.lp-v2 .lp-layout-links > .lp-block::after{content:"";position:absolute;inset-inline-start:8px;top:26px;bottom:-14px;border-inline-start:1px dotted var(--rule-strong)}
-.lp-v2 .lp-layout-links > .lp-block:last-of-type::after{display:none}
 /* image → motif → symbol as a short chain */
-.lp-v2 .lp-layout-links .lp-lines{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px}
-.lp-v2 .lp-layout-links .lp-lines li,.lp-v2 .lp-layout-links .lp-lines li:first-child{border:0;border-top:1px solid var(--ink);padding:16px 0 0;position:relative;color:var(--ink)}
+.lp-v2 .lp-layout-links .lp-lines{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;margin-top:22px}
+.lp-v2 .lp-layout-links .lp-lines li,.lp-v2 .lp-layout-links .lp-lines li:first-child{border:0;border-top:1px solid var(--ink);padding:16px 0 0;position:relative;color:var(--ink);font-size:1.15rem}
 .lp-v2 .lp-layout-links .lp-lines li::before{content:"";position:absolute;top:-5px;inset-inline-start:0;width:9px;height:9px;border-radius:50%;background:var(--ink)}
-@media (max-width:700px){.lp-v2 .lp-layout-links .lp-lines{grid-template-columns:1fr;gap:14px}}
-/* choices as points you can connect */
-.lp-v2 .lp-layout-links .lp-chip{border:0;border-radius:0;background:none;padding:4px 2px;color:var(--ink-2)}
-.lp-v2 .lp-layout-links .lp-chip::before{content:"";display:inline-block;width:8px;height:8px;border:1.5px solid currentColor;border-radius:50%;margin-inline-end:8px;vertical-align:middle}
-.lp-v2 .lp-layout-links .lp-chip[aria-pressed="true"]{background:none;color:var(--ink)}
-.lp-v2 .lp-layout-links .lp-chip[aria-pressed="true"]::before{background:currentColor}
+@media (max-width:700px){
+  .lp-v2 .lp-layout-links .lp-lines{grid-template-columns:1fr;gap:0}
+  .lp-v2 .lp-layout-links .lp-lines li,.lp-v2 .lp-layout-links .lp-lines li:first-child{border-top:0;padding:0 0 18px;padding-inline-start:26px}
+  .lp-v2 .lp-layout-links .lp-lines li::before{top:.62em}
+  .lp-v2 .lp-layout-links .lp-lines li:not(:last-child)::after{content:"";position:absolute;inset-inline-start:4px;top:calc(.62em + 9px);bottom:0;border-inline-start:1px solid var(--ink)}
+}
+/* choices: quiet words, the chosen ones underlined */
+.lp-v2 .lp-layout-links .lp-chip{border:0;border-bottom:1px solid var(--rule);border-radius:0;background:none;padding:4px 2px;color:var(--ink-2)}
+.lp-v2 .lp-layout-links .lp-chip[aria-pressed="true"]{background:none;color:var(--ink);border-bottom:1.5px solid var(--ink)}
+
+/* phones: slightly larger reading text in this lesson */
+@media (max-width:700px){
+  .lp-v2 .lp-layout-pair .lp-sub,.lp-v2 .lp-layout-pair p,
+  .lp-v2 .lp-layout-links .lp-sub,.lp-v2 .lp-layout-links .lp-list li,.lp-v2 .lp-layout-links p,
+  .lp-v2 .lp-layout-rel .lp-sub,.lp-v2 .lp-layout-rel .lp-list li,.lp-v2 .lp-layout-rel p{font-size:1.14rem}
+  .lp-v2 .lp-layout-pair .lp-label,.lp-v2 .lp-layout-links .lp-label,.lp-v2 .lp-layout-rel .lp-label{font-size:.94rem}
+}
 
 /* kinds of connection, each with a small sketch */
 .lp-v2 .lp-rel{list-style:none;padding:0}

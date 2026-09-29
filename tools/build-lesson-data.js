@@ -57,7 +57,7 @@ const MAP = {
     desk: ['1.1', '1.2', '1.3', '1.4'],
     explore: [0], sources: [1], look: [2, 3, 4], idea: [5, 6, 7], create: [8, 9], end: [10, 11, 12] },
   /* 1.6: revised content (content/lessons/frida-kahlo.json): motif → meaning → symbol → relations → a personal world */
-  'frida-kahlo': { authored: true, variant: 'v2', layout: { sources: 'pair', look: 'links', idea: 'links' },
+  'frida-kahlo': { authored: true, variant: 'v2', layout: { sources: 'pair', look: 'links', idea: 'links', create: 'rel', end: 'rel' },
     explore: [0], sources: [1, 2, 3], look: [4, 5, 6, 7, 8], idea: [9, 10, 11], create: [12, 13, 14], end: [15, 16, 17] },
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
@@ -262,7 +262,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=14">
+<link rel="stylesheet" href="../css/lesson-page.css?v=15">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
