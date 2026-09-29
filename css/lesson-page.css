@@ -103,3 +103,44 @@
   .lp-where svg{color:var(--muted)}
 }
 .crumb [aria-current]{color:var(--ink)}
+
+/* ═══ Design pilot (lesson 1.2 only): .lp-v2 ═══════════════════ */
+
+/* opening: a small title page */
+.lp-v2 .lp-gate{text-align:center;padding-block:clamp(40px,7vw,104px) clamp(36px,6vw,80px);margin-bottom:clamp(28px,4vw,48px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.lp-v2 .lp-gate-kicker{margin:0 0 clamp(18px,2.5vw,28px);font-size:.9rem;font-weight:600;letter-spacing:.14em;color:var(--ink-2)}
+.lp-v2 .lp-gate-title{font-size:clamp(4rem,10vw,8.5rem);line-height:.92;margin:0 auto;max-width:12em;text-wrap:balance}
+.lp-v2 .lp-gate-unit{margin:clamp(18px,2.5vw,28px) 0 0;font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--ink-2)}
+.lp-v2 .lp-gate-unit::before,.lp-v2 .lp-gate-unit::after{content:"";display:inline-block;width:28px;height:1px;background:var(--rule-strong);vertical-align:middle;margin-inline:14px}
+.lp-v2 .lp-gate .lp-meta{margin-top:clamp(22px,3vw,34px)}
+
+/* stations */
+.lp-v2 .lp-main{max-width:880px}
+.lp-v2 .lp-station{padding-bottom:clamp(72px,10vw,136px)}
+.lp-v2 .lp-station + .lp-station::before{content:"";display:block;width:1px;height:clamp(48px,7vw,88px);background:var(--rule-strong);margin:0 0 clamp(28px,4vw,44px);margin-inline-start:.9rem}
+.lp-v2 .lp-sec-head{flex-direction:column;align-items:flex-start;gap:6px;border-bottom-color:var(--ink)}
+.lp-v2 .lp-station-n{font-family:var(--f-display);font-weight:400;font-size:clamp(4.8rem,9vw,7.5rem);line-height:.8;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.lp-v2 .lp-block,.lp-v2 .lp-lead,.lp-v2 .lp-mat-line{max-width:700px}
+
+/* inspiration: artworks as a magazine sequence (no cropping) */
+.lp-v2 .lp-ed-works{display:flex;flex-direction:column;gap:clamp(56px,8vw,112px);margin:clamp(28px,4vw,48px) 0 8px}
+.lp-v2 .lp-ed-work{margin:0}
+.lp-v2 .lp-ed-img{display:flex;background:transparent}
+.lp-v2 .lp-ed-img img{display:block;max-width:100%;width:auto;height:auto;max-height:86vh}
+.lp-v2 .lp-ed-r0 .lp-ed-img img{max-height:88vh}
+.lp-v2 .lp-ed-r1{width:82%;margin-inline-start:auto}
+.lp-v2 .lp-ed-r2{width:64%}
+.lp-v2 .lp-ed-work figcaption{margin-top:16px;display:flex;flex-direction:column;gap:2px;max-width:560px}
+.lp-v2 .lp-ed-artist{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,2.8vw,2.3rem);line-height:1.05}
+.lp-v2 .lp-ed-title{font-size:.95rem;color:var(--muted)}
+.lp-v2 .lp-ed-text{margin:10px 0 0;font-size:1.05rem;color:var(--ink-2)}
+.lp-v2 .lp-ask{margin:clamp(40px,6vw,72px) 0 0;padding-top:22px;border-top:1px solid var(--rule-strong);font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,3.4vw,2.7rem);line-height:1.15}
+@media (max-width:700px){
+  .lp-v2 .lp-ed-r1,.lp-v2 .lp-ed-r2{width:100%}
+  .lp-v2 .lp-ed-img img{max-height:none;width:100%}
+}
+
+/* making: work instructions as in an artist's book */
+.lp-v2 .lp-steps > li{padding-inline-start:clamp(18px,3vw,28px);border-inline-start:1px solid var(--rule-strong);margin-bottom:clamp(24px,3vw,36px)}
+.lp-v2 .lp-steps > li + li .lp-block{border-top:0;padding-top:6px}
+.lp-v2 .lp-list li{padding:6px 0}

@@ -38,8 +38,9 @@ const NAMES = {
 /* which screens go into which section, per lesson (screen numbers as in the lesson) */
 const MAP = {
   'lesson-1-1': { explore: [0], sources: [1], idea: [2, 3], create: [4, 5, 6, 7], end: [8, 9, 10] },
-  'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'],
-    explore: [0], sources: [1], look: [2], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
+  /* design pilot (variant 'v2'): the artworks screen belongs to "sources" */
+  'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
+    explore: [0], sources: [1, 2], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
   'visual-journal': { dom: true, explore: [1], idea: [2, 3, 4, 5, 6], create: [7, 8, 9], end: [10, 11] },
   'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
   'journal-artwork': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
@@ -86,6 +87,26 @@ function resolveT(T) {
     }
   }
   return T;
+}
+
+/* Hebrew titles of works whose title the lessons give in English only (image descriptions) */
+const WORK_TITLES = {
+  'The Scream, 1893': 'הצעקה, 1893',
+  'Composition VIII, 1923': 'קומפוזיציה 8, 1923',
+  'The Great Wave off Kanagawa, c. 1831': 'הגל הגדול מול קנגאווה, בערך 1831',
+  'Yellow-Red-Blue, 1925': 'צהוב־אדום־כחול, 1925',
+  'Snow Storm, 1842': 'סופת שלגים, 1842',
+  'Water Lilies': 'שושני מים'
+};
+function addWorkTitles(sections) {
+  for (const sec of Object.values(sections)) {
+    for (const b of (sec.blocks || sec.steps || [])) {
+      for (const w of (b.works || [])) {
+        const en = (w.alt || '').split(',').slice(1).join(',').trim();
+        if (en && WORK_TITLES[en]) w.workTitle = { he: WORK_TITLES[en], en };
+      }
+    }
+  }
 }
 
 // ── helpers ────────────────────────────────────────────────────
@@ -206,8 +227,8 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/design-system.css?v=4">
-<link rel="stylesheet" href="../css/lesson-page.css?v=6">
+<link rel="stylesheet" href="../css/design-system.css?v=5">
+<link rel="stylesheet" href="../css/lesson-page.css?v=7">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -243,8 +264,8 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=4"></script>
-<script src="../js/site-drawer.js?v=5" data-base="../"></script>
+<script src="../js/lesson-page.js?v=5"></script>
+<script src="../js/site-drawer.js?v=6" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
 </html>
@@ -268,9 +289,11 @@ for (const [id, m] of Object.entries(MAP)) {
     }).filter(b => Object.keys(b).length);
     sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
   }
+  if (m.variant === 'v2') addWorkTitles(sections);
   const u = unitOf(file);
   const data = {
     id, path: file, slides: file,
+    ...(m.variant ? { variant: m.variant } : {}),
     number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,

@@ -11,6 +11,8 @@
   if (!D || !root) return;
 
   var BASE = '../';
+  /* design pilot: lessons marked variant 'v2' get the stronger lesson layout (css: .lp-v2) */
+  var V2 = D.variant === 'v2';
   var PAGES = window.LESSON_PAGES_INDEX || {};
 
   var SECTIONS = [
@@ -61,6 +63,18 @@
       '<textarea rows="3" data-ph-he="' + esc(v.he) + '" data-ph-en="' + esc(v.en) + '" placeholder="' + esc(v[L]) + '"></textarea></label>';
   }
 
+  /* pilot: artworks as a magazine sequence; images keep their full proportions (no crop) */
+  function edWork(w, k) {
+    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + ' rv">' +
+      (w.img ? '<div class="lp-ed-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>' : '') +
+      '<figcaption>' + t(w.artist, 'b', 'lp-ed-artist') + t(w.workTitle, 'span', 'lp-ed-title') +
+      t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') + '</figcaption></figure>';
+  }
+  function works(list) {
+    return V2 ? '<div class="lp-ed-works">' + list.map(edWork).join('') + '</div>'
+              : '<div class="lp-works">' + list.map(work).join('') + '</div>';
+  }
+
   function work(w) {
     var img = w.img
       ? '<div class="lp-work-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>'
@@ -79,7 +93,7 @@
       t(b.poem, 'p', 'lp-poem') +
       t(b.sub, 'p', 'lp-sub') +
       t(b.body, 'p', 'lp-sub') +
-      (b.works && b.works.length ? '<div class="lp-works">' + b.works.map(work).join('') + '</div>' : '') +
+      (b.works && b.works.length ? works(b.works) : '') +
       t(b.ask, 'p', 'lp-ask') +
       lines(b.lines) +
       steps(b.list) +
@@ -91,6 +105,12 @@
   }
 
   function section(key, he, en, body, n) {
+    if (V2) {
+      /* pilot: a large, quiet station number marks each part of the lesson */
+      return '<section class="lp-sec lp-station" id="' + key + '" data-sec>' +
+        '<header class="lp-sec-head rv"><span class="lp-station-n" aria-hidden="true">0' + n + '</span>' + tt(he, en, 'h2', 'ed-display') + '</header>' +
+        body + '</section>';
+    }
     return '<section class="lp-sec" id="' + key + '" data-sec>' +
       '<header class="lp-sec-head rv"><span class="lp-sec-n">0' + n + '</span>' + tt(he, en, 'h2', 'ed-display') + '</header>' +
       body + '</section>';
@@ -119,10 +139,18 @@
     '<a href="' + BASE + 'home-preview.html">' + tt('מקורות השראה', 'Sources of Inspiration') + '</a> <span aria-hidden="true">/</span> ' +
     '<a href="' + BASE + 'units/unit-' + D.unitNum + '.html">' + t({ he: 'יחידה ' + unitN + ': ' + unitTitle.he, en: 'Unit ' + unitN + ': ' + unitTitle.en }) + '</a> <span aria-hidden="true">/</span> ' +
     '<span aria-current="page">' + tt('שיעור ' + D.number, 'Lesson ' + D.number) + '</span></nav>' +
-    '<div class="lp-title-row rv"><span class="ed-num lp-num">' + D.number + '</span>' +
-    '<div>' + t(D.title, 'h1', 'ed-display lp-title') +
-    '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
-    '</div></div>';
+    (V2
+      /* pilot: the lesson opens like a small title page */
+      ? '<div class="lp-gate rv">' +
+        '<p class="lp-gate-kicker">' + tt('יחידה ' + D.unitNum + ' · שיעור ' + D.number, 'Unit ' + D.unitNum + ' · Lesson ' + D.number) + '</p>' +
+        t(D.title, 'h1', 'ed-display lp-gate-title') +
+        t(unitTitle, 'p', 'lp-gate-unit') +
+        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
+        '</div>'
+      : '<div class="lp-title-row rv"><span class="ed-num lp-num">' + D.number + '</span>' +
+        '<div>' + t(D.title, 'h1', 'ed-display lp-title') +
+        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
+        '</div></div>');
   if (D.hero) {
     html += '<figure class="lp-hero"><div class="lp-hero-img rv-img"><img src="' + BASE + 'images/editorial/' + D.hero.img + '.jpg" alt="" style="object-position:' + (D.hero.pos || '50% 50%') + '" fetchpriority="high"></div>' +
       t(D.hero.cap, 'figcaption') + '</figure>';
@@ -145,7 +173,7 @@
       /* no making steps in this lesson: the materials go at the start */
       if (D.materials && !createSteps) inner += '<p class="lp-mat-line rv">' + tt('חומרים', 'Materials', 'b') + ' ' + t(D.materials) + '</p>';
     }
-    if (d.works && d.works.length) inner += '<div class="lp-works">' + d.works.map(work).join('') + '</div>';
+    if (d.works && d.works.length) inner += works(d.works);
     blocks.forEach(function (b) { inner += block(b); });
     if (key === 'create') {
       if (d.steps && d.steps.length) {
@@ -177,6 +205,7 @@
     link(flat[i - 1], 'prev') + link(flat[i + 1], 'next') + '</nav>';
 
   root.innerHTML = html;
+  if (V2) root.classList.add('lp-v2');
 
   /* chips: simple toggle, nothing is stored */
   root.querySelectorAll('.lp-chip').forEach(function (c) {

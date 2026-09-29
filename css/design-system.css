@@ -101,10 +101,10 @@ html .ed-open .ed-drawer{transform:none;visibility:visible}
 .ed-panel li a{display:flex;gap:12px;align-items:baseline;padding:7px 10px;margin-inline:-10px;font-size:.94rem;line-height:1.45;color:var(--ink-2);text-decoration:none;border-inline-start:2px solid transparent}
 .ed-panel li a:hover{color:var(--ink);background:color-mix(in srgb,var(--paper-2) 60%,transparent)}
 .ed-ln{flex-shrink:0;min-width:2.1em;font-size:.84rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.ed-panel li a.is-current{background:var(--paper-2);border-color:var(--ink);color:var(--ink);font-weight:600}
+.ed-panel li a.is-current{background:#e3dbca;border-inline-start:3px solid var(--ink);color:var(--ink);font-weight:600}
 .ed-panel li a.is-current .ed-ln{color:var(--ink)}
-.ed-now{display:block;margin-top:2px;font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--muted)}
-.ed-unit-link .ed-now{display:inline;margin:0;margin-inline-start:6px}
+.ed-now{display:table;margin-top:5px;padding:1px 9px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:.72rem;font-weight:600;letter-spacing:.04em;line-height:1.6}
+.ed-unit-link .ed-now{display:inline-block;margin:0;margin-inline-start:6px}
 .ed-panel .soon{margin:0;font-size:.85rem;color:var(--muted)}
 body.ed-open{overflow:hidden}
 

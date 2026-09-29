@@ -21,8 +21,8 @@
   function unitPage(id) { return 'units/unit-' + id.replace('unit', '') + '.html'; }
 
   var UI = {
-    he: { open: 'תוכן', title: 'תוכן האתר', close: 'סגירה', soon: 'בפיתוח', unitPage: 'עמוד היחידה', here: 'השיעור הנוכחי', hereUnit: 'את כאן' },
-    en: { open: 'Contents', title: 'Contents', close: 'Close', soon: 'In development', unitPage: 'Unit page', here: 'Current lesson', hereUnit: 'You are here' }
+    he: { open: 'תוכן', title: 'תוכן האתר', close: 'סגירה', soon: 'בפיתוח', unitPage: 'עמוד היחידה', here: 'את כאן', hereUnit: 'את כאן' },
+    en: { open: 'Contents', title: 'Contents', close: 'Close', soon: 'In development', unitPage: 'Unit page', here: 'You are here', hereUnit: 'You are here' }
   };
 
   function lang() { return document.documentElement.lang === 'he' ? 'he' : 'en'; }

@@ -3,6 +3,7 @@ window.LESSON_PAGE = {
  "id": "emotion-drawing",
  "path": "lessons/emotion-drawing.html",
  "slides": "lessons/emotion-drawing.html",
+ "variant": "v2",
  "number": "1.2",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -71,11 +72,7 @@ window.LESSON_PAGE = {
       "he": "וינסנט ואן גוך",
       "en": "Vincent van Gogh"
      }
-    }
-   ]
-  },
-  "look": {
-   "blocks": [
+    },
     {
      "label": {
       "he": "הסתכלו על הקווים האלה",
@@ -100,6 +97,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "קווים כבדים, סוערים · מונק",
         "en": "Heavy, agitated lines · Munch"
+       },
+       "workTitle": {
+        "he": "הצעקה, 1893",
+        "en": "The Scream, 1893"
        }
       },
       {
@@ -112,6 +113,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "קווים חדים, פורצים · קנדינסקי",
         "en": "Sharp, explosive lines · Kandinsky"
+       },
+       "workTitle": {
+        "he": "קומפוזיציה 8, 1923",
+        "en": "Composition VIII, 1923"
        }
       },
       {
@@ -124,6 +129,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "קווים רכים, זורמים · הוקוסאי",
         "en": "Soft, flowing lines · Hokusai"
+       },
+       "workTitle": {
+        "he": "הגל הגדול מול קנגאווה, בערך 1831",
+        "en": "The Great Wave off Kanagawa, c. 1831"
        }
       }
      ]
@@ -316,6 +325,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "עוצמתי / מכסה · קנדינסקי",
         "en": "Bold / Covering · Kandinsky"
+       },
+       "workTitle": {
+        "he": "צהוב־אדום־כחול, 1925",
+        "en": "Yellow-Red-Blue, 1925"
        }
       },
       {
@@ -328,6 +341,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "שקוף / מתפשט · טרנר",
         "en": "Transparent / Spreading · Turner"
+       },
+       "workTitle": {
+        "he": "סופת שלגים, 1842",
+        "en": "Snow Storm, 1842"
        }
       },
       {
@@ -340,6 +357,10 @@ window.LESSON_PAGE = {
        "title": {
         "he": "מוטלש / ממוזג · מונה",
         "en": "Splashed / Blended · Monet"
+       },
+       "workTitle": {
+        "he": "שושני מים",
+        "en": "Water Lilies"
        }
       }
      ]
