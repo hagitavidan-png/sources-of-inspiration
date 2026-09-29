@@ -81,8 +81,9 @@ const MAP = {
   /* 1.9: the unit's work laid out like a small exhibition: the journey, one work, discovery */
   'unit-summary': { authored: true, variant: 'v2', layout: { look: 'show', end: 'show' }, noTitle: ['explore'],
     explore: [0, 1], look: [2, 3, 4, 5], end: [6, 7, 8, 9, 10, 11, 12, 13] },
-  'lesson-2-1': { hero: ['hokusai-great-wave-1831', '28% 18%'],
-    explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
+  /* 2.1: unit 2 looks outward. Find a real pattern first, then the artists: unit, rule, variation */
+  'lesson-2-1': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', create: 'pattern', end: 'pattern' },
+    explore: [0, 1, 2, 3], sources: [4, 5], look: [6], create: [7, 8, 9], end: [10, 11, 12] },
   'lesson-2-2': { hero: ['monet-haystacks-1891', '50% 70%'],
     explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
   'lesson-2-3': { explore: [0], sources: [3], look: [1, 2], idea: [4, 5, 6], end: [7, 8] },
@@ -197,7 +198,8 @@ function blockFromT(T, n, html) {
   if (he.kind) b.kind = he.kind;                          // a block with its own role in the layout (1.8, 1.9)
   if (Array.isArray(he.sheets)) b.sheets = { he: he.sheets, en: en.sheets || he.sheets };   // the three experiment sheets (1.8)
   if (Array.isArray(he.wall)) b.wall = he.wall;
-  if (Array.isArray(he.meet)) b.meet = he.meet;           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
+  if (Array.isArray(he.meet)) b.meet = he.meet;
+  if (he.sketch) b.sketch = he.sketch;                    // small pattern sketches: a unit in a viewfinder, one rule changed (2.1)           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
   if (Array.isArray(he.ph2)) b.prompts = he.ph2.map((v, k) => bil(v, (en.ph2 || [])[k]));   // two writing spaces side by side
   if (Array.isArray(he.lens)) { b.lenses = { he: he.lens, en: en.lens || he.lens }; if (he.lensLabel) b.lensLabel = bil(he.lensLabel, en.lensLabel); }
 
@@ -279,7 +281,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=19">
+<link rel="stylesheet" href="../css/lesson-page.css?v=20">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -315,7 +317,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=17"></script>
+<script src="../js/lesson-page.js?v=18"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>

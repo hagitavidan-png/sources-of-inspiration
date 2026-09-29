@@ -436,3 +436,27 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 @media (max-width:700px){
   .lp-v2 .lp-layout-color .lp-sub,.lp-v2 .lp-layout-color .lp-lines li,.lp-v2 .lp-layout-color .lp-list li{font-size:1.12rem}
 }
+
+/* ═══ 2.1: unit, rule, variation (unit 2 frames the gaze; here: a viewfinder around one unit) ═══ */
+.lp-v2 .lp-layout-pattern .lp-block + .lp-block{border-top:0;padding-top:clamp(28px,4vw,48px)}
+.lp-v2 .lp-layout-pattern .lp-chip{border:0;border-bottom:1px solid var(--rule);border-radius:0;background:none;padding:4px 2px;color:var(--ink-2)}
+.lp-v2 .lp-layout-pattern .lp-chip[aria-pressed="true"]{background:none;color:var(--ink);border-bottom:1.5px solid var(--ink)}
+.lp-v2 .lp-sketch{margin:20px 0 6px}
+.lp-v2 .lp-sketch svg{display:block;fill:none;stroke:var(--ink)}
+.lp-v2 .lp-sketch .u ellipse{fill:var(--ink);stroke:none;opacity:.28}
+.lp-v2 .lp-sketch-finder svg{width:min(260px,100%);height:auto}
+.lp-v2 .lp-sketch-finder .fr{stroke-width:1.4}
+.lp-v2 .lp-sketch-vary{display:flex;flex-wrap:wrap;gap:clamp(12px,2.4vw,24px)}
+.lp-v2 .lp-sketch-vary svg{width:112px;height:auto}
+.lp-v2 .lp-sketch-vary rect{stroke:var(--rule);stroke-width:1}
+.lp-v2 .lp-sketch-vary .u ellipse{opacity:.4}
+/* the two works side by side */
+.lp-v2 .lp-layout-duo{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,48px);align-items:start}
+.lp-v2 .lp-layout-duo::before,.lp-v2 .lp-layout-duo > .lp-sec-head{grid-column:1 / -1}
+.lp-v2 .lp-layout-duo > .lp-block + .lp-block{border-top:0;padding-top:6px}
+.lp-v2 .lp-layout-duo .lp-ed-work.lp-window{max-width:none}
+@media (max-width:760px){.lp-v2 .lp-layout-duo{grid-template-columns:1fr}.lp-v2 .lp-layout-duo > .lp-block + .lp-block{padding-top:18px}}
+@media (max-width:700px){
+  .lp-v2 .lp-layout-pattern .lp-sub,.lp-v2 .lp-layout-pattern .lp-lines li{font-size:1.12rem}
+  .lp-v2 .lp-sketch-vary svg{width:96px}
+}

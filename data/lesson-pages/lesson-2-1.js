@@ -2,7 +2,14 @@
 window.LESSON_PAGE = {
  "id": "lesson-2-1",
  "path": "lessons/lesson-2-1.html",
- "slides": "lessons/lesson-2-1.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "explore": "pattern",
+  "sources": "duo",
+  "create": "pattern",
+  "end": "pattern"
+ },
  "number": "2.1",
  "unit": {
   "he": "טבע כמקור השראה",
@@ -18,29 +25,18 @@ window.LESSON_PAGE = {
   "en": "45 min"
  },
  "intro": {
-  "he": "נגלה דפוסים וקצב בטבע וביצירות אמנות. נבחר צורה ונפתח ממנה דפוס אישי באמצעות חזרה ושינוי.",
-  "en": "Discover patterns and rhythm in nature and art. Choose a shape and develop a personal pattern through repetition and variation."
+  "he": "נמצא דפוס אמיתי סביבנו, נזהה את היחידה שחוזרת ואת החוק שלפיו היא חוזרת, ונבדוק מה קורה כשמשנים כלל אחד.",
+  "en": "Find a real pattern around you, identify the unit that repeats and the rule it follows, and see what happens when one rule changes."
  },
  "materials": {
   "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
   "en": "Paper or a visual journal, a pencil and colours of your choice"
  },
- "hero": {
-  "img": "hokusai-great-wave-1831",
-  "pos": "28% 18%",
-  "cap": {
-   "he": "פרט מתוך: קצושיקה הוקוסאי, הגל הגדול מול קנגאווה, 1831",
-   "en": "Detail: Katsushika Hokusai, The Great Wave off Kanagawa, 1831"
-  }
- },
+ "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "שיעור 2.1",
-      "en": "Lesson 2.1"
-     },
      "big": {
       "he": "הסתכלו סביבכם.<br>האם אתם רואים <em>חזרה</em>?",
       "en": "Look around you.<br>Do you see <em>repetition</em>?"
@@ -48,61 +44,13 @@ window.LESSON_PAGE = {
      "sub": {
       "he": "דפוסים נמצאים בכל מקום. בקליפת העץ, בעורקי העלה, באריח שמתחת לרגליכם.",
       "en": "Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet."
+     },
+     "body": {
+      "he": "ביחידה הקודמת חיפשנו מה חוזר בעבודות שלנו. עכשיו נחפש מה חוזר בעולם — ואיך.",
+      "en": "In the previous unit we looked for what keeps returning in our work. Now we look for what repeats in the world — and how."
      }
-    }
-   ]
-  },
-  "sources": {
-   "blocks": [
+    },
     {
-     "label": {
-      "he": "מקורות השראה",
-      "en": "References"
-     },
-     "works": [
-      {
-       "img": "hokusai-great-wave-1831",
-       "alt": "Hokusai, The Great Wave off Kanagawa, 1831",
-       "artist": {
-        "he": "קצושיקה הוקוסאי",
-        "en": "Katsushika Hokusai"
-       },
-       "title": {
-        "he": "הגל הגדול מול קנאגאווה, 1831",
-        "en": "The Great Wave off Kanagawa, 1831"
-       },
-       "note": {
-        "he": "הוקוסאי לא העתיק גלים. הוא פירק את הגל לקצב ובנה אותו מחדש.",
-        "en": "Hokusai did not copy waves. He broke the wave into rhythm and built it again."
-       }
-      },
-      {
-       "img": "morris-strawberry-thief-1883",
-       "alt": "William Morris, Strawberry Thief, 1883",
-       "artist": {
-        "he": "ויליאם מוריס",
-        "en": "William Morris"
-       },
-       "title": {
-        "he": "גנב התות, 1883",
-        "en": "Strawberry Thief, 1883"
-       },
-       "note": {
-        "he": "מוריס מצא את העיקרון שמאחורי הצמח. שינוי כיוון וצבע מונע חזרה מכנית.",
-        "en": "Morris found the principle behind the plant. Changes in direction and color prevent mechanical repetition."
-       }
-      }
-     ]
-    }
-   ]
-  },
-  "look": {
-   "blocks": [
-    {
-     "label": {
-      "he": "שלב 1",
-      "en": "Step 1"
-     },
      "big": {
       "he": "מצאו דפוס אחד<br>שנמצא לידכם עכשיו.",
       "en": "Find one pattern<br>near you right now."
@@ -113,17 +61,13 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 2",
-      "en": "Step 2"
-     },
      "big": {
-      "he": "התקרבו אליו.<br>מה בדיוק חוזר?",
-      "en": "Move closer.<br>What exactly repeats?"
+      "he": "התקרבו אליו.<br><em>מה היחידה?</em>",
+      "en": "Move closer.<br><em>What is the unit?</em>"
      },
      "sub": {
-      "he": "בחרו את כל מה שמתאים.",
-      "en": "Select all that apply."
+      "he": "מה הדבר הקטן ביותר שחוזר?",
+      "en": "What is the smallest thing that repeats?"
      },
      "chips": {
       "he": [
@@ -138,6 +82,117 @@ window.LESSON_PAGE = {
        "Space",
        "Direction"
       ]
+     },
+     "sketch": "finder"
+    },
+    {
+     "big": {
+      "he": "<em>מה החוק?</em>",
+      "en": "<em>What is the rule?</em>"
+     },
+     "sub": {
+      "he": "איך היחידה חוזרת?",
+      "en": "How does the unit repeat?"
+     },
+     "chips": {
+      "he": [
+       "במרווח קבוע",
+       "בשורות",
+       "בשיקוף",
+       "בסיבוב",
+       "בלי סדר ברור"
+      ],
+      "en": [
+       "At even spacing",
+       "In rows",
+       "Mirrored",
+       "Turning",
+       "With no clear order"
+      ]
+     }
+    }
+   ]
+  },
+  "sources": {
+   "blocks": [
+    {
+     "works": [
+      {
+       "img": null,
+       "alt": "William Morris, Strawberry Thief, 1883",
+       "artist": {
+        "he": "ויליאם מוריס",
+        "en": "William Morris"
+       },
+       "workTitle": {
+        "he": "גנב התותים, 1883",
+        "en": "Strawberry Thief, 1883"
+       },
+       "note": {
+        "he": "לפי המוזיאון, מוריס עיצב את הדוגמה אחרי שראה ציפורים גונבות תותים מהגינה שלו.",
+        "en": "According to the museum, Morris designed the pattern after watching birds steal strawberries from his garden."
+       },
+       "link": {
+        "href": "https://www.artic.edu/artworks/149052/strawberry-thief",
+        "label": {
+         "he": "פתחו את היצירה באתר Art Institute of Chicago ↗",
+         "en": "Open the work on the Art Institute of Chicago website ↗"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "works": [
+      {
+       "img": null,
+       "alt": "Yayoi Kusama, No. F, 1959",
+       "artist": {
+        "he": "יאיוי קוסמה",
+        "en": "Yayoi Kusama"
+       },
+       "workTitle": {
+        "he": "No. F, 1959",
+        "en": "No. F, 1959"
+       },
+       "note": {
+        "he": "ב־1958 עברה קוסמה מיפן לניו יורק, ושם החלה בסדרת ״רשתות האינסוף״ (Infinity Nets): משיכות מכחול קטנות ומשתלבות של צבע לבן עבה, שחוזרות על פני כל הבד.",
+        "en": "In 1958 Kusama moved from Japan to New York, where she began her Infinity Nets series: small, interlocking brushstrokes of thick white paint, repeated across the whole canvas."
+       },
+       "link": {
+        "href": "https://www.moma.org/collection/works/80176",
+        "label": {
+         "he": "פתחו את היצירה באתר MoMA ↗",
+         "en": "Open the work on the MoMA website ↗"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
+     "big": {
+      "he": "שתי דרכים לחזור.",
+      "en": "Two ways to repeat."
+     },
+     "ask": {
+      "he": "אחד תוכנן מראש, השני נבנה סימן אחרי סימן. איך רואים את זה?",
+      "en": "One was planned in advance, the other was built mark by mark. How can you see that?"
+     },
+     "lines": {
+      "he": [
+       "מה היחידה אצל מוריס? איפה היא משתקפת?",
+       "אצל קוסמה, האם יש בכלל יחידה? מה חוזר?",
+       "איפה הדפוס נגמר?"
+      ],
+      "en": [
+       "What is the unit in Morris's work? Where is it mirrored?",
+       "In Kusama's work, is there a unit at all? What repeats?",
+       "Where does the pattern end?"
+      ]
      }
     }
    ]
@@ -145,31 +200,27 @@ window.LESSON_PAGE = {
   "create": {
    "steps": [
     {
-     "label": {
-      "he": "שלב 3",
-      "en": "Step 3"
-     },
      "big": {
       "he": "קחו דף.<br>ציירו את הדפוס שמצאתם.",
       "en": "Take a page.<br>Draw the pattern you found."
      },
-     "note": {
-      "he": "לא את האובייקט, \nרק את ה<em>חזרה</em>.",
-      "en": "Not the object, \nonly the <em>repetition</em>."
+     "sub": {
+      "he": "לא את האובייקט, רק את ה<em>חזרה</em>.",
+      "en": "Not the object, only the <em>repetition</em>."
+     },
+     "body": {
+      "he": "התחילו מיחידה אחת, וחזרו עליה לפי החוק שמצאתם.",
+      "en": "Start from one unit, and repeat it following the rule you found."
      }
     },
     {
-     "label": {
-      "he": "שלב 4",
-      "en": "Step 4"
-     },
      "big": {
       "he": "עצרו.<br>האם החזרה אחידה או משתנה?",
       "en": "Pause.<br>Is the repetition even or changing?"
      },
-     "note": {
-      "he": "תנו לקצב להשתנות, \nהאיצו, האטו, הרחיבו.",
-      "en": "Let the rhythm change, \nspeed up, slow down, expand."
+     "sub": {
+      "he": "תנו לקצב להשתנות: האיצו, האטו, הרחיבו.",
+      "en": "Let the rhythm change: speed up, slow down, expand."
      },
      "chips": {
       "he": [
@@ -183,15 +234,11 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 5",
-      "en": "Step 5"
-     },
      "big": {
       "he": "שנו <em>דבר אחד בלבד</em><br>על הדף.",
-      "en": "Change only <em>one thing</em><br>on the page."
+      "en": "Change <em>only one thing</em><br>on the page."
      },
-     "note": {
+     "sub": {
       "he": "ראו מה קורה לדפוס כשמשנים כלל אחד.",
       "en": "Notice what happens to the pattern when one rule changes."
      },
@@ -206,61 +253,43 @@ window.LESSON_PAGE = {
        "Direction",
        "Space"
       ]
-     }
+     },
+     "sketch": "vary"
     }
    ]
   },
   "end": {
    "blocks": [
     {
-     "label": {
-      "he": "התבוננות",
-      "en": "Observe"
-     },
      "big": {
-      "he": "עצרו.<br>התבוננו.",
-      "en": "Pause.<br>Look."
+      "he": "עצרו. התבוננו.",
+      "en": "Pause. Look."
      },
      "sub": {
-      "he": "הדפוס השתנה, <br>אבל עדיין מזוהה.",
-      "en": "The pattern changed, <br>but it is still recognizable."
-     },
-     "note": {
-      "he": "זה מה שאמנים עושים.<br>לא מעתיקים, מפרקים ובונים מחדש.",
-      "en": "This is what artists do.<br>They do not copy, they break apart and build again."
-     },
-     "works": [
-      {
-       "img": null,
-       "alt": "M.C. Escher, Sky and Water I, 1938",
-       "artist": {
-        "he": "מ. ק. אשר",
-        "en": "M.C. Escher"
-       },
-       "title": {
-        "he": "שמים ומים I, 1938",
-        "en": "Sky and Water I, 1938"
-       },
-       "note": {
-        "he": "",
-        "en": ""
-       }
-      }
-     ]
+      "he": "הדפוס השתנה,<br>אבל עדיין מזוהה.",
+      "en": "The pattern changed,<br>but it is still recognizable."
+     }
     },
     {
-     "label": {
-      "he": "סיום",
-      "en": "Done"
-     },
      "big": {
-      "he": "דפוס הוא שפה.<br>עכשיו אתם <em>מדברים</em> בה.",
-      "en": "Pattern is a language.<br>Now you are <em>speaking</em> it."
+      "he": "איזה חוק שיניתם,<br>ומה קרה לדפוס?",
+      "en": "Which rule did you change,<br>and what happened to the pattern?"
+     },
+     "prompt": {
+      "he": "כששיניתי את ה… הדפוס…",
+      "en": "When I changed the… the pattern…"
+     }
+    },
+    {
+     "big": {
+      "he": "דפוס הוא חוק שאפשר לראות.",
+      "en": "A pattern is a rule you can see."
      },
      "sub": {
-      "he": "לא רק קוראים אותה, <br>בונים איתה.",
-      "en": "You are not only reading it, <br>you are building with it."
-     }
+      "he": "ומרגע שרואים אותו, אפשר לשנות אותו.",
+      "en": "And once you see it, you can change it."
+     },
+     "kind": "close"
     }
    ]
   }

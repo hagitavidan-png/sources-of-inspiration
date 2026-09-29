@@ -138,6 +138,29 @@
       return '<svg viewBox="0 0 52 30">' + (M[k] || '') + '</svg>';
     }).join('') + '</div>';
   }
+  /* pattern sketches (2.1): one unit isolated in a viewfinder; the same row with one rule changed */
+  function sketch(kind) {
+    var U = function (x, y, r, s) { return '<ellipse cx="' + x + '" cy="' + y + '" rx="' + (4.2 * (s || 1)) + '" ry="' + (2.2 * (s || 1)) + '" transform="rotate(' + (r || -30) + ' ' + x + ' ' + y + ')"/>'; };
+    if (kind === 'finder') {
+      var g = '';
+      for (var r = 0; r < 4; r++) for (var c = 0; c < 7; c++) g += U(12 + c * 16 + (r % 2) * 8, 10 + r * 13);
+      /* corner marks around one unit */
+      var fx = 44, fy = 17, w = 24, h = 18, k = 5;
+      var fr = '<path class="fr" d="M' + fx + ' ' + (fy + k) + 'V' + fy + 'H' + (fx + k) + 'M' + (fx + w - k) + ' ' + fy + 'H' + (fx + w) + 'V' + (fy + k) +
+        'M' + (fx + w) + ' ' + (fy + h - k) + 'V' + (fy + h) + 'H' + (fx + w - k) + 'M' + (fx + k) + ' ' + (fy + h) + 'H' + fx + 'V' + (fy + h - k) + '"/>';
+      return '<div class="lp-sketch lp-sketch-finder" aria-hidden="true"><svg viewBox="0 0 124 56"><g class="u">' + g + '</g>' + fr + '</svg></div>';
+    }
+    if (kind === 'vary') {
+      var row = function (f) { var o = ''; for (var i = 0; i < 4; i++) o += f(i); return o; };
+      var a = row(function (i) { return U(10 + i * 14, 14, -30, 0.7 + i * 0.28); });
+      var b = row(function (i) { return U(10 + i * 14, 14, -30 + i * 40); });
+      var c = row(function (i) { return U(6 + i * (6 + i * 5), 14); });
+      return '<div class="lp-sketch lp-sketch-vary" aria-hidden="true">' + [a, b, c].map(function (x) {
+        return '<svg viewBox="0 0 64 28"><rect x=".5" y=".5" width="63" height="27"/><g class="u">' + x + '</g></svg>';
+      }).join('') + '</div>';
+    }
+    return '';
+  }
   /* the unit's work laid out in order, like a small exhibition (1.9) */
   function wall(list) {
     if (!list || !list.length) return '';
@@ -176,6 +199,7 @@
       lenses(b.lenses, b.lensLabel) +
       t(b.ask, 'p', 'lp-ask') +
       meet(b.meet) +
+      sketch(b.sketch) +
       sheets(b.sheets) +
       prompts(b.prompts) +
       frames(b.frames) +
