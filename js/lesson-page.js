@@ -47,10 +47,21 @@
       return '<button type="button" class="lp-chip" aria-pressed="false">' + t(v) + '</button>';
     }).join('') + '</div>';
   }
-  function steps(list) {
+  /* small sketches of ways two images can be connected (1.6) */
+  var REL = {
+    line: '<circle cx="7" cy="10" r="4"/><circle cx="37" cy="10" r="4"/><path d="M11 10h22"/>',
+    shared: '<circle class="f" cx="7" cy="10" r="4"/><circle class="f" cx="37" cy="10" r="4"/>',
+    near: '<circle cx="18" cy="10" r="4"/><circle cx="26.5" cy="10" r="4"/>',
+    curve: '<circle cx="5" cy="14" r="3.5"/><circle cx="39" cy="6" r="3.5"/><path d="M8 13C18 22 24 -2 36 7"/>'
+  };
+  function steps(list, rel) {
     var a = items(list);
     if (!a.length) return '';
-    return '<ol class="lp-list">' + a.map(function (v) { return t(v, 'li'); }).join('') + '</ol>';
+    if (!rel) return '<ol class="lp-list">' + a.map(function (v) { return t(v, 'li'); }).join('') + '</ol>';
+    return '<ol class="lp-list lp-rel">' + a.map(function (v, k) {
+      var icon = rel && REL[rel[k]] ? '<svg viewBox="0 0 44 20" aria-hidden="true">' + REL[rel[k]] + '</svg>' : '';
+      return '<li>' + icon + t(v) + '</li>';
+    }).join('') + '</ol>';
   }
   function lines(list) {
     var a = items(list);
@@ -120,7 +131,7 @@
       lines(b.lines) +
       t(b.ask, 'p', 'lp-ask') +
       frames(b.frames) +
-      steps(b.list) +
+      steps(b.list, b.rel) +
       chips(b.chips) +
       prompt(b.prompt) +
       t(b.note, 'p', 'ed-note lp-note') +

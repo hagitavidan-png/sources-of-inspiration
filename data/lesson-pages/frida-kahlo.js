@@ -2,7 +2,13 @@
 window.LESSON_PAGE = {
  "id": "frida-kahlo",
  "path": "lessons/frida-kahlo.html",
- "slides": "lessons/frida-kahlo.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "sources": "pair",
+  "look": "links",
+  "idea": "links"
+ },
  "number": "1.6",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -30,13 +36,13 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "יחידה: חוויה אישית כמקור השראה",
-      "en": "Unit: Personal Experience as a Source of Inspiration"
-     },
      "big": {
-      "he": "יש אמנים שלא מציירים רק את מה שהם רואים, <br/>הם מציירים את מה שהם חווים.",
-      "en": "Some artists don't paint<br/>only what they see, <br/>they paint what they experience."
+      "he": "מתי דימוי הופך לסמל?",
+      "en": "When does an image become a symbol?"
+     },
+     "sub": {
+      "he": "כשהוא מתחיל לשאת משהו מעבר למה שהוא.",
+      "en": "When it starts to carry something beyond what it is."
      }
     }
    ]
@@ -48,58 +54,69 @@ window.LESSON_PAGE = {
       "he": "פרידה קאלו",
       "en": "Frida Kahlo"
      },
-     "quote": {
-      "he": "אני מציירת את המציאות שלי.",
-      "en": "I paint my own reality."
-     },
-     "attr": {
-      "he": "פרידה קאלו",
-      "en": "Frida Kahlo"
+     "sub": {
+      "he": "פרידה קאלו ציירה את עצמה פעמים רבות. בדיוקנאות שלה חוזרים בעלי חיים, צמחים, לבוש מקסיקני מסורתי ותכשיטים.",
+      "en": "Frida Kahlo painted herself many times. Animals, plants, traditional Mexican dress and jewellery return again and again in her self-portraits."
      }
+    },
+    {
+     "works": [
+      {
+       "img": null,
+       "alt": "Frida Kahlo, Self-Portrait with Thorn Necklace and Hummingbird, 1940",
+       "artist": {
+        "he": "פרידה קאלו",
+        "en": "Frida Kahlo"
+       },
+       "workTitle": {
+        "he": "דיוקן עצמי עם שרשרת קוצים וקוליברי, 1940",
+        "en": "Self-Portrait with Thorn Necklace and Hummingbird, 1940"
+       },
+       "note": {
+        "he": "שרשרת קוצים סביב הצוואר, ועליה קוליברי. על הכתף קוף, ומעל הראש שפירית.",
+        "en": "A necklace of thorns around her neck, with a hummingbird hanging from it. A monkey on her shoulder and a dragonfly above her head."
+       },
+       "link": {
+        "href": "https://www.hrc.utexas.edu/frida-kahlo-self-portrait/",
+        "label": {
+         "he": "פתחו את היצירה באתר Harry Ransom Center ↗",
+         "en": "Open the work on the Harry Ransom Center website ↗"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "works": [
+      {
+       "img": null,
+       "alt": "Frida Kahlo, Self-Portrait with Cropped Hair, 1940",
+       "artist": {
+        "he": "פרידה קאלו",
+        "en": "Frida Kahlo"
+       },
+       "workTitle": {
+        "he": "דיוקן עצמי עם שיער גזוז, 1940",
+        "en": "Self-Portrait with Cropped Hair, 1940"
+       },
+       "note": {
+        "he": "כאן אין את השמלות המסורתיות והפרחים בשיער, שמופיעים בדיוקנאות רבים שלה. היא לובשת חליפת גבר, השיער הגזוז מפוזר על הרצפה, ביד מספריים, ומעליה מילים של שיר מקסיקני פופולרי.",
+        "en": "Here there are none of the traditional dresses or flowers in her hair that appear in many of her self-portraits. She wears a man's suit, cut hair lies across the floor, she holds scissors, and above her are the words of a popular Mexican song."
+       },
+       "link": {
+        "href": "https://www.moma.org/collection/works/78333",
+        "label": {
+         "he": "פתחו את היצירה באתר MoMA ↗",
+         "en": "Open the work on the MoMA website ↗"
+        }
+       }
+      }
+     ]
     }
    ]
   },
   "look": {
    "blocks": [
-    {
-     "ask": {
-      "he": "מה קורה בתוך הציורים האלה?",
-      "en": "What is happening inside these paintings?"
-     },
-     "sub": {
-      "he": "<strong>שימו לב:</strong> הציורים לא מתארים רק דמות, הם מרכיבים עולם אישי.",
-      "en": "<strong>Notice:</strong> The paintings don't just show a figure, they build a personal world."
-     },
-     "works": [
-      {
-       "img": null,
-       "alt": "Self-Portrait with Monkeys, 1943",
-       "artist": null,
-       "title": {
-        "he": "דיוקן עצמי עם קופים, 1943",
-        "en": "Self-Portrait with Monkeys, 1943"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Self-Portrait with Braid, 1941",
-       "artist": null,
-       "title": {
-        "he": "דיוקן עצמי עם צמה, 1941",
-        "en": "Self-Portrait with Braid, 1941"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Self-Portrait with Bonito, 1941",
-       "artist": null,
-       "title": {
-        "he": "דיוקן עצמי עם בוניטו, 1941",
-        "en": "Self-Portrait with Bonito, 1941"
-       }
-      }
-     ]
-    },
     {
      "label": {
       "he": "הסתכלו מקרוב",
@@ -123,6 +140,10 @@ window.LESSON_PAGE = {
       "he": "מה מרכיב את הציור?",
       "en": "What builds the painting?"
      },
+     "sub": {
+      "he": "<strong>שימו לב:</strong> הציורים לא מתארים רק דמות, הם מרכיבים עולם אישי.",
+      "en": "<strong>Notice:</strong> The paintings don't just show a figure, they build a personal world."
+     },
      "list": {
       "he": [
        "דמות",
@@ -136,6 +157,30 @@ window.LESSON_PAGE = {
        "objects or symbols",
        "color"
       ]
+     }
+    },
+    {
+     "label": {
+      "he": "דימוי, מוטיב, סמל",
+      "en": "Image, motif, symbol"
+     },
+     "lines": {
+      "he": [
+       "דימוי — מה שרואים.",
+       "מוטיב — דימוי שחוזר.",
+       "סמל — דימוי שנושא משמעות מעבר למה שרואים."
+      ],
+      "en": [
+       "Image — what you see.",
+       "Motif — an image that returns.",
+       "Symbol — an image that carries meaning beyond what you see."
+      ]
+     }
+    },
+    {
+     "sub": {
+      "he": "לקוליברי יש משמעויות בתרבות ובפולקלור המקסיקני. בתוך הציור אפשר לשאול איזו משמעות הוא מקבל לצד הקוצים, הקוף והדיוקן של קאלו.",
+      "en": "The hummingbird has meanings in Mexican culture and folklore. Inside the painting you can ask what meaning it takes on next to the thorns, the monkey and Kahlo's portrait."
      }
     },
     {
@@ -157,39 +202,27 @@ window.LESSON_PAGE = {
   "idea": {
    "blocks": [
     {
-     "label": {
-      "he": "התור שלכם",
-      "en": "Your turn"
-     },
      "big": {
-      "he": "בחרו חוויה אישית.",
-      "en": "Choose a personal experience."
+      "he": "חזרו למוטיב שמצאתם בשיעור הקודם",
+      "en": "Go back to the motif you found in the last lesson"
      },
      "sub": {
-      "he": "משהו שקרה, שהרגשתם<br/>או שנשאר איתכם.",
-      "en": "Something that happened,<br/>you felt, or stayed with you."
+      "he": "— או בחרו דימוי אחר שיש לו משמעות עבורכם.",
+      "en": "— or choose another image that has meaning for you."
+     }
+    },
+    {
+     "big": {
+      "he": "מה הוא מסמל בשבילכם?",
+      "en": "What does it stand for, for you?"
      },
-     "chips": {
-      "he": [
-       "פרידה",
-       "גאווה בעצמי",
-       "רגע של פחד",
-       "בדידות",
-       "אי-הבנה",
-       "שינוי גדול",
-       "מקום אהוב",
-       "משהו שאיבדתי"
-      ],
-      "en": [
-       "A goodbye",
-       "Being proud of myself",
-       "A moment of fear",
-       "Feeling lonely",
-       "Being misunderstood",
-       "A big change",
-       "A place I love",
-       "Something I lost"
-      ]
+     "sub": {
+      "he": "לא מה הוא. מה הוא נושא.",
+      "en": "Not what it is. What it carries."
+     },
+     "prompt": {
+      "he": "בשבילי הוא…",
+      "en": "For me it is…"
      }
     },
     {
@@ -198,8 +231,12 @@ window.LESSON_PAGE = {
       "en": "Choose elements"
      },
      "big": {
-      "he": "מה יכול להופיע<br/>בציור שלכם?",
-      "en": "What can appear<br/>in your drawing?"
+      "he": "אילו דימויים נוספים שייכים לעולם שלכם?",
+      "en": "Which other images belong to your world?"
+     },
+     "sub": {
+      "he": "בחרו שניים או שלושה.",
+      "en": "Choose two or three."
      },
      "chips": {
       "he": [
@@ -232,12 +269,12 @@ window.LESSON_PAGE = {
       "en": "Start drawing"
      },
      "big": {
-      "he": "סדרו את המרכיבים<br/>על הדף.",
-      "en": "Arrange the elements<br/>on the page."
+      "he": "סדרו אותם<br/>על הדף.",
+      "en": "Arrange them<br/>on the page."
      },
      "sub": {
-      "he": "הם לא חייבים להיות מציאותיים, <br/>רק קשורים לחוויה שלכם.",
-      "en": "They don't need to be realistic, <br/>only connected to your experience."
+      "he": "הם לא חייבים להיות מציאותיים, <br/>רק קשורים לעולם שלכם.",
+      "en": "They don't need to be realistic, <br/>only connected to your world."
      }
     },
     {
@@ -262,31 +299,13 @@ window.LESSON_PAGE = {
        "close placement",
        "an unexpected link"
       ]
-     }
-    },
-    {
-     "label": {
-      "he": "הוסיפו תחושה",
-      "en": "Add feeling"
      },
-     "big": {
-      "he": "הוסיפו משהו שמבטא<br/>את מה שהרגשתם.",
-      "en": "Add something that<br/>expresses how you felt."
-     },
-     "list": {
-      "he": [
-       "צבע חזק או עדין",
-       "שינוי בגודל",
-       "תנועה",
-       "שכבה נוספת"
-      ],
-      "en": [
-       "strong or soft color",
-       "change in scale",
-       "movement",
-       "another layer"
-      ]
-     }
+     "rel": [
+      "line",
+      "shared",
+      "near",
+      "curve"
+     ]
     },
     {
      "label": {
@@ -314,34 +333,16 @@ window.LESSON_PAGE = {
     },
     {
      "label": {
-      "he": "כמו פרידה קאלו",
-      "en": "Like Frida Kahlo"
-     },
-     "big": {
-      "he": "לא ציירתם רק<br/>מה שרואים.",
-      "en": "You didn't just draw<br/>what is seen."
-     },
-     "sub": {
-      "he": "יצרתם ציור שמכיל<br/>חוויה אישית.",
-      "en": "You created a painting<br/>that holds an experience."
-     }
-    },
-    {
-     "label": {
       "he": "רפלקציה",
       "en": "Reflection"
      },
      "big": {
-      "he": "איזה חלק בציור<br/>מספר הכי הרבה?",
-      "en": "Which part of your drawing<br/>tells the most?"
-     },
-     "sub": {
-      "he": "על החוויה שלכם.",
-      "en": "About your experience."
+      "he": "איזה סמל בציור<br/>נושא הכי הרבה משמעות?",
+      "en": "Which symbol in your drawing<br/>carries the most meaning?"
      },
      "prompt": {
-      "he": "החלק שמספר הכי הרבה הוא…",
-      "en": "The part that tells the most is…"
+      "he": "הסמל שנושא הכי הרבה הוא…",
+      "en": "The symbol that carries the most is…"
      }
     },
     {
@@ -350,12 +351,12 @@ window.LESSON_PAGE = {
       "en": "Lesson complete"
      },
      "big": {
-      "he": "ציירתם את<br/>המציאות שלכם.",
-      "en": "You painted<br/>your own reality."
+      "he": "דימויים יכולים לשאת משמעות.",
+      "en": "Images can carry meaning."
      },
      "sub": {
-      "he": "כמו פרידה, חיברתם בין חוויה אישית<br/>למשהו חזותי ומבוטא.",
-      "en": "Like Frida, you connected personal experience<br/>to something visual and expressive."
+      "he": "כשמחברים ביניהם, מתחיל להיווצר עולם אישי.",
+      "en": "When you connect them, a personal world begins to form."
      }
     }
    ]

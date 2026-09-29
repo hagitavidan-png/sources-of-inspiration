@@ -1,0 +1,256 @@
+{
+  "_note": "Lesson 1.6, revised content approved by the author. Kept screens are copied from lessons/frida-kahlo.html. Source for tools/build-lesson-data.js.",
+  "_sources": "Harry Ransom Center, Self-Portrait with Thorn Necklace and Hummingbird, 1940 (hrc.utexas.edu/frida-kahlo-self-portrait); Tate Kids, Who is Frida Kahlo?; MoMA, Self-Portrait with Cropped Hair, 1940 (moma.org/collection/works/78333). The quote is not used here (the verified TIME 1953 wording is in 1.7). No images: works shown as windows with museum links.",
+  "he": {
+    "s": [
+      {
+        "big": "מתי דימוי הופך לסמל?",
+        "sub": "כשהוא מתחיל לשאת משהו מעבר למה שהוא."
+      },
+      {
+        "label": "פרידה קאלו",
+        "sub": "פרידה קאלו ציירה את עצמה פעמים רבות. בדיוקנאות שלה חוזרים בעלי חיים, צמחים, לבוש מקסיקני מסורתי ותכשיטים."
+      },
+      {
+        "art": {
+          "artist": "פרידה קאלו",
+          "title": "דיוקן עצמי עם שרשרת קוצים וקוליברי, 1940",
+          "note": "שרשרת קוצים סביב הצוואר, ועליה קוליברי. על הכתף קוף, ומעל הראש שפירית.",
+          "link": {
+            "href": "https://www.hrc.utexas.edu/frida-kahlo-self-portrait/",
+            "label": "פתחו את היצירה באתר Harry Ransom Center ↗"
+          }
+        }
+      },
+      {
+        "art": {
+          "artist": "פרידה קאלו",
+          "title": "דיוקן עצמי עם שיער גזוז, 1940",
+          "note": "כאן אין את השמלות המסורתיות והפרחים בשיער, שמופיעים בדיוקנאות רבים שלה. היא לובשת חליפת גבר, השיער הגזוז מפוזר על הרצפה, ביד מספריים, ומעליה מילים של שיר מקסיקני פופולרי.",
+          "link": {
+            "href": "https://www.moma.org/collection/works/78333",
+            "label": "פתחו את היצירה באתר MoMA ↗"
+          }
+        }
+      },
+      {
+        "label": "הסתכלו מקרוב",
+        "big": "מה אתם רואים<br/>בציורים?",
+        "sub": "לא רק מה מצויר, <br/>אלא מה קורה שם."
+      },
+      {
+        "label": "מה מרכיב את הציור",
+        "big": "מה מרכיב את הציור?",
+        "i": [
+          "דמות",
+          "מקום",
+          "חפצים או סמלים",
+          "צבע"
+        ],
+        "sub": "<strong>שימו לב:</strong> הציורים לא מתארים רק דמות, הם מרכיבים עולם אישי."
+      },
+      {
+        "label": "דימוי, מוטיב, סמל",
+        "q0": "דימוי — מה שרואים.",
+        "q1": "מוטיב — דימוי שחוזר.",
+        "q2": "סמל — דימוי שנושא משמעות מעבר למה שרואים."
+      },
+      {
+        "sub": "לקוליברי יש משמעויות בתרבות ובפולקלור המקסיקני. בתוך הציור אפשר לשאול איזו משמעות הוא מקבל לצד הקוצים, הקוף והדיוקן של קאלו."
+      },
+      {
+        "label": "הרעיון",
+        "big": "הציור לא מציג<br/>רגע אחד.",
+        "sub": "הוא מחבר כמה דברים יחד, <br/>כדי לבטא חוויה פנימית."
+      },
+      {
+        "big": "חזרו למוטיב שמצאתם בשיעור הקודם",
+        "sub": "— או בחרו דימוי אחר שיש לו משמעות עבורכם."
+      },
+      {
+        "big": "מה הוא מסמל בשבילכם?",
+        "sub": "לא מה הוא. מה הוא נושא.",
+        "ph": "בשבילי הוא…"
+      },
+      {
+        "chips": [
+          "דמות",
+          "מקום",
+          "חפץ",
+          "צבע",
+          "חיה",
+          "צמח",
+          "סמל אישי"
+        ],
+        "label": "בחרו מרכיבים",
+        "big": "אילו דימויים נוספים שייכים לעולם שלכם?",
+        "sub": "בחרו שניים או שלושה."
+      },
+      {
+        "label": "התחילו לצייר",
+        "big": "סדרו אותם<br/>על הדף.",
+        "sub": "הם לא חייבים להיות מציאותיים, <br/>רק קשורים לעולם שלכם."
+      },
+      {
+        "label": "הוסיפו חיבור",
+        "big": "הוסיפו קשר<br/>בין הדברים.",
+        "i": [
+          "קו שמחבר",
+          "צבע משותף",
+          "מיקום קרוב",
+          "חיבור לא צפוי"
+        ],
+        "relIcons": [
+          "line",
+          "shared",
+          "near",
+          "curve"
+        ]
+      },
+      {
+        "label": "הסימן שלכם",
+        "big": "הוסיפו פרט קטן<br/>שרק אתם יודעים מה הוא מסמל."
+      },
+      {
+        "label": "עצרו",
+        "big": "עצרו רגע.<br/>הסתכלו על הציור שלכם."
+      },
+      {
+        "label": "רפלקציה",
+        "big": "איזה סמל בציור<br/>נושא הכי הרבה משמעות?",
+        "ph": "הסמל שנושא הכי הרבה הוא…"
+      },
+      {
+        "label": "השיעור הסתיים",
+        "big": "דימויים יכולים לשאת משמעות.",
+        "sub": "כשמחברים ביניהם, מתחיל להיווצר עולם אישי."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "When does an image become a symbol?",
+        "sub": "When it starts to carry something beyond what it is."
+      },
+      {
+        "label": "Frida Kahlo",
+        "sub": "Frida Kahlo painted herself many times. Animals, plants, traditional Mexican dress and jewellery return again and again in her self-portraits."
+      },
+      {
+        "art": {
+          "artist": "Frida Kahlo",
+          "title": "Self-Portrait with Thorn Necklace and Hummingbird, 1940",
+          "note": "A necklace of thorns around her neck, with a hummingbird hanging from it. A monkey on her shoulder and a dragonfly above her head.",
+          "link": {
+            "href": "https://www.hrc.utexas.edu/frida-kahlo-self-portrait/",
+            "label": "Open the work on the Harry Ransom Center website ↗"
+          }
+        }
+      },
+      {
+        "art": {
+          "artist": "Frida Kahlo",
+          "title": "Self-Portrait with Cropped Hair, 1940",
+          "note": "Here there are none of the traditional dresses or flowers in her hair that appear in many of her self-portraits. She wears a man's suit, cut hair lies across the floor, she holds scissors, and above her are the words of a popular Mexican song.",
+          "link": {
+            "href": "https://www.moma.org/collection/works/78333",
+            "label": "Open the work on the MoMA website ↗"
+          }
+        }
+      },
+      {
+        "label": "Look closely",
+        "big": "What do you see<br/>in the paintings?",
+        "sub": "Not just what is drawn, <br/>but what is happening there."
+      },
+      {
+        "label": "The building blocks",
+        "big": "What builds the painting?",
+        "i": [
+          "figure",
+          "place",
+          "objects or symbols",
+          "color"
+        ],
+        "sub": "<strong>Notice:</strong> The paintings don't just show a figure, they build a personal world."
+      },
+      {
+        "label": "Image, motif, symbol",
+        "q0": "Image — what you see.",
+        "q1": "Motif — an image that returns.",
+        "q2": "Symbol — an image that carries meaning beyond what you see."
+      },
+      {
+        "sub": "The hummingbird has meanings in Mexican culture and folklore. Inside the painting you can ask what meaning it takes on next to the thorns, the monkey and Kahlo's portrait."
+      },
+      {
+        "label": "The idea",
+        "big": "The painting doesn't<br/>show a single moment.",
+        "sub": "It connects different elements, <br/>to express an inner experience."
+      },
+      {
+        "big": "Go back to the motif you found in the last lesson",
+        "sub": "— or choose another image that has meaning for you."
+      },
+      {
+        "big": "What does it stand for, for you?",
+        "sub": "Not what it is. What it carries.",
+        "ph": "For me it is…"
+      },
+      {
+        "chips": [
+          "figure",
+          "place",
+          "object",
+          "color",
+          "animal",
+          "plant",
+          "personal symbol"
+        ],
+        "label": "Choose elements",
+        "big": "Which other images belong to your world?",
+        "sub": "Choose two or three."
+      },
+      {
+        "label": "Start drawing",
+        "big": "Arrange them<br/>on the page.",
+        "sub": "They don't need to be realistic, <br/>only connected to your world."
+      },
+      {
+        "label": "Add connection",
+        "big": "Add a connection<br/>between elements.",
+        "i": [
+          "a connecting line",
+          "shared color",
+          "close placement",
+          "an unexpected link"
+        ],
+        "relIcons": [
+          "line",
+          "shared",
+          "near",
+          "curve"
+        ]
+      },
+      {
+        "label": "Your mark",
+        "big": "Add a small detail<br/>that only you understand."
+      },
+      {
+        "label": "Pause",
+        "big": "Pause.<br/>Look at your drawing."
+      },
+      {
+        "label": "Reflection",
+        "big": "Which symbol in your drawing<br/>carries the most meaning?",
+        "ph": "The symbol that carries the most is…"
+      },
+      {
+        "label": "Lesson complete",
+        "big": "Images can carry meaning.",
+        "sub": "When you connect them, a personal world begins to form."
+      }
+    ]
+  }
+}

@@ -56,7 +56,9 @@ const MAP = {
     /* the works laid out on the table in "look": pages from the earlier lessons (no images) */
     desk: ['1.1', '1.2', '1.3', '1.4'],
     explore: [0], sources: [1], look: [2, 3, 4], idea: [5, 6, 7], create: [8, 9], end: [10, 11, 12] },
-  'frida-kahlo': { explore: [0], sources: [1], look: [2, 3, 4, 5], idea: [6, 7], create: [8, 9, 10, 11], end: [12, 13, 14, 15] },
+  /* 1.6: revised content (content/lessons/frida-kahlo.json): motif → meaning → symbol → relations → a personal world */
+  'frida-kahlo': { authored: true, variant: 'v2', layout: { sources: 'pair', look: 'links', idea: 'links' },
+    explore: [0], sources: [1, 2, 3], look: [4, 5, 6, 7, 8], idea: [9, 10, 11], create: [12, 13, 14], end: [15, 16, 17] },
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
      screen 9 opens it, 10-12 are three parallel experiments, 13 closes the lesson. */
@@ -180,6 +182,7 @@ function blockFromT(T, n, html) {
   if (ln.he.length) b.lines = ln;
   if (he.ph != null) b.prompt = bil(he.ph, en.ph);
   if (Array.isArray(he.frames)) b.frames = he.frames;   // composition sketches (1.3)
+  if (Array.isArray(he.relIcons)) b.rel = he.relIcons;  // sketches of kinds of connection (1.6)
 
   const imgs = screenImages(html);
   const works = [];
@@ -259,7 +262,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=13">
+<link rel="stylesheet" href="../css/lesson-page.css?v=14">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -295,7 +298,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=11"></script>
+<script src="../js/lesson-page.js?v=13"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
