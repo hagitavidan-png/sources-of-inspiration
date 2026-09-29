@@ -47,8 +47,10 @@ const MAP = {
   'visual-journal': { authored: true, variant: 'v2', layout: { create: 'lab-sketch', end: 'airy' },
     explore: [0], sources: [1], look: [2],
     create: { lead: [3], steps: [4, 5, 6], after: [7, 8, 9, 10] }, end: [11, 12, 13] },
-  /* screen 8 ("something only you understand") is kept for 1.6 only */
-  'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7], end: [9, 10, 11, 12] },
+  /* 1.4: revised content (content/lessons/memory-drawing.json): Chagall as the source,
+     a memory that comes apart (fragments) and is put together again (pieces) */
+  'memory-drawing': { authored: true, variant: 'v2', layout: { idea: 'fragments', create: 'pieces' },
+    explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7], end: [8, 9, 10, 11] },
   /* 1.5: new content (content/lessons/journal-artwork.json), browsing an artist's notebook */
   'journal-artwork': { authored: true, variant: 'v2', layout: { look: 'desk', idea: 'flow' },
     /* the works laid out on the table in "look": pages from the earlier lessons (no images) */
@@ -207,7 +209,8 @@ function blockFromT(T, n, html) {
   if (he.art) {
     const A = he.art, E = en.art || {};
     works.push({ img: PD.has(A.img) ? A.img : null, alt: (E.artist || '') + ', ' + (E.title || ''),
-                 artist: bil(A.artist, E.artist), workTitle: bil(A.title, E.title), note: bil(A.note, E.note) });
+                 artist: bil(A.artist, E.artist), workTitle: bil(A.title, E.title), note: bil(A.note, E.note),
+                 ...(A.link ? { link: { href: A.link.href, label: bil(A.link.label, (E.link || {}).label) } } : {}) });
   }
   if (works.length) b.works = works;
   return b;
@@ -256,7 +259,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=5">
-<link rel="stylesheet" href="../css/lesson-page.css?v=11">
+<link rel="stylesheet" href="../css/lesson-page.css?v=12">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -292,7 +295,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=8"></script>
+<script src="../js/lesson-page.js?v=10"></script>
 <script src="../js/site-drawer.js?v=7" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>

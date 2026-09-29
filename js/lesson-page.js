@@ -69,7 +69,10 @@
     return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + ' rv">' +
       (w.img ? '<div class="lp-ed-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>' : '') +
       '<figcaption>' + (w.noArtist ? '' : t(w.artist, 'b', 'lp-ed-artist')) + t(w.workTitle, 'span', 'lp-ed-title') +
-      t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') + '</figcaption></figure>';
+      t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') +
+      /* a link to the work at its museum, when the image cannot be shown here */
+      (w.link ? '<a class="lp-ext" href="' + esc(w.link.href) + '" target="_blank" rel="noopener">' + t(w.link.label) + '</a>' : '') +
+      '</figcaption></figure>';
   }
   function works(list) {
     return V2 ? '<div class="lp-ed-works">' + list.map(edWork).join('') + '</div>'
@@ -113,8 +116,8 @@
       t(b.sub, 'p', 'lp-sub') +
       t(b.body, 'p', 'lp-sub') +
       (b.works && b.works.length ? works(b.works) : '') +
-      t(b.ask, 'p', 'lp-ask') +
       lines(b.lines) +
+      t(b.ask, 'p', 'lp-ask') +
       frames(b.frames) +
       steps(b.list) +
       chips(b.chips) +

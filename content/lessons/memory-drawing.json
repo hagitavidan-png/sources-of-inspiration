@@ -1,0 +1,246 @@
+{
+  "_note": "Lesson 1.4, revised content approved by the author. Existing screens are copied from lessons/memory-drawing.html; the source, looking questions, composition questions and closing were approved in chat. Source for tools/build-lesson-data.js.",
+  "_sources": "Chagall: MoMA, I and the Village, 1911 (moma.org/collection/works/78984). Rights: Chagall works are protected until 2056 and managed by ADAGP; no image is shown.",
+  "he": {
+    "s": [
+      {
+        "big": "זיכרון עשוי<br>מחלקים.",
+        "sub": "אפשר לצייר אותם."
+      },
+      {
+        "label": "שאגאל",
+        "art": {
+          "artist": "מארק שאגאל",
+          "title": "אני והכפר, 1911",
+          "note": "שאגאל צייר את היצירה לאחר שעבר לפריז. הוא הרכיב אותה מדימויים הקשורים לזיכרונות ממקום ילדותו ליד ויטבסק: אנשים, בעלי חיים, בתים וכנסייה. חלק מהדברים הפוכים, אחרים מרחפים, והמרחב אינו מתנהג כמו מקום מציאותי.",
+          "link": {
+            "href": "https://www.moma.org/collection/works/78984",
+            "label": "לצפייה ביצירה באתר MoMA ↗"
+          }
+        }
+      },
+      {
+        "big": "הסתכלו על היצירה.",
+        "q0": "מה גדול ומה קטן?",
+        "q1": "מה הפוך?",
+        "q2": "מה מרחף?",
+        "q3": "אילו דברים נמצאים יחד, למרות שבמציאות אולי לא היו מופיעים כך?",
+        "ask": "מה האמן בחר לזכור — ומה הוא לא היה צריך לצייר בדיוק כפי שהיה?"
+      },
+      {
+        "label": "חשבו על עצמכם",
+        "big": "בחרו זיכרון.",
+        "sub": "לא צריך לזכור הכל.",
+        "chips": [
+          "ארוחה משפחתית",
+          "מקום שאהבתי",
+          "מסע",
+          "ויכוח",
+          "חגיגה",
+          "להיות לבד",
+          "פעם ראשונה",
+          "משהו שהסתיים"
+        ]
+      },
+      {
+        "label": "פרקו לחלקים",
+        "big": "מה אתם<br>זוכרים?",
+        "sub": "בחרו כמה. לא הכל.",
+        "parts": [
+          "צבע",
+          "מרקם",
+          "צורה",
+          "מקום",
+          "עצם",
+          "תחושה",
+          "צליל",
+          "אור"
+        ]
+      },
+      {
+        "label": "התחלו",
+        "big": "ציירו את החלקים<br>שבחרתם.",
+        "sub": "לא צריך סדר.",
+        "i": [
+          "ציירו כל חלק בנפרד, בכל גודל.",
+          "עוד לא לחבר ביניהם.",
+          "ציירו מהר. אל תחשבו יותר מדי."
+        ]
+      },
+      {
+        "label": "סדרו אותם",
+        "big": "איך החלקים<br>מתחברים?",
+        "comp": [
+          "אחד ליד השני",
+          "אחד על השני",
+          "רחוק וקרוב",
+          "מעורב / בלי כלל"
+        ],
+        "sub": "נסו שני סידורים לפני שמחליטים.",
+        "i": [
+          "מה יהיה גדול ומה קטן?",
+          "מה במרכז ומה בשוליים?",
+          "מה קרוב ומה רחוק?",
+          "איפה יישאר מקום ריק?"
+        ],
+        "frames": [
+          "huge",
+          "center",
+          "pair",
+          "tiny"
+        ]
+      },
+      {
+        "label": "המשיכו",
+        "big": "הוסיפו ושנו.",
+        "sub": "זיכרון לא חייב להיות מדויק.",
+        "i": [
+          "שנו את הגודל של חלק, גדול יותר או קטן יותר.",
+          "הוסיפו משהו שדמיינתם, לא רק מה שקרה.",
+          "מחקו או כסו משהו שלא מרגיש נכון."
+        ]
+      },
+      {
+        "label": "עצרו",
+        "big": "עצרו והסתכלו<br>על הציור.",
+        "sub": "פשוט תסתכלו. אל תשפטו."
+      },
+      {
+        "label": "מה יצרתם",
+        "big": "הציור הזה לא מראה<br>מה קרה.",
+        "sub": "הוא מראה איך אתם זוכרים.<br>זה מקור ההשראה שלכם."
+      },
+      {
+        "label": "רפלקציה",
+        "big": "איזה חלק הכי חזק<br>בציור שלכם?",
+        "ph": "החלק הכי חזק הוא…"
+      },
+      {
+        "label": "השיעור הסתיים",
+        "big": "הזיכרון שלכם<br>הפך לציור.",
+        "sub": "זכרתם בחלקים.<br>שמרו את העבודה. בשיעור הבא היא תחזור לשולחן, יחד עם העבודות הקודמות."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "Memory is made<br>of parts.",
+        "sub": "You can draw them."
+      },
+      {
+        "label": "Chagall",
+        "art": {
+          "artist": "Marc Chagall",
+          "title": "I and the Village, 1911",
+          "note": "Chagall painted this work after he moved to Paris. He built it from images linked to memories of his childhood home near Vitebsk: people, animals, houses and a church. Some things are upside down, others float, and the space does not behave like a real place.",
+          "link": {
+            "href": "https://www.moma.org/collection/works/78984",
+            "label": "View the work on the MoMA website ↗"
+          }
+        }
+      },
+      {
+        "big": "Look at the work.",
+        "q0": "What is big, and what is small?",
+        "q1": "What is upside down?",
+        "q2": "What is floating?",
+        "q3": "Which things are together that might not appear together in real life?",
+        "ask": "What did the artist choose to remember — and what did he not need to paint exactly as it was?"
+      },
+      {
+        "label": "Think of yourself",
+        "big": "Choose a memory.",
+        "sub": "You don't need to remember everything.",
+        "chips": [
+          "A family meal",
+          "A place I loved",
+          "A journey",
+          "An argument",
+          "A celebration",
+          "Being alone",
+          "A first time",
+          "Something ending"
+        ]
+      },
+      {
+        "label": "Break it apart",
+        "big": "What do you<br>remember?",
+        "sub": "Choose a few. Not all.",
+        "parts": [
+          "Color",
+          "Texture",
+          "Shape",
+          "Place",
+          "Object",
+          "Feeling",
+          "Sound",
+          "Light"
+        ]
+      },
+      {
+        "label": "Start",
+        "big": "Draw the parts<br>you chose.",
+        "sub": "No need for order.",
+        "i": [
+          "Draw each part separately, any size.",
+          "Don't connect them yet.",
+          "Draw fast. Don't think too long."
+        ]
+      },
+      {
+        "label": "Arrange them",
+        "big": "How do the<br>parts connect?",
+        "comp": [
+          "Next to each other",
+          "On top of each other",
+          "Far and close",
+          "Mixed / no rule"
+        ],
+        "sub": "Try two arrangements before you decide.",
+        "i": [
+          "What will be big, and what small?",
+          "What goes in the centre, and what at the edges?",
+          "What is close, and what is far?",
+          "Where will empty space remain?"
+        ],
+        "frames": [
+          "huge",
+          "center",
+          "pair",
+          "tiny"
+        ]
+      },
+      {
+        "label": "Keep going",
+        "big": "Add and change.",
+        "sub": "Memory does not have to be accurate.",
+        "i": [
+          "Change the size of a part, make it bigger or smaller.",
+          "Add something you imagined, not only what happened.",
+          "Erase or cover something if it doesn't feel right."
+        ]
+      },
+      {
+        "label": "Pause",
+        "big": "Stop and look<br>at your drawing.",
+        "sub": "Just look. Don't judge."
+      },
+      {
+        "label": "What you made",
+        "big": "This drawing does not show<br>what happened.",
+        "sub": "It shows how you remember.<br>That is your source of inspiration."
+      },
+      {
+        "label": "Reflection",
+        "big": "Which part is strongest<br>in your drawing?",
+        "ph": "The strongest part is…"
+      },
+      {
+        "label": "Lesson complete",
+        "big": "Your memory is<br>now a drawing.",
+        "sub": "You remembered in parts.<br>Keep your work. In the next lesson it comes back to the table, together with your earlier work."
+      }
+    ]
+  }
+}

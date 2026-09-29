@@ -246,3 +246,22 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-desk-2{inset-inline-start:47%;top:12%;transform:rotate(-2deg)}
 .lp-v2 .lp-desk-3{inset-inline-start:69%;top:3%;transform:rotate(4.5deg)}
 .lp-v2 .lp-layout-desk .lp-chip[aria-pressed="true"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:8px;vertical-align:middle}
+
+/* ═══ 1.4: a memory that comes apart and is put together again ═══ */
+
+/* link to the work at its museum */
+.lp-v2 .lp-ext{display:inline-block;margin-top:14px;font-size:.95rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-strong);padding-bottom:2px}
+.lp-v2 .lp-ext:hover{border-color:var(--ink)}
+
+/* choosing the memory and its parts: choices as loose scraps of paper */
+.lp-v2 .lp-layout-fragments .lp-chips{gap:12px 10px}
+.lp-v2 .lp-layout-fragments .lp-chip{border-radius:2px;border-color:var(--rule-strong);background:#fbf9f4;padding:7px 14px}
+.lp-v2 .lp-layout-fragments .lp-chip:nth-child(3n+1){transform:rotate(-1.4deg)}
+.lp-v2 .lp-layout-fragments .lp-chip:nth-child(3n+2){transform:rotate(.9deg) translateY(3px)}
+.lp-v2 .lp-layout-fragments .lp-chip:nth-child(3n){transform:rotate(-.4deg) translateY(-2px)}
+.lp-v2 .lp-layout-fragments .lp-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);transform:none}
+
+/* making: the parts are placed slightly apart and overlap, like pieces put together again */
+.lp-v2 .lp-layout-pieces .lp-steps > li:nth-child(2){margin-inline-start:clamp(14px,5vw,56px);margin-top:-6px}
+.lp-v2 .lp-layout-pieces .lp-steps > li:nth-child(3){margin-inline-start:clamp(6px,2vw,22px);margin-top:-6px}
+.lp-v2 .lp-layout-pieces .lp-frames{margin:14px 0 4px}

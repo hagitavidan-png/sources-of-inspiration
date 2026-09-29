@@ -2,7 +2,12 @@
 window.LESSON_PAGE = {
  "id": "memory-drawing",
  "path": "lessons/memory-drawing.html",
- "slides": "lessons/memory-drawing.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "idea": "fragments",
+  "create": "pieces"
+ },
  "number": "1.4",
  "unit": {
   "he": "חוויה אישית כמקור השראה",
@@ -30,10 +35,6 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "יחידה: חוויה אישית כמקור השראה",
-      "en": "Unit: Personal Experience as a Source of Inspiration"
-     },
      "big": {
       "he": "זיכרון עשוי<br>מחלקים.",
       "en": "Memory is made<br>of parts."
@@ -49,68 +50,62 @@ window.LESSON_PAGE = {
    "blocks": [
     {
      "label": {
-      "he": "מאטיס",
-      "en": "Matisse"
+      "he": "שאגאל",
+      "en": "Chagall"
      },
-     "sub": {
-      "he": "בדיוק זה שעושה אותו מעניין.",
-      "en": "That is exactly what makes it interesting."
-     },
-     "quote": {
-      "he": "זיכרון אף פעם אינו טהור.",
-      "en": "Memory is never pure."
-     },
-     "attr": {
-      "he": "אנרי מאטיס",
-      "en": "Henri Matisse"
-     }
+     "works": [
+      {
+       "img": null,
+       "alt": "Marc Chagall, I and the Village, 1911",
+       "artist": {
+        "he": "מארק שאגאל",
+        "en": "Marc Chagall"
+       },
+       "workTitle": {
+        "he": "אני והכפר, 1911",
+        "en": "I and the Village, 1911"
+       },
+       "note": {
+        "he": "שאגאל צייר את היצירה לאחר שעבר לפריז. הוא הרכיב אותה מדימויים הקשורים לזיכרונות ממקום ילדותו ליד ויטבסק: אנשים, בעלי חיים, בתים וכנסייה. חלק מהדברים הפוכים, אחרים מרחפים, והמרחב אינו מתנהג כמו מקום מציאותי.",
+        "en": "Chagall painted this work after he moved to Paris. He built it from images linked to memories of his childhood home near Vitebsk: people, animals, houses and a church. Some things are upside down, others float, and the space does not behave like a real place."
+       },
+       "link": {
+        "href": "https://www.moma.org/collection/works/78984",
+        "label": {
+         "he": "לצפייה ביצירה באתר MoMA ↗",
+         "en": "View the work on the MoMA website ↗"
+        }
+       }
+      }
+     ]
     }
    ]
   },
   "look": {
    "blocks": [
     {
-     "label": {
-      "he": "הסתכלו על הציורים האלה",
-      "en": "Look at these drawings"
-     },
      "big": {
-      "he": "מה האמן<br>בחר להראות?",
-      "en": "What did the artist<br>choose to show?"
+      "he": "הסתכלו על היצירה.",
+      "en": "Look at the work."
      },
      "ask": {
-      "he": "לא הכל ברור. מה נשאר אצלכם?",
-      "en": "Not everything is clear. What stays with you?"
+      "he": "מה האמן בחר לזכור — ומה הוא לא היה צריך לצייר בדיוק כפי שהיה?",
+      "en": "What did the artist choose to remember — and what did he not need to paint exactly as it was?"
      },
-     "works": [
-      {
-       "img": null,
-       "alt": "Chagall, I and the Village",
-       "artist": null,
-       "title": {
-        "he": "חלקים חופפים",
-        "en": "Parts overlapping"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Chagall dreamlike composition",
-       "artist": null,
-       "title": {
-        "he": "לא הכל אמיתי",
-        "en": "Not everything is real"
-       }
-      },
-      {
-       "img": null,
-       "alt": "Chagall floating figures",
-       "artist": null,
-       "title": {
-        "he": "זיכרון בלי סדר",
-        "en": "Memory without order"
-       }
-      }
-     ]
+     "lines": {
+      "he": [
+       "מה גדול ומה קטן?",
+       "מה הפוך?",
+       "מה מרחף?",
+       "אילו דברים נמצאים יחד, למרות שבמציאות אולי לא היו מופיעים כך?"
+      ],
+      "en": [
+       "What is big, and what is small?",
+       "What is upside down?",
+       "What is floating?",
+       "Which things are together that might not appear together in real life?"
+      ]
+     }
     }
    ]
   },
@@ -227,6 +222,10 @@ window.LESSON_PAGE = {
       "he": "איך החלקים<br>מתחברים?",
       "en": "How do the<br>parts connect?"
      },
+     "sub": {
+      "he": "נסו שני סידורים לפני שמחליטים.",
+      "en": "Try two arrangements before you decide."
+     },
      "chips": {
       "he": [
        "אחד ליד השני",
@@ -240,7 +239,27 @@ window.LESSON_PAGE = {
        "Far and close",
        "Mixed / no rule"
       ]
-     }
+     },
+     "list": {
+      "he": [
+       "מה יהיה גדול ומה קטן?",
+       "מה במרכז ומה בשוליים?",
+       "מה קרוב ומה רחוק?",
+       "איפה יישאר מקום ריק?"
+      ],
+      "en": [
+       "What will be big, and what small?",
+       "What goes in the centre, and what at the edges?",
+       "What is close, and what is far?",
+       "Where will empty space remain?"
+      ]
+     },
+     "frames": [
+      "huge",
+      "center",
+      "pair",
+      "tiny"
+     ]
     },
     {
      "label": {
@@ -324,8 +343,8 @@ window.LESSON_PAGE = {
       "en": "Your memory is<br>now a drawing."
      },
      "sub": {
-      "he": "זכרתם בחלקים.<br>יצרתם משהו שרק אתם יכולתם ליצור.",
-      "en": "You remembered in parts.<br>You made something no one else could make."
+      "he": "זכרתם בחלקים.<br>שמרו את העבודה. בשיעור הבא היא תחזור לשולחן, יחד עם העבודות הקודמות.",
+      "en": "You remembered in parts.<br>Keep your work. In the next lesson it comes back to the table, together with your earlier work."
      }
     }
    ]
