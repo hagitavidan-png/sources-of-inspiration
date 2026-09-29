@@ -12,7 +12,7 @@
 
   /* each unit has its own page: units/unit-00.html … units/unit-06.html */
   /* lessons that already have a page in the new lesson template */
-  var LESSON_PAGES = { 'lessons/lesson-2-1.html': 'lesson-pages/lesson-2-1.html' };
+  var LESSON_PAGES = window.LESSON_PAGES_INDEX || {};   /* data/lesson-pages/index.js */
   function unitPage(id) { return 'units/unit-' + id.replace('unit', '') + '.html'; }
 
   var UI = {

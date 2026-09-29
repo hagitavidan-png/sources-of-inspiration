@@ -37,6 +37,10 @@ window.LESSON_PAGE = {
   "explore": {
    "blocks": [
     {
+     "label": {
+      "he": "שיעור 2.1",
+      "en": "Lesson 2.1"
+     },
      "big": {
       "he": "הסתכלו סביבכם.<br>האם אתם רואים <em>חזרה</em>?",
       "en": "Look around you.<br>Do you see <em>repetition</em>?"
@@ -49,38 +53,46 @@ window.LESSON_PAGE = {
    ]
   },
   "sources": {
-   "works": [
+   "blocks": [
     {
-     "img": "hokusai-great-wave-1831",
-     "alt": "Katsushika Hokusai, The Great Wave off Kanagawa, 1831",
-     "artist": {
-      "he": "קצושיקה הוקוסאי",
-      "en": "Katsushika Hokusai"
+     "label": {
+      "he": "מקורות השראה",
+      "en": "References"
      },
-     "title": {
-      "he": "הגל הגדול מול קנאגאווה, 1831",
-      "en": "The Great Wave off Kanagawa, 1831"
-     },
-     "note": {
-      "he": "הוקוסאי לא העתיק גלים. הוא פירק את הגל לקצב ובנה אותו מחדש.",
-      "en": "Hokusai did not copy waves. He broke the wave into rhythm and built it again."
-     }
-    },
-    {
-     "img": "morris-strawberry-thief-1883",
-     "alt": "William Morris, Strawberry Thief, 1883",
-     "artist": {
-      "he": "ויליאם מוריס",
-      "en": "William Morris"
-     },
-     "title": {
-      "he": "גנב התות, 1883",
-      "en": "Strawberry Thief, 1883"
-     },
-     "note": {
-      "he": "מוריס מצא את העיקרון שמאחורי הצמח. שינוי כיוון וצבע מונע חזרה מכנית.",
-      "en": "Morris found the principle behind the plant. Changes in direction and color prevent mechanical repetition."
-     }
+     "works": [
+      {
+       "img": "hokusai-great-wave-1831",
+       "alt": "Hokusai, The Great Wave off Kanagawa, 1831",
+       "artist": {
+        "he": "קצושיקה הוקוסאי",
+        "en": "Katsushika Hokusai"
+       },
+       "title": {
+        "he": "הגל הגדול מול קנאגאווה, 1831",
+        "en": "The Great Wave off Kanagawa, 1831"
+       },
+       "note": {
+        "he": "הוקוסאי לא העתיק גלים. הוא פירק את הגל לקצב ובנה אותו מחדש.",
+        "en": "Hokusai did not copy waves. He broke the wave into rhythm and built it again."
+       }
+      },
+      {
+       "img": "morris-strawberry-thief-1883",
+       "alt": "William Morris, Strawberry Thief, 1883",
+       "artist": {
+        "he": "ויליאם מוריס",
+        "en": "William Morris"
+       },
+       "title": {
+        "he": "גנב התות, 1883",
+        "en": "Strawberry Thief, 1883"
+       },
+       "note": {
+        "he": "מוריס מצא את העיקרון שמאחורי הצמח. שינוי כיוון וצבע מונע חזרה מכנית.",
+        "en": "Morris found the principle behind the plant. Changes in direction and color prevent mechanical repetition."
+       }
+      }
+     ]
     }
    ]
   },
@@ -142,8 +154,8 @@ window.LESSON_PAGE = {
       "en": "Take a page.<br>Draw the pattern you found."
      },
      "note": {
-      "he": "לא את האובייקט, <br>רק את ה<em>חזרה</em>.",
-      "en": "Not the object, <br>only the <em>repetition</em>."
+      "he": "לא את האובייקט, \nרק את ה<em>חזרה</em>.",
+      "en": "Not the object, \nonly the <em>repetition</em>."
      }
     },
     {
@@ -155,6 +167,10 @@ window.LESSON_PAGE = {
       "he": "עצרו.<br>האם החזרה אחידה או משתנה?",
       "en": "Pause.<br>Is the repetition even or changing?"
      },
+     "note": {
+      "he": "תנו לקצב להשתנות, \nהאיצו, האטו, הרחיבו.",
+      "en": "Let the rhythm change, \nspeed up, slow down, expand."
+     },
      "chips": {
       "he": [
        "אחידה",
@@ -164,10 +180,6 @@ window.LESSON_PAGE = {
        "Even",
        "Changing"
       ]
-     },
-     "note": {
-      "he": "תנו לקצב להשתנות, <br>האיצו, האטו, הרחיבו.",
-      "en": "Let the rhythm change, <br>speed up, slow down, expand."
      }
     },
     {
@@ -217,10 +229,24 @@ window.LESSON_PAGE = {
       "he": "זה מה שאמנים עושים.<br>לא מעתיקים, מפרקים ובונים מחדש.",
       "en": "This is what artists do.<br>They do not copy, they break apart and build again."
      },
-     "work": {
-      "he": "מ. ק. אשר, שמים ומים I, 1938",
-      "en": "M. C. Escher, Sky and Water I, 1938"
-     }
+     "works": [
+      {
+       "img": null,
+       "alt": "M.C. Escher, Sky and Water I, 1938",
+       "artist": {
+        "he": "מ. ק. אשר",
+        "en": "M.C. Escher"
+       },
+       "title": {
+        "he": "שמים ומים I, 1938",
+        "en": "Sky and Water I, 1938"
+       },
+       "note": {
+        "he": "",
+        "en": ""
+       }
+      }
+     ]
     },
     {
      "label": {

@@ -2,7 +2,8 @@
    Lesson page template
    Renders window.LESSON_PAGE (data/lesson-pages/*.js) into the
    shared editorial lesson layout. Sections without content are skipped.
-   Needs: js/app-init.js (language), js/navigation-data.js (prev / next).
+   Needs: js/app-init.js (language), js/navigation-data.js (prev / next),
+   data/lesson-pages/index.js (which lessons already have a page).
    ═══════════════════════════════════════════════════════════ */
 (function () {
   var D = window.LESSON_PAGE;
@@ -10,8 +11,7 @@
   if (!D || !root) return;
 
   var BASE = '../';
-  /* lessons that already have a page in this template */
-  var PAGES = { 'lessons/lesson-2-1.html': 'lesson-pages/lesson-2-1.html' };
+  var PAGES = window.LESSON_PAGES_INDEX || {};
 
   var SECTIONS = [
     ['explore', 'מה אנחנו חוקרים?', 'What are we exploring?'],
@@ -26,30 +26,39 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   /* bilingual element; values may contain simple inline HTML (<br>, <em>) */
   function t(v, tag, cls) {
-    if (!v) return '';
+    if (!v || (!v.he && !v.en)) return '';
     tag = tag || 'span';
     return '<' + tag + (cls ? ' class="' + cls + '"' : '') + ' data-he="' + esc(v.he) + '" data-en="' + esc(v.en) + '">' + (v[L] || '') + '</' + tag + '>';
   }
   function tt(he, en, tag, cls) { return t({ he: he, en: en }, tag, cls); }
-
-  function chips(list) {
-    if (!list) return '';
-    var out = '<div class="lp-chips">';
-    for (var i = 0; i < list.he.length; i++) {
-      out += '<button type="button" class="lp-chip" aria-pressed="false">' + t({ he: list.he[i], en: list.en[i] }) + '</button>';
-    }
-    return out + '</div>';
+  function items(list) {
+    var out = [];
+    if (!list) return out;
+    for (var i = 0; i < list.he.length; i++) out.push({ he: list.he[i], en: (list.en || [])[i] });
+    return out;
   }
 
-  function block(b) {
-    return '<div class="lp-block rv">' +
-      t(b.label, 'p', 'lp-label') +
-      t(b.big, 'h3', 'lp-big') +
-      t(b.sub, 'p', 'lp-sub') +
-      chips(b.chips) +
-      t(b.note, 'p', 'ed-note lp-note') +
-      t(b.work, 'p', 'lp-ref') +
-      '</div>';
+  function chips(list) {
+    var a = items(list);
+    if (!a.length) return '';
+    return '<div class="lp-chips">' + a.map(function (v) {
+      return '<button type="button" class="lp-chip" aria-pressed="false">' + t(v) + '</button>';
+    }).join('') + '</div>';
+  }
+  function steps(list) {
+    var a = items(list);
+    if (!a.length) return '';
+    return '<ol class="lp-list">' + a.map(function (v) { return t(v, 'li'); }).join('') + '</ol>';
+  }
+  function lines(list) {
+    var a = items(list);
+    if (!a.length) return '';
+    return '<ul class="lp-lines">' + a.map(function (v) { return t(v, 'li'); }).join('') + '</ul>';
+  }
+  function prompt(v) {
+    if (!v) return '';
+    return '<label class="lp-prompt"><span class="sr" data-he="מקום לכתיבה" data-en="Space to write">' + (L === 'he' ? 'מקום לכתיבה' : 'Space to write') + '</span>' +
+      '<textarea rows="3" data-ph-he="' + esc(v.he) + '" data-ph-en="' + esc(v.en) + '" placeholder="' + esc(v[L]) + '"></textarea></label>';
   }
 
   function work(w) {
@@ -59,6 +68,26 @@
     return '<figure class="lp-work rv' + (w.img ? '' : ' text-only') + '">' + img +
       '<figcaption>' + t(w.artist, 'b') + t(w.title, 'span', 'lp-work-title') + '</figcaption>' +
       t(w.note, 'p', 'lp-work-note') + '</figure>';
+  }
+
+  function block(b) {
+    var quote = b.quote ? '<blockquote class="lp-quote">' + t(b.quote, 'p') + t(b.attr, 'cite') + '</blockquote>' : '';
+    return '<div class="lp-block rv">' +
+      t(b.label, 'p', 'lp-label') +
+      quote +
+      t(b.big, 'h3', 'lp-big') +
+      t(b.poem, 'p', 'lp-poem') +
+      t(b.sub, 'p', 'lp-sub') +
+      t(b.body, 'p', 'lp-sub') +
+      (b.works && b.works.length ? '<div class="lp-works">' + b.works.map(work).join('') + '</div>' : '') +
+      t(b.ask, 'p', 'lp-ask') +
+      lines(b.lines) +
+      steps(b.list) +
+      chips(b.chips) +
+      prompt(b.prompt) +
+      t(b.note, 'p', 'ed-note lp-note') +
+      t(b.work, 'p', 'lp-ref') +
+      '</div>';
   }
 
   function section(key, he, en, body, n) {
@@ -85,26 +114,28 @@
   var S = D.sections || {};
   var body = '', rail = '', n = 0;
   SECTIONS.forEach(function (s) {
-    var key = s[0], d = S[key];
-    if (key === 'create' && !d && !D.materials) return;
-    if (key !== 'create' && !d) return;
+    var key = s[0], d = S[key] || {};
+    var blocks = d.blocks || [];
+    var createSteps = S.create && S.create.steps && S.create.steps.length;
+    var hasMaterials = key === 'create' && D.materials && createSteps;
+    if (key !== 'explore' && !blocks.length && !(d.works && d.works.length) && !(d.steps && d.steps.length) && !hasMaterials) return;
     n++;
     var inner = '';
     if (key === 'explore') {
       inner += t(D.intro, 'p', 'lp-lead rv');
-      (d.blocks || []).forEach(function (b) { inner += block(b); });
-    } else if (key === 'sources') {
-      inner += '<div class="lp-works">' + d.works.map(work).join('') + '</div>';
-    } else if (key === 'create') {
-      if (d && d.steps && d.steps.length) {
+      /* no making steps in this lesson: the materials go at the start */
+      if (D.materials && !createSteps) inner += '<p class="lp-mat-line rv">' + tt('חומרים', 'Materials', 'b') + ' ' + t(D.materials) + '</p>';
+    }
+    if (d.works && d.works.length) inner += '<div class="lp-works">' + d.works.map(work).join('') + '</div>';
+    blocks.forEach(function (b) { inner += block(b); });
+    if (key === 'create') {
+      if (d.steps && d.steps.length) {
         inner += '<div class="lp-sub-sec">' + tt('מתחילים', 'Getting started', 'h3', 'lp-sub-title rv') +
           '<ol class="lp-steps">' + d.steps.map(function (b) { return '<li>' + block(b) + '</li>'; }).join('') + '</ol></div>';
       }
-      if (D.materials) {
+      if (D.materials && createSteps) {
         inner += '<div class="lp-sub-sec lp-materials rv">' + tt('חומרים', 'Materials', 'h3', 'lp-sub-title') + t(D.materials, 'p') + '</div>';
       }
-    } else {
-      (d.blocks || []).forEach(function (b) { inner += block(b); });
     }
     body += section(key, s[1], s[2], inner, n);
     rail += '<li><a href="#' + key + '"><span>0' + n + '</span>' + tt(s[1], s[2]) + '</a></li>';
@@ -131,10 +162,19 @@
   /* chips: simple toggle, nothing is stored */
   root.querySelectorAll('.lp-chip').forEach(function (c) {
     c.addEventListener('click', function () {
-      var on = c.getAttribute('aria-pressed') !== 'true';
-      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
     });
   });
+
+  /* writing prompts: placeholder follows the language */
+  if (typeof window.setLang === 'function') {
+    var orig = window.setLang;
+    window.setLang = function (l) {
+      orig(l);
+      root.querySelectorAll('textarea[data-ph-he]').forEach(function (ta) { ta.placeholder = ta.getAttribute('data-ph-' + (l === 'he' ? 'he' : 'en')); });
+      root.querySelectorAll('.lp-rail nav, .lp-rail').forEach(function (r) { r.setAttribute('aria-label', l === 'he' ? 'חלקי השיעור' : 'Lesson sections'); });
+    };
+  }
 
   /* rail: mark the section in view */
   if ('IntersectionObserver' in window) {

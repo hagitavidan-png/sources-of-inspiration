@@ -101,7 +101,16 @@ WORKS = {
 DUR = {'Full Session': 'שיעור מלא'}
 
 # lessons that already have a page in the new lesson template
-NEW_LESSON_PAGES = {'lessons/lesson-2-1.html': 'lesson-pages/lesson-2-1.html'}
+def _lesson_index():
+    p = os.path.join(ROOT, 'data', 'lesson-pages', 'index.js')
+    if not os.path.exists(p):
+        return {}
+    import json
+    txt = open(p, encoding='utf8').read()
+    return json.loads(txt[txt.index('{'):txt.rindex('}') + 1])
+
+
+NEW_LESSON_PAGES = _lesson_index()   # built by tools/build-lesson-data.js
 
 
 # ── helpers ───────────────────────────────────────────────────────
@@ -416,7 +425,8 @@ def render(u, units):
 </footer>
 
 <script src="{B}js/navigation-data.js"></script>
-<script src="{B}js/site-drawer.js?v=3" data-base="{B}"></script>
+<script src="{B}data/lesson-pages/index.js"></script>
+<script src="{B}js/site-drawer.js?v=4" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>
 </html>

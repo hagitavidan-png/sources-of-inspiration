@@ -1,9 +1,11 @@
 #!/usr/bin/env node
-/* Build data/lesson-pages/<lesson>.js for the lesson page template.
+/* Build data/lesson-pages/<lesson>.js and lesson-pages/<lesson>.html
+ * for the lesson page template (js/lesson-page.js).
  *
- * The text is read from the existing slide lesson (its `const T` strings)
- * and from js/lesson-intros-data.js, so nothing is retyped or rewritten.
- * Each lesson only needs a small MAP below that says which screen goes
+ * The text is read from the existing slide lessons (their `const T`
+ * strings, or the data-he / data-en attributes for lessons without T)
+ * and from js/lesson-intros-data.js. Nothing is retyped or rewritten.
+ * Each lesson only has a small entry in MAP saying which screen goes
  * into which section of the template.
  *
  * Run from the site root:  node tools/build-lesson-data.js
@@ -18,84 +20,270 @@ require(path.join(ROOT, 'js/navigation-data.js'));
 const INTROS = window.ART_LESSON_INTROS;
 const NAV = window.ART_NAVIGATION;
 
-function readT(file) {
-  const s = fs.readFileSync(path.join(ROOT, file), 'utf8');
-  const i = s.indexOf('const T = {');
-  const j = s.indexOf('\n};', i);
-  return eval('(' + s.slice(i + 10, j + 2) + ')');
+/* public-domain images that have a web copy in images/editorial/ */
+const PD = new Set(['munch-scream', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
+  'turner-snowstorm', 'monet-water-lilies', 'monet-haystacks-1891', 'pissarro-boulevard-montmartre-1897',
+  'friedrich-wanderer', 'morris-strawberry-thief-1883']);
+
+/* Hebrew spelling of artist names that the lessons give in English only */
+const NAMES = {
+  'Edvard Munch': 'אדוורד מונק', 'Wassily Kandinsky': 'וסילי קנדינסקי', 'Katsushika Hokusai': 'קצושיקה הוקוסאי',
+  'J. M. W. Turner': 'ויליאם טרנר', 'J.M.W. Turner': 'ויליאם טרנר', 'Claude Monet': 'קלוד מונה',
+  'Camille Pissarro': 'קמיל פיסארו', 'Caspar David Friedrich': 'קספר דוד פרידריך', 'William Morris': 'ויליאם מוריס',
+  'Frida Kahlo': 'פרידה קאלו', 'Marc Chagall': "מארק שאגאל", 'Mark Rothko': 'מארק רותקו',
+  'Louise Bourgeois': 'לואיז בורז׳ואה', "Georgia O'Keeffe": 'ג׳ורג׳יה אוקיף', 'M. C. Escher': 'מ. ק. אשר',
+  'Hundertwasser': 'הונדרטוואסר', 'M.C. Escher': 'מ. ק. אשר', 'Friedensreich Hundertwasser': 'פרידנסרייך הונדרטוואסר'
+};
+
+/* which screens go into which section, per lesson (screen numbers as in the lesson) */
+const MAP = {
+  'lesson-1-1': { explore: [0], sources: [1], idea: [2, 3], create: [4, 5, 6, 7], end: [8, 9, 10] },
+  'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'],
+    explore: [0], sources: [1], look: [2], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
+  'visual-journal': { dom: true, explore: [1], idea: [2, 3, 4, 5, 6], create: [7, 8, 9], end: [10, 11] },
+  'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
+  'journal-artwork': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
+  'frida-kahlo': { explore: [0], sources: [1], look: [2, 3, 4, 5], idea: [6, 7], create: [8, 9, 10, 11], end: [12, 13, 14, 15] },
+  'experience-experiments': { hero: ['munch-scream', '50% 12%'],
+    explore: [0], sources: [1, 2, 3], look: [4, 5], idea: [6, 7, 8], create: [9, 10, 11, 12], end: [13] },
+  'experience-artwork': { explore: [0], idea: [1, 2], create: [3], end: [4, 5, 6, 7] },
+  'unit-summary': { explore: [0, 1], look: [2, 3, 4, 5, 6, 7], end: [8, 9, 10, 11, 12, 13, 14] },
+  'lesson-2-1': { hero: ['hokusai-great-wave-1831', '28% 18%'],
+    explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
+  'lesson-2-2': { hero: ['monet-haystacks-1891', '50% 70%'],
+    explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
+  'lesson-2-3': { explore: [0], sources: [3], look: [1, 2], idea: [4, 5, 6], end: [7, 8] },
+  'lesson-2-4': { hero: ['turner-snowstorm', '50% 45%'],
+    explore: [0, 1], sources: [2, 3], create: [4, 5, 6], end: [7, 8] }
+};
+/* in "create", these screens are the step-by-step "getting started" part */
+const STEPS_SECTION = 'create';
+
+const HERO_CAPS = {
+  'kandinsky-yellow-red-blue': ['פרט מתוך: וסילי קנדינסקי, צהוב־אדום־כחול, 1925', 'Detail: Wassily Kandinsky, Yellow-Red-Blue, 1925'],
+  'munch-scream': ['פרט מתוך: אדוורד מונק, הצעקה, 1893', 'Detail: Edvard Munch, The Scream, 1893'],
+  'hokusai-great-wave-1831': ['פרט מתוך: קצושיקה הוקוסאי, הגל הגדול מול קנגאווה, 1831', 'Detail: Katsushika Hokusai, The Great Wave off Kanagawa, 1831'],
+  'monet-haystacks-1891': ['פרט מתוך: קלוד מונה, ערימות שחת, 1891', 'Detail: Claude Monet, Haystacks, 1891'],
+  'turner-snowstorm': ['פרט מתוך: ויליאם טרנר, סופת שלגים, 1842', 'Detail: J. M. W. Turner, Snow Storm, 1842']
+};
+
+/* shared screen texts that lessons reference as '_tmpl:<key>' (lessons/js/lesson-system.js) */
+const SCREEN_TEMPLATES = (() => {
+  const src = fs.readFileSync(path.join(ROOT, 'lessons/js/lesson-system.js'), 'utf8');
+  const i = src.indexOf('const SCREEN_TEMPLATES = {');
+  return eval('(' + src.slice(i + 'const SCREEN_TEMPLATES = '.length, src.indexOf('\n};', i) + 2) + ')');
+})();
+function resolveT(T) {
+  for (const lang of ['he', 'en']) {
+    for (const sc of T[lang].s) {
+      for (const k of Object.keys(sc)) {
+        const v = sc[k];
+        if (typeof v === 'string' && v.startsWith('_tmpl:')) {
+          const tm = SCREEN_TEMPLATES[v.slice(6)];
+          sc[k] = tm ? (tm[lang] || tm.en) : '';
+        }
+      }
+    }
+  }
+  return T;
 }
 
-/* screen i, fields → bilingual block */
-function block(T, i, fields) {
-  const b = {};
-  fields.forEach(f => {
-    const he = T.he.s[i][f], en = T.en.s[i][f];
-    if (he === undefined && en === undefined) return;
-    b[f] = Array.isArray(he) ? { he, en } : { he: String(he).replace(/\n/g, '<br>'), en: String(en).replace(/\n/g, '<br>') };
+// ── helpers ────────────────────────────────────────────────────
+const bil = (he, en) => ({ he: he == null ? '' : String(he), en: en == null ? '' : String(en) });
+const plain = s => String(s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const unesc = s => String(s).replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+function screenHtml(src, n) {
+  const m = src.match(new RegExp('<section[^>]*id="s' + n + '"[\\s\\S]*?</section>'));
+  return m ? m[0] : '';
+}
+function screenImages(html) {
+  return [...html.matchAll(/<img\b[^>]*>/g)].map(m => {
+    const tag = m[0];
+    const src = (tag.match(/src="([^"]+)"/) || [])[1] || '';
+    const alt = unesc((tag.match(/alt="([^"]*)"/) || [])[1] || '');
+    const base = path.basename(src).replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    return { img: PD.has(base) ? base : null, alt };
   });
+}
+function artistFromAlt(alt) {
+  const en = (alt.split(',')[0] || '').trim();
+  return NAMES[en] ? bil(NAMES[en], en) : null;
+}
+function artistNames(html) {
+  return [...html.matchAll(/class="artwork-artist"[^>]*>([^<]*)</g)].map(m => unesc(m[1]).trim());
+}
+
+/* one screen of a T-based lesson → one block of the template */
+function blockFromT(T, n, html) {
+  const he = T.he.s[n] || {}, en = T.en.s[n] || {};
+  const b = {};
+  for (const f of ['label', 'big', 'sub', 'note', 'ask', 'quote', 'attr', 'poem', 'body']) {
+    if (he[f] != null || en[f] != null) b[f] = bil(he[f], en[f]);
+  }
+  if (he.instr != null) b.sub = bil(he.instr, en.instr);
+  if (he.title != null && he.body != null) b.big = bil(he.title, en.title);   // artist screen: title of the work
+  for (const f of ['chips', 'opts', 'lines', 'parts', 'comp', 'obs', 'rel']) {
+    if (Array.isArray(he[f])) { b.chips = { he: he[f], en: en[f] || he[f] }; break; }
+  }
+  if (Array.isArray(he.i)) b.list = { he: he.i, en: en.i || he.i };
+  // q0..q2 / line0..line2: separate lines (skip the ones already in the heading)
+  const bigPlain = plain(he.big);
+  const ln = { he: [], en: [] };
+  for (const f of ['q0', 'q1', 'q2', 'q3', 'line0', 'line1', 'line2', 'line3']) {
+    if (he[f] == null) continue;
+    if (f.startsWith('line') && bigPlain.includes(plain(he[f]))) continue;
+    ln.he.push(he[f]); ln.en.push(en[f] || he[f]);
+  }
+  if (ln.he.length) b.lines = ln;
+  if (he.ph != null) b.prompt = bil(he.ph, en.ph);
+
+  const imgs = screenImages(html);
+  const works = [];
+  // gallery screens: cap1..cap3 with the screen's images in order
+  ['cap1', 'cap2', 'cap3'].forEach((c, k) => {
+    if (he[c] == null) return;
+    const im = imgs[k] || {};
+    const alt = (en.alts && en.alts[k]) || im.alt || '';
+    works.push({ img: im.img, alt, artist: artistFromAlt(alt), title: bil(he[c], en[c]) });
+  });
+  // artwork screens: art0title / artTitle / art1Title …
+  const names = artistNames(html);
+  let k = 0;
+  for (const key of Object.keys(he)) {
+    const m = key.match(/^art(\d?)[tT]itle$/);
+    if (!m) continue;
+    const nk = key.replace(/[tT]itle$/, m[0].includes('Title') ? 'Note' : 'note');
+    const im = imgs[k] || {};
+    const artEn = names[k] || (im.alt ? im.alt.split(',')[0].trim() : '');
+    works.push({ img: im.img, alt: im.alt, artist: NAMES[artEn] ? bil(NAMES[artEn], artEn) : null,
+                 title: bil(he[key], en[key]), note: bil(he[nk], en[nk]) });
+    k++;
+  }
+  if (works.length) b.works = works;
   return b;
 }
 
-const MAP = {
-  'lesson-2-1': {
-    file: 'lessons/lesson-2-1.html',
-    hero: { img: 'hokusai-great-wave-1831', pos: '28% 18%',
-            cap: { he: 'פרט מתוך: קצושיקה הוקוסאי, הגל הגדול מול קנגאווה, 1831', en: 'Detail: Katsushika Hokusai, The Great Wave off Kanagawa, 1831' } },
-    build(T) {
-      const F = ['label', 'big', 'sub', 'chips', 'note'];
-      return {
-        explore: { blocks: [block(T, 0, ['big', 'sub'])] },
-        sources: { works: [
-          { img: 'hokusai-great-wave-1831', alt: 'Katsushika Hokusai, The Great Wave off Kanagawa, 1831',
-            artist: { he: 'קצושיקה הוקוסאי', en: 'Katsushika Hokusai' },
-            title: { he: T.he.s[3].art0title, en: T.en.s[3].art0title },
-            note: { he: T.he.s[3].art0note, en: T.en.s[3].art0note } },
-          { img: 'morris-strawberry-thief-1883', alt: 'William Morris, Strawberry Thief, 1883',
-            artist: { he: 'ויליאם מוריס', en: 'William Morris' },
-            title: { he: T.he.s[3].art1title, en: T.en.s[3].art1title },
-            note: { he: T.he.s[3].art1note, en: T.en.s[3].art1note } }
-        ] },
-        look: { blocks: [block(T, 1, F), block(T, 2, F)] },
-        create: { steps: [block(T, 4, F), block(T, 5, F), block(T, 6, Object.assign([], F))] },
-        end: { blocks: [
-          /* the Escher work is still under copyright, so it is named here without its image */
-          Object.assign(block(T, 7, ['label', 'big', 'sub', 'note']), {}),
-          block(T, 8, ['label', 'big', 'sub'])
-        ] },
-        _extra: { escher: { he: 'מ. ק. אשר, ' + T.he.s[7].art2title, en: 'M. C. Escher, ' + T.en.s[7].art2title } }
-      };
-    }
+/* lessons without a T object: read data-he / data-en in document order */
+function blockFromDom(html) {
+  const b = {}; const chips = { he: [], en: [] };
+  const re = /<([a-z0-9]+)\b([^>]*?)\bdata-en="([^"]*)"\s+data-he="([^"]*)"[^>]*>/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const [, tag, attrs] = m; const en = unesc(m[3]), he = unesc(m[4]);
+    const before = html.slice(Math.max(0, m.index - 200), m.index);
+    if (/save|saved|All Units|Start Again|Course/.test(en) && /btn|saved|<a /.test(before + attrs)) continue;
+    if (/class="(big|mid)"/.test(attrs)) b.big = bil(he, en);
+    else if (/class="sub"/.test(attrs)) b.sub = bil(he, en);
+    else if (/choice-btn|swatch|shape-btn|sw-name/.test(attrs + before.slice(-120))) { chips.he.push(he); chips.en.push(en); }
+    else if (/eyebrow/.test(before.slice(-120)) && !b.label) b.label = bil(he, en);
   }
-};
+  if (chips.he.length) b.chips = chips;
+  const phEn = html.match(/data-placeholder-en="([^"]*)"/), phHe = html.match(/data-placeholder-he="([^"]*)"/);
+  if (phEn && phHe) b.prompt = bil(unesc(phHe[1]), unesc(phEn[1]));
+  return b;
+}
 
+function readT(src) {
+  const i = src.indexOf('const T = {');
+  if (i < 0) return null;
+  return resolveT(eval('(' + src.slice(i + 10, src.indexOf('\n};', i) + 2) + ')'));
+}
 function unitOf(p) {
   for (const u of NAV.units) if ((u.lessons || []).some(l => l.path === p)) return u;
   return null;
 }
 
+function pageHtml(id, title) {
+  return `<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<meta name="robots" content="noindex">
+<title>${title} · מקורות השראה באמנות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/design-system.css?v=3">
+<link rel="stylesheet" href="../css/lesson-page.css?v=5">
+</head>
+<body class="ed">
+<script src="../js/app-init.js?v=20260927-structure"></script>
+<script>document.body.classList.remove('dark');</script>
+
+<div class="pv" data-he="תצוגה מקדימה של תבנית שיעור חדשה. השיעור המקורי לא השתנה." data-en="Preview of a new lesson template. The original lesson has not changed.">תצוגה מקדימה של תבנית שיעור חדשה. השיעור המקורי לא השתנה.</div>
+
+<header class="ed-top" id="top">
+  <div class="ed-wrap">
+    <a class="ed-brand" href="../home-preview.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
+    <nav class="ed-nav">
+      <a href="../home-preview.html#journey" data-he="יחידות" data-en="Units">יחידות</a>
+      <a href="../home-preview.html#about" data-he="אודות" data-en="About">אודות</a>
+    </nav>
+    <span class="ed-spacer"></span>
+    <div class="ed-lang">
+      <button id="btn-he" onclick="setLang('he')">עברית</button><i>/</i><button id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+  </div>
+</header>
+
+<main id="lesson"></main>
+
+<footer class="ed-foot">
+  <div class="ed-wrap">
+    <span data-he="© 2025 מקורות השראה באמנות" data-en="© 2025 Sources of Inspiration in Art">© 2025 מקורות השראה באמנות</span>
+    <span class="ed-spacer"></span>
+    <a href="../privacy.html" data-he="מדיניות פרטיות" data-en="Privacy Policy">מדיניות פרטיות</a>
+    <a href="../terms.html" data-he="תנאי שימוש" data-en="Terms of Use">תנאי שימוש</a>
+  </div>
+</footer>
+
+<script src="../js/navigation-data.js"></script>
+<script src="../data/lesson-pages/index.js"></script>
+<script src="../data/lesson-pages/${id}.js"></script>
+<script src="../js/lesson-page.js?v=3"></script>
+<script src="../js/site-drawer.js?v=4" data-base="../"></script>
+<script src="../js/editorial.js?v=1"></script>
+</body>
+</html>
+`;
+}
+
+// ── build ──────────────────────────────────────────────────────
+const index = {};
 for (const [id, m] of Object.entries(MAP)) {
-  const T = readT(m.file);
-  const intro = INTROS[path.basename(m.file)];
-  const sections = m.build(T);
-  const extra = sections._extra || {};
-  delete sections._extra;
-  /* step 5 uses "opts" instead of "chips" in the slide lesson */
-  if (id === 'lesson-2-1') {
-    sections.create.steps[2].chips = { he: T.he.s[6].opts, en: T.en.s[6].opts };
-    sections.end.blocks[0].work = extra.escher;
+  const file = 'lessons/' + id + '.html';
+  const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const T = m.dom ? null : readT(src);
+  const intro = INTROS[id + '.html'];
+  if (!intro) throw new Error('no intro data for ' + id);
+  const sections = {};
+  for (const key of ['explore', 'sources', 'look', 'idea', 'create', 'end']) {
+    if (!m[key]) continue;
+    const blocks = m[key].map(n => {
+      const html = screenHtml(src, n);
+      return T ? blockFromT(T, n, html) : blockFromDom(html);
+    }).filter(b => Object.keys(b).length);
+    sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
   }
-  const u = unitOf(m.file);
+  const u = unitOf(file);
   const data = {
-    id, path: m.file, slides: m.file,
-    number: intro.number,
-    unit: intro.unit, unitNum: u.id.replace('unit', ''),
-    title: intro.title, time: intro.time,
-    intro: intro.description, materials: intro.materials,
-    hero: m.hero,
+    id, path: file, slides: file,
+    number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
+    title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
+    hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
     sections
   };
-  const out = path.join(ROOT, 'data/lesson-pages', id + '.js');
-  fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, '/* Generated by tools/build-lesson-data.js from ' + m.file + ' and js/lesson-intros-data.js. Do not edit by hand. */\nwindow.LESSON_PAGE = ' + JSON.stringify(data, null, 1) + ';\n');
-  console.log('wrote', path.relative(ROOT, out));
+  fs.mkdirSync(path.join(ROOT, 'data/lesson-pages'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'data/lesson-pages', id + '.js'),
+    '/* Generated by tools/build-lesson-data.js from ' + file + ' and js/lesson-intros-data.js. Do not edit by hand. */\nwindow.LESSON_PAGE = ' + JSON.stringify(data, null, 1) + ';\n');
+  fs.mkdirSync(path.join(ROOT, 'lesson-pages'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'), pageHtml(id, plain(intro.title.he)));
+  index[file] = 'lesson-pages/' + id + '.html';
+  const count = Object.values(sections).reduce((a, s) => a + (s.blocks || s.steps).length, 0);
+  console.log(id.padEnd(24), count, 'blocks');
 }
+fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),
+  '/* Generated by tools/build-lesson-data.js: lessons that have a page in the lesson template. */\nwindow.LESSON_PAGES_INDEX = ' + JSON.stringify(index, null, 1) + ';\n');
