@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<meta name="robots" content="noindex">
+<title>מקורות השראה באמנות · תצוגה מקדימה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f6f3; --paper:#ffffff; --ink:#161514; --muted:#66635e; --line:#e2e0db;
+  --accent:#d23a2c; --accent-ink:#ffffff; --chip:#ecebe7;
+  --display:'Frank Ruhl Libre',Georgia,'Times New Roman',serif;
+  --text:'IBM Plex Sans Hebrew',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --wrap:1180px;
+}
+body.dark{
+  --bg:#121211; --paper:#1a1a19; --ink:#f1efea; --muted:#a4a19b; --line:#2c2b29;
+  --accent:#ff5b4a; --accent-ink:#121211; --chip:#242422;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+
+/* ── Header ── */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:1.15rem;white-space:nowrap}
+.brand-mark{width:14px;height:14px;background:var(--accent);flex-shrink:0}
+.nav{display:flex;gap:24px;font-size:.95rem}
+.nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.spacer{flex:1}
+.tools{display:flex;align-items:center;gap:8px}
+.tools button{font:inherit;font-size:.82rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 12px;cursor:pointer}
+.tools button.active{color:var(--ink);border-color:var(--ink)}
+.tools button:focus-visible,.btn:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:860px){.nav{display:none}}
+@media (max-width:600px){.top .wrap{gap:12px;height:60px}.brand{white-space:normal;font-size:1rem;line-height:1.2;min-width:0}.tools{gap:5px;flex-shrink:0}.tools button{padding:4px 9px}}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:600;font-size:1rem;text-decoration:none;padding:14px 26px;border-radius:999px;border:1.5px solid var(--ink);transition:transform .2s,background .2s,color .2s}
+.btn-solid{background:var(--ink);color:var(--bg)}
+.btn-solid:hover{transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+.btn-accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-accent:hover{transform:translateY(-2px)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── Hero ── */
+.hero{padding-block:72px 88px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{font-size:.85rem;letter-spacing:.08em;color:var(--accent);font-weight:600;margin:0 0 20px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(3rem,7.5vw,6rem);line-height:.98;letter-spacing:-.01em;margin:0 0 28px;text-wrap:balance}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0 0 36px}
+.mosaic{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:auto auto;gap:14px}
+.mosaic figure{margin:0;position:relative;overflow:hidden;background:var(--chip)}
+.mosaic img{width:100%;height:100%;object-fit:cover}
+.mosaic .m1{grid-column:1 / -1;aspect-ratio:16/9}
+.mosaic .m2,.mosaic .m3{aspect-ratio:4/5}
+.mosaic figcaption{position:absolute;inset-inline-start:0;bottom:0;background:var(--bg);color:var(--ink);font-size:.72rem;line-height:1.4;padding:6px 10px}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:40px}.hero{padding-block:40px 56px}}
+
+/* ── Section heads ── */
+.sec{padding-block:88px;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:48px}
+.sec-head h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;margin:0;text-wrap:balance}
+.sec-head p{color:var(--muted);margin:0;max-width:36em}
+@media (max-width:800px){.sec{padding-block:56px}.sec-head{grid-template-columns:1fr;gap:16px;margin-bottom:32px}}
+
+/* ── Units list ── */
+.units{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.unit{border-bottom:1px solid var(--line)}
+.unit a{display:grid;grid-template-columns:64px 120px 1fr auto;gap:28px;align-items:center;padding-block:22px;text-decoration:none}
+.unit .num{font-family:var(--display);font-size:1.6rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.unit .thumb{width:120px;aspect-ratio:4/3;overflow:hidden;background:var(--chip)}
+.unit .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.unit a:hover .thumb img{transform:scale(1.06)}
+.unit h3{font-family:var(--display);font-weight:700;font-size:1.45rem;line-height:1.2;margin:0 0 4px}
+.unit p{margin:0;color:var(--muted);font-size:.95rem;max-width:44em}
+.status{font-size:.8rem;font-weight:600;white-space:nowrap;padding:5px 12px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.status.open{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:700px){
+  .unit a{grid-template-columns:84px 1fr;grid-template-areas:"thumb text" "thumb status";gap:6px 16px;align-items:start;padding-block:18px}
+  .unit .num{display:none}
+  .unit .thumb{grid-area:thumb;width:84px}
+  .unit .txt{grid-area:text}
+  .unit .status{grid-area:status;justify-self:start}
+  .unit h3{font-size:1.2rem}
+}
+
+/* ── Lesson steps ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.step{padding:24px 24px 8px 0;border-inline-end:1px solid var(--line)}
+.step:last-child{border-inline-end:none}
+html[dir="rtl"] .step{padding:24px 0 8px 24px}
+.step .n{font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--accent);margin-bottom:16px}
+.step h3{font-size:1.1rem;margin:0 0 8px}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-inline-end:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.step{border-inline-end:none;border-bottom:1px solid var(--line);padding-bottom:20px}}
+
+/* ── Sample lesson band ── */
+.band{display:grid;grid-template-columns:1fr 1fr;min-height:420px;background:var(--ink);color:var(--bg)}
+.band figure{margin:0;overflow:hidden}
+.band img{width:100%;height:100%;object-fit:cover}
+.band .txt{padding:56px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.band h2{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:0}
+.band p{margin:0;opacity:.75;max-width:30em}
+.band .btn{align-self:flex-start;border-color:var(--bg);color:var(--bg)}
+.band .btn:hover{background:var(--bg);color:var(--ink)}
+@media (max-width:800px){.band{grid-template-columns:1fr}.band figure{aspect-ratio:16/10}.band .txt{padding:32px 20px}}
+
+/* ── Contact ── */
+.contact{text-align:center}
+.contact h2{font-family:var(--display);font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;margin:0 0 16px;text-wrap:balance}
+.contact p{color:var(--muted);margin:0 auto 32px;max-width:32em}
+.contact .btns{justify-content:center}
+.btn-wa{background:#1fa855;border-color:#1fa855;color:#fff}
+.btn-wa:hover{transform:translateY(-2px)}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--line);padding-block:40px;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center}
+footer .brand{color:var(--ink)}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+.preview-note{background:var(--accent);color:var(--accent-ink);text-align:center;font-size:.85rem;padding:8px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<script src="js/app-init.js?v=20260927-structure"></script>
+<script>
+/* Preview: light by default; dark only if chosen */
+(function(){ try{ if(localStorage.getItem('sourcesTheme')!=='dark') document.body.classList.remove('dark'); }catch(e){ document.body.classList.remove('dark'); } })();
+</script>
+
+<div class="preview-note" data-he="תצוגה מקדימה של עיצוב חדש לדף הבית. האתר עצמו לא השתנה." data-en="Preview of a new home page design. The live site has not changed.">תצוגה מקדימה של עיצוב חדש לדף הבית. האתר עצמו לא השתנה.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="home-preview.html"><span class="brand-mark"></span><span data-he="מקורות השראה באמנות" data-en="Sources of Inspiration in Art">מקורות השראה באמנות</span></a>
+    <nav class="nav">
+      <a href="course.html" data-he="תכנית הלימודים" data-en="Curriculum">תכנית הלימודים</a>
+      <a href="lesson.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+      <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+      <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
+    </nav>
+    <span class="spacer"></span>
+    <div class="tools">
+      <button id="btn-he" onclick="setLang('he')">עברית</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+      <button id="theme-btn" onclick="toggleTheme()" aria-label="Theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" data-he="תכנית לימודים באמנות לבתי ספר" data-en="An art curriculum for schools">תכנית לימודים באמנות לבתי ספר</p>
+        <h1 data-he="מקורות השראה באמנות" data-en="Sources of Inspiration in Art">מקורות השראה באמנות</h1>
+        <p class="lead" data-he="שבע יחידות שחוקרות מאין מגיעה יצירתיות. מתבוננים ביצירות, שואלים שאלות, ומתנסים בציור מתוך רגש, טבע, מוזיקה, זיכרון ותרבות." data-en="Seven units that explore where creativity comes from. Students look at artworks, ask questions, and paint from emotion, nature, music, memory and culture.">שבע יחידות שחוקרות מאין מגיעה יצירתיות. מתבוננים ביצירות, שואלים שאלות, ומתנסים בציור מתוך רגש, טבע, מוזיקה, זיכרון ותרבות.</p>
+        <div class="btns">
+          <a class="btn btn-solid" href="course.html" data-he="לתכנית הלימודים" data-en="See the curriculum">לתכנית הלימודים</a>
+          <a class="btn btn-line" href="lesson.html" data-he="נסו שיעור לדוגמה" data-en="Try a sample lesson">נסו שיעור לדוגמה</a>
+        </div>
+      </div>
+      <div class="mosaic">
+        <figure class="m1"><img src="lessons/images/hokusai-great-wave-1831.jpg" alt="Katsushika Hokusai, The Great Wave off Kanagawa"><figcaption data-he="הוקוסאי, הגל הגדול, 1831" data-en="Hokusai, The Great Wave, 1831">הוקוסאי, הגל הגדול, 1831</figcaption></figure>
+        <figure class="m2"><img src="lessons/images/munch-scream.jpg" alt="Edvard Munch, The Scream"><figcaption data-he="מונק, הצעקה, 1893" data-en="Munch, The Scream, 1893">מונק, הצעקה, 1893</figcaption></figure>
+        <figure class="m3"><img src="lessons/images/kandinsky-yellow-red-blue.jpg" alt="Wassily Kandinsky, Yellow-Red-Blue"><figcaption data-he="קנדינסקי, צהוב־אדום־כחול, 1925" data-en="Kandinsky, Yellow-Red-Blue, 1925">קנדינסקי, צהוב־אדום־כחול, 1925</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="units">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-he="מאין מגיעה יצירתיות?" data-en="Where does creativity come from?">מאין מגיעה יצירתיות?</h2>
+        <p data-he="בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין." data-en="Each unit introduces a different source of inspiration. Students look closely, talk about what they notice, and make their own work.">בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין.</p>
+      </div>
+      <ol class="units">
+        <li class="unit"><a href="course.html#unit00"><span class="num">00</span><span class="thumb"><img src="lessons/images/friedrich-wanderer.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="יסודות ההשראה" data-en="Foundations of Inspiration">יסודות ההשראה</h3><p data-he="לפני שיוצרים, לומדים לראות. התלמידים בוחנים איך המוח מארגן מידע חזותי, מגלים שלושה אופני ראייה ומתרגלים מעבר ביניהם." data-en="Before we create, we learn to see. Students examine how the brain organises visual information, discover three modes of seeing, and practise shifting between them.">לפני שיוצרים, לומדים לראות. התלמידים בוחנים איך המוח מארגן מידע חזותי, מגלים שלושה אופני ראייה ומתרגלים מעבר ביניהם.</p></span><span class="status" data-he="בפיתוח" data-en="In development">בפיתוח</span></a></li>
+        <li class="unit"><a href="course.html#unit01"><span class="num">01</span><span class="thumb"><img src="lessons/images/munch-scream.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="חוויה אישית כמקור השראה" data-en="Personal Experience as a Source of Inspiration">חוויה אישית כמקור השראה</h3><p data-he="איך הופכים חוויה אישית לציור? התלמידים עובדים עם רגשות, זיכרונות ורישומים ביומן, ובוחנים איך לבטא אותם בקו, בצבע ובקומפוזיציה." data-en="How does a personal experience become a painting? Students work with feelings, memories and a journal, in line, colour and composition.">איך הופכים חוויה אישית לציור? התלמידים עובדים עם רגשות, זיכרונות ורישומים ביומן, ובוחנים איך לבטא אותם בקו, בצבע ובקומפוזיציה.</p></span><span class="status open" data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span></a></li>
+        <li class="unit"><a href="course.html#unit02"><span class="num">02</span><span class="thumb"><img src="lessons/images/monet-water-lilies.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="טבע כמקור השראה" data-en="Nature as Inspiration">טבע כמקור השראה</h3><p data-he="משושני המים של מונה עד גיאומטריית העלה. התלמידים מגלים כיצד העולם הטבעי עורר אמנים בכל התקופות." data-en="From Monet’s water lilies to the geometry of a leaf. Students discover how the natural world has inspired artists in every period.">משושני המים של מונה עד גיאומטריית העלה. התלמידים מגלים כיצד העולם הטבעי עורר אמנים בכל התקופות.</p></span><span class="status open" data-he="4 שיעורים" data-en="4 lessons">4 שיעורים</span></a></li>
+        <li class="unit"><a href="course.html#unit03"><span class="num">03</span><span class="thumb"><img src="lessons/images/kandinsky-composition8.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="מוזיקה וריתמוס באמנות" data-en="Music and Rhythm in Art">מוזיקה וריתמוס באמנות</h3><p data-he="אפשר לצייר צליל? התלמידים חוקרים סינאסתזיה אצל קנדינסקי, אמנות אבסטרקטית בהשראת ג׳אז ואיך ריתמוס הופך תנועה ויזואלית." data-en="Can you paint a sound? Students explore Kandinsky’s synesthesia, jazz-inspired abstract art, and how rhythm becomes visual movement.">אפשר לצייר צליל? התלמידים חוקרים סינאסתזיה אצל קנדינסקי, אמנות אבסטרקטית בהשראת ג׳אז ואיך ריתמוס הופך תנועה ויזואלית.</p></span><span class="status" data-he="בפיתוח" data-en="In development">בפיתוח</span></a></li>
+        <li class="unit"><a href="course.html#unit04"><span class="num">04</span><span class="thumb"><img src="lessons/images/pissarro-boulevard-montmartre-1897.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="זיכרון וזהות" data-en="Memory and Identity">זיכרון וזהות</h3><p data-he="מתבוננים ביצירות של קאלו, שאגאל ואמנים נוספים, ובוחנים איך זיכרון מקבל צורה בציור. בעקבות ההתבוננות יוצרים דיוקן אישי." data-en="Students explore how Frida Kahlo, Marc Chagall and other artists used memories in their work, then create a portrait that expresses something about themselves.">מתבוננים ביצירות של קאלו, שאגאל ואמנים נוספים, ובוחנים איך זיכרון מקבל צורה בציור. בעקבות ההתבוננות יוצרים דיוקן אישי.</p></span><span class="status" data-he="בפיתוח" data-en="In development">בפיתוח</span></a></li>
+        <li class="unit"><a href="course.html#unit05"><span class="num">05</span><span class="thumb"><img src="lessons/images/morris-strawberry-thief-1883.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="תרבות וסמלים" data-en="Culture and Symbols">תרבות וסמלים</h3><p data-he="אמנות כשפה תרבותית. התלמידים מפענחים סמלים ויזואליים ממסורות עולמיות ויוצרים עבודה שמכבדת את המורשת התרבותית." data-en="Art as cultural language. Students decode visual symbols from world traditions and create work that honours and reimagines cultural heritage.">אמנות כשפה תרבותית. התלמידים מפענחים סמלים ויזואליים ממסורות עולמיות ויוצרים עבודה שמכבדת את המורשת התרבותית.</p></span><span class="status" data-he="בפיתוח" data-en="In development">בפיתוח</span></a></li>
+        <li class="unit"><a href="course.html#unit06"><span class="num">06</span><span class="thumb"><img src="lessons/images/turner-snowstorm.jpg" alt="" loading="lazy"></span><span class="txt"><h3 data-he="פיתוח סגנון אישי" data-en="Developing a Personal Style">פיתוח סגנון אישי</h3><p data-he="היחידה המסכמת. התלמידים משלבים את כל מה שלמדו לפיתוח הקול האמנותי שלהם." data-en="The final unit. Students bring together everything they have learned to develop their own artistic voice.">היחידה המסכמת. התלמידים משלבים את כל מה שלמדו לפיתוח הקול האמנותי שלהם.</p></span><span class="status" data-he="בפיתוח" data-en="In development">בפיתוח</span></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-he="איך בנוי שיעור" data-en="How a lesson works">איך בנוי שיעור</h2>
+        <p data-he="כל שיעור מוקרן בכיתה מסך אחרי מסך, ומוביל מהתבוננות לעבודה מעשית." data-en="Each lesson is projected in class one screen at a time, and leads from looking to making.">כל שיעור מוקרן בכיתה מסך אחרי מסך, ומוביל מהתבוננות לעבודה מעשית.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3 data-he="מתבוננים" data-en="Look">מתבוננים</h3><p data-he="יצירה של אמן פותחת את השיעור, עם שאלה אחת שמזמינה להסתכל לאט." data-en="An artwork opens the lesson, with one question that invites slow looking.">יצירה של אמן פותחת את השיעור, עם שאלה אחת שמזמינה להסתכל לאט.</p></div>
+        <div class="step"><div class="n">2</div><h3 data-he="בוחרים נקודת מוצא" data-en="Find a starting point">בוחרים נקודת מוצא</h3><p data-he="רגש, זיכרון, מקום או צבע. כל תלמיד מוצא ממה להתחיל." data-en="A feeling, a memory, a place or a colour. Each student finds where to begin.">רגש, זיכרון, מקום או צבע. כל תלמיד מוצא ממה להתחיל.</p></div>
+        <div class="step"><div class="n">3</div><h3 data-he="עובדים" data-en="Make">עובדים</h3><p data-he="הנחיות קצרות, שלב אחרי שלב, בקו, בצבע ובקומפוזיציה." data-en="Short instructions, step by step, in line, colour and composition.">הנחיות קצרות, שלב אחרי שלב, בקו, בצבע ובקומפוזיציה.</p></div>
+        <div class="step"><div class="n">4</div><h3 data-he="מתבוננים בעבודה" data-en="Reflect">מתבוננים בעבודה</h3><p data-he="בסוף השיעור עוצרים, מסתכלים על מה שנוצר ושואלים מה גילינו." data-en="At the end, students stop, look at what they made and ask what they discovered.">בסוף השיעור עוצרים, מסתכלים על מה שנוצר ושואלים מה גילינו.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="sample-title">
+    <figure><img src="lessons/images/monet-haystacks-1891.jpg" alt="Claude Monet, Haystacks"></figure>
+    <div class="txt">
+      <h2 id="sample-title" data-he="נסו שיעור בעצמכם" data-en="Try a lesson yourself">נסו שיעור בעצמכם</h2>
+      <p data-he="השיעור לדוגמה פתוח לכולם. אפשר לעבור עליו מהטלפון, מהמחשב או על מסך בכיתה." data-en="The sample lesson is open to everyone. Go through it on a phone, a computer or a classroom screen.">השיעור לדוגמה פתוח לכולם. אפשר לעבור עליו מהטלפון, מהמחשב או על מסך בכיתה.</p>
+      <a class="btn" href="lesson.html" data-he="לשיעור לדוגמה" data-en="Open the sample lesson">לשיעור לדוגמה</a>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="wrap">
+      <h2 data-he="רוצים להכניס את התכנית לבית הספר?" data-en="Interested in the curriculum for your school?">רוצים להכניס את התכנית לבית הספר?</h2>
+      <p data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו." data-en="For questions, a price quote or to arrange a demo, write to us.">לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.</p>
+      <div class="btns">
+        <a class="btn btn-accent" href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" data-he="צרו קשר במייל" data-en="Email us">צרו קשר במייל</a>
+        <a class="btn btn-wa" href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" target="_blank" rel="noopener" data-he="וואטסאפ" data-en="WhatsApp">וואטסאפ</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="home-preview.html"><span class="brand-mark"></span><span data-he="מקורות השראה באמנות" data-en="Sources of Inspiration in Art">מקורות השראה באמנות</span></a>
+    <nav>
+      <a href="course.html" data-he="תכנית הלימודים" data-en="Curriculum">תכנית הלימודים</a>
+      <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+      <a href="privacy.html" data-he="מדיניות פרטיות" data-en="Privacy Policy">מדיניות פרטיות</a>
+      <a href="terms.html" data-he="תנאי שימוש" data-en="Terms of Use">תנאי שימוש</a>
+    </nav>
+    <span class="spacer"></span>
+    <span data-he="© 2025 מקורות השראה באמנות" data-en="© 2025 Sources of Inspiration in Art">© 2025 מקורות השראה באמנות</span>
+  </div>
+</footer>
+</body>
+</html>
