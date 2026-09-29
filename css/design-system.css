@@ -100,6 +100,9 @@ body.ed-open{overflow:hidden}
 .rv-img{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
 .rv-img.in{clip-path:inset(0 0 0 0)}
 
+/* preview notice (prototype only) */
+.pv{background:var(--ink);color:var(--paper);font-size:.8rem;text-align:center;padding:6px 16px}
+
 /* footer */
 .ed-foot{border-top:1px solid var(--rule);padding-block:36px 96px;font-size:.88rem;color:var(--muted)}
 .ed-foot .ed-wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}

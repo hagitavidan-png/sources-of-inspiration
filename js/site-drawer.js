@@ -10,8 +10,8 @@
   var script = document.currentScript;
   var BASE = (script && script.getAttribute('data-base')) || '';
 
-  /* unit landing pages that already exist; the rest open in the curriculum page */
-  var UNIT_PAGES = { unit01: 'lessons/personal-experience.html' };
+  /* each unit has its own page: units/unit-00.html … units/unit-06.html */
+  function unitPage(id) { return 'units/unit-' + id.replace('unit', '') + '.html'; }
 
   var UI = {
     he: { open: 'תוכן', title: 'תוכן האתר', close: 'סגירה', soon: 'בפיתוח' },
@@ -34,7 +34,7 @@
     var html = '';
     nav.units.forEach(function (u) {
       var num = u.id.replace('unit', '');
-      var href = BASE + (UNIT_PAGES[u.id] || ('course.html#' + u.id));
+      var href = BASE + unitPage(u.id);
       html += '<div class="ed-unit"><h3><span>' + num + '</span><a href="' + href + '">' + esc(u.title[L]) + '</a></h3>';
       if (u.lessons && u.lessons.length) {
         html += '<ol>';
