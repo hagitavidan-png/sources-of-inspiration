@@ -16,9 +16,7 @@
       },
       {
         "label": "הונדרטוואסר",
-        "quote": "אני מצייר את מה שאני חי.",
-        "attr": "הונדרטוואסר",
-        "sub": "הספירלה חוזרת שוב ושוב בציורים שלו."
+        "sub": "אצל הונדרטוואסר הספירלה חוזרת שוב ושוב. הוא התחיל לצייר אותה כבר ב־1953, והיא הפכה לאחד המוטיבים המזוהים עם עבודתו."
       },
       {
         "label": "אספו",
@@ -107,9 +105,7 @@
       },
       {
         "label": "Hundertwasser",
-        "quote": "I draw what I live.",
-        "attr": "Hundertwasser",
-        "sub": "The spiral appears again and again in his paintings."
+        "sub": "The spiral appears again and again in Hundertwasser's work. He began exploring it in 1953, and it became one of the recurring motifs associated with his art."
       },
       {
         "label": "Gather",
@@ -189,5 +185,6 @@
         "sub": "Something that keeps coming back can start to become part of your language."
       }
     ]
-  }
+  },
+  "_sources": "Hundertwasser screen: Hundertwasser, The Spiral, 1974 (hundertwasser.com/en/texts/die_spirale); catalogue: The Mountain and the Sun – First Spiraloid, 1953 (hundertwasser.com/en/paintings/163)."
 }

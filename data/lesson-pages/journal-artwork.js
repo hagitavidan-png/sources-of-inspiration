@@ -64,16 +64,8 @@ window.LESSON_PAGE = {
       "en": "Hundertwasser"
      },
      "sub": {
-      "he": "הספירלה חוזרת שוב ושוב בציורים שלו.",
-      "en": "The spiral appears again and again in his paintings."
-     },
-     "quote": {
-      "he": "אני מצייר את מה שאני חי.",
-      "en": "I draw what I live."
-     },
-     "attr": {
-      "he": "הונדרטוואסר",
-      "en": "Hundertwasser"
+      "he": "אצל הונדרטוואסר הספירלה חוזרת שוב ושוב. הוא התחיל לצייר אותה כבר ב־1953, והיא הפכה לאחד המוטיבים המזוהים עם עבודתו.",
+      "en": "The spiral appears again and again in Hundertwasser's work. He began exploring it in 1953, and it became one of the recurring motifs associated with his art."
      }
     }
    ]
