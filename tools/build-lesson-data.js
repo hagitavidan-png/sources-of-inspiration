@@ -49,7 +49,7 @@ const MAP = {
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
      screen 9 opens it, 10-12 are three parallel experiments, 13 closes the lesson. */
-  'experience-experiments': { hero: ['munch-scream', '50% 12%'], variant: 'v2',
+  'experience-experiments': { variant: 'v2',   /* no cover image: The Scream appears with Munch in "sources" */
     layout: { idea: 'flow', create: 'lab' },
     explore: ['0:nolabel'],
     sources: [{ s: 1, work: [4, 0] }, { s: 2, work: [4, 1] }, { s: 3, work: [4, 2] }],

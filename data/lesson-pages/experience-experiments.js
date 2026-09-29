@@ -30,14 +30,7 @@ window.LESSON_PAGE = {
   "he": "שלושה דפים קטנים, עיפרון, פחם או טוש, וצבעים לבחירה",
   "en": "Three small sheets, a pencil, charcoal or marker, and colours of your choice"
  },
- "hero": {
-  "img": "munch-scream",
-  "pos": "50% 12%",
-  "cap": {
-   "he": "פרט מתוך: אדוורד מונק, הצעקה, 1893",
-   "en": "Detail: Edvard Munch, The Scream, 1893"
-  }
- },
+ "hero": null,
  "sections": {
   "explore": {
    "blocks": [
