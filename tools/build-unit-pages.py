@@ -100,6 +100,9 @@ WORKS = {
 
 DUR = {'Full Session': 'שיעור מלא'}
 
+# lessons that already have a page in the new lesson template
+NEW_LESSON_PAGES = {'lessons/lesson-2-1.html': 'lesson-pages/lesson-2-1.html'}
+
 
 # ── helpers ───────────────────────────────────────────────────────
 def a(tag, name):
@@ -288,7 +291,7 @@ def render(u, units):
         cap = f'<span class="cap">{t(l["cap"]["he"], l["cap"]["en"])}</span>' if l['cap']['he'] else ''
         tags = ' · '.join(t(*tag_text(tg)) for tg in l['tags'])
         if l['href']:
-            act = f'<a class="ed-cta" href="{B}{l["href"]}">{t("לשיעור", "Open lesson")}<span class="arr" data-he="←" data-en="→">←</span></a>'
+            act = f'<a class="ed-cta" href="{B}{NEW_LESSON_PAGES.get(l["href"], l["href"])}">{t("לשיעור", "Open lesson")}<span class="arr" data-he="←" data-en="→">←</span></a>'
         else:
             act = f'<span class="soon">{t("בפיתוח", "In development")}</span>'
         desc = ''
@@ -335,8 +338,8 @@ def render(u, units):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{B}css/design-system.css?v=2">
-<link rel="stylesheet" href="{B}css/unit-page.css?v=1">
+<link rel="stylesheet" href="{B}css/design-system.css?v=3">
+<link rel="stylesheet" href="{B}css/unit-page.css?v=2">
 </head>
 <body class="ed">
 <script src="{B}js/app-init.js?v=20260927-structure"></script>
@@ -413,7 +416,7 @@ def render(u, units):
 </footer>
 
 <script src="{B}js/navigation-data.js"></script>
-<script src="{B}js/site-drawer.js?v=2" data-base="{B}"></script>
+<script src="{B}js/site-drawer.js?v=3" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>
 </html>

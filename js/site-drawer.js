@@ -11,6 +11,8 @@
   var BASE = (script && script.getAttribute('data-base')) || '';
 
   /* each unit has its own page: units/unit-00.html … units/unit-06.html */
+  /* lessons that already have a page in the new lesson template */
+  var LESSON_PAGES = { 'lessons/lesson-2-1.html': 'lesson-pages/lesson-2-1.html' };
   function unitPage(id) { return 'units/unit-' + id.replace('unit', '') + '.html'; }
 
   var UI = {
@@ -39,7 +41,7 @@
       if (u.lessons && u.lessons.length) {
         html += '<ol>';
         u.lessons.forEach(function (l) {
-          html += '<li><a href="' + BASE + l.path + '">' + esc(l.title[L]) + '</a></li>';
+          html += '<li><a href="' + BASE + (LESSON_PAGES[l.path] || l.path) + '">' + esc(l.title[L]) + '</a></li>';
         });
         html += '</ol>';
       } else {
