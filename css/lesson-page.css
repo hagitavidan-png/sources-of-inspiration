@@ -265,3 +265,17 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-layout-pieces .lp-steps > li:nth-child(2){margin-inline-start:clamp(14px,5vw,56px);margin-top:-6px}
 .lp-v2 .lp-layout-pieces .lp-steps > li:nth-child(3){margin-inline-start:clamp(6px,2vw,22px);margin-top:-6px}
 .lp-v2 .lp-layout-pieces .lp-frames{margin:14px 0 4px}
+
+/* 1.4 polish: the artwork window (name, short text, link to the museum) */
+.lp-v2 .lp-ed-work.lp-window{max-width:620px;padding:clamp(28px,4vw,44px) 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule-strong)}
+.lp-v2 .lp-ed-work.lp-window .lp-ed-artist{font-size:clamp(2.2rem,4vw,3rem)}
+.lp-v2 .lp-ed-work.lp-window .lp-ed-title{font-size:1.05rem;color:var(--ink-2)}
+.lp-v2 .lp-window .lp-ext{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:12px 20px;border:1px solid var(--ink);border-radius:2px;font-weight:600;transition:background .25s,color .25s}
+.lp-v2 .lp-window .lp-ext:hover{background:var(--ink);color:var(--paper)}
+
+/* 1.4 polish: arranging options as words on the page, not app buttons */
+.lp-v2 .lp-layout-pieces .lp-chips{gap:10px 26px}
+.lp-v2 .lp-layout-pieces .lp-chip{background:none;border:0;border-bottom:1px dashed var(--rule-strong);border-radius:0;padding:4px 2px;color:var(--ink-2)}
+.lp-v2 .lp-layout-pieces .lp-chip:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.lp-v2 .lp-layout-pieces .lp-chip[aria-pressed="true"]{background:none;color:var(--ink);border-bottom:1.5px solid var(--ink)}
+.lp-v2 .lp-layout-pieces .lp-chip[aria-pressed="true"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-inline-end:8px;vertical-align:middle}

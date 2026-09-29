@@ -72,8 +72,8 @@ window.LESSON_PAGE = {
        "link": {
         "href": "https://www.moma.org/collection/works/78984",
         "label": {
-         "he": "לצפייה ביצירה באתר MoMA ↗",
-         "en": "View the work on the MoMA website ↗"
+         "he": "פתחו את היצירה באתר MoMA ↗",
+         "en": "Open the work on the MoMA website ↗"
         }
        }
       }

@@ -348,7 +348,7 @@ def render(u, units):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{B}css/design-system.css?v=5">
+<link rel="stylesheet" href="{B}css/design-system.css?v=6">
 <link rel="stylesheet" href="{B}css/unit-page.css?v=2">
 </head>
 <body class="ed" data-unit="{u['id']}">
@@ -427,7 +427,7 @@ def render(u, units):
 
 <script src="{B}js/navigation-data.js"></script>
 <script src="{B}data/lesson-pages/index.js"></script>
-<script src="{B}js/site-drawer.js?v=7" data-base="{B}"></script>
+<script src="{B}js/site-drawer.js?v=8" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>
 </html>

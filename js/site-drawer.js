@@ -154,6 +154,14 @@
       el.addEventListener('click', function (e) { e.preventDefault(); open(); });
     });
 
+    /* on small screens the button steps aside while the previous / next links are in view */
+    var pager = document.querySelector('.unit-nav');
+    if (pager && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { btn.classList.toggle('is-tucked', e.isIntersecting); });
+      }).observe(pager);
+    }
+
     build();
     /* rebuild when the site language changes (open units are kept) */
     if (typeof window.setLang === 'function') {

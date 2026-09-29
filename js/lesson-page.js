@@ -66,7 +66,8 @@
   /* pilot: artworks as a magazine sequence; images keep their full proportions (no crop) */
   function edWork(w, k) {
     /* a work without a usable image is shown by its title only, set as part of the page */
-    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + ' rv">' +
+    /* a work shown by name with a link to its museum: an intentional "window", not a missing image */
+    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + (w.link && !w.img ? ' lp-window' : '') + ' rv">' +
       (w.img ? '<div class="lp-ed-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>' : '') +
       '<figcaption>' + (w.noArtist ? '' : t(w.artist, 'b', 'lp-ed-artist')) + t(w.workTitle, 'span', 'lp-ed-title') +
       t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') +

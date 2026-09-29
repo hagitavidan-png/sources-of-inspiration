@@ -75,6 +75,7 @@ body.ed{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-te
 .ed-toc-btn{position:fixed;z-index:60;bottom:22px;inset-inline-start:22px;display:flex;align-items:center;gap:10px;font:inherit;font-size:.9rem;font-weight:600;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:11px 18px 11px 16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:transform .3s var(--ease)}
 .ed-toc-btn:hover{transform:translateY(-2px)}
 .ed-toc-btn svg{flex-shrink:0}
+@media (max-width:720px){.ed-toc-btn{transition:transform .3s var(--ease),opacity .3s}.ed-toc-btn.is-tucked{opacity:0;visibility:hidden;transform:translateY(12px)}}
 .ed-scrim{position:fixed;inset:0;z-index:70;background:rgba(28,26,23,.32);opacity:0;pointer-events:none;transition:opacity .4s}
 .ed-drawer{position:fixed;z-index:80;top:0;bottom:0;inset-inline-start:0;width:min(440px,92vw);background:var(--paper);border-inline-end:1px solid var(--rule);transform:translateX(100%);transition:transform .5s var(--ease);display:flex;flex-direction:column;visibility:hidden}
 html[dir="ltr"] .ed-drawer{transform:translateX(-100%)}
