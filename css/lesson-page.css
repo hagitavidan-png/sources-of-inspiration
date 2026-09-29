@@ -144,3 +144,22 @@
 .lp-v2 .lp-steps > li{padding-inline-start:clamp(18px,3vw,28px);border-inline-start:1px solid var(--rule-strong);margin-bottom:clamp(24px,3vw,36px)}
 .lp-v2 .lp-steps > li + li .lp-block{border-top:0;padding-top:6px}
 .lp-v2 .lp-list li{padding:6px 0}
+
+/* pilot, small screens: compact inside a station, clear breathing space between stations */
+@media (max-width:700px){
+  .lp-v2 .lp-station{padding-bottom:64px}
+  .lp-v2 .lp-station + .lp-station::before{height:44px;margin-bottom:26px}
+  .lp-v2 .lp-sec-head{padding-bottom:14px;margin-bottom:22px}
+  .lp-v2 .lp-lead{margin-bottom:20px}
+  .lp-v2 .lp-block{padding-block:4px 18px}
+  .lp-v2 .lp-block + .lp-block{padding-top:18px}
+  .lp-v2 .lp-ed-works{gap:34px;margin:18px 0 4px}
+  .lp-v2 .lp-ed-work figcaption{margin-top:10px}
+  .lp-v2 .lp-ed-text{margin-top:6px}
+  .lp-v2 .lp-ask{margin-top:18px;padding-top:14px}
+  .lp-v2 .lp-quote{margin-bottom:12px}
+  .lp-v2 .lp-steps > li{margin-bottom:14px}
+  .lp-v2 .lp-sub-sec + .lp-sub-sec{margin-top:24px}
+  .lp-v2 .lp-materials{padding:14px 0}
+  .lp-v2 .lp-sub-title{margin-bottom:12px}
+}

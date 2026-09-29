@@ -74,18 +74,6 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "הסתכלו על הקווים האלה",
-      "en": "Look at these lines"
-     },
-     "big": {
-      "he": "מה הם מרגישים?",
-      "en": "How do they feel?"
-     },
-     "ask": {
-      "he": "רגוע? מתוח? נע?",
-      "en": "Calm? Tense? Moving?"
-     },
      "works": [
       {
        "img": "munch-scream",
@@ -136,6 +124,24 @@ window.LESSON_PAGE = {
        }
       }
      ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
+     "label": {
+      "he": "הסתכלו על הקווים האלה",
+      "en": "Look at these lines"
+     },
+     "big": {
+      "he": "מה הם מרגישים?",
+      "en": "How do they feel?"
+     },
+     "ask": {
+      "he": "רגוע? מתוח? נע?",
+      "en": "Calm? Tense? Moving?"
+     }
     }
    ]
   },

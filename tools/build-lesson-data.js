@@ -38,9 +38,10 @@ const NAMES = {
 /* which screens go into which section, per lesson (screen numbers as in the lesson) */
 const MAP = {
   'lesson-1-1': { explore: [0], sources: [1], idea: [2, 3], create: [4, 5, 6, 7], end: [8, 9, 10] },
-  /* design pilot (variant 'v2'): the artworks screen belongs to "sources" */
+  /* design pilot (variant 'v2'). Screen 2 is split: its artworks and captions go to "sources",
+     its looking task (label, question, "calm? tense? moving?") to "look". */
   'emotion-drawing': { hero: ['kandinsky-yellow-red-blue', '30% 40%'], variant: 'v2',
-    explore: [0], sources: [1, 2], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
+    explore: [0], sources: [1, '2:works'], look: ['2:text'], idea: [3, 4, 5], create: [6, 7, 8, 9, 10, 11], end: [12, 13, 14, 15] },
   'visual-journal': { dom: true, explore: [1], idea: [2, 3, 4, 5, 6], create: [7, 8, 9], end: [10, 11] },
   'memory-drawing': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
   'journal-artwork': { explore: [0], sources: [1], look: [2], idea: [3, 4], create: [5, 6, 7, 8], end: [9, 10, 11, 12] },
@@ -228,7 +229,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=5">
-<link rel="stylesheet" href="../css/lesson-page.css?v=7">
+<link rel="stylesheet" href="../css/lesson-page.css?v=8">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -283,9 +284,14 @@ for (const [id, m] of Object.entries(MAP)) {
   const sections = {};
   for (const key of ['explore', 'sources', 'look', 'idea', 'create', 'end']) {
     if (!m[key]) continue;
-    const blocks = m[key].map(n => {
+    const blocks = m[key].map(spec => {
+      /* a screen number, or 'n:works' / 'n:text' to use only the artworks or only the rest of screen n */
+      const [n, part] = String(spec).split(':');
       const html = screenHtml(src, n);
-      return T ? blockFromT(T, n, html) : blockFromDom(html);
+      const b = T ? blockFromT(T, Number(n), html) : blockFromDom(html);
+      if (part === 'works') return b.works ? { works: b.works } : {};
+      if (part === 'text') { delete b.works; }
+      return b;
     }).filter(b => Object.keys(b).length);
     sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
   }
