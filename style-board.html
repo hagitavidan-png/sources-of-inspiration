@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>לוח סגנונות · מקורות השראה באמנות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;800&family=Noto+Serif+Hebrew:wght@400;600&family=Noto+Sans+Hebrew:wght@200;400&family=Secular+One&family=Assistant:wght@400;600&family=David+Libre:wght@400;700&family=Suez+One&family=Alef:wght@400;700&family=Miriam+Libre:wght@400;700&family=Playpen+Sans+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#d9d6d0;color:#222;font-family:'Assistant',system-ui,sans-serif;line-height:1.6}
+.intro{max-width:1300px;margin:0 auto;padding:36px 16px 8px}
+.intro h1{font-size:1.6rem;margin:0 0 6px}
+.intro p{margin:0;color:#555}
+.board{max-width:1300px;margin:0 auto;padding:24px 16px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px}
+.opt{display:flex;flex-direction:column;gap:10px}
+.tag{display:flex;align-items:center;gap:10px;font-size:.95rem}
+.tag b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#222;color:#fff;font-size:.95rem;flex-shrink:0}
+.tag small{color:#666;display:block;line-height:1.3}
+.sw{display:flex;gap:4px;margin-inline-start:auto}
+.sw i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+.card{border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.14);background:var(--bg);color:var(--ink);padding:22px 22px 26px;min-height:520px;display:flex;flex-direction:column;font-family:var(--tf)}
+.card .brand{font-size:.8rem;opacity:.75;display:flex;justify-content:space-between;margin-bottom:34px}
+.card h2{font-family:var(--hf);font-weight:var(--hw);font-size:var(--hs,3rem);line-height:var(--hl,1.02);letter-spacing:var(--hls,0);margin:0 0 16px}
+.card h2 span{color:var(--acc)}
+.card p{margin:0 0 22px;font-size:.95rem;opacity:.85}
+.card .btn{align-self:flex-start;text-decoration:none;font-size:.9rem;padding:11px 22px;background:var(--btn);color:var(--btn-ink);border-radius:var(--r,999px);font-weight:600}
+.card ul{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid var(--line)}
+.card li{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.card li em{font-style:normal;font-family:var(--hf);color:var(--acc);min-width:26px}
+.card li span{font-family:var(--hf);font-weight:var(--lw,400)}
+
+.o1{--bg:#e6e0d6;--ink:#22201c;--acc:#b4532a;--btn:#22201c;--btn-ink:#e6e0d6;--line:rgba(34,32,28,.18);--hf:'Heebo';--hw:800;--hs:3.3rem;--hl:.95;--hls:-.02em;--tf:'Heebo';--lw:800}
+.o2{--bg:#c9d1bf;--ink:#1f2a22;--acc:#5b3a1e;--btn:#1f2a22;--btn-ink:#f2efe6;--line:rgba(31,42,34,.2);--hf:'Noto Serif Hebrew';--hw:600;--hs:2.9rem;--tf:'Noto Sans Hebrew';--r:4px}
+.o3{--bg:#d9d2f0;--ink:#241b4d;--acc:#ff5a2e;--btn:#ff5a2e;--btn-ink:#fff;--line:rgba(36,27,77,.2);--hf:'Secular One';--hw:400;--hs:3.2rem;--hl:1;--tf:'Assistant'}
+.o4{--bg:#7a1e24;--ink:#f6e7dd;--acc:#f3b8a3;--btn:#f6e7dd;--btn-ink:#7a1e24;--line:rgba(246,231,221,.25);--hf:'David Libre';--hw:700;--hs:3.3rem;--tf:'Assistant';--r:2px}
+.o5{--bg:#ddd2bf;--ink:#1c1c1c;--acc:#d7381e;--btn:transparent;--btn-ink:#1c1c1c;--line:rgba(28,28,28,.2);--hf:'Noto Sans Hebrew';--hw:200;--hs:3.4rem;--hl:1.05;--tf:'Noto Sans Hebrew';--r:0}
+.o5 .btn{border:1px solid #1c1c1c}
+.o6{--bg:#0f5257;--ink:#f1ecdf;--acc:#f2b33d;--btn:#f2b33d;--btn-ink:#10262a;--line:rgba(241,236,223,.22);--hf:'Suez One';--hw:400;--hs:3rem;--tf:'Alef';--r:10px}
+.o7{--bg:#efd9d1;--ink:#3a1f1a;--acc:#2f5d50;--btn:#2f5d50;--btn-ink:#fff;--line:rgba(58,31,26,.18);--hf:'Miriam Libre';--hw:700;--hs:2.9rem;--hl:1.05;--tf:'Miriam Libre'}
+.o8{--bg:#e3b23c;--ink:#1b1b1b;--acc:#fff6dc;--btn:#1b1b1b;--btn-ink:#e3b23c;--line:rgba(27,27,27,.2);--hf:'Playpen Sans Hebrew';--hw:700;--hs:2.8rem;--hl:1.05;--tf:'Assistant';--lw:700}
+.o8 h2 span{-webkit-text-stroke:0;color:#fff6dc}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>8 כיוונים לבחירה</h1>
+  <p>לכל כיוון גופן, צבעים וטיפוגרפיה משלו. אפשר לבחור אחד, או לשלב, למשל ״הגופן של 3 עם הצבעים של 6״.</p>
+</div>
+
+<div class="board">
+  <div class="opt">
+    <div class="tag"><b>1</b><div>אבן<small>Heebo · כבד וצפוף</small></div><span class="sw"><i style="background:#e6e0d6"></i><i style="background:#22201c"></i><i style="background:#b4532a"></i></span></div>
+    <div class="card o1"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>2</b><div>מרווה<small>Noto Serif · ספרותי ורגוע</small></div><span class="sw"><i style="background:#c9d1bf"></i><i style="background:#1f2a22"></i><i style="background:#5b3a1e"></i></span></div>
+    <div class="card o2"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>3</b><div>לילך<small>Secular One · עגול ונועז</small></div><span class="sw"><i style="background:#d9d2f0"></i><i style="background:#241b4d"></i><i style="background:#ff5a2e"></i></span></div>
+    <div class="card o3"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>4</b><div>בורדו<small>David Libre · קלאסי עברי</small></div><span class="sw"><i style="background:#7a1e24"></i><i style="background:#f6e7dd"></i><i style="background:#f3b8a3"></i></span></div>
+    <div class="card o4"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>5</b><div>חול ודיו<small>Noto Sans דק · מינימליסטי</small></div><span class="sw"><i style="background:#ddd2bf"></i><i style="background:#1c1c1c"></i><i style="background:#d7381e"></i></span></div>
+    <div class="card o5"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>6</b><div>טורקיז<small>Suez One · חם ובטוח</small></div><span class="sw"><i style="background:#0f5257"></i><i style="background:#f1ecdf"></i><i style="background:#f2b33d"></i></span></div>
+    <div class="card o6"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>7</b><div>ורוד אבקה<small>Miriam Libre · רך ואלגנטי</small></div><span class="sw"><i style="background:#efd9d1"></i><i style="background:#3a1f1a"></i><i style="background:#2f5d50"></i></span></div>
+    <div class="card o7"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+
+  <div class="opt">
+    <div class="tag"><b>8</b><div>חרדל<small>Playpen · כמו כתב יד</small></div><span class="sw"><i style="background:#e3b23c"></i><i style="background:#1b1b1b"></i><i style="background:#fff6dc"></i></span></div>
+    <div class="card o8"><div class="brand"><span>מקורות השראה באמנות</span><span>☰</span></div>
+      <h2>מאין מגיעה <span>יצירתיות?</span></h2>
+      <p>שבע יחידות לימוד שחוקרות את מקורות ההשראה באמנות.</p><a class="btn">לתכנית הלימודים</a>
+      <ul><li><em>01</em><span>חוויה אישית כמקור השראה</span></li><li><em>02</em><span>טבע כמקור השראה</span></li><li><em>03</em><span>מוזיקה וריתמוס באמנות</span></li></ul></div>
+  </div>
+</div>
+</body>
+</html>
