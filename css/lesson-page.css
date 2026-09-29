@@ -95,3 +95,11 @@
 .lp-work.text-only{padding-top:14px;border-top:1px solid var(--rule-strong)}
 .lp-mat-line{margin:-18px 0 32px;font-size:.95rem;color:var(--ink-2)}
 .lp-mat-line b{font-weight:600;margin-inline-end:6px}
+
+/* compact location (mobile) */
+.lp-where{display:none}
+@media (max-width:720px){
+  .lp-where{position:sticky;top:62px;z-index:35;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 16px;font-size:.86rem;font-weight:600;color:var(--ink);text-decoration:none;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+  .lp-where svg{color:var(--muted)}
+}
+.crumb [aria-current]{color:var(--ink)}

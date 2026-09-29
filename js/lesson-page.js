@@ -96,10 +96,29 @@
       body + '</section>';
   }
 
+  /* ── where am I: unit, position in the unit (js/navigation-data.js) ── */
+  var navUnit = null, posInUnit = 0, unitCount = 0;
+  ((window.ART_NAVIGATION || {}).units || []).forEach(function (u) {
+    (u.lessons || []).forEach(function (l, k) {
+      if (l.path === D.path) { navUnit = u; posInUnit = k + 1; unitCount = u.lessons.length; }
+    });
+  });
+  var unitN = parseInt(D.unitNum, 10);
+  var unitTitle = navUnit ? navUnit.title : D.unit;
+
   /* ── head ── */
   var html = '';
+  /* compact location for small screens; tapping it opens the contents drawer */
+  if (posInUnit) {
+    html += '<a class="lp-where" href="#ed-drawer" data-open-contents>' +
+      tt('יחידה ' + unitN + ' · שיעור ' + posInUnit + ' מתוך ' + unitCount, 'Unit ' + unitN + ' · Lesson ' + posInUnit + ' of ' + unitCount) +
+      '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>';
+  }
   html += '<section class="lp-head ed-wrap">' +
-    '<p class="crumb rv"><a href="' + BASE + 'units/unit-' + D.unitNum + '.html">' + t(D.unit) + '</a> <span>/</span> ' + tt('שיעור ' + D.number, 'Lesson ' + D.number) + '</p>' +
+    '<nav class="crumb rv" aria-label="' + (L === 'he' ? 'מיקום באתר' : 'Breadcrumb') + '">' +
+    '<a href="' + BASE + 'home-preview.html">' + tt('מקורות השראה', 'Sources of Inspiration') + '</a> <span aria-hidden="true">/</span> ' +
+    '<a href="' + BASE + 'units/unit-' + D.unitNum + '.html">' + t({ he: 'יחידה ' + unitN + ': ' + unitTitle.he, en: 'Unit ' + unitN + ': ' + unitTitle.en }) + '</a> <span aria-hidden="true">/</span> ' +
+    '<span aria-current="page">' + tt('שיעור ' + D.number, 'Lesson ' + D.number) + '</span></nav>' +
     '<div class="lp-title-row rv"><span class="ed-num lp-num">' + D.number + '</span>' +
     '<div>' + t(D.title, 'h1', 'ed-display lp-title') +
     '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
