@@ -5,44 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
 <meta name="robots" content="noindex">
-<title>מקורות השראה באמנות · תצוגה מקדימה</title>
+<title data-he="מקורות השראה באמנות · תכנית אמנות ויצירתיות לבתי ספר" data-en="Sources of Inspiration in Art · An art and creativity curriculum for schools">מקורות השראה באמנות · תכנית אמנות ויצירתיות לבתי ספר</title>
+<meta name="description" content="תכנית לימודים אינטראקטיבית באמנות לבתי ספר: יחידות ושיעורים שמחברים התבוננות ביצירות, שאלות, תרגול יצירתי ורפלקציה. בעברית ובאנגלית.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/design-system.css?v=6">
 <style>
-/* ── Hero: book cover ── */
-.cover{padding-top:clamp(40px,7vw,96px)}
-.cover-head{display:grid;grid-template-columns:1fr auto;gap:24px 48px;align-items:end;margin-bottom:clamp(28px,4vw,52px)}
-.cover-title{font-size:var(--t-hero)}
+/* ── Hero: text only (no image for now) ── */
+.cover{padding-block:clamp(56px,9vw,128px) clamp(24px,4vw,48px)}
+.cover .ed-kicker{margin-bottom:22px}
+.cover-title{font-size:var(--t-hero);margin:0}
 html[lang="en"] .cover-title{font-size:clamp(3.4rem,8.5vw,7.4rem)}
 .cover-latin{display:block;margin-top:18px;font-family:var(--f-text);font-size:clamp(.8rem,1.3vw,1rem);font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2)}
 html[dir="rtl"] .cover-latin{text-align:right}
 html[dir="ltr"] .cover-latin{text-align:left}
 html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:clamp(1rem,1.6vw,1.2rem)}
-.cover-sub{max-width:17em;font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.45;color:var(--ink-2);margin:0 0 6px;text-align:start}
-.cover-fig{position:relative;margin:0}
-.cover-img{overflow:hidden;aspect-ratio:21/10;background:var(--paper-2)}
-.cover-img img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.06);transition:transform 2.4s var(--ease)}
-.cover-img.in img{transform:scale(1)}
-.cover-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;font-size:var(--t-small);color:var(--muted)}
-.loupe{position:absolute;width:clamp(110px,13vw,170px);aspect-ratio:1;border-radius:50%;border:1px solid var(--paper);box-shadow:0 0 0 1px var(--rule-strong);background:url(images/editorial/hokusai-great-wave-1831.jpg) no-repeat;background-size:900%;background-position:23% 15%;top:-6%;right:4%}
-.loupe-note{position:absolute;top:calc(-6% + clamp(40px,5vw,62px));right:calc(4% + clamp(122px,14.5vw,188px));display:flex;align-items:center;gap:8px;white-space:nowrap}
-.loupe-note svg{width:46px;height:20px;flex-shrink:0}
-.loupe-note svg{transform:scaleX(-1)}
-.cover-cta{display:flex;justify-content:center;padding-block:clamp(40px,6vw,72px) 0}
-.cover-cta .ed-cta{font-size:1.15rem}
-@media (max-width:820px){
-  .cover-head{grid-template-columns:1fr}
-  .cover-img{aspect-ratio:4/5}
-  .cover-img img{object-position:22% 50%}
-  .loupe,.loupe-note{display:none}
-}
+.cover-lead{max-width:30em;margin:clamp(28px,4vw,44px) 0 0;font-size:clamp(1.2rem,2vw,1.55rem);line-height:1.5;color:var(--ink)}
+.cover-sub{max-width:30em;margin:14px 0 0;font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.5;color:var(--ink-2)}
+.cover-actions{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:clamp(32px,4.5vw,52px)}
+.cover-actions .ed-cta{font-size:1.1rem}
+.cover-actions .ed-cta + .ed-cta{border-bottom-color:var(--rule-strong);color:var(--ink-2)}
 
 /* ── Journey intro ── */
 .journey{padding-top:var(--sec)}
 .journey-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;padding-bottom:clamp(48px,7vw,96px)}
 .journey-intro h2{font-size:var(--t-h1)}
+.journey-q{margin:0 0 18px!important;font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1.15;color:var(--ink)!important}
 .journey-intro p{margin:0;max-width:30em;color:var(--ink-2)}
 .path{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;font-family:var(--f-display);font-weight:700;font-size:1.7rem;color:var(--ink)}
 .path i{font-style:normal;color:var(--muted);font-family:var(--f-text);font-size:1rem}
@@ -69,6 +59,34 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
   .gate-cap{margin-top:18px}
 }
 
+/* ── Why / each lesson / sample / contact ── */
+.blk{padding-block:var(--sec) 0}
+.blk h2{font-size:var(--t-h1);margin:0 0 clamp(28px,4vw,48px)}
+.why-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,52px) clamp(28px,4vw,56px);border-top:1px solid var(--rule);padding-top:clamp(28px,4vw,44px)}
+.why-list b{display:block;font-family:var(--f-display);font-weight:700;font-size:1.75rem;line-height:1.05;color:var(--ink);margin-bottom:10px}
+.why-list p{margin:0;color:var(--ink-2);line-height:1.6}
+.flow-intro{margin:0 0 clamp(24px,3vw,36px);max-width:34em;color:var(--ink-2)}
+.steps5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--rule)}
+.steps5 li{padding:22px 18px 0 0;border-inline-start:1px solid var(--rule);padding-inline:18px}
+.steps5 li:first-child{border-inline-start:0;padding-inline-start:0}
+.steps5 .n{display:block;font-family:var(--f-display);font-size:2.4rem;line-height:1;color:var(--muted);margin-bottom:10px}
+.steps5 b{display:block;font-weight:700;color:var(--ink);margin-bottom:6px}
+.steps5 p{margin:0;font-size:.95rem;line-height:1.55;color:var(--ink-2)}
+.sample{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;border-top:1px solid var(--rule);padding-top:clamp(28px,4vw,44px)}
+.sample h2{margin:0}
+.sample p{margin:0 0 10px;max-width:30em;color:var(--ink-2)}
+.sample .which{font-family:var(--f-display);font-weight:700;font-size:1.9rem;color:var(--ink);margin:6px 0 14px}
+.contact{padding-block:var(--sec)}
+.contact-box{border-top:1.5px solid var(--ink);padding-top:clamp(28px,4vw,44px)}
+.contact-box h2{font-size:var(--t-h1);max-width:14em;margin:0 0 22px}
+.contact-box p{margin:0 0 28px;max-width:30em;color:var(--ink-2);font-size:1.1rem}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px 40px;align-items:center}
+.contact-actions .ed-cta{font-size:1.1rem}
+.contact-more{margin-top:26px!important;font-size:.95rem!important}
+@media (max-width:980px){.why-list{grid-template-columns:1fr 1fr}.steps5{grid-template-columns:1fr}.steps5 li,.steps5 li:first-child{border-inline-start:0;padding-inline:0;padding-top:18px;border-bottom:1px solid var(--rule);padding-bottom:18px}}
+@media (max-width:820px){.why-list{grid-template-columns:1fr}.sample{grid-template-columns:1fr;gap:12px}}
+.ed-foot .foot-tag{flex-basis:100%;color:var(--ink-2)}
+
 /* ── About ── */
 .about{padding-block:var(--sec);border-top:1px solid var(--rule)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
@@ -90,7 +108,9 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
     <a class="ed-brand" href="home-preview.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
     <nav class="ed-nav">
       <a href="#journey" data-he="יחידות" data-en="Units">יחידות</a>
-      <a href="#about" data-he="אודות" data-en="About">אודות</a>
+      <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+      <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+      <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
     </nav>
     <span class="ed-spacer"></span>
     <div class="ed-lang">
@@ -101,24 +121,18 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
 
 <main>
   <section class="cover ed-wrap">
-    <div class="cover-head rv">
+    <div class="rv">
+      <p class="ed-kicker" data-he="תכנית אמנות ויצירתיות לבתי ספר" data-en="An art and creativity curriculum for schools">תכנית אמנות ויצירתיות לבתי ספר</p>
       <h1 class="ed-display cover-title">
         <span data-he="מקורות השראה באמנות" data-en="Sources of Inspiration in Art">מקורות השראה באמנות</span>
         <span class="cover-latin" dir="auto" data-he="Sources of Inspiration in Art" data-en="מקורות השראה באמנות">Sources of Inspiration in Art</span>
       </h1>
+      <p class="cover-lead" data-he="תכנית אינטראקטיבית שמחברת התבוננות, אמנות, שיחה ויצירה, דרך מסע של יחידות ושיעורים." data-en="An interactive curriculum that connects looking, art, conversation and making, through a journey of units and lessons.">תכנית אינטראקטיבית שמחברת התבוננות, אמנות, שיחה ויצירה, דרך מסע של יחידות ושיעורים.</p>
       <p class="cover-sub" data-he="איך רעיון הופך לדימוי, ודימוי ליצירה" data-en="How an idea becomes an image, and an image becomes an artwork">איך רעיון הופך לדימוי, ודימוי ליצירה</p>
-    </div>
-    <figure class="cover-fig">
-      <div class="cover-img rv-img"><img src="images/editorial/hokusai-great-wave-1831.jpg" alt="Katsushika Hokusai, The Great Wave off Kanagawa, 1831" fetchpriority="high"></div>
-      <div class="loupe rv" aria-hidden="true"></div>
-      <div class="loupe-note rv" aria-hidden="true">
-        <svg viewBox="0 0 46 20"><path d="M44 4 C 30 2, 14 6, 4 14 M4 14 l2-7 M4 14 l7-1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <span class="ed-note" data-he="פרט מוגדל: קצף הגל" data-en="Detail: the foam of the wave">פרט מוגדל: קצף הגל</span>
+      <div class="cover-actions">
+        <a class="ed-cta" href="#journey"><span data-he="לתכנית הלימודים" data-en="See the curriculum">לתכנית הלימודים</span><span class="arr" data-he="↓" data-en="↓">↓</span></a>
+        <a class="ed-cta" href="lesson-pages/lesson-2-1.html"><span data-he="לשיעור לדוגמה" data-en="Open the sample lesson">לשיעור לדוגמה</span><span class="arr" data-he="←" data-en="→">←</span></a>
       </div>
-      <figcaption class="cover-cap"><span data-he="קצושיקה הוקוסאי, הגל הגדול מול קנגאווה, 1831" data-en="Katsushika Hokusai, The Great Wave off Kanagawa, 1831">קצושיקה הוקוסאי, הגל הגדול מול קנגאווה, 1831</span></figcaption>
-    </figure>
-    <div class="cover-cta">
-      <a class="ed-cta" href="#journey"><span data-he="כניסה למסע" data-en="Begin the journey">כניסה למסע</span><span class="arr" data-he="↓" data-en="↓">↓</span></a>
     </div>
   </section>
 
@@ -129,6 +143,7 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
         <h2 class="ed-display" data-he="שבע יחידות" data-en="Seven units">שבע יחידות</h2>
       </div>
       <div>
+        <p class="journey-q" data-he="שאלה אחת גדולה: מאין מגיעה יצירתיות?" data-en="One big question: where does creativity come from?">שאלה אחת גדולה: מאין מגיעה יצירתיות?</p>
         <p data-he="בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין." data-en="Each unit introduces a different source of inspiration. Students look closely, talk about what they notice, and make their own work.">בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין.</p>
         <div class="path" aria-label="השראה, התבוננות, רעיון, יצירה">
           <span data-he="השראה" data-en="Inspiration">השראה</span><i data-he="←" data-en="→">←</i>
@@ -218,20 +233,64 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
     </article>
   </section>
 
+  <section class="blk ed-wrap" id="why">
+    <div class="rv">
+      <h2 class="ed-display" data-he="למה התכנית" data-en="Why this curriculum">למה התכנית</h2>
+      <ul class="why-list">
+        <li><b data-he="לומדים דרך שאלות." data-en="Learning through questions.">לומדים דרך שאלות.</b><p data-he="כל שיעור נפתח בשאלה ובהתבוננות: בעולם, בחפץ או בחוויה של התלמידים, לפני שמגיעים ליצירה." data-en="Every lesson opens with a question and with looking: at the world, an object or the students&#x27; own experience, before the making begins.">כל שיעור נפתח בשאלה ובהתבוננות: בעולם, בחפץ או בחוויה של התלמידים, לפני שמגיעים ליצירה.</p></li>
+        <li><b data-he="מקורות אמנותיים מגוונים." data-en="Varied artistic sources.">מקורות אמנותיים מגוונים.</b><p data-he="יצירות מתקופות, ממקומות ומחומרים שונים: ציור, וידאו, צילום, עיצוב ומיצב. הן מוצגות כמקור השראה, לא כדוגמה להעתקה." data-en="Works from different times, places and media: painting, video, photography, design and installation. They are shown as a source of inspiration, not a model to copy.">יצירות מתקופות, ממקומות ומחומרים שונים: ציור, וידאו, צילום, עיצוב ומיצב. הן מוצגות כמקור השראה, לא כדוגמה להעתקה.</p></li>
+        <li><b data-he="תרגול יצירתי מונחה." data-en="Guided creative practice.">תרגול יצירתי מונחה.</b><p data-he="תרגילים קצרים וברורים, צעד אחרי צעד, שמובילים לעבודה אישית. אין תשובה אחת נכונה." data-en="Short, clear exercises, step by step, that lead to a personal work. There is no single right answer.">תרגילים קצרים וברורים, צעד אחרי צעד, שמובילים לעבודה אישית. אין תשובה אחת נכונה.</p></li>
+        <li><b data-he="עצירה לרפלקציה." data-en="A pause for reflection.">עצירה לרפלקציה.</b><p data-he="השיעורים מסתיימים בהתבוננות בעבודה: מה עשיתי, מה גיליתי, מה אקח הלאה." data-en="The lessons end by looking at the work: what I did, what I found, what I&#x27;ll take further.">השיעורים מסתיימים בהתבוננות בעבודה: מה עשיתי, מה גיליתי, מה אקח הלאה.</p></li>
+        <li><b data-he="בכל כיתה." data-en="In any classroom.">בכל כיתה.</b><p data-he="בעברית ובאנגלית, בדפדפן — במחשב, בטאבלט, בטלפון או על מסך בכיתה." data-en="In Hebrew and English, in the browser — on a computer, tablet, phone or classroom screen.">בעברית ובאנגלית, בדפדפן — במחשב, בטאבלט, בטלפון או על מסך בכיתה.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="blk ed-wrap" id="each-lesson">
+    <div class="rv">
+      <h2 class="ed-display" data-he="מה קורה בכל שיעור" data-en="What happens in each lesson">מה קורה בכל שיעור</h2>
+      <p class="flow-intro" data-he="שיעור בתכנית בנוי בדרך כלל כרצף קצר וברור של חמישה שלבים:" data-en="A lesson in the curriculum is usually built as a short, clear sequence of five stages:">שיעור בתכנית בנוי בדרך כלל כרצף קצר וברור של חמישה שלבים:</p>
+      <ol class="steps5">
+        <li><span class="n">01</span><b data-he="מה אנחנו חוקרים?" data-en="What are we exploring?">מה אנחנו חוקרים?</b><p data-he="שאלה פותחת והתבוננות ראשונה" data-en="An opening question and a first look">שאלה פותחת והתבוננות ראשונה</p></li>
+        <li><span class="n">02</span><b data-he="מקורות השראה" data-en="Sources of inspiration">מקורות השראה</b><p data-he="יצירות של אמנים, עם מידע קצר וקישור למוזיאון" data-en="Artists&#x27; works, with short notes and a link to the museum">יצירות של אמנים, עם מידע קצר וקישור למוזיאון</p></li>
+        <li><span class="n">03</span><b data-he="מסתכלים" data-en="Looking">מסתכלים</b><p data-he="שאלות התבוננות ושיחה" data-en="Questions for looking and talking">שאלות התבוננות ושיחה</p></li>
+        <li><span class="n">04</span><b data-he="יוצרים" data-en="Making">יוצרים</b><p data-he="תרגיל מונחה, ואחריו זמן עבודה עצמאי" data-en="A guided exercise, then time to work on your own">תרגיל מונחה, ואחריו זמן עבודה עצמאי</p></li>
+        <li><span class="n">05</span><b data-he="סיום" data-en="Closing">סיום</b><p data-he="עצירה לרפלקציה על העבודה" data-en="A pause to reflect on the work">עצירה לרפלקציה על העבודה</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="blk ed-wrap" id="sample">
+    <div class="sample rv">
+      <div><h2 class="ed-display" data-he="שיעור לדוגמה" data-en="A sample lesson">שיעור לדוגמה</h2></div>
+      <div>
+        <p data-he="פתחו שיעור מלא מתוך התכנית, כפי שהוא מוצג בכיתה." data-en="Open a full lesson from the curriculum, as it is shown in class.">פתחו שיעור מלא מתוך התכנית, כפי שהוא מוצג בכיתה.</p>
+        <p class="which" data-he="2.1 · דפוסים בטבע ובאמנות" data-en="2.1 · Patterns in Nature &amp; Art">2.1 · דפוסים בטבע ובאמנות</p>
+        <a class="ed-cta" href="lesson-pages/lesson-2-1.html"><span data-he="לשיעור לדוגמה" data-en="Open the sample lesson">לשיעור לדוגמה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact ed-wrap" id="contact">
+    <div class="contact-box rv">
+      <h2 class="ed-display" data-he="רוצים להכניס את התכנית לבית הספר?" data-en="Want to bring the curriculum to your school?">רוצים להכניס את התכנית לבית הספר?</h2>
+      <p data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו." data-en="For questions, a price quote or a demo, write to us.">לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.</p>
+      <div class="contact-actions">
+        <a class="ed-cta" href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA"><span data-he="כתבו לנו במייל" data-en="Email us">כתבו לנו במייל</span></a>
+        <a class="ed-cta" href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" target="_blank" rel="noopener"><span data-he="וואטסאפ" data-en="WhatsApp">וואטסאפ</span></a>
+      </div>
+      <p class="contact-more"><a class="ed-link" href="teachers.html" data-he="מידע למורים" data-en="Information for teachers">מידע למורים</a></p>
+    </div>
+  </section>
+
   <section class="about" id="about">
     <div class="ed-wrap about-grid rv">
       <div>
         <p class="ed-kicker" data-he="אודות" data-en="About">אודות</p>
-        <h2 class="ed-display" data-he="על התכנית" data-en="About the programme">על התכנית</h2>
+        <h2 class="ed-display" data-he="על התכנית" data-en="About the curriculum">על התכנית</h2>
       </div>
       <div>
-        <p data-he="תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים בציור מתוך רגש, טבע, מוזיקה, זיכרון ותרבות." data-en="A seven-unit programme exploring the sources of inspiration in art. Students look at artworks, ask questions and paint from emotion, nature, music, memory and culture.">תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים בציור מתוך רגש, טבע, מוזיקה, זיכרון ותרבות.</p>
-        <div class="links">
-          <a class="ed-link" href="lesson.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
-          <a class="ed-link" href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
-          <a class="ed-link" href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" data-he="צרו קשר במייל" data-en="Email us">צרו קשר במייל</a>
-          <a class="ed-link" href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" target="_blank" rel="noopener" data-he="וואטסאפ" data-en="WhatsApp">וואטסאפ</a>
-        </div>
+        <p data-he="תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים ביצירה מתוך חוויה אישית, מבט החוצה, מוזיקה, זיכרון ותרבות." data-en="A seven-unit curriculum exploring the sources of inspiration in art. Students look at artworks, ask questions and make art from personal experience, looking outward, music, memory and culture.">תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים ביצירה מתוך חוויה אישית, מבט החוצה, מוזיקה, זיכרון ותרבות.</p>
       </div>
     </div>
   </section>
@@ -239,10 +298,15 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
 
 <footer class="ed-foot">
   <div class="ed-wrap">
-    <span data-he="© 2025 מקורות השראה באמנות" data-en="© 2025 Sources of Inspiration in Art">© 2025 מקורות השראה באמנות</span>
-    <span class="ed-spacer"></span>
+    <span class="foot-tag" data-he="תכנית אמנות ויצירתיות לבתי ספר." data-en="An art and creativity curriculum for schools.">תכנית אמנות ויצירתיות לבתי ספר.</span>
+    <a href="#journey" data-he="יחידות" data-en="Units">יחידות</a>
+    <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+    <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+    <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
     <a href="privacy.html" data-he="מדיניות פרטיות" data-en="Privacy Policy">מדיניות פרטיות</a>
     <a href="terms.html" data-he="תנאי שימוש" data-en="Terms of Use">תנאי שימוש</a>
+    <span class="ed-spacer"></span>
+    <span data-he="© 2026 מקורות השראה באמנות" data-en="© 2026 Sources of Inspiration in Art">© 2026 מקורות השראה באמנות</span>
   </div>
 </footer>
 
