@@ -537,8 +537,7 @@ def render(u, units):
   </div>
 </footer>
 
-<script src="{B}js/navigation-data.js"></script>
-<script src="{B}data/lesson-pages/index.js"></script>{UNIT_NAME_JS if u.get('own_title') else ''}
+<script src="{B}js/site-nav.js"></script>
 <script src="{B}js/site-drawer.js?v=8" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>

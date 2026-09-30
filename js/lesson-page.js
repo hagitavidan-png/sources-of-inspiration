@@ -328,7 +328,7 @@
   }
   html += '<section class="lp-head ed-wrap">' +
     '<nav class="crumb rv" aria-label="' + (L === 'he' ? 'מיקום באתר' : 'Breadcrumb') + '">' +
-    '<a href="' + BASE + 'home-preview.html">' + tt('מקורות השראה', 'Sources of Inspiration') + '</a> <span aria-hidden="true">/</span> ' +
+    '<a href="' + BASE + 'index.html">' + tt('מקורות השראה', 'Sources of Inspiration') + '</a> <span aria-hidden="true">/</span> ' +
     '<a href="' + BASE + 'units/unit-' + D.unitNum + '.html">' + t({ he: 'יחידה ' + unitN + ': ' + unitTitle.he, en: 'Unit ' + unitN + ': ' + unitTitle.en }) + '</a> <span aria-hidden="true">/</span> ' +
     '<span aria-current="page">' + tt('שיעור ' + D.number, 'Lesson ' + D.number) + '</span></nav>' +
     (V2
