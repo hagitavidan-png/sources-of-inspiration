@@ -139,7 +139,7 @@
     }).join('') + '</div>';
   }
   /* pattern sketches (2.1): one unit isolated in a viewfinder; the same row with one rule changed */
-  function sketch(kind) {
+  function sketch(kind, b_labels, b_cap) {
     var U = function (x, y, r, s) { return '<ellipse cx="' + x + '" cy="' + y + '" rx="' + (4.2 * (s || 1)) + '" ry="' + (2.2 * (s || 1)) + '" transform="rotate(' + (r || -30) + ' ' + x + ' ' + y + ')"/>'; };
     if (kind === 'finder') {
       var g = '';
@@ -158,6 +158,19 @@
       return '<div class="lp-sketch lp-sketch-vary" aria-hidden="true">' + [a, b, c].map(function (x) {
         return '<svg viewBox="0 0 64 28"><rect x=".5" y=".5" width="63" height="27"/><g class="u">' + x + '</g></svg>';
       }).join('') + '</div>';
+    }
+    if (kind === 'crop') {
+      /* the same leaf: whole and small, whole and enlarged, cropped by the frame */
+      var leaf = function (cx, cy, k) {
+        return '<g transform="translate(' + cx + ' ' + cy + ') scale(' + k + ') rotate(-35)">' +
+          '<path class="lf" d="M0 -20C9 -12 10 6 0 20C-10 6 -9 -12 0 -20Z"/><path class="vn" d="M0 -18V18M0 -8L5 -12M0 -8L-5 -12M0 0L6 -4M0 0L-6 -4M0 8L5 4M0 8L-5 4"/></g>';
+      };
+      var frames = [leaf(32, 24, 0.45), leaf(32, 24, 1.05), leaf(26, 34, 2.6)];
+      var lab = items(b_labels);
+      return '<figure class="lp-sketch lp-sketch-crop" aria-hidden="true"><div>' + frames.map(function (f, k) {
+        return '<span><svg viewBox="0 0 64 48"><defs><clipPath id="lp-crop-' + k + '"><rect x="0" y="0" width="64" height="48"/></clipPath></defs>' +
+          '<g clip-path="url(#lp-crop-' + k + ')">' + f + '</g><rect class="fr" x=".5" y=".5" width="63" height="47"/></svg>' + (lab[k] ? t(lab[k], 'b') : '') + '</span>';
+      }).join('') + '</div>' + t(b_cap, 'figcaption') + '</figure>';
     }
     return '';
   }
@@ -199,7 +212,7 @@
       lenses(b.lenses, b.lensLabel) +
       t(b.ask, 'p', 'lp-ask') +
       meet(b.meet) +
-      sketch(b.sketch) +
+      sketch(b.sketch, b.sketchLabels, b.sketchCap) +
       sheets(b.sheets) +
       prompts(b.prompts) +
       frames(b.frames) +

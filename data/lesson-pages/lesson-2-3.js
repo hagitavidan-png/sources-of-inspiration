@@ -2,38 +2,42 @@
 window.LESSON_PAGE = {
  "id": "lesson-2-3",
  "path": "lessons/lesson-2-3.html",
- "slides": "lessons/lesson-2-3.html",
- "number": "2.3",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "explore": "pattern",
+  "sources": "duo",
+  "look": "pattern",
+  "create": "pattern",
+  "end": "pattern"
+ },
+ "number": "2.2",
  "unit": {
   "he": "טבע כמקור השראה",
   "en": "Nature as Inspiration"
  },
  "unitNum": "02",
  "title": {
-  "he": "ג׳ורג׳יה אוקיף, הגדלה",
-  "en": "Georgia O'Keeffe, Enlargement"
+  "he": "מקרוב מאוד",
+  "en": "Up Close"
  },
  "time": {
-  "he": "55 דקות",
-  "en": "55 min"
+  "he": "50 דקות",
+  "en": "50 min"
  },
  "intro": {
-  "he": "נתבונן מקרוב בפרטים בטבע ובציוריה של ג׳ורג׳יה אוקיף. נבחר פרט קטן, נגדיל אותו ונגלה בו צורות חדשות.",
-  "en": "Look closely at natural details and Georgia O’Keeffe’s paintings. Choose a small detail, enlarge it and discover new shapes within it."
+  "he": "נתקרב לחפץ טבעי קטן, נבחר בו חלק אחד וניתן למסגרת לחתוך אותו, עד שהפרט הופך לעולם שלם.",
+  "en": "Get close to a small natural object, choose one part of it and let the frame crop it, until the detail becomes a whole world."
  },
  "materials": {
-  "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
-  "en": "Paper or a visual journal, a pencil and colours of your choice"
+  "he": "חפץ טבעי שנמצא, פיסת נייר לגזירת חלון, דף גדול, עיפרון וצבעים",
+  "en": "A found natural object, a scrap of paper to cut a window, a large sheet, a pencil and colours"
  },
  "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "שיעור 2.3",
-      "en": "Lesson 2.3"
-     },
      "big": {
       "he": "כמה <em>קטן</em><br>זה קטן?",
       "en": "How <em>small</em><br>is small?"
@@ -42,51 +46,19 @@ window.LESSON_PAGE = {
       "he": "הכל משתנה כשמתקרבים.",
       "en": "Everything changes when you move closer."
      }
-    }
-   ]
-  },
-  "sources": {
-   "blocks": [
+    },
     {
-     "label": {
-      "he": "מקור השראה",
-      "en": "Reference"
-     },
-     "works": [
-      {
-       "img": null,
-       "alt": "Georgia O'Keeffe, close-up magnified flower, large petals filling the entire frame",
-       "artist": {
-        "he": "ג׳ורג׳יה אוקיף",
-        "en": "Georgia O'Keeffe"
-       },
-       "title": {
-        "he": "ג׳ימסון ויד / פרח לבן מס׳ 1, 1932",
-        "en": "Jimson Weed / White Flower No. 1, 1932"
-       },
-       "note": {
-        "he": "אוקיף ציירה פרחים. אבל לא כמו שרואים אותם מרחוק. היא התקרבה, עד שהם מילאו את כל התמונה.",
-        "en": "O'Keeffe painted flowers. But not as we see them from a distance. She moved closer, until they filled the entire frame."
-       }
-      }
-     ]
-    }
-   ]
-  },
-  "look": {
-   "blocks": [
-    {
-     "label": {
-      "he": "שלב 1",
-      "en": "Step 1"
-     },
      "big": {
-      "he": "בחרו אובייקט קטן.<br>פרח, עלה, אבן, קליפה.",
-      "en": "Choose a small object.<br>A flower, leaf, stone, or shell."
+      "he": "בחרו אובייקט קטן.",
+      "en": "Choose a small object."
      },
-     "note": {
-      "he": "התקרבו אליו, \nעד שהוא מפסיק להיות <em>דבר</em>\nומתחיל להיות צורות וצבעים.",
-      "en": "Move closer, \nuntil it stops being a <em>thing</em>\nand becomes shapes and colors."
+     "sub": {
+      "he": "משהו שנשר או שמצאתם, לא שקטפתם.",
+      "en": "Something that fell or that you found, not something you picked."
+     },
+     "body": {
+      "he": "התקרבו אליו, עד שהוא מפסיק להיות <em>דבר</em><br>ומתחיל להיות צורות וצבעים.",
+      "en": "Move closer, until it stops being a <em>thing</em><br>and becomes shapes and colours."
      },
      "chips": {
       "he": [
@@ -106,13 +78,9 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 2",
-      "en": "Step 2"
-     },
      "big": {
-      "he": "מה אתם רואים עכשיו, <br>שלא <em>ראיתם</em> קודם?",
-      "en": "What do you see now, <br>that you <em>didn't</em> see before?"
+      "he": "מה אתם רואים עכשיו,<br>שלא <em>ראיתם</em> קודם?",
+      "en": "What do you see now,<br>that you <em>didn't</em> see before?"
      },
      "chips": {
       "he": [
@@ -129,48 +97,157 @@ window.LESSON_PAGE = {
     }
    ]
   },
-  "idea": {
+  "sources": {
    "blocks": [
     {
-     "label": {
-      "he": "עיקרון",
-      "en": "Principle"
-     },
+     "works": [
+      {
+       "img": null,
+       "alt": "Georgia O'Keeffe, Jimson Weed/White Flower No. 1, 1932",
+       "artist": {
+        "he": "ג׳ורג׳יה אוקיף",
+        "en": "Georgia O'Keeffe"
+       },
+       "workTitle": {
+        "he": "ג׳ימסון ויד / פרח לבן מס׳ 1, 1932",
+        "en": "Jimson Weed/White Flower No. 1, 1932"
+       },
+       "note": {
+        "he": "אוקיף ציירה פרח דטורה בקנה מידה ענק, וחתכה את הציור צמוד סביבו. הבד גבוה מיותר ממטר.",
+        "en": "O'Keeffe painted a jimson weed flower at a huge scale, and cropped the painting tightly around it. The canvas is more than a metre tall."
+       },
+       "link": {
+        "href": "https://crystalbridges.org/artworks/2014-35",
+        "label": {
+         "he": "פתחו את היצירה באתר Crystal Bridges ↗",
+         "en": "Open the work on the Crystal Bridges website ↗"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "works": [
+      {
+       "img": "blossfeldt-adiantum-pedatum-1928",
+       "alt": "Karl Blossfeldt, Adiantum pedatum, from Urformen der Kunst, 1928",
+       "artist": {
+        "he": "קרל בלוספלדט",
+        "en": "Karl Blossfeldt"
+       },
+       "workTitle": {
+        "he": "<bdi>Adiantum pedatum</bdi>, מתוך <bdi>Urformen der Kunst</bdi>, 1928",
+        "en": "Adiantum pedatum, from Urformen der Kunst, 1928"
+       },
+       "note": {
+        "he": "בלוספלדט יצר תצלומי תקריב של צמחים, והשתמש בהם גם ככלי הוראה כדי לחשוף בפני תלמידיו את הצורות והדפוסים שבטבע.",
+        "en": "Blossfeldt made close-up photographs of plants, and also used them as a teaching tool, to show his students the forms and patterns found in nature."
+       },
+       "link": {
+        "href": "https://www.nga.gov/artworks/225723-adiantum-pedatum",
+        "label": {
+         "he": "פתחו את היצירה באתר National Gallery of Art ↗",
+         "en": "Open the work on the National Gallery of Art website ↗"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
      "big": {
-      "he": "כשמגדילים מספיק, <br>האובייקט מתחיל <em>להיעלם</em>.",
-      "en": "When you enlarge enough, <br>the object begins to <em>disappear</em>."
+      "he": "שתי דרכים להתקרב.",
+      "en": "Two ways to get close."
+     },
+     "sub": {
+      "he": "אצל אוקיף: ציור. אצל בלוספלדט: צילום. אבל בשניהם, ההתקרבות משנה את מה שאנחנו רואים.",
+      "en": "O'Keeffe: painting. Blossfeldt: photography. But in both, getting close changes what we see."
+     },
+     "ask": {
+      "he": "אם לא הייתם יודעים מה זה, מה הייתם חושבים שזה?",
+      "en": "If you didn't know what it was, what would you think it is?"
      },
      "lines": {
       "he": [
-       "ה<em>צורה</em> נשארת."
+       "איפה הפרח של אוקיף נחתך בקצה הבד?",
+       "מה בצילום של בלוספלדט נראה כמו משהו שאדם בנה?",
+       "מה נעלם כשמתקרבים, ומה מופיע?"
       ],
       "en": [
-       "The <em>shape</em> remains."
+       "Where is O'Keeffe's flower cut off at the edge of the canvas?",
+       "What in Blossfeldt's photograph looks like something built by a person?",
+       "What disappears when you get close, and what appears?"
       ]
      }
     },
     {
-     "label": {
-      "he": "שלב 3",
-      "en": "Step 3"
-     },
      "big": {
-      "he": "בחרו חלק קטן<br>מהאובייקט.",
-      "en": "Choose one small part<br>of your object."
+      "he": "כשמגדילים מספיק,<br>האובייקט מתחיל <em>להיעלם</em>.",
+      "en": "When you enlarge enough,<br>the object begins to <em>disappear</em>."
      },
-     "note": {
-      "he": "ציירו רק אותו, <em>גדול מאוד</em>.\nתנו לקצוות לצאת מחוץ לדף.",
-      "en": "Draw only that, <em>very large</em>.\nLet the edges go beyond the page."
+     "sub": {
+      "he": "ה<em>צורה</em> נשארת.",
+      "en": "The <em>shape</em> remains."
+     }
+    }
+   ]
+  },
+  "create": {
+   "steps": [
+    {
+     "big": {
+      "he": "ציירו את האובייקט כולו,<br>כפי שאתם רואים אותו.",
+      "en": "Draw the whole object,<br>the way you see it."
+     },
+     "sub": {
+      "he": "קטן, בפינת הדף. זו נקודת ההתחלה.",
+      "en": "Small, in the corner of the page. This is the starting point."
      }
     },
     {
-     "label": {
-      "he": "שלב 4",
-      "en": "Step 4"
-     },
      "big": {
-      "he": "הצופה לא צריך לזהות מה זה, ",
-      "en": "The viewer doesn't need to<br>recognize what it is, "
+      "he": "עכשיו חלון.",
+      "en": "Now a window."
+     },
+     "sub": {
+      "he": "גזרו חלון קטן בנייר, בערך 3×3 ס״מ. הניחו אותו על החלק המעניין ביותר.",
+      "en": "Cut a small window in a scrap of paper, about 3×3 cm. Lay it on the most interesting part."
+     },
+     "sketch": "crop",
+     "sketchLabels": {
+      "he": [
+       "שלם",
+       "מוגדל",
+       "חתוך"
+      ],
+      "en": [
+       "Whole",
+       "Enlarged",
+       "Cropped"
+      ]
+     },
+     "sketchCap": {
+      "he": "אותו עלה, שלוש דרכי הסתכלות",
+      "en": "The same leaf, three ways of looking"
+     }
+    },
+    {
+     "big": {
+      "he": "ציירו רק את מה שבתוך החלון,<br>על דף שלם.",
+      "en": "Draw only what is inside the window,<br>on a whole page."
+     },
+     "sub": {
+      "he": "<em>גדול מאוד</em>. תנו לקצוות לצאת מחוץ לדף.",
+      "en": "<em>Very large</em>. Let the edges go beyond the page."
+     }
+    },
+    {
+     "big": {
+      "he": "הצופה לא צריך לזהות מה זה,",
+      "en": "The viewer doesn't need to recognize what it is,"
      },
      "sub": {
       "he": "רק להיכנס לתוך הצורה.",
@@ -182,13 +259,9 @@ window.LESSON_PAGE = {
   "end": {
    "blocks": [
     {
-     "label": {
-      "he": "שלב 5",
-      "en": "Step 5"
-     },
      "big": {
-      "he": "עצרו.<br><br>האם זה עדיין נראה<br>כמו ה<em>אובייקט</em>?",
-      "en": "Stop.<br><br>Does it still look like<br>the <em>object</em>?"
+      "he": "עצרו.<br>האם זה עדיין נראה כמו ה<em>אובייקט</em>?",
+      "en": "Stop.<br>Does it still look like the <em>object</em>?"
      },
      "chips": {
       "he": [
@@ -204,18 +277,33 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "סיום",
-      "en": "Done"
-     },
      "big": {
-      "he": "כשהתקרבתם, <br>ראיתם משהו <em>אחר</em>.",
-      "en": "When you moved closer, <br>you saw something <em>else</em>."
+      "he": "הניחו את שני הציורים<br>זה לצד זה.",
+      "en": "Place the two drawings<br>side by side."
      },
      "sub": {
-      "he": "זה לא קרה במקרה.\nזו החלטה שלכם.",
-      "en": "That didn't happen by chance.\nIt was your decision."
+      "he": "הראשון: האובייקט כולו. השני: רק חלק ממנו, כשהוא גדול.",
+      "en": "The first: the whole object. The second: only a part of it, large."
+     },
+     "ask": {
+      "he": "מה השתנה בדרך שבה אתם רואים אותו?",
+      "en": "What changed in the way you see it?"
+     },
+     "prompt": {
+      "he": "כשהתקרבתי, ראיתי…",
+      "en": "When I moved closer, I saw…"
      }
+    },
+    {
+     "big": {
+      "he": "כשהתקרבתם,<br>ראיתם משהו <em>אחר</em>.",
+      "en": "When you moved closer,<br>you saw something <em>else</em>."
+     },
+     "sub": {
+      "he": "זה לא קרה במקרה. זו החלטה שלכם.",
+      "en": "That didn't happen by chance. It was your decision."
+     },
+     "kind": "close"
     }
    ]
   }

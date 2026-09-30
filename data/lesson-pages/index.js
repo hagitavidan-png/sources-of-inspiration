@@ -19,5 +19,27 @@ window.LESSON_TITLES = {
  "lessons/journal-artwork.html": {
   "he": "מה חוזר בעבודות שלי?",
   "en": "What Keeps Returning in My Work?"
+ },
+ "lessons/lesson-2-3.html": {
+  "he": "מקרוב מאוד",
+  "en": "Up Close"
  }
 };
+/* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */
+window.LESSON_ORDER = {
+ "unit02": [
+  "lessons/lesson-2-1.html",
+  "lessons/lesson-2-3.html",
+  "lessons/lesson-2-2.html",
+  "lessons/lesson-2-4.html"
+ ]
+};
+(function () {
+  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER;
+  if (!N || !O) return;
+  (N.units || []).forEach(function (u) {
+    var o = O[u.id];
+    if (!o || !u.lessons) return;
+    u.lessons.sort(function (a, b) { return o.indexOf(a.path) - o.indexOf(b.path); });
+  });
+})();

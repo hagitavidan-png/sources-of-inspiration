@@ -1,0 +1,228 @@
+{
+  "_note": "Lesson 2.2 in unit 2's new journey ('Up close'), file lesson-2-3 (the URL stays). Content approved by the author: getting close, a window, cropping, the detail becomes a world. Existing screens are copied from lessons/lesson-2-3.html. Source for tools/build-lesson-data.js.",
+  "_sources": "O'Keeffe: Crystal Bridges, Jimson Weed/White Flower No. 1, 1932, oil on canvas, 53 x 44 3/4 in. ('depicted a jimson weed flower at a massive scale, cropping tightly around her subject'; crystalbridges.org/artworks/2014-35). Protected: window only. Blossfeldt: National Gallery of Art, Adiantum pedatum, 1928, photogravure from Urformen der Kunst (nga.gov/artworks/225723-adiantum-pedatum); NGA marks the media as public domain. Image downloaded from the NGA page by the author (images/editorial/blossfeldt-adiantum-pedatum-1928.jpg). Teaching use: Met (metmuseum.org/art/collection/search/660536: a pedagogic tool for designers); Public Domain Review (photographs made to teach his students the forms of nature).",
+  "title": {
+    "he": "מקרוב מאוד",
+    "en": "Up Close"
+  },
+  "number": "2.2",
+  "time": {
+    "he": "50 דקות",
+    "en": "50 min"
+  },
+  "description": {
+    "he": "נתקרב לחפץ טבעי קטן, נבחר בו חלק אחד וניתן למסגרת לחתוך אותו, עד שהפרט הופך לעולם שלם.",
+    "en": "Get close to a small natural object, choose one part of it and let the frame crop it, until the detail becomes a whole world."
+  },
+  "materials": {
+    "he": "חפץ טבעי שנמצא, פיסת נייר לגזירת חלון, דף גדול, עיפרון וצבעים",
+    "en": "A found natural object, a scrap of paper to cut a window, a large sheet, a pencil and colours"
+  },
+  "he": {
+    "s": [
+      {
+        "big": "כמה <em>קטן</em><br>זה קטן?",
+        "sub": "הכל משתנה כשמתקרבים."
+      },
+      {
+        "big": "בחרו אובייקט קטן.",
+        "sub": "משהו שנשר או שמצאתם, לא שקטפתם.",
+        "body": "התקרבו אליו, עד שהוא מפסיק להיות <em>דבר</em><br>ומתחיל להיות צורות וצבעים.",
+        "chips": [
+          "פרח",
+          "עלה",
+          "אבן",
+          "קליפה",
+          "אחר"
+        ]
+      },
+      {
+        "big": "מה אתם רואים עכשיו,<br>שלא <em>ראיתם</em> קודם?",
+        "opts": [
+          "גיליתי משהו שלא ראיתי קודם",
+          "זה נראה שונה לגמרי",
+          "קשה לי כבר לזהות מה זה"
+        ]
+      },
+      {
+        "art": {
+          "artist": "ג׳ורג׳יה אוקיף",
+          "title": "ג׳ימסון ויד / פרח לבן מס׳ 1, 1932",
+          "note": "אוקיף ציירה פרח דטורה בקנה מידה ענק, וחתכה את הציור צמוד סביבו. הבד גבוה מיותר ממטר.",
+          "link": {
+            "href": "https://crystalbridges.org/artworks/2014-35",
+            "label": "פתחו את היצירה באתר Crystal Bridges ↗"
+          }
+        }
+      },
+      {
+        "art": {
+          "img": "blossfeldt-adiantum-pedatum-1928",
+          "artist": "קרל בלוספלדט",
+          "title": "<bdi>Adiantum pedatum</bdi>, מתוך <bdi>Urformen der Kunst</bdi>, 1928",
+          "note": "בלוספלדט יצר תצלומי תקריב של צמחים, והשתמש בהם גם ככלי הוראה כדי לחשוף בפני תלמידיו את הצורות והדפוסים שבטבע.",
+          "link": {
+            "href": "https://www.nga.gov/artworks/225723-adiantum-pedatum",
+            "label": "פתחו את היצירה באתר National Gallery of Art ↗"
+          }
+        }
+      },
+      {
+        "big": "שתי דרכים להתקרב.",
+        "sub": "אצל אוקיף: ציור. אצל בלוספלדט: צילום. אבל בשניהם, ההתקרבות משנה את מה שאנחנו רואים.",
+        "q0": "איפה הפרח של אוקיף נחתך בקצה הבד?",
+        "q1": "מה בצילום של בלוספלדט נראה כמו משהו שאדם בנה?",
+        "q2": "מה נעלם כשמתקרבים, ומה מופיע?",
+        "ask": "אם לא הייתם יודעים מה זה, מה הייתם חושבים שזה?"
+      },
+      {
+        "big": "כשמגדילים מספיק,<br>האובייקט מתחיל <em>להיעלם</em>.",
+        "sub": "ה<em>צורה</em> נשארת."
+      },
+      {
+        "big": "ציירו את האובייקט כולו,<br>כפי שאתם רואים אותו.",
+        "sub": "קטן, בפינת הדף. זו נקודת ההתחלה."
+      },
+      {
+        "big": "עכשיו חלון.",
+        "sub": "גזרו חלון קטן בנייר, בערך 3×3 ס״מ. הניחו אותו על החלק המעניין ביותר.",
+        "sketch": "crop",
+        "sketchLabels": [
+          "שלם",
+          "מוגדל",
+          "חתוך"
+        ],
+        "sketchCap": "אותו עלה, שלוש דרכי הסתכלות"
+      },
+      {
+        "big": "ציירו רק את מה שבתוך החלון,<br>על דף שלם.",
+        "sub": "<em>גדול מאוד</em>. תנו לקצוות לצאת מחוץ לדף."
+      },
+      {
+        "big": "הצופה לא צריך לזהות מה זה,",
+        "sub": "רק להיכנס לתוך הצורה."
+      },
+      {
+        "big": "עצרו.<br>האם זה עדיין נראה כמו ה<em>אובייקט</em>?",
+        "opts": [
+          "עדיין מזוהה",
+          "הפך למשהו אחר",
+          "משהו באמצע"
+        ]
+      },
+      {
+        "big": "הניחו את שני הציורים<br>זה לצד זה.",
+        "sub": "הראשון: האובייקט כולו. השני: רק חלק ממנו, כשהוא גדול.",
+        "ask": "מה השתנה בדרך שבה אתם רואים אותו?",
+        "ph": "כשהתקרבתי, ראיתי…"
+      },
+      {
+        "kind": "close",
+        "big": "כשהתקרבתם,<br>ראיתם משהו <em>אחר</em>.",
+        "sub": "זה לא קרה במקרה. זו החלטה שלכם."
+      }
+    ]
+  },
+  "en": {
+    "s": [
+      {
+        "big": "How <em>small</em><br>is small?",
+        "sub": "Everything changes when you move closer."
+      },
+      {
+        "big": "Choose a small object.",
+        "sub": "Something that fell or that you found, not something you picked.",
+        "body": "Move closer, until it stops being a <em>thing</em><br>and becomes shapes and colours.",
+        "chips": [
+          "Flower",
+          "Leaf",
+          "Stone",
+          "Shell",
+          "Other"
+        ]
+      },
+      {
+        "big": "What do you see now,<br>that you <em>didn't</em> see before?",
+        "opts": [
+          "I discovered something I hadn't seen before",
+          "It looks completely different",
+          "I can barely recognize what it is"
+        ]
+      },
+      {
+        "art": {
+          "artist": "Georgia O'Keeffe",
+          "title": "Jimson Weed/White Flower No. 1, 1932",
+          "note": "O'Keeffe painted a jimson weed flower at a huge scale, and cropped the painting tightly around it. The canvas is more than a metre tall.",
+          "link": {
+            "href": "https://crystalbridges.org/artworks/2014-35",
+            "label": "Open the work on the Crystal Bridges website ↗"
+          }
+        }
+      },
+      {
+        "art": {
+          "artist": "Karl Blossfeldt",
+          "title": "Adiantum pedatum, from Urformen der Kunst, 1928",
+          "note": "Blossfeldt made close-up photographs of plants, and also used them as a teaching tool, to show his students the forms and patterns found in nature.",
+          "link": {
+            "href": "https://www.nga.gov/artworks/225723-adiantum-pedatum",
+            "label": "Open the work on the National Gallery of Art website ↗"
+          }
+        }
+      },
+      {
+        "big": "Two ways to get close.",
+        "sub": "O'Keeffe: painting. Blossfeldt: photography. But in both, getting close changes what we see.",
+        "q0": "Where is O'Keeffe's flower cut off at the edge of the canvas?",
+        "q1": "What in Blossfeldt's photograph looks like something built by a person?",
+        "q2": "What disappears when you get close, and what appears?",
+        "ask": "If you didn't know what it was, what would you think it is?"
+      },
+      {
+        "big": "When you enlarge enough,<br>the object begins to <em>disappear</em>.",
+        "sub": "The <em>shape</em> remains."
+      },
+      {
+        "big": "Draw the whole object,<br>the way you see it.",
+        "sub": "Small, in the corner of the page. This is the starting point."
+      },
+      {
+        "big": "Now a window.",
+        "sub": "Cut a small window in a scrap of paper, about 3×3 cm. Lay it on the most interesting part.",
+        "sketchLabels": [
+          "Whole",
+          "Enlarged",
+          "Cropped"
+        ],
+        "sketchCap": "The same leaf, three ways of looking"
+      },
+      {
+        "big": "Draw only what is inside the window,<br>on a whole page.",
+        "sub": "<em>Very large</em>. Let the edges go beyond the page."
+      },
+      {
+        "big": "The viewer doesn't need to recognize what it is,",
+        "sub": "only to enter the shape."
+      },
+      {
+        "big": "Stop.<br>Does it still look like the <em>object</em>?",
+        "opts": [
+          "Still recognizable",
+          "Became something else",
+          "Something in between"
+        ]
+      },
+      {
+        "big": "Place the two drawings<br>side by side.",
+        "sub": "The first: the whole object. The second: only a part of it, large.",
+        "ask": "What changed in the way you see it?",
+        "ph": "When I moved closer, I saw…"
+      },
+      {
+        "big": "When you moved closer,<br>you saw something <em>else</em>.",
+        "sub": "That didn't happen by chance. It was your decision."
+      }
+    ]
+  }
+}

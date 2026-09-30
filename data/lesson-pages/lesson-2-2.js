@@ -3,7 +3,7 @@ window.LESSON_PAGE = {
  "id": "lesson-2-2",
  "path": "lessons/lesson-2-2.html",
  "slides": "lessons/lesson-2-2.html",
- "number": "2.2",
+ "number": "2.3",
  "unit": {
   "he": "טבע כמקור השראה",
   "en": "Nature as Inspiration"

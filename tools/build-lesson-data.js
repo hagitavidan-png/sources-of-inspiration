@@ -21,7 +21,7 @@ const INTROS = window.ART_LESSON_INTROS;
 const NAV = window.ART_NAVIGATION;
 
 /* public-domain images that have a web copy in images/editorial/ */
-const PD = new Set(['munch-scream', 'morris-strawberry-thief-aic', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
+const PD = new Set(['munch-scream', 'morris-strawberry-thief-aic', 'blossfeldt-adiantum-pedatum-1928', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
   'turner-snowstorm', 'monet-water-lilies', 'monet-haystacks-1891', 'pissarro-boulevard-montmartre-1897',
   'friedrich-wanderer', 'morris-strawberry-thief-1883']);
 
@@ -84,9 +84,12 @@ const MAP = {
   /* 2.1: unit 2 looks outward. Find a real pattern first, then the artists: unit, rule, variation */
   'lesson-2-1': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', create: 'pattern', end: 'pattern' },
     explore: [0, 1, 2, 3], sources: [4, 5], look: [6], create: [7, 8, 9], end: [10, 11, 12] },
-  'lesson-2-2': { hero: ['monet-haystacks-1891', '50% 70%'],
+  /* unit 2's new journey puts 'Up close' (file lesson-2-3) second; the Monet lesson moves to third place */
+  'lesson-2-2': { hero: ['monet-haystacks-1891', '50% 70%'], number: '2.3',
     explore: [0], sources: [3], look: [1, 2], create: [4, 5, 6], end: [7, 8] },
-  'lesson-2-3': { explore: [0], sources: [3], look: [1, 2], idea: [4, 5, 6], end: [7, 8] },
+  /* 2.2 'Up close': a window, cropping, the detail becomes a world */
+  'lesson-2-3': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', look: 'pattern', create: 'pattern', end: 'pattern' },
+    explore: [0, 1, 2], sources: [3, 4], look: [5, 6], create: [7, 8, 9, 10], end: [11, 12, 13] },
   'lesson-2-4': { hero: ['turner-snowstorm', '50% 45%'],
     explore: [0, 1], sources: [2, 3], create: [4, 5, 6], end: [7, 8] }
 };
@@ -199,7 +202,9 @@ function blockFromT(T, n, html) {
   if (Array.isArray(he.sheets)) b.sheets = { he: he.sheets, en: en.sheets || he.sheets };   // the three experiment sheets (1.8)
   if (Array.isArray(he.wall)) b.wall = he.wall;
   if (Array.isArray(he.meet)) b.meet = he.meet;
-  if (he.sketch) b.sketch = he.sketch;                    // small pattern sketches: a unit in a viewfinder, one rule changed (2.1)           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
+  if (he.sketch) b.sketch = he.sketch;
+  if (Array.isArray(he.sketchLabels)) b.sketchLabels = { he: he.sketchLabels, en: en.sketchLabels || he.sketchLabels };
+  if (he.sketchCap) b.sketchCap = bil(he.sketchCap, en.sketchCap);                    // small pattern sketches: a unit in a viewfinder, one rule changed (2.1)           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
   if (Array.isArray(he.ph2)) b.prompts = he.ph2.map((v, k) => bil(v, (en.ph2 || [])[k]));   // two writing spaces side by side
   if (Array.isArray(he.lens)) { b.lenses = { he: he.lens, en: en.lens || he.lens }; if (he.lensLabel) b.lensLabel = bil(he.lensLabel, en.lensLabel); }
 
@@ -281,7 +286,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=20">
+<link rel="stylesheet" href="../css/lesson-page.css?v=21">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -317,13 +322,18 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=18"></script>
+<script src="../js/lesson-page.js?v=19"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
 </html>
 `;
 }
+
+/* unit 2's new journey: pattern, up close, light, space */
+const ORDER = {
+  unit02: ['lessons/lesson-2-1.html', 'lessons/lesson-2-3.html', 'lessons/lesson-2-2.html', 'lessons/lesson-2-4.html']
+};
 
 // ── build ──────────────────────────────────────────────────────
 const index = {};
@@ -380,7 +390,7 @@ for (const [id, m] of Object.entries(MAP)) {
     ...(m.desk ? { desk: m.desk } : {}),
     ...(m.noTitle ? { noTitle: m.noTitle } : {}),
     ...(A && A.subtitle ? { subtitle: A.subtitle } : {}),
-    number: intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
+    number: (A && A.number) || m.number || intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
     sections
@@ -398,4 +408,15 @@ for (const [id, m] of Object.entries(MAP)) {
 fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),
   '/* Generated by tools/build-lesson-data.js: lessons that have a page in the lesson template,\n   and new titles for lessons whose content was rewritten (used by the drawer and prev / next). */\n' +
   'window.LESSON_PAGES_INDEX = ' + JSON.stringify(index, null, 1) + ';\n' +
-  'window.LESSON_TITLES = ' + JSON.stringify(titles, null, 1) + ';\n');
+  'window.LESSON_TITLES = ' + JSON.stringify(titles, null, 1) + ';\n' +
+  '/* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */\n' +
+  'window.LESSON_ORDER = ' + JSON.stringify(ORDER, null, 1) + ';\n' +
+  '(function () {\n' +
+  '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER;\n' +
+  '  if (!N || !O) return;\n' +
+  '  (N.units || []).forEach(function (u) {\n' +
+  '    var o = O[u.id];\n' +
+  '    if (!o || !u.lessons) return;\n' +
+  '    u.lessons.sort(function (a, b) { return o.indexOf(a.path) - o.indexOf(b.path); });\n' +
+  '  });\n' +
+  '})();\n');
