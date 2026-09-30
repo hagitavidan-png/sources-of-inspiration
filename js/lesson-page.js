@@ -191,6 +191,31 @@
       };
       return '<div class="lp-sketch lp-sketch-light" aria-hidden="true">' + ball(0, 'r') + ball(1, 'l') + '</div>';
     }
+    if (kind === 'moments' || kind === 'overlap') {
+      /* a simple walking figure; d is how far the legs and arms swing */
+      var fig = function (x, d, op) {
+        return '<g class="wk"' + (op ? ' opacity="' + op + '"' : '') + '><circle cx="' + x + '" cy="11" r="3.2"/>' +
+          '<path d="M' + x + ' 14.5V29M' + x + ' 29L' + (x + d) + ' 42M' + x + ' 29L' + (x - d) + ' 42M' + x + ' 18L' + (x - d * 0.7) + ' 27M' + x + ' 18L' + (x + d * 0.7) + ' 27"/></g>';
+      };
+      if (kind === 'moments') {
+        /* the same movement drawn three times, a moment apart */
+        return '<div class="lp-sketch lp-sketch-mv" aria-hidden="true">' + [[20, 7], [32, 2], [44, -7]].map(function (f) {
+          return '<svg viewBox="0 0 64 48">' + fig(f[0], f[1]) + '<rect class="fr" x=".5" y=".5" width="63" height="47"/></svg>';
+        }).join('') + '</div>';
+      }
+      /* the moments overlap in one frame */
+      return '<div class="lp-sketch lp-sketch-mv lp-sketch-ov" aria-hidden="true"><svg viewBox="0 0 96 48">' +
+        fig(26, 7, '.25') + fig(37, 2, '.4') + fig(48, -7, '.6') + fig(59, 2, '.8') + fig(70, 7, '1') +
+        '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg></div>';
+    }
+    if (kind === 'tilt') {
+      /* a drop on a tilted sheet: the paint runs down and over the edge */
+      return '<div class="lp-sketch lp-sketch-tilt" aria-hidden="true"><svg viewBox="0 0 96 64">' +
+        '<g transform="rotate(-10 48 32)"><rect class="fr" x="22" y="6" width="52" height="46"/></g>' +
+        '<circle class="dr" cx="40" cy="14" r="3.6"/>' +
+        '<path class="run" d="M40 17C41 25 38 30 42 37S46 50 45 61"/>' +
+        '<path class="arr" d="M82 18c5 5 5 11 1 16M80 31l3 3.4 3.4-2.6"/></svg></div>';
+    }
     if (kind === 'crop') {
       /* the same leaf: whole and small, whole and enlarged, cropped by the frame */
       var leaf = function (cx, cy, k) {

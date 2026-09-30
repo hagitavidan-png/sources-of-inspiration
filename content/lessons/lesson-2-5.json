@@ -1,0 +1,95 @@
+{
+  "_note": "Lesson 2.5 'Catching movement' (file lesson-2-5, new, preview only), content approved by the author: see a real movement, draw it at one moment and at further moments, compare, then Duchamp, then join the moments into one image. Ma Yuan was removed. Source for tools/build-lesson-data.js.",
+  "_sources": "Duchamp: Philadelphia Museum of Art, Nude Descending a Staircase (No. 2), 1912, oil on canvas, 57 7/8 x 35 1/8 in. (147 x 89.2 cm), Louise and Walter Arensberg Collection (philamuseum.org/collection/object/51449). Protected (Duchamp d. 1968): window only.",
+  "title": { "he": "לתפוס תנועה", "en": "Catching Movement" },
+  "number": "2.5",
+  "time": { "he": "45–50 דקות", "en": "45–50 min" },
+  "description": {
+    "he": "נתבונן בתנועה אמיתית, נצייר אותה בכמה רגעים, נשווה בין הרישומים, ונחבר את הרגעים לדימוי אחד שמרגיש בתנועה.",
+    "en": "Look at a real movement, draw it at several moments, compare the sketches, and join the moments into one image that feels in motion."
+  },
+  "materials": {
+    "he": "דפים, עיפרון או פחם או טוש",
+    "en": "Paper, a pencil, charcoal or a marker"
+  },
+  "he": {
+    "s": [
+      { "big": "מה זז סביבכם?", "sub": "אדם הולך, יד, שיער ברוח, ענף, מים, וילון." },
+      { "big": "בחרו תנועה אחת,<br>והתבוננו בה.", "sub": "תנועה שחוזרת היא הכי טובה: צעד, נפנוף, נדנוד." },
+      { "big": "רגע ראשון.", "sub": "ציירו את מה שאתם רואים עכשיו. חצי דקה. לא מדויק." },
+      {
+        "big": "רגע נוסף.",
+        "sub": "כשהתנועה ממשיכה, ציירו שוב את מה שאתם רואים עכשיו, ליד הרישום הקודם.",
+        "body": "ועוד רגע אחד.",
+        "sketch": "moments"
+      },
+      {
+        "big": "הניחו את שלושת הרישומים זה לצד זה.<br><em>מה השתנה?</em>",
+        "q0": "הזווית?",
+        "q1": "הכיוון?",
+        "q2": "המקום על הדף?"
+      },
+      {
+        "art": {
+          "artist": "מרסל דושאן",
+          "title": "עירום יורד במדרגות (מס׳ 2), 1912",
+          "note": "ציור שמן על בד, בגובה של כמעט מטר וחצי. השם אומר מה מתרחש: דמות שיורדת במדרגות. דושאן יצר דימוי שבו אותה דמות מופיעה דרך רצף של תנוחות, כך שנוצרת תחושה של תנועה.",
+          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "פתחו את היצירה באתר Philadelphia Museum of Art ↗" }
+        }
+      },
+      {
+        "big": "איך דושאן גורם לנו להרגיש<br>שהדמות בתנועה?",
+        "q0": "מה חוזר?",
+        "q1": "מה משתנה?",
+        "q2": "לאיזה כיוון אנחנו מרגישים שהדמות נעה?"
+      },
+      {
+        "big": "עכשיו <em>דימוי אחד</em>.",
+        "sub": "חברו את הרגעים שציירתם לתמונה אחת שמרגישה בתנועה.",
+        "body": "אפשר להשתמש ב:",
+        "sketch": "overlap",
+        "chips": ["חזרה", "חפיפה", "שינוי", "כיוון", "קו"]
+      },
+      { "big": "איפה אתם מרגישים את התנועה<br>בעבודה שלכם?", "ph": "אני מרגיש/ה את התנועה ב…" }
+    ]
+  },
+  "en": {
+    "s": [
+      { "big": "What is moving around you?", "sub": "A person walking, a hand, hair in the wind, a branch, water, a curtain." },
+      { "big": "Choose one movement<br>and watch it.", "sub": "A movement that repeats works best: a step, a wave, a sway." },
+      { "big": "First moment.", "sub": "Draw what you see right now. Half a minute. Not accurate." },
+      {
+        "big": "Another moment.",
+        "sub": "As the movement goes on, draw again what you see now, next to the first sketch.",
+        "body": "And one more."
+      },
+      {
+        "big": "Place the three sketches side by side.<br><em>What changed?</em>",
+        "q0": "The angle?",
+        "q1": "The direction?",
+        "q2": "The place on the page?"
+      },
+      {
+        "art": {
+          "artist": "Marcel Duchamp",
+          "title": "Nude Descending a Staircase (No. 2), 1912",
+          "note": "Oil on canvas, almost a metre and a half tall. The title tells you what happens: a figure walking down stairs. Duchamp made an image in which the same figure appears through a sequence of positions, creating a sense of movement.",
+          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "Open the work on the Philadelphia Museum of Art website ↗" }
+        }
+      },
+      {
+        "big": "How does Duchamp make us feel<br>the figure is moving?",
+        "q0": "What repeats?",
+        "q1": "What changes?",
+        "q2": "Which way do we feel the figure is moving?"
+      },
+      {
+        "big": "Now <em>one image</em>.",
+        "sub": "Join the moments you drew into one picture that feels in motion.",
+        "body": "You can use:",
+        "chips": ["repetition", "overlap", "change", "direction", "line"]
+      },
+      { "big": "Where do you feel the movement<br>in your work?", "ph": "I feel the movement in…" }
+    ]
+  }
+}

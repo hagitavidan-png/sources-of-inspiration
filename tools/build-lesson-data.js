@@ -93,7 +93,13 @@ const MAP = {
     explore: [0, 1, 2], sources: [3, 4], look: [5, 6], create: [7, 8, 9, 10], end: [11, 12, 13] },
   /* 2.4 'Where am I in the space?': horizon, a person as the measure of scale, a view through a tube */
   'lesson-2-4': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', look: 'pattern', create: 'pattern', end: 'pattern' },
-    explore: [0, 1, 2, 3], sources: [4, 5], look: [6], create: [7, 8, 9, 10], end: [11, 12, 13] }
+    explore: [0, 1, 2, 3], sources: [4, 5], look: [6], create: [7, 8, 9, 10], end: [11, 12, 13] },
+  /* 2.5 'Catching movement' (new, preview only): a moment, another moment, compare, Duchamp, one image */
+  'lesson-2-5': { authored: true, variant: 'v2', layout: { explore: 'pattern', look: 'pattern', create: 'pattern', end: 'pattern' },
+    explore: [0, 1, 2, 3, 4], sources: [5], look: [6], create: [7], end: [8] },
+  /* 2.6 'When the drawing itself moves' (new, preview only), the last lesson of unit 2: a drop, Steir, actions, the unit */
+  'lesson-2-6': { authored: true, variant: 'v2', layout: { explore: 'pattern', look: 'pattern', create: 'pattern', end: 'pattern' },
+    explore: [0, 1], sources: [2], look: [3], create: [4, 5, 6], end: [7, 8, 9] }
 };
 /* in "create", these screens are the step-by-step "getting started" part */
 const STEPS_SECTION = 'create';
@@ -288,7 +294,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=23">
+<link rel="stylesheet" href="../css/lesson-page.css?v=24">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -324,7 +330,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=21"></script>
+<script src="../js/lesson-page.js?v=22"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -332,10 +338,21 @@ function pageHtml(id, title) {
 `;
 }
 
-/* unit 2's new journey: pattern, up close, light, space */
+/* unit 2's new journey: pattern, up close, light, space, movement, the movement of making */
 const ORDER = {
-  unit02: ['lessons/lesson-2-1.html', 'lessons/lesson-2-3.html', 'lessons/lesson-2-2.html', 'lessons/lesson-2-4.html']
+  unit02: ['lessons/lesson-2-1.html', 'lessons/lesson-2-3.html', 'lessons/lesson-2-2.html', 'lessons/lesson-2-4.html',
+    'lessons/lesson-2-5.html', 'lessons/lesson-2-6.html']
 };
+/* new lessons that have only a lesson page (no slides, not in js/navigation-data.js): added to their unit
+   on the preview pages only, with the title from their content file */
+const ADD = { unit02: ['lesson-2-5', 'lesson-2-6'] };
+const ADDED = {};
+for (const [uid, ids] of Object.entries(ADD)) {
+  const u = NAV.units.find(x => x.id === uid);
+  ADDED[uid] = ids.map(id => ({ path: 'lessons/' + id + '.html',
+    title: JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', id + '.json'), 'utf8')).title }));
+  ADDED[uid].forEach(l => { if (!u.lessons.some(x => x.path === l.path)) u.lessons.push(l); });
+}
 
 // ── build ──────────────────────────────────────────────────────
 const index = {};
@@ -392,7 +409,7 @@ for (const [id, m] of Object.entries(MAP)) {
     ...(m.desk ? { desk: m.desk } : {}),
     ...(m.noTitle ? { noTitle: m.noTitle } : {}),
     ...(A && A.subtitle ? { subtitle: A.subtitle } : {}),
-    number: (A && A.number) || m.number || intro.number, unit: intro.unit, unitNum: u.id.replace('unit', ''),
+    number: (A && A.number) || m.number || intro.number, unit: intro.unit || u.title, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
     sections
@@ -413,10 +430,15 @@ fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),
   'window.LESSON_TITLES = ' + JSON.stringify(titles, null, 1) + ';\n' +
   '/* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */\n' +
   'window.LESSON_ORDER = ' + JSON.stringify(ORDER, null, 1) + ';\n' +
+  '/* new lessons that are not in js/navigation-data.js, added on the preview pages only */\n' +
+  'window.LESSON_ADDED = ' + JSON.stringify(ADDED, null, 1) + ';\n' +
   '(function () {\n' +
-  '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER;\n' +
+  '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};\n' +
   '  if (!N || !O) return;\n' +
   '  (N.units || []).forEach(function (u) {\n' +
+  '    (A[u.id] || []).forEach(function (l) {\n' +
+  '      if (u.lessons && !u.lessons.some(function (x) { return x.path === l.path; })) u.lessons.push(l);\n' +
+  '    });\n' +
   '    var o = O[u.id];\n' +
   '    if (!o || !u.lessons) return;\n' +
   '    u.lessons.sort(function (a, b) { return o.indexOf(a.path) - o.indexOf(b.path); });\n' +

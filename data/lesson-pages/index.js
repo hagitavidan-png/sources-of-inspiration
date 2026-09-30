@@ -13,7 +13,9 @@ window.LESSON_PAGES_INDEX = {
  "lessons/lesson-2-1.html": "lesson-pages/lesson-2-1.html",
  "lessons/lesson-2-2.html": "lesson-pages/lesson-2-2.html",
  "lessons/lesson-2-3.html": "lesson-pages/lesson-2-3.html",
- "lessons/lesson-2-4.html": "lesson-pages/lesson-2-4.html"
+ "lessons/lesson-2-4.html": "lesson-pages/lesson-2-4.html",
+ "lessons/lesson-2-5.html": "lesson-pages/lesson-2-5.html",
+ "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html"
 };
 window.LESSON_TITLES = {
  "lessons/journal-artwork.html": {
@@ -31,6 +33,14 @@ window.LESSON_TITLES = {
  "lessons/lesson-2-4.html": {
   "he": "איפה אני במרחב?",
   "en": "Where Am I in the Space?"
+ },
+ "lessons/lesson-2-5.html": {
+  "he": "לתפוס תנועה",
+  "en": "Catching Movement"
+ },
+ "lessons/lesson-2-6.html": {
+  "he": "כשהציור עצמו נע",
+  "en": "When the Drawing Itself Moves"
  }
 };
 /* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */
@@ -39,13 +49,37 @@ window.LESSON_ORDER = {
   "lessons/lesson-2-1.html",
   "lessons/lesson-2-3.html",
   "lessons/lesson-2-2.html",
-  "lessons/lesson-2-4.html"
+  "lessons/lesson-2-4.html",
+  "lessons/lesson-2-5.html",
+  "lessons/lesson-2-6.html"
+ ]
+};
+/* new lessons that are not in js/navigation-data.js, added on the preview pages only */
+window.LESSON_ADDED = {
+ "unit02": [
+  {
+   "path": "lessons/lesson-2-5.html",
+   "title": {
+    "he": "לתפוס תנועה",
+    "en": "Catching Movement"
+   }
+  },
+  {
+   "path": "lessons/lesson-2-6.html",
+   "title": {
+    "he": "כשהציור עצמו נע",
+    "en": "When the Drawing Itself Moves"
+   }
+  }
  ]
 };
 (function () {
-  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER;
+  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};
   if (!N || !O) return;
   (N.units || []).forEach(function (u) {
+    (A[u.id] || []).forEach(function (l) {
+      if (u.lessons && !u.lessons.some(function (x) { return x.path === l.path; })) u.lessons.push(l);
+    });
     var o = O[u.id];
     if (!o || !u.lessons) return;
     u.lessons.sort(function (a, b) { return o.indexOf(a.path) - o.indexOf(b.path); });

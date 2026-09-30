@@ -1,0 +1,104 @@
+{
+  "_note": "Lesson 2.6 'When the drawing itself moves' (file lesson-2-6, new, preview only), the closing lesson of unit 2, content approved by the author: a drop on a tilted sheet first, then Pat Steir's Color Wheel, then one or two actions in a chosen medium (mixed media optional), then the unit's summary. Source for tools/build-lesson-data.js.",
+  "_sources": "Steir: Smithsonian, 'Pat Steir: Color Wheel', Hirshhorn Museum and Sculpture Garden, Oct 24, 2019 - Mar 13, 2020, second-floor inner-circle galleries; 28 large-scale paintings from the Waterfall series forming a color wheel, nearly 400 linear feet; the pours on each canvas often in the complementary hue of the monochrome background (si.edu/exhibitions/pat-steir-color-wheel:event-exhib-6378; Smithsonian press release). Upright canvases, paint poured: Smithsonian Magazine (smithsonianmag.com/smithsonian-institution/artist-pat-steir-re-imagines-color-wheel-180973587/). Protected: window only, shown as an exhibition (not a single work in a collection).",
+  "title": { "he": "כשהציור עצמו נע", "en": "When the Drawing Itself Moves" },
+  "number": "2.6",
+  "time": { "he": "50 דקות, ומי שרוצה יכול להמשיך", "en": "50 min, and you can go on if you like" },
+  "description": {
+    "he": "נבדוק איך אפשר לראות בתוך העבודה את התנועה של פעולת הציור: של היד, של הצבע ושל החומר.",
+    "en": "See how the movement of making a drawing can be seen in the work itself: the movement of the hand, the paint and the material."
+  },
+  "materials": {
+    "he": "צבע מדולל (גואש או צבעי מים), מכחולים, דפים עבים, נייר לקולאז׳, דבק, עיפרון, וכיסוי לשולחן",
+    "en": "Thinned paint (gouache or watercolour), brushes, thick paper, paper for collage, glue, a pencil, and a cover for the table"
+  },
+  "he": {
+    "s": [
+      { "big": "בשיעור הקודם ציירתם<br>תנועה שראיתם.", "sub": "היום נבדוק איך אפשר לראות את התנועה של פעולת הציור בתוך העבודה." },
+      {
+        "big": "ניסוי קצר: <em>טיפה אחת</em>.",
+        "sub": "טפטפו צבע מדולל על דף, והטו את הדף.",
+        "sketch": "tilt",
+        "q0": "לאן הצבע נע?",
+        "q1": "מה גרם לו לשנות כיוון?"
+      },
+      {
+        "art": {
+          "artist": "פט סטייר",
+          "title": "Color Wheel",
+          "note": "תערוכה במוזיאון הירשהורן, 2019–2020. 28 ציורים מסדרת Waterfall, סביב אולם עגול. סטייר עבדה על בדים עומדים. היא שפכה את הצבע והוא נזל מטה, והמסלול שלו נשאר על הבד.",
+          "link": { "href": "https://www.si.edu/exhibitions/pat-steir-color-wheel:event-exhib-6378", "label": "פתחו את התערוכה באתר הסמית׳סוניאן ↗" }
+        }
+      },
+      {
+        "big": "מה הצבע עשה?",
+        "q0": "לאיזה כיוון הוא נע?",
+        "q1": "איפה הוא נעצר, ואיפה המשיך?",
+        "q2": "איפה רואים שכבה מעל שכבה?"
+      },
+      {
+        "big": "בחרו פעולה אחת או שתיים.",
+        "chips": ["טפטוף", "גרירה", "התזה", "שכבות", "קולאז׳", "רישום מעל צבע"],
+        "note": "רישום, צבע, קולאז׳ או שילוב ביניהם. לא חייבים הכול. הבחירה היא חלק מהתרגיל."
+      },
+      {
+        "big": "התחילו מתנועה.",
+        "sub": "אפשר מהתנועה שציירתם בשיעור הקודם, או מתנועה שאתם רואים עכשיו.",
+        "body": "תנו לחומר לעשות חלק מהעבודה: הטו, גררו, חכו."
+      },
+      { "big": "עצרו לפני השכבה הבאה.", "sub": "מה עשיתם אתם, ומה עשה החומר בעצמו?" },
+      { "big": "איפה רואים את התנועה<br>שהתרחשה בזמן שיצרתם?", "ph": "רואים אותה ב…" },
+      {
+        "big": "ביחידה הזאת הסתכלתם החוצה:",
+        "lens": ["דפוס", "פרט", "אור", "מרחב", "תנועה"],
+        "ask": "באיזה מבט תרצו להמשיך?",
+        "ph": "אני רוצה להמשיך להסתכל על…"
+      },
+      { "kind": "close", "big": "העולם לא עומד במקום.<br>גם הציור לא חייב." }
+    ]
+  },
+  "en": {
+    "s": [
+      { "big": "Last lesson you drew<br>a movement you saw.", "sub": "Today: how can the movement of making a drawing be seen in the work itself?" },
+      {
+        "big": "A short test: <em>one drop</em>.",
+        "sub": "Drip thinned paint on a sheet and tilt it.",
+        "q0": "Where did the paint move?",
+        "q1": "What made it change direction?"
+      },
+      {
+        "art": {
+          "artist": "Pat Steir",
+          "title": "Color Wheel",
+          "note": "An exhibition at the Hirshhorn Museum, 2019–2020. 28 paintings from the Waterfall series, around a circular gallery. Steir worked on upright canvases. She poured the paint and it ran down, and its path stays on the canvas.",
+          "link": { "href": "https://www.si.edu/exhibitions/pat-steir-color-wheel:event-exhib-6378", "label": "Open the exhibition on the Smithsonian website ↗" }
+        }
+      },
+      {
+        "big": "What did the paint do?",
+        "q0": "Which way did it move?",
+        "q1": "Where did it stop, and where did it go on?",
+        "q2": "Where do you see layer over layer?"
+      },
+      {
+        "big": "Choose one or two actions.",
+        "chips": ["drip", "drag", "splash", "layers", "collage", "drawing over paint"],
+        "note": "Drawing, paint, collage or a mix. You don't need them all. Choosing is part of the task."
+      },
+      {
+        "big": "Start from a movement.",
+        "sub": "The one you drew last lesson, or one you can see now.",
+        "body": "Let the material do part of the work: tilt, drag, wait."
+      },
+      { "big": "Pause before the next layer.", "sub": "What did you do, and what did the material do by itself?" },
+      { "big": "Where can you see the movement<br>that happened while you worked?", "ph": "You can see it in…" },
+      {
+        "big": "In this unit you looked outward:",
+        "lens": ["pattern", "detail", "light", "space", "movement"],
+        "ask": "Which way of looking do you want to keep?",
+        "ph": "I want to keep looking at…"
+      },
+      { "kind": "close", "big": "The world doesn't stand still.<br>Neither does a drawing." }
+    ]
+  }
+}

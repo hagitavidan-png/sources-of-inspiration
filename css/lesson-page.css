@@ -492,6 +492,19 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 @media (max-width:700px){.lp-v2 .lp-sketch-light svg{width:112px}}
 
 /* ═══ 2.4 where am I in the space: a wide frame, the horizon, and a round view through a tube ═══ */
+/* 2.5: moments of one movement, side by side and then overlapping in one frame; 2.6: a drop on a tilted sheet */
+.lp-v2 .lp-sketch-mv{display:flex;flex-wrap:wrap;gap:clamp(12px,2.4vw,24px);margin:22px 0 6px}
+.lp-v2 .lp-sketch-mv svg{width:112px;height:auto;overflow:visible}
+.lp-v2 .lp-sketch-ov svg{width:min(236px,100%)}
+.lp-v2 .lp-sketch-mv .fr{fill:none;stroke:var(--ink);stroke-width:1}
+[dir=rtl] .lp-v2 .lp-sketch-mv svg{transform:scaleX(-1)}   /* the movement goes the way the line reads */
+.lp-v2 .lp-sketch-mv .wk{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round}
+.lp-v2 .lp-sketch-tilt svg{width:150px;height:auto;overflow:visible}
+.lp-v2 .lp-sketch-tilt .fr{fill:var(--paper);stroke:var(--ink);stroke-width:1}
+.lp-v2 .lp-sketch-tilt .dr{fill:var(--ink);stroke:none;opacity:.7}
+.lp-v2 .lp-sketch-tilt .run{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;opacity:.55}
+.lp-v2 .lp-sketch-tilt .arr{fill:none;stroke:var(--ink);stroke-width:.9;opacity:.6}
+@media (max-width:700px){.lp-v2 .lp-sketch-mv svg{width:92px}.lp-v2 .lp-sketch-ov svg{width:min(220px,100%)}}
 .lp-v2 .lp-sketch-hz{margin:22px 0 6px}
 .lp-v2 .lp-sketch-hz > div{display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(14px,2.6vw,28px)}
 .lp-v2 .lp-sketch-hz span{display:flex;flex-direction:column;gap:6px}
