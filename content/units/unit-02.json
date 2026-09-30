@@ -1,10 +1,15 @@
 {
-  "_note": "Unit 2 page 'Looking outward', decided by the author after the unit 2 QA. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lessons are listed in the new order; each card's title, short description and time are read from its lesson page (data/lesson-pages), nothing is written here. The sources are only the artists of the six lessons. The cover image is not changed yet (a separate decision). The unit description is the author's text.",
+  "_note": "Unit 2 page 'Looking outward', decided by the author after the unit 2 QA. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lessons are listed in the new order; each card's title, short description and time are read from its lesson page (data/lesson-pages), nothing is written here. The sources are only the artists of the six lessons. The cover is the Strawberry Thief image of lesson 2.1 (Art Institute of Chicago), chosen by the author. The unit description is the author's text.",
   "title": { "he": "מבט החוצה", "en": "Looking Outward" },
   "keys": { "he": "דפוס · פרט · אור · מרחב · תנועה", "en": "Pattern · Detail · Light · Space · Movement" },
   "desc": {
     "he": "נביט החוצה דרך דפוס, פרט, אור, מרחב ותנועה — ונגלה איך שינוי במבט משנה את מה שאנחנו רואים ומציירים.",
     "en": "We’ll look outward through pattern, detail, light, space, and movement — and discover how changing the way we look changes what we see and draw."
+  },
+  "cover": {
+    "img": "morris-strawberry-thief-aic",
+    "pos": "50% 50%",
+    "cap": { "he": "ויליאם מוריס, גנב התותים, 1883", "en": "William Morris, Strawberry Thief, 1883" }
   },
   "count": { "he": "6 שיעורים", "en": "6 lessons" },
   "noApproach": true,

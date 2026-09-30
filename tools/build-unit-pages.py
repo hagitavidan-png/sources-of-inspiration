@@ -330,6 +330,9 @@ UNIT_NAME_JS = '''
 
 def render(u, units):
     cfg = UNITS[u['id']]
+    cv = (u.get('over') or {}).get('cover')
+    if cv:   # an approved cover image for the unit (content/units/unit-NN.json)
+        cfg = dict(cfg, img=cv['img'], pos=cv.get('pos', '50% 50%'), cap=(cv['cap']['he'], cv['cap']['en']))
     ko = (u.get('over') or {}).get('keys')
     keys = (ko['he'], ko['en']) if ko else cfg['keys']
     idx = [x['id'] for x in units].index(u['id'])
