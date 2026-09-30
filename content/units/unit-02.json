@@ -1,5 +1,5 @@
 {
-  "_note": "Unit 2 page 'Looking outward', decided by the author after the unit 2 QA. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lessons are listed in the new order; each card's title, short description and time are read from its lesson page (data/lesson-pages), nothing is written here. The sources are only the artists of the six lessons. The cover is the Strawberry Thief image of lesson 2.1 (Art Institute of Chicago), chosen by the author. The unit description is the author's text.",
+  "_note": "Unit 2 page 'Looking outward', decided by the author after the unit 2 QA. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lessons are listed in the new order; each card's title, short description and time are read from its lesson page (data/lesson-pages), nothing is written here. The sources are only the artists of the six lessons. The cover is the Strawberry Thief image of lesson 2.1 (Art Institute of Chicago), chosen by the author. On wide screens (the 21:9 frame) a crop of the textile only, without the grey background and the fringe, made from the author's full-size AIC download (1324 x 3000): images/editorial/morris-strawberry-thief-aic-cover.jpg. Phones and tablets keep the lesson's image. The unit description is the author's text.",
   "title": { "he": "מבט החוצה", "en": "Looking Outward" },
   "keys": { "he": "דפוס · פרט · אור · מרחב · תנועה", "en": "Pattern · Detail · Light · Space · Movement" },
   "desc": {
@@ -8,6 +8,7 @@
   },
   "cover": {
     "img": "morris-strawberry-thief-aic",
+    "wide": "morris-strawberry-thief-aic-cover",
     "pos": "50% 50%",
     "cap": { "he": "ויליאם מוריס, גנב התותים, 1883", "en": "William Morris, Strawberry Thief, 1883" }
   },

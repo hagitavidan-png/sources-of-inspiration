@@ -332,7 +332,7 @@ def render(u, units):
     cfg = UNITS[u['id']]
     cv = (u.get('over') or {}).get('cover')
     if cv:   # an approved cover image for the unit (content/units/unit-NN.json)
-        cfg = dict(cfg, img=cv['img'], pos=cv.get('pos', '50% 50%'), cap=(cv['cap']['he'], cv['cap']['en']))
+        cfg = dict(cfg, img=cv['img'], pos=cv.get('pos', '50% 50%'), cap=(cv['cap']['he'], cv['cap']['en']), wide=cv.get('wide'))
     ko = (u.get('over') or {}).get('keys')
     keys = (ko['he'], ko['en']) if ko else cfg['keys']
     idx = [x['id'] for x in units].index(u['id'])
@@ -493,7 +493,7 @@ def render(u, units):
       </div>
     </div>
     <figure class="u-fig">
-      <div class="u-img rv-img"><img src="{B}images/editorial/{cfg['img']}.jpg" alt="{esc(cfg['cap'][1])}" style="object-position:{cfg['pos']}" fetchpriority="high"></div>
+      <div class="u-img rv-img">{f'<picture><source media="(min-width:821px)" srcset="{B}images/editorial/{cfg["wide"]}.jpg">' if cfg.get('wide') else ''}<img src="{B}images/editorial/{cfg['img']}.jpg" alt="{esc(cfg['cap'][1])}" style="object-position:{cfg['pos']}" fetchpriority="high">{'</picture>' if cfg.get('wide') else ''}</div>
       <figcaption>{t(*cfg['cap'])}</figcaption>
     </figure>
     <div class="u-intro rv">
