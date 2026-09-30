@@ -25,8 +25,8 @@ window.LESSON_PAGE = {
   "en": "50 min"
  },
  "intro": {
-  "he": "נמצא דפוס אמיתי סביבנו, נזהה את היחידה שחוזרת ואת החוק שלפיו היא חוזרת, ונבדוק מה קורה כשמשנים כלל אחד.",
-  "en": "Find a real pattern around you, identify the unit that repeats and the rule it follows, and see what happens when one rule changes."
+  "he": "נמצא דפוס אמיתי סביבנו, נזהה את המרכיב שחוזר ואת החוק שלפיו הוא חוזר, ונבדוק מה קורה כשמשנים כלל אחד.",
+  "en": "Find a real pattern around you, identify the element that repeats and the rule it follows, and see what happens when one rule changes."
  },
  "materials": {
   "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",

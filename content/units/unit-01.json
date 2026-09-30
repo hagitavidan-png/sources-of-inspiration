@@ -1,8 +1,8 @@
 {
   "_note": "Unit 1 page, content approved by the author. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lesson list is the unit's journey: a journey word, the lesson title, a short description and the time.",
   "desc": {
-    "he": "החיים שלכם הם מקור ההשראה. ביחידה נתחיל מרגש ונגלה בהדרגה איך צבע, קו, קומפוזיציה, זיכרון, מוטיב וסמל יכולים להפוך לחומר ליצירה. משם נעבור לניסוי, לפיתוח עבודה ולהתבוננות בשפה האישית שמתחילה להיווצר.",
-    "en": "Your life is the source of inspiration. The unit starts from a feeling and discovers, step by step, how colour, line, composition, memory, motif and symbol can become material for art. From there it moves to experiments, to developing a work, and to looking at the personal language that begins to form."
+    "he": "החיים שלכם הם מקור ההשראה. ביחידה נתחיל מרגש ונגלה בהדרגה איך צבע, קו, קומפוזיציה, זיכרון, מוטיב וסמל יכולים להפוך לחומר ליצירה. משם נעבור לניסוי, לפיתוח עבודה ולהתבוננות בשפה האישית שהולכת ומתגבשת.",
+    "en": "Your life is the source of inspiration. The unit starts from a feeling and discovers, step by step, how colour, line, composition, memory, motif and symbol can become material for art. From there it moves to experiments, to developing a work, and to looking at the personal language that is taking shape."
   },
   "keys": {
     "he": "חוויה · דימוי · משמעות",
@@ -74,12 +74,20 @@
       "step": {
         "he": "ניסוי",
         "en": "Experiment"
+      },
+      "sub": {
+        "he": "מכירים את פרידה קאלו, אדוורד מונק ולואיז בורז׳ואה, בוחרים חוויה אישית אחת ובודקים אותה בשלושה ניסויים קצרים: צבע, קו ותנועה, מרחב וקומפוזיציה.",
+        "en": "Meet Frida Kahlo, Edvard Munch and Louise Bourgeois, choose one personal experience, and test it in three short experiments: colour, line and movement, space and composition."
       }
     },
     "lessons/experience-artwork.html": {
       "step": {
         "he": "פיתוח",
         "en": "Development"
+      },
+      "sub": {
+        "he": "חוזרים לשלושת הניסויים, בוחרים את זה שרוצים להמשיך לחקור, ומפתחים ממנו עבודה גדולה, עם עצירה אחת להתבוננות ורפלקציה על התהליך.",
+        "en": "Return to your three experiments, choose the one you want to explore further, and develop it into a larger work, with one pause for looking and a reflection on the process."
       }
     },
     "lessons/unit-summary.html": {
@@ -88,12 +96,17 @@
         "en": "Discovery"
       },
       "sub": {
-        "he": "פורשים את עבודות היחידה, מזהים מה השתנה ומה חוזר ושואלים איך אפשר לזהות את השפה האישית שלנו.",
-        "en": "Lay out the unit's work, notice what changed and what keeps returning, and ask how your personal language can be recognised."
+        "he": "מניחים יחד את עבודות היחידה, מזהים מה השתנה ומה חוזר, ושואלים איך ניכרת בהן השפה האישית שלנו.",
+        "en": "Bring the unit's work together, notice what changed and what keeps returning, and ask how your personal language shows in it."
       },
       "dur": "45 min"
     }
   },
+  "inspirationTitle": {
+    "he": "רקע על האמנים",
+    "en": "About the Artists"
+  },
+  "noPeopleLabel": true,
   "people": [
     [
       "rothko",

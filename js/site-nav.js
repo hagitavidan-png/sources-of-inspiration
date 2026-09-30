@@ -62,15 +62,15 @@ window.ART_NAVIGATION = {
     {
      "path": "lessons/experience-experiments.html",
      "title": {
-      "he": "חוויה אישית כמקור ליצירה, חלק א: ניסויים",
-      "en": "Personal Experience as a Source, Part 1: Experiments"
+      "he": "מחוויה ליצירה, חלק א: ניסויים",
+      "en": "From Experience to Artwork, Part 1: Experiments"
      }
     },
     {
      "path": "lessons/experience-artwork.html",
      "title": {
-      "he": "חוויה אישית כמקור ליצירה, חלק ב: פיתוח עבודה",
-      "en": "Personal Experience as a Source, Part 2: Developing a Work"
+      "he": "מחוויה ליצירה, חלק ב: פיתוח עבודה",
+      "en": "From Experience to Artwork, Part 2: Developing a Work"
      }
     },
     {

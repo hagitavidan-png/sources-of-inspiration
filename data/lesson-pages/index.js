@@ -22,6 +22,14 @@ window.LESSON_TITLES = {
   "he": "מה חוזר בעבודות שלי?",
   "en": "What Keeps Returning in My Work?"
  },
+ "lessons/experience-experiments.html": {
+  "he": "מחוויה ליצירה, חלק א: ניסויים",
+  "en": "From Experience to Artwork, Part 1: Experiments"
+ },
+ "lessons/experience-artwork.html": {
+  "he": "מחוויה ליצירה, חלק ב: פיתוח עבודה",
+  "en": "From Experience to Artwork, Part 2: Developing a Work"
+ },
  "lessons/lesson-2-2.html": {
   "he": "אותו דבר, אור אחר",
   "en": "Same Thing, Different Light"

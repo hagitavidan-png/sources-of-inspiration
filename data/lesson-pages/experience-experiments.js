@@ -15,8 +15,8 @@ window.LESSON_PAGE = {
  },
  "unitNum": "01",
  "title": {
-  "he": "חוויה אישית כמקור ליצירה, חלק א: ניסויים",
-  "en": "Personal Experience as a Source, Part 1: Experiments"
+  "he": "מחוויה ליצירה, חלק א: ניסויים",
+  "en": "From Experience to Artwork, Part 1: Experiments"
  },
  "time": {
   "he": "45 דקות",

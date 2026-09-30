@@ -25,8 +25,8 @@ window.LESSON_PAGE = {
   "en": "50 min"
  },
  "intro": {
-  "he": "נתבונן בתנועה אמיתית, נצייר אותה בכמה רגעים, נשווה בין הרישומים, ונחבר את הרגעים לדימוי אחד שמרגיש בתנועה.",
-  "en": "Look at a real movement, draw it at several moments, compare the sketches, and join the moments into one image that feels in motion."
+  "he": "נעקוב אחרי תנועה אמיתית, נצייר אותה בכמה רגעים, נשווה בין הרישומים, ונחבר את הרגעים לדימוי אחד שמרגיש בתנועה.",
+  "en": "Follow a real movement, draw it at several moments, compare the sketches, and join the moments into one image that feels in motion."
  },
  "materials": {
   "he": "דפים, עיפרון או פחם או טוש",

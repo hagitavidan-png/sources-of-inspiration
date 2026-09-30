@@ -17,8 +17,8 @@ window.LESSON_PAGE = {
  },
  "unitNum": "01",
  "title": {
-  "he": "חוויה אישית כמקור ליצירה, חלק ב: פיתוח עבודה",
-  "en": "Personal Experience as a Source, Part 2: Developing a Work"
+  "he": "מחוויה ליצירה, חלק ב: פיתוח עבודה",
+  "en": "From Experience to Artwork, Part 2: Developing a Work"
  },
  "time": {
   "he": "45 דקות",

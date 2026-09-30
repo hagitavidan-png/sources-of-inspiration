@@ -26,8 +26,8 @@ window.LESSON_PAGE = {
   "en": "50 min"
  },
  "intro": {
-  "he": "נתבונן במרחב פתוח אמיתי, נסמן את קו האופק, ונבדוק כמה גדול נראה אדם בתוך המרחב, במבט רחב ובמבט דרך צינור.",
-  "en": "Look at a real open space, mark the horizon, and see how big a person looks inside the space, in a wide view and in a view through a tube."
+  "he": "נתבונן במרחב פתוח אמיתי, נסמן את קו האופק, ונבדוק כמה גדול נראה אדם בתוכו, במבט רחב ובמבט דרך צינור.",
+  "en": "Look at a real open space, mark the horizon, and see how big a person looks inside it, in a wide view and in a view through a tube."
  },
  "materials": {
   "he": "דף גדול לרוחב, דף נוסף לגלגול לצינור, עיפרון וצבעים",

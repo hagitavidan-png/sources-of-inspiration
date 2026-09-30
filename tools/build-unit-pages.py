@@ -376,15 +376,17 @@ def render(u, units):
     insp = ''
     if u['people']:
         pl = u['people_label'] or {'he': 'אמנים ביחידה', 'en': 'Artists in this unit'}
+        ov = u.get('over') or {}
+        ih = ov.get('inspirationTitle') or {'he': 'מקורות השראה ורקע על האמנים', 'en': 'Sources of inspiration and the artists'}
         insp = f'''
   <section class="u-sec ed-wrap" id="inspiration">
     <div class="u-sec-head rv">
       <span class="step">{t('השראה', 'Inspiration')}</span>
-      <h2 class="ed-display">{t('מקורות השראה ורקע על האמנים', 'Sources of inspiration and the artists')}</h2>
+      <h2 class="ed-display">{t(ih['he'], ih['en'])}</h2>
     </div>
     {'<div class="works">' + works_html + '</div>' if works_html else ''}
     <div class="people rv">
-      <p class="ed-kicker">{t(pl['he'], pl['en'])}</p>
+      {'' if ov.get('noPeopleLabel') else '<p class="ed-kicker">' + t(pl['he'], pl['en']) + '</p>'}
       <ul>{people_html}</ul>
     </div>
   </section>'''

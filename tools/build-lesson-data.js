@@ -69,7 +69,7 @@ const MAP = {
   /* design pilot (variant 'v2'), 5 stations. Each artist screen is paired with that artist's work
      from the gallery screen (4); the gallery's looking questions go to "look". "Making" is a lab:
      screen 9 opens it, 10-12 are three parallel experiments, 13 closes the lesson. */
-  'experience-experiments': { variant: 'v2', noSlides: true,   /* no cover image: The Scream appears with Munch in "sources" */
+  'experience-experiments': { variant: 'v2', noSlides: true, title: { he: 'מחוויה ליצירה, חלק א: ניסויים', en: 'From Experience to Artwork, Part 1: Experiments' },   /* no cover image: The Scream appears with Munch in "sources" */
     layout: { idea: 'flow', create: 'lab' },
     explore: ['0:nolabel'],
     sources: [{ s: 1, work: [4, 0] }, { s: 2, work: [4, 1] }, { s: 3, work: [4, 2] }],
@@ -361,7 +361,7 @@ for (const [id, m] of Object.entries(MAP)) {
   /* lessons that are read from their slides use the archived copy (lessons-archive/): the slide paths become redirects */
   const src = A ? '' : fs.readFileSync(path.join(ROOT, 'lessons-archive', id + '.html'), 'utf8');
   const T = A ? { he: A.he, en: A.en } : (m.dom ? null : readT(src));
-  const intro = Object.assign({}, INTROS[id + '.html'], A && A.time ? { time: A.time } : {}, A && A.title ? { title: A.title } : {},
+  const intro = Object.assign({}, INTROS[id + '.html'], A && A.time ? { time: A.time } : {}, A && A.title ? { title: A.title } : {}, m.title ? { title: m.title } : {},
     A && A.description ? { description: A.description } : {}, A && A.materials ? { materials: A.materials } : {});
   if (!intro) throw new Error('no intro data for ' + id);
   const sections = {};
@@ -420,6 +420,7 @@ for (const [id, m] of Object.entries(MAP)) {
   fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'), pageHtml(id, plain(intro.title.he)));
   index[file] = 'lesson-pages/' + id + '.html';
   if (A && A.title) titles[file] = A.title;
+  if (m.title) titles[file] = m.title;
   const count = Object.values(sections).reduce((a, s) => a + ['blocks', 'steps', 'lead', 'after', 'outro'].reduce((n, k) => n + (s[k] || []).length, 0), 0);
   console.log(id.padEnd(24), count, 'blocks');
 }
