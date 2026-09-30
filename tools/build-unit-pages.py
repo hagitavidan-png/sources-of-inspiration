@@ -76,6 +76,14 @@ PEOPLE = {
     'picasso': ('פבלו פיקאסו', 'Pablo Picasso', ['Pablo Picasso', 'Picasso']),
     'cezanne': ('פול סזאן', 'Paul Cézanne', ['Paul Cézanne', 'Cézanne']),
     'hockney': ('דייוויד הוקני', 'David Hockney', ['David Hockney', 'Hockney']),
+    # unit 2 'Looking outward': the spelling used in the lesson pages
+    'kusama': ('יאיוי קוסמה', 'Yayoi Kusama', []),
+    'blossfeldt': ('קרל בלוספלדט', 'Karl Blossfeldt', []),
+    'steinkamp': ('ג׳ניפר סטיינקמפ', 'Jennifer Steinkamp', []),
+    'fankuan': ('פאן קואן', 'Fan Kuan', []),
+    'holt': ('ננסי הולט', 'Nancy Holt', []),
+    'duchamp': ('מרסל דושאן', 'Marcel Duchamp', []),
+    'steir': ('פט סטייר', 'Pat Steir', []),
 }
 OTHER_TAGS = {'Indigenous Art': 'אמנות ילידית', 'Ancient Egypt': 'מצרים העתיקה', 'Global': 'גלובלי', 'Contemporary': 'עכשווי',
               # tags that course.html has in English only
@@ -134,6 +142,16 @@ def _unit_content(uid):
         return None
     import json
     return json.load(open(p, encoding='utf8'))
+
+
+def _lesson_page(path):
+    """The approved content of a lesson page (data/lesson-pages/<id>.js): its title and short description."""
+    import json
+    lp = NEW_LESSON_PAGES.get(path)
+    if not lp:
+        return None
+    txt = open(os.path.join(ROOT, 'data', 'lesson-pages', os.path.basename(lp)[:-5] + '.js'), encoding='utf8').read()
+    return json.loads(txt[txt.index('window.LESSON_PAGE = ') + len('window.LESSON_PAGE = '):].rstrip().rstrip(';'))
 
 
 # ── helpers ───────────────────────────────────────────────────────
@@ -249,6 +267,20 @@ def parse():
                 u['desc'] = O['desc']
             if O.get('noApproach'):
                 u['approach'] = []
+            if O.get('title'):
+                u['own_title'] = O['title']   # this unit's own page only; the other units' pages keep their links as they are
+            if O.get('noDesc'):
+                u['desc'] = None
+            if O.get('count'):
+                u['count'] = O['count']
+            if O.get('journey'):
+                # the unit's lessons in their new order, each read from its lesson page
+                js = []
+                for j in O['journey']:
+                    D = _lesson_page(j['path'])
+                    js.append(dict(open=True, num=j['num'], title=D['title'], cap={'he': '', 'en': ''}, sub=D['intro'],
+                                   tags=[], dur=D['time']['en'], desc=None, href=j['path']))
+                u['lessons'] = js
             if O.get('people') is not None:
                 u['people'] = [k for k, _ in O['people']]
                 u['people_refs'] = dict((k, v) for k, v in O['people'])
@@ -291,6 +323,11 @@ def journey_row(l, lo, n, B):
       </li>'''
 
 
+# the unit's new name in the contents drawer of its own page (preview only, as on the lesson pages)
+UNIT_NAME_JS = '''
+<script>((window.ART_NAVIGATION || {}).units || []).forEach(function (u) { var n = (window.UNIT_TITLES || {})[u.id]; if (n) u.title = n; });</script>'''
+
+
 def render(u, units):
     cfg = UNITS[u['id']]
     ko = (u.get('over') or {}).get('keys')
@@ -303,7 +340,7 @@ def render(u, units):
     # inspiration: works
     # works by the unit's artists, skipping the one already shown at the top of the page
     works = [(k,) + WORKS[(u['id'], k)] for k in u['people']
-             if (u['id'], k) in WORKS and WORKS[(u['id'], k)][0] != cfg['img']]
+             if (u['id'], k) in WORKS and WORKS[(u['id'], k)][0] != cfg['img'] and not (u.get('over') or {}).get('noWorks')]
     works_html = ''
     for k, img, whe, wen in works[:4]:
         he, en, _ = PEOPLE[k]
@@ -383,7 +420,7 @@ def render(u, units):
         <div class="ls-main">
           <h3>{t(l['title']['he'], l['title']['en'])}{cap}</h3>
           <p class="ls-sub">{t(sub['he'], sub['en'])}</p>
-          <p class="ls-tags">{tags}</p>
+          {f'<p class="ls-tags">{tags}</p>' if tags else ''}
           {desc}
         </div>
         <div class="ls-side">
@@ -414,7 +451,7 @@ def render(u, units):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
 <meta name="robots" content="noindex">
-<title>{esc(u['title']['he'])} · מקורות השראה באמנות</title>
+<title>{esc((u.get('own_title') or u['title'])['he'])} · מקורות השראה באמנות</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
@@ -448,7 +485,7 @@ def render(u, units):
       <span class="ed-num u-num">{u['num']}</span>
       <div>
         <p class="ed-kicker">{t('יחידה ' + u['num'], 'Unit ' + u['num'])}</p>
-        <h1 class="ed-display u-title">{t(u['title']['he'], u['title']['en'])}</h1>
+        <h1 class="ed-display u-title">{t((u.get('own_title') or u['title'])['he'], (u.get('own_title') or u['title'])['en'])}</h1>
         <p class="u-keys">{t(*keys)}</p>
       </div>
     </div>
@@ -457,7 +494,7 @@ def render(u, units):
       <figcaption>{t(*cfg['cap'])}</figcaption>
     </figure>
     <div class="u-intro rv">
-      <p class="u-desc">{t(u['desc']['he'], u['desc']['en'])}</p>
+      {f'<p class="u-desc">{t(u["desc"]["he"], u["desc"]["en"])}</p>' if u['desc'] else ''}
       <div class="u-aside">
         <p class="u-count">{t(count['he'], count['en'])}</p>
         <ol class="flow" aria-label="{esc('השראה, התבוננות, רעיון, יצירה')}">
@@ -496,7 +533,7 @@ def render(u, units):
 </footer>
 
 <script src="{B}js/navigation-data.js"></script>
-<script src="{B}data/lesson-pages/index.js"></script>
+<script src="{B}data/lesson-pages/index.js"></script>{UNIT_NAME_JS if u.get('own_title') else ''}
 <script src="{B}js/site-drawer.js?v=8" data-base="{B}"></script>
 <script src="{B}js/editorial.js?v=1"></script>
 </body>

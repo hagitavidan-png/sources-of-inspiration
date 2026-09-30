@@ -1,0 +1,29 @@
+{
+  "_note": "Unit 2 page 'Looking outward', decided by the author after the unit 2 QA. Read by tools/build-unit-pages.py on top of course.html (course.html is part of the live site and is not changed). The lessons are listed in the new order; each card's title, short description and time are read from its lesson page (data/lesson-pages), nothing is written here. The sources are only the artists of the six lessons. The cover image is not changed yet (a separate decision). There is no unit description yet: the old one described the former unit.",
+  "title": { "he": "מבט החוצה", "en": "Looking Outward" },
+  "keys": { "he": "דפוס · פרט · אור · מרחב · תנועה", "en": "Pattern · Detail · Light · Space · Movement" },
+  "noDesc": true,
+  "count": { "he": "6 שיעורים", "en": "6 lessons" },
+  "noApproach": true,
+  "noWorks": true,
+  "journey": [
+    { "path": "lessons/lesson-2-1.html", "num": "2.1" },
+    { "path": "lessons/lesson-2-3.html", "num": "2.2" },
+    { "path": "lessons/lesson-2-2.html", "num": "2.3" },
+    { "path": "lessons/lesson-2-4.html", "num": "2.4" },
+    { "path": "lessons/lesson-2-5.html", "num": "2.5" },
+    { "path": "lessons/lesson-2-6.html", "num": "2.6" }
+  ],
+  "people": [
+    ["morris", ["lessons/lesson-2-1.html"]],
+    ["kusama", ["lessons/lesson-2-1.html"]],
+    ["okeeffe", ["lessons/lesson-2-3.html"]],
+    ["blossfeldt", ["lessons/lesson-2-3.html"]],
+    ["monet", ["lessons/lesson-2-2.html"]],
+    ["steinkamp", ["lessons/lesson-2-2.html"]],
+    ["fankuan", ["lessons/lesson-2-4.html"]],
+    ["holt", ["lessons/lesson-2-4.html"]],
+    ["duchamp", ["lessons/lesson-2-5.html"]],
+    ["steir", ["lessons/lesson-2-6.html"]]
+  ]
+}
