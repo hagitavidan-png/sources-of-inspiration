@@ -507,11 +507,11 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-sketch-mv .pt{fill:none;stroke:var(--ink);stroke-width:.7;stroke-dasharray:1.5 2.5;opacity:.45}
 .lp-v2 .lp-sketch-mv .pd{fill:none;stroke:var(--ink);stroke-width:.9;opacity:.7}
 .lp-v2 .lp-sketch-mv .dt{fill:var(--ink);stroke:none}
-.lp-v2 .lp-sketch-tilt svg{width:150px;height:auto;overflow:visible}
-.lp-v2 .lp-sketch-tilt .fr{fill:var(--paper);stroke:var(--ink);stroke-width:1}
-.lp-v2 .lp-sketch-tilt .dr{fill:var(--ink);stroke:none;opacity:.7}
-.lp-v2 .lp-sketch-tilt .run{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;opacity:.55}
-.lp-v2 .lp-sketch-tilt .arr{fill:none;stroke:var(--ink);stroke-width:.9;opacity:.6}
+.lp-v2 .lp-sketch-tilt svg{width:150px;height:auto}
+.lp-v2 .lp-sketch-tilt .fr{fill:none;stroke:var(--ink);stroke-width:1}
+.lp-v2 .lp-sketch-tilt .pd{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round;opacity:.75}
+.lp-v2 .lp-sketch-tilt .pt{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:1.5 2.5;opacity:.5}
+.lp-v2 .lp-sketch-tilt .dt{fill:var(--ink);stroke:none}
 @media (max-width:700px){.lp-v2 .lp-sketch-mv svg{width:92px}.lp-v2 .lp-sketch-ov svg{width:min(220px,100%)}}
 .lp-v2 .lp-sketch-hz{margin:22px 0 6px}
 .lp-v2 .lp-sketch-hz > div{display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(14px,2.6vw,28px)}

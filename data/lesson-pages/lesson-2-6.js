@@ -193,15 +193,15 @@ window.LESSON_PAGE = {
     {
      "big": {
       "he": "ביחידה הזאת הסתכלתם החוצה:",
-      "en": "In this unit you looked outward:"
+      "en": "In this unit, you looked outward:"
      },
      "ask": {
-      "he": "באיזה מבט תרצו להמשיך?",
-      "en": "Which way of looking do you want to keep?"
+      "he": "איזו דרך הסתכלות תרצו להמשיך לתרגל?",
+      "en": "Which way of looking would you like to keep practicing?"
      },
      "prompt": {
-      "he": "אני רוצה להמשיך להסתכל על…",
-      "en": "I want to keep looking at…"
+      "he": "אני רוצה להמשיך להתבונן דרך…",
+      "en": "I want to keep looking through…"
      },
      "lenses": {
       "he": [

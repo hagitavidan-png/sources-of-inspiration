@@ -51,8 +51,8 @@
       {
         "big": "ביחידה הזאת הסתכלתם החוצה:",
         "lens": ["דפוס", "פרט", "אור", "מרחב", "תנועה"],
-        "ask": "באיזה מבט תרצו להמשיך?",
-        "ph": "אני רוצה להמשיך להסתכל על…"
+        "ask": "איזו דרך הסתכלות תרצו להמשיך לתרגל?",
+        "ph": "אני רוצה להמשיך להתבונן דרך…"
       },
       { "kind": "close", "big": "העולם לא עומד במקום.<br>גם הציור לא חייב." }
     ]
@@ -93,10 +93,10 @@
       { "big": "Pause before the next layer.", "sub": "What did you do, and what did the material do by itself?" },
       { "big": "Where can you see the movement<br>that happened while you worked?", "ph": "You can see it in…" },
       {
-        "big": "In this unit you looked outward:",
+        "big": "In this unit, you looked outward:",
         "lens": ["pattern", "detail", "light", "space", "movement"],
-        "ask": "Which way of looking do you want to keep?",
-        "ph": "I want to keep looking at…"
+        "ask": "Which way of looking would you like to keep practicing?",
+        "ph": "I want to keep looking through…"
       },
       { "kind": "close", "big": "The world doesn't stand still.<br>Neither does a drawing." }
     ]

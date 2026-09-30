@@ -212,12 +212,12 @@
         path('M12 38Q48 2 84 38', 'M12 38Q37.2 12.8 62.4 22.9') + dots + '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg></div>';
     }
     if (kind === 'tilt') {
-      /* a drop on a tilted sheet: the paint runs down and over the edge */
-      return '<div class="lp-sketch lp-sketch-tilt" aria-hidden="true"><svg viewBox="0 0 96 64">' +
-        '<g transform="rotate(-10 48 32)"><rect class="fr" x="22" y="6" width="52" height="46"/></g>' +
-        '<circle class="dr" cx="40" cy="14" r="3.6"/>' +
-        '<path class="run" d="M40 17C41 25 38 30 42 37S46 50 45 61"/>' +
-        '<path class="arr" d="M82 18c5 5 5 11 1 16M80 31l3 3.4 3.4-2.6"/></svg></div>';
+      /* a drop on a slightly tilted sheet: the paint's path is a fine line that runs on past the edge */
+      return '<div class="lp-sketch lp-sketch-tilt" aria-hidden="true"><svg viewBox="0 0 96 72">' +
+        '<rect class="fr" x="16" y="6" width="64" height="48" transform="rotate(-7 48 30)"/>' +
+        '<path class="pd" d="M40 17C40.5 25 38.5 31 41 38S44 47 43.5 55"/>' +
+        '<path class="pt" d="M43.5 55C43.2 60 42.8 65 42.5 70"/>' +
+        '<circle class="dt" cx="40" cy="15" r="3.6"/></svg></div>';
     }
     if (kind === 'crop') {
       /* the same leaf: whole and small, whole and enlarged, cropped by the frame */
