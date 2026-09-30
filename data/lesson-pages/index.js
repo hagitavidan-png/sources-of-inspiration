@@ -73,6 +73,13 @@ window.LESSON_ADDED = {
   }
  ]
 };
+/* new unit names, used on the lesson pages only (js/lesson-page.js) */
+window.UNIT_TITLES = {
+ "unit02": {
+  "he": "מבט החוצה",
+  "en": "Looking Outward"
+ }
+};
 (function () {
   var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};
   if (!N || !O) return;

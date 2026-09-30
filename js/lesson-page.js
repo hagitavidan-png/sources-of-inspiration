@@ -14,6 +14,11 @@
   /* design pilot: lessons marked variant 'v2' get the stronger lesson layout (css: .lp-v2) */
   var V2 = D.variant === 'v2';
   var PAGES = window.LESSON_PAGES_INDEX || {};
+  /* a unit's new name (preview only): the lesson header and the contents drawer on this page use it */
+  ((window.ART_NAVIGATION || {}).units || []).forEach(function (u) {
+    var nt = (window.UNIT_TITLES || {})[u.id];
+    if (nt) u.title = nt;
+  });
 
   var SECTIONS = [
     ['explore', 'מה אנחנו חוקרים?', 'What are we exploring?'],

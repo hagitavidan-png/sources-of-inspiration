@@ -12,8 +12,8 @@ window.LESSON_PAGE = {
  },
  "number": "2.6",
  "unit": {
-  "he": "טבע כמקור השראה",
-  "en": "Nature as Inspiration"
+  "he": "מבט החוצה",
+  "en": "Looking Outward"
  },
  "unitNum": "02",
  "title": {
@@ -21,8 +21,8 @@ window.LESSON_PAGE = {
   "en": "When the Drawing Itself Moves"
  },
  "time": {
-  "he": "50 דקות, ומי שרוצה יכול להמשיך",
-  "en": "50 min, and you can go on if you like"
+  "he": "50 דקות",
+  "en": "50 min"
  },
  "intro": {
   "he": "נבדוק איך אפשר לראות בתוך העבודה את התנועה של פעולת הציור: של היד, של הצבע ושל החומר.",

@@ -13,8 +13,8 @@ window.LESSON_PAGE = {
  },
  "number": "2.2",
  "unit": {
-  "he": "טבע כמקור השראה",
-  "en": "Nature as Inspiration"
+  "he": "מבט החוצה",
+  "en": "Looking Outward"
  },
  "unitNum": "02",
  "title": {

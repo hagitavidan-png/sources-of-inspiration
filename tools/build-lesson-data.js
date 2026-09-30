@@ -330,7 +330,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=25"></script>
+<script src="../js/lesson-page.js?v=26"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -346,6 +346,8 @@ const ORDER = {
 /* new lessons that have only a lesson page (no slides, not in js/navigation-data.js): added to their unit
    on the preview pages only, with the title from their content file */
 const ADD = { unit02: ['lesson-2-5', 'lesson-2-6'] };
+/* new unit names, shown on the lesson pages of the preview only (applied by js/lesson-page.js) */
+const UNIT_TITLES = { unit02: { he: 'מבט החוצה', en: 'Looking Outward' } };
 const ADDED = {};
 for (const [uid, ids] of Object.entries(ADD)) {
   const u = NAV.units.find(x => x.id === uid);
@@ -409,7 +411,7 @@ for (const [id, m] of Object.entries(MAP)) {
     ...(m.desk ? { desk: m.desk } : {}),
     ...(m.noTitle ? { noTitle: m.noTitle } : {}),
     ...(A && A.subtitle ? { subtitle: A.subtitle } : {}),
-    number: (A && A.number) || m.number || intro.number, unit: intro.unit || u.title, unitNum: u.id.replace('unit', ''),
+    number: (A && A.number) || m.number || intro.number, unit: UNIT_TITLES[u.id] || intro.unit || u.title, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
     sections
@@ -432,6 +434,8 @@ fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),
   'window.LESSON_ORDER = ' + JSON.stringify(ORDER, null, 1) + ';\n' +
   '/* new lessons that are not in js/navigation-data.js, added on the preview pages only */\n' +
   'window.LESSON_ADDED = ' + JSON.stringify(ADDED, null, 1) + ';\n' +
+  '/* new unit names, used on the lesson pages only (js/lesson-page.js) */\n' +
+  'window.UNIT_TITLES = ' + JSON.stringify(UNIT_TITLES, null, 1) + ';\n' +
   '(function () {\n' +
   '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};\n' +
   '  if (!N || !O) return;\n' +

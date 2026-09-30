@@ -12,8 +12,8 @@ window.LESSON_PAGE = {
  },
  "number": "2.5",
  "unit": {
-  "he": "טבע כמקור השראה",
-  "en": "Nature as Inspiration"
+  "he": "מבט החוצה",
+  "en": "Looking Outward"
  },
  "unitNum": "02",
  "title": {
@@ -21,8 +21,8 @@ window.LESSON_PAGE = {
   "en": "Catching Movement"
  },
  "time": {
-  "he": "45–50 דקות",
-  "en": "45–50 min"
+  "he": "50 דקות",
+  "en": "50 min"
  },
  "intro": {
   "he": "נתבונן בתנועה אמיתית, נצייר אותה בכמה רגעים, נשווה בין הרישומים, ונחבר את הרגעים לדימוי אחד שמרגיש בתנועה.",

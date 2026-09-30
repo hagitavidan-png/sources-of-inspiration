@@ -12,8 +12,8 @@ window.LESSON_PAGE = {
  },
  "number": "2.1",
  "unit": {
-  "he": "טבע כמקור השראה",
-  "en": "Nature as Inspiration"
+  "he": "מבט החוצה",
+  "en": "Looking Outward"
  },
  "unitNum": "02",
  "title": {
@@ -21,8 +21,8 @@ window.LESSON_PAGE = {
   "en": "Patterns in Nature & Art"
  },
  "time": {
-  "he": "45 דקות",
-  "en": "45 min"
+  "he": "50 דקות",
+  "en": "50 min"
  },
  "intro": {
   "he": "נמצא דפוס אמיתי סביבנו, נזהה את היחידה שחוזרת ואת החוק שלפיו היא חוזרת, ונבדוק מה קורה כשמשנים כלל אחד.",
