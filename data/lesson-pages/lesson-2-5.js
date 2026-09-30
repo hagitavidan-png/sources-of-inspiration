@@ -185,8 +185,7 @@ window.LESSON_PAGE = {
        "direction",
        "line"
       ]
-     },
-     "sketch": "overlap"
+     }
     }
    ]
   },
