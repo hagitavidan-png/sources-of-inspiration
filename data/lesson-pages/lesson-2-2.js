@@ -272,10 +272,6 @@ window.LESSON_PAGE = {
      "sketch": "twolight"
     },
     {
-     "big": {
-      "he": "תוך כדי הסקיצה השנייה:",
-      "en": "While you draw the second sketch:"
-     },
      "lines": {
       "he": [
        "איפה הצל כהה יותר עכשיו?",
