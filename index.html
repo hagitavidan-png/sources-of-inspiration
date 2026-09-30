@@ -46,6 +46,9 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
 .gate-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .gate:hover .gate-img img{transform:scale(1.035)}
 .gate-txt{display:flex;flex-direction:column;align-items:flex-start}
+.gate-head,.gate-body{display:flex;flex-direction:column;align-items:flex-start}
+/* wide screens: the text column appears as one block, as before; the inner parts do not animate on their own */
+@media (min-width:821px){.gate-head.rv,.gate-body.rv{opacity:1;transform:none;transition:none}}
 .gate-title{font-family:var(--f-display);font-weight:700;font-size:var(--t-h2);line-height:.95;margin:18px 0 14px}
 .gate-title a{text-decoration:none}
 .gate-keys{margin:0 0 6px;font-size:1.12rem;color:var(--ink-2);letter-spacing:.02em}
@@ -56,6 +59,13 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
   .gate.flip .gate-img{order:0}
   .gate-img,.gate.flip .gate-img{aspect-ratio:4/5}
   .gate-cap{margin-top:18px}
+  /* stacked cards: the unit number and title first, then the image, then the rest; each text part reveals on its own */
+  .gate,.gate.flip{display:flex;flex-direction:column;align-items:stretch;gap:22px}
+  .gate-txt{display:contents}
+  .gate-head{order:0}
+  .gate .gate-img,.gate.flip .gate-img{order:1}
+  .gate-body{order:2}
+  .gate-title{margin-bottom:0}
 }
 
 /* ── Why / each lesson / sample / contact ── */
@@ -154,78 +164,106 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
     <article class="gate " id="unit00">
       <a class="gate-img rv-img" href="units/unit-00.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/friedrich-wanderer.jpg" alt="" loading="lazy" style="object-position:50% 30%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">00</span>
-        <h3 class="gate-title"><a href="units/unit-00.html" data-he="יסודות ההשראה" data-en="Foundations of Inspiration">יסודות ההשראה</a></h3>
-        <p class="gate-keys" data-he="ראייה · תפיסה · תשומת לב" data-en="Seeing · Perception · Attention">ראייה · תפיסה · תשומת לב</p>
-        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
-        <a class="ed-cta" href="units/unit-00.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="קספר דוד פרידריך, הנודד מעל ים הערפל, 1818" data-en="Caspar David Friedrich, Wanderer above the Sea of Fog, 1818">קספר דוד פרידריך, הנודד מעל ים הערפל, 1818</p>
+        <div class="gate-head rv">
+          <span class="ed-num">00</span>
+          <h3 class="gate-title"><a href="units/unit-00.html" data-he="יסודות ההשראה" data-en="Foundations of Inspiration">יסודות ההשראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="ראייה · תפיסה · תשומת לב" data-en="Seeing · Perception · Attention">ראייה · תפיסה · תשומת לב</p>
+          <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+          <a class="ed-cta" href="units/unit-00.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="קספר דוד פרידריך, הנודד מעל ים הערפל, 1818" data-en="Caspar David Friedrich, Wanderer above the Sea of Fog, 1818">קספר דוד פרידריך, הנודד מעל ים הערפל, 1818</p>
+        </div>
       </div>
     </article>
     <article class="gate flip" id="unit01">
       <a class="gate-img rv-img" href="units/unit-01.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/munch-scream.jpg" alt="" loading="lazy" style="object-position:50% 40%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">01</span>
-        <h3 class="gate-title"><a href="units/unit-01.html" data-he="חוויה אישית כמקור השראה" data-en="Personal Experience as a Source of Inspiration">חוויה אישית כמקור השראה</a></h3>
-        <p class="gate-keys" data-he="רגש · זיכרון · יומן" data-en="Emotion · Memory · Journal">רגש · זיכרון · יומן</p>
-        <p class="gate-meta"><span data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span></p>
-        <a class="ed-cta" href="units/unit-01.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="אדוורד מונק, הצעקה, 1893" data-en="Edvard Munch, The Scream, 1893">אדוורד מונק, הצעקה, 1893</p>
+        <div class="gate-head rv">
+          <span class="ed-num">01</span>
+          <h3 class="gate-title"><a href="units/unit-01.html" data-he="חוויה אישית כמקור השראה" data-en="Personal Experience as a Source of Inspiration">חוויה אישית כמקור השראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="רגש · זיכרון · יומן" data-en="Emotion · Memory · Journal">רגש · זיכרון · יומן</p>
+          <p class="gate-meta"><span data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span></p>
+          <a class="ed-cta" href="units/unit-01.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="אדוורד מונק, הצעקה, 1893" data-en="Edvard Munch, The Scream, 1893">אדוורד מונק, הצעקה, 1893</p>
+        </div>
       </div>
     </article>
     <article class="gate " id="unit02">
       <a class="gate-img rv-img" href="units/unit-02.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/morris-strawberry-thief-aic-card.jpg" alt="" loading="lazy" style="object-position:50% 50%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">02</span>
-        <h3 class="gate-title"><a href="units/unit-02.html" data-he="מבט החוצה" data-en="Looking Outward">מבט החוצה</a></h3>
-        <p class="gate-keys" data-he="דפוס · פרט · אור · מרחב · תנועה" data-en="Pattern · Detail · Light · Space · Movement">דפוס · פרט · אור · מרחב · תנועה</p>
-        <p class="gate-meta"><span data-he="6 שיעורים" data-en="6 lessons">6 שיעורים</span></p>
-        <a class="ed-cta" href="units/unit-02.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+        <div class="gate-head rv">
+          <span class="ed-num">02</span>
+          <h3 class="gate-title"><a href="units/unit-02.html" data-he="מבט החוצה" data-en="Looking Outward">מבט החוצה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="דפוס · פרט · אור · מרחב · תנועה" data-en="Pattern · Detail · Light · Space · Movement">דפוס · פרט · אור · מרחב · תנועה</p>
+          <p class="gate-meta"><span data-he="6 שיעורים" data-en="6 lessons">6 שיעורים</span></p>
+          <a class="ed-cta" href="units/unit-02.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+        </div>
       </div>
     </article>
     <article class="gate flip" id="unit03">
       <a class="gate-img rv-img" href="units/unit-03.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/kandinsky-composition8.jpg" alt="" loading="lazy" style="object-position:40% 50%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">03</span>
-        <h3 class="gate-title"><a href="units/unit-03.html" data-he="מוזיקה וריתמוס כמקור השראה" data-en="Music & Rhythm as Inspiration">מוזיקה וריתמוס כמקור השראה</a></h3>
-        <p class="gate-keys" data-he="צליל · קצב · תנועה" data-en="Sound · Rhythm · Movement">צליל · קצב · תנועה</p>
-        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
-        <a class="ed-cta" href="units/unit-03.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="וסילי קנדינסקי, קומפוזיציה 8, 1923" data-en="Wassily Kandinsky, Composition VIII, 1923">וסילי קנדינסקי, קומפוזיציה 8, 1923</p>
+        <div class="gate-head rv">
+          <span class="ed-num">03</span>
+          <h3 class="gate-title"><a href="units/unit-03.html" data-he="מוזיקה וריתמוס כמקור השראה" data-en="Music & Rhythm as Inspiration">מוזיקה וריתמוס כמקור השראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="צליל · קצב · תנועה" data-en="Sound · Rhythm · Movement">צליל · קצב · תנועה</p>
+          <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+          <a class="ed-cta" href="units/unit-03.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="וסילי קנדינסקי, קומפוזיציה 8, 1923" data-en="Wassily Kandinsky, Composition VIII, 1923">וסילי קנדינסקי, קומפוזיציה 8, 1923</p>
+        </div>
       </div>
     </article>
     <article class="gate " id="unit04">
       <a class="gate-img rv-img" href="units/unit-04.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/monet-haystacks-1891.jpg" alt="" loading="lazy" style="object-position:50% 60%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">04</span>
-        <h3 class="gate-title"><a href="units/unit-04.html" data-he="זיכרון וזהות כמקור השראה" data-en="Memory & Identity as Inspiration">זיכרון וזהות כמקור השראה</a></h3>
-        <p class="gate-keys" data-he="זיכרון · דיוקן · זהות" data-en="Memory · Portrait · Identity">זיכרון · דיוקן · זהות</p>
-        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
-        <a class="ed-cta" href="units/unit-04.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="קלוד מונה, ערימות שחת, 1891" data-en="Claude Monet, Haystacks, 1891">קלוד מונה, ערימות שחת, 1891</p>
+        <div class="gate-head rv">
+          <span class="ed-num">04</span>
+          <h3 class="gate-title"><a href="units/unit-04.html" data-he="זיכרון וזהות כמקור השראה" data-en="Memory & Identity as Inspiration">זיכרון וזהות כמקור השראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="זיכרון · דיוקן · זהות" data-en="Memory · Portrait · Identity">זיכרון · דיוקן · זהות</p>
+          <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+          <a class="ed-cta" href="units/unit-04.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="קלוד מונה, ערימות שחת, 1891" data-en="Claude Monet, Haystacks, 1891">קלוד מונה, ערימות שחת, 1891</p>
+        </div>
       </div>
     </article>
     <article class="gate flip" id="unit05">
       <a class="gate-img rv-img" href="units/unit-05.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/morris-strawberry-thief-1883.jpg" alt="" loading="lazy" style="object-position:50% 40%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">05</span>
-        <h3 class="gate-title"><a href="units/unit-05.html" data-he="תרבות וסמלים כמקור השראה" data-en="Culture & Symbols as Inspiration">תרבות וסמלים כמקור השראה</a></h3>
-        <p class="gate-keys" data-he="סמל · מסורת · מורשת" data-en="Symbol · Tradition · Heritage">סמל · מסורת · מורשת</p>
-        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
-        <a class="ed-cta" href="units/unit-05.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+        <div class="gate-head rv">
+          <span class="ed-num">05</span>
+          <h3 class="gate-title"><a href="units/unit-05.html" data-he="תרבות וסמלים כמקור השראה" data-en="Culture & Symbols as Inspiration">תרבות וסמלים כמקור השראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="סמל · מסורת · מורשת" data-en="Symbol · Tradition · Heritage">סמל · מסורת · מורשת</p>
+          <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+          <a class="ed-cta" href="units/unit-05.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+        </div>
       </div>
     </article>
     <article class="gate " id="unit06">
       <a class="gate-img rv-img" href="units/unit-06.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/turner-snowstorm.jpg" alt="" loading="lazy" style="object-position:55% 50%"></a>
       <div class="gate-txt rv">
-        <span class="ed-num">06</span>
-        <h3 class="gate-title"><a href="units/unit-06.html" data-he="סגנון אישי כמקור השראה" data-en="Personal Style as Inspiration">סגנון אישי כמקור השראה</a></h3>
-        <p class="gate-keys" data-he="קול · בחירה · דרך" data-en="Voice · Choice · Path">קול · בחירה · דרך</p>
-        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
-        <a class="ed-cta" href="units/unit-06.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
-        <p class="gate-cap" data-he="ויליאם טרנר, סופת שלגים, 1842" data-en="J. M. W. Turner, Snow Storm, 1842">ויליאם טרנר, סופת שלגים, 1842</p>
+        <div class="gate-head rv">
+          <span class="ed-num">06</span>
+          <h3 class="gate-title"><a href="units/unit-06.html" data-he="סגנון אישי כמקור השראה" data-en="Personal Style as Inspiration">סגנון אישי כמקור השראה</a></h3>
+        </div>
+        <div class="gate-body rv">
+          <p class="gate-keys" data-he="קול · בחירה · דרך" data-en="Voice · Choice · Path">קול · בחירה · דרך</p>
+          <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+          <a class="ed-cta" href="units/unit-06.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+          <p class="gate-cap" data-he="ויליאם טרנר, סופת שלגים, 1842" data-en="J. M. W. Turner, Snow Storm, 1842">ויליאם טרנר, סופת שלגים, 1842</p>
+        </div>
       </div>
     </article>
   </section>
