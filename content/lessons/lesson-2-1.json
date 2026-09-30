@@ -1,6 +1,6 @@
 {
   "_note": "Lesson 2.1, new content approved by the author (unit 2: looking outward). Unit, rule of repetition, variation. Existing screens are copied from lessons/lesson-2-1.html; Hokusai and Escher were removed (Hokusai appears in 1.2 and 1.3; Escher is protected and the image on the site is not the original). Source for tools/build-lesson-data.js.",
-  "_sources": "Morris: Art Institute of Chicago, Strawberry Thief, designed 1883 (artic.edu/artworks/149052; 'reportedly fashioned this pattern after watching birds steal strawberries from his kitchen garden'); V&A (collections.vam.ac.uk/item/O270853). Kusama: MoMA, No. F, 1959, oil on canvas (moma.org/collection/works/80176); moved to New York in 1958, Infinity Nets. Kusama's work is protected: window only. Morris is public domain, but no museum image could be downloaded yet, so it is shown as a window too.",
+  "_sources": "Morris: Art Institute of Chicago, Strawberry Thief, designed 1883 (artic.edu/artworks/149052; 'reportedly fashioned this pattern after watching birds steal strawberries from his kitchen garden'); V&A (collections.vam.ac.uk/item/O270853). Kusama: MoMA, No. F, 1959, oil on canvas (moma.org/collection/works/80176); moved to New York in 1958, Infinity Nets. Kusama's work is protected: window only. Morris image: Art Institute of Chicago, CC0 Public Domain Designation (downloaded from the museum page by the author; images/editorial/morris-strawberry-thief-aic.jpg).",
   "description": {
     "he": "נמצא דפוס אמיתי סביבנו, נזהה את היחידה שחוזרת ואת החוק שלפיו היא חוזרת, ונבדוק מה קורה כשמשנים כלל אחד.",
     "en": "Find a real pattern around you, identify the unit that repeats and the rule it follows, and see what happens when one rule changes."
@@ -20,19 +20,34 @@
         "big": "התקרבו אליו.<br><em>מה היחידה?</em>",
         "sub": "מה הדבר הקטן ביותר שחוזר?",
         "sketch": "finder",
-        "chips": ["צורה", "קו", "מרווח", "כיוון"]
+        "chips": [
+          "צורה",
+          "קו",
+          "מרווח",
+          "כיוון"
+        ]
       },
       {
         "big": "<em>מה החוק?</em>",
         "sub": "איך היחידה חוזרת?",
-        "chips": ["במרווח קבוע", "בשורות", "בשיקוף", "בסיבוב", "בלי סדר ברור"]
+        "chips": [
+          "במרווח קבוע",
+          "בשורות",
+          "בשיקוף",
+          "בסיבוב",
+          "בלי סדר ברור"
+        ]
       },
       {
         "art": {
           "artist": "ויליאם מוריס",
           "title": "גנב התותים, 1883",
           "note": "לפי המוזיאון, מוריס עיצב את הדוגמה אחרי שראה ציפורים גונבות תותים מהגינה שלו.",
-          "link": { "href": "https://www.artic.edu/artworks/149052/strawberry-thief", "label": "פתחו את היצירה באתר Art Institute of Chicago ↗" }
+          "link": {
+            "href": "https://www.artic.edu/artworks/149052/strawberry-thief",
+            "label": "פתחו את היצירה באתר Art Institute of Chicago ↗"
+          },
+          "img": "morris-strawberry-thief-aic"
         }
       },
       {
@@ -40,7 +55,10 @@
           "artist": "יאיוי קוסמה",
           "title": "No. F, 1959",
           "note": "ב־1958 עברה קוסמה מיפן לניו יורק, ושם החלה בסדרת ״רשתות האינסוף״ (Infinity Nets): משיכות מכחול קטנות ומשתלבות של צבע לבן עבה, שחוזרות על פני כל הבד.",
-          "link": { "href": "https://www.moma.org/collection/works/80176", "label": "פתחו את היצירה באתר MoMA ↗" }
+          "link": {
+            "href": "https://www.moma.org/collection/works/80176",
+            "label": "פתחו את היצירה באתר MoMA ↗"
+          }
         }
       },
       {
@@ -58,13 +76,20 @@
       {
         "big": "עצרו.<br>האם החזרה אחידה או משתנה?",
         "sub": "תנו לקצב להשתנות: האיצו, האטו, הרחיבו.",
-        "chips": ["אחידה", "משתנה"]
+        "chips": [
+          "אחידה",
+          "משתנה"
+        ]
       },
       {
         "big": "שנו <em>דבר אחד בלבד</em><br>על הדף.",
         "sub": "ראו מה קורה לדפוס כשמשנים כלל אחד.",
         "sketch": "vary",
-        "opts": ["גודל", "כיוון", "מרווח"]
+        "opts": [
+          "גודל",
+          "כיוון",
+          "מרווח"
+        ]
       },
       {
         "big": "עצרו. התבוננו.",
@@ -95,19 +120,33 @@
       {
         "big": "Move closer.<br><em>What is the unit?</em>",
         "sub": "What is the smallest thing that repeats?",
-        "chips": ["Shape", "Line", "Space", "Direction"]
+        "chips": [
+          "Shape",
+          "Line",
+          "Space",
+          "Direction"
+        ]
       },
       {
         "big": "<em>What is the rule?</em>",
         "sub": "How does the unit repeat?",
-        "chips": ["At even spacing", "In rows", "Mirrored", "Turning", "With no clear order"]
+        "chips": [
+          "At even spacing",
+          "In rows",
+          "Mirrored",
+          "Turning",
+          "With no clear order"
+        ]
       },
       {
         "art": {
           "artist": "William Morris",
           "title": "Strawberry Thief, 1883",
           "note": "According to the museum, Morris designed the pattern after watching birds steal strawberries from his garden.",
-          "link": { "href": "https://www.artic.edu/artworks/149052/strawberry-thief", "label": "Open the work on the Art Institute of Chicago website ↗" }
+          "link": {
+            "href": "https://www.artic.edu/artworks/149052/strawberry-thief",
+            "label": "Open the work on the Art Institute of Chicago website ↗"
+          }
         }
       },
       {
@@ -115,7 +154,10 @@
           "artist": "Yayoi Kusama",
           "title": "No. F, 1959",
           "note": "In 1958 Kusama moved from Japan to New York, where she began her Infinity Nets series: small, interlocking brushstrokes of thick white paint, repeated across the whole canvas.",
-          "link": { "href": "https://www.moma.org/collection/works/80176", "label": "Open the work on the MoMA website ↗" }
+          "link": {
+            "href": "https://www.moma.org/collection/works/80176",
+            "label": "Open the work on the MoMA website ↗"
+          }
         }
       },
       {
@@ -133,12 +175,19 @@
       {
         "big": "Pause.<br>Is the repetition even or changing?",
         "sub": "Let the rhythm change: speed up, slow down, expand.",
-        "chips": ["Even", "Changing"]
+        "chips": [
+          "Even",
+          "Changing"
+        ]
       },
       {
         "big": "Change <em>only one thing</em><br>on the page.",
         "sub": "Notice what happens to the pattern when one rule changes.",
-        "opts": ["Size", "Direction", "Space"]
+        "opts": [
+          "Size",
+          "Direction",
+          "Space"
+        ]
       },
       {
         "big": "Pause. Look.",

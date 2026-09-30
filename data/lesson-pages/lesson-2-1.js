@@ -118,7 +118,7 @@ window.LESSON_PAGE = {
     {
      "works": [
       {
-       "img": null,
+       "img": "morris-strawberry-thief-aic",
        "alt": "William Morris, Strawberry Thief, 1883",
        "artist": {
         "he": "ויליאם מוריס",

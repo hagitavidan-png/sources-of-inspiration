@@ -21,7 +21,7 @@ const INTROS = window.ART_LESSON_INTROS;
 const NAV = window.ART_NAVIGATION;
 
 /* public-domain images that have a web copy in images/editorial/ */
-const PD = new Set(['munch-scream', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
+const PD = new Set(['munch-scream', 'morris-strawberry-thief-aic', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
   'turner-snowstorm', 'monet-water-lilies', 'monet-haystacks-1891', 'pissarro-boulevard-montmartre-1897',
   'friedrich-wanderer', 'morris-strawberry-thief-1883']);
 
