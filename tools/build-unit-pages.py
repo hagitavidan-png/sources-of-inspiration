@@ -455,7 +455,6 @@ def render(u, units):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
-<meta name="robots" content="noindex">
 <title>{esc((u.get('own_title') or u['title'])['he'])} · מקורות השראה באמנות</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -467,14 +466,12 @@ def render(u, units):
 <script src="{B}js/app-init.js?v=20260927-structure"></script>
 <script>document.body.classList.remove('dark');</script>
 
-<div class="pv">{t('תצוגה מקדימה של עמוד יחידה חדש. האתר עצמו לא השתנה.', 'Preview of a new unit page. The live site has not changed.', 'span')}</div>
-
 <header class="ed-top" id="top">
   <div class="ed-wrap">
-    <a class="ed-brand" href="{B}home-preview.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
+    <a class="ed-brand" href="{B}index.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
     <nav class="ed-nav">
-      <a href="{B}home-preview.html#journey" data-he="יחידות" data-en="Units">יחידות</a>
-      <a href="{B}home-preview.html#about" data-he="אודות" data-en="About">אודות</a>
+      <a href="{B}index.html#journey" data-he="יחידות" data-en="Units">יחידות</a>
+      <a href="{B}index.html#about" data-he="אודות" data-en="About">אודות</a>
     </nav>
     <span class="ed-spacer"></span>
     <div class="ed-lang">
@@ -485,7 +482,7 @@ def render(u, units):
 
 <main>
   <section class="u-head ed-wrap">
-    <p class="crumb rv"><a href="{B}home-preview.html#journey" data-he="יחידות" data-en="Units">יחידות</a> <span>/</span> <span>{u['num']}</span></p>
+    <p class="crumb rv"><a href="{B}index.html#journey" data-he="יחידות" data-en="Units">יחידות</a> <span>/</span> <span>{u['num']}</span></p>
     <div class="u-title-row rv">
       <span class="ed-num u-num">{u['num']}</span>
       <div>

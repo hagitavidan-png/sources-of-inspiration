@@ -1,641 +1,315 @@
 <!DOCTYPE html>
-<html translate="no" class="notranslate" data-reading="page" lang="en" style="scroll-behavior: smooth;">
+<html lang="he" dir="rtl" translate="no" class="notranslate">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-<title>Sources of Inspiration in Art: Premium Creativity Curriculum for Schools</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>" />
-<meta name="description" content="A complete interactive art curriculum that teaches students where creativity comes from. 6 units · 36 lessons · Built for schools worldwide." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-<link rel="stylesheet" href="css/style.css?v=20260927-title" />
+<title data-he="מקורות השראה באמנות · תכנית אמנות ויצירתיות לבתי ספר" data-en="Sources of Inspiration in Art · An art and creativity curriculum for schools">מקורות השראה באמנות · תכנית אמנות ויצירתיות לבתי ספר</title>
+<meta name="description" content="תכנית לימודים אינטראקטיבית באמנות לבתי ספר: יחידות ושיעורים שמחברים התבוננות ביצירות, שאלות, תרגול יצירתי ורפלקציה. בעברית ובאנגלית.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css?v=6">
 <style>
-/* ── MOBILE VIEWPORT / RTL BIDI-SHIFT FIX ──────────────────────────────
-   Inline so it applies before any external CSS loads on mobile.
-   RTL bidi-shift: dir=rtl + overflow-x:hidden causes Safari/iOS to put the
-   scrollbar on the LEFT, pushing the entire page right and off-screen.
-   overflow-y:scroll forces the scrollbar to always appear on the RIGHT. */
-html { overflow-x: hidden !important; overflow-y: scroll !important; width: 100% !important; max-width: 100% !important; }
-body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !important; position: relative; left: 0 !important; right: 0 !important; }
-/* RTL support for sources/index.html — minimal overrides only.
-   Full RTL rules live in css/style.css.
-   IMPORTANT: .nav-actions and #nav-lang-toggle are NOT reversed here —
-   reversing them causes a double-reversal on tablet/mobile that pushes
-   the EN button off-screen. Only .nav-inner reversal is needed; it places
-   the whole actions block correctly in RTL. */
-[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
+/* ── Hero: text only (no image for now) ── */
+.cover{padding-block:clamp(56px,9vw,128px) clamp(24px,4vw,48px)}
+.cover .ed-kicker{margin-bottom:22px}
+.cover-title{font-size:var(--t-hero);margin:0}
+html[lang="en"] .cover-title{font-size:clamp(3.4rem,8.5vw,7.4rem)}
+.cover-latin{display:block;margin-top:18px;font-family:var(--f-text);font-size:clamp(.8rem,1.3vw,1rem);font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2)}
+html[dir="rtl"] .cover-latin{text-align:right}
+html[dir="ltr"] .cover-latin{text-align:left}
+html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:clamp(1rem,1.6vw,1.2rem)}
+.cover-lead{max-width:30em;margin:clamp(28px,4vw,44px) 0 0;font-size:clamp(1.2rem,2vw,1.55rem);line-height:1.5;color:var(--ink)}
+.cover-sub{max-width:30em;margin:14px 0 0;font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.5;color:var(--ink-2)}
+.cover-actions{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:clamp(32px,4.5vw,52px)}
+.cover-actions .ed-cta{font-size:1.1rem}
+.cover-actions .ed-cta + .ed-cta{border-bottom-color:var(--rule-strong);color:var(--ink-2)}
 
-/* ── DARK MODE ── */
-body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
-body.dark #site-header,
-body.dark nav#nav{background:color-mix(in srgb, var(--color-bg-primary) 97%, transparent) !important;border-bottom-color:rgba(255,255,255,.07) !important}
-body.dark .nav-logo,
-body.dark .nav-logo span{color:#e8e6e1 !important}
-body.dark .nav-link{color:rgba(232,230,225,.45) !important}
-body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;background:rgba(255,255,255,.06) !important}
-body.dark #nav-hamburger span,body.dark .hamburger span{background:#e8e6e1 !important}
-body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
-/* ── Sections: force dark backgrounds ── */
-body.dark #units,body.dark #why{background:#111118 !important}
-body.dark #lesson-preview,body.dark #pricing{background:var(--color-bg-primary) !important}
-body.dark #testimonials{background:#111118 !important}
-body.dark #cta{background:linear-gradient(135deg,#111118 0%,#0f0f1a 100%) !important;border-top-color:rgba(255,255,255,.07) !important}
-/* Light sections (legacy IDs) */
-body.dark #about,body.dark #main-quote,body.dark .benefits-section,
-body.dark .how-works,body.dark #lessons{background:var(--color-bg-primary) !important}
-body.dark #about *,body.dark .about-text p{color:rgba(232,230,225,.6) !important}
-/* Typography */
-body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
-body.dark .section-header p{color:rgba(232,230,225,.55) !important}
-/* Unit cards (homepage grid) */
-body.dark .unit-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
-body.dark .unit-card-desc{color:rgba(232,230,225,.5) !important}
-body.dark .unit-meta-item{color:rgba(232,230,225,.45) !important}
-body.dark .lesson-preview-row{background:rgba(255,255,255,.06) !important;color:rgba(232,230,225,.65) !important}
-/* Why cards */
-body.dark .why-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
-body.dark .why-card h3{color:#e8e6e1 !important}
-body.dark .why-card p{color:rgba(232,230,225,.55) !important}
-/* Testimonial cards */
-body.dark .testi-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
-body.dark .testi-quote{color:rgba(232,230,225,.65) !important}
-body.dark .testi-name{color:#e8e6e1 !important}
-body.dark .testi-role{color:rgba(232,230,225,.45) !important}
-/* Pricing cards */
-body.dark .price-card:not(.featured){background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
-body.dark .price-card:not(.featured) h3{color:#e8e6e1 !important}
-body.dark .price-card:not(.featured) .price-amount{color:#e8e6e1 !important}
-body.dark .price-card:not(.featured) .price-per{color:rgba(232,230,225,.45) !important}
-body.dark .price-card:not(.featured) .pf-row{color:rgba(232,230,225,.65) !important}
-body.dark .price-card:not(.featured) .price-plan{color:var(--gold) !important}
-/* CTA */
-body.dark #cta h2{color:#e8e6e1 !important}
-body.dark #cta p{color:rgba(232,230,225,.55) !important}
-/* Lesson-preview section */
-body.dark .pf-text h4{color:#e8e6e1 !important}
-body.dark .pf-text p{color:rgba(232,230,225,.55) !important}
-body.dark .preview-content>p{color:rgba(232,230,225,.55) !important}
-/* Hero */
-body.dark .hero-eyebrow,body.dark .hero-dot{color:rgba(232,230,225,.45)}
-body.dark .hero-subtitle{color:rgba(232,230,225,.55) !important}
-/* Course (lesson) cards */
-body.dark .unit-lesson-item{background:#1c1c28 !important;border-color:rgba(255,255,255,.08) !important;color:#e8e6e1 !important}
-body.dark .unit-lesson-item:hover{background:rgba(201,168,76,.1) !important}
-body.dark .lesson-item-meta{color:rgba(232,230,225,.45) !important}
-body.dark .approach-tag,body.dark .lr-tag{background:rgba(255,255,255,.07) !important;color:rgba(232,230,225,.55) !important}
-body.dark .as-pill{background:#1c1c28 !important;border-color:rgba(255,255,255,.09) !important;color:rgba(232,230,225,.65) !important}
-body.dark .main-quote-text{color:#e8e6e1 !important}
-/* Footer */
-body.dark footer#footer,body.dark footer{background:#0a0a0e !important;border-top-color:rgba(255,255,255,.07) !important}
-body.dark .footer-brand,body.dark .footer-logo{color:#e8e6e1 !important}
-body.dark .footer-brand p{color:rgba(232,230,225,.45) !important}
-body.dark .footer-tagline,body.dark .footer-copy,body.dark .footer-col a{color:rgba(232,230,225,.45) !important}
-body.dark .footer-col h4{color:rgba(232,230,225,.35) !important}
-body.dark .footer-col a:hover{color:#e8e6e1 !important}
-body.dark .footer-bottom p{color:rgba(232,230,225,.3) !important}
-body.dark .footer-logo-text{color:#e8e6e1 !important}
-body.dark .cs-label,.dark .stat-label{color:rgba(232,230,225,.4) !important}
+/* ── Journey intro ── */
+.journey{padding-top:var(--sec)}
+.journey-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;padding-bottom:clamp(48px,7vw,96px)}
+.journey-intro h2{font-size:var(--t-h1)}
+.journey-q{margin:0 0 18px!important;font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1.15;color:var(--ink)!important}
+.journey-intro p{margin:0;max-width:30em;color:var(--ink-2)}
+.path{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;font-family:var(--f-display);font-weight:700;font-size:1.7rem;color:var(--ink)}
+.path i{font-style:normal;color:var(--muted);font-family:var(--f-text);font-size:1rem}
+@media (max-width:820px){.journey-intro{grid-template-columns:1fr;gap:18px}}
+
+/* ── Unit gates ── */
+.gate{display:grid;grid-template-columns:7fr 5fr;gap:clamp(28px,5vw,80px);align-items:center;padding-block:clamp(44px,6vw,88px);border-top:1px solid var(--rule)}
+.gate.flip{grid-template-columns:5fr 7fr}
+.gate.flip .gate-img{order:2}
+.gate-img{display:block;overflow:hidden;aspect-ratio:5/4;background:var(--paper-2)}
+.gate.flip .gate-img{aspect-ratio:4/5}
+.gate-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.gate:hover .gate-img img{transform:scale(1.035)}
+.gate-txt{display:flex;flex-direction:column;align-items:flex-start}
+.gate-title{font-family:var(--f-display);font-weight:700;font-size:var(--t-h2);line-height:.95;margin:18px 0 14px}
+.gate-title a{text-decoration:none}
+.gate-keys{margin:0 0 6px;font-size:1.12rem;color:var(--ink-2);letter-spacing:.02em}
+.gate-meta{margin:0 0 26px;font-size:var(--t-small);color:var(--muted)}
+.gate-cap{margin:34px 0 0;font-size:.8rem;color:var(--muted)}
+@media (max-width:820px){
+  .gate,.gate.flip{grid-template-columns:1fr;gap:22px;padding-block:40px 56px}
+  .gate.flip .gate-img{order:0}
+  .gate-img,.gate.flip .gate-img{aspect-ratio:4/5}
+  .gate-cap{margin-top:18px}
+}
+
+/* ── Why / each lesson / sample / contact ── */
+.blk{padding-block:var(--sec) 0}
+.blk h2{font-size:var(--t-h1);margin:0 0 clamp(28px,4vw,48px)}
+.why-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,52px) clamp(28px,4vw,56px);border-top:1px solid var(--rule);padding-top:clamp(28px,4vw,44px)}
+.why-list b{display:block;font-family:var(--f-display);font-weight:700;font-size:1.75rem;line-height:1.05;color:var(--ink);margin-bottom:10px}
+.why-list p{margin:0;color:var(--ink-2);line-height:1.6}
+.flow-intro{margin:0 0 clamp(24px,3vw,36px);max-width:34em;color:var(--ink-2)}
+.steps5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--rule)}
+.steps5 li{padding:22px 18px 0 0;border-inline-start:1px solid var(--rule);padding-inline:18px}
+.steps5 li:first-child{border-inline-start:0;padding-inline-start:0}
+.steps5 .n{display:block;font-family:var(--f-display);font-size:2.4rem;line-height:1;color:var(--muted);margin-bottom:10px}
+.steps5 b{display:block;font-weight:700;color:var(--ink);margin-bottom:6px}
+.steps5 p{margin:0;font-size:.95rem;line-height:1.55;color:var(--ink-2)}
+.sample{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;border-top:1px solid var(--rule);padding-top:clamp(28px,4vw,44px)}
+.sample h2{margin:0}
+.sample p{margin:0 0 10px;max-width:30em;color:var(--ink-2)}
+.sample .which{font-family:var(--f-display);font-weight:700;font-size:1.9rem;color:var(--ink);margin:6px 0 14px}
+.contact{padding-block:var(--sec)}
+.contact-box{border-top:1.5px solid var(--ink);padding-top:clamp(28px,4vw,44px)}
+.contact-box h2{font-size:var(--t-h1);max-width:14em;margin:0 0 22px}
+.contact-box p{margin:0 0 28px;max-width:30em;color:var(--ink-2);font-size:1.1rem}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px 40px;align-items:center}
+.contact-actions .ed-cta{font-size:1.1rem}
+.contact-more{margin-top:26px!important;font-size:.95rem!important}
+@media (max-width:980px){.why-list{grid-template-columns:1fr 1fr}.steps5{grid-template-columns:1fr}.steps5 li,.steps5 li:first-child{border-inline-start:0;padding-inline:0;padding-top:18px;border-bottom:1px solid var(--rule);padding-bottom:18px}}
+@media (max-width:820px){.why-list{grid-template-columns:1fr}.sample{grid-template-columns:1fr;gap:12px}}
+.ed-foot .foot-tag{flex-basis:100%;color:var(--ink-2)}
+
+/* ── About ── */
+.about{padding-block:var(--sec);border-top:1px solid var(--rule)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about h2{font-size:var(--t-h1)}
+.about p{margin:0 0 28px;max-width:30em;color:var(--ink-2)}
+.about .links{display:flex;flex-wrap:wrap;gap:12px 32px}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr;gap:16px}}
+
 </style>
-<link rel="stylesheet" href="css/reading.css?v=20260927-all"/>
-<link rel="stylesheet" href="css/navigation.css?v=20260927-dock"/>
-<link rel="stylesheet" href="css/alignment.css?v=20260927-language"/>
-<link rel="stylesheet" href="css/site-structure.css?v=20260927-structure">
 </head>
-<body class="dark">
-<!-- Shared init: dark mode flash-prevention + language bootstrap -->
+<body class="ed">
 <script src="js/app-init.js?v=20260927-structure"></script>
+<script>document.body.classList.remove('dark');</script>
 
-<!-- ══ NAVBAR ══ -->
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark">✦</div>
-      <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
-    </a>
-    <div class="nav-links">
-      <a href="course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
-      <a href="lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
-      <a href="teachers.html" class="nav-link" data-en="For Teachers" data-he="למורים">For Teachers</a>
-      <a href="#contact" class="nav-link" data-en="Contact" data-he="צרו קשר">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
-      <a href="#contact" class="btn btn-gold btn-sm" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-      <div id="nav-lang-toggle">
-        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-        <button id="btn-he" onclick="setLang('he')">עברית</button>
-      </div>
-      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
-    </div>
-    <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<div id="mobile-menu">
-  <a href="course.html" data-en="The Course" data-he="הקורס">The Course</a>
-  <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
-  <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
-  <a href="#contact" data-en="Contact" data-he="צרו קשר">Contact</a>
-  <div class="mob-actions">
-    <a href="#contact" class="btn btn-gold btn-sm" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-  </div>
-  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
-    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
-    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
-  </div>
-</div>
-
-<!-- ══ HERO ══ -->
-<section id="hero">
-  <div class="hero-canvas" aria-hidden="true" style="pointer-events:none">
-    <div class="hero-blob hb1" style="pointer-events:none"></div>
-    <div class="hero-blob hb2" style="pointer-events:none"></div>
-    <div class="hero-blob hb3" style="pointer-events:none"></div>
-  </div>
-  <div class="container">
-    <div class="hero-grid">
-
-      <!-- LEFT -->
-      <div class="hero-text">
-        <div class="hero-eyebrow">
-          <div class="hero-dot"></div>
-          <span data-en="Premium School Curriculum · Now Available" data-he="תכנית לימודים מתקדמת לבתי ספר · זמינה עכשיו">Premium School Curriculum · Now Available</span>
-        </div>
-        <h1 class="fade-up" data-en="Sources of<br><span class='grad-gold'>Inspiration</span><br>in Art" data-he="מקורות<br><span class='grad-gold'>השראה</span><br>באמנות">Sources of<br><span class="grad-gold">Inspiration</span><br>in Art</h1>
-        <p class="hero-subtitle fade-up delay-1" data-en="Interactive Creativity Curriculum for Schools" data-he="תכנית יצירתיות אינטראקטיבית לבתי ספר">Interactive Creativity Curriculum for Schools</p>
-        <p class="hero-desc fade-up delay-2" data-en="Explore sources of inspiration through seven units of art study and hands-on practice. Students look at artworks, ask questions, and draw on emotion, nature, music, memory, and culture." data-he="תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים בציור מתוך רגש, טבע, מוזיקה, זיכרון ותרבות.">
-          Explore sources of inspiration through seven units of art study and hands-on practice. Students look at artworks, ask questions, and draw on emotion, nature, music, memory, and culture.
-        </p>
-        <div class="hero-cta fade-up delay-3">
-          <a href="course.html" class="btn btn-gold btn-lg">
-            <i class="fa-solid fa-book-open"></i> <span data-en="Explore the Curriculum" data-he="לתכנית הלימודים">Explore the Curriculum</span>
-          </a>
-          <a href="lesson.html" class="btn btn-outline-white btn-lg">
-            <i class="fa-solid fa-play"></i> <span data-en="Try Demo Lesson" data-he="נסו שיעור דמו">Try Demo Lesson</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- RIGHT: Course card -->
-      <div class="hero-visual fade-up delay-2">
-
-        <div class="hero-course-card">
-          <div class="hcc-title" data-en="Sources of Inspiration in Art: Full Curriculum" data-he="מקורות השראה באמנות: תכנית לימודים מלאה">Sources of Inspiration in Art: Full Curriculum</div>
-
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u1)">1</div>
-            <div class="unit-pill-text">
-              <strong data-en="Personal Experience as a Source of Inspiration" data-he="חוויה אישית כמקור השראה">Personal Experience as a Source of Inspiration</strong>
-              <span data-en="9 lessons" data-he="9 שיעורים">9 lessons</span>
-            </div>
-            <div class="unit-pill-icon">❤️</div>
-          </div>
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u2)">2</div>
-            <div class="unit-pill-text">
-              <strong data-en="Nature as Inspiration" data-he="טבע כהשראה">Nature as Inspiration</strong>
-              <span data-en="4 lessons" data-he="4 שיעורים">4 lessons</span>
-            </div>
-            <div class="unit-pill-icon">🌿</div>
-          </div>
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u3)">3</div>
-            <div class="unit-pill-text">
-              <strong data-en="Music &amp; Rhythm in Art" data-he="מוזיקה וריתמוס באמנות">Music &amp; Rhythm in Art</strong>
-              <span data-en="In development" data-he="בפיתוח">In development</span>
-            </div>
-            <div class="unit-pill-icon">🎵</div>
-          </div>
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u4)">4</div>
-            <div class="unit-pill-text">
-              <strong data-en="Memory &amp; Identity" data-he="זיכרון וזהות">Memory &amp; Identity</strong>
-              <span data-en="In development" data-he="בפיתוח">In development</span>
-            </div>
-            <div class="unit-pill-icon">🧠</div>
-          </div>
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u5)">5</div>
-            <div class="unit-pill-text">
-              <strong data-en="Culture &amp; Symbols" data-he="תרבות וסמלים">Culture &amp; Symbols</strong>
-              <span data-en="In development" data-he="בפיתוח">In development</span>
-            </div>
-            <div class="unit-pill-icon">🌍</div>
-          </div>
-          <div class="unit-pill">
-            <div class="unit-num" style="background:var(--u6)">6</div>
-            <div class="unit-pill-text">
-              <strong data-en="Personal Style Development" data-he="פיתוח סגנון אישי">Personal Style Development</strong>
-              <span data-en="In development" data-he="בפיתוח">In development</span>
-            </div>
-            <div class="unit-pill-icon">🎨</div>
-          </div>
-
-          <div class="hcc-footer">
-            <span class="hcc-stat">🌐 <strong>עברית · EN</strong></span>
-            <span class="hcc-stat">⏱ <strong>30–55 min</strong></span>
-          </div>
-        </div>
-
-      </div>
+<header class="ed-top" id="top">
+  <div class="ed-wrap">
+    <a class="ed-brand" href="index.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
+    <nav class="ed-nav">
+      <a href="#journey" data-he="יחידות" data-en="Units">יחידות</a>
+      <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+      <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+      <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
+    </nav>
+    <span class="ed-spacer"></span>
+    <div class="ed-lang">
+      <button id="btn-he" onclick="setLang('he')">עברית</button><i>/</i><button id="btn-en" onclick="setLang('en')">English</button>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ══ UNITS ══ -->
-<section id="units">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="tag tag-gold" data-en="✦ The Curriculum" data-he="✦ תכנית הלימודים">✦ The Curriculum</div>
-      <h2 data-en="Seven Units. One Big Question:<br><span class='grad-gold'>Where Does Creativity Come From?</span>" data-he="שבע יחידות. שאלה אחת גדולה:<br><span class='grad-gold'>מאין מגיעה יצירתיות?</span>">Seven Units. One Big Question:<br><span class="grad-gold">Where Does Creativity Come From?</span></h2>
-      <p data-en="Each unit introduces a different source of inspiration. Students look closely, discuss what they notice, and develop their own artwork." data-he="בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין.">Each unit introduces a different source of inspiration. Students look closely, discuss what they notice, and develop their own artwork.</p>
-    </div>
-
-    <div class="units-grid">
-
-      <div class="unit-card fade-up" onclick="location.href='course.html#unit01'">
-        <div class="unit-card-header" style="color:var(--u1)">
-          <div class="unit-num-large">1</div>
-          <div class="unit-emoji">❤️</div>
-          <div class="unit-card-num">Unit 01</div>
-          <div class="unit-card-title" data-en="Personal Experience as a Source of Inspiration" data-he="חוויה אישית כמקור השראה">Personal Experience as a Source of Inspiration</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="How can a personal experience become a drawing? Students use feelings, memories, and journal entries to explore line, colour, and composition." data-he="איך הופכים חוויה אישית לציור? התלמידים עובדים עם רגשות, זיכרונות ורישומים ביומן, ובוחנים איך לבטא אותם בקו, בצבע ובקומפוזיציה.">How do artists use feelings as raw material? Students explore how emotion shapes color, line, and composition, from Munch's Scream to their own visual diaries.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u1)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u1)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u1)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u1)'></div>What colour is sadness?" data-he="איזה צבע הוא עצב?<div class='lesson-dot' style='background:var(--u1)'></div>"><div class="lesson-dot" style="background:var(--u1)"></div>What colour is sadness?</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u1)'></div>The art of Edvard Munch" data-he="האמנות של אדוורד מונק<div class='lesson-dot' style='background:var(--u1)'></div>"><div class="lesson-dot" style="background:var(--u1)"></div>The art of Edvard Munch</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u1)'></div>Creating an emotional landscape" data-he="יצירת נוף רגשי<div class='lesson-dot' style='background:var(--u1)'></div>"><div class="lesson-dot" style="background:var(--u1)"></div>Creating an emotional landscape</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit-card fade-up delay-1" onclick="location.href='course.html#unit02'">
-        <div class="unit-card-header" style="color:var(--u2)">
-          <div class="unit-num-large">2</div>
-          <div class="unit-emoji">🌿</div>
-          <div class="unit-card-num">Unit 02</div>
-          <div class="unit-card-title" data-en="Nature as Inspiration" data-he="טבע כמקור השראה">Nature as Inspiration</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="From Monet's water lilies to the geometry of a leaf. Students discover how the natural world has inspired artists across all movements and periods." data-he="משושני המים של מונה עד גיאומטריית העלה. התלמידים מגלים כיצד העולם הטבעי עורר אמנים בכל התקופות.">From Monet's water lilies to the geometry of a leaf. Students discover how the natural world has inspired artists across all movements and periods.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u2)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u2)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u2)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u2)'></div>Patterns in nature &amp; art" data-he="דפוסים בטבע ובאמנות<div class='lesson-dot' style='background:var(--u2)'></div>"><div class="lesson-dot" style="background:var(--u2)"></div>Patterns in nature & art</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u2)'></div>Monet and the Impressionists" data-he="מונה והאימפרסיוניסטים<div class='lesson-dot' style='background:var(--u2)'></div>"><div class="lesson-dot" style="background:var(--u2)"></div>Monet and the Impressionists</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u2)'></div>Botanical drawing &amp; abstraction" data-he="ציור בוטני ואבסטרקציה<div class='lesson-dot' style='background:var(--u2)'></div>"><div class="lesson-dot" style="background:var(--u2)"></div>Botanical drawing & abstraction</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit-card fade-up delay-2" onclick="location.href='course.html#unit03'">
-        <div class="unit-card-header" style="color:var(--u3)">
-          <div class="unit-num-large">3</div>
-          <div class="unit-emoji">🎵</div>
-          <div class="unit-card-num">Unit 03</div>
-          <div class="unit-card-title" data-en="Music &amp; Rhythm in Art" data-he="מוזיקה וריתמוס באמנות">Music &amp; Rhythm in Art</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="Can you paint a sound? Students bridge the senses, exploring Kandinsky's synesthesia, jazz-inspired abstract art, and how rhythm becomes visual movement." data-he="אפשר לצייר צליל? התלמידים חוקרים סינאסתזיה אצל קנדינסקי, אמנות אבסטרקטית בהשראת ג'אז ואיך ריתמוס הופך תנועה ויזואלית.">Can you paint a sound? Students bridge the senses, exploring Kandinsky's synesthesia, jazz-inspired abstract art, and how rhythm becomes visual movement.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u3)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u3)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u3)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u3)'></div>Kandinsky &amp; synesthesia" data-he="קנדינסקי וסינאסתזיה<div class='lesson-dot' style='background:var(--u3)'></div>"><div class="lesson-dot" style="background:var(--u3)"></div>Kandinsky & synesthesia</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u3)'></div>Painting music: jazz &amp; abstract" data-he="ציור מוזיקה: ג'אז ואבסטרקט<div class='lesson-dot' style='background:var(--u3)'></div>"><div class="lesson-dot" style="background:var(--u3)"></div>Painting music: jazz & abstract</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u3)'></div>Rhythm, repetition, movement" data-he="קצב, חזרה, תנועה<div class='lesson-dot' style='background:var(--u3)'></div>"><div class="lesson-dot" style="background:var(--u3)"></div>Rhythm, repetition, movement</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit-card fade-up" onclick="location.href='course.html#unit04'">
-        <div class="unit-card-header" style="color:var(--u4)">
-          <div class="unit-num-large">4</div>
-          <div class="unit-emoji">🧠</div>
-          <div class="unit-card-num">Unit 04</div>
-          <div class="unit-card-title" data-en="Memory &amp; Identity" data-he="זיכרון וזהות">Memory &amp; Identity</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="Students explore how Frida Kahlo, Marc Chagall, and other artists used memories in their work, then create a portrait that expresses something about themselves." data-he="מתבוננים ביצירות של קאלו, שאגאל ואמנים נוספים, ובוחנים איך זיכרון מקבל צורה בציור. בעקבות ההתבוננות יוצרים דיוקן אישי.">Students explore how Frida Kahlo, Marc Chagall, and other artists used memories in their work, then create a portrait that expresses something about themselves.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u4)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u4)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u4)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u4)'></div>Frida Kahlo, self as subject" data-he="פרידה קאלו, העצמי כנושא<div class='lesson-dot' style='background:var(--u4)'></div>"><div class="lesson-dot" style="background:var(--u4)"></div>Frida Kahlo, self as subject</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u4)'></div>Memory map exercise" data-he="תרגיל מפת זיכרון<div class='lesson-dot' style='background:var(--u4)'></div>"><div class="lesson-dot" style="background:var(--u4)"></div>Memory map exercise</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u4)'></div>Creating an identity portrait" data-he="יצירת דיוקן זהות<div class='lesson-dot' style='background:var(--u4)'></div>"><div class="lesson-dot" style="background:var(--u4)"></div>Creating an identity portrait</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit-card fade-up delay-1" onclick="location.href='course.html#unit05'">
-        <div class="unit-card-header" style="color:var(--u5)">
-          <div class="unit-num-large">5</div>
-          <div class="unit-emoji">🌍</div>
-          <div class="unit-card-num">Unit 05</div>
-          <div class="unit-card-title" data-en="Culture &amp; Symbols" data-he="תרבות וסמלים">Culture &amp; Symbols</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="Art as cultural language. Students decode visual symbols from world traditions and create work that honors and reimagines cultural heritage." data-he="אמנות כשפה תרבותית. התלמידים פועלים סמלים ויזואליים ממסורות עולמיות ויוצרים עבודה שמכבדת את המורשת התרבותית.">Art as cultural language. Students decode visual symbols from world traditions and create work that honors and reimagines cultural heritage.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u5)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u5)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u5)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u5)'></div>Visual symbols across cultures" data-he="סמלים חזותיים בתרבויות<div class='lesson-dot' style='background:var(--u5)'></div>"><div class="lesson-dot" style="background:var(--u5)"></div>Visual symbols across cultures</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u5)'></div>Folk art &amp; modern remix" data-he="אמנות עממית ורמיקס מודרני<div class='lesson-dot' style='background:var(--u5)'></div>"><div class="lesson-dot" style="background:var(--u5)"></div>Folk art & modern remix</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u5)'></div>My cultural symbol project" data-he="פרויקט הסמל התרבותי שלי<div class='lesson-dot' style='background:var(--u5)'></div>"><div class="lesson-dot" style="background:var(--u5)"></div>My cultural symbol project</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit-card fade-up delay-2" onclick="location.href='course.html#unit06'">
-        <div class="unit-card-header" style="color:var(--u6)">
-          <div class="unit-num-large">6</div>
-          <div class="unit-emoji">🎨</div>
-          <div class="unit-card-num">Unit 06</div>
-          <div class="unit-card-title" data-en="Personal Style Development" data-he="פיתוח סגנון אישי">Personal Style Development</div>
-        </div>
-        <div class="unit-card-body">
-          <p class="unit-card-desc" data-en="The final unit. Students synthesize everything they've learned to develop their own artistic voice and create a capstone portfolio piece." data-he="היחידה המסכמת. התלמידים משלבים את כל מה שלמדו לפיתוח הקול האמנותי שלהם.">The final unit. Students synthesize everything they've learned to develop their own artistic voice and create a capstone portfolio piece.</p>
-          <div class="unit-card-meta">
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-book-open' style='color:var(--u6)'></i> 6 lessons" data-he="<i class='fa-solid fa-book-open' style='color:var(--u6)'></i> 6 שיעורים"><i class="fa-solid fa-book-open" style="color:var(--u6)"></i> 6 lessons</span>
-            <span class="unit-meta-item" data-en="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 min each" data-he="<i class='fa-solid fa-clock' style='color:var(--gray-500)'></i> 45–60 דקות לכל שיעור"><i class="fa-solid fa-clock" style="color:var(--gray-500)"></i> 45–60 min each</span>
-          </div>
-          <div class="unit-lessons-preview">
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u6)'></div>Finding your visual language" data-he="מציאת השפה החזותית שלך<div class='lesson-dot' style='background:var(--u6)'></div>"><div class="lesson-dot" style="background:var(--u6)"></div>Finding your visual language</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u6)'></div>Artist statement writing" data-he="כתיבת הצהרת אמן<div class='lesson-dot' style='background:var(--u6)'></div>"><div class="lesson-dot" style="background:var(--u6)"></div>Artist statement writing</div>
-            <div class="lesson-preview-row" data-en="<div class='lesson-dot' style='background:var(--u6)'></div>Final portfolio project" data-he="פרויקט תיק עבודות סופי<div class='lesson-dot' style='background:var(--u6)'></div>"><div class="lesson-dot" style="background:var(--u6)"></div>Final portfolio project</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="text-align:center;margin-top:56px" class="fade-up">
-      <a href="course.html" class="btn btn-dark btn-lg">
-        <i class="fa-solid fa-compass"></i> <span data-en="View Full Curriculum" data-he="לתכנית המלאה">View Full Curriculum</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ WHY ══ -->
-<section id="why">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="tag tag-dark" data-en="✦ Why This Curriculum" data-he="✦ למה תכנית לימודים זו">✦ Why This Curriculum</div>
-      <h2 data-en="Built for the Way Students<br><span class='grad-gold'>Actually Think</span>" data-he="נבנתה לאופן שבו תלמידים<br><span class='grad-gold'>באמת חושבים</span>">Built for the Way Students<br><span class="grad-gold">Actually Think</span></h2>
-      <p data-en="Not a collection of lessons. A coherent journey from sensation to self-expression." data-he="לא אוסף של שיעורים. מסע קוהרנטי מתחושה לביטוי עצמי.">Not a collection of lessons. A coherent journey from sensation to self-expression.</p>
-    </div>
-
-    <div class="why-grid">
-      <div class="why-card fade-up">
-        <div class="why-icon" style="background:rgba(232,93,117,.12)">🎭</div>
-        <h3 data-en="Inquiry-Led Learning" data-he="למידה מונחית שאלה">Inquiry-Led Learning</h3>
-        <p data-en="Each lesson begins with a question and time to look closely. The discussion gives students a starting point for their own work." data-he="כל שיעור נפתח בשאלה ובהתבוננות. השיחה נותנת לתלמידים נקודת מוצא לעבודה שלהם.">Each lesson begins with a question and time to look closely. The discussion gives students a starting point for their own work.</p>
-      </div>
-      <div class="why-card fade-up delay-1">
-        <div class="why-icon" style="background:rgba(201,168,76,.12)">🖼️</div>
-        <h3 data-en="World-Class Art as Anchor" data-he="אמנות עולמית כעוגן">World-Class Art as Anchor</h3>
-        <p data-en="Students encounter works by Van Gogh, Kahlo, Kandinsky, and Klee. They discuss the artists’ choices and try related approaches in their own work." data-he="פוגשים יצירות של ון גוך, קאלו, קנדינסקי וקלה. בוחנים את הבחירות של האמנים ומנסים דרכי עבודה בהשראתם.">Students encounter works by Van Gogh, Kahlo, Kandinsky, and Klee. They discuss the artists’ choices and try related approaches in their own work.</p>
-      </div>
-      <div class="why-card fade-up delay-2">
-        <div class="why-icon" style="background:rgba(76,175,125,.12)">✍️</div>
-        <h3 data-en="Reflection Built In" data-he="התבוננות מובנית לתוך">Reflection Built In</h3>
-        <p data-en="Written and visual reflection prompts are woven into every lesson. Students develop critical thinking alongside creative skills." data-he="שאלות התבוננות כתובות וויזואליות שזורות לכל שיעור. התלמידים מפתחים חשיבה ביקורתית לצד כישורים יצירתיים.">Written and visual reflection prompts are woven into every lesson. Students develop critical thinking alongside creative skills.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-icon" style="background:rgba(63,168,200,.12)">🌐</div>
-        <h3 data-en="Artists from Many Places" data-he="אמנים מתקופות ומקומות שונים">Artists from Many Places</h3>
-        <p data-en="From Hokusai in Japan and Frida Kahlo in Mexico to Munch in Norway and Rothko in New York." data-he="מהוקוסאי ביפן ופרידה קאלו במקסיקו, ועד מונק בנורווגיה ורות׳קו בניו יורק.">From Hokusai in Japan and Frida Kahlo in Mexico to Munch in Norway and Rothko in New York.</p>
-      </div>
-      <div class="why-card fade-up delay-1">
-        <div class="why-icon" style="background:rgba(124,111,205,.12)">🧭</div>
-        <h3 data-en="Screen by Screen" data-he="מסך אחרי מסך">Screen by Screen</h3>
-        <p data-en="Each lesson is projected in class one screen at a time, so it is easy to lead and easy to follow." data-he="כל שיעור מוקרן בכיתה מסך אחרי מסך, כך שקל להוביל אותו וקל לעקוב אחריו.">Each lesson is projected in class one screen at a time, so it is easy to lead and easy to follow.</p>
-      </div>
-      <div class="why-card fade-up delay-2">
-        <div class="why-icon" style="background:rgba(200,76,142,.12)">📱</div>
-        <h3 data-en="Every Device, Every Room" data-he="כל מכשיר, כל כיתה">Every Device, Every Room</h3>
-        <p data-en="Open the curriculum on a smartboard, laptop, or tablet." data-he="אפשר לפתוח את התכנית בלוח חכם, במחשב ובטאבלט.">Open the curriculum on a smartboard, laptop, or tablet.</p>
+<main>
+  <section class="cover ed-wrap">
+    <div class="rv">
+      <p class="ed-kicker" data-he="תכנית אמנות ויצירתיות לבתי ספר" data-en="An art and creativity curriculum for schools">תכנית אמנות ויצירתיות לבתי ספר</p>
+      <h1 class="ed-display cover-title">
+        <span data-he="מקורות השראה באמנות" data-en="Sources of Inspiration in Art">מקורות השראה באמנות</span>
+        <span class="cover-latin" dir="auto" data-he="Sources of Inspiration in Art" data-en="מקורות השראה באמנות">Sources of Inspiration in Art</span>
+      </h1>
+      <p class="cover-lead" data-he="תכנית אינטראקטיבית שמחברת התבוננות, אמנות, שיחה ויצירה, דרך מסע של יחידות ושיעורים." data-en="An interactive curriculum that connects looking, art, conversation and making, through a journey of units and lessons.">תכנית אינטראקטיבית שמחברת התבוננות, אמנות, שיחה ויצירה, דרך מסע של יחידות ושיעורים.</p>
+      <p class="cover-sub" data-he="איך רעיון הופך לדימוי, ודימוי ליצירה" data-en="How an idea becomes an image, and an image becomes an artwork">איך רעיון הופך לדימוי, ודימוי ליצירה</p>
+      <div class="cover-actions">
+        <a class="ed-cta" href="#journey"><span data-he="לתכנית הלימודים" data-en="See the curriculum">לתכנית הלימודים</span><span class="arr" data-he="↓" data-en="↓">↓</span></a>
+        <a class="ed-cta" href="lesson-pages/lesson-2-1.html"><span data-he="לשיעור לדוגמה" data-en="Open the sample lesson">לשיעור לדוגמה</span><span class="arr" data-he="←" data-en="→">←</span></a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ LESSON PREVIEW ══ -->
-<section id="lesson-preview">
-  <div class="container">
-    <div class="preview-grid">
-
-      <!-- Screen mockup -->
-      <div class="preview-screen fade-up">
-        <div class="ps-topbar">
-          <div class="ps-dot r"></div><div class="ps-dot y"></div><div class="ps-dot g"></div>
-          <div class="ps-url">sources.art/lesson/emotion-colour</div>
-        </div>
-        <div class="ps-body">
-          <div class="ps-lesson-header">
-            <div class="ps-unit-tag"><i class="fa-solid fa-circle" style="font-size:.5rem"></i> Unit 01 · Personal Experience</div>
-            <div class="ps-lesson-title">What Colour is Sadness?</div>
-            <div class="ps-lesson-meta">Lesson 1 of 6 · 45 minutes</div>
-          </div>
-          <div class="ps-gallery">
-            <div class="ps-artwork" style="background:linear-gradient(135deg,#1a1a3e,#3a1a2e)">😢</div>
-            <div class="ps-artwork" style="background:linear-gradient(135deg,#2e1a0a,#4a2a0a)">😡</div>
-            <div class="ps-artwork" style="background:linear-gradient(135deg,#0a2e0a,#1a4a1a)">😌</div>
-          </div>
-          <div class="ps-question">
-            <div class="ps-q-label">✦ Opening Question</div>
-            <div class="ps-q-text">Look at Munch's "The Scream." What colours did he choose, and why do you think those colours feel so anxious?</div>
-          </div>
-          <div class="ps-timer">
-            <div>
-              <div class="ps-timer-label">Exercise Timer</div>
-              <div class="ps-timer-val">08:00</div>
-            </div>
-            <div class="ps-timer-btn">▶ Start</div>
-          </div>
-        </div>
+  <section class="journey ed-wrap" id="journey">
+    <div class="journey-intro rv">
+      <div>
+        <p class="ed-kicker" data-he="המסע" data-en="The journey">המסע</p>
+        <h2 class="ed-display" data-he="שבע יחידות" data-en="Seven units">שבע יחידות</h2>
       </div>
-
-      <!-- Content -->
-      <div class="preview-content fade-up delay-2">
-        <div class="tag tag-gold" data-en="✦ Inside Every Lesson" data-he="✦ בכל שיעור">✦ Inside Every Lesson</div>
-        <h2 data-en="A Complete Experience,&lt;br&gt;&lt;span class='grad-gold'&gt;Ready to Teach&lt;/span&gt;" data-he="חוויה מלאה,&lt;br&gt;&lt;span class='grad-gold'&gt;מוכנה להוראה&lt;/span&gt;">A Complete Experience,<br><span class="grad-gold">Ready to Teach</span></h2>
-        <div class="preview-features">
-          <div class="pf-item">
-            <div class="pf-icon gold-bg">🖼️</div>
-            <div class="pf-text">
-              <h4 data-en="Masterwork Gallery" data-he="גלריית יצירות מופת">Masterwork Gallery</h4>
-              <p data-en="Curated artworks open every lesson as visual inspiration, presented in full-screen gallery mode." data-he="יצירות אמנות נבחרות פותחות כל שיעור כהשראה חזותית, מוצגות במצב גלריה מסך מלא.">Curated artworks open every lesson as visual inspiration, presented in full-screen gallery mode.</p>
-            </div>
-          </div>
-          <div class="pf-item">
-            <div class="pf-icon gold-bg">💬</div>
-            <div class="pf-text">
-              <h4 data-en="Guided Discussion Questions" data-he="שאלות דיון מונחות">Guided Discussion Questions</h4>
-              <p data-en="Carefully written prompts spark genuine conversation before the creative work begins." data-he="הנחיות כתובות בקפידה מעוררות שיחה אמיתית לפני שמתחיל העבודה היצירתית.">Carefully written prompts spark genuine conversation before the creative work begins.</p>
-            </div>
-          </div>
-          <div class="pf-item">
-            <div class="pf-icon gold-bg">⏱️</div>
-            <div class="pf-text">
-              <h4 data-en="Timed Studio Exercise" data-he="תרגיל סטודיו מתוזמן">Timed Studio Exercise</h4>
-              <p data-en="A built-in timer helps students set aside time for each stage of the exercise." data-he="טיימר מובנה עוזר להקדיש זמן ברור לכל שלב בתרגיל.">A built-in timer helps students set aside time for each stage of the exercise.</p>
-            </div>
-          </div>
-          <div class="pf-item">
-            <div class="pf-icon gold-bg">✍️</div>
-            <div class="pf-text">
-              <h4 data-en="Reflection Journal" data-he="יומן רפלקציה">Reflection Journal</h4>
-              <p data-en="Every lesson ends with a written or visual reflection prompt, developing artistic voice over time." data-he="כל שיעור נגמר עם הנחיית רפלקציה כתובה או חזותית, המפתחת קול אמנותי לאורך זמן.">Every lesson ends with a written or visual reflection prompt, developing artistic voice over time.</p>
-            </div>
-          </div>
-        </div>
-        <a href="lesson.html" class="btn btn-dark btn-lg">
-        <i class="fa-solid fa-play"></i> <span data-en="Preview a Full Lesson" data-he="צפו בשיעור מלא">Preview a Full Lesson</span>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ CONTACT ══ -->
-<section id="contact" style="padding:80px 24px">
-  <div class="container" style="max-width:640px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px">
-    <div class="tag tag-gold" data-en="✦ Contact" data-he="✦ צרו קשר">✦ Contact</div>
-    <h2 data-en="Interested in the Curriculum for Your School?" data-he="רוצים להכניס את התכנית לבית הספר?">Interested in the Curriculum for Your School?</h2>
-    <p data-en="For questions, a price quote or to arrange a demo, write to us." data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.">For questions, a price quote or to arrange a demo, write to us.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-      <a href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" class="btn btn-gold btn-lg" data-en="<i class='fa-solid fa-envelope'></i> Contact Us" data-he="<i class='fa-solid fa-envelope'></i> צרו קשר"><i class="fa-solid fa-envelope"></i> Contact Us</a>
-      <a href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" class="btn btn-lg" target="_blank" rel="noopener" style="background:#25D366;color:#fff;border:none" data-en="<i class='fa-brands fa-whatsapp'></i> WhatsApp" data-he="<i class='fa-brands fa-whatsapp'></i> וואטסאפ"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<section id="cta">
-  <div class="container">
-    <div class="cta-inner fade-up">
-      <div class="tag tag-dark" style="margin-bottom:24px" data-en="✦ Start Today" data-he="✦ התחילו היום">✦ Start Today</div>
-      <h2 data-en="See a Lesson&lt;br&gt;for Yourself" data-he="נסו שיעור&lt;br&gt;בעצמכם">See a Lesson<br>for Yourself</h2>
-      <p data-en="Open the sample lesson, or write to us to arrange a demo for your school." data-he="פתחו את השיעור לדוגמה, או כתבו לנו לתיאום הדגמה לבית הספר.">Open the sample lesson, or write to us to arrange a demo for your school.</p>
-      <div class="cta-btns">
-        <a href="lesson.html" class="btn btn-gold btn-lg">
-          <i class="fa-solid fa-play"></i> <span data-en="Try the Sample Lesson" data-he="לשיעור לדוגמה">Try the Sample Lesson</span>
-        </a>
-        <a href="#contact" class="btn btn-outline-white btn-lg">
-          <i class="fa-solid fa-envelope"></i> <span data-en="Contact Us" data-he="צרו קשר">Contact Us</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<footer id="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo" style="margin-bottom:0">
-          <div class="nav-logo-mark" style="width:32px;height:32px;font-size:.9rem">✦</div>
-          <span class="footer-logo-text" data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
-        </div>
-        <p data-en="A premium interactive art curriculum teaching students where creativity comes from. Built for schools worldwide." data-he="תכנית לימודים אמנותית אינטראקטיבית מתקדמת, מלמדת תלמידים מאין מגיעה יצירתיות. נבנתה לבתי ספר ברחבי העולם.">A premium interactive art curriculum teaching students where creativity comes from. Built for schools worldwide.</p>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="Curriculum" data-he="תכנית לימודים">Curriculum</h4>
-        <div class="footer-links">
-          <a href="course.html" data-en="All Units" data-he="כל היחידות">All Units</a>
-          <a href="lesson.html" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
-          <a href="teachers.html" data-en="Teacher Resources" data-he="משאבים למורים">Teacher Resources</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="Schools" data-he="בתי ספר">Schools</h4>
-        <div class="footer-links">
-          <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
-          <a href="mailto:hagitavidan@gmail.com" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
+      <div>
+        <p class="journey-q" data-he="שאלה אחת גדולה: מאין מגיעה יצירתיות?" data-en="One big question: where does creativity come from?">שאלה אחת גדולה: מאין מגיעה יצירתיות?</p>
+        <p data-he="בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין." data-en="Each unit introduces a different source of inspiration. Students look closely, talk about what they notice, and make their own work.">בכל יחידה פוגשים מקור השראה אחר. מתבוננים, משוחחים ויוצרים עבודה אישית מתוך מה שעורר עניין.</p>
+        <div class="path" aria-label="השראה, התבוננות, רעיון, יצירה">
+          <span data-he="השראה" data-en="Inspiration">השראה</span><i data-he="←" data-en="→">←</i>
+          <span data-he="התבוננות" data-en="Looking">התבוננות</span><i data-he="←" data-en="→">←</i>
+          <span data-he="רעיון" data-en="Idea">רעיון</span><i data-he="←" data-en="→">←</i>
+          <span data-he="יצירה" data-en="Artwork">יצירה</span>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p data-en="© 2025 Sources of Inspiration in Art. All rights reserved." data-he="© 2025 מקורות השראה באמנות. כל הזכויות שמורות.">© 2025 Sources of Inspiration in Art. All rights reserved.</p>
-      <p><a href="privacy.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a> · <a href="terms.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px" data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</a></p>
-      <p class="footer-gold" data-en="Made with ❤️ for art teachers everywhere." data-he="נוצר באהבה ❤️ למורי אמנות בכל העולם.">Made with ❤️ for art teachers everywhere.</p>
+
+    <article class="gate " id="unit00">
+      <a class="gate-img rv-img" href="units/unit-00.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/friedrich-wanderer.jpg" alt="" loading="lazy" style="object-position:50% 30%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">00</span>
+        <h3 class="gate-title"><a href="units/unit-00.html" data-he="יסודות ההשראה" data-en="Foundations of Inspiration">יסודות ההשראה</a></h3>
+        <p class="gate-keys" data-he="ראייה · תפיסה · תשומת לב" data-en="Seeing · Perception · Attention">ראייה · תפיסה · תשומת לב</p>
+        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+        <a class="ed-cta" href="units/unit-00.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="קספר דוד פרידריך, הנודד מעל ים הערפל, 1818" data-en="Caspar David Friedrich, Wanderer above the Sea of Fog, 1818">קספר דוד פרידריך, הנודד מעל ים הערפל, 1818</p>
+      </div>
+    </article>
+    <article class="gate flip" id="unit01">
+      <a class="gate-img rv-img" href="units/unit-01.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/munch-scream.jpg" alt="" loading="lazy" style="object-position:50% 40%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">01</span>
+        <h3 class="gate-title"><a href="units/unit-01.html" data-he="חוויה אישית כמקור השראה" data-en="Personal Experience as a Source of Inspiration">חוויה אישית כמקור השראה</a></h3>
+        <p class="gate-keys" data-he="רגש · זיכרון · יומן" data-en="Emotion · Memory · Journal">רגש · זיכרון · יומן</p>
+        <p class="gate-meta"><span data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span></p>
+        <a class="ed-cta" href="units/unit-01.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="אדוורד מונק, הצעקה, 1893" data-en="Edvard Munch, The Scream, 1893">אדוורד מונק, הצעקה, 1893</p>
+      </div>
+    </article>
+    <article class="gate " id="unit02">
+      <a class="gate-img rv-img" href="units/unit-02.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/morris-strawberry-thief-aic-card.jpg" alt="" loading="lazy" style="object-position:50% 50%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">02</span>
+        <h3 class="gate-title"><a href="units/unit-02.html" data-he="מבט החוצה" data-en="Looking Outward">מבט החוצה</a></h3>
+        <p class="gate-keys" data-he="דפוס · פרט · אור · מרחב · תנועה" data-en="Pattern · Detail · Light · Space · Movement">דפוס · פרט · אור · מרחב · תנועה</p>
+        <p class="gate-meta"><span data-he="6 שיעורים" data-en="6 lessons">6 שיעורים</span></p>
+        <a class="ed-cta" href="units/unit-02.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+      </div>
+    </article>
+    <article class="gate flip" id="unit03">
+      <a class="gate-img rv-img" href="units/unit-03.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/kandinsky-composition8.jpg" alt="" loading="lazy" style="object-position:40% 50%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">03</span>
+        <h3 class="gate-title"><a href="units/unit-03.html" data-he="מוזיקה וריתמוס כמקור השראה" data-en="Music & Rhythm as Inspiration">מוזיקה וריתמוס כמקור השראה</a></h3>
+        <p class="gate-keys" data-he="צליל · קצב · תנועה" data-en="Sound · Rhythm · Movement">צליל · קצב · תנועה</p>
+        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+        <a class="ed-cta" href="units/unit-03.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="וסילי קנדינסקי, קומפוזיציה 8, 1923" data-en="Wassily Kandinsky, Composition VIII, 1923">וסילי קנדינסקי, קומפוזיציה 8, 1923</p>
+      </div>
+    </article>
+    <article class="gate " id="unit04">
+      <a class="gate-img rv-img" href="units/unit-04.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/monet-haystacks-1891.jpg" alt="" loading="lazy" style="object-position:50% 60%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">04</span>
+        <h3 class="gate-title"><a href="units/unit-04.html" data-he="זיכרון וזהות כמקור השראה" data-en="Memory & Identity as Inspiration">זיכרון וזהות כמקור השראה</a></h3>
+        <p class="gate-keys" data-he="זיכרון · דיוקן · זהות" data-en="Memory · Portrait · Identity">זיכרון · דיוקן · זהות</p>
+        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+        <a class="ed-cta" href="units/unit-04.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="קלוד מונה, ערימות שחת, 1891" data-en="Claude Monet, Haystacks, 1891">קלוד מונה, ערימות שחת, 1891</p>
+      </div>
+    </article>
+    <article class="gate flip" id="unit05">
+      <a class="gate-img rv-img" href="units/unit-05.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/morris-strawberry-thief-1883.jpg" alt="" loading="lazy" style="object-position:50% 40%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">05</span>
+        <h3 class="gate-title"><a href="units/unit-05.html" data-he="תרבות וסמלים כמקור השראה" data-en="Culture & Symbols as Inspiration">תרבות וסמלים כמקור השראה</a></h3>
+        <p class="gate-keys" data-he="סמל · מסורת · מורשת" data-en="Symbol · Tradition · Heritage">סמל · מסורת · מורשת</p>
+        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+        <a class="ed-cta" href="units/unit-05.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</p>
+      </div>
+    </article>
+    <article class="gate " id="unit06">
+      <a class="gate-img rv-img" href="units/unit-06.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/turner-snowstorm.jpg" alt="" loading="lazy" style="object-position:55% 50%"></a>
+      <div class="gate-txt rv">
+        <span class="ed-num">06</span>
+        <h3 class="gate-title"><a href="units/unit-06.html" data-he="סגנון אישי כמקור השראה" data-en="Personal Style as Inspiration">סגנון אישי כמקור השראה</a></h3>
+        <p class="gate-keys" data-he="קול · בחירה · דרך" data-en="Voice · Choice · Path">קול · בחירה · דרך</p>
+        <p class="gate-meta"><span data-he="בפיתוח" data-en="In development">בפיתוח</span></p>
+        <a class="ed-cta" href="units/unit-06.html"><span data-he="לשער היחידה" data-en="Enter the unit">לשער היחידה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+        <p class="gate-cap" data-he="ויליאם טרנר, סופת שלגים, 1842" data-en="J. M. W. Turner, Snow Storm, 1842">ויליאם טרנר, סופת שלגים, 1842</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="blk ed-wrap" id="why">
+    <div class="rv">
+      <h2 class="ed-display" data-he="למה התכנית" data-en="Why this curriculum">למה התכנית</h2>
+      <ul class="why-list">
+        <li><b data-he="לומדים דרך שאלות." data-en="Learning through questions.">לומדים דרך שאלות.</b><p data-he="כל שיעור נפתח בשאלה ובהתבוננות: בעולם, בחפץ או בחוויה של התלמידים, לפני שמגיעים ליצירה." data-en="Every lesson opens with a question and with looking: at the world, an object or the students&#x27; own experience, before the making begins.">כל שיעור נפתח בשאלה ובהתבוננות: בעולם, בחפץ או בחוויה של התלמידים, לפני שמגיעים ליצירה.</p></li>
+        <li><b data-he="מקורות אמנותיים מגוונים." data-en="Varied artistic sources.">מקורות אמנותיים מגוונים.</b><p data-he="יצירות מתקופות, ממקומות ומחומרים שונים: ציור, וידאו, צילום, עיצוב ומיצב. הן מוצגות כמקור השראה, לא כדוגמה להעתקה." data-en="Works from different times, places and media: painting, video, photography, design and installation. They are shown as a source of inspiration, not a model to copy.">יצירות מתקופות, ממקומות ומחומרים שונים: ציור, וידאו, צילום, עיצוב ומיצב. הן מוצגות כמקור השראה, לא כדוגמה להעתקה.</p></li>
+        <li><b data-he="תרגול יצירתי מונחה." data-en="Guided creative practice.">תרגול יצירתי מונחה.</b><p data-he="תרגילים קצרים וברורים, צעד אחרי צעד, שמובילים לעבודה אישית. אין תשובה אחת נכונה." data-en="Short, clear exercises, step by step, that lead to a personal work. There is no single right answer.">תרגילים קצרים וברורים, צעד אחרי צעד, שמובילים לעבודה אישית. אין תשובה אחת נכונה.</p></li>
+        <li><b data-he="עצירה לרפלקציה." data-en="A pause for reflection.">עצירה לרפלקציה.</b><p data-he="השיעורים מסתיימים בהתבוננות בעבודה: מה עשיתי, מה גיליתי, מה אקח הלאה." data-en="The lessons end by looking at the work: what I did, what I found, what I&#x27;ll take further.">השיעורים מסתיימים בהתבוננות בעבודה: מה עשיתי, מה גיליתי, מה אקח הלאה.</p></li>
+        <li><b data-he="בכל כיתה." data-en="In any classroom.">בכל כיתה.</b><p data-he="בעברית ובאנגלית, בדפדפן — במחשב, בטאבלט, בטלפון או על מסך בכיתה." data-en="In Hebrew and English, in the browser — on a computer, tablet, phone or classroom screen.">בעברית ובאנגלית, בדפדפן — במחשב, בטאבלט, בטלפון או על מסך בכיתה.</p></li>
+      </ul>
     </div>
+  </section>
+
+  <section class="blk ed-wrap" id="each-lesson">
+    <div class="rv">
+      <h2 class="ed-display" data-he="מה קורה בכל שיעור" data-en="What happens in each lesson">מה קורה בכל שיעור</h2>
+      <p class="flow-intro" data-he="שיעור בתכנית בנוי בדרך כלל כרצף קצר וברור של חמישה שלבים:" data-en="A lesson in the curriculum is usually built as a short, clear sequence of five stages:">שיעור בתכנית בנוי בדרך כלל כרצף קצר וברור של חמישה שלבים:</p>
+      <ol class="steps5">
+        <li><span class="n">01</span><b data-he="מה אנחנו חוקרים?" data-en="What are we exploring?">מה אנחנו חוקרים?</b><p data-he="שאלה פותחת והתבוננות ראשונה" data-en="An opening question and a first look">שאלה פותחת והתבוננות ראשונה</p></li>
+        <li><span class="n">02</span><b data-he="מקורות השראה" data-en="Sources of inspiration">מקורות השראה</b><p data-he="יצירות של אמנים, עם מידע קצר וקישור למוזיאון" data-en="Artists&#x27; works, with short notes and a link to the museum">יצירות של אמנים, עם מידע קצר וקישור למוזיאון</p></li>
+        <li><span class="n">03</span><b data-he="מסתכלים" data-en="Looking">מסתכלים</b><p data-he="שאלות התבוננות ושיחה" data-en="Questions for looking and talking">שאלות התבוננות ושיחה</p></li>
+        <li><span class="n">04</span><b data-he="יוצרים" data-en="Making">יוצרים</b><p data-he="תרגיל מונחה, ואחריו זמן עבודה עצמאי" data-en="A guided exercise, then time to work on your own">תרגיל מונחה, ואחריו זמן עבודה עצמאי</p></li>
+        <li><span class="n">05</span><b data-he="סיום" data-en="Closing">סיום</b><p data-he="עצירה לרפלקציה על העבודה" data-en="A pause to reflect on the work">עצירה לרפלקציה על העבודה</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="blk ed-wrap" id="sample">
+    <div class="sample rv">
+      <div><h2 class="ed-display" data-he="שיעור לדוגמה" data-en="A sample lesson">שיעור לדוגמה</h2></div>
+      <div>
+        <p data-he="פתחו שיעור מלא מתוך התכנית, כפי שהוא מוצג בכיתה." data-en="Open a full lesson from the curriculum, as it is shown in class.">פתחו שיעור מלא מתוך התכנית, כפי שהוא מוצג בכיתה.</p>
+        <p class="which" data-he="2.1 · דפוסים בטבע ובאמנות" data-en="2.1 · Patterns in Nature &amp; Art">2.1 · דפוסים בטבע ובאמנות</p>
+        <a class="ed-cta" href="lesson-pages/lesson-2-1.html"><span data-he="לשיעור לדוגמה" data-en="Open the sample lesson">לשיעור לדוגמה</span><span class="arr" data-he="←" data-en="→">←</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact ed-wrap" id="contact">
+    <div class="contact-box rv">
+      <h2 class="ed-display" data-he="רוצים להכניס את התכנית לבית הספר?" data-en="Want to bring the curriculum to your school?">רוצים להכניס את התכנית לבית הספר?</h2>
+      <p data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו." data-en="For questions, a price quote or a demo, write to us.">לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.</p>
+      <div class="contact-actions">
+        <a class="ed-cta" href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA"><span data-he="כתבו לנו במייל" data-en="Email us">כתבו לנו במייל</span></a>
+        <a class="ed-cta" href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" target="_blank" rel="noopener"><span data-he="וואטסאפ" data-en="WhatsApp">וואטסאפ</span></a>
+      </div>
+      <p class="contact-more"><a class="ed-link" href="teachers.html" data-he="מידע למורים" data-en="Information for teachers">מידע למורים</a></p>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="ed-wrap about-grid rv">
+      <div>
+        <p class="ed-kicker" data-he="אודות" data-en="About">אודות</p>
+        <h2 class="ed-display" data-he="על התכנית" data-en="About the curriculum">על התכנית</h2>
+      </div>
+      <div>
+        <p data-he="תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים ביצירה מתוך חוויה אישית, מבט החוצה, מוזיקה, זיכרון ותרבות." data-en="A seven-unit curriculum exploring the sources of inspiration in art. Students look at artworks, ask questions and make art from personal experience, looking outward, music, memory and culture.">תכנית בת שבע יחידות לחקירת מקורות ההשראה באמנות. מתבוננים ביצירות, שואלים שאלות ומתנסים ביצירה מתוך חוויה אישית, מבט החוצה, מוזיקה, זיכרון ותרבות.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ed-foot">
+  <div class="ed-wrap">
+    <span class="foot-tag" data-he="תכנית אמנות ויצירתיות לבתי ספר." data-en="An art and creativity curriculum for schools.">תכנית אמנות ויצירתיות לבתי ספר.</span>
+    <a href="#journey" data-he="יחידות" data-en="Units">יחידות</a>
+    <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+    <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+    <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
+    <a href="privacy.html" data-he="מדיניות פרטיות" data-en="Privacy Policy">מדיניות פרטיות</a>
+    <a href="terms.html" data-he="תנאי שימוש" data-en="Terms of Use">תנאי שימוש</a>
+    <span class="ed-spacer"></span>
+    <span data-he="© 2026 מקורות השראה באמנות" data-en="© 2026 Sources of Inspiration in Art">© 2026 מקורות השראה באמנות</span>
   </div>
 </footer>
 
-<script>
-// ── PAGE-SPECIFIC JS (index.html) ──────────────────────────
-// Dark mode, language init, toggleTheme, setLang → app-init.js?v=20260927-structure
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  // Navbar scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
-
-  // Hamburger — uses .open class (matches style.css #mobile-menu.open rule)
-  const burger = document.getElementById('nav-hamburger');
-  const mobMenu = document.getElementById('mobile-menu');
-  if(burger && mobMenu){
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      mobMenu.classList.toggle('open');
-    });
-    document.addEventListener('click', e => {
-      if(!burger.contains(e.target) && !mobMenu.contains(e.target)){
-        burger.classList.remove('open');
-        mobMenu.classList.remove('open');
-      }
-    });
-  }
-
-  // Fade-up
-  if('IntersectionObserver' in window){
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  } else {
-    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-  }
-
-  // Close mobile menu on any link click inside mobile-menu, or any #anchor link anywhere
-  document.addEventListener('click', function(e) {
-    const burger = document.getElementById('nav-hamburger');
-    const mobMenu = document.getElementById('mobile-menu');
-    if (e.target.closest('#mobile-menu a') || e.target.closest('a[href^="#"]')) {
-      if (burger) burger.classList.remove('open');
-      if (mobMenu) mobMenu.classList.remove('open');
-    }
-    // scroll-behavior:smooth on <html> handles the smooth scroll — no JS needed
-  });
-
-}); // end DOMContentLoaded
-</script>
-
-<script src="js/navigation-data.js?v=20260927-nav"></script>
-<script src="js/navigation.js?v=20260927-access"></script>
-<script src="js/site-structure.js?v=20260927-structure"></script>
+<script src="js/navigation-data.js"></script>
+<script src="data/lesson-pages/index.js"></script>
+<script src="js/site-drawer.js?v=8" data-base=""></script>
+<script src="js/editorial.js?v=1"></script>
 </body>
 </html>
