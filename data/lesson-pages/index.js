@@ -81,9 +81,10 @@ window.UNIT_TITLES = {
  }
 };
 (function () {
-  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};
+  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {}, T = window.UNIT_TITLES || {};
   if (!N || !O) return;
   (N.units || []).forEach(function (u) {
+    if (T[u.id]) u.title = T[u.id];   /* the unit's new name, in the contents drawer of every preview page */
     (A[u.id] || []).forEach(function (l) {
       if (u.lessons && !u.lessons.some(function (x) { return x.path === l.path; })) u.lessons.push(l);
     });

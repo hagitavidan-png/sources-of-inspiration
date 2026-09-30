@@ -437,9 +437,10 @@ fs.writeFileSync(path.join(ROOT, 'data/lesson-pages/index.js'),
   '/* new unit names, used on the lesson pages only (js/lesson-page.js) */\n' +
   'window.UNIT_TITLES = ' + JSON.stringify(UNIT_TITLES, null, 1) + ';\n' +
   '(function () {\n' +
-  '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {};\n' +
+  '  var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {}, T = window.UNIT_TITLES || {};\n' +
   '  if (!N || !O) return;\n' +
   '  (N.units || []).forEach(function (u) {\n' +
+  '    if (T[u.id]) u.title = T[u.id];   /* the unit\'s new name, in the contents drawer of every preview page */\n' +
   '    (A[u.id] || []).forEach(function (l) {\n' +
   '      if (u.lessons && !u.lessons.some(function (x) { return x.path === l.path; })) u.lessons.push(l);\n' +
   '    });\n' +

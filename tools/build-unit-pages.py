@@ -444,7 +444,7 @@ def render(u, units):
         a_en = f'{arr_en} {lab[1]}' if direction == 'prev' else f'{lab[1]} {arr_en}'
         return f'''<a class="un un-{direction}" href="unit-{x['num']}.html">
           {t(a_he, a_en, 'span', 'un-lab')}
-          <span class="un-t"><span class="un-n">{x['num']}</span>{t(x['title']['he'], x['title']['en'])}</span>
+          <span class="un-t"><span class="un-n">{x['num']}</span>{t((x.get('own_title') or x['title'])['he'], (x.get('own_title') or x['title'])['en'])}</span>
         </a>'''
 
     return f'''<!DOCTYPE html>
