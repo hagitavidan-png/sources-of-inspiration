@@ -2,7 +2,15 @@
 window.LESSON_PAGE = {
  "id": "lesson-2-2",
  "path": "lessons/lesson-2-2.html",
- "slides": "lessons/lesson-2-2.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "explore": "pattern",
+  "sources": "light",
+  "look": "pattern",
+  "create": "pattern",
+  "end": "pattern"
+ },
  "number": "2.3",
  "unit": {
   "he": "טבע כמקור השראה",
@@ -10,99 +18,36 @@ window.LESSON_PAGE = {
  },
  "unitNum": "02",
  "title": {
-  "he": "מונה והאימפרסיוניסטים",
-  "en": "Monet and the Impressionists"
+  "he": "אותו דבר, אור אחר",
+  "en": "Same Thing, Different Light"
  },
  "time": {
   "he": "50 דקות",
   "en": "50 min"
  },
  "intro": {
-  "he": "נתבונן בציורי מונה ונחקור איך אור וצבע משנים את מה שאנחנו רואים. ניצור עבודה בהשראת האור והאווירה של רגע מסוים.",
-  "en": "Look at Monet’s paintings and explore how light and colour change what we see. Create a work inspired by the light and atmosphere of a particular moment."
+  "he": "נצייר את אותו אובייקט פעמיים, בשני מצבי אור, ונראה מה האור משנה: צבע, צל ובהירות.",
+  "en": "Draw the same object twice, in two different lights, and see what the light changes: colour, shadow and brightness."
  },
  "materials": {
-  "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
-  "en": "Paper or a visual journal, a pencil and colours of your choice"
+  "he": "חפץ יומיומי, חלון או מנורה, שני דפים, עיפרון וצבעים",
+  "en": "An everyday object, a window or a lamp, two sheets of paper, a pencil and colours"
  },
- "hero": {
-  "img": "monet-haystacks-1891",
-  "pos": "50% 70%",
-  "cap": {
-   "he": "פרט מתוך: קלוד מונה, ערימות שחת, 1891",
-   "en": "Detail: Claude Monet, Haystacks, 1891"
-  }
- },
+ "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "שיעור 2.2",
-      "en": "Lesson 2.2"
-     },
      "big": {
-      "he": "האם אותו דבר נראה אותו דבר, <br><em>כל הזמן</em>?",
+      "he": "האם אותו דבר נראה אותו דבר,<br><em>כל הזמן</em>?",
       "en": "Does the same thing always<br>look the <em>same</em>?"
      },
      "sub": {
-      "he": "התשובה היא לא, והאימפרסיוניסטים בנו תנועה שלמה על הגילוי הזה.",
-      "en": "The answer is no, and the Impressionists built an entire movement on that discovery."
+      "he": "התשובה היא לא.",
+      "en": "The answer is no."
      }
-    }
-   ]
-  },
-  "sources": {
-   "blocks": [
+    },
     {
-     "label": {
-      "he": "מקורות השראה",
-      "en": "References"
-     },
-     "works": [
-      {
-       "img": "monet-haystacks-1891",
-       "alt": "Claude Monet, Haystacks, 1891",
-       "artist": {
-        "he": "קלוד מונה",
-        "en": "Claude Monet"
-       },
-       "title": {
-        "he": "ערמות חציר, 1891",
-        "en": "Haystacks, 1891"
-       },
-       "note": {
-        "he": "מונה צייר את אותן ערמות חציר בשחר, בצהריים, בדמדומים ובחורף. הנושא לא השתנה, רק האור השתנה.",
-        "en": "Monet painted the same haystacks at dawn, noon, dusk, and winter. The subject never changed, only the light did."
-       }
-      },
-      {
-       "img": "pissarro-boulevard-montmartre-1897",
-       "alt": "Camille Pissarro, Boulevard Montmartre, 1897",
-       "artist": {
-        "he": "קמיל פיסארו",
-        "en": "Camille Pissarro"
-       },
-       "title": {
-        "he": "רחוב המונמארטר, 1897",
-        "en": "Boulevard Montmartre, 1897"
-       },
-       "note": {
-        "he": "פיסארו צייר את אותו רחוב מאותו חלון, בוקר אביבי, אחר צהריים, ערב גשום. אותו רחוב, עולמות שונים.",
-        "en": "Pissarro painted the same boulevard from the same window, spring morning, afternoon, rainy evening. Same street, different worlds."
-       }
-      }
-     ]
-    }
-   ]
-  },
-  "look": {
-   "blocks": [
-    {
-     "label": {
-      "he": "שלב 1",
-      "en": "Step 1"
-     },
      "big": {
       "he": "הסתכלו על האור<br>סביבכם עכשיו.",
       "en": "Look at the light<br>around you right now."
@@ -123,21 +68,17 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 2",
-      "en": "Step 2"
-     },
      "big": {
       "he": "בחרו אובייקט אחד<br>שנמצא לידכם.",
       "en": "Choose one object<br>near you."
      },
      "sub": {
-      "he": "כוס, יד, כיסא, חלון.<br>משהו יומיומי.",
-      "en": "A cup, a hand, a chair, a window.<br>Something ordinary."
+      "he": "כוס, יד, כיסא, חלון. משהו יומיומי.",
+      "en": "A cup, a hand, a chair, a window. Something ordinary."
      },
-     "note": {
-      "he": "עכשיו התבוננו כיצד <em>האור</em> נופל עליו.\nאיפה הוא בהיר? איפה יש צל?",
-      "en": "Now observe how the <em>light</em> falls on it.\nWhere is it bright? Where is shadow?"
+     "body": {
+      "he": "עכשיו התבוננו כיצד <em>האור</em> נופל עליו. איפה הוא בהיר? איפה יש צל?",
+      "en": "Now observe how the <em>light</em> falls on it. Where is it bright? Where is shadow?"
      },
      "chips": {
       "he": [
@@ -158,13 +99,128 @@ window.LESSON_PAGE = {
     }
    ]
   },
-  "create": {
-   "steps": [
+  "sources": {
+   "blocks": [
     {
      "label": {
-      "he": "שלב 3",
-      "en": "Step 3"
+      "he": "קלוד מונה",
+      "en": "Claude Monet"
      },
+     "sub": {
+      "he": "ערימות החיטה עמדו בשדה ליד ביתו של מונה בז׳יברני. ב־1890–1891 הוא צייר אותן שוב ושוב, לפעמים על כמה בדים בו־זמנית.",
+      "en": "The stacks of wheat stood in a field near Monet's house at Giverny. In 1890–1891 he painted them again and again, sometimes on several canvases at once."
+     }
+    },
+    {
+     "works": [
+      {
+       "img": "monet-stacks-end-of-summer-aic",
+       "alt": "Claude Monet, Stacks of Wheat (End of Summer), 1890/91",
+       "noArtist": true,
+       "artist": {
+        "he": "קלוד מונה",
+        "en": "Claude Monet"
+       },
+       "workTitle": {
+        "he": "ערימות חיטה (סוף הקיץ), 1890/91",
+        "en": "Stacks of Wheat (End of Summer), 1890/91"
+       },
+       "note": {
+        "he": "",
+        "en": ""
+       },
+       "link": {
+        "href": "https://www.artic.edu/artworks/64818/stacks-of-wheat-end-of-summer",
+        "label": {
+         "he": "באתר Art Institute of Chicago ↗",
+         "en": "On the Art Institute of Chicago website ↗"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "works": [
+      {
+       "img": "monet-stacks-sunset-snow-aic",
+       "alt": "Claude Monet, Stacks of Wheat (Sunset, Snow Effect), 1890/91",
+       "noArtist": true,
+       "artist": {
+        "he": "קלוד מונה",
+        "en": "Claude Monet"
+       },
+       "workTitle": {
+        "he": "ערימות חיטה (שקיעה, שלג), 1890/91",
+        "en": "Stacks of Wheat (Sunset, Snow Effect), 1890/91"
+       },
+       "note": {
+        "he": "",
+        "en": ""
+       },
+       "link": {
+        "href": "https://www.artic.edu/artworks/81545/stacks-of-wheat-sunset-snow-effect",
+        "label": {
+         "he": "באתר Art Institute of Chicago ↗",
+         "en": "On the Art Institute of Chicago website ↗"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "works": [
+      {
+       "img": null,
+       "alt": "Jennifer Steinkamp, Mike Kelley, 14, 2007–08",
+       "artist": {
+        "he": "ג׳ניפר סטיינקמפ",
+        "en": "Jennifer Steinkamp"
+       },
+       "workTitle": {
+        "he": "Mike Kelley, 14, 2007–08",
+        "en": "Mike Kelley, 14, 2007–08"
+       },
+       "note": {
+        "he": "עץ יחיד בהקרנה דיגיטלית עובר דרך ארבע העונות: מענפים חשופים, לצמיחה ירוקה, לשלכת, וחזרה לענפים חשופים.",
+        "en": "A single tree, in a digital projection, passes through the four seasons: from bare branches, to green growth, to autumn leaves, and back to bare branches."
+       },
+       "link": {
+        "href": "https://emuseum.mfah.org/objects/113123/mike-kelley-14",
+        "label": {
+         "he": "פתחו את היצירה באתר MFAH ↗",
+         "en": "Open the work on the MFAH website ↗"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
+     "big": {
+      "he": "אותו נושא, אור אחר.",
+      "en": "Same subject, different light."
+     },
+     "ask": {
+      "he": "מונה מצייר רגעים שונים. סטיינקמפ מראה שינוי שנמשך. מה ההבדל?",
+      "en": "Monet paints different moments. Steinkamp shows a change that goes on. What is the difference?"
+     },
+     "lines": {
+      "he": [
+       "מה נשאר זהה בשני הציורים של מונה, ומה השתנה?",
+       "איזה צבע יש לצל בכל אחד מהם?",
+       "בעבודה של סטיינקמפ, מה משתנה עם הזמן ומה נשאר?"
+      ],
+      "en": [
+       "What stays the same in Monet's two paintings, and what changed?",
+       "What colour is the shadow in each of them?",
+       "In Steinkamp's work, what changes with time, and what stays?"
+      ]
+     }
+    },
+    {
      "big": {
       "he": "חזרו לאובייקט שלכם.<br>כיצד האור <em>משנה</em> אותו?",
       "en": "Return to your object.<br>How does light <em>change</em> it?"
@@ -176,47 +232,60 @@ window.LESSON_PAGE = {
        "איפה ה<em>בהירות</em> מושכת את עיניכם?"
       ],
       "en": [
-       "Does the <em>color</em> shift in the light?",
+       "Does the <em>colour</em> shift in the light?",
        "Where does <em>shadow</em> make it feel heavy?",
        "Where does <em>brightness</em> pull your eye?"
       ]
      }
-    },
+    }
+   ]
+  },
+  "create": {
+   "steps": [
     {
-     "label": {
-      "he": "שלב 4",
-      "en": "Step 4"
-     },
      "big": {
-      "he": "ציירו את האובייקט.<br>התמקדו ב<em>אור</em>, לא באובייקט.",
-      "en": "Draw the object.<br>Focus on <em>light</em>, not the object."
+      "he": "סקיצה ראשונה: ציירו את האובייקט.<br>התמקדו ב<em>אור</em>, לא באובייקט.",
+      "en": "First sketch: draw the object.<br>Focus on <em>light</em>, not the object."
      },
-     "note": {
-      "he": "אינכם מציירים את הכוס.\nאתם מציירים היכן <em>האור נוחת</em> עליה\nוהיכן הוא נעלם.",
-      "en": "You are not drawing the cup.\nYou are drawing where <em>light lands</em> on it\nand where it disappears."
+     "sub": {
+      "he": "כ־10 דקות.",
+      "en": "About 10 minutes."
+     },
+     "body": {
+      "he": "אינכם מציירים את הכוס. אתם מציירים היכן <em>האור נוחת</em> עליה והיכן הוא נעלם.",
+      "en": "You are not drawing the cup. You are drawing where <em>light lands</em> on it and where it disappears."
      }
     },
     {
-     "label": {
-      "he": "שלב 5",
-      "en": "Step 5"
-     },
      "big": {
-      "he": "עכשיו<br><em>שנו</em> את האור.",
-      "en": "Now<br><em>modify</em> the light."
+      "he": "עכשיו שנו את האור,<br>לא את הציור.",
+      "en": "Now change the light,<br>not the drawing."
      },
-     "chips": {
+     "sub": {
+      "he": "הזיזו את המנורה, או סובבו את האובייקט ביחס לחלון.",
+      "en": "Move the lamp, or turn the object in relation to the window."
+     },
+     "body": {
+      "he": "סקיצה שנייה: ציירו אותו שוב, על דף חדש. כ־10 דקות.",
+      "en": "Second sketch: draw it again, on a new sheet. About 10 minutes."
+     },
+     "sketch": "twolight"
+    },
+    {
+     "big": {
+      "he": "תוך כדי הסקיצה השנייה:",
+      "en": "While you draw the second sketch:"
+     },
+     "lines": {
       "he": [
-       "כהו את אזורי הצל",
-       "הבהירו את הנקודה הבהירה ביותר",
-       "הוסיפו צבע חמים לאור",
-       "הוסיפו צבע קר לצל"
+       "איפה הצל כהה יותר עכשיו?",
+       "איפה הנקודה הבהירה ביותר?",
+       "האור חם או קר? והצל?"
       ],
       "en": [
-       "Darken the shadow areas",
-       "Lighten the brightest point",
-       "Add a warm color to the light",
-       "Add a cool color to the shadow"
+       "Where is the shadow darker now?",
+       "Where is the brightest point?",
+       "Is the light warm or cool? And the shadow?"
       ]
      }
     }
@@ -225,36 +294,35 @@ window.LESSON_PAGE = {
   "end": {
    "blocks": [
     {
-     "label": {
-      "he": "שלב 6",
-      "en": "Step 6"
-     },
      "big": {
-      "he": "הסתכלו על שני הציורים<br>זה לצד זה.",
-      "en": "Look at your two drawings<br>side by side."
+      "he": "הניחו את שתי הסקיצות<br>זו לצד זו.",
+      "en": "Place the two sketches<br>side by side."
      },
      "sub": {
-      "he": "האובייקט לא השתנה.<br>ה<em>תחושה</em> השתנתה.",
-      "en": "The object did not change.<br>The <em>feeling</em> did."
+      "he": "האובייקט אותו אובייקט. מה השתנה בציור?",
+      "en": "The object is the same object. What changed in the drawing?"
      },
-     "note": {
-      "he": "זה מה שמונה הבין.\nאור אינו קישוט, הוא\nמה שנותן לדברים את ה<em>אופי</em> שלהם.",
-      "en": "This is what Monet understood.\nLight is not decoration, it is\nwhat gives things their <em>character</em>."
-     }
+     "body": {
+      "he": "סמנו שלושה הבדלים: צבע · צל · בהירות.",
+      "en": "Mark three differences: colour · shadow · brightness."
+     },
+     "prompts": [
+      {
+       "he": "באור הראשון…",
+       "en": "In the first light…"
+      },
+      {
+       "he": "באור השני…",
+       "en": "In the second light…"
+      }
+     ]
     },
     {
-     "label": {
-      "he": "סיום",
-      "en": "Done"
-     },
      "big": {
-      "he": "האור לא רק מאיר, <br>הוא <em>משנה</em> את מה שאתם רואים.",
-      "en": "Light does not just illuminate, <br>it <em>changes</em> what you see."
+      "he": "האור לא רק מאיר,<br>הוא <em>משנה</em> את מה שאתם רואים.",
+      "en": "Light does not just illuminate,<br>it <em>changes</em> what you see."
      },
-     "sub": {
-      "he": "עכשיו אתם מסתכלים<br>כמו שהאימפרסיוניסטים הסתכלו.",
-      "en": "You are now looking the way<br>the Impressionists looked."
-     }
+     "kind": "close"
     }
    ]
   }

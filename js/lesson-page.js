@@ -159,6 +159,19 @@
         return '<svg viewBox="0 0 64 28"><rect x=".5" y=".5" width="63" height="27"/><g class="u">' + x + '</g></svg>';
       }).join('') + '</div>';
     }
+    if (kind === 'twolight') {
+      /* the same round object, lit from one side and then from the other: the shadow changes sides */
+      var ball = function (k, from) {
+        var lx = from === 'r' ? 40 : 24;
+        return '<svg viewBox="0 0 64 48"><defs><radialGradient id="lp-tl-' + k + '" cx="' + (from === 'r' ? '.68' : '.32') + '" cy=".35" r=".75">' +
+          '<stop offset="0" class="s1"/><stop offset="1" class="s2"/></radialGradient></defs>' +
+          '<ellipse class="cast" cx="' + (from === 'r' ? 20 : 44) + '" cy="39" rx="16" ry="3.4"/>' +
+          '<circle cx="32" cy="26" r="13" fill="url(#lp-tl-' + k + ')"/>' +
+          '<path class="ray" d="M' + (from === 'r' ? '58 6L' + (lx + 8) + ' 14' : '6 6L' + (lx - 8) + ' 14') + '"/>' +
+          '<rect class="fr" x=".5" y=".5" width="63" height="47"/></svg>';
+      };
+      return '<div class="lp-sketch lp-sketch-light" aria-hidden="true">' + ball(0, 'r') + ball(1, 'l') + '</div>';
+    }
     if (kind === 'crop') {
       /* the same leaf: whole and small, whole and enlarged, cropped by the frame */
       var leaf = function (cx, cy, k) {

@@ -1,0 +1,172 @@
+{
+  "_note": "Lesson 2.3 in unit 2's new journey ('Same thing, different light'), file lesson-2-2 (the URL stays). Content approved by the author: two sketches of the same object in two lights. Existing screens are copied from lessons/lesson-2-2.html; Pissarro and the generalisations about the Impressionists were removed. Source for tools/build-lesson-data.js.",
+  "_sources": "Monet: Art Institute of Chicago, Stacks of Wheat (End of Summer), 1890/91, 60 x 100.5 cm (artic.edu/artworks/64818) and Stacks of Wheat (Sunset, Snow Effect), 1890/91, 65.3 x 100.4 cm (artic.edu/artworks/81545); CC0 Public Domain Designation; images downloaded from the museum pages by the author. The stacks stood outside his farmhouse at Giverny; in 1890-91 he worked on the series in the field, at several easels at once, and in the studio (AIC, publications.artic.edu/node/135598). Steinkamp: MFAH, Mike Kelley, 14, 2007-08, video projection, acquired 2011; a single tree passing through the seasons (emuseum.mfah.org/objects/113123). Protected: window only.",
+  "title": { "he": "אותו דבר, אור אחר", "en": "Same Thing, Different Light" },
+  "number": "2.3",
+  "time": { "he": "50 דקות", "en": "50 min" },
+  "description": {
+    "he": "נצייר את אותו אובייקט פעמיים, בשני מצבי אור, ונראה מה האור משנה: צבע, צל ובהירות.",
+    "en": "Draw the same object twice, in two different lights, and see what the light changes: colour, shadow and brightness."
+  },
+  "materials": {
+    "he": "חפץ יומיומי, חלון או מנורה, שני דפים, עיפרון וצבעים",
+    "en": "An everyday object, a window or a lamp, two sheets of paper, a pencil and colours"
+  },
+  "he": {
+    "s": [
+      { "big": "האם אותו דבר נראה אותו דבר,<br><em>כל הזמן</em>?", "sub": "התשובה היא לא." },
+      {
+        "big": "הסתכלו על האור<br>סביבכם עכשיו.",
+        "sub": "רק שימו לב. עדיין לא מציירים.",
+        "q0": "האם הוא <em>חזק</em> או <em>רך</em>?",
+        "q1": "האם הוא <em>חמים</em> או <em>קר</em>?"
+      },
+      {
+        "big": "בחרו אובייקט אחד<br>שנמצא לידכם.",
+        "sub": "כוס, יד, כיסא, חלון. משהו יומיומי.",
+        "body": "עכשיו התבוננו כיצד <em>האור</em> נופל עליו. איפה הוא בהיר? איפה יש צל?",
+        "chips": ["כוס", "יד", "כיסא", "חלון", "אחר"]
+      },
+      {
+        "label": "קלוד מונה",
+        "sub": "ערימות החיטה עמדו בשדה ליד ביתו של מונה בז׳יברני. ב־1890–1891 הוא צייר אותן שוב ושוב, לפעמים על כמה בדים בו־זמנית."
+      },
+      {
+        "art": {
+          "img": "monet-stacks-end-of-summer-aic", "noArtist": true,
+          "artist": "קלוד מונה", "title": "ערימות חיטה (סוף הקיץ), 1890/91",
+          "link": { "href": "https://www.artic.edu/artworks/64818/stacks-of-wheat-end-of-summer", "label": "באתר Art Institute of Chicago ↗" }
+        }
+      },
+      {
+        "art": {
+          "img": "monet-stacks-sunset-snow-aic", "noArtist": true,
+          "artist": "קלוד מונה", "title": "ערימות חיטה (שקיעה, שלג), 1890/91",
+          "link": { "href": "https://www.artic.edu/artworks/81545/stacks-of-wheat-sunset-snow-effect", "label": "באתר Art Institute of Chicago ↗" }
+        }
+      },
+      {
+        "art": {
+          "artist": "ג׳ניפר סטיינקמפ",
+          "title": "Mike Kelley, 14, 2007–08",
+          "note": "עץ יחיד בהקרנה דיגיטלית עובר דרך ארבע העונות: מענפים חשופים, לצמיחה ירוקה, לשלכת, וחזרה לענפים חשופים.",
+          "link": { "href": "https://emuseum.mfah.org/objects/113123/mike-kelley-14", "label": "פתחו את היצירה באתר MFAH ↗" }
+        }
+      },
+      {
+        "big": "אותו נושא, אור אחר.",
+        "q0": "מה נשאר זהה בשני הציורים של מונה, ומה השתנה?",
+        "q1": "איזה צבע יש לצל בכל אחד מהם?",
+        "q2": "בעבודה של סטיינקמפ, מה משתנה עם הזמן ומה נשאר?",
+        "ask": "מונה מצייר רגעים שונים. סטיינקמפ מראה שינוי שנמשך. מה ההבדל?"
+      },
+      {
+        "big": "חזרו לאובייקט שלכם.<br>כיצד האור <em>משנה</em> אותו?",
+        "q0": "האם ה<em>צבע</em> משתנה באור?",
+        "q1": "איפה ה<em>צל</em> גורם לו להרגיש כבד?",
+        "q2": "איפה ה<em>בהירות</em> מושכת את עיניכם?"
+      },
+      {
+        "big": "סקיצה ראשונה: ציירו את האובייקט.<br>התמקדו ב<em>אור</em>, לא באובייקט.",
+        "sub": "כ־10 דקות.",
+        "body": "אינכם מציירים את הכוס. אתם מציירים היכן <em>האור נוחת</em> עליה והיכן הוא נעלם."
+      },
+      {
+        "big": "עכשיו שנו את האור,<br>לא את הציור.",
+        "sub": "הזיזו את המנורה, או סובבו את האובייקט ביחס לחלון.",
+        "body": "סקיצה שנייה: ציירו אותו שוב, על דף חדש. כ־10 דקות.",
+        "sketch": "twolight"
+      },
+      {
+        "big": "תוך כדי הסקיצה השנייה:",
+        "q0": "איפה הצל כהה יותר עכשיו?",
+        "q1": "איפה הנקודה הבהירה ביותר?",
+        "q2": "האור חם או קר? והצל?"
+      },
+      {
+        "big": "הניחו את שתי הסקיצות<br>זו לצד זו.",
+        "sub": "האובייקט אותו אובייקט. מה השתנה בציור?",
+        "body": "סמנו שלושה הבדלים: צבע · צל · בהירות.",
+        "ph2": ["באור הראשון…", "באור השני…"]
+      },
+      { "kind": "close", "big": "האור לא רק מאיר,<br>הוא <em>משנה</em> את מה שאתם רואים." }
+    ]
+  },
+  "en": {
+    "s": [
+      { "big": "Does the same thing always<br>look the <em>same</em>?", "sub": "The answer is no." },
+      {
+        "big": "Look at the light<br>around you right now.",
+        "sub": "Just notice. No drawing yet.",
+        "q0": "Is it <em>strong</em> or <em>soft</em>?",
+        "q1": "Is it <em>warm</em> or <em>cool</em>?"
+      },
+      {
+        "big": "Choose one object<br>near you.",
+        "sub": "A cup, a hand, a chair, a window. Something ordinary.",
+        "body": "Now observe how the <em>light</em> falls on it. Where is it bright? Where is shadow?",
+        "chips": ["Cup", "Hand", "Chair", "Window", "Other"]
+      },
+      {
+        "label": "Claude Monet",
+        "sub": "The stacks of wheat stood in a field near Monet's house at Giverny. In 1890–1891 he painted them again and again, sometimes on several canvases at once."
+      },
+      {
+        "art": {
+          "artist": "Claude Monet", "title": "Stacks of Wheat (End of Summer), 1890/91",
+          "link": { "href": "https://www.artic.edu/artworks/64818/stacks-of-wheat-end-of-summer", "label": "On the Art Institute of Chicago website ↗" }
+        }
+      },
+      {
+        "art": {
+          "artist": "Claude Monet", "title": "Stacks of Wheat (Sunset, Snow Effect), 1890/91",
+          "link": { "href": "https://www.artic.edu/artworks/81545/stacks-of-wheat-sunset-snow-effect", "label": "On the Art Institute of Chicago website ↗" }
+        }
+      },
+      {
+        "art": {
+          "artist": "Jennifer Steinkamp",
+          "title": "Mike Kelley, 14, 2007–08",
+          "note": "A single tree, in a digital projection, passes through the four seasons: from bare branches, to green growth, to autumn leaves, and back to bare branches.",
+          "link": { "href": "https://emuseum.mfah.org/objects/113123/mike-kelley-14", "label": "Open the work on the MFAH website ↗" }
+        }
+      },
+      {
+        "big": "Same subject, different light.",
+        "q0": "What stays the same in Monet's two paintings, and what changed?",
+        "q1": "What colour is the shadow in each of them?",
+        "q2": "In Steinkamp's work, what changes with time, and what stays?",
+        "ask": "Monet paints different moments. Steinkamp shows a change that goes on. What is the difference?"
+      },
+      {
+        "big": "Return to your object.<br>How does light <em>change</em> it?",
+        "q0": "Does the <em>colour</em> shift in the light?",
+        "q1": "Where does <em>shadow</em> make it feel heavy?",
+        "q2": "Where does <em>brightness</em> pull your eye?"
+      },
+      {
+        "big": "First sketch: draw the object.<br>Focus on <em>light</em>, not the object.",
+        "sub": "About 10 minutes.",
+        "body": "You are not drawing the cup. You are drawing where <em>light lands</em> on it and where it disappears."
+      },
+      {
+        "big": "Now change the light,<br>not the drawing.",
+        "sub": "Move the lamp, or turn the object in relation to the window.",
+        "body": "Second sketch: draw it again, on a new sheet. About 10 minutes."
+      },
+      {
+        "big": "While you draw the second sketch:",
+        "q0": "Where is the shadow darker now?",
+        "q1": "Where is the brightest point?",
+        "q2": "Is the light warm or cool? And the shadow?"
+      },
+      {
+        "big": "Place the two sketches<br>side by side.",
+        "sub": "The object is the same object. What changed in the drawing?",
+        "body": "Mark three differences: colour · shadow · brightness.",
+        "ph2": ["In the first light…", "In the second light…"]
+      },
+      { "big": "Light does not just illuminate,<br>it <em>changes</em> what you see." }
+    ]
+  }
+}

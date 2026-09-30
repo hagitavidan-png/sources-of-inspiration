@@ -20,6 +20,10 @@ window.LESSON_TITLES = {
   "he": "מה חוזר בעבודות שלי?",
   "en": "What Keeps Returning in My Work?"
  },
+ "lessons/lesson-2-2.html": {
+  "he": "אותו דבר, אור אחר",
+  "en": "Same Thing, Different Light"
+ },
  "lessons/lesson-2-3.html": {
   "he": "מקרוב מאוד",
   "en": "Up Close"
