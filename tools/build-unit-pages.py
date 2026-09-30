@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Build the editorial unit pages (units/unit-00.html … unit-06.html).
 
-All unit and lesson content is read from course.html, so nothing is
+All unit and lesson content is read from a frozen copy of course.html
+(tools/source/course.html), so nothing is
 rewritten by hand. Only presentation lives here: layout, the Hebrew/English
 spelling of artist names, and which public-domain images are shown.
 
@@ -12,7 +13,8 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COURSE = open(os.path.join(ROOT, 'course.html'), encoding='utf8').read()
+# a frozen copy of course.html (the live course.html becomes a redirect when the new site goes live)
+COURSE = open(os.path.join(ROOT, 'tools', 'source', 'course.html'), encoding='utf8').read()
 
 # ── presentation data ─────────────────────────────────────────────
 UNITS = {

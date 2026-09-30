@@ -362,7 +362,8 @@ const titles = {};   // lessons whose title was changed in the new content
 for (const [id, m] of Object.entries(MAP)) {
   const file = 'lessons/' + id + '.html';
   const A = m.authored ? JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', id + '.json'), 'utf8')) : null;
-  const src = A ? '' : fs.readFileSync(path.join(ROOT, file), 'utf8');
+  /* lessons that are read from their slides use the archived copy (lessons-archive/): the slide paths become redirects */
+  const src = A ? '' : fs.readFileSync(path.join(ROOT, 'lessons-archive', id + '.html'), 'utf8');
   const T = A ? { he: A.he, en: A.en } : (m.dom ? null : readT(src));
   const intro = Object.assign({}, INTROS[id + '.html'], A && A.time ? { time: A.time } : {}, A && A.title ? { title: A.title } : {},
     A && A.description ? { description: A.description } : {}, A && A.materials ? { materials: A.materials } : {});
