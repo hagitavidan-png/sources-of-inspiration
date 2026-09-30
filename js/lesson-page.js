@@ -212,12 +212,11 @@
         path('M12 38Q48 2 84 38', 'M12 38Q37.2 12.8 62.4 22.9') + dots + '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg></div>';
     }
     if (kind === 'tilt') {
-      /* a drop on a slightly tilted sheet: the paint's path is a fine line that runs on past the edge */
-      return '<div class="lp-sketch lp-sketch-tilt" aria-hidden="true"><svg viewBox="0 0 96 72">' +
-        '<rect class="fr" x="16" y="6" width="64" height="48" transform="rotate(-7 48 30)"/>' +
-        '<path class="pd" d="M40 17C40.5 25 38.5 31 41 38S44 47 43.5 55"/>' +
-        '<path class="pt" d="M43.5 55C43.2 60 42.8 65 42.5 70"/>' +
-        '<circle class="dt" cx="40" cy="15" r="3.6"/></svg></div>';
+      /* paint running down a tilted sheet: thicker where it starts, thinning out, on past the edge */
+      return '<div class="lp-sketch lp-sketch-tilt" aria-hidden="true"><svg viewBox="0 -3 96 75">' +
+        '<rect class="fr" x="16" y="6" width="64" height="48" transform="rotate(-14 48 30)"/>' +
+        '<path class="pd" d="M38.5 14.1L38.6 15.9L38.7 17.6L38.8 19.3L38.8 20.9L38.8 22.5L38.7 24.1L38.7 25.6L38.7 27.1L38.7 28.5L38.8 30.0L38.9 31.4L39.0 32.8L39.2 34.2L39.5 35.5L39.9 36.9L40.4 38.2L40.9 39.5L41.3 40.6L41.7 41.7L42.0 42.7L42.3 43.6L42.6 44.5L42.8 45.5L43.0 46.4L43.2 47.4L43.3 48.5L43.4 49.6L43.4 50.8L43.4 52.1L43.4 53.6L43.4 55.2L43.3 57.0L43.7 57.0L43.8 55.2L43.8 53.6L43.9 52.1L43.9 50.8L43.9 49.6L43.9 48.4L43.8 47.3L43.7 46.3L43.6 45.3L43.4 44.4L43.2 43.4L43.0 42.4L42.7 41.3L42.4 40.2L42.0 39.1L41.6 37.8L41.3 36.5L41.0 35.2L40.8 33.9L40.7 32.6L40.7 31.3L40.7 30.0L40.7 28.6L40.8 27.2L40.9 25.7L41.0 24.2L41.1 22.6L41.3 21.0L41.4 19.4L41.4 17.6L41.5 15.8L41.5 13.9A1.48 1.48 0 0 0 38.5 14.1Z"/>' +
+        '<path class="pt" d="M43.5 57.5C43.2 62 42.9 66 42.6 70"/></svg></div>';
     }
     if (kind === 'crop') {
       /* the same leaf: whole and small, whole and enlarged, cropped by the frame */
