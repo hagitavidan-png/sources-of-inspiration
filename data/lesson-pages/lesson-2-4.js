@@ -2,7 +2,15 @@
 window.LESSON_PAGE = {
  "id": "lesson-2-4",
  "path": "lessons/lesson-2-4.html",
- "slides": "lessons/lesson-2-4.html",
+ "slides": null,
+ "variant": "v2",
+ "layout": {
+  "explore": "pattern",
+  "sources": "duo",
+  "look": "pattern",
+  "create": "pattern",
+  "end": "pattern"
+ },
  "number": "2.4",
  "unit": {
   "he": "טבע כמקור השראה",
@@ -10,37 +18,26 @@ window.LESSON_PAGE = {
  },
  "unitNum": "02",
  "title": {
-  "he": "אדם מול טבע, הנשגב",
-  "en": "Human vs. Nature, The Sublime"
+  "he": "איפה אני במרחב?",
+  "en": "Where Am I in the Space?"
  },
  "time": {
-  "he": "45 דקות",
-  "en": "45 min"
+  "he": "50 דקות",
+  "en": "50 min"
  },
  "intro": {
-  "he": "נחקור את היחס בין האדם לנוף ואת תחושת הפליאה מול הטבע. ניצור קומפוזיציה שמבטאת קנה מידה ואווירה.",
-  "en": "Explore the relationship between people and landscape, and the sense of wonder nature can evoke. Create a composition that expresses scale and atmosphere."
+  "he": "נתבונן במרחב פתוח אמיתי, נסמן את קו האופק, ונבדוק כמה גדול נראה אדם בתוך המרחב, במבט רחב ובמבט דרך צינור.",
+  "en": "Look at a real open space, mark the horizon, and see how big a person looks inside the space, in a wide view and in a view through a tube."
  },
  "materials": {
-  "he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
-  "en": "Paper or a visual journal, a pencil and colours of your choice"
+  "he": "דף גדול לרוחב, דף נוסף לגלגול לצינור, עיפרון וצבעים",
+  "en": "A large sheet in landscape format, another sheet to roll into a tube, a pencil and colours"
  },
- "hero": {
-  "img": "turner-snowstorm",
-  "pos": "50% 45%",
-  "cap": {
-   "he": "פרט מתוך: ויליאם טרנר, סופת שלגים, 1842",
-   "en": "Detail: J. M. W. Turner, Snow Storm, 1842"
-  }
- },
+ "hero": null,
  "sections": {
   "explore": {
    "blocks": [
     {
-     "label": {
-      "he": "שיעור 2.4",
-      "en": "Lesson 2.4"
-     },
      "big": {
       "he": "יש דברים שגדולים<br><em>מכם</em>.",
       "en": "Some things are<br><em>larger than you</em>."
@@ -51,17 +48,47 @@ window.LESSON_PAGE = {
      }
     },
     {
-     "label": {
-      "he": "שלב 1",
-      "en": "Step 1"
-     },
      "big": {
-      "he": "חשבו על מקום שגרם לכם<br>להרגיש <em>קטנים</em>.",
-      "en": "Think of a place that made<br>you feel <em>small</em>."
+      "he": "הסתכלו החוצה.",
+      "en": "Look outside."
      },
      "sub": {
-      "he": "ים, הר, שמיים.\nמרחב פתוח ועצום.",
-      "en": "Sea, mountain, sky.\nA vast open space."
+      "he": "מחלון, מהחצר, או מתוך צילום שצילמתם בעצמכם. מקום פתוח, עם אופק.",
+      "en": "Through a window, in the yard, or in a photo you took yourself. An open place, with a horizon."
+     }
+    },
+    {
+     "big": {
+      "he": "איפה האופק?",
+      "en": "Where is the horizon?"
+     },
+     "sub": {
+      "he": "הקו שבו השמיים פוגשים את הארץ או את הים.",
+      "en": "The line where the sky meets the land or the sea."
+     },
+     "lines": {
+      "he": [
+       "האם הוא גבוה או נמוך ביחס לעיניים שלכם?",
+       "כמה מהמבט הוא שמיים, וכמה ארץ?"
+      ],
+      "en": [
+       "Is it high or low compared to your eyes?",
+       "How much of the view is sky, and how much is land?"
+      ]
+     }
+    },
+    {
+     "big": {
+      "he": "מצאו משהו שאתם יודעים<br>כמה הוא גדול.",
+      "en": "Find something whose size<br>you know."
+     },
+     "sub": {
+      "he": "עץ, אדם, בית, מכונית.",
+      "en": "A tree, a person, a house, a car."
+     },
+     "ask": {
+      "he": "כמה קטן הוא נראה מכאן?",
+      "en": "How small does it look from here?"
      }
     }
    ]
@@ -69,154 +96,205 @@ window.LESSON_PAGE = {
   "sources": {
    "blocks": [
     {
-     "label": {
-      "he": "מקור השראה",
-      "en": "Reference"
-     },
      "works": [
       {
-       "img": "friedrich-wanderer",
-       "alt": "Lone figure standing on rocky peak above sea of fog, vast misty landscape, Romantic painting in the style of Caspar David Friedrich",
+       "img": "fan-kuan-travelers-npm",
+       "alt": "Fan Kuan, Travelers among Mountains and Streams, ca. 1000",
        "artist": {
-        "he": "קספר דוד פרידריך",
-        "en": "Caspar David Friedrich"
+        "he": "פאן קואן",
+        "en": "Fan Kuan"
        },
-       "title": {
-        "he": "מטייל מעל ים הערפל, 1818",
-        "en": "Wanderer above the Sea of Fog, 1818"
+       "workTitle": {
+        "he": "נוסעים בין הרים ונחלים, בערך שנת 1000",
+        "en": "Travelers among Mountains and Streams, ca. 1000"
        },
        "note": {
-        "he": "הדמות עומדת מול נוף עצום. אנחנו לא רואים את הפנים, רק את המפגש.",
-        "en": "The figure stands before a vast landscape. We don't see the face, only the encounter."
+        "he": "ציור בדיו ובמעט צבע על משי, בגובה של יותר משני מטרים. ההר ממלא את רוב הציור. הנוסעים והפרדות קטנים מאוד, בתחתית, ליד היער.",
+        "en": "Ink and a little colour on silk, more than two metres tall. The mountain fills most of the painting. The travellers and their mules are tiny, at the bottom, by the trees."
+       },
+       "link": {
+        "href": "https://theme.npm.edu.tw/opendata/index.aspx?lang=2",
+        "label": {
+         "he": "National Palace Museum ↗",
+         "en": "National Palace Museum ↗"
+        }
        }
       }
      ]
     },
     {
-     "label": {
-      "he": "מקור השראה",
-      "en": "Reference"
-     },
      "works": [
       {
-       "img": "turner-snowstorm",
-       "alt": "Swirling vortex of storm and fog over sea, boat barely visible in chaos of light, Romantic painting in the style of JMW Turner",
+       "img": null,
+       "alt": "Nancy Holt, Sun Tunnels, 1973–76",
        "artist": {
-        "he": "ויליאם טרנר",
-        "en": "J. M. W. Turner"
+        "he": "ננסי הולט",
+        "en": "Nancy Holt"
        },
-       "title": {
-        "he": "סערת שלג: אונית קיטור מול פתח נמל, 1842",
-        "en": "Snow Storm: Steam-Boat off a Harbour's Mouth, 1842"
+       "workTitle": {
+        "he": "Sun Tunnels, 1973–76",
+        "en": "Sun Tunnels, 1973–76"
        },
        "note": {
-        "he": "כאן כמעט אין דמות. האור, הרוח, התנועה, משתלטים.",
-        "en": "Here, the figure almost disappears. Light, wind, and motion take over."
+        "he": "ארבעה צינורות בטון במדבר ביוטה, כל אחד באורך של כ־5.5 מטרים ובקוטר של כ־2.7 מטרים. הם מסודרים כך שביום הארוך ביותר וביום הקצר ביותר בשנה, הם ממסגרים את השמש על האופק בזריחה ובשקיעה.",
+        "en": "Four concrete tunnels in the desert in Utah, each about 5.5 metres long and 2.7 metres across. They are placed so that on the longest and the shortest day of the year, they frame the sun on the horizon as it rises and sets."
+       },
+       "link": {
+        "href": "https://www.diaart.org/visit/visit-our-locations-sites/nancy-holt-sun-tunnels",
+        "label": {
+         "he": "פתחו את היצירה באתר Dia ↗",
+         "en": "Open the work on the Dia website ↗"
+        }
        }
       }
      ]
+    }
+   ]
+  },
+  "look": {
+   "blocks": [
+    {
+     "big": {
+      "he": "איפה האדם?",
+      "en": "Where is the person?"
+     },
+     "ask": {
+      "he": "מה משתנה כשאתם רואים את אותו מרחב מבחוץ, וכשאתם נמצאים בתוכו?",
+      "en": "What changes when you see the same space from outside, and when you are inside it?"
+     },
+     "body": {
+      "he": "מה קורה לגודל של הדברים?",
+      "en": "What happens to the size of things?"
+     },
+     "lines": {
+      "he": [
+       "מצאו את האנשים אצל פאן קואן. כמה זמן לקח לכם?",
+       "כמה גדולים הם לעומת ההר?",
+       "מה הצינור של הולט עושה לשמיים ולאופק?"
+      ],
+      "en": [
+       "Find the people in Fan Kuan's painting. How long did it take you?",
+       "How big are they compared to the mountain?",
+       "What do Holt's tunnels do to the sky and the horizon?"
+      ]
+     }
     }
    ]
   },
   "create": {
    "steps": [
     {
-     "label": {
-      "he": "שלב 2",
-      "en": "Step 2"
-     },
      "big": {
-      "he": "ציירו <em>מרחב גדול</em>.",
-      "en": "Draw a <em>large space</em>."
+      "he": "קחו דף לרוחב.<br>סמנו את קו האופק.",
+      "en": "Take a sheet in landscape format.<br>Mark the horizon."
      },
      "sub": {
-      "he": "הוסיפו בו משהו קטן, \nשיכול להיות אתם.",
-      "en": "Add something small inside it, \nit could be you."
+      "he": "בגובה שבו אתם רואים אותו.",
+      "en": "At the height where you see it."
+     },
+     "sketch": "horizon",
+     "sketchLabels": {
+      "he": [
+       "אופק נמוך · יותר שמיים",
+       "אופק גבוה · יותר אדמה"
+      ],
+      "en": [
+       "Low horizon · more sky",
+       "High horizon · more land"
+      ]
+     },
+     "sketchCap": {
+      "he": "אותו מקום, שני אופקים",
+      "en": "The same place, two horizons"
      }
     },
     {
-     "label": {
-      "he": "שלב 3",
-      "en": "Step 3"
-     },
      "big": {
-      "he": "איפה <em>הדבר הקטן</em><br>נמצא?",
-      "en": "Where is the<br><em>small element</em> placed?"
+      "he": "ציירו את המרחב<br>שאתם רואים.",
+      "en": "Draw the space<br>you see."
      },
-     "chips": {
-      "he": [
-       "רחוק מאוד",
-       "קרוב לקצה",
-       "בתוך המרחב"
-      ],
-      "en": [
-       "Very far",
-       "Near the edge",
-       "Inside the space"
-      ]
+     "sub": {
+      "he": "קווים גדולים ופשוטים: שמיים, ארץ, מה שבדרך.",
+      "en": "Big, simple lines: sky, land, what is in between."
      }
     },
     {
-     "label": {
-      "he": "עצרו",
-      "en": "Pause"
-     },
      "big": {
-      "he": "מה <em>שולט</em><br>בציור?",
-      "en": "What <em>dominates</em><br>the drawing?"
+      "he": "מצאו אדם במרחב,<br>או הוסיפו דמות פשוטה.",
+      "en": "Find a person in the space,<br>or add a simple figure."
      },
-     "chips": {
-      "he": [
-       "המרחב שולט",
-       "הדמות מורגשת",
-       "איזון ביניהם"
-      ],
-      "en": [
-       "The space dominates",
-       "The figure is felt",
-       "A balance between them"
-      ]
+     "sub": {
+      "he": "ציירו אותה בגודל שבו היא באמת נראית לכם מכאן.",
+      "en": "Draw it at the size it really looks to you from here."
+     },
+     "body": {
+      "he": "נקודה, קו או דמות קטנה מספיקים.",
+      "en": "A dot, a line or a small figure is enough."
      }
+    },
+    {
+     "big": {
+      "he": "עכשיו מבט<br>דרך צינור.",
+      "en": "Now a view<br>through a tube."
+     },
+     "sub": {
+      "he": "גלגלו דף לצינור, והסתכלו דרכו על אותו מקום.",
+      "en": "Roll a sheet of paper into a tube, and look at the same place through it."
+     },
+     "body": {
+      "he": "ציירו בעיגול קטן רק את מה שרואים דרכו.",
+      "en": "In a small circle, draw only what you see through it."
+     },
+     "sketch": "tube"
     }
    ]
   },
   "end": {
    "blocks": [
     {
-     "label": {
-      "he": "תובנה",
-      "en": "Insight"
-     },
      "big": {
-      "he": "<em>המיקום</em><br>משנה את התחושה.",
-      "en": "<em>Placement</em><br>changes the feeling."
+      "he": "מה גדול יותר<br>בציור שלכם?",
+      "en": "What is bigger<br>in your drawing?"
      },
-     "lines": {
+     "chips": {
       "he": [
-       "דמות קטנה במרחב עצום, ",
-       "יוצרת תחושה של ה<em>נשגב</em>.",
-       "המיקום שלה משנה הכל."
+       "המרחב שולט",
+       "האדם מורגש",
+       "איזון ביניהם"
       ],
       "en": [
-       "A small figure in a vast space, ",
-       "creates a feeling of the <em>sublime</em>.",
-       "Where you place it changes everything."
+       "The space dominates",
+       "The person is felt",
+       "A balance between them"
       ]
      }
     },
     {
-     "label": {
-      "he": "סיום",
-      "en": "Done"
-     },
      "big": {
-      "he": "לפעמים להיות <em>קטן</em><br>זה מה שמאפשר<br>לראות גדול.",
-      "en": "Sometimes being <em>small</em><br>is what allows you<br>to see something vast."
+      "he": "הניחו את המבט הרחב<br>ליד העיגול.",
+      "en": "Place the wide view<br>next to the circle."
      },
      "sub": {
-      "he": "זה הנשגב.",
-      "en": "That's the sublime."
-     }
+      "he": "מה השתנה כשהסתכלתם דרך הצינור?",
+      "en": "What changed when you looked through the tube?"
+     },
+     "prompts": [
+      {
+       "he": "במבט הרחב…",
+       "en": "In the wide view…"
+      },
+      {
+       "he": "דרך הצינור…",
+       "en": "Through the tube…"
+      }
+     ]
+    },
+    {
+     "big": {
+      "he": "לפעמים להיות <em>קטן</em><br>זה מה שמאפשר לראות גדול.",
+      "en": "Sometimes being <em>small</em><br>is what lets you see something vast."
+     },
+     "kind": "close"
     }
    ]
   }

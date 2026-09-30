@@ -21,7 +21,7 @@ const INTROS = window.ART_LESSON_INTROS;
 const NAV = window.ART_NAVIGATION;
 
 /* public-domain images that have a web copy in images/editorial/ */
-const PD = new Set(['munch-scream', 'morris-strawberry-thief-aic', 'blossfeldt-adiantum-pedatum-1928', 'monet-stacks-end-of-summer-aic', 'monet-stacks-sunset-snow-aic', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
+const PD = new Set(['munch-scream', 'morris-strawberry-thief-aic', 'blossfeldt-adiantum-pedatum-1928', 'monet-stacks-end-of-summer-aic', 'monet-stacks-sunset-snow-aic', 'fan-kuan-travelers-npm', 'kandinsky-composition8', 'kandinsky-yellow-red-blue', 'hokusai-great-wave-1831',
   'turner-snowstorm', 'monet-water-lilies', 'monet-haystacks-1891', 'pissarro-boulevard-montmartre-1897',
   'friedrich-wanderer', 'morris-strawberry-thief-1883']);
 
@@ -91,8 +91,9 @@ const MAP = {
   /* 2.2 'Up close': a window, cropping, the detail becomes a world */
   'lesson-2-3': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', look: 'pattern', create: 'pattern', end: 'pattern' },
     explore: [0, 1, 2], sources: [3, 4], look: [5, 6], create: [7, 8, 9, 10], end: [11, 12, 13] },
-  'lesson-2-4': { hero: ['turner-snowstorm', '50% 45%'],
-    explore: [0, 1], sources: [2, 3], create: [4, 5, 6], end: [7, 8] }
+  /* 2.4 'Where am I in the space?': horizon, a person as the measure of scale, a view through a tube */
+  'lesson-2-4': { authored: true, variant: 'v2', layout: { explore: 'pattern', sources: 'duo', look: 'pattern', create: 'pattern', end: 'pattern' },
+    explore: [0, 1, 2, 3], sources: [4, 5], look: [6], create: [7, 8, 9, 10], end: [11, 12, 13] }
 };
 /* in "create", these screens are the step-by-step "getting started" part */
 const STEPS_SECTION = 'create';
@@ -287,7 +288,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=22">
+<link rel="stylesheet" href="../css/lesson-page.css?v=23">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -323,7 +324,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=20"></script>
+<script src="../js/lesson-page.js?v=21"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>

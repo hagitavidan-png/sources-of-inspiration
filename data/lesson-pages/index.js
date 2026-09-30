@@ -27,6 +27,10 @@ window.LESSON_TITLES = {
  "lessons/lesson-2-3.html": {
   "he": "מקרוב מאוד",
   "en": "Up Close"
+ },
+ "lessons/lesson-2-4.html": {
+  "he": "איפה אני במרחב?",
+  "en": "Where Am I in the Space?"
  }
 };
 /* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */

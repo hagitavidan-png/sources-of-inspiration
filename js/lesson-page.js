@@ -159,6 +159,25 @@
         return '<svg viewBox="0 0 64 28"><rect x=".5" y=".5" width="63" height="27"/><g class="u">' + x + '</g></svg>';
       }).join('') + '</div>';
     }
+    if (kind === 'horizon' || kind === 'tube') {
+      /* a wide view: the horizon line decides how much is sky and how much is land; a tiny person gives the scale */
+      var wide = function (hy, extra) {
+        return '<svg viewBox="0 0 96 48"><rect class="sky" x="0" y="0" width="96" height="' + hy + '"/>' +
+          '<path class="hz" d="M0 ' + hy + 'H96"/><path class="pp" d="M62 ' + (hy + 6) + 'v-3.4"/><circle class="pp" cx="62" cy="' + (hy + 1.8) + '" r=".9"/>' +
+          (extra || '') + '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg>';
+      };
+      if (kind === 'horizon') {
+        var lab = items(b_labels);
+        return '<figure class="lp-sketch lp-sketch-hz" aria-hidden="true"><div>' + [wide(34), wide(14)].map(function (x, k) {
+          return '<span>' + x + (lab[k] ? t(lab[k], 'b') : '') + '</span>';
+        }).join('') + '</div>' + t(b_cap, 'figcaption') + '</figure>';
+      }
+      /* the same view, and the small circle seen through a rolled paper tube */
+      return '<div class="lp-sketch lp-sketch-hz lp-sketch-tube" aria-hidden="true"><div><span>' + wide(28, '<circle class="tb" cx="62" cy="28" r="9"/>') + '</span>' +
+        '<span><svg viewBox="0 0 48 48"><clipPath id="lp-tube"><circle cx="24" cy="24" r="22"/></clipPath><g clip-path="url(#lp-tube)">' +
+        '<rect class="sky" x="0" y="0" width="48" height="24"/><path class="hz" d="M0 24H48"/><path class="pp" d="M24 36v-9"/><circle class="pp" cx="24" cy="25" r="2.2"/></g>' +
+        '<circle class="fr" cx="24" cy="24" r="22"/></svg></span></div></div>';
+    }
     if (kind === 'twolight') {
       /* the same round object, lit from one side and then from the other: the shadow changes sides */
       var ball = function (k, from) {

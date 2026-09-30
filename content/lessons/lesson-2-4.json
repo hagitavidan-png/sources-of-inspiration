@@ -1,0 +1,139 @@
+{
+  "_note": "Lesson 2.4 'Where am I in the space?' (file lesson-2-4), content approved by the author: a real open view, the horizon, a person as the measure of scale, a wide view and a view through a tube. Existing screens are copied from lessons/lesson-2-4.html; Friedrich, Turner, 'the sublime' and the repetition of 1.3 were removed. Source for tools/build-lesson-data.js.",
+  "_sources": "Fan Kuan: National Palace Museum, Taipei, Travelers among Mountains and Streams, ca. 1000, Northern Song, hanging scroll, ink and slight colour on silk, 206.3 x 103.3 cm; image from the NPM Open Data platform (CC BY 4.0, credit: National Palace Museum), downloaded by the author (images/editorial/fan-kuan-travelers-npm.jpg). Travellers and pack mules at the foot of a towering cliff: Britannica; Smarthistory. Holt: Dia Art Foundation, Sun Tunnels, 1973-76, Great Basin Desert, Utah; four concrete tunnels, 18 ft long and 9 ft in diameter, arranged in an open cross and aligned to frame the sun on the horizon at the summer and winter solstices (diaart.org). Protected: window only. Background only, not shown in the lesson: Holt, Artforum 1977, 'I wanted to bring the vast space of the desert back to human scale' (quoted by the Holt/Smithson Foundation and the Dia/UMFA Sun Tunnels guide).",
+  "title": { "he": "איפה אני במרחב?", "en": "Where Am I in the Space?" },
+  "time": { "he": "50 דקות", "en": "50 min" },
+  "description": {
+    "he": "נתבונן במרחב פתוח אמיתי, נסמן את קו האופק, ונבדוק כמה גדול נראה אדם בתוך המרחב, במבט רחב ובמבט דרך צינור.",
+    "en": "Look at a real open space, mark the horizon, and see how big a person looks inside the space, in a wide view and in a view through a tube."
+  },
+  "materials": {
+    "he": "דף גדול לרוחב, דף נוסף לגלגול לצינור, עיפרון וצבעים",
+    "en": "A large sheet in landscape format, another sheet to roll into a tube, a pencil and colours"
+  },
+  "he": {
+    "s": [
+      { "big": "יש דברים שגדולים<br><em>מכם</em>.", "sub": "ים. הר. שמיים." },
+      { "big": "הסתכלו החוצה.", "sub": "מחלון, מהחצר, או מתוך צילום שצילמתם בעצמכם. מקום פתוח, עם אופק." },
+      {
+        "big": "איפה האופק?",
+        "sub": "הקו שבו השמיים פוגשים את הארץ או את הים.",
+        "q0": "האם הוא גבוה או נמוך ביחס לעיניים שלכם?",
+        "q1": "כמה מהמבט הוא שמיים, וכמה ארץ?"
+      },
+      { "big": "מצאו משהו שאתם יודעים<br>כמה הוא גדול.", "sub": "עץ, אדם, בית, מכונית.", "ask": "כמה קטן הוא נראה מכאן?" },
+      {
+        "art": {
+          "img": "fan-kuan-travelers-npm",
+          "artist": "פאן קואן",
+          "title": "נוסעים בין הרים ונחלים, בערך שנת 1000",
+          "note": "ציור בדיו ובמעט צבע על משי, בגובה של יותר משני מטרים. ההר ממלא את רוב הציור. הנוסעים והפרדות קטנים מאוד, בתחתית, ליד היער.",
+          "link": { "href": "https://theme.npm.edu.tw/opendata/index.aspx?lang=2", "label": "National Palace Museum ↗" }
+        }
+      },
+      {
+        "art": {
+          "artist": "ננסי הולט",
+          "title": "Sun Tunnels, 1973–76",
+          "note": "ארבעה צינורות בטון במדבר ביוטה, כל אחד באורך של כ־5.5 מטרים ובקוטר של כ־2.7 מטרים. הם מסודרים כך שביום הארוך ביותר וביום הקצר ביותר בשנה, הם ממסגרים את השמש על האופק בזריחה ובשקיעה.",
+          "link": { "href": "https://www.diaart.org/visit/visit-our-locations-sites/nancy-holt-sun-tunnels", "label": "פתחו את היצירה באתר Dia ↗" }
+        }
+      },
+      {
+        "big": "איפה האדם?",
+        "q0": "מצאו את האנשים אצל פאן קואן. כמה זמן לקח לכם?",
+        "q1": "כמה גדולים הם לעומת ההר?",
+        "q2": "מה הצינור של הולט עושה לשמיים ולאופק?",
+        "ask": "מה משתנה כשאתם רואים את אותו מרחב מבחוץ, וכשאתם נמצאים בתוכו?",
+        "body": "מה קורה לגודל של הדברים?"
+      },
+      {
+        "big": "קחו דף לרוחב.<br>סמנו את קו האופק.",
+        "sub": "בגובה שבו אתם רואים אותו.",
+        "sketch": "horizon",
+        "sketchLabels": ["אופק נמוך · יותר שמיים", "אופק גבוה · יותר אדמה"],
+        "sketchCap": "אותו מקום, שני אופקים"
+      },
+      { "big": "ציירו את המרחב<br>שאתם רואים.", "sub": "קווים גדולים ופשוטים: שמיים, ארץ, מה שבדרך." },
+      {
+        "big": "מצאו אדם במרחב,<br>או הוסיפו דמות פשוטה.",
+        "sub": "ציירו אותה בגודל שבו היא באמת נראית לכם מכאן.",
+        "body": "נקודה, קו או דמות קטנה מספיקים."
+      },
+      {
+        "big": "עכשיו מבט<br>דרך צינור.",
+        "sub": "גלגלו דף לצינור, והסתכלו דרכו על אותו מקום.",
+        "body": "ציירו בעיגול קטן רק את מה שרואים דרכו.",
+        "sketch": "tube"
+      },
+      { "big": "מה גדול יותר<br>בציור שלכם?", "opts": ["המרחב שולט", "האדם מורגש", "איזון ביניהם"] },
+      {
+        "big": "הניחו את המבט הרחב<br>ליד העיגול.",
+        "sub": "מה השתנה כשהסתכלתם דרך הצינור?",
+        "ph2": ["במבט הרחב…", "דרך הצינור…"]
+      },
+      { "kind": "close", "big": "לפעמים להיות <em>קטן</em><br>זה מה שמאפשר לראות גדול." }
+    ]
+  },
+  "en": {
+    "s": [
+      { "big": "Some things are<br><em>larger than you</em>.", "sub": "Sea. Mountain. Sky." },
+      { "big": "Look outside.", "sub": "Through a window, in the yard, or in a photo you took yourself. An open place, with a horizon." },
+      {
+        "big": "Where is the horizon?",
+        "sub": "The line where the sky meets the land or the sea.",
+        "q0": "Is it high or low compared to your eyes?",
+        "q1": "How much of the view is sky, and how much is land?"
+      },
+      { "big": "Find something whose size<br>you know.", "sub": "A tree, a person, a house, a car.", "ask": "How small does it look from here?" },
+      {
+        "art": {
+          "artist": "Fan Kuan",
+          "title": "Travelers among Mountains and Streams, ca. 1000",
+          "note": "Ink and a little colour on silk, more than two metres tall. The mountain fills most of the painting. The travellers and their mules are tiny, at the bottom, by the trees.",
+          "link": { "href": "https://theme.npm.edu.tw/opendata/index.aspx?lang=2", "label": "National Palace Museum ↗" }
+        }
+      },
+      {
+        "art": {
+          "artist": "Nancy Holt",
+          "title": "Sun Tunnels, 1973–76",
+          "note": "Four concrete tunnels in the desert in Utah, each about 5.5 metres long and 2.7 metres across. They are placed so that on the longest and the shortest day of the year, they frame the sun on the horizon as it rises and sets.",
+          "link": { "href": "https://www.diaart.org/visit/visit-our-locations-sites/nancy-holt-sun-tunnels", "label": "Open the work on the Dia website ↗" }
+        }
+      },
+      {
+        "big": "Where is the person?",
+        "q0": "Find the people in Fan Kuan's painting. How long did it take you?",
+        "q1": "How big are they compared to the mountain?",
+        "q2": "What do Holt's tunnels do to the sky and the horizon?",
+        "ask": "What changes when you see the same space from outside, and when you are inside it?",
+        "body": "What happens to the size of things?"
+      },
+      {
+        "big": "Take a sheet in landscape format.<br>Mark the horizon.",
+        "sub": "At the height where you see it.",
+        "sketchLabels": ["Low horizon · more sky", "High horizon · more land"],
+        "sketchCap": "The same place, two horizons"
+      },
+      { "big": "Draw the space<br>you see.", "sub": "Big, simple lines: sky, land, what is in between." },
+      {
+        "big": "Find a person in the space,<br>or add a simple figure.",
+        "sub": "Draw it at the size it really looks to you from here.",
+        "body": "A dot, a line or a small figure is enough."
+      },
+      {
+        "big": "Now a view<br>through a tube.",
+        "sub": "Roll a sheet of paper into a tube, and look at the same place through it.",
+        "body": "In a small circle, draw only what you see through it."
+      },
+      { "big": "What is bigger<br>in your drawing?", "opts": ["The space dominates", "The person is felt", "A balance between them"] },
+      {
+        "big": "Place the wide view<br>next to the circle.",
+        "sub": "What changed when you looked through the tube?",
+        "ph2": ["In the wide view…", "Through the tube…"]
+      },
+      { "big": "Sometimes being <em>small</em><br>is what lets you see something vast." }
+    ]
+  }
+}
