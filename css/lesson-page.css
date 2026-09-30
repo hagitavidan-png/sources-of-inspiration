@@ -279,6 +279,12 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-ed-work.lp-window .lp-ed-title{font-size:1.05rem;color:var(--ink-2)}
 .lp-v2 .lp-window .lp-ext{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:12px 20px;border:1px solid var(--ink);border-radius:2px;font-weight:600;transition:background .25s,color .25s}
 .lp-v2 .lp-window .lp-ext:hover{background:var(--ink);color:var(--paper)}
+/* 2.5: the work is the main visual moment of the lesson, so its window is a clear panel with a large button */
+.lp-v2 .lp-ed-work.lp-window-stage{max-width:680px;padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);background:var(--paper-2);border:1.5px solid var(--ink)}
+.lp-v2 .lp-window-stage .lp-ed-artist{font-size:clamp(2.4rem,4.6vw,3.4rem)}
+.lp-v2 .lp-window-stage .lp-ed-title{font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--ink);margin-top:4px}
+.lp-v2 .lp-window-stage .lp-ext{align-self:stretch;justify-content:center;text-align:center;margin-top:32px;padding:18px 24px;font-size:clamp(1rem,1.4vw,1.1rem);background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lp-v2 .lp-window-stage .lp-ext:hover{background:none;color:var(--ink)}
 
 /* 1.4 polish: arranging options as words on the page, not app buttons */
 .lp-v2 .lp-layout-pieces .lp-chips{gap:10px 26px}
@@ -494,11 +500,13 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 /* ═══ 2.4 where am I in the space: a wide frame, the horizon, and a round view through a tube ═══ */
 /* 2.5: moments of one movement, side by side and then overlapping in one frame; 2.6: a drop on a tilted sheet */
 .lp-v2 .lp-sketch-mv{display:flex;flex-wrap:wrap;gap:clamp(12px,2.4vw,24px);margin:22px 0 6px}
-.lp-v2 .lp-sketch-mv svg{width:112px;height:auto;overflow:visible}
+.lp-v2 .lp-sketch-mv svg{width:112px;height:auto}
 .lp-v2 .lp-sketch-ov svg{width:min(236px,100%)}
 .lp-v2 .lp-sketch-mv .fr{fill:none;stroke:var(--ink);stroke-width:1}
 [dir=rtl] .lp-v2 .lp-sketch-mv svg{transform:scaleX(-1)}   /* the movement goes the way the line reads */
-.lp-v2 .lp-sketch-mv .wk{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round}
+.lp-v2 .lp-sketch-mv .pt{fill:none;stroke:var(--ink);stroke-width:.7;stroke-dasharray:1.5 2.5;opacity:.45}
+.lp-v2 .lp-sketch-mv .pd{fill:none;stroke:var(--ink);stroke-width:.9;opacity:.7}
+.lp-v2 .lp-sketch-mv .dt{fill:var(--ink);stroke:none}
 .lp-v2 .lp-sketch-tilt svg{width:150px;height:auto;overflow:visible}
 .lp-v2 .lp-sketch-tilt .fr{fill:var(--paper);stroke:var(--ink);stroke-width:1}
 .lp-v2 .lp-sketch-tilt .dr{fill:var(--ink);stroke:none;opacity:.7}

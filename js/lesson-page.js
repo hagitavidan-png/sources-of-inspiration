@@ -78,7 +78,7 @@
   function edWork(w, k) {
     /* a work without a usable image is shown by its title only, set as part of the page */
     /* a work shown by name with a link to its museum: an intentional "window", not a missing image */
-    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + (w.link && !w.img ? ' lp-window' : '') + ' rv">' +
+    return '<figure class="lp-ed-work lp-ed-r' + (k % 3) + (w.img ? '' : ' no-img') + (w.noArtist ? ' in-artist' : '') + (w.link && !w.img ? ' lp-window' : '') + (w.stage ? ' lp-window-stage' : '') + ' rv">' +
       (w.img ? '<div class="lp-ed-img"><img src="' + BASE + 'images/editorial/' + w.img + '.jpg" alt="' + esc(w.alt || '') + '" loading="lazy"></div>' : '') +
       '<figcaption>' + (w.noArtist ? '' : t(w.artist, 'b', 'lp-ed-artist')) + t(w.workTitle, 'span', 'lp-ed-title') +
       t(w.title, 'p', 'lp-ed-text') + t(w.note, 'p', 'lp-ed-text') +
@@ -192,21 +192,24 @@
       return '<div class="lp-sketch lp-sketch-light" aria-hidden="true">' + ball(0, 'r') + ball(1, 'l') + '</div>';
     }
     if (kind === 'moments' || kind === 'overlap') {
-      /* a simple walking figure; d is how far the legs and arms swing */
-      var fig = function (x, d, op) {
-        return '<g class="wk"' + (op ? ' opacity="' + op + '"' : '') + '><circle cx="' + x + '" cy="11" r="3.2"/>' +
-          '<path d="M' + x + ' 14.5V29M' + x + ' 29L' + (x + d) + ' 42M' + x + ' 29L' + (x - d) + ' 42M' + x + ' 18L' + (x - d * 0.7) + ' 27M' + x + ' 18L' + (x + d * 0.7) + ' 27"/></g>';
-      };
+      /* one dot moving along a path: the path so far is a fine line, the rest is only suggested */
+      var path = function (d, done) { return '<path class="pt" d="' + d + '"/>' + (done ? '<path class="pd" d="' + done + '"/>' : ''); };
       if (kind === 'moments') {
-        /* the same movement drawn three times, a moment apart */
-        return '<div class="lp-sketch lp-sketch-mv" aria-hidden="true">' + [[20, 7], [32, 2], [44, -7]].map(function (f) {
-          return '<svg viewBox="0 0 64 48">' + fig(f[0], f[1]) + '<rect class="fr" x=".5" y=".5" width="63" height="47"/></svg>';
+        /* three moments of the same movement, a frame for each */
+        return '<div class="lp-sketch lp-sketch-mv" aria-hidden="true">' + [
+          ['M10 36Q14.4 30 18.8 26.4', 18.8, 26.4], ['M10 36Q21 21 32 21', 32, 21], ['M10 36Q27.6 12 45.2 26.4', 45.2, 26.4]
+        ].map(function (f) {
+          return '<svg viewBox="0 0 64 48">' + path('M10 36Q32 6 54 36', f[0]) + '<circle class="dt" cx="' + f[1] + '" cy="' + f[2] + '" r="3.6"/>' +
+            '<rect class="fr" x=".5" y=".5" width="63" height="47"/></svg>';
         }).join('') + '</div>';
       }
       /* the moments overlap in one frame */
+      var dots = '';
+      [[33.6, 22.9, .22], [40.8, 20.7, .38], [48, 20, .55], [55.2, 20.7, .75], [62.4, 22.9, 1]].forEach(function (d) {
+        dots += '<circle class="dt" cx="' + d[0] + '" cy="' + d[1] + '" r="5.4" opacity="' + d[2] + '"/>';
+      });
       return '<div class="lp-sketch lp-sketch-mv lp-sketch-ov" aria-hidden="true"><svg viewBox="0 0 96 48">' +
-        fig(26, 7, '.25') + fig(37, 2, '.4') + fig(48, -7, '.6') + fig(59, 2, '.8') + fig(70, 7, '1') +
-        '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg></div>';
+        path('M12 38Q48 2 84 38', 'M12 38Q37.2 12.8 62.4 22.9') + dots + '<rect class="fr" x=".5" y=".5" width="95" height="47"/></svg></div>';
     }
     if (kind === 'tilt') {
       /* a drop on a tilted sheet: the paint runs down and over the edge */

@@ -34,7 +34,8 @@
           "artist": "מרסל דושאן",
           "title": "עירום יורד במדרגות (מס׳ 2), 1912",
           "note": "ציור שמן על בד, בגובה של כמעט מטר וחצי. השם אומר מה מתרחש: דמות שיורדת במדרגות. דושאן יצר דימוי שבו אותה דמות מופיעה דרך רצף של תנוחות, כך שנוצרת תחושה של תנועה.",
-          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "פתחו את היצירה באתר Philadelphia Museum of Art ↗" }
+          "stage": true,
+          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "צפו ביצירה בגודל מלא באתר Philadelphia Museum of Art ↗" }
         }
       },
       {
@@ -74,7 +75,7 @@
           "artist": "Marcel Duchamp",
           "title": "Nude Descending a Staircase (No. 2), 1912",
           "note": "Oil on canvas, almost a metre and a half tall. The title tells you what happens: a figure walking down stairs. Duchamp made an image in which the same figure appears through a sequence of positions, creating a sense of movement.",
-          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "Open the work on the Philadelphia Museum of Art website ↗" }
+          "link": { "href": "https://philamuseum.org/collection/object/51449", "label": "View the work in full size on the Philadelphia Museum of Art website ↗" }
         }
       },
       {

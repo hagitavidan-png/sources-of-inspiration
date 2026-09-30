@@ -108,6 +108,7 @@ window.LESSON_PAGE = {
       {
        "img": null,
        "alt": "Marcel Duchamp, Nude Descending a Staircase (No. 2), 1912",
+       "stage": true,
        "artist": {
         "he": "מרסל דושאן",
         "en": "Marcel Duchamp"
@@ -123,8 +124,8 @@ window.LESSON_PAGE = {
        "link": {
         "href": "https://philamuseum.org/collection/object/51449",
         "label": {
-         "he": "פתחו את היצירה באתר Philadelphia Museum of Art ↗",
-         "en": "Open the work on the Philadelphia Museum of Art website ↗"
+         "he": "צפו ביצירה בגודל מלא באתר Philadelphia Museum of Art ↗",
+         "en": "View the work in full size on the Philadelphia Museum of Art website ↗"
         }
        }
       }

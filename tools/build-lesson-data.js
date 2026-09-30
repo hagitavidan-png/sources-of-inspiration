@@ -243,7 +243,7 @@ function blockFromT(T, n, html) {
   // authored lessons: { art: { img, artist, title, note } }
   if (he.art) {
     const A = he.art, E = en.art || {};
-    works.push({ img: PD.has(A.img) ? A.img : null, alt: (E.artist || '') + ', ' + (E.title || ''), ...(A.noArtist ? { noArtist: true } : {}),
+    works.push({ img: PD.has(A.img) ? A.img : null, alt: (E.artist || '') + ', ' + (E.title || ''), ...(A.noArtist ? { noArtist: true } : {}), ...(A.stage ? { stage: true } : {}),
                  artist: bil(A.artist, E.artist), workTitle: bil(A.title, E.title), note: bil(A.note, E.note),
                  ...(A.link ? { link: { href: A.link.href, label: bil(A.link.label, (E.link || {}).label) } } : {}) });
   }
@@ -294,7 +294,7 @@ function pageHtml(id, title) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=24">
+<link rel="stylesheet" href="../css/lesson-page.css?v=25">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -330,7 +330,7 @@ function pageHtml(id, title) {
 <script src="../js/navigation-data.js"></script>
 <script src="../data/lesson-pages/index.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=22"></script>
+<script src="../js/lesson-page.js?v=23"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
