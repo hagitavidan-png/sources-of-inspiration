@@ -30,9 +30,9 @@ UNITS = {
     'unit03': dict(img='kandinsky-composition8', pos='40% 50%',
                    keys=('צליל · קצב · תנועה', 'Sound · Rhythm · Movement'),
                    cap=('וסילי קנדינסקי, קומפוזיציה 8, 1923', 'Wassily Kandinsky, Composition VIII, 1923')),
-    'unit04': dict(img='monet-haystacks-1891', pos='50% 60%',
-                   keys=('זיכרון · דיוקן · זהות', 'Memory · Portrait · Identity'),
-                   cap=('קלוד מונה, ערימות שחת, 1891', 'Claude Monet, Haystacks, 1891')),
+    # no cover image for now: the Haystacks was a prototype placeholder (Monet belongs to unit 06)
+    'unit04': dict(img=None,
+                   keys=('זיכרון · דיוקן · זהות', 'Memory · Portrait · Identity')),
     # no cover image for now: the Strawberry Thief was a prototype placeholder (it belongs to unit 02)
     'unit05': dict(img=None,
                    keys=('סמל · מסורת · מורשת', 'Symbol · Tradition · Heritage')),
@@ -70,7 +70,7 @@ PEOPLE = {
     'cornell': ('ג׳וזף קורנל', 'Joseph Cornell', ['Joseph Cornell']),
     'wiley': ('קהינדה ויילי', 'Kehinde Wiley', ['Kehinde Wiley']),
     'hopper': ('אדוארד הופר', 'Edward Hopper', ['Edward Hopper', 'Hopper']),
-    'shonibare': ('יינקה שוניבארה', 'Yinka Shonibare', ['Yinka Shonibare', 'Shonibare']),
+    'shonibare': ('ינקה שוניברי', 'Yinka Shonibare', ['Yinka Shonibare', 'Shonibare']),   # Hebrew as in the National Library of Israel
     'rauschenberg': ('רוברט ראושנברג', 'Robert Rauschenberg', ['Rauschenberg']),
     'rivera': ('דייגו ריברה', 'Diego Rivera', ['Diego Rivera', 'Rivera']),
     'banksy': ('בנקסי', 'Banksy', ['Banksy']),
