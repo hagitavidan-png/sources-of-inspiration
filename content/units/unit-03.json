@@ -1,0 +1,18 @@
+{
+  "_note": "Unit 3 page, approved corrections only (the unit is still in development; its lessons, order, artists and images are unchanged). Read by tools/build-unit-pages.py on top of course.html (tools/source/course.html is not changed). 'fixes' are exact text corrections inside the unit's lessons and approaches: each one must be found, or the build stops.",
+  "desc": {
+    "he": "איך מציירים צליל? התלמידים חוקרים סינאסתזיה, קצב חזותי והניסויים הבין־חושיים של אמנים שהמוזיקה הייתה עבורם נקודת מוצא ליצירה.",
+    "en": "How do you paint sound? Students explore synesthesia, visual rhythm and the cross-sensory experiments of artists who used music as their creative starting point."
+  },
+  "count": { "he": "5 שיעורים + פרויקט מסכם", "en": "5 Lessons + Capstone Project" },
+  "inspirationTitle": { "he": "רקע על האמנים", "en": "About the Artists" },
+  "noPeopleLabel": true,
+  "fixes": [
+    { "lesson": "3.4", "field": "title", "he": ["פול קלה", "פאול קלה"] },
+    { "lesson": "3.4", "field": "desc", "he": ["קלה היה כנר מוסמך", "קלה היה כנר מיומן"] },
+    { "lesson": "3.3", "field": "desc", "he": ["יצירת המופת הסופית של מונדריאן", "היצירה האחרונה שמונדריאן השלים"], "en": ["Mondrian's final masterpiece", "Mondrian's last completed painting"] },
+    { "he": ["ג'אז", "ג׳אז"], "count": 7 },
+    { "lesson": "3.6", "field": "title", "he": ["✦ צליל לתמונה פרויקט מסכם", "✦ פרויקט מסכם: צליל לתמונה"], "en": ["✦ Sound Into Image Capstone", "✦ Capstone Project: Sound Into Image"] },
+    { "lesson": "3.6", "field": "cap", "he": ["פרויקט מסכם", ""], "en": ["Capstone", ""] }
+  ]
+}

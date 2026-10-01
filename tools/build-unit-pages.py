@@ -205,6 +205,31 @@ def tag_text(tg):
     return he, en
 
 
+def apply_fix(u, f):
+    """An approved text correction inside a unit's lessons and approaches (content/units/unit-NN.json, 'fixes').
+    Optional 'lesson' (its number) and 'field' (title, cap, sub, desc, tags, approach) narrow where it applies;
+    each language's text must be found, and 'count' (Hebrew) must match when given, or the build stops."""
+    for lang in ('he', 'en'):
+        if lang not in f:
+            continue
+        old, new = f[lang]
+        targets = []
+        for l in u['lessons']:
+            if f.get('lesson') and l['num'] != f['lesson']:
+                continue
+            targets += [l[k] for k in ('title', 'cap', 'sub', 'desc') if l.get(k) and f.get('field') in (None, k)]
+            if f.get('field') in (None, 'tags'):
+                targets += l['tags']
+        if not f.get('lesson') and f.get('field') in (None, 'approach'):
+            targets += u['approach']
+        n = 0
+        for d in targets:
+            if d.get(lang) and old in d[lang]:
+                n += d[lang].count(old)
+                d[lang] = d[lang].replace(old, new)
+        assert n > 0 and (lang != 'he' or f.get('count', n) == n), ('fix not applied as expected', u['id'], f, lang, n)
+
+
 # ── parse course.html ─────────────────────────────────────────────
 def parse():
     out = []
@@ -265,6 +290,8 @@ def parse():
         O = _unit_content(uid)
         u['over'] = O
         if O:
+            for f in O.get('fixes', []):
+                apply_fix(u, f)
             if O.get('desc'):
                 u['desc'] = O['desc']
             if O.get('noApproach'):
