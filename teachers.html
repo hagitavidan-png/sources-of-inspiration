@@ -1,702 +1,275 @@
 <!DOCTYPE html>
-<html translate="no" class="notranslate" data-reading="page" lang="en">
+<html lang="he" dir="rtl" translate="no" class="notranslate">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Teachers & Schools: Sources of Inspiration in Art</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-<link rel="stylesheet" href="css/style.css?v=20260927-readable" />
+<title data-he="למורי אמנות ובתי ספר: מקורות השראה באמנות" data-en="For Teachers &amp; Schools: Sources of Inspiration in Art">למורי אמנות ובתי ספר: מקורות השראה באמנות</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d1a'/><text x='16' y='23' font-size='16' text-anchor='middle' fill='%23c9a84c'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css?v=6">
 <style>
-/* ── MOBILE VIEWPORT / RTL BIDI-SHIFT FIX ── */
-html { overflow-x: hidden !important; overflow-y: scroll !important; width: 100% !important; max-width: 100% !important; scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h, 72px) + 16px); }
-body { overflow-x: hidden !important; width: 100% !important; max-width: 100% !important; position: relative; left: 0 !important; right: 0 !important; }
-/* ── Page-specific styles ── */
+/* the current page in the header */
+.ed-nav a[aria-current="page"]{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px}
 
-/* Teacher Hero */
-.teacher-hero{background:linear-gradient(155deg,#f7f6f2 0%,#eef0f5 100%);padding:140px 0 80px;position:relative;overflow:hidden}
-.teacher-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(201,168,76,.1) 0%,transparent 60%);pointer-events:none}
-.teacher-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(63,168,200,.06) 0%,transparent 60%);pointer-events:none}
-.teacher-hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.th-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:6px 16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-dk);margin-bottom:24px}
-.teacher-hero h1{font-size:clamp(2rem,4vw,3.2rem);color:#0d0d1a;margin-bottom:20px;line-height:1.15}
-.teacher-hero h1 em{font-style:normal;color:var(--gold-dk)}
-.teacher-hero p{font-size:1.05rem;color:rgba(13,13,26,.6);line-height:1.8;margin-bottom:32px;max-width:480px}
-.th-ctas{display:flex;gap:14px;flex-wrap:wrap;max-width:100%;overflow:visible;box-sizing:border-box}
+/* ── Intro ── */
+.t-hero{display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,6vw,96px);align-items:end;padding-block:clamp(56px,9vw,128px) 0}
+.t-hero .ed-kicker{margin-bottom:22px}
+.t-hero h1{font-size:var(--t-h1);margin:0}
+.t-hero h1 em{font-style:normal}
+.t-lead{max-width:30em;margin:clamp(24px,3.5vw,40px) 0 0;font-size:clamp(1.15rem,1.9vw,1.45rem);line-height:1.5}
+.t-actions{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:clamp(28px,4vw,44px)}
+.t-actions .ed-cta{font-size:1.1rem}
+.t-actions .ed-cta + .ed-cta{border-bottom-color:var(--rule-strong);color:var(--ink-2)}
+.avail{border-top:1.5px solid var(--ink);padding-top:18px}
+.avail .ed-kicker{margin-bottom:6px}
+.avail ul{list-style:none;margin:0;padding:0}
+.avail li a{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.av-t{font-family:var(--f-display);font-weight:700;font-size:1.75rem;line-height:1.05}
+.av-m{flex-shrink:0;font-size:var(--t-small);color:var(--muted)}
+.avail li a:hover .av-t{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
 
-/* Hero visual / stats card */
-.th-visual{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:32px;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
-.th-visual-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.4);margin-bottom:24px}
-.th-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
-.th-stat{background:#f7f6f2;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:18px}
-.th-stat-num{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold-dk);line-height:1;margin-bottom:4px}
-.th-stat-label{font-size:.72rem;color:rgba(13,13,26,.45);font-weight:500;line-height:1.4}
-.th-teacher-quote{background:rgba(201,168,76,.08);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px}
-.th-teacher-quote p{font-size:.9rem;color:rgba(13,13,26,.7);line-height:1.6;font-style:italic;margin-bottom:8px}
-.th-quote-author{font-size:.75rem;color:var(--gold-dk);font-weight:600}
+/* ── Sections ── */
+.blk{padding-block:var(--sec) 0}
+.blk .ed-kicker{margin-bottom:14px}
+.blk h2{font-size:var(--t-h1);margin:0 0 18px}
+.blk-intro{margin:0 0 clamp(28px,4vw,44px);max-width:34em;color:var(--ink-2)}
+.grid3,.grid4{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,4vw,52px) clamp(28px,4vw,56px);border-top:1px solid var(--rule);padding-top:clamp(28px,4vw,44px)}
+.grid3{grid-template-columns:repeat(3,1fr)}
+.grid4{grid-template-columns:repeat(4,1fr)}
+.grid3 b,.grid4 b{display:block;font-family:var(--f-display);font-weight:700;font-size:1.75rem;line-height:1.05;color:var(--ink);margin-bottom:10px}
+.grid3 p,.grid4 p{margin:0;color:var(--ink-2);line-height:1.6}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule)}
+.steps li{padding:22px 18px 0;border-inline-start:1px solid var(--rule)}
+.steps li:first-child{border-inline-start:0;padding-inline-start:0}
+.steps .n{display:block;font-family:var(--f-display);font-size:2.4rem;line-height:1;color:var(--muted);margin-bottom:10px}
+.steps b{display:block;font-weight:700;color:var(--ink);margin-bottom:6px}
+.steps p{margin:0;line-height:1.55;color:var(--ink-2)}
+.ulist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.ulist a{display:grid;grid-template-columns:3.2em 1fr auto 1.4em;align-items:baseline;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.ul-n{font-family:var(--f-display);font-size:1.9rem;line-height:1;color:var(--muted)}
+.ul-t{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.05}
+.ul-m{font-size:var(--t-small);color:var(--muted)}
+.ul-a{color:var(--muted);transition:transform .4s var(--ease)}
+html[dir="ltr"] .ul-a{transform:scaleX(-1)}
+.ulist a:hover .ul-t{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.ulist a:hover .ul-a{color:var(--ink)}
 
-/* What Teachers Get */
-.benefits-section{padding:96px 0;background:white}
-.benefits-section .section-header{text-align:center;margin-bottom:60px}
-.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.benefit-card{background:var(--cream);border-radius:var(--radius-lg);padding:32px;transition:all var(--transition)}
-.benefit-card:hover{background:white;box-shadow:var(--shadow-lg);transform:translateY(-4px)}
-.benefit-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px}
-.benefit-card h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:10px}
-.benefit-card p{font-size:.88rem;color:var(--gray-500);line-height:1.7}
+/* ── FAQ ── */
+.faqs{border-top:1px solid var(--rule);max-width:52em}
+.faq{border-bottom:1px solid var(--rule)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:20px 0;cursor:pointer;list-style:none;font-weight:600;font-size:1.12rem;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex-shrink:0;font-size:1.5rem;line-height:1;font-weight:400;color:var(--muted);transition:transform .3s var(--ease)}
+.faq[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover span{text-decoration:underline;text-underline-offset:4px}
+.faq p{margin:0;padding:0 0 22px;max-width:40em;color:var(--ink-2)}
 
-/* How It Works for Teachers */
-.how-works{padding:80px 0;background:var(--warm)}
-.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:52px;position:relative}
-.how-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:rgba(0,0,0,.08)}
-.how-step{text-align:center;position:relative}
-.step-num{width:56px;height:56px;border-radius:50%;background:var(--gold-dk);color:white;font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;box-shadow:0 4px 16px rgba(180,140,60,.3)}
-.how-step h4{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-.how-step p{font-size:.82rem;color:var(--gray-500);line-height:1.6}
+/* ── Contact ── */
+.contact{padding-block:var(--sec)}
+.contact-box{border-top:1.5px solid var(--ink);padding-top:clamp(28px,4vw,44px)}
+.contact-box .ed-kicker{margin-bottom:14px}
+.contact-box h2{font-size:var(--t-h1);max-width:14em;margin:0 0 22px}
+.contact-box p{margin:0 0 28px;max-width:30em;color:var(--ink-2);font-size:1.1rem}
+.contact-box .contact-q{margin:0 0 10px;font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:var(--ink)}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px 40px;align-items:center}
+.contact-actions .ed-cta{font-size:1.1rem}
+.ed-foot .foot-tag{flex-basis:100%;color:var(--ink-2)}
 
-/* Curriculum Details */
-.curriculum-detail{padding:80px 0;background:white}
-.cd-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.cd-units{display:flex;flex-direction:column;gap:12px}
-.cd-unit{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--cream);border-radius:14px;transition:all var(--transition);cursor:default}
-.cd-unit:hover{background:var(--gold-lt);background:rgba(201,168,76,.1);transform:translateX(4px)}
-.cd-unit-icon{font-size:1.4rem;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cd-unit-info{}
-.cd-unit-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-500);margin-bottom:2px}
-.cd-unit-name{font-size:.9rem;font-weight:700;color:var(--ink)}
-.cd-unit-count{font-size:.75rem;color:var(--gray-500);margin-top:2px}
-.cd-features{display:flex;flex-direction:column;gap:16px}
-.cd-feature{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:14px}
-.cd-feature-icon{font-size:1.3rem;flex-shrink:0;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.15)}
-.cd-feature h4{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:4px}
-.cd-feature p{font-size:.8rem;color:var(--gray-500);line-height:1.6}
-
-/* Pricing */
-.pricing-section{padding:96px 0;background:#f0ede6}
-.pricing-section .section-header{text-align:center;margin-bottom:16px}
-.pricing-section .section-header h2{color:var(--ink)}
-.pricing-section .section-header p{color:var(--gray-700)}
-.pricing-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin:32px 0 52px}
-.ptoggle-label{font-size:.88rem;font-weight:600;color:rgba(13,13,26,.4);transition:.2s}
-.ptoggle-label.active{color:var(--ink)}
-.ptoggle-switch{width:52px;height:28px;background:rgba(0,0,0,.12);border-radius:14px;cursor:pointer;position:relative;transition:.3s;border:none}
-.ptoggle-switch.annual .ptoggle-knob{transform:translateX(24px)}
-.ptoggle-switch.annual{background:var(--gold-dk)}
-.ptoggle-knob{width:22px;height:22px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .3s}
-.ptoggle-badge{background:rgba(80,220,120,.2);color:#4ed88a;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:10px;letter-spacing:.05em}
-.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.price-card{background:white;border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:36px;transition:all var(--transition);box-shadow:var(--shadow-sm)}
-.price-card.featured{background:linear-gradient(135deg,#fffdf5 0%,#fff8e6 100%);border-color:var(--gold);position:relative;box-shadow:0 8px 40px rgba(201,168,76,.2)}
-.price-featured-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold-dk);color:var(--ink);font-size:.68rem;font-weight:800;padding:5px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
-.price-plan{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-500);margin-bottom:12px}
-.price-card.featured .price-plan{color:var(--gold-dk)}
-.price-name{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:8px}
-.price-card.featured .price-name{color:var(--ink)}
-.price-desc{font-size:.82rem;color:var(--gray-500);line-height:1.6;margin-bottom:28px;min-height:48px}
-.price-card.featured .price-desc{color:var(--gray-500)}
-.price-amount{margin-bottom:28px}
-.price-num{font-family:'Sora',sans-serif;font-size:3rem;font-weight:800;color:var(--ink);line-height:1}
-.price-card.featured .price-num{color:var(--ink)}
-.price-num sup{font-size:1.2rem;vertical-align:top;margin-top:8px;font-weight:600;color:var(--gray-500)}
-.price-card.featured .price-num sup{color:var(--gray-500)}
-.price-period{font-size:.8rem;color:var(--gray-500);margin-top:4px}
-.price-card.featured .price-period{color:var(--gray-500)}
-.price-orig{font-size:.82rem;color:var(--gray-300);text-decoration:line-through;margin-top:2px}
-.price-custom{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;color:var(--gold-dk);line-height:1;margin-bottom:8px}
-.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
-.price-features li{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--gray-700)}
-.price-features li i{font-size:.75rem;color:#27b066;flex-shrink:0}
-.price-features li.disabled{color:var(--gray-300)}
-.price-features li.disabled i{color:var(--gray-300)}
-.price-card.featured .price-features li{color:var(--gray-700)}
-.price-card.featured .price-features li.disabled{color:var(--gray-300)}
-.price-card.featured .price-features li.disabled i{color:var(--gray-300)}
-.price-cta{display:block;text-align:center;padding:14px;border-radius:12px;font-size:.88rem;font-weight:700;transition:all var(--transition)}
-.price-cta-outline{background:transparent;border:1.5px solid rgba(0,0,0,.2);color:var(--gray-700)}
-.price-cta-outline:hover{border-color:var(--ink);color:var(--ink)}
-.price-cta-gold{background:var(--gold-dk);color:var(--ink)}
-.price-cta-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
-.price-cta-ghost{background:rgba(0,0,0,.04);color:var(--gray-700);border:1.5px solid rgba(0,0,0,.15)}
-.price-cta-ghost:hover{background:rgba(0,0,0,.08);color:var(--ink)}
-
-/* Comparison table */
-.compare-section{padding:64px 0 80px;background:#f7f6f2;overflow-x:hidden}
-.compare-table{width:100%;max-width:100%;border-collapse:collapse;margin-top:40px;box-sizing:border-box}
-.compare-table th{padding:14px 20px;text-align:start;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(13,13,26,.4);border-bottom:1px solid rgba(0,0,0,.08)}
-.compare-table th:not(:first-child){text-align:center}
-.compare-table td{padding:16px 20px;border-bottom:1px solid rgba(0,0,0,.05);font-size:.88rem;color:var(--gray-700)}
-.compare-table td:not(:first-child){text-align:center}
-.compare-table tr:hover td{background:rgba(0,0,0,.02)}
-.compare-table .fa-check{color:#27b066}
-.compare-table .fa-times{color:rgba(0,0,0,.18)}
-.compare-table .ct-category{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,13,26,.3);padding-top:24px}
-.compare-table .ct-category td{color:rgba(13,13,26,.3);border-bottom:none}
-
-/* Free Trial Section */
-.trial-section{padding:96px 0;background:white;scroll-margin-top:calc(var(--nav-h) + 16px)}
-.trial-section .section-header{text-align:center;margin-bottom:52px}
-.trial-box{max-width:680px;margin:0 auto;background:white;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);border:1.5px solid rgba(0,0,0,.07)}
-.trial-box-top{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.04));padding:40px 40px 32px;text-align:center;border-bottom:1px solid rgba(0,0,0,.07)}
-.trial-box-top .tbt-tag{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-dk);margin-bottom:12px}
-.trial-box-top h3{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);margin-bottom:10px}
-.trial-box-top p{font-size:.9rem;color:var(--gray-700);line-height:1.7}
-.trial-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:20px}
-.trial-perk{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--gray-700);font-weight:500}
-.trial-perk i{color:#27b066;font-size:.78rem}
-.trial-form{padding:36px 40px 40px;background:white}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group label{font-size:.75rem;font-weight:600;color:rgba(13,13,26,.45);text-transform:uppercase;letter-spacing:.06em}
-.form-group input,
-.form-group select{background:#f7f6f2;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;padding:12px 14px;font-size:.88rem;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:.2s}
-.form-group input::placeholder{color:rgba(13,13,26,.3)}
-.form-group input:focus,
-.form-group select:focus{border-color:rgba(201,168,76,.5);background:white}
-.form-group select option{background:#f7f6f2;color:var(--ink)}
-.form-submit{width:100%;padding:16px;border-radius:12px;background:var(--gold-dk);color:var(--ink);font-size:.95rem;font-weight:800;font-family:'Sora',sans-serif;transition:all var(--transition);margin-top:6px;letter-spacing:.02em}
-.form-submit:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.35)}
-.form-note{text-align:center;font-size:.75rem;color:rgba(13,13,26,.35);margin-top:14px;line-height:1.6}
-.form-note a{color:var(--gold-dk);text-decoration:underline}
-
-/* Success state */
-.trial-success{display:none;padding:48px 40px;text-align:center}
-.success-icon{font-size:3rem;margin-bottom:20px;animation:popIn .4s ease}
-@keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
-.trial-success h3{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:12px}
-.trial-success p{font-size:.9rem;color:var(--gray-700);line-height:1.7;max-width:400px;margin:0 auto 28px}
-.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-
-/* Testimonials */
-.testimonials-section{padding:80px 0;background:var(--cream)}
-.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-.testimonial-card{background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow)}
-.tc-stars{color:var(--gold-dk);font-size:.9rem;margin-bottom:14px;letter-spacing:2px}
-.tc-text{font-size:.9rem;color:var(--gray-500);line-height:1.75;font-style:italic;margin-bottom:20px}
-.tc-author{display:flex;align-items:center;gap:12px}
-.tc-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:white;flex-shrink:0}
-.tc-name{font-size:.88rem;font-weight:700;color:var(--ink)}
-.tc-role{font-size:.75rem;color:var(--gray-500)}
-
-/* FAQ */
-.faq-section{padding:80px 0;background:white}
-.faq-list{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:0}
-.faq-item{border-bottom:1px solid rgba(0,0,0,.07)}
-.faq-q{width:100%;background:none;border:none;text-align:start;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:.95rem;font-weight:600;color:var(--ink);cursor:pointer;transition:color var(--transition)}
-.faq-q:hover{color:var(--gold-dk)}
-.faq-q i{font-size:.8rem;color:var(--gray-500);transition:transform .3s;flex-shrink:0}
-.faq-item.open .faq-q i{transform:rotate(180deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;padding:0}
-.faq-item.open .faq-a{max-height:300px;padding:0 0 20px}
-.faq-a p{font-size:.88rem;color:var(--gray-500);line-height:1.75}
-
-/* Final CTA */
-.final-cta{padding:96px 0;background:linear-gradient(135deg,#f7f6f2 0%,#eef0f5 100%);text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(0,0,0,.06)}
-.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(201,168,76,.1) 0%,transparent 70%)}
-.final-cta .container{position:relative;z-index:2}
-.final-cta h2{font-size:clamp(2rem,4vw,3rem);color:var(--ink);margin-bottom:16px}
-.final-cta p{font-size:1rem;color:var(--gray-700);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
-.final-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-
-/* RTL support — desktop defaults */
-[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
-/* .nav-actions must NOT be reversed — nav-inner reversal already places it correctly. */
-[dir="rtl"] .teacher-hero .container { direction: rtl; }
-[dir="rtl"] .th-left { text-align: right; }
-/* Hero heading always centered; body text right in RTL */
-[dir="rtl"] .teacher-hero h1,
-[dir="rtl"] .teacher-hero h2 { text-align: center; }
-.teacher-hero h1,
-.teacher-hero h2 { text-align: center; }
-[dir="rtl"] .th-ctas { justify-content: flex-end; flex-direction: row; flex-wrap: wrap; }
-[dir="rtl"] .section-header { text-align: center; }
-[dir="rtl"] .benefits-grid { direction: rtl; }
-[dir="rtl"] .benefit-card { text-align: right; }
-[dir="rtl"] .how-steps { direction: rtl; }
-[dir="rtl"] .cd-grid { direction: rtl; }
-[dir="rtl"] .pricing-cards { direction: rtl; }
-[dir="rtl"] .testimonials-grid { direction: rtl; }
-[dir="rtl"] .testimonial-card { text-align: right; }
-[dir="rtl"] .faq-q { flex-direction: row-reverse; }
-[dir="rtl"] .footer-grid { direction: rtl; }
-
-/* Responsive */
-@media(max-width:1024px){
-  .teacher-hero .container{grid-template-columns:1fr;gap:40px}
-  .th-visual{max-width:520px}
-  .benefits-grid{grid-template-columns:repeat(2,1fr)}
-  .how-steps{grid-template-columns:repeat(2,1fr)}
-  .how-steps::before{display:none}
-  .pricing-cards{grid-template-columns:1fr}
-  .price-card.featured{order:-1}
-  .cd-grid{grid-template-columns:1fr}
-  .testimonials-grid{grid-template-columns:1fr 1fr}
+@media (max-width:980px){.grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}}
+@media (max-width:820px){
+  .t-hero{grid-template-columns:1fr;gap:clamp(40px,8vw,56px)}
+  .steps{grid-template-columns:1fr}
+  .steps li,.steps li:first-child{border-inline-start:0;padding-inline:0;padding-top:18px;border-bottom:1px solid var(--rule);padding-bottom:18px}
+  .grid3,.grid4{grid-template-columns:1fr}
+  .ulist a{grid-template-columns:2.4em 1fr 1.2em;gap:4px 14px}
+  .ul-m{grid-column:2;grid-row:2}
+  .ul-a{grid-column:3;grid-row:1}
 }
-@media(max-width:768px){
-  .teacher-hero{padding:120px 0 64px}
-  /* On mobile, th-left spans full width — center the CTA buttons */
-  .th-ctas{justify-content:center}
-  [dir="rtl"] .th-ctas { justify-content: center; }
-  .benefits-grid{grid-template-columns:1fr}
-  .how-steps{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .trial-form{padding:28px 24px 32px}
-  .trial-box-top{padding:28px 24px 24px}
-  .testimonials-grid{grid-template-columns:1fr}
-  .th-stats{grid-template-columns:1fr 1fr}
-}
-[dir="rtl"] #mobile-menu { direction: rtl; }
-
-/* ── DARK MODE ── */
-body.dark{background:var(--color-bg-primary) !important;color:#e8e6e1}
-body.dark nav#nav{background:color-mix(in srgb, var(--color-bg-primary) 97%, transparent) !important;border-bottom-color:rgba(255,255,255,.07) !important}
-body.dark .nav-logo,body.dark .nav-logo span{color:#e8e6e1 !important}
-body.dark .nav-link{color:rgba(232,230,225,.45) !important}
-body.dark .nav-link:hover,body.dark .nav-link.active{color:#e8e6e1 !important;background:rgba(255,255,255,.06) !important}
-body.dark #nav-hamburger span,body.dark .hamburger span{background:#e8e6e1 !important}
-body.dark #mobile-menu a{color:rgba(232,230,225,.75) !important}
-/* Dark mode backgrounds */
-/* Hero gets same deep navy gradient as index hero */
-body.dark .teacher-hero { background: linear-gradient(155deg, #0d0d18 0%, #111124 60%, #0f0f1a 100%) !important; }
-/* Other sections get dark background */
-body.dark .benefits-section,
-body.dark .how-works,
-body.dark .preview-section,
-body.dark .testimonials,
-body.dark .faq-section,
-body.dark .pricing-section,
-body.dark .trial-section,
-body.dark section { background: var(--color-bg-primary) !important; }
-body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5{color:#e8e6e1 !important}
-body.dark p,body.dark .unit-desc,body.dark .teacher-hero p,body.dark .benefit-card p{color:rgba(232,230,225,.58) !important}
-body.dark .th-visual,body.dark .benefit-card,body.dark .how-step,body.dark .testi-card,body.dark .faq-item,body.dark .pricing-card{background:#161620 !important;border-color:rgba(255,255,255,.07) !important}
-body.dark .th-stat{background:#1c1c28 !important;border-color:rgba(255,255,255,.08) !important}
-body.dark .th-stat-label{color:rgba(232,230,225,.45) !important}
-body.dark .th-visual-title{color:rgba(232,230,225,.35) !important}
-body.dark .lesson-row-preview,body.dark .lr-row{background:#1c1c28 !important;border-color:rgba(255,255,255,.08) !important;color:#e8e6e1 !important}
-body.dark .section-header p{color:rgba(232,230,225,.55) !important}
-body.dark .faq-q{color:#e8e6e1 !important}
-body.dark .faq-a{color:rgba(232,230,225,.58) !important;border-top-color:rgba(255,255,255,.07) !important}
-body.dark footer,body.dark #footer{background:#0a0a0e !important;border-top-color:rgba(255,255,255,.07) !important}
-body.dark .footer-brand,body.dark .footer-logo{color:#e8e6e1 !important}
-body.dark .footer-col h4{color:rgba(232,230,225,.35) !important}
-body.dark .footer-col a,body.dark .footer-tagline,body.dark .footer-copy{color:rgba(232,230,225,.45) !important}
-body.dark .footer-col a:hover{color:#e8e6e1 !important}
-/* Footer: links stacked in each column; site name readable in dark mode */
-#footer .footer-col{display:flex;flex-direction:column;gap:8px}
-#footer .footer-col a{display:block}
-body.dark #footer .footer-brand > div > div:first-child{color:#e8e6e1 !important}
-#footer .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start}
-#footer .footer-brand{display:flex;align-items:center;gap:12px}
-#footer .footer-inner > .footer-links{flex-direction:row;flex-wrap:wrap;gap:56px}
-#footer .footer-col-title{font-weight:700;margin-bottom:4px}
-#footer .footer-bottom{max-width:1100px;margin:32px auto 0;padding:20px 24px 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;border-top:1px solid rgba(0,0,0,.07)}
-body.dark #footer .footer-bottom{border-top-color:rgba(255,255,255,.07)}
-body.dark #footer .footer-brand > div > div:nth-child(2){color:rgba(232,230,225,.5) !important}
-body.dark .btn-outline{border-color:rgba(232,230,225,.3) !important;color:rgba(232,230,225,.7) !important}
-body.dark .btn-outline:hover{background:rgba(255,255,255,.07) !important}
 </style>
-<link rel="stylesheet" href="css/reading.css?v=20260927-all"/>
-<link rel="stylesheet" href="css/navigation.css?v=20260927-dock"/>
-<link rel="stylesheet" href="css/alignment.css?v=20260927-language"/>
 </head>
-<body class="dark">
-<!-- Shared init: dark mode flash-prevention + language bootstrap -->
+<body class="ed">
 <script src="js/app-init.js?v=20260927-structure"></script>
+<script>document.body.classList.remove('dark');</script>
 
-<!-- ══ NAVBAR ══ -->
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark">✦</div>
-      <span data-en="Sources of Inspiration" data-he="מקורות השראה באמנות">Sources of Inspiration</span>
-    </a>
-    <div class="nav-links">
-      <a href="course.html" class="nav-link" data-en="The Course" data-he="הקורס">The Course</a>
-      <a href="lesson.html" class="nav-link" data-en="Preview Lesson" data-he="שיעור לדוגמה">Preview Lesson</a>
-      <a href="teachers.html" class="nav-link active" data-en="For Teachers" data-he="למורים">For Teachers</a>
-      <a href="#contact" class="nav-link" data-en="Contact" data-he="צרו קשר">Contact</a>
+<header class="ed-top" id="top">
+  <div class="ed-wrap">
+    <a class="ed-brand" href="index.html" data-he="מקורות השראה" data-en="Sources of Inspiration">מקורות השראה</a>
+    <nav class="ed-nav">
+      <a href="index.html#journey" data-he="יחידות" data-en="Units">יחידות</a>
+      <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+      <a href="teachers.html" aria-current="page" data-he="למורים" data-en="For teachers">למורים</a>
+      <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
+    </nav>
+    <span class="ed-spacer"></span>
+    <div class="ed-lang">
+      <button id="btn-he" onclick="setLang('he')">עברית</button><i>/</i><button id="btn-en" onclick="setLang('en')">English</button>
     </div>
-    <div class="nav-actions">
-      <a href="course.html" class="btn btn-outline-white btn-sm" data-en="Explore Units" data-he="לכל היחידות">Explore Units</a>
-      <a href="#contact" class="btn btn-gold btn-sm" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-      <div id="nav-lang-toggle">
-        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-        <button id="btn-he" onclick="setLang('he')">עברית</button>
-      </div>
-      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">☀️</button>
-    </div>
-    <button id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-</nav>
-<div id="mobile-menu">
-  <a href="course.html" data-en="The Course" data-he="הקורס">The Course</a>
-  <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
-  <a href="teachers.html" data-en="For Teachers" data-he="למורים">For Teachers</a>
-  <a href="#contact" data-en="Contact" data-he="צרו קשר">Contact</a>
-  <div class="mob-actions">
-    <a href="#contact" class="btn btn-gold btn-sm" style="justify-content:center" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-  </div>
-  <div id="mob-lang-toggle" class="lang-toggle" style="margin-top:12px;justify-content:center">
-    <button id="mob-btn-en" onclick="setLang('en')">EN</button>
-    <button id="mob-btn-he" onclick="setLang('he')">עברית</button>
-  </div>
-</div>
+</header>
 
-<!-- ══ HERO ══ -->
-<section class="teacher-hero">
-  <div class="container">
-    <div class="th-left fade-up">
-      <div class="th-tag" data-en="✦ For Art Teachers &amp; Schools" data-he="✦ למורי אמנות ובתי ספר">✦ For Art Teachers & Schools</div>
-      <h1 data-en="A Curriculum<br>That <em>Inspires</em><br>Every Student" data-he="תכנית לימודים<br>ש<em>מעררת</em><br>כל תלמיד">A Curriculum<br>That <em>Inspires</em><br>Every Student</h1>
-      <p data-en="Interactive lessons you project in class: artworks, questions for looking, and step-by-step studio work, one screen at a time." data-he="שיעורים אינטראקטיביים שמקרינים בכיתה: יצירות אמנות, שאלות להתבוננות ועבודה מעשית שלב אחרי שלב, מסך אחרי מסך.">Interactive lessons you project in class: artworks, questions for looking, and step-by-step studio work, one screen at a time.</p>
-      <div class="th-ctas">
-        <a href="#contact" class="btn btn-gold" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-        <a href="course.html" class="btn btn-outline-white" data-en="Browse the Course" data-he="עיינו בקורס">Browse the Course</a>
+<main>
+  <section class="t-hero ed-wrap">
+    <div class="rv">
+      <p class="ed-kicker" data-he="למורי אמנות ובתי ספר" data-en="For Art Teachers &amp; Schools">למורי אמנות ובתי ספר</p>
+      <h1 class="ed-display" data-he="תכנית לימודים<br>ש<em>מעוררת</em><br>כל תלמיד" data-en="A Curriculum<br>That <em>Inspires</em><br>Every Student">תכנית לימודים<br>ש<em>מעוררת</em><br>כל תלמיד</h1>
+      <p class="t-lead" data-he="שיעורים אינטראקטיביים שמקרינים בכיתה: יצירות אמנות, שאלות להתבוננות ועבודה מעשית שלב אחרי שלב, מסך אחרי מסך." data-en="Interactive lessons you project in class: artworks, questions for looking, and step-by-step studio work, one screen at a time.">שיעורים אינטראקטיביים שמקרינים בכיתה: יצירות אמנות, שאלות להתבוננות ועבודה מעשית שלב אחרי שלב, מסך אחרי מסך.</p>
+      <div class="t-actions">
+        <a class="ed-cta" href="#contact"><span data-he="צרו קשר" data-en="Contact Us">צרו קשר</span></a>
+        <a class="ed-cta" href="index.html#journey"><span data-he="עיינו בקורס" data-en="Browse the Course">עיינו בקורס</span></a>
       </div>
     </div>
-    <div class="th-right fade-up" style="animation-delay:.15s">
-      <div class="th-visual">
-        <div class="th-visual-title" data-en="Available now" data-he="זמין עכשיו">Available now</div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
-          <a href="course.html#unit01" class="th-teacher-quote" style="display:block;text-decoration:none"><p style="font-style:normal" data-en="Unit 1 · Personal Experience as a Source of Inspiration" data-he="יחידה 1 · חוויה אישית כמקור השראה">Unit 1 · Personal Experience as a Source of Inspiration</p><div class="th-quote-author" data-en="9 lessons" data-he="9 שיעורים">9 lessons</div></a>
-          <a href="course.html#unit02" class="th-teacher-quote" style="display:block;text-decoration:none"><p style="font-style:normal" data-en="Unit 2 · Nature as Inspiration" data-he="יחידה 2 · טבע כמקור השראה">Unit 2 · Nature as Inspiration</p><div class="th-quote-author" data-en="4 lessons" data-he="4 שיעורים">4 lessons</div></a>
-          <a href="course.html#additional-lessons" class="th-teacher-quote" style="display:block;text-decoration:none"><p style="font-style:normal" data-en="Additional lessons" data-he="שיעורים נוספים">Additional lessons</p><div class="th-quote-author" data-en="14 lessons" data-he="14 שיעורים">14 lessons</div></a>
-          <a href="lesson.html" class="th-teacher-quote" style="display:block;text-decoration:none"><p style="font-style:normal" data-en="Sample lesson" data-he="שיעור לדוגמה">Sample lesson</p><div class="th-quote-author" data-en="Try it now" data-he="אפשר לנסות עכשיו">Try it now</div></a>
-        </div>
-      </div>
+    <div class="avail rv">
+      <p class="ed-kicker" data-he="זמין עכשיו" data-en="Available now">זמין עכשיו</p>
+      <ul>
+      <li><a href="units/unit-01.html">
+        <span class="av-t" data-he="יחידה 01 · חוויה אישית" data-en="Unit 01 · Personal Experience">יחידה 01 · חוויה אישית</span>
+        <span class="av-m" data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span>
+      </a></li>
+      <li><a href="units/unit-02.html">
+        <span class="av-t" data-he="יחידה 02 · מבט החוצה" data-en="Unit 02 · Looking Outward">יחידה 02 · מבט החוצה</span>
+        <span class="av-m" data-he="6 שיעורים" data-en="6 lessons">6 שיעורים</span>
+      </a></li>
+      <li><a href="lesson-pages/lesson-2-1.html">
+        <span class="av-t" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</span>
+        <span class="av-m" data-he="אפשר לנסות עכשיו" data-en="Try it now">אפשר לנסות עכשיו</span>
+      </a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ WHAT TEACHERS GET ══ -->
-<section class="benefits-section">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-tag" data-en="✦ What’s in the Curriculum" data-he="✦ מה יש בתכנית">✦ What’s in the Curriculum</div>
-      <h2 data-en="Everything Ready.<br>Nothing Left to Guess." data-he="הכל מוכן.<br>לא צריך לנחש.">Everything Ready.<br>Nothing Left to Guess.</h2>
-      <p data-en="Every lesson is ready to project in class, with no special preparation or equipment." data-he="כל שיעור מוכן להקרנה בכיתה, בלי הכנה מיוחדת ובלי ציוד מיוחד.">Every lesson is ready to project in class, with no special preparation or equipment.</p>
+  <section class="blk ed-wrap" id="curriculum">
+    <div class="rv">
+      <p class="ed-kicker" data-he="מה יש בתכנית" data-en="What’s in the Curriculum">מה יש בתכנית</p>
+      <h2 class="ed-display" data-he="הכל מוכן.<br>לא צריך לנחש." data-en="Everything Ready.<br>Nothing Left to Guess.">הכל מוכן.<br>לא צריך לנחש.</h2>
+      <p class="blk-intro" data-he="כל שיעור מוכן להקרנה בכיתה, בלי הכנה מיוחדת ובלי ציוד מיוחד." data-en="Every lesson is ready to project in class, with no special preparation or equipment.">כל שיעור מוכן להקרנה בכיתה, בלי הכנה מיוחדת ובלי ציוד מיוחד.</p>
     </div>
-    <div class="benefits-grid">
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon" style="background:rgba(232,93,117,.12);color:#e85d75">📚</div>
-        <h3 data-en="Interactive Lessons" data-he="שיעורים אינטראקטיביים">Interactive Lessons</h3>
-        <p data-en="Each lesson is a sequence of short screens that leads the class from looking to making." data-he="כל שיעור הוא רצף של מסכים קצרים, שמוביל את הכיתה מהתבוננות לעבודה מעשית.">Each lesson is a sequence of short screens that leads the class from looking to making.</p>
-      </div>
-      <div class="benefit-card fade-up" style="animation-delay:0.06s">
-        <div class="benefit-icon" style="background:rgba(201,168,76,.12);color:var(--gold-dk)">🖼️</div>
-        <h3 data-en="Artworks and Artists" data-he="יצירות ואמנים">Artworks and Artists</h3>
-        <p data-en="Lessons open with works by artists such as Rothko, Munch, Frida Kahlo, Monet and O’Keeffe, as a starting point for talk and work." data-he="השיעורים נפתחים ביצירות של אמנים כמו רות׳קו, מונק, פרידה קאלו, מונה ואוקיף, כנקודת מוצא לשיחה ולעבודה.">Lessons open with works by artists such as Rothko, Munch, Frida Kahlo, Monet and O’Keeffe, as a starting point for talk and work.</p>
-      </div>
-      <div class="benefit-card fade-up" style="animation-delay:0.12s">
-        <div class="benefit-icon" style="background:rgba(100,160,255,.12);color:#64a0ff">💬</div>
-        <h3 data-en="Questions for Looking" data-he="שאלות להתבוננות">Questions for Looking</h3>
-        <p data-en="Every lesson asks students to look slowly and talk about what they see." data-he="בכל שיעור יש שאלות שמזמינות להסתכל לאט ולדבר על מה שרואים.">Every lesson asks students to look slowly and talk about what they see.</p>
-      </div>
-      <div class="benefit-card fade-up" style="animation-delay:0.18s">
-        <div class="benefit-icon" style="background:rgba(80,220,120,.12);color:#4ed88a">✍️</div>
-        <h3 data-en="Studio Work in Steps" data-he="עבודה מעשית בשלבים">Studio Work in Steps</h3>
-        <p data-en="Short instructions, step by step, for drawing and for experiments in colour, line and composition." data-he="הנחיות קצרות, שלב אחרי שלב, לציור ולניסויים בצבע, בקו ובקומפוזיציה.">Short instructions, step by step, for drawing and for experiments in colour, line and composition.</p>
-      </div>
-      <div class="benefit-card fade-up" style="animation-delay:0.24s">
-        <div class="benefit-icon" style="background:rgba(180,100,220,.12);color:#b464dc">🪞</div>
-        <h3 data-en="Reflection" data-he="רפלקציה">Reflection</h3>
-        <p data-en="Each lesson closes by looking at the work and asking students what they discovered." data-he="כל שיעור נסגר בהתבוננות בעבודה ובשאלה לתלמידים על מה שגילו.">Each lesson closes by looking at the work and asking students what they discovered.</p>
-      </div>
-      <div class="benefit-card fade-up" style="animation-delay:0.30s">
-        <div class="benefit-icon" style="background:rgba(255,140,60,.12);color:#ff8c3c">🌍</div>
-        <h3 data-en="Hebrew and English" data-he="עברית ואנגלית">Hebrew and English</h3>
-        <p data-en="Most lessons are available in Hebrew and English, with one click to switch." data-he="רוב השיעורים זמינים בעברית ובאנגלית, עם מעבר בין השפות בלחיצה.">Most lessons are available in Hebrew and English, with one click to switch.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <ul class="grid3 rv">
+      <li><b data-he="שיעורים אינטראקטיביים" data-en="Interactive Lessons">שיעורים אינטראקטיביים</b><p data-he="כל שיעור הוא רצף של מסכים קצרים, שמוביל את הכיתה מהתבוננות לעבודה מעשית." data-en="Each lesson is a sequence of short screens that leads the class from looking to making.">כל שיעור הוא רצף של מסכים קצרים, שמוביל את הכיתה מהתבוננות לעבודה מעשית.</p></li>
+      <li><b data-he="יצירות ואמנים" data-en="Artworks and Artists">יצירות ואמנים</b><p data-he="השיעורים נפתחים ביצירות של אמנים כמו רותקו, מונק, פרידה קאלו, מונה ואוקיף, כנקודת מוצא לשיחה ולעבודה." data-en="Lessons open with works by artists such as Rothko, Munch, Frida Kahlo, Monet and O’Keeffe, as a starting point for talk and work.">השיעורים נפתחים ביצירות של אמנים כמו רותקו, מונק, פרידה קאלו, מונה ואוקיף, כנקודת מוצא לשיחה ולעבודה.</p></li>
+      <li><b data-he="שאלות להתבוננות" data-en="Questions for Looking">שאלות להתבוננות</b><p data-he="בכל שיעור יש שאלות שמזמינות להסתכל לאט ולדבר על מה שרואים." data-en="Every lesson asks students to look slowly and talk about what they see.">בכל שיעור יש שאלות שמזמינות להסתכל לאט ולדבר על מה שרואים.</p></li>
+      <li><b data-he="עבודה מעשית בשלבים" data-en="Studio Work in Steps">עבודה מעשית בשלבים</b><p data-he="הנחיות קצרות, שלב אחרי שלב, לציור ולניסויים בצבע, בקו ובקומפוזיציה." data-en="Short instructions, step by step, for drawing and for experiments in colour, line and composition.">הנחיות קצרות, שלב אחרי שלב, לציור ולניסויים בצבע, בקו ובקומפוזיציה.</p></li>
+      <li><b data-he="רפלקציה" data-en="Reflection">רפלקציה</b><p data-he="כל שיעור נסגר בהתבוננות בעבודה ובשאלה לתלמידים על מה שגילו." data-en="Each lesson closes by looking at the work and asking students what they discovered.">כל שיעור נסגר בהתבוננות בעבודה ובשאלה לתלמידים על מה שגילו.</p></li>
+      <li><b data-he="עברית ואנגלית" data-en="Hebrew and English">עברית ואנגלית</b><p data-he="רוב השיעורים זמינים בעברית ובאנגלית, עם מעבר בין השפות בלחיצה." data-en="Most lessons are available in Hebrew and English, with one click to switch.">רוב השיעורים זמינים בעברית ובאנגלית, עם מעבר בין השפות בלחיצה.</p></li>
+    </ul>
+  </section>
 
-<!-- ══ HOW IT WORKS ══ -->
-<section class="how-works">
-  <div class="container">
-    <div class="section-header fade-up" style="text-align:center">
-      <div class="section-tag" data-en="✦ Getting Started" data-he="✦ התחילו">✦ Getting Started</div>
-      <h2 data-en="How to Start" data-he="איך מתחילים">How to Start</h2>
-      <p data-en="Nothing to install: open the lesson in a browser and project it in class." data-he="אין מה להתקין: פותחים את השיעור בדפדפן ומקרינים אותו בכיתה.">Nothing to install: open the lesson in a browser and project it in class.</p>
+  <section class="blk ed-wrap" id="start">
+    <div class="rv">
+      <p class="ed-kicker" data-he="התחילו" data-en="Getting Started">התחילו</p>
+      <h2 class="ed-display" data-he="איך מתחילים" data-en="How to Start">איך מתחילים</h2>
+      <p class="blk-intro" data-he="אין מה להתקין: פותחים את השיעור בדפדפן ומקרינים אותו בכיתה." data-en="Nothing to install: open the lesson in a browser and project it in class.">אין מה להתקין: פותחים את השיעור בדפדפן ומקרינים אותו בכיתה.</p>
     </div>
-    <div class="how-steps">
-      <div class="how-step fade-up">
-        <div class="step-num">1</div>
-        <h4 data-en="Explore the Curriculum" data-he="עיינו בתכנית">Explore the Curriculum</h4>
-        <p data-en="Look through the units and try the sample lesson." data-he="עברו על היחידות ונסו את השיעור לדוגמה.">Look through the units and try the sample lesson.</p>
-      </div>
-      <div class="how-step fade-up" style="animation-delay:.08s">
-        <div class="step-num">2</div>
-        <h4 data-en="Contact Us" data-he="צרו קשר">Contact Us</h4>
-        <p data-en="Write to us and we will be happy to tell you more and arrange a demo." data-he="כתבו לנו, ונשמח לספר על התכנית ולתאם הדגמה.">Write to us and we will be happy to tell you more and arrange a demo.</p>
-      </div>
-      <div class="how-step fade-up" style="animation-delay:.16s">
-        <div class="step-num">3</div>
-        <h4 data-en="Teach Your First Lesson" data-he="למדו את השיעור הראשון">Teach Your First Lesson</h4>
-        <p data-en="Open the lesson in class and walk through it with your students." data-he="פתחו את השיעור בכיתה ועברו אותו יחד עם התלמידים.">Open the lesson in class and walk through it with your students.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <ol class="steps rv">
+      <li><span class="n">1</span><b data-he="עיינו בתכנית" data-en="Explore the Curriculum">עיינו בתכנית</b><p data-he="עברו על היחידות ונסו את השיעור לדוגמה." data-en="Look through the units and try the sample lesson.">עברו על היחידות ונסו את השיעור לדוגמה.</p></li>
+      <li><span class="n">2</span><b data-he="צרו קשר" data-en="Contact Us">צרו קשר</b><p data-he="כתבו לנו, ונשמח לספר על התכנית ולתאם הדגמה." data-en="Write to us and we will be happy to tell you more and arrange a demo.">כתבו לנו, ונשמח לספר על התכנית ולתאם הדגמה.</p></li>
+      <li><span class="n">3</span><b data-he="למדו את השיעור הראשון" data-en="Teach Your First Lesson">למדו את השיעור הראשון</b><p data-he="פתחו את השיעור בכיתה ועברו אותו יחד עם התלמידים." data-en="Open the lesson in class and walk through it with your students.">פתחו את השיעור בכיתה ועברו אותו יחד עם התלמידים.</p></li>
+    </ol>
+  </section>
 
-<!-- ══ CURRICULUM DETAILS ══ -->
-<section class="curriculum-detail">
-  <div class="container">
-    <div class="cd-grid">
-      <div class="fade-up">
-        <div class="section-tag" style="margin-bottom:20px" data-en="✦ The Units" data-he="✦ היחידות">✦ The Units</div>
-        <h2 style="margin-bottom:12px" data-en="One Source of Inspiration<br>in Each Unit" data-he="מקור השראה אחד<br>בכל יחידה">One Source of Inspiration<br>in Each Unit</h2>
-        <p style="color:var(--gray-500);line-height:1.75;margin-bottom:32px" data-en="Each unit focuses on one source of inspiration and is built as a sequence of lessons. Units 1 and 2 are available now; the others are in development." data-he="כל יחידה מתמקדת במקור השראה אחד ובנויה כרצף של שיעורים. יחידות 1 ו־2 זמינות עכשיו, והשאר בפיתוח.">Each unit focuses on one source of inspiration and is built as a sequence of lessons. Units 1 and 2 are available now; the others are in development.</p>
-        <div class="cd-units">
-          <div class="cd-unit" style="--u:#e85d75">
-            <div class="cd-unit-icon" style="background:rgba(232,93,117,.12);color:#e85d75">💜</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 01</div>
-          <div class="cd-unit-name" data-en="Personal Experience as a Source of Inspiration" data-he="חוויה אישית כמקור השראה">Personal Experience as a Source of Inspiration</div>
-              <div class="cd-unit-count" data-en="9 lessons" data-he="9 שיעורים">9 lessons</div>
-            </div>
-          </div>
-          <div class="cd-unit">
-            <div class="cd-unit-icon" style="background:rgba(80,180,100,.12);color:#50b464">🌿</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 02</div>
-          <div class="cd-unit-name" data-en="Nature as Inspiration" data-he="טבע כמקור השראה">Nature as Inspiration</div>
-              <div class="cd-unit-count" data-en="4 lessons" data-he="4 שיעורים">4 lessons</div>
-            </div>
-          </div>
-          <div class="cd-unit">
-            <div class="cd-unit-icon" style="background:rgba(100,140,255,.12);color:#648cff">🎵</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 03</div>
-          <div class="cd-unit-name" data-en="Music &amp; Rhythm in Art" data-he="מוזיקה וריתמוס באמנות">Music &amp; Rhythm in Art</div>
-              <div class="cd-unit-count" data-en="In development" data-he="בפיתוח">In development</div>
-            </div>
-          </div>
-          <div class="cd-unit">
-            <div class="cd-unit-icon" style="background:rgba(201,168,76,.12);color:var(--gold-dk)">🪞</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 04</div>
-          <div class="cd-unit-name" data-en="Memory &amp; Identity" data-he="זיכרון וזהות">Memory &amp; Identity</div>
-              <div class="cd-unit-count" data-en="In development" data-he="בפיתוח">In development</div>
-            </div>
-          </div>
-          <div class="cd-unit">
-            <div class="cd-unit-icon" style="background:rgba(255,140,60,.12);color:#ff8c3c">🏛️</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 05</div>
-          <div class="cd-unit-name" data-en="Culture &amp; Symbols" data-he="תרבות וסמלים">Culture &amp; Symbols</div>
-              <div class="cd-unit-count" data-en="In development" data-he="בפיתוח">In development</div>
-            </div>
-          </div>
-          <div class="cd-unit">
-            <div class="cd-unit-icon" style="background:rgba(180,100,220,.12);color:#b464dc">✨</div>
-            <div class="cd-unit-info">
-              <div class="cd-unit-tag">Unit 06</div>
-          <div class="cd-unit-name" data-en="Personal Style Development" data-he="פיתוח סגנון אישי">Personal Style Development</div>
-              <div class="cd-unit-count" data-en="In development" data-he="בפיתוח">In development</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="fade-up" style="animation-delay:.15s">
-        <div class="section-tag" style="margin-bottom:20px" data-en="✦ What's Included Per Lesson" data-he="✦ מה כלול כל שיעור">✦ What's Included Per Lesson</div>
-        <h2 style="margin-bottom:12px" data-en="Every Lesson,<br>Fully Equipped" data-he="כל שיעור,<br>הכל מוכן">Every Lesson,<br>Fully Equipped</h2>
-        <p style="color:var(--gray-500);line-height:1.75;margin-bottom:32px" data-en="Each lesson is a sequence of screens you project in class, from the opening question to the reflection." data-he="כל שיעור הוא רצף מסכים שמקרינים בכיתה, מהשאלה הפותחת ועד הרפלקציה.">Each lesson is a sequence of screens you project in class, from the opening question to the reflection.</p>
-        <div class="cd-features">
-          <div class="cd-feature">
-            <div class="cd-feature-icon">🎨</div>
-            <div>
-              <h4 data-en="Opening Big Question" data-he="שאלה פותחת גדולה">Opening Big Question</h4>
-              <p data-en="A thought-provoking prompt to spark curiosity and set the lesson's emotional tone." data-he="הנחיה מעוררת חשיבה שמציתה סקרנות ומגדירה את הטון הרגשי של השיעור.">A thought-provoking prompt to spark curiosity and set the lesson's emotional tone.</p>
-            </div>
-          </div>
-          <div class="cd-feature">
-            <div class="cd-feature-icon">🖼️</div>
-            <div>
-              <h4 data-en="Artworks" data-he="יצירות אמנות">Artworks</h4>
-              <p data-en="Works by artists, with questions that guide the looking." data-he="יצירות של אמנים, עם שאלות שמכוונות את ההתבוננות.">Works by artists, with questions that guide the looking.</p>
-            </div>
-          </div>
-          <div class="cd-feature">
-            <div class="cd-feature-icon">✍️</div>
-            <div>
-              <h4 data-en="Creative Activity" data-he="פעילות יצירתית">Creative Activity</h4>
-              <p data-en="A practical art exercise linked to the lesson, in short steps." data-he="תרגיל יצירה בנושא השיעור, בשלבים קצרים.">A practical art exercise linked to the lesson, in short steps.</p>
-            </div>
-          </div>
-          <div class="cd-feature">
-            <div class="cd-feature-icon">💬</div>
-            <div>
-              <h4 data-en="Reflection &amp; Discussion" data-he="התבוננות ודיון">Reflection &amp; Discussion</h4>
-              <p data-en="Structured prompts for verbal sharing and written journaling to deepen understanding." data-he="הנחיות מובנות לשיתוף מילולי ורישום ביומן להעמקת ההבנה.">Structured prompts for verbal sharing and written journaling to deepen understanding.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="blk ed-wrap" id="each-lesson">
+    <div class="rv">
+      <p class="ed-kicker" data-he="מה כלול בכל שיעור" data-en="What's Included Per Lesson">מה כלול בכל שיעור</p>
+      <h2 class="ed-display" data-he="כל שיעור,<br>הכל מוכן" data-en="Every Lesson,<br>Fully Equipped">כל שיעור,<br>הכל מוכן</h2>
+      <p class="blk-intro" data-he="כל שיעור הוא רצף מסכים שמקרינים בכיתה, מהשאלה הפותחת ועד הרפלקציה." data-en="Each lesson is a sequence of screens you project in class, from the opening question to the reflection.">כל שיעור הוא רצף מסכים שמקרינים בכיתה, מהשאלה הפותחת ועד הרפלקציה.</p>
     </div>
-  </div>
-</section>
+    <ul class="grid4 rv">
+      <li><b data-he="שאלה פותחת גדולה" data-en="Opening Big Question">שאלה פותחת גדולה</b><p data-he="הנחיה מעוררת חשיבה שמציתה סקרנות ומגדירה את הטון הרגשי של השיעור." data-en="A thought-provoking prompt to spark curiosity and set the lesson's emotional tone.">הנחיה מעוררת חשיבה שמציתה סקרנות ומגדירה את הטון הרגשי של השיעור.</p></li>
+      <li><b data-he="יצירות אמנות" data-en="Artworks">יצירות אמנות</b><p data-he="יצירות של אמנים, עם שאלות שמכוונות את ההתבוננות." data-en="Works by artists, with questions that guide the looking.">יצירות של אמנים, עם שאלות שמכוונות את ההתבוננות.</p></li>
+      <li><b data-he="פעילות יצירתית" data-en="Creative Activity">פעילות יצירתית</b><p data-he="תרגיל יצירה בנושא השיעור, בשלבים קצרים." data-en="A practical art exercise linked to the lesson, in short steps.">תרגיל יצירה בנושא השיעור, בשלבים קצרים.</p></li>
+      <li><b data-he="התבוננות ודיון" data-en="Reflection &amp; Discussion">התבוננות ודיון</b><p data-he="הנחיות מובנות לשיתוף מילולי ורישום ביומן להעמקת ההבנה." data-en="Structured prompts for verbal sharing and written journaling to deepen understanding.">הנחיות מובנות לשיתוף מילולי ורישום ביומן להעמקת ההבנה.</p></li>
+    </ul>
+  </section>
 
-<!-- ══ FAQ ══ -->
-<section class="faq-section">
-  <div class="container">
-    <div class="section-header fade-up" style="text-align:center">
-      <div class="section-tag" data-en="✦ FAQ" data-he="✦ שאלות נפוצות">✦ FAQ</div>
-      <h2 data-en="Common Questions" data-he="שאלות נפוצות">Common Questions</h2>
+  <section class="blk ed-wrap" id="units">
+    <div class="rv">
+      <p class="ed-kicker" data-he="היחידות" data-en="The Units">היחידות</p>
+      <h2 class="ed-display" data-he="מקור השראה אחד<br>בכל יחידה" data-en="One Source of Inspiration<br>in Each Unit">מקור השראה אחד<br>בכל יחידה</h2>
+      <p class="blk-intro" data-he="כל יחידה מתמקדת במקור השראה אחד ובנויה כרצף של שיעורים. יחידות 1 ו־2 זמינות עכשיו, והשאר בפיתוח." data-en="Each unit focuses on one source of inspiration and is built as a sequence of lessons. Units 1 and 2 are available now; the others are in development.">כל יחידה מתמקדת במקור השראה אחד ובנויה כרצף של שיעורים. יחידות 1 ו־2 זמינות עכשיו, והשאר בפיתוח.</p>
     </div>
-    <div class="faq-list">
+    <ul class="ulist rv">
+      <li><a href="units/unit-00.html">
+        <span class="ul-n">00</span><span class="ul-t" data-he="יסודות ההשראה" data-en="Foundations of Inspiration">יסודות ההשראה</span><span class="ul-m" data-he="בפיתוח" data-en="In development">בפיתוח</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-01.html">
+        <span class="ul-n">01</span><span class="ul-t" data-he="חוויה אישית" data-en="Personal Experience">חוויה אישית</span><span class="ul-m" data-he="9 שיעורים" data-en="9 lessons">9 שיעורים</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-02.html">
+        <span class="ul-n">02</span><span class="ul-t" data-he="מבט החוצה" data-en="Looking Outward">מבט החוצה</span><span class="ul-m" data-he="6 שיעורים" data-en="6 lessons">6 שיעורים</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-03.html">
+        <span class="ul-n">03</span><span class="ul-t" data-he="מוזיקה וריתמוס" data-en="Music &amp; Rhythm">מוזיקה וריתמוס</span><span class="ul-m" data-he="בפיתוח" data-en="In development">בפיתוח</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-04.html">
+        <span class="ul-n">04</span><span class="ul-t" data-he="זיכרון וזהות" data-en="Memory &amp; Identity">זיכרון וזהות</span><span class="ul-m" data-he="בפיתוח" data-en="In development">בפיתוח</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-05.html">
+        <span class="ul-n">05</span><span class="ul-t" data-he="תרבות וסמלים" data-en="Culture &amp; Symbols">תרבות וסמלים</span><span class="ul-m" data-he="בפיתוח" data-en="In development">בפיתוח</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+      <li><a href="units/unit-06.html">
+        <span class="ul-n">06</span><span class="ul-t" data-he="סגנון אישי" data-en="Personal Style">סגנון אישי</span><span class="ul-m" data-he="בפיתוח" data-en="In development">בפיתוח</span><span class="ul-a" aria-hidden="true">←</span>
+      </a></li>
+    </ul>
+  </section>
 
-      <div class="faq-item">
-        <button class="faq-q" data-en="Do I need any special technology or equipment? <i class='fas fa-chevron-down'></i>" data-he="האם נדרשת טכנולוגיה מיוחדת? <i class='fas fa-chevron-down'></i>">Do I need any special technology or equipment? <i class="fas fa-chevron-down"></i></button>
-        <div class="faq-a"><p data-en="No special equipment needed. You just need a browser and ideally a projector or screen for class display. All lessons work on tablets and laptops. There's nothing to install." data-he="לא צריך ציוד מיוחד. מספיק דפדפן ומקרן. כל השיעורים עובדים על טאבלטים ומחשבים ניידים. אין מה להתקין.">No special equipment needed. You just need a browser (Chrome, Safari, Firefox, or Edge) and ideally a projector or screen for class display. All lessons work on tablets and laptops. There's nothing to install.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" data-en="How long is each lesson? <i class='fas fa-chevron-down'></i>" data-he="כמה זמן אורך כל שיעור? <i class='fas fa-chevron-down'></i>">How long is each lesson? <i class="fas fa-chevron-down"></i></button>
-        <div class="faq-a"><p data-en="Most lessons are designed for 45–55 minutes. The longer ones can be split across two class periods." data-he="רוב השיעורים מיועדים ל־45–55 דקות. את הארוכים אפשר לחלק לשני מפגשים.">Most lessons are designed for 45–55 minutes. The longer ones can be split across two class periods.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" data-en="Can I use this alongside our existing art program? <i class='fas fa-chevron-down'></i>" data-he="אפשר להשתמש בה לצד תכנית קיימת? <i class='fas fa-chevron-down'></i>">Can I use this alongside our existing art program? <i class="fas fa-chevron-down"></i></button>
-        <div class="faq-a"><p data-en="Yes. You can teach the whole curriculum in order, or choose single units and lessons." data-he="כן. אפשר ללמד את כל התכנית לפי הסדר, או לבחור יחידות ושיעורים בודדים.">Yes. You can teach the whole curriculum in order, or choose single units and lessons.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" data-en="Is there support available if I have questions? <i class='fas fa-chevron-down'></i>" data-he="יש תמיכה אם יש שאלות? <i class='fas fa-chevron-down'></i>">Is there support available if I have questions? <i class="fas fa-chevron-down"></i></button>
-        <div class="faq-a"><p data-en="Yes. Write to us at hagitavidan@gmail.com." data-he="כן. כתבו לנו לכתובת hagitavidan@gmail.com.">Yes. Write to us at hagitavidan@gmail.com.</p></div>
-      </div>
+  <section class="blk ed-wrap" id="faq">
+    <div class="rv">
+      <p class="ed-kicker" data-he="שאלות נפוצות" data-en="FAQ">שאלות נפוצות</p>
+      <h2 class="ed-display" data-he="שאלות נפוצות" data-en="Common Questions">שאלות נפוצות</h2>
     </div>
-  </div>
-</section>
+    <div class="faqs rv">
+      <details class="faq">
+        <summary><span data-he="האם נדרשת טכנולוגיה מיוחדת?" data-en="Do I need any special technology or equipment?">האם נדרשת טכנולוגיה מיוחדת?</span></summary>
+        <p data-he="לא צריך ציוד מיוחד. מספיק דפדפן ומקרן. כל השיעורים עובדים על טאבלטים ומחשבים ניידים. אין מה להתקין." data-en="No special equipment needed. You just need a browser and ideally a projector or screen for class display. All lessons work on tablets and laptops. There's nothing to install.">לא צריך ציוד מיוחד. מספיק דפדפן ומקרן. כל השיעורים עובדים על טאבלטים ומחשבים ניידים. אין מה להתקין.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-he="כמה זמן אורך כל שיעור?" data-en="How long is each lesson?">כמה זמן אורך כל שיעור?</span></summary>
+        <p data-he="רוב השיעורים מיועדים ל־45–55 דקות. את הארוכים אפשר לחלק לשני מפגשים." data-en="Most lessons are designed for 45–55 minutes. The longer ones can be split across two class periods.">רוב השיעורים מיועדים ל־45–55 דקות. את הארוכים אפשר לחלק לשני מפגשים.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-he="אפשר להשתמש בה לצד תכנית קיימת?" data-en="Can I use this alongside our existing art program?">אפשר להשתמש בה לצד תכנית קיימת?</span></summary>
+        <p data-he="כן. אפשר ללמד את כל התכנית לפי הסדר, או לבחור יחידות ושיעורים בודדים." data-en="Yes. You can teach the whole curriculum in order, or choose single units and lessons.">כן. אפשר ללמד את כל התכנית לפי הסדר, או לבחור יחידות ושיעורים בודדים.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-he="יש תמיכה אם יש שאלות?" data-en="Is there support available if I have questions?">יש תמיכה אם יש שאלות?</span></summary>
+        <p data-he="כן. כתבו לנו לכתובת hagitavidan@gmail.com." data-en="Yes. Write to us at hagitavidan@gmail.com.">כן. כתבו לנו לכתובת hagitavidan@gmail.com.</p>
+      </details>
+    </div>
+  </section>
 
-<!-- ══ FINAL CTA ══ -->
-<section class="final-cta">
-  <div class="container">
-    <div class="section-tag" style="color:var(--gold-lt);text-align:center;margin-bottom:20px" data-en="✦ Ready to Start?" data-he="✦ מוכנים להתחיל?">✦ Ready to Start?</div>
-    <h2 class="fade-up" data-en="Give Your Students a<br>Language for Creativity" data-he="תנו לתלמידים שלכם<br>שפה ליצירתיות">Give Your Students a<br>Language for Creativity</h2>
-    <p class="fade-up" data-en="Want to bring the curriculum to your school? Write to us and we will be happy to arrange a conversation or a demo." data-he="רוצים להכניס את התכנית לבית הספר? כתבו לנו, ונשמח לתאם שיחה או הדגמה.">Want to bring the curriculum to your school? Write to us and we will be happy to arrange a conversation or a demo.</p>
-    <div class="final-cta-actions fade-up">
-      <a href="#contact" class="btn btn-gold btn-lg" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-      <a href="course.html" class="btn btn-outline-white btn-lg" data-en="Explore the Curriculum" data-he="לתכנית הלימודים">Explore the Curriculum</a>
+  <section class="contact ed-wrap" id="contact">
+    <div class="contact-box rv">
+      <p class="ed-kicker" data-he="מוכנים להתחיל?" data-en="Ready to Start?">מוכנים להתחיל?</p>
+      <h2 class="ed-display" data-he="תנו לתלמידים שלכם<br>שפה ליצירתיות" data-en="Give Your Students a<br>Language for Creativity">תנו לתלמידים שלכם<br>שפה ליצירתיות</h2>
+      <p class="contact-q" data-he="רוצים להכניס את התכנית לבית הספר?" data-en="Interested in the Curriculum for Your School?">רוצים להכניס את התכנית לבית הספר?</p>
+      <p data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו." data-en="For questions, a price quote or to arrange a demo, write to us.">לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.</p>
+      <div class="contact-actions">
+        <a class="ed-cta" href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA"><span data-he="צרו קשר" data-en="Contact Us">צרו קשר</span></a>
+        <a class="ed-cta" href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" target="_blank" rel="noopener"><span data-he="וואטסאפ" data-en="WhatsApp">וואטסאפ</span></a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<!-- ══ CONTACT ══ -->
-<section id="contact" style="padding:80px 24px">
-  <div class="container" style="max-width:640px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px">
-    <div class="section-tag" data-en="✦ Contact" data-he="✦ צרו קשר">✦ Contact</div>
-    <h2 data-en="Interested in the Curriculum for Your School?" data-he="רוצים להכניס את התכנית לבית הספר?">Interested in the Curriculum for Your School?</h2>
-    <p data-en="For questions, a price quote or to arrange a demo, write to us." data-he="לשאלות, להצעת מחיר או לתיאום הדגמה, כתבו לנו.">For questions, a price quote or to arrange a demo, write to us.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-      <a href="mailto:hagitavidan@gmail.com?subject=%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" class="btn btn-gold btn-lg" data-en="<i class='fa-solid fa-envelope'></i> Contact Us" data-he="<i class='fa-solid fa-envelope'></i> צרו קשר"><i class="fa-solid fa-envelope"></i> Contact Us</a>
-      <a href="https://wa.me/972528600750?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9E%D7%A7%D7%95%D7%A8%D7%95%D7%AA%20%D7%94%D7%A9%D7%A8%D7%90%D7%94%20%D7%91%D7%90%D7%9E%D7%A0%D7%95%D7%AA" class="btn btn-lg" target="_blank" rel="noopener" style="background:#25D366;color:#fff;border:none" data-en="<i class='fa-brands fa-whatsapp'></i> WhatsApp" data-he="<i class='fa-brands fa-whatsapp'></i> וואטסאפ"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-    </div>
-  </div>
-</section>
-<style>
-body.dark #contact { background: rgba(255,255,255,.04) !important; }
-body.dark #contact input,
-body.dark #contact textarea { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.12) !important; color: #f0ede6 !important; }
-body.dark #contact input::placeholder,
-body.dark #contact textarea::placeholder { color: rgba(240,237,230,.4); }
-</style>
-
-<!-- ══ FOOTER ══ -->
-<footer id="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="nav-logo-mark" style="width:36px;height:36px;font-size:1.2rem">✦</div>
-      <div>
-        <div style="font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:1rem;margin-bottom:2px" data-en="Sources of Inspiration in Art" data-he="מקורות השראה באמנות">Sources of Inspiration in Art</div>
-        <div style="font-size:.78rem;color:rgba(13,13,26,.4)" data-en="Premium Creativity Curriculum for Schools" data-he="תכנית יצירתיות מתקדמת לבתי ספר">Premium Creativity Curriculum for Schools</div>
-      </div>
-    </div>
-    <div class="footer-links">
-      <div class="footer-col">
-        <div class="footer-col-title" data-en="Curriculum" data-he="תכנית לימודים">Curriculum</div>
-        <a href="course.html" data-en="The 7 Units" data-he="7 היחידות">The 7 Units</a>
-        <a href="lesson.html" data-en="Preview a Lesson" data-he="שיעור לדוגמה">Preview a Lesson</a>
-        <a href="course.html#unit01" data-en="Personal Experience" data-he="חוויה אישית">Personal Experience</a>
-        <a href="course.html#unit02" data-en="Nature as Inspiration" data-he="טבע כמקור השראה">Nature as Inspiration</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title" data-en="For Schools" data-he="לבתי ספר">For Schools</div>
-        <a href="teachers.html" data-en="Teacher Resources" data-he="משאבים למורים">Teacher Resources</a>
-        <a href="mailto:hagitavidan@gmail.com" data-en="Contact Us" data-he="צרו קשר">Contact Us</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div data-en="© 2025 Sources of Inspiration in Art. All rights reserved." data-he="© 2025 מקורות השראה באמנות. כל הזכויות שמורות.">© 2025 Sources of Inspiration in Art. All rights reserved.</div>
-    <div><a href="privacy.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a> · <a href="terms.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px" data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</a></div>
+<footer class="ed-foot">
+  <div class="ed-wrap">
+    <span class="foot-tag" data-he="תכנית אמנות ויצירתיות לבתי ספר." data-en="An art and creativity curriculum for schools.">תכנית אמנות ויצירתיות לבתי ספר.</span>
+    <a href="index.html#journey" data-he="יחידות" data-en="Units">יחידות</a>
+    <a href="lesson-pages/lesson-2-1.html" data-he="שיעור לדוגמה" data-en="Sample lesson">שיעור לדוגמה</a>
+    <a href="teachers.html" data-he="למורים" data-en="For teachers">למורים</a>
+    <a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a>
+    <a href="privacy.html" data-he="מדיניות פרטיות" data-en="Privacy Policy">מדיניות פרטיות</a>
+    <a href="terms.html" data-he="תנאי שימוש" data-en="Terms of Use">תנאי שימוש</a>
+    <span class="ed-spacer"></span>
+    <span data-he="© 2026 מקורות השראה באמנות" data-en="© 2026 Sources of Inspiration in Art">© 2026 מקורות השראה באמנות</span>
   </div>
 </footer>
 
-<script>
-// ── Navbar scroll ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// ── Hamburger ──
-const hamburger = document.getElementById('nav-hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-document.addEventListener('click', e => {
-  if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-  }
-});
-
-// ── Fade-up on scroll ──
-const fadeEls = document.querySelectorAll('.fade-up');
-if ('IntersectionObserver' in window) {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  fadeEls.forEach(el => io.observe(el));
-} else {
-  fadeEls.forEach(el => el.classList.add('visible'));
-}
-
-// ── FAQ ──
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
-});
-
-
-// ── Smooth scroll for anchor links — offset by sticky nav height ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const navEl = document.getElementById('nav');
-      const navH  = navEl ? navEl.getBoundingClientRect().height : 72;
-      const top   = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-// ── LANGUAGE + THEME: handled by app-init.js?v=20260927-structure ─────────────────────────────
-// setLang(), toggleTheme(), currentLang, _syncThemeBtn() are all global.
-// Apply language on load (currentLang set by app-init.js?v=20260927-structure).
-setLang(currentLang);
-_syncThemeBtn();
-</script>
-<script src="js/navigation-data.js?v=20260927-nav"></script>
-<script src="js/navigation.js?v=20260927-access"></script>
+<script src="js/navigation-data.js"></script>
+<script src="data/lesson-pages/index.js"></script>
+<script src="js/site-drawer.js?v=8" data-base=""></script>
+<script src="js/editorial.js?v=1"></script>
 </body>
 </html>
