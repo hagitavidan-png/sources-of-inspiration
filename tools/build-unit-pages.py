@@ -33,9 +33,9 @@ UNITS = {
     'unit04': dict(img='monet-haystacks-1891', pos='50% 60%',
                    keys=('זיכרון · דיוקן · זהות', 'Memory · Portrait · Identity'),
                    cap=('קלוד מונה, ערימות שחת, 1891', 'Claude Monet, Haystacks, 1891')),
-    'unit05': dict(img='morris-strawberry-thief-1883', pos='50% 40%',
-                   keys=('סמל · מסורת · מורשת', 'Symbol · Tradition · Heritage'),
-                   cap=('ויליאם מוריס, גנב התותים, 1883', 'William Morris, Strawberry Thief, 1883')),
+    # no cover image for now: the Strawberry Thief was a prototype placeholder (it belongs to unit 02)
+    'unit05': dict(img=None,
+                   keys=('סמל · מסורת · מורשת', 'Symbol · Tradition · Heritage')),
     'unit06': dict(img='turner-snowstorm', pos='55% 50%',
                    keys=('קול · בחירה · דרך', 'Voice · Choice · Path'),
                    cap=('ויליאם טרנר, סופת שלגים, 1842', 'J. M. W. Turner, Snow Storm, 1842')),
@@ -451,6 +451,12 @@ def render(u, units):
           <span class="un-t"><span class="un-n">{x['num']}</span>{t((x.get('own_title') or x['title'])['he'], (x.get('own_title') or x['title'])['en'])}</span>
         </a>'''
 
+    # the cover image (a unit without one goes straight from the title to the description)
+    fig_html = (f'''    <figure class="u-fig">
+      <div class="u-img rv-img">{f'<picture><source media="(min-width:821px)" srcset="{B}images/editorial/{cfg["wide"]}.jpg">' if cfg.get('wide') else ''}<img src="{B}images/editorial/{cfg['img']}.jpg" alt="{esc(cfg['cap'][1])}" style="object-position:{cfg['pos']}" fetchpriority="high">{'</picture>' if cfg.get('wide') else ''}</div>
+      <figcaption>{t(*cfg['cap'])}</figcaption>
+    </figure>
+''' if cfg['img'] else '')
     return f'''<!DOCTYPE html>
 <html lang="he" dir="rtl" translate="no" class="notranslate">
 <head>
@@ -493,11 +499,7 @@ def render(u, units):
         <p class="u-keys">{t(*keys)}</p>
       </div>
     </div>
-    <figure class="u-fig">
-      <div class="u-img rv-img">{f'<picture><source media="(min-width:821px)" srcset="{B}images/editorial/{cfg["wide"]}.jpg">' if cfg.get('wide') else ''}<img src="{B}images/editorial/{cfg['img']}.jpg" alt="{esc(cfg['cap'][1])}" style="object-position:{cfg['pos']}" fetchpriority="high">{'</picture>' if cfg.get('wide') else ''}</div>
-      <figcaption>{t(*cfg['cap'])}</figcaption>
-    </figure>
-    <div class="u-intro rv">
+{fig_html}    <div class="u-intro rv">
       {f'<p class="u-desc">{t(u["desc"]["he"], u["desc"]["en"])}</p>' if u['desc'] else ''}
       <div class="u-aside">
         <p class="u-count">{t(count['he'], count['en'])}</p>

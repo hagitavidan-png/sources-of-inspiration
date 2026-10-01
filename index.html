@@ -42,6 +42,7 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
 .gate{display:grid;grid-template-columns:7fr 5fr;gap:clamp(28px,5vw,80px);align-items:center;padding-block:clamp(44px,6vw,88px);border-top:1px solid var(--rule)}
 .gate.flip{grid-template-columns:5fr 7fr}
 .gate.flip .gate-fig{order:2}
+.gate.no-img{grid-template-columns:1fr}   /* a unit without an image yet: the text alone, in one column */
 .gate-fig{margin:0;display:flex;flex-direction:column}
 .gate-fig .gate-cap{margin:12px 0 0}
 .gate-img{display:block;overflow:hidden;aspect-ratio:5/4;background:var(--paper-2)}
@@ -248,11 +249,7 @@ html[lang="en"] .cover-latin{letter-spacing:.06em;text-transform:none;font-size:
         </div>
       </div>
     </article>
-    <article class="gate flip" id="unit05">
-      <figure class="gate-fig">
-        <a class="gate-img rv-img" href="units/unit-05.html" tabindex="-1" aria-hidden="true"><img src="images/editorial/morris-strawberry-thief-1883.jpg" alt="" loading="lazy" style="object-position:50% 40%"></a>
-        <figcaption class="gate-cap rv" data-he="ויליאם מוריס, גנב התותים, 1883" data-en="William Morris, Strawberry Thief, 1883">ויליאם מוריס, גנב התותים, 1883</figcaption>
-      </figure>
+    <article class="gate flip no-img" id="unit05">
       <div class="gate-txt rv">
         <div class="gate-head rv">
           <span class="ed-num">05</span>
