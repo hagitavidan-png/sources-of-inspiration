@@ -19,8 +19,8 @@
 
   "core": {
     "C1": {
-      "he": { "big": "דפוס אינו רק דבר שחוזר.<br>הוא מערכת של יחסים.", "sub": "<b>יחידה:</b> מה חוזר.<br><b>חוק:</b> איך הוא חוזר.", "body": "דוגמה: בקיר לבנים, הלבנה יכולה להיות היחידה. החוק יכול להיות סידור הלבנים בשורות, כאשר כל שורה מוזזת ביחס לקודמת." },
-      "en": { "big": "A pattern is not only something that repeats.<br>It is a system of relationships.", "sub": "<b>Unit:</b> what repeats.<br><b>Law:</b> how it repeats.", "body": "Example: In a brick wall, the brick can be the unit. The law can be the way the bricks are laid in rows, with each row shifted in relation to the one before." }
+      "he": { "big": "כשצורות, קווים, מרווחים או כיוונים חוזרים, נוצרת ביניהם מערכת של יחסים.<br>דפוס הוא מערכת של יחסים שנוצרת מתוך חזרה.", "sub": "<b>יחידה:</b> מה חוזר.<br><b>חוק:</b> איך הוא חוזר.", "body": "דוגמה: בקיר לבנים, הלבנה יכולה להיות היחידה. החוק יכול להיות סידור הלבנים בשורות, כאשר כל שורה מוזזת ביחס לשורה שלפניה." },
+      "en": { "big": "When shapes, lines, spaces, or directions repeat, relationships are formed between them.<br>A pattern is a system of relationships created through repetition.", "sub": "<b>Unit:</b> what repeats.<br><b>Law:</b> how it repeats.", "body": "Example: In a brick wall, the brick can be the unit. The law can be the arrangement of the bricks in rows, with each row shifted in relation to the one before it." }
     },
     "C2": {
       "he": { "sub": "ממה יכולה להיות היחידה: צורה · קו · מרווח · כיוון" },
@@ -95,7 +95,7 @@
       "prep": [
         { "he": { "label": "מטרות השיעור", "sub": "בסוף השיעור התלמידים:", "i": [
             "מזהים בדפוס אמיתי את היחידה (מה חוזר) ואת החוק (איך הוא חוזר).",
-            "מבחינים בין שתי מערכות חזרה שונות, אצל מוריס ואצל יאיוי קוסמה.",
+            "מבחינים בין שתי מערכות שונות של חזרה, אצל מוריס ואצל יאיוי קוסמה.",
             "בונים דפוס מיחידה ומחוק, ומשנים בו חוק אחד בלבד.",
             "מנסחים במילים מה השתנה בדפוס בעקבות השינוי." ] },
           "en": { "label": "Lesson goals", "sub": "By the end of the lesson, students:", "i": [

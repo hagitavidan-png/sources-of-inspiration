@@ -150,16 +150,16 @@ window.LESSON_PAGE = {
         {
          "block": {
           "big": {
-           "he": "דפוס אינו רק דבר שחוזר.<br>הוא מערכת של יחסים.",
-           "en": "A pattern is not only something that repeats.<br>It is a system of relationships."
+           "he": "כשצורות, קווים, מרווחים או כיוונים חוזרים, נוצרת ביניהם מערכת של יחסים.<br>דפוס הוא מערכת של יחסים שנוצרת מתוך חזרה.",
+           "en": "When shapes, lines, spaces, or directions repeat, relationships are formed between them.<br>A pattern is a system of relationships created through repetition."
           },
           "sub": {
            "he": "<b>יחידה:</b> מה חוזר.<br><b>חוק:</b> איך הוא חוזר.",
            "en": "<b>Unit:</b> what repeats.<br><b>Law:</b> how it repeats."
           },
           "body": {
-           "he": "דוגמה: בקיר לבנים, הלבנה יכולה להיות היחידה. החוק יכול להיות סידור הלבנים בשורות, כאשר כל שורה מוזזת ביחס לקודמת.",
-           "en": "Example: In a brick wall, the brick can be the unit. The law can be the way the bricks are laid in rows, with each row shifted in relation to the one before."
+           "he": "דוגמה: בקיר לבנים, הלבנה יכולה להיות היחידה. החוק יכול להיות סידור הלבנים בשורות, כאשר כל שורה מוזזת ביחס לשורה שלפניה.",
+           "en": "Example: In a brick wall, the brick can be the unit. The law can be the arrangement of the bricks in rows, with each row shifted in relation to the one before it."
           },
           "core": "C1"
          }
