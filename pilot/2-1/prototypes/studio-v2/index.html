@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>Interactive Art Studio · Prototype V2</title>
+<!--
+  Interactive Art Studio, Prototype V2 (isolated; not linked from the site). V1 stays in ../studio-v1/.
+  The activity decides which tools the studio shows (activities.js). Query parameters:
+    ?activity=drawing   which activity (default: drawing; also: pattern, color, composition)
+    ?lang=he|en         language (default: the site's saved language, else Hebrew)
+    ?back=<path>        where "Back to the lesson" goes; only a relative path inside this site is accepted
+  The work is saved in localStorage under "studio-v2:<lesson>:<activity>".
+-->
+<link rel="stylesheet" href="studio.css">
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top chrome">
+    <button class="back" id="back" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      <span data-t="back"></span>
+    </button>
+    <h1 class="title" data-t="title"></h1>
+  </header>
+
+  <main class="stage" id="stage">
+    <canvas id="canvas"></canvas>
+    <!-- the tools' panels are added here by the tools that need one -->
+  </main>
+
+  <div class="chrome">
+    <!-- built from the activity: undo, redo, then the activity's tools -->
+    <nav class="tools" id="tools"></nav>
+    <div class="actions">
+      <button class="btn" id="clear" type="button" data-t="clear"></button>
+      <button class="btn primary" id="save" type="button" data-t="save"></button>
+    </div>
+  </div>
+</div>
+
+<dialog id="confirmClear">
+  <p data-t="clearQ"></p>
+  <div class="row">
+    <button class="btn" type="button" value="cancel" data-t="cancel"></button>
+    <button class="btn danger" type="button" value="clear" data-t="clear"></button>
+  </div>
+</dialog>
+<dialog id="confirmExit">
+  <p data-t="unsaved"></p>
+  <div class="row">
+    <button class="btn" type="button" value="cancel" data-t="cancel"></button>
+    <button class="btn" type="button" value="exit" data-t="exit"></button>
+    <button class="btn primary" type="button" value="save" data-t="save"></button>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="activities.js"></script>
+<script src="js/core.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/color.js"></script>
+<script src="js/repeat.js"></script>
+<script src="js/fill.js"></script>
+<script src="js/arrange.js"></script>
+<script>Studio.boot();</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+/* Pilot 2.1 only (pilot/2-1/): if the web font does not load, the English name may wrap instead of widening the page */
+@media (max-width:520px){
+  .ed-brand{
+    white-space:normal;
+    min-width:0
+  }
+}
