@@ -345,5 +345,6 @@ window.LESSON_PAGES_INDEX = {
  "lessons/lesson-2-3.html": "lesson-pages/lesson-2-3.html",
  "lessons/lesson-2-4.html": "lesson-pages/lesson-2-4.html",
  "lessons/lesson-2-5.html": "lesson-pages/lesson-2-5.html",
- "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html"
+ "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html",
+ "lessons/lesson-4-1.html": "lesson-pages/lesson-4-1.html"
 };

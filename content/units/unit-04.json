@@ -7,6 +7,7 @@
   "count": { "he": "5 שיעורים + פרויקט מסכם", "en": "5 Lessons + Capstone Project" },
   "inspirationTitle": { "he": "רקע על האמנים", "en": "About the Artists" },
   "noPeopleLabel": true,
+  "pages": [{ "num": "4.1", "path": "lessons/lesson-4-1.html" }],
   "fixes": [
     { "lesson": "4.1", "field": "desc",
       "he": ["בהשראת קופסאות הזיכרון של ג'וזף קורנל, ", "בהשראת קופסאות הצל והקופסאות של ג׳וזף קורנל, שבהן חפצים, דימויים וזיכרונות מקבלים מקום חדש. "],
@@ -14,6 +15,7 @@
     { "lesson": "4.4", "field": "desc",
       "he": ["שוניברה משתמש בבד שעווה הולנדי, במקורו אפריקאי אך מיוצר באינדונזיה לשוקים בריטיים, כפרשנות על זהות תרבותית והיסטוריה קולוניאלית.", "ינקה שוניברי משתמש בבדי שעווה, שמקורם בהדפסי בטיק אינדונזיים שיוצרו באופן תעשייתי בהולנד ובבריטניה ונעשו לחלק ממסורות הלבוש במערב אפריקה. בעבודתו הבד הופך לנקודת מוצא לעיסוק בזהות תרבותית ובהיסטוריה קולוניאלית."],
       "en": ["Shonibare uses Dutch wax fabric, originally African but made in Indonesia for British markets, as a commentary on cultural identity and colonial history.", "Yinka Shonibare uses wax-print fabrics, which originated in Indonesian batik prints that were industrially produced in the Netherlands and Britain and became part of West African dress traditions. In his work the fabric becomes a starting point for exploring cultural identity and colonial history."] },
+    { "lesson": "4.2", "field": "title", "he": ["משפחה, מורשת ודיוקן", "מה מספר הדיוקן?"], "en": ["Family, Heritage and the Portrait", "What Does the Portrait Tell?"] },
     { "lesson": "4.4", "field": "title", "he": ["יינקה שוניברה", "ינקה שוניברי"] },
     { "he": ["קולאז'", "קולאז׳"], "count": 3 },
     { "lesson": "4.6", "field": "title", "he": ["✦ האוטוביוגרפיה החזותית שלי פרויקט מסכם", "✦ פרויקט מסכם: האוטוביוגרפיה החזותית שלי"], "en": ["✦ My Visual Autobiography Capstone", "✦ Capstone Project: My Visual Autobiography"] },

@@ -15,7 +15,8 @@ window.LESSON_PAGES_INDEX = {
  "lessons/lesson-2-3.html": "lesson-pages/lesson-2-3.html",
  "lessons/lesson-2-4.html": "lesson-pages/lesson-2-4.html",
  "lessons/lesson-2-5.html": "lesson-pages/lesson-2-5.html",
- "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html"
+ "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html",
+ "lessons/lesson-4-1.html": "lesson-pages/lesson-4-1.html"
 };
 window.LESSON_TITLES = {
  "lessons/journal-artwork.html": {
@@ -49,6 +50,10 @@ window.LESSON_TITLES = {
  "lessons/lesson-2-6.html": {
   "he": "כשהציור עצמו נע",
   "en": "When the Drawing Itself Moves"
+ },
+ "lessons/lesson-4-1.html": {
+  "he": "חפץ וזיכרון",
+  "en": "Object and Memory"
  }
 };
 /* the order of lessons in the new units, on the preview pages only (js/navigation-data.js is shared with the live site) */

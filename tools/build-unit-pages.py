@@ -292,6 +292,13 @@ def parse():
         if O:
             for f in O.get('fixes', []):
                 apply_fix(u, f)
+            for pg in O.get('pages', []):
+                # one lesson of the unit already has its lesson page: its row links there, with the page's
+                # title, short description and time; the unit's other lessons stay as they are
+                D = _lesson_page(pg['path'])
+                l = next(x for x in u['lessons'] if x['num'] == pg['num'])
+                l.update(open=True, title=D['title'], cap={'he': '', 'en': ''}, sub=D['intro'], desc=None,
+                         dur=D['time']['en'], href=NEW_LESSON_PAGES[pg['path']])
             if O.get('desc'):
                 u['desc'] = O['desc']
             if O.get('noApproach'):

@@ -99,7 +99,11 @@ const MAP = {
     explore: [0, 1, 2, 3, 4], sources: [5], look: [6], create: [7], end: [8] },
   /* 2.6 'When the drawing itself moves' (new, preview only), the last lesson of unit 2: a drop, Steir, actions, the unit */
   'lesson-2-6': { authored: true, variant: 'v2', layout: { explore: 'pattern', look: 'pattern', create: 'pattern', end: 'pattern' },
-    explore: [0, 1], sources: [2], look: [3], create: [4, 5, 6], end: [7, 8, 9] }
+    explore: [0, 1], sources: [2], look: [3], create: [4, 5, 6], end: [7, 8, 9] },
+  /* 4.1 'Object and memory' (new; the other lessons of unit 4 are still in development): an object, what we
+     see and cannot see, Cornell (by name, with a link to MoMA), the frame changes the look, a small world around one object */
+  'lesson-4-1': { authored: true, variant: 'v2', unit: 'unit04',   /* not in the course navigation yet: linked from the unit 4 page only */
+    explore: [0, 1, 2], sources: [3], look: [4], idea: [5, 6, 7, 8], create: [9, 10, 11, 12], end: [13, 14, 15, 16] }
 };
 /* in "create", these screens are the step-by-step "getting started" part */
 const STEPS_SECTION = 'create';
@@ -397,7 +401,7 @@ for (const [id, m] of Object.entries(MAP)) {
     sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
   }
   if (m.variant === 'v2') addWorkTitles(sections);
-  const u = unitOf(file);
+  const u = unitOf(file) || NAV.units.find(x => x.id === m.unit);
   const data = {
     id, path: file,
     /* the slide lesson is the classroom mode; for rewritten lessons it still holds the old content */

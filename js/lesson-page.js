@@ -413,7 +413,7 @@
     return '<a class="un un-' + dir + '" href="' + href + '">' + t(lab, 'span', 'un-lab') + t(title, 'span', 'un-t') + '</a>';
   }
   html += '<nav class="unit-nav lp-nav ed-wrap" aria-label="' + (L === 'he' ? 'ניווט בין שיעורים' : 'Lesson navigation') + '">' +
-    link(flat[i - 1], 'prev') + link(flat[i + 1], 'next') + '</nav>';
+    (i < 0 ? '' : link(flat[i - 1], 'prev') + link(flat[i + 1], 'next')) + '</nav>';   /* a lesson that is not in the navigation (4.1): no prev / next */
 
   root.innerHTML = html;
   if (V2) root.classList.add('lp-v2');
