@@ -1,0 +1,387 @@
+{
+  "_note": "Lesson 2.1 pilot (preview only): two versions of the same lesson, built from this one file by tools/build-lesson-data.js into lesson-pages/lesson-2-1-teacher.html and lesson-pages/lesson-2-1-learner.html. 'core' holds the shared artistic core once; a version's item is either a core id (\"C4\", injected as is) or its own block. In a 'guide' row, \"@C8\" embeds a core block and \"@C4:note\" the text of a core artwork note. The live lesson 2.1 (content/lessons/lesson-2-1.json) is not changed.",
+  "_sources": "Morris: Art Institute of Chicago, Strawberry Thief (artic.edu/artworks/149052): design date 1883; 'reportedly fashioned this pattern after watching birds steal strawberries from his kitchen garden'; image CC0 Public Domain Designation. V&A (collections.vam.ac.uk/item/O78889): 'a symmetrical design', 'pairs of thrushes'. Kusama: MoMA, No. F, 1959 (moma.org/collection/works/80176): began the Infinity Nets series after moving to New York City in 1958; 'infinite repetition'; 'interlocking brushstrokes'; 'giving equal weight to the interlocking brushstrokes and the spaces between them'. Kusama's work is protected: link only, no image.",
+  "title": { "he": "דפוסים בטבע ובאמנות", "en": "Patterns in Nature & Art" },
+  "number": "2.1",
+  "time": { "he": "50 דקות", "en": "50 min" },
+  "modes": {
+    "teacher": {
+      "label": { "he": "גרסת מורה", "en": "Teacher Version" },
+      "other": "lesson-2-1-learner.html",
+      "switch": { "he": "מעבר לגרסת לומד עצמאי", "en": "Switch to the Independent Learner Version" }
+    },
+    "learner": {
+      "label": { "he": "גרסת לומד עצמאי", "en": "Independent Learner Version" },
+      "other": "lesson-2-1-teacher.html",
+      "switch": { "he": "מעבר לגרסת מורה", "en": "Switch to the Teacher Version" }
+    }
+  },
+
+  "core": {
+    "C1": {
+      "he": { "big": "דפוס אינו רק דבר שחוזר.<br>הוא מערכת של יחסים.", "sub": "<b>יחידה:</b> מה חוזר.<br><b>חוק:</b> איך הוא חוזר.", "body": "דוגמה: בקיר לבנים, הלבנה יכולה להיות היחידה. החוק יכול להיות סידור הלבנים בשורות, כאשר כל שורה מוזזת ביחס לקודמת." },
+      "en": { "big": "A pattern is not only something that repeats.<br>It is a system of relationships.", "sub": "<b>Unit:</b> what repeats.<br><b>Law:</b> how it repeats.", "body": "Example: In a brick wall, the brick can be the unit. The law can be the way the bricks are laid in rows, with each row shifted in relation to the one before." }
+    },
+    "C2": {
+      "he": { "sub": "ממה יכולה להיות היחידה: צורה · קו · מרווח · כיוון" },
+      "en": { "sub": "The unit can be a shape, a line, a space, or a direction." }
+    },
+    "C3": {
+      "he": { "sub": "איך היחידה יכולה לחזור: במרווח קבוע · בשורות · בשיקוף · בסיבוב · בשינוי הדרגתי" },
+      "en": { "sub": "The unit can repeat at a fixed spacing, in rows, through mirroring, through rotation, or through gradual change." }
+    },
+    "C4": {
+      "he": { "art": { "artist": "ויליאם מוריס", "title": "גנב התותים, 1883", "img": "morris-strawberry-thief-aic",
+        "note": "מוריס עיצב את הדוגמה ב־1883. הדוגמה סימטרית, וציפורים מופיעות בה בזוגות. לפי Art Institute of Chicago, מוריס עיצב את הדוגמה, כך מדווח, אחרי שראה ציפורים גונבות תותים מגינת הירק שלו.",
+        "link": { "href": "https://www.artic.edu/artworks/149052/strawberry-thief", "label": "פתיחת היצירה באתר Art Institute of Chicago ↗" } } },
+      "en": { "art": { "artist": "William Morris", "title": "Strawberry Thief, 1883",
+        "note": "Morris designed the pattern in 1883. The pattern is symmetrical, and the birds appear in pairs. According to the Art Institute of Chicago, Morris reportedly designed the pattern after watching birds steal strawberries from his kitchen garden.",
+        "link": { "href": "https://www.artic.edu/artworks/149052/strawberry-thief", "label": "Open the work on the Art Institute of Chicago website ↗" } } }
+    },
+    "C5": {
+      "he": { "art": { "artist": "יאיוי קוסמה", "title": "No. F, 1959",
+        "note": "ב־1958 עברה יאיוי קוסמה לניו יורק, ושם החלה בסדרת 'רשתות האינסוף' (Infinity Nets), שבה עסקה ברעיון של חזרה אינסופית. הציור בנוי ממשיכות מכחול משתלבות, ולפי MoMA הוא נותן משקל שווה למשיכות ולחללים שביניהן.",
+        "link": { "href": "https://www.moma.org/collection/works/80176", "label": "פתיחת היצירה באתר MoMA ↗" } } },
+      "en": { "art": { "artist": "Yayoi Kusama", "title": "No. F, 1959",
+        "note": "In 1958 Yayoi Kusama moved to New York, where she began her Infinity Nets series, exploring the idea of infinite repetition. The painting is built from interlocking brushstrokes, and according to MoMA it gives equal weight to the brushstrokes and the spaces between them.",
+        "link": { "href": "https://www.moma.org/collection/works/80176", "label": "Open the work on the MoMA website ↗" } } }
+    },
+    "C6": {
+      "he": { "big": "אותה פעולה, חזרה, יוצרת כאן שתי מערכות חזותיות שונות. במה הן שונות?", "sub": "שאלות שעוזרות להשוות:",
+        "q0": "מה חוזר?", "q1": "איך זה חוזר?", "q2": "מה קורה בין הדברים שחוזרים?", "q3": "איפה הדפוס נגמר?" },
+      "en": { "big": "The same action, repetition, creates two different visual systems here. How are they different?", "sub": "Questions that help you compare:",
+        "q0": "What repeats?", "q1": "How does it repeat?", "q2": "What happens between the things that repeat?", "q3": "Where does the pattern end?" }
+    },
+    "C7": {
+      "he": { "big": "שתי דרכים לחזור, להשראה",
+        "q0": "<b>כמו אצל מוריס:</b> יחידה ברורה שחוזרת בתוך מבנה, תוך יצירת יחסים בין החלקים.",
+        "q1": "<b>כמו אצל יאיוי קוסמה:</b> סימן שחוזר שוב ושוב, עם תשומת לב לחללים שבין הסימנים.",
+        "ask": "לא מעתיקים את היצירה. לוקחים ממנה דרך לעבוד עם חזרה." },
+      "en": { "big": "Two ways of repeating, as inspiration",
+        "q0": "<b>As in Morris:</b> a clear unit that repeats within a structure, creating relationships between the parts.",
+        "q1": "<b>As in Yayoi Kusama:</b> a mark repeated again and again, with attention to the spaces between the marks.",
+        "ask": "You don't copy the work. You take from it a way of working with repetition." }
+    },
+    "C8": {
+      "he": { "i": [
+        "לצייר את הדפוס שנמצא. לא את האובייקט, רק את החזרה.",
+        "להתחיל מיחידה אחת, ולחזור עליה לפי החוק שנמצא, בדרך החזרה שנבחרה.",
+        "לעצור ולשאול: האם החזרה אחידה או משתנה? אפשר לתת לקצב להשתנות: להאיץ, להאט, להרחיב." ] },
+      "en": { "i": [
+        "Draw the pattern you found. Not the object, only the repetition.",
+        "Start from one unit, and repeat it following the law you found, in the way of repeating you chose.",
+        "Pause and ask: is the repetition even or changing? You can let the rhythm change: speed up, slow down, spread out." ] }
+    },
+    "C9": {
+      "he": { "sub": "לשנות דבר אחד בלבד: גודל, כיוון או מרווח. כל השאר נשאר כמו שהיה.", "body": "לראות מה קורה לדפוס כשמשנים חוק אחד." },
+      "en": { "sub": "Change only one thing: size, direction or spacing. Everything else stays as it was.", "body": "Notice what happens to the pattern when one law changes." }
+    },
+    "C10": {
+      "he": { "sub": "הדפוס השתנה, אבל האם הוא עדיין מזוהה?" },
+      "en": { "sub": "The pattern has changed, but is it still recognizable?" }
+    },
+    "C11": {
+      "he": { "sub": "איזה חוק השתנה, ומה קרה לדפוס?", "ph": "כששיניתי את ה… הדפוס…" },
+      "en": { "sub": "Which law changed, and what happened to the pattern?", "ph": "When I changed the…, the pattern…" }
+    },
+    "C12": {
+      "he": { "kind": "close", "big": "דפוס הוא חוק שאפשר לראות.", "sub": "וכשמשנים חוק אחד, אפשר לראות איך כל המערכת משתנה." },
+      "en": { "big": "Pattern is a law you can see.", "sub": "When you change one law, you can see how the whole system changes." }
+    }
+  },
+
+  "teacher": {
+    "sections": {
+      "prep": [
+        { "he": { "label": "מטרות השיעור", "sub": "בסוף השיעור התלמידים:", "i": [
+            "מזהים בדפוס אמיתי את היחידה (מה חוזר) ואת החוק (איך הוא חוזר).",
+            "מבחינים בין שתי מערכות חזרה שונות, אצל מוריס ואצל יאיוי קוסמה.",
+            "בונים דפוס מיחידה ומחוק, ומשנים בו חוק אחד בלבד.",
+            "מנסחים במילים מה השתנה בדפוס בעקבות השינוי." ] },
+          "en": { "label": "Lesson goals", "sub": "By the end of the lesson, students:", "i": [
+            "Identify, in a real pattern, the unit (what repeats) and the law (how it repeats).",
+            "Distinguish between two different systems of repetition, in Morris and in Yayoi Kusama.",
+            "Build a pattern from a unit and a law, and change only one law in it.",
+            "Put into words what changed in the pattern as a result." ] } },
+        { "he": { "guide": [
+            ["time", "50 דקות."],
+            ["materials", "נייר או יומן חזותי, עיפרון וצבעים לבחירה."],
+            ["prep", [
+              "להכין לכל תלמיד דף ועיפרון.",
+              "לבחור מראש בכיתה שניים או שלושה דפוסים אמיתיים, למשל אריח, בד או רשת חלון, בשביל מי שיתקשה למצוא דפוס. אפשר גם להביא חפץ עם דפוס.",
+              "להכין את התמונה של מוריס להקרנה או להדפסה. היא ברישיון CC0.",
+              "לפתוח את דף No. F באתר MoMA להצגה בכיתה. אין להוריד או להדפיס את התמונה.",
+              "כדאי לנסות את התרגיל לבד לפני השיעור." ]] ] },
+          "en": { "guide": [
+            ["time", "50 minutes."],
+            ["materials", "Paper or a visual journal, a pencil and colours of your choice."],
+            ["prep", [
+              "Have a sheet of paper and a pencil ready for each student.",
+              "Choose two or three real patterns in the classroom in advance, such as a tile, a fabric or a window screen, for students who find it hard to find one. You can also bring in an object with a pattern.",
+              "Prepare the Morris image for projection or printing. It is CC0.",
+              "Open the No. F page on the MoMA website to show in class. Do not download or print the image.",
+              "It is worth trying the exercise yourself before the lesson." ]] ] } },
+        { "he": { "label": "רקע", "guide": [
+            ["מוריס", "@C4:note"],
+            ["יאיוי קוסמה", "@C5:note"],
+            ["concepts", "@C1"] ] },
+          "en": { "label": "Background", "guide": [
+            ["Morris", "@C4:note"],
+            ["Yayoi Kusama", "@C5:note"],
+            ["concepts", "@C1"] ] } }
+      ],
+      "explore": [
+        { "he": { "label": "1. פתיחה (3 דקות)", "guide": [
+            ["goal", "להפנות את תשומת הלב לחזרה שבעולם."],
+            ["instruction", "\"הסתכלו סביבכם. האם אתם רואים חזרה? דפוסים נמצאים בכל מקום. בקליפת העץ, בעורקי העלה, באריח שמתחת לרגליכם.\""],
+            ["look", "תלמידים שמצביעים על חזרה ממשית בחדר."],
+            ["stuck", "להצביע על אחד הדפוסים שהוכנו מראש."] ] },
+          "en": { "label": "1. Opening (3 min)", "guide": [
+            ["goal", "Draw attention to repetition in the world."],
+            ["instruction", "\"Look around you. Do you see repetition? Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet.\""],
+            ["look", "Students pointing to actual repetition in the room."],
+            ["stuck", "Point to one of the patterns you prepared."] ] } },
+        { "he": { "label": "2. מציאת דפוס (4 דקות)", "guide": [
+            ["goal", "לעבוד מהמציאות, לא מתמונה."],
+            ["instruction", "\"מצאו דפוס אחד שנמצא לידכם עכשיו. לא בתמונה, במציאות. הסתכלו על בד, רצפה, קיר, עור, צמח.\""],
+            ["look", "לכל תלמיד יש דפוס אחד שהוא יכול להצביע עליו."],
+            ["stuck", "לתת לבחור אחד מהדפוסים שהוכנו, או לחפש על הבגדים."] ] },
+          "en": { "label": "2. Finding a pattern (4 min)", "guide": [
+            ["goal", "Work from reality, not from an image."],
+            ["instruction", "\"Find one pattern near you right now. Not in an image, in reality. Look at fabric, floor, wall, skin, a plant.\""],
+            ["look", "Each student has one pattern they can point to."],
+            ["stuck", "Let them choose one of the prepared patterns, or look at their own clothes."] ] } },
+        { "he": { "label": "3. זיהוי היחידה (4 דקות)", "guide": [
+            ["goal", "לבודד את מה שחוזר."],
+            ["instruction", "\"התקרבו אליו. מה היחידה? מה הדבר הקטן ביותר שחוזר?\""],
+            ["options", "@C2"],
+            ["look", "משהו קטן ומוגדר, ולא \"הדפוס כולו\"."],
+            ["stuck", [ "להשתמש בדוגמת קיר הלבנים.", "להציע לכסות את הדפוס בכף היד ולחשוף רק חלק קטן." ]] ] },
+          "en": { "label": "3. Identifying the unit (4 min)", "guide": [
+            ["goal", "Isolate what repeats."],
+            ["instruction", "\"Move closer to it. What is the unit? What is the smallest thing that repeats?\""],
+            ["options", "@C2"],
+            ["look", "Something small and defined, not \"the whole pattern\"."],
+            ["stuck", [ "Use the brick wall example.", "Suggest covering the pattern with a hand and revealing only a small part." ]] ] } },
+        { "he": { "label": "4. זיהוי החוק (4 דקות)", "guide": [
+            ["goal", "להבין שהיחידה חוזרת לפי סדר."],
+            ["instruction", "\"מה החוק? איך היחידה חוזרת?\""],
+            ["options", "@C3"],
+            ["look", "משפט שמתאר את האופן שבו היחידה חוזרת. החוק יכול להיות פשוט, מורכב או להשתנות בהדרגה."],
+            ["stuck", "לשאול \"אם הייתם ממשיכים את הדפוס, איפה הייתם שמים את היחידה הבאה?\""] ] },
+          "en": { "label": "4. Identifying the law (4 min)", "guide": [
+            ["goal", "Understand that the unit repeats in an order."],
+            ["instruction", "\"What is the law? How does the unit repeat?\""],
+            ["options", "@C3"],
+            ["look", "A sentence that describes how the unit repeats. The law can be simple, complex, or change gradually."],
+            ["stuck", "Ask: \"If you carried on the pattern, where would you put the next unit?\""] ] } }
+      ],
+      "sources": [
+        { "he": { "label": "5. מוריס (4 דקות)", "guide": [ ["goal", "לראות יחידה וחוק אצל אמן."] ] },
+          "en": { "label": "5. Morris (4 min)", "guide": [ ["goal", "See a unit and a law in an artist's work."] ] } },
+        "C4",
+        { "he": { "guide": [
+            ["question", "\"מה חוזר ביצירה? איפה אתם רואים סימטריה או שיקוף, אם בכלל?\""],
+            ["look", [ "יחידה שהתלמידים מזהים בעצמם, למשל ציפור, תות או פרח. אין תשובה אחת נכונה.", "הבחנה בחלקים שעומדים זה מול זה." ]],
+            ["stuck", "לבקש לעקוב באצבע אחרי ציפור אחת, ולחפש את הציפור שמולה."] ] },
+          "en": { "guide": [
+            ["question", "\"What repeats in the work? Where do you see symmetry or mirroring, if at all?\""],
+            ["look", [ "A unit the students identify themselves, such as a bird, a strawberry or a flower. There is no single right answer.", "Noticing parts that face each other." ]],
+            ["stuck", "Ask them to follow one bird with a finger, and look for the bird facing it."] ] } },
+        { "he": { "label": "6. יאיוי קוסמה (4 דקות)", "guide": [
+            ["goal", "לראות מערכת חזרה מסוג אחר."],
+            ["show", "את דף היצירה באתר MoMA."] ] },
+          "en": { "label": "6. Yayoi Kusama (4 min)", "guide": [
+            ["goal", "See a different kind of system of repetition."],
+            ["show", "The work's page on the MoMA website."] ] } },
+        "C5",
+        { "he": { "guide": [
+            ["question", "\"אצל יאיוי קוסמה, האם יש בכלל יחידה? מה חוזר?\""],
+            ["look", [ "אין תשובה אחת נכונה. תלמידים עשויים לראות יחידה, או לומר שיש סימן שחוזר.", "לשים לב למי שמתייחס גם לחללים שבין הסימנים." ]],
+            ["stuck", "לשאול \"מה הייתם צריכים לצייר שוב ושוב כדי לבנות משהו כזה?\""] ] },
+          "en": { "guide": [
+            ["question", "\"In Yayoi Kusama's work, is there a unit at all? What repeats?\""],
+            ["look", [ "There is no single right answer. Students may see a unit, or say that a mark repeats.", "Notice students who also refer to the spaces between the marks." ]],
+            ["stuck", "Ask: \"What would you have to draw again and again to build something like this?\""] ] } }
+      ],
+      "look": [
+        { "he": { "label": "7. השוואה (4 דקות)", "guide": [
+            ["goal", "להבין שאותה פעולה, חזרה, יכולה ליצור מערכות שונות."],
+            ["question", "@C6"],
+            ["look", [ "<b>אצל מוריס:</b> יחידה ברורה יחסית, סימטריה, וחזרה בתוך מבנה.", "<b>אצל יאיוי קוסמה:</b> חזרה סדרתית, משיכות משתלבות, ויחסים בין הסימנים לחללים.", "לא להוביל להבחנה \"מתוכנן מול ספונטני\"." ]],
+            ["stuck", "לעבור על השאלות שעוזרות להשוות, אחת־אחת, לכל יצירה."] ] },
+          "en": { "label": "7. Comparison (4 min)", "guide": [
+            ["goal", "Understand that the same action, repetition, can create different systems."],
+            ["question", "@C6"],
+            ["look", [ "<b>In Morris:</b> a relatively clear unit, symmetry, and repetition within a structure.", "<b>In Yayoi Kusama:</b> serial repetition, interlocking brushstrokes, and relationships between the marks and the spaces.", "Don't steer toward a \"planned versus spontaneous\" distinction." ]],
+            ["stuck", "Go through the questions that help you compare, one by one, for each work."] ] } }
+      ],
+      "idea": [
+        { "he": { "label": "8. בחירה אמנותית (2 דקות)", "guide": [
+            ["goal", "לקחת מהאמנים דרך פעולה, ולא תמונה."],
+            ["instruction", "@C7"],
+            ["look", "כל תלמיד יודע לומר באיזו דרך בחר."],
+            ["stuck", "לשאול לאיזו משתי היצירות הוא רוצה לחזור, ולבחור את הדרך שלה."] ] },
+          "en": { "label": "8. Artistic choice (2 min)", "guide": [
+            ["goal", "Take a way of working from the artists, not an image."],
+            ["instruction", "@C7"],
+            ["look", "Each student can say which way they chose."],
+            ["stuck", "Ask which of the two works they would like to go back to, and take its way of repeating."] ] } }
+      ],
+      "create": [
+        { "he": { "label": "9. יצירה (10 דקות)", "guide": [
+            ["goal", "לבנות דפוס מיחידה ומחוק."],
+            ["instruction", "@C8"],
+            ["look", "יחידה שאפשר לזהות, וחוק שאפשר לתאר. הדף לא צריך להיות מלא."],
+            ["stuck", [ "מי שמצייר את האובייקט: להחזיר אותו ליחידה אחת.", "מי שלא מתחיל: להציע לצייר שלוש פעמים את אותה יחידה, בשורה." ]] ] },
+          "en": { "label": "9. Making (10 min)", "guide": [
+            ["goal", "Build a pattern from a unit and a law."],
+            ["instruction", "@C8"],
+            ["look", "A unit that can be identified, and a law that can be described. The page does not need to be full."],
+            ["stuck", [ "If they are drawing the object: bring them back to a single unit.", "If they can't get started: suggest drawing the same unit three times, in a row." ]] ] } },
+        { "he": { "label": "10. שינוי חוק אחד (4 דקות)", "guide": [
+            ["goal", "לראות איך שינוי אחד משפיע על כל המערכת."],
+            ["instruction", "@C9"],
+            ["look", "בדיוק שינוי אחד."],
+            ["stuck", "להציע את השינוי הפשוט ביותר: להגדיל את היחידה, ולהשאיר את כל השאר. אם השתנו כמה דברים, לשאול מה היה השינוי הראשון ולהתחיל ממנו."] ] },
+          "en": { "label": "10. Changing one law (4 min)", "guide": [
+            ["goal", "See how one change affects the whole system."],
+            ["instruction", "@C9"],
+            ["look", "Exactly one change."],
+            ["stuck", "Suggest the simplest change: make the unit bigger and keep everything else. If several things changed, ask what the first change was and start again from it."] ] } }
+      ],
+      "end": [
+        { "he": { "label": "11. בדיקה (2 דקות)", "guide": [
+            ["questions", [ "האם רואים את היחידה?", "האם אפשר לתאר את החוק?", "האם השתנה דבר אחד בלבד?" ], "@C10"],
+            ["outcome", "דף עם דפוס שנבנה מיחידה ומחוק, גרסה שבה השתנה חוק אחד, ומשפט רפלקציה."] ] },
+          "en": { "label": "11. Check (2 min)", "guide": [
+            ["questions", [ "Can you see the unit?", "Can you describe the law?", "Did only one thing change?" ], "@C10"],
+            ["outcome", "A page with a pattern built from a unit and a law, a version in which one law changed, and one sentence of reflection."] ] } },
+        { "he": { "label": "12. רפלקציה וסיום (5 דקות)", "guide": [
+            ["reflection", "@C11"],
+            ["discussion", "שניים או שלושה תלמידים מציגים את שתי הגרסאות זו לצד זו, והכיתה מנסה לזהות איזה חוק השתנה, לפני שהם מספרים."] ] },
+          "en": { "label": "12. Reflection and closing (5 min)", "guide": [
+            ["reflection", "@C11"],
+            ["discussion", "Two or three students show their two versions side by side, and the class tries to work out which law changed before they say."] ] } },
+        "C12"
+      ]
+    }
+  },
+
+  "learner": {
+    "sections": {
+      "explore": [
+        { "he": { "label": "1. פתיחה", "guide": [
+            ["do", "להסתכל סביב ולחפש חזרה."],
+            ["why", "דפוסים נמצאים בכל מקום. בקליפת העץ, בעורקי העלה, באריח שמתחת לרגליים. בשיעור הזה תגלה איך דפוס בנוי, ואז תבנה דפוס משלך ותשנה אותו."],
+            ["materials", "נייר או יומן חזותי, עיפרון וצבעים לבחירה. בערך 50 דקות."],
+            ["check", "מצאת לפחות מקום אחד שבו משהו חוזר?"] ] },
+          "en": { "label": "1. Opening", "guide": [
+            ["do", "Look around you and search for repetition."],
+            ["why", "Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet. In this lesson you'll discover how a pattern is built, then build a pattern of your own and change it."],
+            ["materials", "Paper or a visual journal, a pencil and colours of your choice. About 50 minutes."],
+            ["check", "Have you found at least one place where something repeats?"] ] } },
+        { "he": { "label": "2. מציאת דפוס", "guide": [
+            ["do", "לבחור דפוס אחד שנמצא לידך עכשיו. לא בתמונה, במציאות: בד, רצפה, קיר, עור, צמח."],
+            ["why", "התבוננות בדפוס אמיתי מאפשרת לך לראות מקרוב את החזרה וגם את השינויים הקטנים שבתוכה."],
+            ["check", "אפשר להצביע על הדפוס שבחרת?"] ] },
+          "en": { "label": "2. Finding a pattern", "guide": [
+            ["do", "Choose one pattern near you right now. Not in an image, in reality: fabric, floor, wall, skin, a plant."],
+            ["why", "Looking at a real pattern lets you see the repetition up close, and also the small changes within it."],
+            ["check", "Can you point to the pattern you chose?"] ] } },
+        { "he": { "label": "3. זיהוי היחידה", "guide": [
+            ["do", "להתקרב לדפוס ולמצוא את הדבר הקטן ביותר שחוזר."],
+            ["why", "@C1", "@C2"],
+            ["check", "אם מכסים את כל הדפוס חוץ מהיחידה, עדיין ברור שזה החלק שחוזר?"] ] },
+          "en": { "label": "3. Identifying the unit", "guide": [
+            ["do", "Move closer to the pattern and find the smallest thing that repeats."],
+            ["why", "@C1", "@C2"],
+            ["check", "If you cover the whole pattern except the unit, is it still clear that this is the part that repeats?"] ] } },
+        { "he": { "label": "4. זיהוי החוק", "guide": [
+            ["do", "לשאול איך היחידה חוזרת."],
+            ["why", "החוק הוא האופן שבו היחידה חוזרת: איפה מופיעה היחידה הבאה, באיזה כיוון ובאיזה מרווח. החוק יכול להיות פשוט, מורכב או להשתנות בהדרגה.",
+              "דרכים שבהן היחידה יכולה לחזור: במרווח קבוע · בשורות · בשיקוף · בסיבוב · בשינוי הדרגתי"],
+            ["check", "אם היית צריך להמשיך את הדפוס, היית יודע איפה לשים את היחידה הבאה?"] ] },
+          "en": { "label": "4. Identifying the law", "guide": [
+            ["do", "Ask how the unit repeats."],
+            ["why", "The law is how the unit repeats: where the next unit appears, in which direction, and at what spacing. The law can be simple, complex, or change gradually.",
+              "Ways the unit can repeat: at a fixed spacing · in rows · through mirroring · through rotation · through gradual change"],
+            ["check", "If you had to carry on the pattern, would you know where to put the next unit?"] ] } }
+      ],
+      "sources": [
+        { "he": { "label": "5. מוריס", "guide": [ ["do", "להתבונן ביצירה, ולשאול מה היחידה אצל מוריס."] ] },
+          "en": { "label": "5. Morris", "guide": [ ["do", "Look at the work, and ask what the unit is in Morris's pattern."] ] } },
+        "C4",
+        { "he": { "guide": [
+            ["why", "אצל מוריס אפשר לחפש יחידה ברורה יחסית, ולראות איך היא חוזרת בתוך מבנה."],
+            ["check", [ "איפה אתה רואה סימטריה או שיקוף?", "מה גורם לך לחשוב שיש כאן שיקוף?" ]] ] },
+          "en": { "guide": [
+            ["why", "In Morris's work you can look for a relatively clear unit, and see how it repeats within a structure."],
+            ["check", [ "Where do you see symmetry or mirroring?", "What makes you think there is mirroring here?" ]] ] } },
+        { "he": { "label": "6. יאיוי קוסמה", "guide": [ ["do", "לפתוח את היצירה באתר MoMA ולהתבונן בה."] ] },
+          "en": { "label": "6. Yayoi Kusama", "guide": [ ["do", "Open the work on the MoMA website and look at it."] ] } },
+        "C5",
+        { "he": { "guide": [
+            ["why", "כאן כדאי להסתכל גם על הסימנים וגם על החללים שביניהם."],
+            ["check", "האם אתה מצליח לזהות יחידה ברורה? אם כן — מה היא? אם לא — מה בכל זאת חוזר?"] ] },
+          "en": { "guide": [
+            ["why", "Here it's worth looking both at the marks and at the spaces between them."],
+            ["check", "Can you identify a clear unit? If so, what is it? If not, what still repeats?"] ] } }
+      ],
+      "look": [
+        { "he": { "label": "7. השוואה", "guide": [
+            ["do", "@C6"],
+            ["why", "אין כאן תשובה נכונה אחת. המטרה היא לראות שאותה פעולה, חזרה, יכולה לבנות מערכות שונות."],
+            ["check", "מצאת לפחות הבדל אחד בין שתי היצירות?"] ] },
+          "en": { "label": "7. Comparison", "guide": [
+            ["do", "@C6"],
+            ["why", "There is no single right answer here. The aim is to see that the same action, repetition, can build different systems."],
+            ["check", "Have you found at least one difference between the two works?"] ] } }
+      ],
+      "idea": [
+        { "he": { "label": "8. לקיחת השראה", "guide": [
+            ["do", "@C7"],
+            ["why", "ההשראה היא מהאופן שבו האמן חוזר על משהו, לא ממה שהוא מצייר."],
+            ["check", "אפשר לומר במשפט אחד איזו דרך בחרת, ולמה?"] ] },
+          "en": { "label": "8. Taking inspiration", "guide": [
+            ["do", "@C7"],
+            ["why", "The inspiration comes from how the artist repeats something, not from what they draw."],
+            ["check", "Can you say in one sentence which way you chose, and why?"] ] } }
+      ],
+      "create": [
+        { "he": { "label": "9. יצירה", "guide": [
+            ["do", "@C8"],
+            ["why", "לא צריך למלא את הדף. מספיקות כמה חזרות, כדי שהחוק ייראה."],
+            ["check", [ "רואים את היחידה?", "האם אפשר לתאר במילים איך היחידה חוזרת?", "ציירת חזרה, ולא את האובייקט עצמו?" ]] ] },
+          "en": { "label": "9. Making", "guide": [
+            ["do", "@C8"],
+            ["why", "You don't need to fill the page. A few repetitions are enough for the law to show."],
+            ["check", [ "Can you see the unit?", "Can you describe in words how the unit repeats?", "Did you draw repetition, and not the object itself?" ]] ] } },
+        { "he": { "label": "10. שינוי חוק אחד", "guide": [
+            ["do", "@C9"],
+            ["why", "כשמשנים רק דבר אחד, רואים בדיוק מה הוא עושה לדפוס. אם משנים כמה דברים בבת אחת, כבר אי אפשר לדעת מה גרם לשינוי."],
+            ["check", "שינית דבר אחד בלבד? אם השתנו כמה דברים, לבחור אחד מהם ולנסות שוב."] ] },
+          "en": { "label": "10. Changing one law", "guide": [
+            ["do", "@C9"],
+            ["why", "When you change only one thing, you can see exactly what it does to the pattern. If you change several things at once, you can no longer tell what caused the change."],
+            ["check", "Did you change only one thing? If several things changed, choose one of them and try again."] ] } }
+      ],
+      "end": [
+        { "he": { "label": "11. בדיקה עצמית", "guide": [
+            ["do", "להניח את שתי הגרסאות זו לצד זו.", "@C10"],
+            ["checklist", [ "יש יחידה ברורה.", "יש חוק שאפשר לתאר.", "השתנה דבר אחד בלבד.", "אפשר לומר מה השתנה." ]] ] },
+          "en": { "label": "11. Self-check", "guide": [
+            ["do", "Place the two versions side by side.", "@C10"],
+            ["checklist", [ "There is a clear unit.", "There is a law you can describe.", "Only one thing changed.", "You can say what changed." ]] ] } },
+        { "he": { "label": "12. רפלקציה", "guide": [
+            ["do", "לכתוב משפט אחד.", "@C11"],
+            ["why", "הכתיבה עוזרת לראות מה למדת מהניסוי, ולא רק מה ציירת."] ] },
+          "en": { "label": "12. Reflection", "guide": [
+            ["do", "Write one sentence.", "@C11"],
+            ["why", "Writing helps you see what you learned from the experiment, and not only what you drew."] ] } },
+        { "he": { "label": "13. סיום" }, "en": { "label": "13. Closing" } },
+        "C12"
+      ]
+    }
+  }
+}

@@ -103,7 +103,12 @@ const MAP = {
   /* 4.1 'Object and memory' (new; the other lessons of unit 4 are still in development): an object, what we
      see and cannot see, Cornell (by name, with a link to MoMA), the frame changes the look, a small world around one object */
   'lesson-4-1': { authored: true, variant: 'v2', unit: 'unit04',   /* not in the course navigation yet: linked from the unit 4 page only */
-    explore: [0, 1, 2], sources: [3], look: [4], idea: [5, 6, 7, 8], create: [9, 10, 11, 12], end: [13, 14, 15, 16] }
+    explore: [0, 1, 2], sources: [3], look: [4], idea: [5, 6, 7, 8], create: [9, 10, 11, 12], end: [13, 14, 15, 16] },
+  /* 2.1 pilot (preview only): a teacher version and an independent learner version of 'Patterns in nature and art',
+     both built from content/lessons/lesson-2-1-pilot.json (one shared core, one layer per version); not in the
+     navigation, not registered in the lesson index, noindex; the live 2.1 above is unchanged */
+  'lesson-2-1-teacher': { pilot: 'lesson-2-1-pilot', mode: 'teacher', variant: 'v2', unit: 'unit02', preview: true, noSteps: true, v: 28 },
+  'lesson-2-1-learner': { pilot: 'lesson-2-1-pilot', mode: 'learner', variant: 'v2', unit: 'unit02', preview: true, noSteps: true, v: 28 }
 };
 /* in "create", these screens are the step-by-step "getting started" part */
 const STEPS_SECTION = 'create';
@@ -218,6 +223,8 @@ function blockFromT(T, n, html) {
   if (Array.isArray(he.sketchLabels)) b.sketchLabels = { he: he.sketchLabels, en: en.sketchLabels || he.sketchLabels };
   if (he.sketchCap) b.sketchCap = bil(he.sketchCap, en.sketchCap);                    // small pattern sketches: a unit in a viewfinder, one rule changed (2.1)           // small sketches: two patches touching, overlapping, blending (1.1)           // the unit's work laid out in order (1.9)
   if (Array.isArray(he.ph2)) b.prompts = he.ph2.map((v, k) => bil(v, (en.ph2 || [])[k]));   // two writing spaces side by side
+  if (Array.isArray(he.guide)) b.guide = he.guide.map((r, k) => guideRow(r, (en.guide || [])[k] || r));   // labelled rows (2.1 pilot)
+  if (he._core) b.core = he._core;                                                                       // a block of the pilot's shared core
   if (Array.isArray(he.lens)) { b.lenses = { he: he.lens, en: en.lens || he.lens }; if (he.lensLabel) b.lensLabel = bil(he.lensLabel, en.lensLabel); }
 
   const imgs = screenImages(html);
@@ -285,19 +292,19 @@ function unitOf(p) {
   return null;
 }
 
-function pageHtml(id, title) {
+function pageHtml(id, title, o = {}) {
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl" translate="no" class="notranslate">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google" content="notranslate">
-<title>${title} · מקורות השראה באמנות</title>
+${o.noindex ? '<meta name="robots" content="noindex">\n' : ''}<title>${title} · מקורות השראה באמנות</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/design-system.css?v=6">
-<link rel="stylesheet" href="../css/lesson-page.css?v=27">
+<link rel="stylesheet" href="../css/lesson-page.css?v=${o.v || 27}">
 </head>
 <body class="ed">
 <script src="../js/app-init.js?v=20260927-structure"></script>
@@ -330,7 +337,7 @@ function pageHtml(id, title) {
 
 <script src="../js/site-nav.js"></script>
 <script src="../data/lesson-pages/${id}.js"></script>
-<script src="../js/lesson-page.js?v=27"></script>
+<script src="../js/lesson-page.js?v=${o.v || 27}"></script>
 <script src="../js/site-drawer.js?v=8" data-base="../"></script>
 <script src="../js/editorial.js?v=1"></script>
 </body>
@@ -356,12 +363,54 @@ for (const [uid, ids] of Object.entries(ADD)) {
   ADDED[uid].forEach(l => { if (!u.lessons.some(x => x.path === l.path)) u.lessons.push(l); });
 }
 
+/* 2.1 pilot: one content file, a shared core and two versions (teacher, learner) */
+let PILOT_CORE = {};
+/* a labelled row: [key or label, ...parts]; a part is text, a list, or { core } (a core block shown inside the row).
+   A key ('goal', 'do', …) is the same in both languages and is labelled by js/lesson-page.js; any other first
+   item is the row's own label */
+function guideRow(h, e) {
+  const row = h[0] === e[0] ? { k: h[0] } : { label: bil(h[0], e[0]) };
+  row.parts = h.slice(1).map((p, i) => {
+    const q = e[i + 1];
+    if (p && p.core) return { block: Object.assign(blockFromT({ he: { s: [PILOT_CORE[p.core].he] }, en: { s: [PILOT_CORE[p.core].en] } }, 0, ''), { core: p.core }) };
+    if (Array.isArray(p)) return { list: { he: p, en: q || p } };
+    return { text: bil(p, q) };
+  });
+  return row;
+}
+/* the screens of one version, in the format of the authored lessons, and which screens each section takes;
+   a core id becomes that core block; in a row, '@C8' embeds core block C8 and '@C4:note' the text of its artwork note */
+function pilotLesson(m) {
+  const J = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', m.pilot + '.json'), 'utf8'));
+  PILOT_CORE = J.core;
+  const core = c => { if (!J.core[c]) throw new Error(m.pilot + ': no core block ' + c); return J.core[c]; };
+  const ref = (p, L) => {
+    if (typeof p !== 'string' || p[0] !== '@') return p;
+    const [c, f] = p.slice(1).split(':');
+    return f ? core(c)[L].art[f] : (core(c), { core: c });
+  };
+  const side = (b, L) => b.guide ? Object.assign({}, b, { guide: b.guide.map(r => r.map((p, i) => i ? ref(p, L) : p)) }) : b;
+  const he = [], en = [], spec = {};
+  for (const [key, list] of Object.entries(J[m.mode].sections)) {
+    spec[key] = list.map(it => {
+      if (typeof it === 'string') { he.push(Object.assign({ _core: it }, core(it).he)); en.push(core(it).en); }
+      else { he.push(side(it.he, 'he')); en.push(side(it.en, 'en')); }
+      return he.length - 1;
+    });
+  }
+  const M = J.modes[m.mode];
+  return { A: { title: J.title, number: J.number, time: J.time, he: { s: he }, en: { s: en } }, spec,
+           mode: { mode: m.mode, modeLabel: M.label, other: { href: M.other, label: M.switch } } };
+}
+
 // ── build ──────────────────────────────────────────────────────
 const index = {};
 const titles = {};   // lessons whose title was changed in the new content
 for (const [id, m] of Object.entries(MAP)) {
   const file = 'lessons/' + id + '.html';
-  const A = m.authored ? JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', id + '.json'), 'utf8')) : null;
+  const P = m.pilot ? pilotLesson(m) : null;
+  const A = P ? P.A : m.authored ? JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lessons', id + '.json'), 'utf8')) : null;
+  const S = P ? P.spec : m;   // which screens go to each section
   /* lessons that are read from their slides use the archived copy (lessons-archive/): the slide paths become redirects */
   const src = A ? '' : fs.readFileSync(path.join(ROOT, 'lessons-archive', id + '.html'), 'utf8');
   const T = A ? { he: A.he, en: A.en } : (m.dom ? null : readT(src));
@@ -369,8 +418,8 @@ for (const [id, m] of Object.entries(MAP)) {
     A && A.description ? { description: A.description } : {}, A && A.materials ? { materials: A.materials } : {});
   if (!intro) throw new Error('no intro data for ' + id);
   const sections = {};
-  for (const key of ['explore', 'sources', 'look', 'idea', 'create', 'end']) {
-    if (!m[key]) continue;
+  for (const key of ['prep', 'explore', 'sources', 'look', 'idea', 'create', 'end']) {
+    if (!S[key]) continue;
     /* a spec is a screen number; 'n:works' / 'n:text' use only the artworks or only the rest of screen n;
        'n:nolabel' leaves out the screen's small label; { s: n, work: [m, k] } adds artwork k of screen m
        to screen n (an artist next to their own work, shown without repeating the artist's name) */
@@ -392,13 +441,13 @@ for (const [id, m] of Object.entries(MAP)) {
       if (part === 'nolabel') { delete b.label; }
       return b;
     }).filter(b => Object.keys(b).length);
-    if (key === STEPS_SECTION && !Array.isArray(m[key])) {
-      sections[key] = { lead: build(m[key].lead || []), steps: build(m[key].steps || []),
-                        after: build(m[key].after || []), outro: build(m[key].outro || []) };
+    if (key === STEPS_SECTION && !Array.isArray(S[key])) {
+      sections[key] = { lead: build(S[key].lead || []), steps: build(S[key].steps || []),
+                        after: build(S[key].after || []), outro: build(S[key].outro || []) };
       continue;
     }
-    const blocks = build(m[key]);
-    sections[key] = key === STEPS_SECTION ? { steps: blocks } : { blocks };
+    const blocks = build(S[key]);
+    sections[key] = key === STEPS_SECTION && !m.noSteps ? { steps: blocks } : { blocks };
   }
   if (m.variant === 'v2') addWorkTitles(sections);
   const u = unitOf(file) || NAV.units.find(x => x.id === m.unit);
@@ -406,12 +455,13 @@ for (const [id, m] of Object.entries(MAP)) {
     id, path: file,
     /* the slide lesson is the classroom mode; for rewritten lessons it still holds the old content */
     /* unit 1: no link to the old slides for now, they no longer match the lesson pages (author's decision) */
-    slides: m.authored || m.noSlides ? null : file,
+    slides: m.authored || m.noSlides || P ? null : file,   /* the pilot has no slide version */
     ...(m.variant ? { variant: m.variant } : {}),
     ...(m.layout ? { layout: m.layout } : {}),
     ...(m.desk ? { desk: m.desk } : {}),
     ...(m.noTitle ? { noTitle: m.noTitle } : {}),
     ...(A && A.subtitle ? { subtitle: A.subtitle } : {}),
+    ...(P ? P.mode : {}),
     number: (A && A.number) || m.number || intro.number, unit: UNIT_TITLES[u.id] || intro.unit || u.title, unitNum: u.id.replace('unit', ''),
     title: intro.title, time: intro.time, intro: intro.description, materials: intro.materials,
     hero: m.hero ? { img: m.hero[0], pos: m.hero[1], cap: bil(...HERO_CAPS[m.hero[0]]) } : null,
@@ -421,10 +471,14 @@ for (const [id, m] of Object.entries(MAP)) {
   fs.writeFileSync(path.join(ROOT, 'data/lesson-pages', id + '.js'),
     '/* Generated by tools/build-lesson-data.js from ' + file + ' and js/lesson-intros-data.js. Do not edit by hand. */\nwindow.LESSON_PAGE = ' + JSON.stringify(data, null, 1) + ';\n');
   fs.mkdirSync(path.join(ROOT, 'lesson-pages'), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'), pageHtml(id, plain(intro.title.he)));
-  index[file] = 'lesson-pages/' + id + '.html';
-  if (A && A.title) titles[file] = A.title;
-  if (m.title) titles[file] = m.title;
+  fs.writeFileSync(path.join(ROOT, 'lesson-pages', id + '.html'),
+    pageHtml(id, plain(intro.title.he) + (P ? ' · ' + P.mode.modeLabel.he : ''), { noindex: m.preview, v: m.v }));
+  /* a preview page is not registered: it stays out of the navigation, the drawer and the unit pages */
+  if (!m.preview) {
+    index[file] = 'lesson-pages/' + id + '.html';
+    if (A && A.title) titles[file] = A.title;
+    if (m.title) titles[file] = m.title;
+  }
   const count = Object.values(sections).reduce((a, s) => a + ['blocks', 'steps', 'lead', 'after', 'outro'].reduce((n, k) => n + (s[k] || []).length, 0), 0);
   console.log(id.padEnd(24), count, 'blocks');
 }

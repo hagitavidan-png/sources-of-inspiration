@@ -21,6 +21,8 @@
   });
 
   var SECTIONS = [
+    /* shown only when a lesson has it (the teacher version of the 2.1 pilot) */
+    ['prep', 'לפני השיעור', 'Before the lesson'],
     ['explore', 'מה אנחנו חוקרים?', 'What are we exploring?'],
     ['sources', 'מקורות השראה ורקע על האמנים', 'Sources of inspiration and the artists'],
     ['look', 'מסתכלים', 'Looking'],
@@ -261,15 +263,37 @@
     return '<div class="lp-diptych">' + list.map(prompt).join('') + '</div>';
   }
 
+  /* labelled rows (2.1 pilot): a row is a known key or its own label, then text, lists and shared core blocks */
+  var GUIDE = {
+    goal: ['מטרה', 'Goal'], instruction: ['הנחיה', 'Instruction'], question: ['שאלה', 'Question'], show: ['להציג', 'Show'],
+    options: ['האפשרויות', 'Options'], look: ['מה לחפש', 'What to look for'], stuck: ['אם תלמיד נתקע', 'If a student gets stuck'],
+    questions: ['שאלות לתלמידים', 'Questions for students'], outcome: ['תוצר צפוי', 'Expected outcome'],
+    reflection: ['רפלקציה', 'Reflection'], discussion: ['דיון', 'Discussion'], time: ['זמן', 'Time'],
+    materials: ['חומרים', 'Materials'], prep: ['הכנה', 'Preparation'], concepts: ['מושגים', 'Concepts'],
+    'do': ['מה עושים', 'What to do'], why: ['הסבר', 'Explanation'], check: ['בדיקה עצמית', 'Self-check'], checklist: ['רשימה לבדיקה', 'Checklist']
+  };
+  function guide(rows) {
+    if (!rows || !rows.length) return '';
+    return '<dl class="lp-guide">' + rows.map(function (r) {
+      var lab = r.k ? tt((GUIDE[r.k] || [r.k, r.k])[0], (GUIDE[r.k] || [r.k, r.k])[1]) : t(r.label);
+      return '<div class="lp-guide-row"><dt>' + lab + '</dt><dd>' + (r.parts || []).map(function (p) {
+        if (p.block) return block(p.block);
+        if (p.list) return '<ul class="lp-guide-list">' + items(p.list).map(function (v) { return t(v, 'li'); }).join('') + '</ul>';
+        return t(p.text, 'p');
+      }).join('') + '</dd></div>';
+    }).join('') + '</dl>';
+  }
+
   function block(b) {
     var quote = b.quote ? '<blockquote class="lp-quote">' + t(b.quote, 'p') + t(b.attr, 'cite') + '</blockquote>' : '';
-    return '<div class="lp-block rv' + (b.kind ? ' lp-kind-' + b.kind : '') + '">' +
+    return '<div class="lp-block rv' + (b.kind ? ' lp-kind-' + b.kind : '') + '"' + (b.core ? ' data-core="' + esc(b.core) + '"' : '') + '>' +
       t(b.label, 'p', 'lp-label') +
       quote +
       t(b.big, 'h3', 'lp-big') +
       t(b.poem, 'p', 'lp-poem') +
       t(b.sub, 'p', 'lp-sub') +
       t(b.body, 'p', 'lp-sub') +
+      guide(b.guide) +
       wall(b.wall) +
       (b.works && b.works.length ? works(b.works) : '') +
       lines(b.lines) +
@@ -334,11 +358,14 @@
     (V2
       /* pilot: the lesson opens like a small title page */
       ? '<div class="lp-gate rv">' +
-        '<p class="lp-gate-kicker">' + tt('יחידה ' + D.unitNum + ' · שיעור ' + D.number, 'Unit ' + D.unitNum + ' · Lesson ' + D.number) + '</p>' +
+        '<p class="lp-gate-kicker">' + tt('יחידה ' + D.unitNum + ' · שיעור ' + D.number, 'Unit ' + D.unitNum + ' · Lesson ' + D.number) +
+        /* a version of the lesson (2.1 pilot): its name, next to the lesson number */
+        (D.modeLabel ? '<span class="dot" aria-hidden="true"> · </span>' + t(D.modeLabel, 'span', 'lp-mode') : '') + '</p>' +
         t(D.title, 'h1', 'ed-display lp-gate-title') +
         t(D.subtitle, 'p', 'lp-gate-sub') +
         t(unitTitle, 'p', 'lp-gate-unit') +
-        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
+        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') +
+        (D.other ? ' <span class="dot">·</span> <a class="ed-link lp-other" href="' + esc(D.other.href) + '">' + t(D.other.label) + '</a>' : '') + '</p>' +
         '</div>'
       : '<div class="lp-title-row rv"><span class="ed-num lp-num">' + D.number + '</span>' +
         '<div>' + t(D.title, 'h1', 'ed-display lp-title') +

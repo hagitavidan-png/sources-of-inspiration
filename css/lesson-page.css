@@ -525,3 +525,31 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 .lp-v2 .lp-sketch-hz b{font-weight:400;font-size:.92rem;color:var(--ink-2)}
 .lp-v2 .lp-sketch-hz figcaption{margin-top:10px;font-size:.9rem;color:var(--muted)}
 @media (max-width:700px){.lp-v2 .lp-sketch-hz svg{width:150px}.lp-v2 .lp-sketch-tube span:last-child svg{width:76px}}
+
+/* 2.1 pilot: labelled rows (teacher: goal, instruction, what to look for…; learner: what to do, explanation, self-check) */
+.lp-guide{margin:6px 0 0}
+.lp-guide-row{padding:14px 0;border-top:1px solid var(--rule)}
+.lp-guide dt{margin:0 0 6px;font-size:var(--t-small);font-weight:600;letter-spacing:.06em;color:var(--muted)}
+.lp-guide dd{margin:0;min-width:0;color:var(--ink-2);line-height:1.7;overflow-wrap:anywhere}
+.lp-guide dd > p{margin:0}
+.lp-guide dd > * + *{margin-top:10px}
+.lp-guide-list{margin:0;padding-inline-start:1.2em}
+.lp-guide-list li + li{margin-top:4px}
+@media (min-width:721px){
+  .lp-guide-row{display:grid;grid-template-columns:10.5em minmax(0,1fr);gap:24px}
+  .lp-guide dt{margin:0;padding-top:3px}
+}
+/* the stage title of a block that opens with rows: "5. Morris (4 min)" */
+.lp-v2 .lp-label:has(+ .lp-guide){margin-bottom:14px;font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.05;letter-spacing:0;color:var(--ink)}
+/* a shared core block inside a row: set at text size, not as a display block */
+.lp-guide .lp-block{max-width:none;padding:0;border:0}
+.lp-guide .lp-big{margin:0 0 6px;font-family:var(--f-text);font-size:1.12rem;font-weight:600;line-height:1.5;color:var(--ink)}
+.lp-guide .lp-sub{margin:0 0 6px}
+.lp-v2 .lp-guide .lp-ask{margin:12px 0 0;padding-top:0;border-top:0;font-family:var(--f-text);font-size:1rem;font-weight:600;line-height:1.6}
+.lp-guide .lp-lines{margin-top:8px}
+.lp-guide .lp-lines li{padding:6px 0}
+.lp-guide .lp-list{margin-top:4px}
+.lp-guide .lp-prompt{margin-top:12px}
+/* the version of the lesson, next to its number; the link to the other version */
+.lp-v2 .lp-gate-kicker .lp-mode{color:var(--ink)}
+.lp-meta .lp-other{white-space:normal}
