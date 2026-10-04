@@ -1,0 +1,5 @@
+{
+  "_note": "What is open on the site. Everything not listed here is shown as Coming Soon / בקרוב: its lessons are not linked from the site, and a lesson page opened by its address shows Coming Soon instead of the lesson. Read by tools/build-lesson-data.js (written into js/site-nav.js and data/lesson-pages/index.js) and tools/build-unit-pages.py. Lessons are listed by their page in the navigation: lessons/lesson-2-1.html is 2.1, lessons/lesson-4-1.html is 4.1.",
+  "units": ["unit02", "unit04"],
+  "lessons": ["lessons/lesson-2-1.html", "lessons/lesson-4-1.html"]
+}

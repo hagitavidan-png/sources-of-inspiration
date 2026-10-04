@@ -107,6 +107,9 @@ html .ed-open .ed-drawer{transform:none;visibility:visible}
 .ed-now{display:table;margin-top:5px;padding:1px 9px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:.72rem;font-weight:600;letter-spacing:.04em;line-height:1.6}
 .ed-unit-link .ed-now{display:inline-block;margin:0;margin-inline-start:6px}
 .ed-panel .soon{margin:0;font-size:.85rem;color:var(--muted)}
+/* a lesson that is Coming Soon: in its place in the list, quiet, not a link */
+.ed-panel li .ed-lsoon{display:flex;gap:12px;align-items:baseline;padding:7px 10px;margin-inline:-10px;font-size:.94rem;line-height:1.45;color:var(--muted)}
+.ed-soon{display:table;margin-top:4px;font-size:.75rem;letter-spacing:.04em;color:var(--muted)}
 body.ed-open{overflow:hidden}
 
 /* reveal */

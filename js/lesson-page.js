@@ -336,11 +336,15 @@
   });
   var unitN = parseInt(D.unitNum, 10);
   var unitTitle = navUnit ? navUnit.title : D.unit;
+  /* what is open (content/status.json via js/site-nav.js): a lesson of the course that is not open is Coming Soon;
+     opened by its address it shows its title and "Coming Soon", not the lesson (a preview page outside the navigation is not affected) */
+  var STATUS = window.SITE_STATUS;
+  var SOON = !!(STATUS && navUnit && STATUS.lessons.indexOf(D.path) < 0);
 
   /* ── head ── */
   var html = '';
   /* compact location for small screens; tapping it opens the contents drawer */
-  if (posInUnit) {
+  if (posInUnit && !SOON) {
     /* phones: the main way into the contents: "☰ Contents · Unit 1 · Lesson 8 of 9 ⌄", the whole bar opens the drawer */
     html += '<a class="lp-where" href="#ed-drawer" data-open-contents aria-expanded="false">' +
       '<span class="lp-where-in">' +
@@ -364,18 +368,29 @@
         t(D.title, 'h1', 'ed-display lp-gate-title') +
         t(D.subtitle, 'p', 'lp-gate-sub') +
         t(unitTitle, 'p', 'lp-gate-unit') +
+        (SOON ? '<p class="lp-soon">' + tt('בקרוב', 'Coming Soon') + '</p>' :
         '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') +
-        (D.other ? ' <span class="dot">·</span> <a class="ed-link lp-other" href="' + esc(D.other.href) + '">' + t(D.other.label) + '</a>' : '') + '</p>' +
+        (D.other ? ' <span class="dot">·</span> <a class="ed-link lp-other" href="' + esc(D.other.href) + '">' + t(D.other.label) + '</a>' : '') + '</p>') +
         '</div>'
       : '<div class="lp-title-row rv"><span class="ed-num lp-num">' + D.number + '</span>' +
         '<div>' + t(D.title, 'h1', 'ed-display lp-title') +
-        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>' +
+        (SOON ? '<p class="lp-soon">' + tt('בקרוב', 'Coming Soon') + '</p>' :
+        '<p class="lp-meta">' + t(D.time) + (D.slides ? ' <span class="dot">·</span> <a class="ed-link" href="' + BASE + D.slides + '">' + tt('הצגה בכיתה, מסך אחרי מסך', 'Present in class, screen by screen') + '</a>' : '') + '</p>') +
         '</div></div>');
-  if (D.hero) {
+  if (D.hero && !SOON) {
     html += '<figure class="lp-hero"><div class="lp-hero-img rv-img"><img src="' + BASE + 'images/editorial/' + D.hero.img + '.jpg" alt="" style="object-position:' + (D.hero.pos || '50% 50%') + '" fetchpriority="high"></div>' +
       t(D.hero.cap, 'figcaption') + '</figure>';
   }
   html += '</section>';
+
+  /* Coming Soon: the title page only, and the way back to the unit */
+  if (SOON) {
+    html += '<p class="lp-soon-back ed-wrap rv"><a class="ed-cta" href="' + BASE + 'units/unit-' + D.unitNum + '.html">' + tt('לשער היחידה', 'Enter the unit') +
+      '<span class="arr" data-he="←" data-en="→">' + (L === 'he' ? '←' : '→') + '</span></a></p>';
+    root.innerHTML = html;
+    if (V2) root.classList.add('lp-v2');
+    return;
+  }
 
   /* ── body: rail + sections ── */
   var S = D.sections || {};
@@ -429,7 +444,8 @@
 
   /* ── prev / next lesson (course order from js/navigation-data.js) ── */
   var flat = [];
-  ((window.ART_NAVIGATION || {}).units || []).forEach(function (u) { (u.lessons || []).forEach(function (l) { flat.push(l); }); });
+  /* only open lessons: previous / next never lead to a lesson that is Coming Soon */
+  ((window.ART_NAVIGATION || {}).units || []).forEach(function (u) { (u.lessons || []).forEach(function (l) { if (!STATUS || STATUS.lessons.indexOf(l.path) >= 0) flat.push(l); }); });
   var i = -1;
   flat.forEach(function (l, k) { if (l.path === D.path) i = k; });
   function link(l, dir) {

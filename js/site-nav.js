@@ -348,3 +348,14 @@ window.LESSON_PAGES_INDEX = {
  "lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html",
  "lessons/lesson-4-1.html": "lesson-pages/lesson-4-1.html"
 };
+/* what is open (content/status.json); every other unit and lesson is shown as Coming Soon (js/site-drawer.js, js/lesson-page.js) */
+window.SITE_STATUS = {
+ "units": [
+  "unit02",
+  "unit04"
+ ],
+ "lessons": [
+  "lessons/lesson-2-1.html",
+  "lessons/lesson-4-1.html"
+ ]
+};

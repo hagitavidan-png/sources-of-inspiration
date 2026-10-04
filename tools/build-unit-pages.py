@@ -123,6 +123,19 @@ def _lesson_index():
 
 NEW_LESSON_PAGES = _lesson_index()   # built by tools/build-lesson-data.js
 
+# what is open on the site (content/status.json): only open lessons are linked; every other lesson is Coming Soon
+def _status():
+    import json
+    return json.load(open(os.path.join(ROOT, 'content', 'status.json'), encoding='utf8'))
+
+
+_STATUS = _status()
+OPEN_LESSONS = set(_STATUS['lessons']) | set(NEW_LESSON_PAGES[p] for p in _STATUS['lessons'] if p in NEW_LESSON_PAGES)
+
+
+def is_open(href):
+    return bool(href) and href in OPEN_LESSONS
+
 
 def _lesson_titles():
     """New titles of lessons whose content was rewritten (same source as the drawer and prev / next)."""
@@ -340,12 +353,12 @@ def journey_row(l, lo, n, B):
     sub = lo.get('sub') or (l['desc'] if l['desc'] and l['desc']['he'] else l['sub']) or {'he': '', 'en': ''}
     dur = lo.get('dur', l['dur'])
     cap = f'<span class="cap">{t(l["cap"]["he"], l["cap"]["en"])}</span>' if l['cap']['he'] else ''
-    if l['href']:
+    if is_open(l['href']):
         act = f'<a class="ed-cta" href="{B}{NEW_LESSON_PAGES.get(l["href"], l["href"])}">{t("לשיעור", "Open lesson")}<span class="arr" data-he="←" data-en="→">←</span></a>'
     else:
-        act = f'<span class="soon">{t("בפיתוח", "In development")}</span>'
+        act = f'<span class="soon">{t("בקרוב", "Coming Soon")}</span>'
     return f'''
-      <li class="ls ls-j{'' if l['href'] else ' off'} rv">
+      <li class="ls ls-j{'' if is_open(l['href']) else ' off'} rv">
         <span class="ls-num">{n:02d}</span>
         <div class="ls-main">
           <p class="ls-step">{t(lo['step']['he'], lo['step']['en'])}</p>
@@ -399,7 +412,7 @@ def render(u, units):
         if refs:
             links = []
             for l in refs:
-                if l['href']:
+                if is_open(l['href']):
                     href = NEW_LESSON_PAGES.get(l['href'], l['href']) if u.get('people_refs') else l['href']
                     links.append(f'<a href="{B}{href}">{l["num"]}</a>')
                 else:
@@ -448,15 +461,15 @@ def render(u, units):
         sub = l['sub'] or {'he': '', 'en': ''}
         cap = f'<span class="cap">{t(l["cap"]["he"], l["cap"]["en"])}</span>' if l['cap']['he'] else ''
         tags = ' · '.join(t(*tag_text(tg)) for tg in l['tags'])
-        if l['href']:
+        if is_open(l['href']):
             act = f'<a class="ed-cta" href="{B}{NEW_LESSON_PAGES.get(l["href"], l["href"])}">{t("לשיעור", "Open lesson")}<span class="arr" data-he="←" data-en="→">←</span></a>'
         else:
-            act = f'<span class="soon">{t("בפיתוח", "In development")}</span>'
+            act = f'<span class="soon">{t("בקרוב", "Coming Soon")}</span>'
         desc = ''
         if l['desc'] and l['desc']['he']:
             desc = f'<details><summary>{t("על השיעור", "About this lesson")}</summary><p>{t(l["desc"]["he"], l["desc"]["en"], "span")}</p></details>'
         rows += f'''
-      <li class="ls{'' if l['href'] else ' off'} rv">
+      <li class="ls{'' if is_open(l['href']) else ' off'} rv">
         <span class="ls-num">{l['num']}</span>
         <div class="ls-main">
           <h3>{t(l['title']['he'], l['title']['en'])}{cap}</h3>

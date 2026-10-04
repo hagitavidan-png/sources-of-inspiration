@@ -553,3 +553,7 @@ html[lang="en"] .lp-v2 .lp-layout-lab-sketch .lp-sheet::before{content:counter(e
 /* the version of the lesson, next to its number; the link to the other version */
 .lp-v2 .lp-gate-kicker .lp-mode{color:var(--ink)}
 .lp-meta .lp-other{white-space:normal}
+
+/* a lesson that is Coming Soon (content/status.json): its title page shows a quiet status and the way back to the unit */
+.lp-soon{display:inline-block;margin:clamp(22px,3vw,34px) 0 0;padding:3px 14px;border:1px solid var(--rule-strong);border-radius:999px;font-size:.88rem;letter-spacing:.06em;color:var(--ink-2)}
+.lp-soon-back{margin:0 auto clamp(56px,8vw,96px);text-align:center}

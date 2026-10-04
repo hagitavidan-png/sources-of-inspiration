@@ -93,6 +93,17 @@ window.UNIT_TITLES = {
   "en": "Looking Outward"
  }
 };
+/* what is open (content/status.json); every other unit and lesson is shown as Coming Soon (js/site-drawer.js, js/lesson-page.js) */
+window.SITE_STATUS = {
+ "units": [
+  "unit02",
+  "unit04"
+ ],
+ "lessons": [
+  "lessons/lesson-2-1.html",
+  "lessons/lesson-4-1.html"
+ ]
+};
 (function () {
   var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {}, T = window.UNIT_TITLES || {};
   if (!N || !O) return;

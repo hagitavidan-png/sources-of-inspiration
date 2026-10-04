@@ -19,10 +19,13 @@
   var LESSON_PAGES = window.LESSON_PAGES_INDEX || {};
   /* each unit has its own page: units/unit-00.html … units/unit-06.html */
   function unitPage(id) { return 'units/unit-' + id.replace('unit', '') + '.html'; }
+  /* what is open (content/status.json, via js/site-nav.js or data/lesson-pages/index.js); everything else is Coming Soon */
+  var STATUS = window.SITE_STATUS;
+  function lessonOpen(path) { return !STATUS || STATUS.lessons.indexOf(path) >= 0; }
 
   var UI = {
-    he: { open: 'תוכן', title: 'תוכן האתר', close: 'סגירה', soon: 'בפיתוח', unitPage: 'עמוד היחידה', here: 'את כאן', hereUnit: 'את כאן' },
-    en: { open: 'Contents', title: 'Contents', close: 'Close', soon: 'In development', unitPage: 'Unit page', here: 'You are here', hereUnit: 'You are here' }
+    he: { open: 'תוכן', title: 'תוכן האתר', close: 'סגירה', soon: 'בקרוב', unitPage: 'עמוד היחידה', here: 'את כאן', hereUnit: 'את כאן' },
+    en: { open: 'Contents', title: 'Contents', close: 'Close', soon: 'Coming Soon', unitPage: 'Unit page', here: 'You are here', hereUnit: 'You are here' }
   };
 
   function lang() { return document.documentElement.lang === 'he' ? 'he' : 'en'; }
@@ -73,6 +76,14 @@
         html += '<ol>';
         u.lessons.forEach(function (l, k) {
           var cur = l.path === here.lesson;
+          if (!lessonOpen(l.path)) {
+            /* Coming Soon: shown in its place in the unit, not linked */
+            html += '<li><span class="ed-lsoon">' +
+              '<span class="ed-ln">' + n + '.' + (k + 1) + '</span>' +
+              '<span class="ed-lt">' + esc(((window.LESSON_TITLES || {})[l.path] || l.title)[L]) + '<span class="ed-soon">' + esc(t.soon) + '</span></span>' +
+              '</span></li>';
+            return;
+          }
           html += '<li><a href="' + BASE + (LESSON_PAGES[l.path] || l.path) + '"' + (cur ? ' class="is-current" aria-current="page"' : '') + '>' +
             '<span class="ed-ln">' + n + '.' + (k + 1) + '</span>' +
             '<span class="ed-lt">' + esc(((window.LESSON_TITLES || {})[l.path] || l.title)[L]) + (cur ? '<span class="ed-now">' + esc(t.here) + '</span>' : '') + '</span>' +
