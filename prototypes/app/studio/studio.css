@@ -1,0 +1,94 @@
+:root{
+  --paper:#f4efe6;      /* warm off-white */
+  --sheet:#fffdf9;
+  --ink:#2b2a28;        /* charcoal */
+  --ink-2:#5b5852;
+  --rule:#ddd5c8;
+  --accent:#b65d3c;     /* terracotta */
+  --sage:#8a9a7b;
+  --ochre:#c99a3a;
+  --tap:48px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);overflow:hidden}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Hebrew","Arial Hebrew",Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;touch-action:manipulation}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+
+/* top bar */
+.top{flex:none;display:flex;align-items:center;gap:12px;padding:6px 10px;min-height:52px}
+.back{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap);padding:0 12px;border:0;background:none;border-radius:10px;cursor:pointer;font-size:.95rem;color:var(--ink-2)}
+.back:hover{background:rgba(43,42,40,.06);color:var(--ink)}
+.back svg{width:18px;height:18px}
+[dir=ltr] .back svg{transform:scaleX(-1)}
+.title{margin:0;margin-inline-start:auto;padding-inline-end:6px;font-size:1.05rem;font-weight:600;letter-spacing:.01em}
+
+/* canvas: the centre of the screen */
+.stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:0 8px}
+canvas{display:block;background:var(--sheet);border-radius:6px;box-shadow:0 0 0 1px var(--rule);touch-action:none;cursor:crosshair}
+/* two layers: the sheet and the activity's base below, the learner's layer on top (transparent) */
+#base{position:absolute;z-index:0;pointer-events:none}
+#canvas{position:relative;z-index:1;background:transparent;box-shadow:none}
+
+/* tools */
+.chrome{flex:none;transition:opacity .25s ease}
+.drawing .chrome{opacity:.6}           /* the interface steps back while drawing, and stays readable */
+.tools{display:flex;justify-content:center;align-items:stretch;gap:2px;padding:6px 6px 2px;max-width:640px;margin:0 auto}
+.tool{flex:1 1 0;min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 0;border:0;background:none;border-radius:12px;cursor:pointer;color:var(--ink)}
+.tool svg{width:24px;height:24px;flex:none}
+.tool span{font-size:.88rem;font-weight:500;line-height:1.2;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tool:hover{background:rgba(43,42,40,.05)}
+.tool[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.tool[aria-pressed=true] span{color:var(--paper)}
+.tool:disabled{opacity:.3;cursor:default;background:none}
+.tool .sep{display:none}
+.gap{flex:0 0 1px;margin:10px 4px;background:var(--rule)}
+.swatch-dot{width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.18)}
+.size-dot{display:flex;align-items:center;justify-content:center;width:24px;height:24px}
+.size-dot i{display:block;border-radius:50%;background:currentColor}
+
+.actions{display:flex;justify-content:center;gap:12px;padding:6px 12px 10px}
+.btn{min-height:var(--tap);min-width:112px;padding:0 22px;border-radius:999px;border:1.5px solid var(--ink);background:none;cursor:pointer;font-size:1rem;font-weight:600}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.danger{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:hover{filter:brightness(1.08)}
+
+/* small panels for colour and size, above the tools */
+.panel{position:absolute;inset-inline:0;bottom:8px;margin:0 auto;width:max-content;max-width:calc(100% - 16px);padding:12px;border-radius:16px;background:var(--sheet);box-shadow:0 8px 28px rgba(43,42,40,.18),0 0 0 1px var(--rule);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;z-index:5}
+.panel[hidden]{display:none}
+.sw{width:var(--tap);height:var(--tap);border-radius:50%;border:0;cursor:pointer;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.15)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--sheet),0 0 0 5px var(--ink)}
+.sw.custom{position:relative;overflow:hidden;background:conic-gradient(#c8423b,#e9c33f,#5d8a4f,#2f6fa8,#6b4f9a,#c8423b)}
+.sw.custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+.sz{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:76px;min-height:64px;border:0;border-radius:12px;background:none;cursor:pointer}
+.sz i{display:block;border-radius:50%;background:var(--ink)}
+.sz svg{width:28px;height:28px;color:var(--ink)}
+#repeatIcon{display:flex}#repeatIcon svg{width:24px;height:24px}
+.panel .hint{flex-basis:100%;margin:0 0 2px;text-align:center;font-size:.85rem;color:var(--ink-2)}
+.sz:disabled{opacity:.35;cursor:default}
+.sz span{font-size:.85rem;color:var(--ink-2)}
+.sz[aria-pressed=true]{background:rgba(43,42,40,.08)}
+.sz[aria-pressed=true] span{color:var(--ink);font-weight:600}
+
+/* dialogs */
+dialog{border:0;border-radius:18px;padding:24px 22px 18px;width:min(360px,calc(100vw - 32px));background:var(--sheet);color:var(--ink);box-shadow:0 18px 50px rgba(43,42,40,.25)}
+dialog::backdrop{background:rgba(43,42,40,.35)}
+dialog p{margin:0 0 20px;font-size:1.1rem;font-weight:600;line-height:1.4}
+dialog .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+dialog .btn{min-width:0;flex:1 1 auto}
+
+/* a short message */
+.toast{position:fixed;inset-inline:0;top:64px;margin:0 auto;width:max-content;max-width:calc(100% - 32px);padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:.95rem;opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .2s;pointer-events:none;z-index:20}
+.toast.on{opacity:1;transform:none}
+
+@media (min-width:700px){
+  .tool{min-height:64px}
+  .tool span{font-size:.9rem}
+  .stage{padding:0 20px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .top{min-height:44px}
+  .tool{min-height:48px}.tool span{display:none}
+  .actions{padding:4px 12px 6px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

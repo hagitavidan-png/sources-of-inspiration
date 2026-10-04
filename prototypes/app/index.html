@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="google" content="notranslate">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="icon" href="data:,">
+<title>מקורות השראה באמנות · App prototype</title>
+<!--
+  App prototype (isolated; not linked from the site): Home → Units → Unit 02 → Lesson 2.1 → Lesson Player.
+  The lesson's content is read from the site (data/lesson-pages/lesson-2-1-learner.js); the screens of the player
+  are defined in lessons/2-1.js. Routes: #/home, #/units, #/unit/02, #/lesson/2-1, #/lesson/2-1/play/N.
+  Saved on this device only (localStorage "app-proto:*"); the Studio copy in studio/ saves under "studio-v2:2.1-app:*".
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script src="../../js/site-nav.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/adapters/guide.js"></script>
+<script src="lessons/2-1.js"></script>
+<script src="js/player.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
