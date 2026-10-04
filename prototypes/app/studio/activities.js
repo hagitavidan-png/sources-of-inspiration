@@ -40,6 +40,16 @@ window.STUDIO_ACTIVITIES = {
     params: { repeat: { modes: ['grid', 'offset'], step: 250 } },
     back: '../index.html#/lesson/2-1/play/10'
   },
+  /* the same work, version 2 (screen 11, change one law): its own save key, so version 1 stays as it was;
+     the Lesson Player starts it from a copy of version 1 */
+  'pattern-2-1-app-v2': {
+    id: 'pattern-2-1-app-v2',
+    lesson: '2.1-app',
+    tools: ['draw', 'repeat'],
+    canvas: { aspect: '4:3' },
+    params: { repeat: { modes: ['grid', 'offset'], step: 250 } },
+    back: '../index.html#/lesson/2-1/play/11'
+  },
   color: {
     id: 'color',
     lesson: 'prototype',

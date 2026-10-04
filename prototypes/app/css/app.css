@@ -67,6 +67,13 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .pl-pair .pl-work img,.pl-pair .pl-linkcard-box{aspect-ratio:4/3;max-height:none;height:auto;object-fit:cover}
 .pl-pair .pl-linkcard-box{font-size:.8rem;padding:8px}
 .pl-studio-work{margin:0 0 14px}
+/* the two versions of the Studio work, side by side */
+.pl-version{margin:0}
+.pl-version img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:12px;border:1px solid var(--rule);background:var(--card)}
+.pl-version figcaption{margin:6px 0 0;font-size:.88rem;font-weight:600;text-align:center;color:var(--ink)}
+.pl-version-missing div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;aspect-ratio:4/3;border-radius:12px;border:1.5px dashed var(--rule);color:var(--muted);font-size:.82rem;line-height:1.35;text-align:center;padding:8px}
+.pl-version-missing svg{width:28px;height:28px}
+.pl-version-missing figcaption{color:var(--muted)}
 .pl-studio-work img{display:block;width:100%;border-radius:14px;border:1px solid var(--rule);background:var(--card)}
 
 /* the prototype's marks: what is missing, said plainly */

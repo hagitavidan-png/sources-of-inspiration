@@ -7,7 +7,11 @@ window.APP_LESSONS['2-1'] = {
   data: '../../data/lesson-pages/lesson-2-1-learner.js',
   adapter: 'guide',
   unit: 'unit02',
-  studio: { href: 'studio/index.html?activity=pattern-2-1-app', key: 'studio-v2:2.1-app:pattern-2-1-app' },
+  /* the Studio work, in two versions: 1 made on screen 10, 2 (one law changed) on screen 11, started from 1 */
+  studio: [
+    { href: 'studio/index.html?activity=pattern-2-1-app', key: 'studio-v2:2.1-app:pattern-2-1-app' },
+    { href: 'studio/index.html?activity=pattern-2-1-app-v2', key: 'studio-v2:2.1-app:pattern-2-1-app-v2' }
+  ],
   assets: {},
   screens: [
     /* 1 */ { type: 'content', src: [['explore', 0]], media: { asset: '2-1-opening' } },
@@ -21,7 +25,7 @@ window.APP_LESSONS['2-1'] = {
     /* 9 */ { type: 'creation', step: 'choose' },
     /* 10 */ { type: 'creation', step: 'make', src: [['create', 0]], studioGap: 'protoS3' },
     /* 11 */ { type: 'creation', step: 'change', src: [['create', 1]], studioGap: 'protoS1' },
-    /* 12 */ { type: 'comparison', step: 'check', src: [['end', 0]], studioGap: 'protoS2' },
+    /* 12 */ { type: 'comparison', step: 'check', src: [['end', 0]] },
     /* 13 */ { type: 'reflection', src: [['end', 1], ['end', 2], ['end', 3]] }
   ]
 };

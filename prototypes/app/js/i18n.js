@@ -14,20 +14,20 @@ window.I18N = (function () {
       site: 'מקורות השראה באמנות', units: 'יחידות',
       'do': 'מה עושים', why: 'הסבר', check: 'בדיקה עצמית', checklist: 'רשימה לבדיקה', materials: 'חומרים', unit: 'יחידה', lesson: 'שיעור', soon: 'בקרוב', oneOpen: 'שיעור אחד פתוח · {n} בקרוב',
       'continue': 'המשך', back: 'חזרה', done: 'סיימתי', how: 'איך תרצה/י ליצור?', paper: 'על נייר', studio: 'Studio',
+      reopen: 'פתח/י שוב ב-Studio', v1: 'גרסה 1', v2: 'גרסה 2', v2missing: 'גרסה 2 עדיין לא נוצרה',
       proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.',
       protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
       protoS1: 'ב-Studio עדיין אין שינוי של גודל, כיוון או מרווח (S1).',
-      protoS2: 'ב-Studio עדיין אין שמירה של שתי גרסאות להשוואה (S2).',
       protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
     },
     en: {
       site: 'Sources of Inspiration in Art', units: 'Units',
       'do': 'What to do', why: 'Explanation', check: 'Self-check', checklist: 'Checklist', materials: 'Materials', unit: 'Unit', lesson: 'Lesson', soon: 'Coming Soon', oneOpen: '1 lesson open · {n} coming soon',
       'continue': 'Continue', back: 'Back', done: "I'm done", how: 'How would you like to create?', paper: 'On paper', studio: 'Studio',
+      reopen: 'Open in Studio', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
       proto: 'Prototype', protoImage: 'Image placeholder. To be added.',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS1: 'The Studio cannot change size, direction or spacing yet (S1).',
-      protoS2: 'The Studio cannot keep two versions to compare yet (S2).',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'
     }
   };

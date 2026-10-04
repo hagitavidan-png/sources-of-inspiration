@@ -2,7 +2,9 @@
    window.APP_LESSONS (kind of screen + where its content is in the lesson), through that lesson format's adapter.
    Kinds of screen: content, action, creation, comparison, reflection.
    What the learner does in the lesson (paper or Studio, the checklist, the reflection) is kept on this device:
-   localStorage "app-proto:lesson:<id>", so it is still there after a visit to the Studio. */
+   localStorage "app-proto:lesson:<id>", so it is still there after a visit to the Studio.
+   With the Studio the work has two versions, each the Studio's own save (L.studio[0], L.studio[1]): version 1 is made
+   on screen 10; version 2 (one law changed) on screen 11 starts as a copy of version 1 and is saved apart from it. */
 window.Player = (function () {
   'use strict';
   var I = window.I18N;
@@ -60,6 +62,21 @@ window.Player = (function () {
     }).join('');
   }
 
+  /* a work saved by the Studio (its preview and operations), or null */
+  function studioSave(key) { try { var d = JSON.parse(localStorage.getItem(key)); return d && d.ops && d.ops.length ? d : null; } catch (e) { return null; } }
+  /* version 2 opens on the work of version 1: until the learner saves version 2, it is (again) a copy of version 1 */
+  function openVersion2(id, L, nav) {
+    var st = load(id), raw = null, cur = studioSave(L.studio[1].key);
+    try { raw = localStorage.getItem(L.studio[0].key); } catch (e) {}
+    if (raw && (!cur || cur.savedAt === st.v2seed)) {
+      try { localStorage.setItem(L.studio[1].key, raw); st.v2seed = JSON.parse(raw).savedAt; save(id, st); } catch (e) {}
+    }
+    nav.studio(L.studio[1].href);
+  }
+  function figure(img, label) {
+    return '<figure class="pl-version"><img src="' + img + '" alt="">' + (label ? '<figcaption>' + esc(label) + '</figcaption>' : '') + '</figure>';
+  }
+
   /* ── one screen ── */
   function render(root, id, n, nav) {
     var L = window.APP_LESSONS[id], A = window.AppAdapters[L.adapter](window.LESSON_PAGE), count = L.screens.length;
@@ -72,7 +89,9 @@ window.Player = (function () {
       if (b.kind === 'close') closing = '<div class="pl-close">' + core(b) + '</div>';
       else A.rows(b).forEach(function (r) { allRows.push(r); });
     });
-    var studioWork = (function () { try { var d = JSON.parse(localStorage.getItem(L.studio.key)); return d && d.ops && d.ops.length ? d : null; } catch (e) { return null; } })();
+    var v1 = studioSave(L.studio[0].key), v2 = studioSave(L.studio[1].key);
+    if (v2 && st.v2seed && v2.savedAt === st.v2seed) v2 = null;   // still the copy of version 1: not saved as version 2 yet
+    var studioWork = v1;
 
     if (s.type === 'creation' && s.step === 'choose') {
       title = I.ui('how');
@@ -87,12 +106,11 @@ window.Player = (function () {
       var doRows = allRows.filter(function (r) { return r.k === 'do'; }).map(row).join('');
       var otherRows = allRows.filter(function (r) { return r.k !== 'do' && r.k !== 'checklist'; }).map(row).join('');
       var studioPart = '';
-      if (medium === 'studio' && s.studioGap) {
-        if (s.step === 'make') studioPart = (studioWork ? '<figure class="pl-studio-work"><img src="' + studioWork.preview + '" alt=""></figure>' : '') + proto(I.ui(s.studioGap));
-        else if (s.step === 'check') studioPart = '<div class="pl-pair">' + (studioWork ? '<figure class="pl-studio-work"><img src="' + studioWork.preview + '" alt=""></figure>' : '') +
-          '<figure class="pl-media pl-placeholder small"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/></svg></figure></div>' + proto(I.ui(s.studioGap));
-        else studioPart = proto(I.ui(s.studioGap));
-      }
+      if (medium === 'studio' && s.step === 'make') studioPart = (studioWork ? '<figure class="pl-studio-work"><img src="' + studioWork.preview + '" alt=""></figure>' : '') + proto(I.ui(s.studioGap));
+      if (medium === 'studio' && s.step === 'change') studioPart = (v2 ? '<figure class="pl-studio-work"><img src="' + v2.preview + '" alt=""></figure>' : '') + proto(I.ui(s.studioGap));
+      /* comparison: version 1 | version 2, from the Studio's own saves; never the same version twice */
+      if (medium === 'studio' && s.step === 'check' && v1) studioPart = '<div class="pl-pair pl-versions">' + figure(v1.preview, I.ui('v1')) +
+        (v2 ? figure(v2.preview, I.ui('v2')) : '<figure class="pl-version pl-version-missing"><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/></svg><span>' + esc(I.ui('v2missing')) + '</span></div><figcaption>' + esc(I.ui('v2')) + '</figcaption></figure>') + '</div>';
       var check = '';
       allRows.filter(function (r) { return r.k === 'checklist'; }).forEach(function (r) {
         var items = [];
@@ -111,8 +129,13 @@ window.Player = (function () {
       }
       if (s.type === 'creation' && medium === 'paper') action = { label: I.ui('done'), go: function () { nav.go(n + 1); } };
       if (s.type === 'creation' && s.step === 'make' && medium === 'studio') {
-        if (studioWork) extra = '<button type="button" class="pl-secondary" data-studio>' + esc(I.ui('studio')) + '</button>';
-        else action = { label: I.ui('studio'), go: function () { nav.studio(L.studio.href); } };
+        if (studioWork) extra = '<button type="button" class="pl-secondary" data-studio="0">' + esc(I.ui('studio')) + '</button>';
+        else action = { label: I.ui('studio'), go: function () { nav.studio(L.studio[0].href); } };
+      }
+      /* screen 11: open the work again in the Studio, as version 2 */
+      if (s.type === 'creation' && s.step === 'change' && medium === 'studio') {
+        if (v2) extra = '<button type="button" class="pl-secondary" data-studio="1">' + esc(I.ui('reopen')) + '</button>';
+        else action = { label: I.ui('reopen'), go: function () { openVersion2(id, L, nav); } };
       }
       body = media0 + art + (s.gap ? proto(I.ui(s.gap)) : '') + doRows + studioPart + reflect + otherRows + check + closing;
     }
@@ -132,7 +155,7 @@ window.Player = (function () {
     root.querySelector('.pl-back').addEventListener('click', function () { if (n > 1) nav.go(n - 1); else nav.exit(); });
     if (action) root.querySelector('.pl-primary').addEventListener('click', action.go);
     var sb = root.querySelector('[data-studio]');
-    if (sb) sb.addEventListener('click', function () { nav.studio(L.studio.href); });
+    if (sb) sb.addEventListener('click', function () { if (sb.getAttribute('data-studio') === '1') openVersion2(id, L, nav); else nav.studio(L.studio[0].href); });
     root.querySelectorAll('.pl-choice').forEach(function (b) {
       b.addEventListener('click', function () { var x = load(id); x.medium = b.getAttribute('data-medium'); save(id, x); nav.go(n + 1); });
     });
