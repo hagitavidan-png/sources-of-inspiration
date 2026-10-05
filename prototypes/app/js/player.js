@@ -34,10 +34,12 @@ window.Player = (function () {
       return '';
     }).join('');
   }
-  /* a row of the lesson: "do" leads the screen; why, materials and check are quieter, each with its label */
+  /* a row of the lesson: "do" leads the screen; why, materials and check are quieter. The names of the lesson's
+     structure stay in its data; the learner does not see them unless they add meaning (UNLABELLED: shown without) */
+  var UNLABELLED = ['why', 'check'];
   function row(r) {
     if (r.k === 'do') return '<div class="pl-do">' + parts(r.parts) + '</div>';
-    return '<section class="pl-row pl-row-' + esc(r.k) + '"><h4>' + esc(I.ui(r.k)) + '</h4>' + parts(r.parts) + '</section>';
+    return '<section class="pl-row pl-row-' + esc(r.k) + '">' + (UNLABELLED.indexOf(r.k) < 0 ? '<h4>' + esc(I.ui(r.k)) + '</h4>' : '') + parts(r.parts) + '</section>';
   }
   function proto(text) {
     return '<aside class="pl-proto" role="note"><b>' + esc(I.ui('proto')) + '</b><span>' + esc(text) + '</span></aside>';
@@ -87,6 +89,7 @@ window.Player = (function () {
     var blocks = (s.src || []).map(A.block);
     var title = '', body = '', action = { label: I.ui('continue'), go: function () { nav.go(n + 1); } }, extra = '';
     blocks.forEach(function (b) { if (!title) title = A.title(b); });
+    if (s.title && s.title[I.lang()]) title = s.title[I.lang()];   // the screen's own title in the player, where it has one
     var allRows = [], closing = '';
     blocks.forEach(function (b) {
       if (b.kind === 'close') closing = '<div class="pl-close">' + core(b) + '</div>';
@@ -128,7 +131,7 @@ window.Player = (function () {
         var items = [];
         r.parts.forEach(function (p) { if (p.list) items = items.concat(p.list[I.lang()] || []); });
         var on = st.checks || {};
-        check += '<section class="pl-row pl-checklist"><h4>' + esc(I.ui('checklist')) + '</h4><div class="pl-checks">' + items.map(function (v, k) {
+        check += '<section class="pl-row pl-checklist"><div class="pl-checks">' + items.map(function (v, k) {
           return '<button type="button" class="pl-check" data-check="' + k + '" aria-pressed="' + !!on[k] + '"><i aria-hidden="true"></i><span>' + v + '</span></button>';
         }).join('') + '</div></section>';
       });

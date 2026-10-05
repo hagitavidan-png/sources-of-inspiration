@@ -1,5 +1,6 @@
 /* Lesson 2.1 in the Lesson Player: which screens, of which kind, and where each takes its content from in the
-   lesson itself (section, block). No lesson text is written here.
+   lesson itself (section, block). No lesson text is written here, except a screen's own title in the player
+   (title), where the lesson's step name is not the right title for the screen.
    media.asset names the image a screen needs; while no image is approved for it, the screen shows a placeholder
    in its place (ASSETS below maps an asset to an image of the site's images/editorial/ once there is one). */
 window.APP_LESSONS = window.APP_LESSONS || {};
@@ -24,11 +25,11 @@ window.APP_LESSONS['2-1'] = {
     /* 5 */ { type: 'content', src: [['sources', 0], ['sources', 1], ['sources', 2]] },
     /* 6 */ { type: 'content', src: [['sources', 3], ['sources', 4], ['sources', 5]], gap: 'protoKusama' },
     /* 7 */ { type: 'comparison', src: [['look', 0]], compare: [['sources', 1], ['sources', 4]] },
-    /* 8 */ { type: 'content', src: [['idea', 0]] },
+    /* 8 */ { type: 'content', src: [['idea', 0]], title: { he: 'מה אפשר לקחת מזה ליצירה שלך?', en: 'What can you take into your own artwork?' } },
     /* 9 */ { type: 'creation', step: 'choose' },
     /* 10 */ { type: 'creation', step: 'make', src: [['create', 0]], studioGap: 'protoS3' },
     /* 11 */ { type: 'creation', step: 'change', src: [['create', 1]] },
-    /* 12 */ { type: 'comparison', step: 'check', src: [['end', 0]] },
+    /* 12 */ { type: 'comparison', step: 'check', src: [['end', 0]], title: { he: 'התבוננות בשתי הגרסאות', en: 'Looking at both versions' } },
     /* 13 */ { type: 'reflection', src: [['end', 1], ['end', 2], ['end', 3]] }
   ]
 };
