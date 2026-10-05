@@ -34,6 +34,8 @@ Studio.register('draw', {
       c.stroke();
     }
     S.renderer('stroke', drawStroke);
+    /* app prototype only: params.draw.view shows the lines and offers no drawing (lesson 2.1, version 2) */
+    if (((S.activity.params || {}).draw || {}).view) { this.tool = null; return; }
 
     /* while drawing: only the newest piece, so the line follows the hand without delay */
     function drawTail(op) {

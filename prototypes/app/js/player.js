@@ -4,7 +4,9 @@
    What the learner does in the lesson (paper or Studio, the checklist, the reflection) is kept on this device:
    localStorage "app-proto:lesson:<id>", so it is still there after a visit to the Studio.
    With the Studio the work has two versions, each the Studio's own save (L.studio[0], L.studio[1]): version 1 is made
-   on screen 10; version 2 (one law changed) on screen 11 starts as a copy of version 1 and is saved apart from it. */
+   on screen 10; version 2 (one law changed) on screen 11 starts as a copy of version 1 and is saved apart from it.
+   On screen 11 the learner first chooses the one thing to change (size, direction or spacing: state "change"); the
+   Studio opens version 2 with only that one thing to change. Once version 2 is saved, the choice is kept as it is. */
 window.Player = (function () {
   'use strict';
   var I = window.I18N;
@@ -65,14 +67,15 @@ window.Player = (function () {
   /* a work saved by the Studio (its preview and operations), or null */
   function studioSave(key) { try { var d = JSON.parse(localStorage.getItem(key)); return d && d.ops && d.ops.length ? d : null; } catch (e) { return null; } }
   /* version 2 opens on the work of version 1: until the learner saves version 2, it is (again) a copy of version 1 */
-  function openVersion2(id, L, nav) {
+  function openVersion2(id, L, nav, change) {
     var st = load(id), raw = null, cur = studioSave(L.studio[1].key);
     try { raw = localStorage.getItem(L.studio[0].key); } catch (e) {}
     if (raw && (!cur || cur.savedAt === st.v2seed)) {
       try { localStorage.setItem(L.studio[1].key, raw); st.v2seed = JSON.parse(raw).savedAt; save(id, st); } catch (e) {}
     }
-    nav.studio(L.studio[1].href);
+    nav.studio(L.studio[1].href[change]);
   }
+  var CHANGES = ['size', 'direction', 'spacing'];
   function figure(img, label) {
     return '<figure class="pl-version"><img src="' + img + '" alt="">' + (label ? '<figcaption>' + esc(label) + '</figcaption>' : '') + '</figure>';
   }
@@ -107,10 +110,19 @@ window.Player = (function () {
       var otherRows = allRows.filter(function (r) { return r.k !== 'do' && r.k !== 'checklist'; }).map(row).join('');
       var studioPart = '';
       if (medium === 'studio' && s.step === 'make') studioPart = (studioWork ? '<figure class="pl-studio-work"><img src="' + studioWork.preview + '" alt=""></figure>' : '') + proto(I.ui(s.studioGap));
-      if (medium === 'studio' && s.step === 'change') studioPart = (v2 ? '<figure class="pl-studio-work"><img src="' + v2.preview + '" alt=""></figure>' : '') + proto(I.ui(s.studioGap));
+      /* screen 11: change one thing only. The choice of the thing, then the Studio; once version 2 is saved, the
+         choice stays (version 2 is never reset by changing it) */
+      if (medium === 'studio' && s.step === 'change') {
+        var locked = !!v2;
+        studioPart = (v2 ? '<figure class="pl-studio-work"><img src="' + v2.preview + '" alt=""></figure>' : '') +
+          '<section class="pl-changes" role="group" aria-label="' + esc(I.ui('changeOne')) + '"><h3>' + esc(I.ui('changeOne')) + '</h3><div>' +
+          CHANGES.map(function (c) {
+            return '<button type="button" class="pl-change" data-change="' + c + '" aria-pressed="' + (st.change === c) + '"' + (locked ? ' disabled' : '') + '>' + esc(I.ui(c)) + '</button>';
+          }).join('') + '</div></section>';
+      }
       /* comparison: version 1 | version 2, from the Studio's own saves; never the same version twice */
       if (medium === 'studio' && s.step === 'check' && v1) studioPart = '<div class="pl-pair pl-versions">' + figure(v1.preview, I.ui('v1')) +
-        (v2 ? figure(v2.preview, I.ui('v2')) : '<figure class="pl-version pl-version-missing"><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/></svg><span>' + esc(I.ui('v2missing')) + '</span></div><figcaption>' + esc(I.ui('v2')) + '</figcaption></figure>') + '</div>';
+        (v2 ? figure(v2.preview, I.ui('v2') + (st.change ? ' · ' + I.ui(st.change) : '')) : '<figure class="pl-version pl-version-missing"><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/></svg><span>' + esc(I.ui('v2missing')) + '</span></div><figcaption>' + esc(I.ui('v2')) + '</figcaption></figure>') + '</div>';
       var check = '';
       allRows.filter(function (r) { return r.k === 'checklist'; }).forEach(function (r) {
         var items = [];
@@ -135,7 +147,7 @@ window.Player = (function () {
       /* screen 11: open the work again in the Studio, as version 2 */
       if (s.type === 'creation' && s.step === 'change' && medium === 'studio') {
         if (v2) extra = '<button type="button" class="pl-secondary" data-studio="1">' + esc(I.ui('reopen')) + '</button>';
-        else action = { label: I.ui('reopen'), go: function () { openVersion2(id, L, nav); } };
+        else action = { label: I.ui('openStudio'), off: !st.change, go: function () { if (st.change) openVersion2(id, L, nav, st.change); } };
       }
       body = media0 + art + (s.gap ? proto(I.ui(s.gap)) : '') + doRows + studioPart + reflect + otherRows + check + closing;
     }
@@ -149,13 +161,16 @@ window.Player = (function () {
       '</header>' +
       '<main class="pl-main pl-' + s.type + '" data-screen="' + n + '" tabindex="-1"><div class="pl-inner">' +
         (title ? '<h2 class="pl-title">' + esc(title) + '</h2>' : '') + body + '</div></main>' +
-      '<footer class="pl-foot">' + extra + (action ? '<button type="button" class="pl-primary">' + esc(action.label) + '</button>' : '') + '</footer>';
+      '<footer class="pl-foot">' + extra + (action ? '<button type="button" class="pl-primary"' + (action.off ? ' disabled' : '') + '>' + esc(action.label) + '</button>' : '') + '</footer>';
     root.className = 'app player';
 
     root.querySelector('.pl-back').addEventListener('click', function () { if (n > 1) nav.go(n - 1); else nav.exit(); });
     if (action) root.querySelector('.pl-primary').addEventListener('click', action.go);
     var sb = root.querySelector('[data-studio]');
-    if (sb) sb.addEventListener('click', function () { if (sb.getAttribute('data-studio') === '1') openVersion2(id, L, nav); else nav.studio(L.studio[0].href); });
+    if (sb) sb.addEventListener('click', function () { if (sb.getAttribute('data-studio') === '1') openVersion2(id, L, nav, load(id).change); else nav.studio(L.studio[0].href); });
+    root.querySelectorAll('.pl-change').forEach(function (b) {
+      b.addEventListener('click', function () { var x = load(id); x.change = b.getAttribute('data-change'); save(id, x); nav.go(n); });
+    });
     root.querySelectorAll('.pl-choice').forEach(function (b) {
       b.addEventListener('click', function () { var x = load(id); x.medium = b.getAttribute('data-medium'); save(id, x); nav.go(n + 1); });
     });

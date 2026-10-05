@@ -66,6 +66,15 @@ canvas{display:block;background:var(--sheet);border-radius:6px;box-shadow:0 0 0 
 #repeatIcon{display:flex}#repeatIcon svg{width:24px;height:24px}
 .panel .hint{flex-basis:100%;margin:0 0 2px;text-align:center;font-size:.85rem;color:var(--ink-2)}
 .sz:disabled{opacity:.35;cursor:default}
+/* app prototype, lesson 2.1: the one control of "change one thing only" */
+.vary{max-width:560px;margin:0 auto;padding:8px 16px 2px;text-align:center}
+.vary b{display:block;font-size:.95rem;margin:0 0 2px}
+.vary-row{display:flex;align-items:center;gap:10px}
+.vary-row span{flex:none;font-size:.85rem;color:var(--ink-2)}
+.vary-row span[aria-hidden]{font-size:1.4rem;line-height:1}
+.vary input{flex:1;min-width:0;height:var(--tap);accent-color:var(--ink);margin:0}
+.vary output{display:block;font-size:.85rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tool[hidden]{display:none}   /* undo and redo, not offered there */
 .sz span{font-size:.85rem;color:var(--ink-2)}
 .sz[aria-pressed=true]{background:rgba(43,42,40,.08)}
 .sz[aria-pressed=true] span{color:var(--ink);font-weight:600}

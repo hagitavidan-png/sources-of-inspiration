@@ -40,16 +40,25 @@ window.STUDIO_ACTIVITIES = {
     params: { repeat: { modes: ['grid', 'offset'], step: 250 } },
     back: '../index.html#/lesson/2-1/play/10'
   },
-  /* the same work, version 2 (screen 11, change one law): its own save key, so version 1 stays as it was;
-     the Lesson Player starts it from a copy of version 1 */
-  'pattern-2-1-app-v2': {
-    id: 'pattern-2-1-app-v2',
-    lesson: '2.1-app',
-    tools: ['draw', 'repeat'],
-    canvas: { aspect: '4:3' },
-    params: { repeat: { modes: ['grid', 'offset'], step: 250 } },
+  /* the same work, version 2 (screen 11, change one thing only): one entry per thing that may change, all with the
+     same id, so all save version 2 under one key and version 1 stays as it was. Only the repeat: no drawing, no
+     kind of repeat, no clearing (draw shows the lines only); the Lesson Player starts it from a copy of version 1 */
+  'pattern-2-1-app-v2-size': {
+    id: 'pattern-2-1-app-v2', lesson: '2.1-app', tools: ['draw', 'repeat'], canvas: { aspect: '4:3' },
+    params: { draw: { view: true }, repeat: { modes: ['grid', 'offset'], step: 250, vary: 'size' } },
     back: '../index.html#/lesson/2-1/play/11'
   },
+  'pattern-2-1-app-v2-direction': {
+    id: 'pattern-2-1-app-v2', lesson: '2.1-app', tools: ['draw', 'repeat'], canvas: { aspect: '4:3' },
+    params: { draw: { view: true }, repeat: { modes: ['grid', 'offset'], step: 250, vary: 'direction' } },
+    back: '../index.html#/lesson/2-1/play/11'
+  },
+  'pattern-2-1-app-v2-spacing': {
+    id: 'pattern-2-1-app-v2', lesson: '2.1-app', tools: ['draw', 'repeat'], canvas: { aspect: '4:3' },
+    params: { draw: { view: true }, repeat: { modes: ['grid', 'offset'], step: 250, vary: 'spacing' } },
+    back: '../index.html#/lesson/2-1/play/11'
+  },
+
   color: {
     id: 'color',
     lesson: 'prototype',
