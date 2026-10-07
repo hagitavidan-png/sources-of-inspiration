@@ -1,6 +1,8 @@
 /* Interactive Art Studio V2: the shell around the artwork.
    Top bar, the toolbar (undo and redo, then the activity's tools), panels, the two questions
-   ("Clear?" and "Unsaved changes"), the short message, and leaving without losing work. */
+   ("Clear?" and "Unsaved changes"), the short message, and leaving without losing work.
+   An artwork that saves itself (S.auto, app prototype ?art=): no "Save" and no "Unsaved changes" question; a small
+   "Saved" beside the title once it is written, and leaving or hiding the page writes what is left first. */
 Studio.shell = (function () {
   'use strict';
 
@@ -47,6 +49,18 @@ Studio.shell = (function () {
     });
     $('save').addEventListener('click', S.save);
 
+    if (S.auto) {
+      $('save').hidden = true;
+      /* "Back" writes what is left, then leaves; while it cannot be written ("Could not save"), the learner stays, every
+         time: the next change or "Back" tries again */
+      $('back').addEventListener('click', function () {
+        S.flush().then(function () { if (!S.dirty()) leave(); });
+      });
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') S.flush(true); });
+      window.addEventListener('pagehide', function () { S.flush(true); });
+      return;
+    }
+
     /* leaving: never lose work by accident */
     $('back').addEventListener('click', function () {
       if (!S.dirty()) return leave();
@@ -87,11 +101,20 @@ Studio.shell = (function () {
     });
   }
 
+  /* the artwork that saves itself: "Saved" once written; nothing while a change waits or is being written; the
+     failure said plainly */
+  function saveState(st) {
+    var el = $('saveState');
+    if (!el || !S) return;
+    el.setAttribute('data-state', st);
+    el.textContent = st === 'saved' ? S.T.autoSaved : st === 'error' ? S.T.saveFailed : '';
+  }
+
   var tt;
   function toast(msg) {
     var el = $('toast'); el.textContent = msg; el.classList.add('on');
     clearTimeout(tt); tt = setTimeout(function () { el.classList.remove('on'); }, 1800);
   }
 
-  return { build: build, closePanels: closePanels, togglePanel: togglePanel, toast: toast };
+  return { build: build, closePanels: closePanels, togglePanel: togglePanel, toast: toast, saveState: saveState };
 })();

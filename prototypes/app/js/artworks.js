@@ -17,7 +17,11 @@
    attempt   (the earlier model, kept for now: the Lesson Player still reads it) { id, lesson, createdAt,
              updatedAt, medium?, change?, checks?, reflection?, done?, v1?, v2? }.
    Before this store, the prototype kept one Studio work per activity in localStorage. Those are copied in once
-   (migrate below); the old keys stay as they are. */
+   (migrate below); the old keys stay as they are.
+   A work left at once: a write to IndexedDB begun while the page goes away is lost, so the Studio also puts the
+   state not written yet in localStorage ("app-proto:unsaved:<id>", stash), at once; the next page that opens the
+   store writes it into the artwork and removes it (recover). Only the latest unwritten state of an artwork, for
+   that moment: localStorage does not keep the artworks. */
 window.Artworks = (function () {
   'use strict';
   var DB = 'sources-app', VERSION = 2, STORES = ['artworks', 'attempts', 'meta'];
@@ -121,8 +125,30 @@ window.Artworks = (function () {
     }, Promise.resolve());
   }
 
+  /* ── a state not written yet when the page went away (see above) ── */
+  var STASH = 'app-proto:unsaved:';
+  function stash(w) { try { localStorage.setItem(STASH + w.id, JSON.stringify({ at: Date.now(), w: w })); return true; } catch (e) { return false; } }
+  function unstash(id) { try { localStorage.removeItem(STASH + id); } catch (e) {} }
+  /* written in only if nothing newer was written since, never into a paper work; removed once written */
+  function recover() {
+    var keys = [];
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(STASH) === 0) keys.push(k); } } catch (e) { return; }
+    return keys.reduce(function (p, k) {
+      return p.then(function () {
+        var st = null, id = k.slice(STASH.length);
+        try { st = JSON.parse(localStorage.getItem(k)); } catch (e) {}
+        if (!st || !st.w || st.w.id !== id) return unstash(id);
+        return get('artworks', id).then(function (old) {
+          if (old && (old.medium === 'paper' || Date.parse(old.updatedAt) > st.at)) return;
+          return save(st.w);
+        }).then(function () { unstash(id); });
+      });
+    }, Promise.resolve());
+  }
+
   var ready = open().then(function (d) { db = d; }, function (e) { console.warn('Artworks: kept in memory only (' + (e && e.message) + ')'); })
-    .then(migrate).catch(function (e) { console.warn('Artworks: the earlier saves were not copied (' + (e && e.message) + ')'); });
+    .then(migrate).catch(function (e) { console.warn('Artworks: the earlier saves were not copied (' + (e && e.message) + ')'); })
+    .then(recover).catch(function (e) { console.warn('Artworks: a work left unwritten was not written in (' + (e && e.message) + ')'); });
 
   function after(fn) { return function () { var a = arguments; return ready.then(function () { return fn.apply(null, a); }); }; }
   function byDate(a, b) { return a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0; }
@@ -213,6 +239,8 @@ window.Artworks = (function () {
     list: after(function () { return all('artworks'); }),
     create: after(function (f) { return put('artworks', newArtwork(f || {})); }),
     put: after(save),
+    stash: stash,       // at once, not after ready: for a page going away
+    unstash: unstash,
     addPoint: after(addPoint),
     restorePoint: after(restorePoint),
     /* lesson runs */

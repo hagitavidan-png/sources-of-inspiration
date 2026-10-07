@@ -15,10 +15,12 @@ window.Studio = (function () {
   var TEXT = {
     he: { back: 'חזרה לשיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
           exit: 'צא', clearQ: 'לנקות את כל היצירה?', unsaved: 'יש שינויים שלא נשמרו.', saved: 'היצירה נשמרה',
-          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי' },
+          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי',
+          autoSaved: 'נשמר' },
     en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
           exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
-          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks' }
+          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks',
+          autoSaved: 'Saved' }
   };
 
   var caps = {};          // registered tools: id → { strings, init(api) }
@@ -32,12 +34,13 @@ window.Studio = (function () {
   var $ = function (id) { return document.getElementById(id); };
   var app, stage, canvas, ctx, base, bctx;
   var activity, LANG, T, KEY, BACK;
-  /* app prototype: ?art=<id> the artwork this is (js/artworks.js: saved there, under its own id; a new id is a new
-     work), ?from=<id> the artwork a new one starts from (lesson 2.1: version 2 from version 1). Without ?art= the
-     Studio saves one work per activity in localStorage (KEY), as before */
+  /* app prototype: ?art=<id> the artwork this is (js/artworks.js: saved there by itself, under its own id; a new id
+     is a new work), ?from=<id> the artwork a new one starts from (lesson 2.1: version 2 from version 1). Without
+     ?art= the Studio saves one work per activity in localStorage (KEY) when the learner saves, as before */
   var ID = /^[A-Za-z0-9-]{1,64}$/;
   var ART = ID.test(Q.get('art') || '') ? Q.get('art') : null, FROM = ID.test(Q.get('from') || '') ? Q.get('from') : null;
   var ENTRY, created = null;
+  var paper = false;      // ?art= is a paper artwork: the Studio does not write into it
   var tools = [];         // the activity's tools that are available
   var doc = { w: LOGICAL_W, h: 750, ops: [], settings: {} };   // ops: { t:'clear' } or the tools' own operations;
                                                                 // settings: the tools' choices for the whole work (not history)
@@ -109,7 +112,7 @@ window.Studio = (function () {
 
   /* ── history ── */
   function commit(op) { doc.ops.push(op); redoStack = []; changed(); }
-  function changed() { version++; updateUi(); }
+  function changed() { version++; updateUi(); schedule(); }
   function undo() { if (!doc.ops.length) return; redoStack.push(doc.ops.pop()); changed(); redraw(); }
   function redo() { if (!redoStack.length) return; doc.ops.push(redoStack.pop()); changed(); redraw(); }
   function clearAll() { commit({ t: 'clear' }); redraw(); }
@@ -174,17 +177,48 @@ window.Studio = (function () {
     if (Object.keys(doc.settings).length) data.settings = doc.settings;
     return data;
   }
-  /* saving: true once saved (a promise of it, for an artwork of the store) */
-  function save() {
+  /* ── an artwork of the store (?art=) saves itself: a moment after the last change (AUTO_MS, so a drawing in
+     progress is not written at every line), and at once when the page is left or hidden. One write at a time, in
+     order. This saves the artwork's current state; it never keeps a development point (point() does, when asked).
+     Leaving or hiding the page (away): the state not written yet goes first to Artworks.stash, which survives the
+     page going away, then is written as usual; once a write of the latest state ends, the stash is removed ── */
+  var AUTO_MS = 1000, timer = null, chain = Promise.resolve(true);
+  function autosaves() { return !!ART && !paper; }
+  function schedule() {
+    if (!autosaves()) return;
+    clearTimeout(timer); timer = setTimeout(flush, AUTO_MS);
+    Studio.shell.saveState('pending');
+  }
+  /* write now what is not written yet: a promise of true once it is. away: the page is being left or hidden */
+  function flush(away) {
+    clearTimeout(timer); timer = null;
+    if (!autosaves() || !dirty()) return chain;
     var at = version, data;
-    try { data = record(); } catch (e) { Studio.shell.toast(T.saveFailed); return false; }
-    if (ART) {
-      data.id = ART; data.activity.entry = ENTRY;
-      if (created) data.createdAt = created;
+    try { data = record(); } catch (e) { Studio.shell.saveState('error'); return Promise.resolve(false); }
+    data.id = ART; data.activity.entry = ENTRY;
+    if (created) data.createdAt = created;
+    if (away) window.Artworks.stash(data);
+    Studio.shell.saveState('saving');
+    chain = chain.then(function () {
       return window.Artworks.put(data).then(function (w) {
-        created = w.createdAt; savedVersion = at; Studio.shell.toast(T.saved); return true;
-      }, function () { Studio.shell.toast(T.saveFailed); return false; });
-    }
+        created = w.createdAt; if (at > savedVersion) savedVersion = at;
+        if (at === version) window.Artworks.unstash(ART);
+        Studio.shell.saveState(dirty() ? 'pending' : 'saved');
+        return true;
+      }, function () { Studio.shell.saveState('error'); return false; });
+    });
+    return chain;
+  }
+  /* keep the current state as a development point of the artwork (only when asked: never while drawing or saving) */
+  function point(kind) {
+    if (!autosaves()) return Promise.resolve(null);
+    return flush().then(function () { return window.Artworks.addPoint(ART, kind); });
+  }
+  /* saving: true once saved (for an artwork of the store, a promise of it) */
+  function save() {
+    if (ART) return flush().then(function () { return !dirty(); });
+    var data;
+    try { data = record(); } catch (e) { Studio.shell.toast(T.saveFailed); return false; }
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
       savedVersion = version;
@@ -212,6 +246,7 @@ window.Studio = (function () {
   function loadArt() {
     var A = window.Artworks;
     return A.get(ART).then(function (w) {
+      if (w && w.medium === 'paper') { paper = true; return null; }   // not a Studio work: nothing to open, nothing written
       if (w) { created = w.createdAt; return w; }
       return FROM ? A.get(FROM) : null;
     }).then(function (w) {
@@ -272,6 +307,7 @@ window.Studio = (function () {
       base: function (fn) { basePainters.push(fn); },   // paint on the base layer (artwork units)
       present: function (fn) { presenter = fn; },       // show the learner layer through fn(context, paint)
       changed: changed,                                 // a setting changed: unsaved, but not a step in the history
+      point: point,                                     // keep the current state as a development point (?art= only)
       pointer: function (toolId, h) { pointers[toolId] = h; },
       item: function (it) { items.push(it); },
       closePanels: function () { Studio.shell.closePanels(); },
@@ -283,7 +319,7 @@ window.Studio = (function () {
     items.sort(function (a, b) { return a.order - b.order; });
 
     Studio.shell.build({ T: T, items: items, undo: undo, redo: redo, clearAll: clearAll, hasDrawing: hasDrawing,
-                         save: save, dirty: dirty, back: function () { return BACK; } });
+                         save: save, dirty: dirty, back: function () { return BACK; }, auto: autosaves(), flush: flush });
     tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
     fit();
     updateUi();
@@ -292,8 +328,9 @@ window.Studio = (function () {
     window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 80); });
 
     /* for the prototype tests only: a read-only view of the state */
-    window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools };
+    window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools,
+                        flush: flush, point: point, auto: autosaves() };
   }
 
-  return { register: register, boot: boot, safeBack: safeBack };
+  return { register: register, boot: boot, safeBack: safeBack, point: point };
 })();

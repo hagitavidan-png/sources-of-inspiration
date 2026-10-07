@@ -12,7 +12,8 @@
     ?activity=drawing   which activity (default: drawing; also: pattern, color, composition)
     ?lang=he|en         language (default: the site's saved language, else Hebrew)
     ?back=<path>        where "Back to the lesson" goes; only a relative path inside this site is accepted
-    ?art=<id>           app prototype: the artwork to open and save (../js/artworks.js, IndexedDB); a new id is a new work
+    ?art=<id>           app prototype: the artwork to open; it saves itself (../js/artworks.js, IndexedDB), with no
+                        "Save" button; a new id is a new work
     ?from=<id>          app prototype: the artwork a new one starts from, until it is saved
     ?ctx=gallery        app prototype: "Back" says "Back to my artworks"
   Without ?art=, the work is saved in localStorage under "studio-v2:<lesson>:<activity>".
@@ -27,6 +28,7 @@
       <span data-t="back"></span>
     </button>
     <h1 class="title" data-t="title"></h1>
+    <span class="savestate" id="saveState" role="status" aria-live="polite"></span>
   </header>
 
   <main class="stage" id="stage">
