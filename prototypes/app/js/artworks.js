@@ -1,18 +1,32 @@
-/* The learner's artworks and lesson attempts, on this device (IndexedDB "sources-app"). The one place that knows
+/* The learner's artworks and lesson runs, on this device (IndexedDB "sources-app"). The one place that knows
    where they are kept: the Studio and the Lesson Player only call this API, so it can later be joined to an account
    and the cloud without changing them.
-   artwork   a work saved by the Studio: { id, v, activity: { id, lesson, entry }, lang, canvas, ops, settings?,
-             preview, createdAt, updatedAt, savedAt }. activity.entry is the Studio activity that reopens it.
-   attempt   one time through a lesson: { id, lesson, createdAt, updatedAt, medium?, change?, checks?, reflection?,
-             done?, v1?, v2? }; v1 and v2 are the ids of its two artworks (lesson 2.1: version 1 and version 2).
-             A lesson's current attempt is its newest; a new attempt never removes an older one.
+   artwork   the central object: one work, which may change a great deal and stay the same work.
+             { id, medium: 'digital' | 'paper', lesson?, createdAt, updatedAt, points: [], …its current state }
+             Its current state (STATE): a digital work has the Studio's canvas, ops, settings? and preview (and
+             v, activity: { id, lesson, entry }, lang, savedAt); a paper work has none yet (later perhaps a
+             photographed preview). Saving the current state is not a development point.
+   point     a meaningful development point: a copy of the artwork's state at that moment, kept apart from it.
+             { id, kind, createdAt, state: { canvas?, ops?, settings?, preview? } }. kind says why it was kept
+             (e.g. 'before-repeat', 'kept'). Points are only what is kept on purpose (addPoint); no branches:
+             restoring a point makes it the current state again and adds no point (a flow that must keep the
+             current state first says so itself, with addPoint).
+   run       one time through a lesson: { id, lesson, artwork, createdAt, updatedAt, …the lesson's own state }.
+             It refers to one artwork (artworkFor); a lesson's current run is its newest, and a new run never
+             removes an older one or its artwork.
+   attempt   (the earlier model, kept for now: the Lesson Player still reads it) { id, lesson, createdAt,
+             updatedAt, medium?, change?, checks?, reflection?, done?, v1?, v2? }.
    Before this store, the prototype kept one Studio work per activity in localStorage. Those are copied in once
    (migrate below); the old keys stay as they are. */
 window.Artworks = (function () {
   'use strict';
-  var DB = 'sources-app', STORES = ['artworks', 'attempts', 'meta'];
+  var DB = 'sources-app', VERSION = 2, STORES = ['artworks', 'attempts', 'meta'];
+  var STATE = ['canvas', 'ops', 'settings', 'preview'];   // an artwork's current state (what a point keeps)
 
-  function now() { return new Date().toISOString(); }
+  /* the time, never the same twice on this page: a later save is always later, a newer run always newer */
+  var last = 0;
+  function now() { var t = Date.now(); if (t <= last) t = last + 1; last = t; return new Date(t).toISOString(); }
+  function clone(v) { return v === undefined ? v : JSON.parse(JSON.stringify(v)); }
   function newId() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
@@ -24,31 +38,32 @@ window.Artworks = (function () {
   function open() {
     return new Promise(function (ok, no) {
       if (!window.indexedDB) return no(new Error('no IndexedDB'));
-      var r = indexedDB.open(DB, 1);
-      r.onupgradeneeded = function () {
+      var r = indexedDB.open(DB, VERSION);
+      r.onupgradeneeded = function () {   // 1: artworks, attempts, meta; 2: runs. Nothing is removed
         var d = r.result;
         if (!d.objectStoreNames.contains('artworks')) d.createObjectStore('artworks', { keyPath: 'id' });
         if (!d.objectStoreNames.contains('attempts')) d.createObjectStore('attempts', { keyPath: 'id' }).createIndex('lesson', 'lesson');
         if (!d.objectStoreNames.contains('meta')) d.createObjectStore('meta', { keyPath: 'k' });
+        if (!d.objectStoreNames.contains('runs')) d.createObjectStore('runs', { keyPath: 'id' }).createIndex('lesson', 'lesson');
       };
       r.onsuccess = function () { ok(r.result); };
       r.onerror = function () { no(r.error); };
       r.onblocked = function () { no(new Error('blocked')); };
     });
   }
-  var memory = { artworks: {}, attempts: {}, meta: {} };
+  var memory = { artworks: {}, attempts: {}, meta: {}, runs: {} };   // kept as copies, as the database would
   var db = null;
   function store(name, mode) { return db.transaction(name, mode || 'readonly').objectStore(name); }
   function get(name, id) {
-    if (!db) return Promise.resolve(memory[name][id] || null);
+    if (!db) return Promise.resolve(clone(memory[name][id]) || null);
     return req(store(name).get(id)).then(function (v) { return v || null; });
   }
   function all(name) {
-    if (!db) return Promise.resolve(Object.keys(memory[name]).map(function (k) { return memory[name][k]; }));
+    if (!db) return Promise.resolve(Object.keys(memory[name]).map(function (k) { return clone(memory[name][k]); }));
     return req(store(name).getAll());
   }
   function put(name, v) {
-    if (!db) { memory[name][v.id] = JSON.parse(JSON.stringify(v)); return Promise.resolve(v); }
+    if (!db) { memory[name][v.id] = clone(v); return Promise.resolve(v); }
     var tx = db.transaction(name, 'readwrite'); tx.objectStore(name).put(v);
     return done(tx).then(function () { return v; });
   }
@@ -112,22 +127,105 @@ window.Artworks = (function () {
   function after(fn) { return function () { var a = arguments; return ready.then(function () { return fn.apply(null, a); }); }; }
   function byDate(a, b) { return a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0; }
 
+  /* ── artworks ── */
+  function stateOf(w) { var s = {}; STATE.forEach(function (k) { if (w[k] !== undefined) s[k] = clone(w[k]); }); return s; }
+  function empty(w) { return !(w.ops && w.ops.length) && !w.preview; }
+  function newArtwork(f) {
+    var t = now();
+    return Object.assign({}, f, { id: (f && f.id) || newId(), medium: (f && f.medium) || 'digital', points: [], createdAt: t, updatedAt: t });
+  }
+  /* save an artwork's current state: a new id is a new artwork; the same id updates it. What the artwork is (its
+     creation date, medium, lesson and points) stays unless given; its current state is the one given */
+  function save(w) {
+    return get('artworks', w.id).then(function (old) {
+      var t = now(), rec = Object.assign({}, w);
+      rec.createdAt = (old && old.createdAt) || w.createdAt || t;
+      rec.updatedAt = rec.savedAt = t;
+      rec.medium = w.medium || (old && old.medium) || 'digital';
+      if (w.lesson === undefined && old && old.lesson !== undefined) rec.lesson = old.lesson;
+      rec.points = (old && old.points) || w.points || [];
+      return put('artworks', rec);
+    });
+  }
+  /* keep the current state as a development point */
+  function addPoint(id, kind) {
+    return get('artworks', id).then(function (w) {
+      if (!w) return null;
+      var p = { id: newId(), kind: kind || 'kept', createdAt: now(), state: stateOf(w) };
+      w.points = (w.points || []).concat([p]); w.updatedAt = now();
+      return put('artworks', w).then(function () { return p; });
+    });
+  }
+  /* a point becomes the current state again; the points stay as they are */
+  function restorePoint(id, pointId) {
+    return get('artworks', id).then(function (w) {
+      var p = w && (w.points || []).filter(function (x) { return x.id === pointId; })[0];
+      if (!p) return null;
+      STATE.forEach(function (k) { delete w[k]; });
+      Object.assign(w, clone(p.state));
+      w.updatedAt = w.savedAt = now();
+      return put('artworks', w);
+    });
+  }
+
+  /* ── lesson runs ── */
+  function newRun(lesson) { var t = now(); return put('runs', { id: newId(), lesson: lesson, artwork: null, createdAt: t, updatedAt: t }); }
+  function putRun(r) { r.createdAt = r.createdAt || now(); r.updatedAt = now(); return put('runs', r); }
+  /* the run's one artwork, made the first time it is asked for (with the medium given). Asked for again, it is
+     the same artwork; an empty one takes the medium given, one with work in it keeps its own. The run is read and
+     written in one transaction, so two asks at once still make one artwork */
+  function artworkFor(runId, medium) {
+    function decide(r, w) {
+      if (!r) return { r: null, w: null };
+      if (r.artwork && w) {
+        if (medium && w.medium !== medium && empty(w)) { w.medium = medium; w.updatedAt = now(); return { r: null, w: w, write: [w] }; }
+        return { r: null, w: w, write: [] };
+      }
+      var a = newArtwork({ medium: medium, lesson: r.lesson });
+      r.artwork = a.id; r.updatedAt = now();
+      return { r: r, w: a, write: [a] };
+    }
+    if (!db) {
+      var r = clone(memory.runs[runId]), d = decide(r, r && r.artwork ? clone(memory.artworks[r.artwork]) : null);
+      if (d.r) memory.runs[runId] = clone(d.r);
+      (d.write || []).forEach(function (w) { memory.artworks[w.id] = clone(w); });
+      return Promise.resolve(d.w);
+    }
+    var tx = db.transaction(['runs', 'artworks'], 'readwrite'), out = null;
+    tx.objectStore('runs').get(runId).onsuccess = function (e) {
+      var r = e.target.result;
+      function then(w) {
+        var d = decide(r, w); out = d.w;
+        if (d.r) tx.objectStore('runs').put(d.r);
+        (d.write || []).forEach(function (x) { tx.objectStore('artworks').put(x); });
+      }
+      if (r && r.artwork) tx.objectStore('artworks').get(r.artwork).onsuccess = function (e2) { then(e2.target.result || null); };
+      else then(null);
+    };
+    return done(tx).then(function () { return out; });
+  }
+
   return {
     ready: ready,
     newId: newId,
     /* artworks */
     get: after(function (id) { return id ? get('artworks', id) : Promise.resolve(null); }),
     list: after(function () { return all('artworks'); }),
-    /* save an artwork: a new id is a new work; the same id updates it (it keeps its createdAt) */
-    put: after(function (w) {
-      var t = now();
-      return get('artworks', w.id).then(function (old) {
-        w.createdAt = (old && old.createdAt) || w.createdAt || t;
-        w.updatedAt = w.savedAt = t;
-        return put('artworks', w);
-      });
+    create: after(function (f) { return put('artworks', newArtwork(f || {})); }),
+    put: after(save),
+    addPoint: after(addPoint),
+    restorePoint: after(restorePoint),
+    /* lesson runs */
+    newRun: after(newRun),
+    currentRun: after(function (lesson) {
+      return all('runs').then(function (l) { return l.filter(function (r) { return r.lesson === lesson; }).sort(byDate).pop() || null; });
     }),
-    /* lesson attempts */
+    runs: after(function (lesson) {
+      return all('runs').then(function (l) { return l.filter(function (r) { return !lesson || r.lesson === lesson; }).sort(byDate); });
+    }),
+    putRun: after(putRun),
+    artworkFor: after(artworkFor),
+    /* lesson attempts (the earlier model) */
     attempts: after(function (lesson) {
       return all('attempts').then(function (l) { return l.filter(function (a) { return !lesson || a.lesson === lesson; }).sort(byDate); });
     }),
