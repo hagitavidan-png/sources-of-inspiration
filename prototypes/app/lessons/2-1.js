@@ -15,6 +15,7 @@ window.APP_LESSONS['2-1'] = {
   adapter: 'guide',
   unit: 'unit02',
   langs: ['he', 'en'],
+  artworkActivity: '2-1-continue',   // the Studio activity "My artworks" opens an artwork of this lesson in (never its last one)
   assets: {},
   /* the words of the flow's actions */
   actions: {

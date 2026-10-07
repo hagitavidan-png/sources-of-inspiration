@@ -2,8 +2,7 @@
    Units, lessons and what is open come from the site (js/site-nav.js: ART_NAVIGATION, SITE_STATUS); a unit's
    description and cover from content/units/unit-NN.json. A lesson opens in the player when it is listed in
    window.APP_LESSONS; any other open lesson stays on the site.
-   My artworks (#/gallery): the works the learner saved in the Studio during the lessons (js/artworks.js), one card
-   per lesson attempt (its two versions together); a work opens again in the Studio. */
+   My artworks (#/gallery): the learner's artworks (js/artworks.js), one card each; see gallery() below. */
 (function () {
   'use strict';
   var I = window.I18N, NAV = window.ART_NAVIGATION || { units: [] }, STATUS = window.SITE_STATUS || { units: [], lessons: [] };
@@ -108,43 +107,85 @@
     });
   }
 
-  /* the lesson of an attempt, as the site names it: "2.1" and its title */
+  /* the lesson of an artwork, as the site names it: "2.1" and its title (in the current language) */
   function lessonOf(id) {
     var r = null;
     NAV.units.forEach(function (u) { u.lessons.forEach(function (l, k) { if (lessonId(l.path) === id) r = { num: (+unitNum(u)) + '.' + (k + 1), title: I.tx(l.title) }; }); });
     return r;
   }
-  function day(iso) { try { return new Date(iso).toLocaleDateString(I.lang(), { day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return ''; } }
+  var LOCALE = { he: 'he-IL', en: 'en-GB' };
+  function day(iso) { try { return new Date(iso).toLocaleDateString(LOCALE[I.lang()] || I.lang(), { day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return ''; } }
+
+  /* My artworks: one card per artwork, the one worked on last first (updatedAt). Only read: nothing is written here.
+     - an artwork of a lesson run (js/artworks.js runs) is the learner's: digital once something is made in it (its
+       operations and picture), paper always (nothing tells whether the page has been worked on);
+     - the earlier prototype's works (copied in once; two works of one attempt) are one card, to look at only: its
+       later work's picture, the attempt's lesson. Neither the attempt nor its two works are named to the learner.
+     An artwork of a run is never taken as an earlier work. "Continue developing" opens the same artwork in the
+     lesson's artworkActivity (lessons/<id>.js), never in the activity it was last saved in; paper never opens the
+     Studio. */
+  function cardsOf(works, runs, attempts) {
+    var byId = {}, inRun = {}, used = {}, cards = [];
+    works.forEach(function (w) { byId[w.id] = w; });
+    runs.forEach(function (r) { if (r.artwork) inRun[r.artwork] = true; });
+    attempts.forEach(function (a) {
+      var pair = [a.v1, a.v2].filter(function (id) { return id && byId[id] && !inRun[id] && !used[id]; });
+      pair.forEach(function (id) { used[id] = true; });
+      var shown = pair.map(function (id) { return byId[id]; }).filter(function (w) { return w.preview; });
+      if (!shown.length) return;
+      cards.push({ kind: 'earlier', w: shown[shown.length - 1], lesson: a.lesson,
+        at: shown.reduce(function (m, w) { return w.updatedAt > m ? w.updatedAt : m; }, ''), created: shown[0].createdAt });
+    });
+    works.forEach(function (w) {
+      if (used[w.id]) return;
+      var made = !!(w.ops && w.ops.length && w.preview);
+      if (inRun[w.id] && w.medium === 'paper') cards.push({ kind: 'paper', w: w, lesson: w.lesson });
+      else if (inRun[w.id] && made) cards.push({ kind: 'digital', w: w, lesson: w.lesson });
+      else if (!inRun[w.id] && w.medium !== 'paper' && w.preview) cards.push({ kind: 'earlier', w: w, lesson: w.lesson });
+    });
+    cards.forEach(function (c) { c.at = c.at || c.w.updatedAt || ''; c.created = c.created || c.w.createdAt || ''; });
+    return cards.sort(function (a, b) { return a.at !== b.at ? (a.at < b.at ? 1 : -1) : a.created < b.created ? 1 : a.created > b.created ? -1 : 0; });
+  }
+  var PAPER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>';
   function gallery() {
     frame(esc(I.ui('gallery')), '#/home', '<div class="ga"></div>');
     var W = window.Artworks;
-    Promise.all([W.list(), W.attempts()]).then(function (r) {
+    Promise.all([W.list(), W.runs(), W.attempts()]).then(function (r) {
       var box = root.querySelector('.ga');
       if (!box) return;
-      var works = {}, used = {}, cards = [];
-      r[0].forEach(function (w) { if (w.ops && w.ops.length && w.preview) works[w.id] = w; });
-      /* an attempt is one card: its version 1 and version 2 side by side */
-      r[1].forEach(function (a) {
-        var items = [[a.v1, I.ui('v1')], [a.v2, I.ui('v2') + (a.change ? ' · ' + I.ui(a.change) : '')]].filter(function (x) { return works[x[0]]; })
-          .map(function (x) { used[x[0]] = true; return { w: works[x[0]], label: x[1] }; });
-        if (items.length) cards.push({ lesson: lessonOf(a.lesson), items: items });
-      });
-      Object.keys(works).forEach(function (k) { if (!used[k]) cards.push({ lesson: null, items: [{ w: works[k], label: '' }] }); });
-      cards.forEach(function (c) { c.at = c.items.reduce(function (m, x) { return x.w.updatedAt > m ? x.w.updatedAt : m; }, ''); });
-      cards.sort(function (a, b) { return a.at < b.at ? 1 : a.at > b.at ? -1 : 0; });
-      if (!cards.length) { box.innerHTML = '<p class="ga-empty">' + esc(I.ui('galleryEmpty')) + '</p>'; return; }
+      var cards = cardsOf(r[0], r[1], r[2]);
+      if (!cards.length) {
+        box.innerHTML = '<div class="ga-empty"><p>' + esc(I.ui('artworksEmpty')) + '</p><a class="sh-primary" href="#/units">' + esc(I.ui('artworksStart')) + '</a></div>';
+        return;
+      }
       var back = encodeURIComponent('../index.html#/gallery');
-      box.innerHTML = '<ol class="ga-list">' + cards.map(function (c) {
-        return '<li class="ga-card">' +
-          (c.lesson ? '<h2 class="ga-h">' + esc(I.ui('lesson')) + ' ' + esc(c.lesson.num) + ' · ' + esc(c.lesson.title) + '</h2>' : '') +
-          '<p class="ga-date">' + esc(day(c.at)) + '</p>' +
-          '<div class="ga-works' + (c.items.length > 1 ? ' two' : '') + '">' + c.items.map(function (x) {
-            var e = x.w.activity && x.w.activity.entry;
-            var img = '<img src="' + x.w.preview + '" alt="">' + (x.label ? '<span>' + esc(x.label) + '</span>' : '');
-            return e ? '<a class="ga-work" href="studio/index.html?activity=' + encodeURIComponent(e) + '&art=' + encodeURIComponent(x.w.id) + '&back=' + back + '&ctx=gallery">' + img + '</a>'
-                     : '<span class="ga-work">' + img + '</span>';
-          }).join('') + '</div></li>';
-      }).join('') + '</ol>';
+      box.innerHTML = '<ol class="ga-list">' + cards.map(function (c, i) {
+        var w = c.w, L = c.lesson && lessonOf(c.lesson), line = L ? I.ui('lesson') + ' ' + L.num + ' · ' + L.title : '';
+        var alt = line ? I.ui('artworkAlt', { lesson: line }) : I.ui('artworkAlt', { lesson: '' }).replace(/\s*·\s*$/, '');
+        var ids = [], head = '', action = '', act = c.kind === 'digital' && c.lesson && window.APP_LESSONS[c.lesson] && window.APP_LESSONS[c.lesson].artworkActivity;
+        if (c.kind === 'paper') { head += '<p class="ga-kind" id="ga-k' + i + '">' + esc(I.ui('onPaper')) + '</p>'; ids.push('ga-k' + i); }
+        if (line) { head += '<h2 class="ga-h" id="ga-h' + i + '">' + esc(line) + '</h2>'; ids.push('ga-h' + i); }
+        head += '<p class="ga-date" id="ga-d' + i + '">' + esc(I.ui('lastWorked', { date: day(c.at) })) + '</p>';
+        if (!ids.length) ids.push('ga-d' + i);
+        var about = ids.concat(ids.indexOf('ga-d' + i) < 0 ? ['ga-d' + i] : []).join(' ');
+        if (act) action = '<a class="ga-action main" href="studio/index.html?activity=' + encodeURIComponent(act) + '&amp;art=' + encodeURIComponent(w.id) + '&amp;ctx=gallery&amp;back=' + back + '" aria-describedby="' + about + '">' + esc(I.ui('continueDeveloping')) + '</a>';
+        if (c.kind === 'paper' && c.lesson && window.APP_LESSONS[c.lesson]) action = '<a class="ga-action" href="#/lesson/' + esc(c.lesson) + '" aria-describedby="' + about + '">' + esc(I.ui('backToLesson')) + '</a>';
+        if (c.kind === 'earlier') action = '<button type="button" class="ga-action" data-view="' + i + '" aria-describedby="' + about + '">' + esc(I.ui('viewArtwork')) + '</button>';
+        var pic = c.kind === 'paper' ? '<div class="ga-pic ga-blank">' + PAPER + '</div>' : '<figure class="ga-pic"><img src="' + w.preview + '" alt="' + esc(alt) + '"></figure>';
+        return '<li><article class="ga-card ga-' + c.kind + '" aria-labelledby="' + ids.join(' ') + '">' + pic + '<div class="ga-text">' + head + '</div>' + action + '</article></li>';
+      }).join('') + '</ol>' +
+        '<dialog class="ga-view"><img alt=""><button type="button" class="ga-close">' + esc(I.ui('close')) + '</button></dialog>';
+      /* an earlier work: its picture, large; only to look at */
+      var dlg = box.querySelector('.ga-view'), opener = null;
+      box.querySelectorAll('[data-view]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var img = b.closest('.ga-card').querySelector('.ga-pic img'), big = dlg.querySelector('img');
+          big.src = img.src; big.alt = img.alt; dlg.setAttribute('aria-label', img.alt);
+          opener = b; dlg.showModal(); dlg.querySelector('.ga-close').focus();
+        });
+      });
+      dlg.querySelector('.ga-close').addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('close', function () { if (opener) opener.focus(); });
     });
   }
 

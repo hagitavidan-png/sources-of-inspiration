@@ -159,18 +159,32 @@ a.sh-item:hover{border-color:var(--ink)}
 .sh-secondary{align-self:center;min-height:var(--tap);padding:0 12px;border:0;background:none;font:inherit;font-size:1.02rem;font-weight:600;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .sh-lesson .sh-secondary{margin-top:10px}
 
-/* my artworks: one card per lesson attempt */
-.ga-empty{margin:24px 0;color:var(--ink-2);line-height:1.6}
-.ga-list{list-style:none;margin:8px auto 0;padding:0;display:grid;gap:14px}
-.ga-card{padding:14px 16px 16px;border-radius:16px;background:var(--card);border:1px solid var(--rule)}
-.ga-h{margin:0;font-size:1.02rem;font-weight:700;line-height:1.35}
-.ga-date{margin:2px 0 12px;font-size:.86rem;color:var(--muted)}
-.ga-works{display:grid;gap:12px}
-.ga-works.two{grid-template-columns:1fr 1fr}
-.ga-work{display:block;min-width:0;text-decoration:none;color:var(--ink)}
-.ga-work img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:12px;border:1px solid var(--rule);background:#fffdf9}
-a.ga-work:hover img{border-color:var(--ink)}
-.ga-work span{display:block;margin:6px 0 0;font-size:.88rem;font-weight:600;text-align:center}
+/* my artworks: one card per artwork, its picture first; one visible action */
+.ga-empty{margin:24px 0;display:flex;flex-direction:column;gap:20px}
+.ga-empty p{margin:0;color:var(--ink-2);line-height:1.6;font-size:1.06rem}
+.ga-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:14px}
+.ga-card{height:100%;display:flex;flex-direction:column;gap:10px;padding:12px 12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--rule)}
+.ga-pic{margin:0;aspect-ratio:4/3;border-radius:12px;border:1px solid var(--rule);background:#fffdf9;overflow:hidden}
+.ga-pic img{display:block;width:100%;height:100%;object-fit:contain}
+.ga-blank{display:flex;align-items:center;justify-content:center;color:var(--muted);background:repeating-linear-gradient(135deg,#fbf8f1 0 10px,#f6f2e9 10px 20px)}   /* paper: no picture of it, on purpose */
+.ga-blank svg{width:44px;height:44px;stroke-width:1.4}
+.ga-text{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.ga-kind{margin:0;font-weight:700;color:var(--ink)}
+.ga-h{margin:0;font-size:1rem;font-weight:600;line-height:1.35}
+.ga-date{margin:2px 0 0;font-size:.86rem;color:var(--muted)}
+.ga-action{display:flex;align-items:center;justify-content:center;min-height:var(--tap);padding:0 16px;border-radius:999px;border:1.5px solid var(--ink);background:none;color:var(--ink);font-size:1rem;font-weight:700;text-align:center;text-decoration:none;cursor:pointer}
+.ga-action.main{background:var(--ink);color:var(--bg)}
+.ga-action:hover{background:rgba(36,36,36,.06)}.ga-action.main:hover{background:#000}
+.ga-action:focus-visible,.ga-close:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+/* an earlier work, large; only to look at */
+.ga-view{border:0;border-radius:18px;padding:12px;width:min(960px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(43,42,40,.25)}
+.ga-view[open]{display:flex;flex-direction:column;gap:12px}
+.ga-view::backdrop{background:rgba(36,36,36,.45)}
+.ga-view img{display:block;width:100%;min-height:0;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:12px;background:#fffdf9}
+.ga-close{align-self:center;min-height:var(--tap);min-width:140px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink);background:none;font-weight:700;cursor:pointer}
+@media (min-width:560px){ .ga-list{grid-template-columns:1fr 1fr} }
+@media (min-width:700px){ .sh-main > .ga{max-width:none} }
+@media (min-width:1024px){ .ga-list{grid-template-columns:1fr 1fr 1fr} }
 
 /* wider screens: the same app, more air */
 @media (min-width:700px){

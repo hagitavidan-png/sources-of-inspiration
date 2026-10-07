@@ -17,6 +17,9 @@ window.I18N = (function () {
       reopen: 'פתח/י שוב ב-Studio', v1: 'גרסה 1', v2: 'גרסה 2', v2missing: 'גרסה 2 עדיין לא נוצרה',
       changeOne: 'שנה/י דבר אחד בלבד', size: 'גודל', direction: 'כיוון', spacing: 'מרווח', openStudio: 'פתח/י ב-Studio',
       gallery: 'היצירות שלי', newAttempt: 'ניסיון חדש', newArtwork: 'להתחיל יצירה חדשה', galleryEmpty: 'היצירות שלך יופיעו כאן אחרי שתשמור/י אותן ב-Studio.',
+      artworksEmpty: 'כאן יופיעו היצירות שתתחילו ליצור.', artworksStart: 'לבחור מקור השראה', continueDeveloping: 'להמשיך לפתח',
+      onPaper: 'יצירה על נייר', backToLesson: 'חזרה לשיעור', lastWorked: 'עבדתם עליה לאחרונה: {date}',
+      viewArtwork: 'לצפות ביצירה', close: 'סגירה', artworkAlt: 'היצירה שלך · {lesson}',
       proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.',
       protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
       protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
@@ -28,6 +31,9 @@ window.I18N = (function () {
       reopen: 'Open in Studio again', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
       changeOne: 'Change one thing only', size: 'Size', direction: 'Rotation', spacing: 'Spacing', openStudio: 'Open in Studio',
       gallery: 'My artworks', newAttempt: 'New attempt', newArtwork: 'Start a new artwork', galleryEmpty: 'Your artworks will appear here after you save them in Studio.',
+      artworksEmpty: 'Your artworks will appear here when you start creating.', artworksStart: 'Choose a source of inspiration', continueDeveloping: 'Continue developing',
+      onPaper: 'Artwork on paper', backToLesson: 'Back to lesson', lastWorked: 'Last worked on: {date}',
+      viewArtwork: 'View artwork', close: 'Close', artworkAlt: 'Your artwork · {lesson}',
       proto: 'Prototype', protoImage: 'Image placeholder. To be added.',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'
