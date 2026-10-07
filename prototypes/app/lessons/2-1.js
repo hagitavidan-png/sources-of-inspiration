@@ -8,14 +8,12 @@ window.APP_LESSONS['2-1'] = {
   data: '../../data/lesson-pages/lesson-2-1-learner.js',
   adapter: 'guide',
   unit: 'unit02',
-  /* the Studio work, in two versions: 1 made on screen 10, 2 (one law changed) on screen 11, started from 1 */
-  studio: [
-    { href: 'studio/index.html?activity=pattern-2-1-app', key: 'studio-v2:2.1-app:pattern-2-1-app' },
-    { key: 'studio-v2:2.1-app:pattern-2-1-app-v2', href: {   /* version 2: one Studio activity per thing to change, one save */
-      size: 'studio/index.html?activity=pattern-2-1-app-v2-size',
-      direction: 'studio/index.html?activity=pattern-2-1-app-v2-direction',
-      spacing: 'studio/index.html?activity=pattern-2-1-app-v2-spacing' } }
-  ],
+  /* the Studio work, in two versions (two artworks of the lesson attempt): 1 made on screen 10, 2 (one law changed)
+     on screen 11, started from 1. The Studio activities: version 2 has one per thing to change */
+  studio: {
+    v1: 'pattern-2-1-app',
+    v2: { size: 'pattern-2-1-app-v2-size', direction: 'pattern-2-1-app-v2-direction', spacing: 'pattern-2-1-app-v2-spacing' }
+  },
   assets: {},
   screens: [
     /* 1 */ { type: 'content', src: [['explore', 0]], media: { asset: '2-1-opening' } },

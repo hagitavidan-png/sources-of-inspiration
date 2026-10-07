@@ -145,6 +145,23 @@ a.sh-item:hover{border-color:var(--ink)}
 .sh-kicker{margin:0 0 10px;color:var(--terracotta);font-weight:600}
 .sh-time{margin:0 0 32px;color:var(--muted)}
 
+/* home and lesson: a second, quieter way */
+.sh-secondary{align-self:center;min-height:var(--tap);padding:0 12px;border:0;background:none;font:inherit;font-size:1.02rem;font-weight:600;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.sh-lesson .sh-secondary{margin-top:10px}
+
+/* my artworks: one card per lesson attempt */
+.ga-empty{margin:24px 0;color:var(--ink-2);line-height:1.6}
+.ga-list{list-style:none;margin:8px auto 0;padding:0;display:grid;gap:14px}
+.ga-card{padding:14px 16px 16px;border-radius:16px;background:var(--card);border:1px solid var(--rule)}
+.ga-h{margin:0;font-size:1.02rem;font-weight:700;line-height:1.35}
+.ga-date{margin:2px 0 12px;font-size:.86rem;color:var(--muted)}
+.ga-works{display:grid;gap:12px}
+.ga-works.two{grid-template-columns:1fr 1fr}
+.ga-work{display:block;min-width:0;text-decoration:none;color:var(--ink)}
+.ga-work img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:12px;border:1px solid var(--rule);background:#fffdf9}
+a.ga-work:hover img{border-color:var(--ink)}
+.ga-work span{display:block;margin:6px 0 0;font-size:.88rem;font-weight:600;text-align:center}
+
 /* wider screens: the same app, more air */
 @media (min-width:700px){
   .app{border-inline:1px solid var(--rule)}

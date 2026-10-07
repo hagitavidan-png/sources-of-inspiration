@@ -15,10 +15,10 @@ window.Studio = (function () {
   var TEXT = {
     he: { back: 'חזרה לשיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
           exit: 'צא', clearQ: 'לנקות את כל היצירה?', unsaved: 'יש שינויים שלא נשמרו.', saved: 'היצירה נשמרה',
-          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור' },
+          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי' },
     en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
           exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
-          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area' }
+          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks' }
   };
 
   var caps = {};          // registered tools: id → { strings, init(api) }
@@ -32,6 +32,13 @@ window.Studio = (function () {
   var $ = function (id) { return document.getElementById(id); };
   var app, stage, canvas, ctx, base, bctx;
   var activity, LANG, T, KEY, BACK;
+  /* app prototype: ?art=<id> the artwork this is (js/artworks.js: saved there, under its own id; a new id is a new
+     work), ?from=<id> the artwork a new one starts from (lesson 2.1: version 2 from version 1). Without ?art= the
+     Studio saves one work per activity in localStorage (KEY), as before */
+  var ID = /^[A-Za-z0-9-]{1,64}$/;
+  var ART = ID.test(Q.get('art') || '') ? Q.get('art') : null, FROM = ID.test(Q.get('from') || '') ? Q.get('from') : null;
+  var ENTRY, created = null;
+  var tools = [];         // the activity's tools that are available
   var doc = { w: LOGICAL_W, h: 750, ops: [], settings: {} };   // ops: { t:'clear' } or the tools' own operations;
                                                                 // settings: the tools' choices for the whole work (not history)
   var redoStack = [];
@@ -160,12 +167,25 @@ window.Studio = (function () {
     x.drawImage(ink, 0, 0);
     return c.toDataURL('image/png');
   }
+  function record() {
+    var data = { v: 2, activity: { id: activity.id, lesson: activity.lesson }, lang: LANG, back: BACK,
+                 savedAt: new Date().toISOString(), canvas: { aspect: activity.canvas.aspect, w: doc.w, h: doc.h },
+                 ops: visibleOps(), preview: preview() };
+    if (Object.keys(doc.settings).length) data.settings = doc.settings;
+    return data;
+  }
+  /* saving: true once saved (a promise of it, for an artwork of the store) */
   function save() {
+    var at = version, data;
+    try { data = record(); } catch (e) { Studio.shell.toast(T.saveFailed); return false; }
+    if (ART) {
+      data.id = ART; data.activity.entry = ENTRY;
+      if (created) data.createdAt = created;
+      return window.Artworks.put(data).then(function (w) {
+        created = w.createdAt; savedVersion = at; Studio.shell.toast(T.saved); return true;
+      }, function () { Studio.shell.toast(T.saveFailed); return false; });
+    }
     try {
-      var data = { v: 2, activity: { id: activity.id, lesson: activity.lesson }, lang: LANG, back: BACK,
-                   savedAt: new Date().toISOString(), canvas: { aspect: activity.canvas.aspect, w: doc.w, h: doc.h },
-                   ops: visibleOps(), preview: preview() };
-      if (Object.keys(doc.settings).length) data.settings = doc.settings;
       localStorage.setItem(KEY, JSON.stringify(data));
       savedVersion = version;
       Studio.shell.toast(T.saved);
@@ -175,17 +195,29 @@ window.Studio = (function () {
       return false;
     }
   }
+  /* reopen a saved work into the document: true when there is something in it */
+  function apply(data) {
+    if (!data || data.v !== 2 || !data.canvas || !Array.isArray(data.ops)) return false;
+    doc.w = data.canvas.w; doc.h = data.canvas.h; doc.ops = data.ops;   // the work keeps the proportions it was made in
+    if (data.settings && typeof data.settings === 'object') doc.settings = data.settings;   // each tool checks its own
+    return data.ops.length > 0;
+  }
   function load() {
     var raw = null;
     try { raw = localStorage.getItem(KEY); } catch (e) {}
     if (!raw) return false;
-    try {
-      var data = JSON.parse(raw);
-      if (!data || data.v !== 2 || !data.canvas || !Array.isArray(data.ops)) return false;
-      doc.w = data.canvas.w; doc.h = data.canvas.h; doc.ops = data.ops;   // the work keeps the proportions it was made in
-      if (data.settings && typeof data.settings === 'object') doc.settings = data.settings;   // each tool checks its own
-      return data.ops.length > 0;
-    } catch (e) { return false; }
+    try { return apply(JSON.parse(raw)); } catch (e) { return false; }
+  }
+  /* the artwork ?art= (or, while it is not saved yet, the one ?from= it starts from) */
+  function loadArt() {
+    var A = window.Artworks;
+    return A.get(ART).then(function (w) {
+      if (w) { created = w.createdAt; return w; }
+      return FROM ? A.get(FROM) : null;
+    }).then(function (w) {
+      if (!w) return false;
+      try { return apply(JSON.parse(JSON.stringify(w))); } catch (e) { return false; }
+    }, function () { return false; });
   }
 
   /* ── start ── */
@@ -198,7 +230,7 @@ window.Studio = (function () {
 
     LANG = Q.get('lang') || (function () { try { return localStorage.getItem('sourcesLang'); } catch (e) { return null; } })() || 'he';
     if (!TEXT[LANG]) LANG = 'he';
-    var tools = (activity.tools || []).filter(function (t) {
+    tools = (activity.tools || []).filter(function (t) {
       if (!caps[t]) console.warn('Studio: tool "' + t + '" is not available');
       return !!caps[t];
     });
@@ -209,6 +241,8 @@ window.Studio = (function () {
     document.documentElement.dir = LANG === 'he' ? 'rtl' : 'ltr';
 
     BACK = safeBack(Q.get('back')) || safeBack(activity.back) || '../../index.html';
+    if (Q.get('ctx') === 'gallery') T.back = T.backGallery;   // opened from the app's "My artworks"
+    ENTRY = id;
     KEY = 'studio-v2:' + activity.lesson + ':' + activity.id;
     doc.w = LOGICAL_W; doc.h = Math.round(LOGICAL_W * aspect(activity.canvas.aspect));
 
@@ -222,7 +256,10 @@ window.Studio = (function () {
     canvas.addEventListener('pointercancel', onUp);
     canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
-    var reopened = load();
+    if (!window.Artworks) ART = null;
+    if (ART) loadArt().then(start); else start(load());
+  }
+  function start(reopened) {
     /* what the tools may read about the activity; read-only */
     var info = freeze(JSON.parse(JSON.stringify({ id: activity.id, lesson: activity.lesson, tools: activity.tools || [],
       canvas: activity.canvas, params: activity.params || {}, content: activity.content || {} })));
@@ -255,7 +292,7 @@ window.Studio = (function () {
     window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 80); });
 
     /* for the prototype tests only: a read-only view of the state */
-    window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, lang: LANG, activity: activity, back: BACK, tools: tools };
+    window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools };
   }
 
   return { register: register, boot: boot, safeBack: safeBack };

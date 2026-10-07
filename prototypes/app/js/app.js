@@ -1,7 +1,9 @@
 /* The app prototype: Home → Units → Unit → Lesson → Lesson Player, one screen at a time, by the address's #route.
    Units, lessons and what is open come from the site (js/site-nav.js: ART_NAVIGATION, SITE_STATUS); a unit's
    description and cover from content/units/unit-NN.json. A lesson opens in the player when it is listed in
-   window.APP_LESSONS; any other open lesson stays on the site. */
+   window.APP_LESSONS; any other open lesson stays on the site.
+   My artworks (#/gallery): the works the learner saved in the Studio during the lessons (js/artworks.js), one card
+   per lesson attempt (its two versions together); a work opens again in the Studio. */
 (function () {
   'use strict';
   var I = window.I18N, NAV = window.ART_NAVIGATION || { units: [] }, STATUS = window.SITE_STATUS || { units: [], lessons: [] };
@@ -28,7 +30,8 @@
 
   function home() {
     frame('', null, '<div class="sh-home"><p class="sh-brand">' + esc(I.ui('site')) + '</p>' +
-      '<a class="sh-primary" href="#/units">' + esc(I.ui('units')) + '</a></div>');
+      '<a class="sh-primary" href="#/units">' + esc(I.ui('units')) + '</a>' +
+      '<a class="sh-secondary" href="#/gallery">' + esc(I.ui('gallery')) + '</a></div>');
   }
 
   function unitStatus(u) {
@@ -87,6 +90,55 @@
         '<h2 class="sh-h big">' + esc(I.tx(d.title)) + '</h2>' +
         '<p class="sh-time">' + esc(I.tx(d.time)) + '</p>' +
         '<a class="sh-primary" href="#/lesson/' + id + '/play/1">' + esc(I.ui('continue')) + '</a></div>');
+      /* a new attempt, once the current one has begun its work: the earlier attempt and its works stay */
+      window.Player.attempt(id).then(function (a) {
+        var box = root.querySelector('.sh-lesson');
+        if (!box || !(a.medium || a.done || a.v1)) return;
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'sh-secondary'; b.textContent = I.ui('newAttempt');
+        b.addEventListener('click', function () { b.disabled = true; window.Artworks.newAttempt(id).then(function () { go('#/lesson/' + id + '/play/1'); }); });
+        box.appendChild(b);
+      });
+    });
+  }
+
+  /* the lesson of an attempt, as the site names it: "2.1" and its title */
+  function lessonOf(id) {
+    var r = null;
+    NAV.units.forEach(function (u) { u.lessons.forEach(function (l, k) { if (lessonId(l.path) === id) r = { num: (+unitNum(u)) + '.' + (k + 1), title: I.tx(l.title) }; }); });
+    return r;
+  }
+  function day(iso) { try { return new Date(iso).toLocaleDateString(I.lang(), { day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return ''; } }
+  function gallery() {
+    frame(esc(I.ui('gallery')), '#/home', '<div class="ga"></div>');
+    var W = window.Artworks;
+    Promise.all([W.list(), W.attempts()]).then(function (r) {
+      var box = root.querySelector('.ga');
+      if (!box) return;
+      var works = {}, used = {}, cards = [];
+      r[0].forEach(function (w) { if (w.ops && w.ops.length && w.preview) works[w.id] = w; });
+      /* an attempt is one card: its version 1 and version 2 side by side */
+      r[1].forEach(function (a) {
+        var items = [[a.v1, I.ui('v1')], [a.v2, I.ui('v2') + (a.change ? ' · ' + I.ui(a.change) : '')]].filter(function (x) { return works[x[0]]; })
+          .map(function (x) { used[x[0]] = true; return { w: works[x[0]], label: x[1] }; });
+        if (items.length) cards.push({ lesson: lessonOf(a.lesson), items: items });
+      });
+      Object.keys(works).forEach(function (k) { if (!used[k]) cards.push({ lesson: null, items: [{ w: works[k], label: '' }] }); });
+      cards.forEach(function (c) { c.at = c.items.reduce(function (m, x) { return x.w.updatedAt > m ? x.w.updatedAt : m; }, ''); });
+      cards.sort(function (a, b) { return a.at < b.at ? 1 : a.at > b.at ? -1 : 0; });
+      if (!cards.length) { box.innerHTML = '<p class="ga-empty">' + esc(I.ui('galleryEmpty')) + '</p>'; return; }
+      var back = encodeURIComponent('../index.html#/gallery');
+      box.innerHTML = '<ol class="ga-list">' + cards.map(function (c) {
+        return '<li class="ga-card">' +
+          (c.lesson ? '<h2 class="ga-h">' + esc(I.ui('lesson')) + ' ' + esc(c.lesson.num) + ' · ' + esc(c.lesson.title) + '</h2>' : '') +
+          '<p class="ga-date">' + esc(day(c.at)) + '</p>' +
+          '<div class="ga-works' + (c.items.length > 1 ? ' two' : '') + '">' + c.items.map(function (x) {
+            var e = x.w.activity && x.w.activity.entry;
+            var img = '<img src="' + x.w.preview + '" alt="">' + (x.label ? '<span>' + esc(x.label) + '</span>' : '');
+            return e ? '<a class="ga-work" href="studio/index.html?activity=' + encodeURIComponent(e) + '&art=' + encodeURIComponent(x.w.id) + '&back=' + back + '&ctx=gallery">' + img + '</a>'
+                     : '<span class="ga-work">' + img + '</span>';
+          }).join('') + '</div></li>';
+      }).join('') + '</ol>';
     });
   }
 
@@ -105,6 +157,7 @@
   function route() {
     var h = location.hash.replace(/^#\/?/, '').split('/');
     if (h[0] === 'units') units();
+    else if (h[0] === 'gallery') gallery();
     else if (h[0] === 'unit' && h[1]) unit(h[1]);
     else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], +h[3]);
     else if (h[0] === 'lesson' && h[1]) lessonIntro(h[1]);

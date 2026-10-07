@@ -16,6 +16,7 @@ window.I18N = (function () {
       'continue': 'המשך', back: 'חזרה', done: 'סיימתי', how: 'איך תרצה/י ליצור?', paper: 'על נייר', studio: 'Studio',
       reopen: 'פתח/י שוב ב-Studio', v1: 'גרסה 1', v2: 'גרסה 2', v2missing: 'גרסה 2 עדיין לא נוצרה',
       changeOne: 'שנה/י דבר אחד בלבד', size: 'גודל', direction: 'כיוון', spacing: 'מרווח', openStudio: 'פתח/י ב-Studio',
+      gallery: 'היצירות שלי', newAttempt: 'ניסיון חדש', galleryEmpty: 'היצירות שלך יופיעו כאן אחרי שתשמור/י אותן ב-Studio.',
       proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.',
       protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
       protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
@@ -26,6 +27,7 @@ window.I18N = (function () {
       'continue': 'Continue', back: 'Back', done: "I'm done", how: 'How would you like to create?', paper: 'On paper', studio: 'Studio',
       reopen: 'Open in Studio', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
       changeOne: 'Change one thing only', size: 'Size', direction: 'Rotation', spacing: 'Spacing', openStudio: 'Open in Studio',
+      gallery: 'My artworks', newAttempt: 'New attempt', galleryEmpty: 'Your artworks will appear here after you save them in Studio.',
       proto: 'Prototype', protoImage: 'Image placeholder. To be added.',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'

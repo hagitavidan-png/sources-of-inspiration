@@ -52,7 +52,7 @@ Studio.shell = (function () {
       if (!S.dirty()) return leave();
       ask('confirmExit').then(function (v) {
         if (v === 'exit') leave();
-        else if (v === 'save' && S.save()) setTimeout(leave, 450);
+        else if (v === 'save') Promise.resolve(S.save()).then(function (ok) { if (ok) setTimeout(leave, 450); });   // saved first, then away
       });
     });
     window.addEventListener('beforeunload', function (e) {

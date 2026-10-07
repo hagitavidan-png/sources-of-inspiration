@@ -11,8 +11,10 @@
 <!--
   App prototype (isolated; not linked from the site): Home → Units → Unit 02 → Lesson 2.1 → Lesson Player.
   The lesson's content is read from the site (data/lesson-pages/lesson-2-1-learner.js); the screens of the player
-  are defined in lessons/2-1.js. Routes: #/home, #/units, #/unit/02, #/lesson/2-1, #/lesson/2-1/play/N.
-  Saved on this device only (localStorage "app-proto:*"); the Studio copy in studio/ saves under "studio-v2:2.1-app:*".
+  are defined in lessons/2-1.js. Routes: #/home, #/units, #/unit/02, #/lesson/2-1, #/lesson/2-1/play/N, #/gallery.
+  Saved on this device only: artworks and lesson attempts in IndexedDB "sources-app" (js/artworks.js); the language
+  in localStorage. The earlier saves (localStorage "app-proto:lesson:2-1", "studio-v2:2.1-app:*") are copied in once
+  and kept.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +26,7 @@
 
 <script src="../../js/site-nav.js"></script>
 <script src="js/i18n.js"></script>
+<script src="js/artworks.js"></script>
 <script src="js/adapters/guide.js"></script>
 <script src="lessons/2-1.js"></script>
 <script src="js/player.js"></script>

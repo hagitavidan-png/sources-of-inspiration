@@ -1,10 +1,12 @@
 /* The Lesson Player: one screen, one idea, one action. It shows any lesson whose screens are listed in
    window.APP_LESSONS (kind of screen + where its content is in the lesson), through that lesson format's adapter.
    Kinds of screen: content, action, creation, comparison, reflection.
-   What the learner does in the lesson (paper or Studio, the checklist, the reflection) is kept on this device:
-   localStorage "app-proto:lesson:<id>", so it is still there after a visit to the Studio.
-   With the Studio the work has two versions, each the Studio's own save (L.studio[0], L.studio[1]): version 1 is made
-   on screen 10; version 2 (one law changed) on screen 11 starts as a copy of version 1 and is saved apart from it.
+   What the learner does in the lesson (paper or Studio, the checklist, the reflection) belongs to the lesson's
+   current attempt, kept on this device by js/artworks.js, so it is still there after a visit to the Studio. A new
+   attempt starts the lesson again; the earlier ones and their works stay.
+   With the Studio the work has two versions, two artworks of the attempt (attempt.v1, attempt.v2; the Studio
+   activities in L.studio): version 1 is made on screen 10; version 2 (one law changed) on screen 11 starts from
+   version 1 (the Studio's ?from=) and is saved as an artwork of its own.
    On screen 11 the learner first chooses the one thing to change (size, direction or spacing: state "change"); the
    Studio opens version 2 with only that one thing to change. Once version 2 is saved, the choice is kept as it is. */
 window.Player = (function () {
@@ -13,9 +15,9 @@ window.Player = (function () {
   var IMG = '../../images/editorial/';
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function keyOf(id) { return 'app-proto:lesson:' + id; }
-  function load(id) { try { return JSON.parse(localStorage.getItem(keyOf(id))) || {}; } catch (e) { return {}; } }
-  function save(id, st) { try { localStorage.setItem(keyOf(id), JSON.stringify(st)); } catch (e) {} }
+  var W = window.Artworks;
+  /* the lesson's current attempt; before the learner has one, a new one (stored once something is kept in it) */
+  function attemptOf(id) { return W.current(id).then(function (a) { return a || { id: W.newId(), lesson: id }; }); }
 
   /* ── the parts of the lesson's content (texts come from the lesson; they may hold <b> and <br>) ── */
   function core(b) {
@@ -66,16 +68,15 @@ window.Player = (function () {
     }).join('');
   }
 
-  /* a work saved by the Studio (its preview and operations), or null */
-  function studioSave(key) { try { var d = JSON.parse(localStorage.getItem(key)); return d && d.ops && d.ops.length ? d : null; } catch (e) { return null; } }
-  /* version 2 opens on the work of version 1: until the learner saves version 2, it is (again) a copy of version 1 */
-  function openVersion2(id, L, nav, change) {
-    var st = load(id), raw = null, cur = studioSave(L.studio[1].key);
-    try { raw = localStorage.getItem(L.studio[0].key); } catch (e) {}
-    if (raw && (!cur || cur.savedAt === st.v2seed)) {
-      try { localStorage.setItem(L.studio[1].key, raw); st.v2seed = JSON.parse(raw).savedAt; save(id, st); } catch (e) {}
-    }
-    nav.studio(L.studio[1].href[change]);
+  /* an artwork the Studio saved with something in it (its preview and operations), or null */
+  function made(w) { return w && w.ops && w.ops.length ? w : null; }
+  /* the Studio, on one artwork of the attempt: its id is given before the Studio opens (kept in the attempt), so the
+     player finds the work when the learner comes back. Version 2 starts from version 1 until it is saved */
+  function openStudio(att, L, nav, which, change) {
+    if (!att['v' + which]) att['v' + which] = W.newId();
+    var href = 'studio/index.html?activity=' + encodeURIComponent(which === 1 ? L.studio.v1 : L.studio.v2[change]) + '&art=' + att['v' + which] +
+      (which === 2 && att.v1 ? '&from=' + att.v1 : '');
+    W.putAttempt(att).then(function () { nav.studio(href); });
   }
   var CHANGES = ['size', 'direction', 'spacing'];
   function figure(img, label) {
@@ -83,9 +84,19 @@ window.Player = (function () {
   }
 
   /* ── one screen ── */
+  /* a screen: the attempt and its works first (the store answers later), then the screen; a newer screen asked
+     for meanwhile wins */
+  var asked = 0;
   function render(root, id, n, nav) {
+    var my = ++asked;
+    attemptOf(id).then(function (att) {
+      return Promise.all([att, W.get(att.v1), W.get(att.v2)]);
+    }).then(function (r) { if (my === asked) show(root, id, n, nav, r[0], made(r[1]), made(r[2])); });
+  }
+  function show(root, id, n, nav, st, v1, v2) {
     var L = window.APP_LESSONS[id], A = window.AppAdapters[L.adapter](window.LESSON_PAGE), count = L.screens.length;
-    var s = L.screens[n - 1], st = load(id), medium = st.medium || null;
+    var s = L.screens[n - 1], medium = st.medium || null;
+    function keep() { return W.putAttempt(st); }
     var blocks = (s.src || []).map(A.block);
     var title = '', body = '', action = { label: I.ui('continue'), go: function () { nav.go(n + 1); } }, extra = '';
     blocks.forEach(function (b) { if (!title) title = A.title(b); });
@@ -95,8 +106,6 @@ window.Player = (function () {
       if (b.kind === 'close') closing = '<div class="pl-close">' + core(b) + '</div>';
       else A.rows(b).forEach(function (r) { allRows.push(r); });
     });
-    var v1 = studioSave(L.studio[0].key), v2 = studioSave(L.studio[1].key);
-    if (v2 && st.v2seed && v2.savedAt === st.v2seed) v2 = null;   // still the copy of version 1: not saved as version 2 yet
     var studioWork = v1;
 
     if (s.type === 'creation' && s.step === 'choose') {
@@ -140,17 +149,17 @@ window.Player = (function () {
         blocks.forEach(function (b) { (b.guide || []).forEach(function (r) { r.parts.forEach(function (p) {
           if (p.block && p.block.prompt) reflect = '<textarea class="pl-reflect" rows="4" placeholder="' + esc(I.tx(p.block.prompt)) + '">' + esc(st.reflection || '') + '</textarea>';
         }); }); });
-        action = { label: I.ui('done'), go: function () { var x = load(id); x.done = true; save(id, x); nav.finish(); } };
+        action = { label: I.ui('done'), go: function () { st.done = true; keep().then(nav.finish); } };
       }
       if (s.type === 'creation' && medium === 'paper') action = { label: I.ui('done'), go: function () { nav.go(n + 1); } };
       if (s.type === 'creation' && s.step === 'make' && medium === 'studio') {
         if (studioWork) extra = '<button type="button" class="pl-secondary" data-studio="0">' + esc(I.ui('studio')) + '</button>';
-        else action = { label: I.ui('studio'), go: function () { nav.studio(L.studio[0].href); } };
+        else action = { label: I.ui('studio'), go: function () { openStudio(st, L, nav, 1); } };
       }
       /* screen 11: open the work again in the Studio, as version 2 */
       if (s.type === 'creation' && s.step === 'change' && medium === 'studio') {
         if (v2) extra = '<button type="button" class="pl-secondary" data-studio="1">' + esc(I.ui('reopen')) + '</button>';
-        else action = { label: I.ui('openStudio'), off: !st.change, go: function () { if (st.change) openVersion2(id, L, nav, st.change); } };
+        else action = { label: I.ui('openStudio'), off: !st.change, go: function () { if (st.change) openStudio(st, L, nav, 2, st.change); } };
       }
       body = media0 + art + (s.gap ? proto(I.ui(s.gap)) : '') + doRows + studioPart + reflect + otherRows + check + closing;
     }
@@ -170,23 +179,23 @@ window.Player = (function () {
     root.querySelector('.pl-back').addEventListener('click', function () { if (n > 1) nav.go(n - 1); else nav.exit(); });
     if (action) root.querySelector('.pl-primary').addEventListener('click', action.go);
     var sb = root.querySelector('[data-studio]');
-    if (sb) sb.addEventListener('click', function () { if (sb.getAttribute('data-studio') === '1') openVersion2(id, L, nav, load(id).change); else nav.studio(L.studio[0].href); });
+    if (sb) sb.addEventListener('click', function () { if (sb.getAttribute('data-studio') === '1') openStudio(st, L, nav, 2, st.change); else openStudio(st, L, nav, 1); });
     root.querySelectorAll('.pl-change').forEach(function (b) {
-      b.addEventListener('click', function () { var x = load(id); x.change = b.getAttribute('data-change'); save(id, x); nav.go(n); });
+      b.addEventListener('click', function () { st.change = b.getAttribute('data-change'); keep().then(function () { nav.go(n); }); });
     });
     root.querySelectorAll('.pl-choice').forEach(function (b) {
-      b.addEventListener('click', function () { var x = load(id); x.medium = b.getAttribute('data-medium'); save(id, x); nav.go(n + 1); });
+      b.addEventListener('click', function () { st.medium = b.getAttribute('data-medium'); keep().then(function () { nav.go(n + 1); }); });
     });
     root.querySelectorAll('.pl-check').forEach(function (b) {
       b.addEventListener('click', function () {
-        var x = load(id); x.checks = x.checks || {}; var k = b.getAttribute('data-check');
-        x.checks[k] = !x.checks[k]; save(id, x); b.setAttribute('aria-pressed', String(!!x.checks[k]));
+        st.checks = st.checks || {}; var k = b.getAttribute('data-check');
+        st.checks[k] = !st.checks[k]; keep(); b.setAttribute('aria-pressed', String(!!st.checks[k]));
       });
     });
     var ta = root.querySelector('.pl-reflect');
-    if (ta) ta.addEventListener('input', function () { var x = load(id); x.reflection = ta.value; save(id, x); });
-    var x = load(id); x.screen = n; save(id, x);
+    if (ta) ta.addEventListener('input', function () { st.reflection = ta.value; keep(); });
+    st.screen = n; keep();
     root.querySelector('.pl-main').focus({ preventScroll: true });
   }
-  return { render: render, state: load };
+  return { render: render, attempt: attemptOf };
 })();
