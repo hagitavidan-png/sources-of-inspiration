@@ -10,7 +10,10 @@
    What comes before it (after the last clear) is the source; fn shows that source repeated; what comes after it
    is painted once, in order, over the repeated composition on the same layer, so a line after it appears once
    and an eraser after it erases only where it goes. { t:'rset' } operations after it are Repeat's own settings
-   (they paint nothing). Without a { t:'repeat' } operation the learner layer is painted as it is. */
+   (they paint nothing). Without a { t:'repeat' } operation the learner layer is painted as it is.
+   activity.source (app prototype, lesson 2.1 "back to the drawing"): only the source is worked on. Repeat and what
+   came after it are set aside (tail) while the Studio is open, and put back after the source in every save and
+   preview: the artwork stays whole, repeated, with the source as the learner changed it. */
 window.Studio = (function () {
   'use strict';
 
@@ -52,6 +55,7 @@ window.Studio = (function () {
   var doc = { w: LOGICAL_W, h: 750, ops: [], settings: {} };   // ops: { t:'clear' } or the tools' own operations;
                                                                 // settings: the tools' choices for the whole work (not history)
   var redoStack = [];
+  var tail = [];          // activity.source: Repeat and what came after it, set aside while the source is worked on
   var version = 0, savedVersion = 0;
   var scale = 1;          // css px per artwork unit
   var state = { tool: null };
@@ -186,7 +190,9 @@ window.Studio = (function () {
     var x = c.getContext('2d');
     var ink = document.createElement('canvas'); ink.width = W; ink.height = H;
     var y = ink.getContext('2d'); y.setTransform(k, 0, 0, k, 0, 0);
-    paintLearner(y);
+    var own = doc.ops;   // the whole artwork, also while only its source is worked on
+    if (tail.length) doc.ops = own.concat(tail);
+    try { paintLearner(y); } finally { doc.ops = own; }
     x.fillStyle = '#fffdf9'; x.fillRect(0, 0, W, H);
     x.save(); x.setTransform(k, 0, 0, k, 0, 0); paintBase(x); x.restore();
     x.drawImage(ink, 0, 0);
@@ -195,7 +201,7 @@ window.Studio = (function () {
   function record() {
     var data = { v: 2, activity: { id: activity.id, lesson: activity.lesson }, lang: LANG, back: BACK,
                  savedAt: new Date().toISOString(), canvas: { aspect: activity.canvas.aspect, w: doc.w, h: doc.h },
-                 ops: visibleOps(), preview: preview() };
+                 ops: visibleOps().concat(tail), preview: preview() };
     if (Object.keys(doc.settings).length) data.settings = doc.settings;
     return data;
   }
@@ -326,6 +332,10 @@ window.Studio = (function () {
     if (ART) loadArt().then(start); else start(load());
   }
   function start(reopened) {
+    if (activity.source) {   // the source only: Repeat and what follows it set aside (see above)
+      for (var at = doc.ops.length - 1; at >= 0 && doc.ops[at].t !== 'repeat'; at--) {}
+      if (at >= 0) { tail = doc.ops.slice(at); doc.ops = doc.ops.slice(0, at); }
+    }
     /* what the tools may read about the activity; read-only */
     var info = freeze(JSON.parse(JSON.stringify({ id: activity.id, lesson: activity.lesson, tools: activity.tools || [],
       canvas: activity.canvas, params: activity.params || {}, content: activity.content || {} })));
@@ -355,11 +365,13 @@ window.Studio = (function () {
     Studio.shell.build({ T: T, items: items, undo: undo, redo: redo, clearAll: clearAll, hasDrawing: hasDrawing,
                          save: save, dirty: dirty, back: function () { return BACK; }, auto: autosaves(), flush: flush,
                          clear: activity.clear !== false, point: point,
-                         keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null });
+                         keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null,
+                         next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
+                         source: !!activity.source });
     tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
     fit();
     updateUi();
-    if (reopened) Studio.shell.toast(T.opened);
+    if (reopened && !autosaves()) Studio.shell.toast(T.opened);   // an artwork that saves itself just opens, without a word about it
     var rt;
     window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 80); });
 

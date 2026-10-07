@@ -107,11 +107,13 @@ window.STUDIO_ACTIVITIES = {
      2-1-repeat           screen 11: Repeat enters the work (a 'before-repeat' point first), in a grid; no control yet
      2-1-change-<kind>    screen 14: one Repeat setting to change (size, rotation or spacing), drawing as before,
                           and "keep this possibility"
+     2-1-source           screen 12, "back to the drawing": the source only (Repeat and what followed set aside and
+                          kept), drawing as on screen 10; "see it repeat again" goes back to the lesson
      2-1-continue         screen 16: all three settings, one at a time (tabs); the first shown: ?control=
-   None has "Clear"; none can let Repeat enter a second time. keep.label is working copy, not final (Hebrew only:
-   the new flow is Hebrew only until its English is approved) */
+   None has "Clear"; none can let Repeat enter a second time. The labels are Hebrew only: the new flow is Hebrew
+   only until its English is approved */
 (function (A) {
-  var KEEP = { label: { he: 'אני רוצה לשמור את האפשרות הזאת' } };
+  var KEEP = { label: { he: 'את זה אני רוצה לשמור' } };
   function lesson21(id, repeat, more) {
     var a = { id: id, lesson: '2.1-app', tools: repeat ? ['draw', 'color', 'repeat'] : ['draw', 'color'], canvas: { aspect: '4:3' },
               clear: false, back: '../index.html#/lesson/2-1' };
@@ -121,5 +123,6 @@ window.STUDIO_ACTIVITIES = {
   lesson21('2-1-begin', null);
   lesson21('2-1-repeat', { enter: true });
   ['size', 'rotation', 'spacing'].forEach(function (k) { lesson21('2-1-change-' + k, { control: k }, { keep: KEEP }); });
+  lesson21('2-1-source', {}, { source: true, next: { label: { he: 'לראות שוב בחזרה' } } });
   lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
 })(window.STUDIO_ACTIVITIES);

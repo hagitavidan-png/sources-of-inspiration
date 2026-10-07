@@ -14,6 +14,8 @@
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
   function unitNum(u) { return u.id.replace('unit', ''); }
   function lessonId(path) { return (path.match(/lesson-(\d+)-(\d+)\.html$/) || []).slice(1).join('-'); }
+  /* a lesson the app plays, in the current language (lessons/<id>.js langs: the languages its flow has) */
+  function inApp(id) { var L = window.APP_LESSONS[id]; return !!L && (!L.langs || L.langs.indexOf(I.lang()) >= 0); }
   var BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
 
   /* the frame of the screens outside the player: back, a title, the language */
@@ -41,8 +43,8 @@
   }
   function units() {
     frame(esc(I.ui('units')), '#/home', '<ol class="sh-list">' + NAV.units.map(function (u) {
-      var open = STATUS.units.indexOf(u.id) >= 0, inApp = u.lessons.some(function (l) { return window.APP_LESSONS[lessonId(l.path)]; });
-      var href = !open ? null : inApp ? '#/unit/' + unitNum(u) : SITE + 'units/unit-' + unitNum(u) + '.html';
+      var open = STATUS.units.indexOf(u.id) >= 0, played = u.lessons.some(function (l) { return window.APP_LESSONS[lessonId(l.path)]; });   // the unit stays in the app in every language
+      var href = !open ? null : played ? '#/unit/' + unitNum(u) : SITE + 'units/unit-' + unitNum(u) + '.html';
       var inner = '<span class="sh-n">' + unitNum(u) + '</span><span class="sh-t">' + esc(I.tx(u.title)) + '<small>' + esc(unitStatus(u)) + '</small></span>';
       return '<li>' + (href ? '<a class="sh-item" href="' + href + '">' + inner + '</a>' : '<span class="sh-item off">' + inner + '</span>') + '</li>';
     }).join('') + '</ol>');
@@ -53,7 +55,7 @@
     if (!u) return go('#/units');
     var list = '<ol class="sh-list">' + u.lessons.map(function (l, k) {
       var id = lessonId(l.path), open = STATUS.lessons.indexOf(l.path) >= 0;
-      var href = open ? (window.APP_LESSONS[id] ? '#/lesson/' + id : SITE + 'lesson-pages/' + l.path.split('/').pop()) : null;
+      var href = open ? (inApp(id) ? '#/lesson/' + id : SITE + 'lesson-pages/' + l.path.split('/').pop()) : null;
       var inner = '<span class="sh-n">' + (+num) + '.' + (k + 1) + '</span><span class="sh-t">' + esc(I.tx(l.title)) + (open ? '' : '<small>' + esc(I.ui('soon')) + '</small>') + '</span>';
       return '<li>' + (href ? '<a class="sh-item" href="' + href + '">' + inner + '</a>' : '<span class="sh-item off">' + inner + '</span>') + '</li>';
     }).join('') + '</ol>';
@@ -75,6 +77,7 @@
   function withLesson(id, then) {
     var L = window.APP_LESSONS[id];
     if (!L) return go('#/units');
+    if (!inApp(id)) return go('#/unit/' + L.unit.replace('unit', ''));   // not in this language: the unit, which links to the site
     if (loaded[id]) { window.LESSON_PAGE = loaded[id]; return then(L); }
     var s = document.createElement('script');
     s.src = L.data;
@@ -90,13 +93,16 @@
         '<h2 class="sh-h big">' + esc(I.tx(d.title)) + '</h2>' +
         '<p class="sh-time">' + esc(I.tx(d.time)) + '</p>' +
         '<a class="sh-primary" href="#/lesson/' + id + '/play/1">' + esc(I.ui('continue')) + '</a></div>');
-      /* a new attempt, once the current one has begun its work: the earlier attempt and its works stay */
-      window.Player.attempt(id).then(function (a) {
+      /* "Continue": where the learner was; a new artwork (a new run), once the current one has begun: the earlier
+         run and its artwork stay */
+      window.Player.run(id).then(function (r) {
         var box = root.querySelector('.sh-lesson');
-        if (!box || !(a.medium || a.done || a.v1)) return;
+        if (!box) return;
+        if (r.screen) box.querySelector('.sh-primary').setAttribute('href', '#/lesson/' + id + '/play/' + r.screen);
+        if (!(r.medium || r.begun || r.done)) return;
         var b = document.createElement('button');
-        b.type = 'button'; b.className = 'sh-secondary'; b.textContent = I.ui('newAttempt');
-        b.addEventListener('click', function () { b.disabled = true; window.Artworks.newAttempt(id).then(function () { go('#/lesson/' + id + '/play/1'); }); });
+        b.type = 'button'; b.className = 'sh-secondary'; b.textContent = I.ui('newArtwork');
+        b.addEventListener('click', function () { b.disabled = true; window.Artworks.newRun(id).then(function () { go('#/lesson/' + id + '/play/1'); }); });
         box.appendChild(b);
       });
     });

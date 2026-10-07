@@ -4,7 +4,8 @@
    An artwork that saves itself (S.auto, app prototype ?art=): no "Save" and no "Unsaved changes" question; a small
    "Saved" beside the title once it is written, and leaving or hiding the page writes what is left first.
    The activity may also say: clear: false (no "Clear"); keep (an artwork that saves itself only): one button that
-   keeps the work as it is now as a development point of the artwork ('kept'), its label from the activity. */
+   keeps the work as it is now as a development point of the artwork ('kept'), its label from the activity;
+   next (the same): one button that writes the work and goes back to the lesson, like "Back", with its own label. */
 Studio.shell = (function () {
   'use strict';
 
@@ -52,6 +53,15 @@ Studio.shell = (function () {
     $('save').addEventListener('click', S.save);
     if (!S.clear) $('clear').hidden = true;
 
+    /* the lesson's next step: written first, then back to the lesson (never away with the work not written) */
+    if (S.next) {
+      var next = document.createElement('button');
+      next.className = 'btn primary'; next.id = 'next'; next.type = 'button'; next.textContent = S.next;
+      $('save').parentNode.appendChild(next);
+      next.addEventListener('click', function () { S.flush().then(function () { if (!S.dirty()) leave(); }); });
+      if (S.source) $('back').style.visibility = 'hidden';   // working on the source: its one way back is this button
+    }
+
     /* keep this possibility: written first, then kept; one press, one point (a press while it is being kept is not
        another); said in the same quiet way as saving */
     if (S.keep) {
@@ -60,8 +70,8 @@ Studio.shell = (function () {
       $('save').parentNode.appendChild(keep);
       keep.addEventListener('click', function () {
         if (busy) return;
-        busy = true; keep.disabled = true;
-        S.point('kept').then(function (p) { if (p) toast(S.T.autoSaved); }, function () { saveState('error'); })
+        busy = true; keep.disabled = true; keeping = true;
+        S.point('kept').then(function (p) { keeping = false; saveState(''); if (p) toast(S.T.autoSaved); }, function () { keeping = false; saveState('error'); })
           .then(function () { busy = false; keep.disabled = false; });
       });
     }
@@ -120,9 +130,11 @@ Studio.shell = (function () {
 
   /* the artwork that saves itself: "Saved" once written; nothing while a change waits or is being written; the
      failure said plainly */
+  var keeping = false;   // while a possibility is kept, its own "Saved" is the only one shown
   function saveState(st) {
     var el = $('saveState');
     if (!el || !S) return;
+    if (keeping && st !== 'error') st = '';
     el.setAttribute('data-state', st);
     el.textContent = st === 'saved' ? S.T.autoSaved : st === 'error' ? S.T.saveFailed : '';
   }
