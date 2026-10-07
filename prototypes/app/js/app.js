@@ -8,6 +8,15 @@
   var I = window.I18N, NAV = window.ART_NAVIGATION || { units: [] }, STATUS = window.SITE_STATUS || { units: [], lessons: [] };
   var root = document.getElementById('app');
   var SITE = '../../';
+  /* a lesson the app plays that the site's navigation does not list yet (lessons/<id>.js nav): in its unit, open, in
+     the app only (js/site-nav.js is generated for the whole site and stays as it is) */
+  Object.keys(window.APP_LESSONS || {}).forEach(function (id) {
+    var n = window.APP_LESSONS[id].nav, u = n && NAV.units.filter(function (x) { return x.id === n.unit; })[0];
+    if (!u || u.lessons.some(function (l) { return l.path === n.path; })) return;
+    u.lessons.push({ path: n.path, title: n.title });
+    if (STATUS.units.indexOf(u.id) < 0) STATUS.units.push(u.id);
+    if (STATUS.lessons.indexOf(n.path) < 0) STATUS.lessons.push(n.path);
+  });
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
@@ -38,6 +47,7 @@
   function unitStatus(u) {
     if (STATUS.units.indexOf(u.id) < 0) return I.ui('soon');
     var open = u.lessons.filter(function (l) { return STATUS.lessons.indexOf(l.path) >= 0; }).length;
+    if (open === 1 && u.lessons.length === 1) return I.ui('oneOpenOnly');
     return open === 1 ? I.ui('oneOpen', { n: u.lessons.length - 1 }) : I.ui('soon');
   }
   function units() {
@@ -77,6 +87,7 @@
     var L = window.APP_LESSONS[id];
     if (!L) return go('#/units');
     if (!inApp(id)) return go('#/unit/' + L.unit.replace('unit', ''));   // not in this language: the unit, which links to the site
+    if (L.page) loaded[id] = L.page;   // a lesson whose content is in its own file (lessons/<id>.js page)
     if (loaded[id]) { window.LESSON_PAGE = loaded[id]; return then(L); }
     var s = document.createElement('script');
     s.src = L.data;

@@ -20,7 +20,7 @@ window.I18N = (function () {
       artworksEmpty: 'כאן יופיעו היצירות שתתחילו ליצור.', artworksStart: 'לבחור מקור השראה', continueDeveloping: 'להמשיך לפתח',
       onPaper: 'יצירה על נייר', backToLesson: 'חזרה לשיעור', lastWorked: 'עבדתם עליה לאחרונה: {date}',
       viewArtwork: 'לצפות ביצירה', close: 'סגירה', artworkAlt: 'היצירה שלך · {lesson}',
-      proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.',
+      proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.', protoAudio: 'מקום למוזיקה. תתווסף בהמשך.', oneOpenOnly: 'שיעור אחד פתוח',
       protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
       protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
     },
@@ -34,7 +34,7 @@ window.I18N = (function () {
       artworksEmpty: 'Your artworks will appear here when you start creating.', artworksStart: 'Choose a source of inspiration', continueDeveloping: 'Continue developing',
       onPaper: 'Artwork on paper', backToLesson: 'Back to lesson', lastWorked: 'Last worked on: {date}',
       viewArtwork: 'View artwork', close: 'Close', artworkAlt: 'Your artwork · {lesson}',
-      proto: 'Prototype', protoImage: 'Image placeholder. To be added.',
+      proto: 'Prototype', protoImage: 'Image placeholder. To be added.', protoAudio: 'Music placeholder. To be added.', oneOpenOnly: '1 lesson open',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'
     }

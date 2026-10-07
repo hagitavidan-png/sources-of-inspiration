@@ -126,3 +126,8 @@ window.STUDIO_ACTIVITIES = {
   lesson21('2-1-source', {}, { source: true, next: { label: { he: 'לראות שוב בחזרה', en: 'See it repeated again' } } });
   lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
 })(window.STUDIO_ACTIVITIES);
+
+/* the app prototype's lesson 3.1: one artwork, drawn from the music and developed after it; drawing, colour, line
+   width, eraser, undo, redo (no Repeat, no Clear) on every screen it opens from (5, 13, 14, 16) and from My artworks */
+window.STUDIO_ACTIVITIES['3-1-draw'] = { id: '3-1-draw', lesson: '3.1-app', tools: ['draw', 'color'], canvas: { aspect: '4:3' },
+  clear: false, back: '../index.html#/lesson/3-1' };

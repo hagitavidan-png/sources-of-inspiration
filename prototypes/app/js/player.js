@@ -45,9 +45,15 @@ window.Player = (function () {
   function proto(text) {
     return '<aside class="pl-proto" role="note"><b>' + esc(I.ui('proto')) + '</b><span>' + esc(text) + '</span></aside>';
   }
-  /* an image the screen needs: the approved image, or a placeholder in the same place */
+  /* an image or the music the screen needs: the approved one, or a placeholder in the same place (audio: L.audio) */
+  var NOTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>';
   function media(m, L) {
     if (!m) return '';
+    if (m.audio) {
+      var file = L.audio && L.audio[m.audio];
+      if (file) return '<figure class="pl-audio"><audio controls preload="none" src="' + esc(file) + '"></audio></figure>';
+      return '<figure class="pl-audio pl-placeholder" data-audio="' + esc(m.audio) + '">' + NOTE + '<figcaption>' + esc(I.ui('protoAudio')) + '</figcaption></figure>';
+    }
     var img = L.assets && L.assets[m.asset];
     if (img) return '<figure class="pl-media"><img src="' + IMG + esc(img) + '.jpg" alt=""></figure>';
     return '<figure class="pl-media pl-placeholder" data-asset="' + esc(m.asset) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 3-3 5 5"/></svg>' +
@@ -56,7 +62,12 @@ window.Player = (function () {
   /* an artwork of the lesson: its image, or, with no right to show it, the lesson's link to the museum */
   function work(w, small) {
     var cap = '<figcaption><b>' + esc(I.tx(w.artist)) + '</b> · ' + esc(I.tx(w.workTitle)) + '</figcaption>';
-    if (w.img) return '<figure class="pl-work' + (small ? ' small' : '') + '"><img src="' + IMG + esc(w.img) + '.jpg" alt="' + esc(w.alt || '') + '">' + cap + '</figure>';
+    var alt = w.alt && typeof w.alt === 'object' ? I.tx(w.alt) : w.alt;
+    if (w.img) return '<figure class="pl-work' + (small ? ' small' : '') + '"><img src="' + IMG + esc(w.img) + '.jpg" alt="' + esc(alt || '') + '">' + cap + '</figure>';
+    /* no image and nothing to link to yet: a placeholder where the image will be, the artist and title under it */
+    if (!w.link) return '<figure class="pl-work pl-linkcard' + (small ? ' small' : '') + '"><div class="pl-linkcard-box pl-placeholder">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 3-3 5 5"/></svg>' +
+      '<span>' + esc(I.ui('protoImage')) + '</span></div>' + cap + '</figure>';
     return '<figure class="pl-work pl-linkcard' + (small ? ' small' : '') + '"><div class="pl-linkcard-box">' +
       (w.link ? '<a href="' + esc(w.link.href) + '" target="_blank" rel="noopener">' + esc(I.tx(w.link.label)) + '</a>' : '') + '</div>' + cap + '</figure>';
   }
@@ -101,7 +112,8 @@ window.Player = (function () {
       });
     }
     var few = !studio || kept(art).length < 2;   // screen 15 only with two or more kept possibilities (never on paper)
-    if (s.step === 'choose' && few) return nav.go(16);
+    var free = L.screens.map(function (x) { return x.step; }).indexOf('free') + 1;   // the screen of free making (2.1: 16)
+    if (s.step === 'choose' && few) return nav.go(n + 1);
 
     var blocks = (s.src || []).map(A.block);
     var title = '';
@@ -171,7 +183,7 @@ window.Player = (function () {
     }
     /* 14: try possibilities (Studio: that one setting, drawing, "keep this") */
     if (s.step === 'try') {
-      action.go = function () { go(few ? 16 : 15); };
+      action.go = function () { go(few ? n + 2 : n + 1); };   // past the choice (15 in 2.1) when there is none to make
       if (studio) {
         body += preview;
         var openTry = function () { run.tried = true; openStudio(side.activity + run.change); };
@@ -197,12 +209,17 @@ window.Player = (function () {
       else action = { label: ACT('keepCreating'), go: openFree };
     }
     if (s.step === 'free' && !studio) action.label = ACT('doneForNow');   // paper: time to make; the learner says when it is enough for now
+    /* back to the artwork (3.1 screen 13): the Studio opens on it, and comes back to the free screen after it */
+    if (s.step === 'return' && studio) {
+      body += preview;
+      action = { label: ACT('keepCreating'), go: function () { run.free = true; openStudio(side.activity, side.back); } };
+    }
     if (s.step === 'see') body += preview;
-    /* 18: go on making, or another time (the work stays as it is, open) */
+    /* the end (2.1: 18): go on making, or another time (the work stays as it is, open) */
     if (s.step === 'end') {
       action = { label: ACT('anotherTime'), go: function () { run.done = true; keep().then(nav.finish); } };
       extra = { label: ACT('keepCreating'), go: function () {
-        if (studio) openStudio(s.studio.activity, n, '&control=' + encodeURIComponent(run.change || 'size')); else go(16);
+        if (studio) openStudio(s.studio.activity, n, '&control=' + encodeURIComponent(run.change || 'size')); else go(free);
       } };
     }
     if (s.step === 'repeat' && studio && hasRepeat(art)) action = { label: I.ui('continue'), go: function () { go(n + 1); } };
@@ -222,7 +239,8 @@ window.Player = (function () {
 
     root.querySelector('.pl-back').addEventListener('click', function () {
       if (n === 1) return nav.exit();
-      go(n === 16 && few ? 14 : n - 1);
+      var prev = L.screens[n - 2];
+      go(prev && prev.step === 'choose' && few ? n - 2 : n - 1);   // a choice skipped on the way is skipped on the way back
     });
     if (action) root.querySelector('.pl-primary').addEventListener('click', function () { if (!action.off) action.go(); });
     if (extra) root.querySelector('.pl-secondary').addEventListener('click', extra.go);
