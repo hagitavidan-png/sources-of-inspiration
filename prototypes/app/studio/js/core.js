@@ -5,7 +5,12 @@
    Two layers, the same size and place: the base layer (#base, below: what the activity provides, painted by
    the tools that show it) and the learner layer (#canvas, on top: the learner's operations). The eraser
    works on the learner layer only. A tool may show the learner layer in its own way (S.present: Repeat
-   shows it repeated); the operations stay the learner's own, one per action. */
+   shows it repeated); the operations stay the learner's own, one per action.
+   Repeat as a step in the artwork's development (S.present(fn, true)): an operation { t:'repeat' } in the history.
+   What comes before it (after the last clear) is the source; fn shows that source repeated; what comes after it
+   is painted once, in order, over the repeated composition on the same layer, so a line after it appears once
+   and an eraser after it erases only where it goes. { t:'rset' } operations after it are Repeat's own settings
+   (they paint nothing). Without a { t:'repeat' } operation the learner layer is painted as it is. */
 window.Studio = (function () {
   'use strict';
 
@@ -27,6 +32,8 @@ window.Studio = (function () {
   var renderers = {};     // operation type → function (op, context)
   var basePainters = [];  // functions (context) that paint the base layer
   var presenter = null;   // function (context, paint) that shows the learner layer, or null: as it is
+  var asStep = false;     // the presenter shows only the source before a { t:'repeat' } operation, and only once there is one
+  var watchers = [];      // the tools' functions called when the history changes (undo, redo, a new step)
   var pointers = {};      // active tool id → { down(e), move(events), up(e) }
   var items = [];         // toolbar buttons from the activity's tools
 
@@ -79,11 +86,25 @@ window.Studio = (function () {
     for (var i = doc.ops.length - 1; i >= 0; i--) if (doc.ops[i].t === 'clear') { from = i + 1; break; }
     return doc.ops.slice(from);
   }
-  function paint(c) {
-    visibleOps().forEach(function (op) { var r = renderers[op.t]; if (r) r(op, c); });
+  function paintOps(ops, c) {
+    ops.forEach(function (op) { var r = renderers[op.t]; if (r) r(op, c); });
     c.globalCompositeOperation = 'source-over';
   }
-  function paintLearner(c) { if (presenter) presenter(c, paint); else paint(c); }
+  function paint(c) { paintOps(visibleOps(), c); }
+  /* the visible operations around the (last) { t:'repeat' }: the source before it, the operations after it */
+  function split() {
+    var ops = visibleOps(), at = -1;
+    for (var i = ops.length - 1; i >= 0; i--) if (ops[i].t === 'repeat') { at = i; break; }
+    return at < 0 ? { source: ops, marker: null, after: [] } : { source: ops.slice(0, at), marker: ops[at], after: ops.slice(at + 1) };
+  }
+  function paintLearner(c) {
+    if (!presenter) return paint(c);
+    if (!asStep) return presenter(c, paint);
+    var sp = split();
+    if (!sp.marker) return paintOps(sp.source, c);
+    presenter(c, function (x) { paintOps(sp.source, x); });
+    paintOps(sp.after, c);
+  }
   function paintBase(c) {
     basePainters.forEach(function (fn) { c.save(); fn(c); c.restore(); });
   }
@@ -124,6 +145,7 @@ window.Studio = (function () {
     $('redo').disabled = !redoStack.length;
     $('clear').disabled = !hasDrawing();
     items.forEach(function (it) { if (it.update) it.update($(it.id)); });
+    watchers.forEach(function (fn) { fn(); });
   }
 
   /* ── pointer: finger, stylus, mouse or trackpad; one stroke at a time; the active tool decides what it does ── */
@@ -209,10 +231,18 @@ window.Studio = (function () {
     });
     return chain;
   }
-  /* keep the current state as a development point of the artwork (only when asked: never while drawing or saving) */
-  function point(kind) {
+  /* keep the current state as a development point of the artwork (only when asked: never while drawing or saving).
+     once: if a point of the same kind already has exactly this state, that point is the answer and none is added */
+  function point(kind, once) {
     if (!autosaves()) return Promise.resolve(null);
-    return flush().then(function () { return window.Artworks.addPoint(ART, kind); });
+    return flush().then(function () {
+      if (!once) return window.Artworks.addPoint(ART, kind);
+      return window.Artworks.get(ART).then(function (w) {
+        var now = w && JSON.stringify([w.canvas, w.ops, w.settings]);
+        var same = w && (w.points || []).filter(function (p) { return p.kind === kind && JSON.stringify([p.state.canvas, p.state.ops, p.state.settings]) === now; })[0];
+        return same || window.Artworks.addPoint(ART, kind);
+      });
+    });
   }
   /* saving: true once saved (for an artwork of the store, a promise of it) */
   function save() {
@@ -305,7 +335,10 @@ window.Studio = (function () {
       has: function (t) { return tools.indexOf(t) >= 0; },
       renderer: function (type, fn) { renderers[type] = fn; },
       base: function (fn) { basePainters.push(fn); },   // paint on the base layer (artwork units)
-      present: function (fn) { presenter = fn; },       // show the learner layer through fn(context, paint)
+      present: function (fn, step) { presenter = fn; asStep = !!step; },   // show the learner layer through fn(context, paint);
+                                                        // step: only the source, once a { t:'repeat' } is in the history
+      split: split,                                     // { source, marker, after } around the { t:'repeat' } operation
+      watch: function (fn) { watchers.push(fn); },      // fn() whenever the history changes
       changed: changed,                                 // a setting changed: unsaved, but not a step in the history
       point: point,                                     // keep the current state as a development point (?art= only)
       pointer: function (toolId, h) { pointers[toolId] = h; },
