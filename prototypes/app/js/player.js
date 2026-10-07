@@ -108,7 +108,11 @@ window.Player = (function () {
     blocks.forEach(function (b) { if (!title) title = A.title(b); });
     if (s.title && s.title[I.lang()]) title = s.title[I.lang()];
     var rows = [];
-    blocks.forEach(function (b) { if (b.kind !== 'close') A.rows(b).forEach(function (r) { if (!s.only || s.only.indexOf(r.k) >= 0) rows.push(r); }); });
+    var own = s.rows || {};   // the player's own words for a row, in this language (else the lesson's)
+    blocks.forEach(function (b) { if (b.kind !== 'close') A.rows(b).forEach(function (r) {
+      if (s.only && s.only.indexOf(r.k) < 0) return;
+      rows.push(own[r.k] && own[r.k][I.lang()] != null ? { k: r.k, parts: [{ text: own[r.k] }] } : r);
+    }); });
     var body = (s.media ? media(s.media, L) : '') +
       (s.compare ? '<div class="pl-pair">' + s.compare.map(function (r) { return works(A.block(r), true); }).join('') + '</div>'
                  : blocks.filter(function (b) { return b.works; }).map(function (b) { return works(b, false); }).join('')) +

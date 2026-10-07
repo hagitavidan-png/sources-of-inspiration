@@ -42,7 +42,7 @@ canvas{display:block;background:var(--sheet);border-radius:6px;box-shadow:0 0 0 
 .tools{display:flex;justify-content:center;align-items:stretch;gap:2px;padding:6px 6px 2px;max-width:640px;margin:0 auto}
 .tool{flex:1 1 0;min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 0;border:0;background:none;border-radius:12px;cursor:pointer;color:var(--ink)}
 .tool svg{width:24px;height:24px;flex:none}
-.tool span{font-size:.88rem;font-weight:500;line-height:1.2;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tool span{font-size:.88rem;font-weight:500;line-height:1.2;color:var(--ink);white-space:normal;text-align:center;overflow:hidden;max-width:100%}   /* a label too long for one line takes a second, never cut */
 .tool:hover{background:rgba(43,42,40,.05)}
 .tool[aria-pressed=true]{background:var(--ink);color:var(--paper)}
 .tool[aria-pressed=true] span{color:var(--paper)}

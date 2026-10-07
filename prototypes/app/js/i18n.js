@@ -25,9 +25,9 @@ window.I18N = (function () {
       site: 'Sources of Inspiration in Art', units: 'Units',
       'do': 'What to do', why: 'Explanation', check: 'Self-check', checklist: 'Checklist', materials: 'Materials', unit: 'Unit', lesson: 'Lesson', soon: 'Coming Soon', oneOpen: '1 lesson open · {n} coming soon',
       'continue': 'Continue', back: 'Back', done: "I'm done", how: 'How would you like to create?', paper: 'On paper', studio: 'Studio',
-      reopen: 'Open in Studio', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
+      reopen: 'Open in Studio again', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
       changeOne: 'Change one thing only', size: 'Size', direction: 'Rotation', spacing: 'Spacing', openStudio: 'Open in Studio',
-      gallery: 'My artworks', newAttempt: 'New attempt', galleryEmpty: 'Your artworks will appear here after you save them in Studio.',
+      gallery: 'My artworks', newAttempt: 'New attempt', newArtwork: 'Start a new artwork', galleryEmpty: 'Your artworks will appear here after you save them in Studio.',
       proto: 'Prototype', protoImage: 'Image placeholder. To be added.',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'

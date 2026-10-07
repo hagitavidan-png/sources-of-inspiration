@@ -5,7 +5,7 @@ Studio.register('draw', {
   strings: {
     /* lineWidth, not size: the line width has its own word (Repeat's size is another thing; the tools share one table) */
     he: { brush: 'מכחול', lineWidth: 'עובי קו', eraser: 'מחק', thin: 'דק', medium: 'בינוני', thick: 'עבה', sizes: 'עובי' },
-    en: { brush: 'Brush', lineWidth: 'Size', eraser: 'Eraser', thin: 'Thin', medium: 'Medium', thick: 'Thick', sizes: 'Thickness' }
+    en: { brush: 'Brush', lineWidth: 'Line width', eraser: 'Eraser', thin: 'Thin', medium: 'Medium', thick: 'Thick', sizes: 'Line width' }
   },
   init: function (S) {
     'use strict';

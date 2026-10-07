@@ -63,7 +63,7 @@ Studio.shell = (function () {
     }
 
     /* keep this possibility: written first, then kept; one press, one point (a press while it is being kept is not
-       another); said in the same quiet way as saving */
+       another); said in the same quiet way as saving, in its own word (T.kept: the learner's choice, not the autosave) */
     if (S.keep) {
       var keep = document.createElement('button'), busy = false;   // only there when the activity asks for it
       keep.className = 'btn primary'; keep.id = 'keep'; keep.type = 'button'; keep.textContent = S.keep;
@@ -71,7 +71,7 @@ Studio.shell = (function () {
       keep.addEventListener('click', function () {
         if (busy) return;
         busy = true; keep.disabled = true; keeping = true;
-        S.point('kept').then(function (p) { keeping = false; saveState(''); if (p) toast(S.T.autoSaved); }, function () { keeping = false; saveState('error'); })
+        S.point('kept').then(function (p) { keeping = false; saveState(''); if (p) toast(S.T.kept); }, function () { keeping = false; saveState('error'); })
           .then(function () { busy = false; keep.disabled = false; });
       });
     }
@@ -130,7 +130,7 @@ Studio.shell = (function () {
 
   /* the artwork that saves itself: "Saved" once written; nothing while a change waits or is being written; the
      failure said plainly */
-  var keeping = false;   // while a possibility is kept, its own "Saved" is the only one shown
+  var keeping = false;   // while a possibility is kept, its own "Kept" is the only word shown
   function saveState(st) {
     var el = $('saveState');
     if (!el || !S) return;

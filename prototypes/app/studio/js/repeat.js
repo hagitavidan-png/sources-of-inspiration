@@ -26,7 +26,7 @@ Studio.register('repeat', {
     he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
           size: 'גודל', direction: 'כיוון', spacing: 'מרווח', smaller: 'קטן יותר', larger: 'גדול יותר', closer: 'צפוף יותר', apart: 'מרווח יותר', turnLeft: 'סיבוב נגד כיוון השעון', turnRight: 'סיבוב עם כיוון השעון' },
     en: { repeat: 'Repeat', grid: 'Grid', offset: 'Offset', repeats: 'Kind of repeat',
-          size: 'Size', direction: 'Rotation', spacing: 'Spacing', smaller: 'Smaller', larger: 'Larger', closer: 'Closer', apart: 'Further apart', turnLeft: 'Turn anticlockwise', turnRight: 'Turn clockwise' }
+          size: 'Size', direction: 'Direction', spacing: 'Spacing', smaller: 'Smaller', larger: 'Larger', closer: 'Closer', apart: 'Further apart', turnLeft: 'Turn anticlockwise', turnRight: 'Turn clockwise' }
   },
   init: function (S) {
     'use strict';
