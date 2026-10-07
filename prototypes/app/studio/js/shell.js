@@ -2,7 +2,9 @@
    Top bar, the toolbar (undo and redo, then the activity's tools), panels, the two questions
    ("Clear?" and "Unsaved changes"), the short message, and leaving without losing work.
    An artwork that saves itself (S.auto, app prototype ?art=): no "Save" and no "Unsaved changes" question; a small
-   "Saved" beside the title once it is written, and leaving or hiding the page writes what is left first. */
+   "Saved" beside the title once it is written, and leaving or hiding the page writes what is left first.
+   The activity may also say: clear: false (no "Clear"); keep (an artwork that saves itself only): one button that
+   keeps the work as it is now as a development point of the artwork ('kept'), its label from the activity. */
 Studio.shell = (function () {
   'use strict';
 
@@ -48,6 +50,21 @@ Studio.shell = (function () {
       ask('confirmClear').then(function (v) { if (v === 'clear') S.clearAll(); });
     });
     $('save').addEventListener('click', S.save);
+    if (!S.clear) $('clear').hidden = true;
+
+    /* keep this possibility: written first, then kept; one press, one point (a press while it is being kept is not
+       another); said in the same quiet way as saving */
+    if (S.keep) {
+      var keep = document.createElement('button'), busy = false;   // only there when the activity asks for it
+      keep.className = 'btn primary'; keep.id = 'keep'; keep.type = 'button'; keep.textContent = S.keep;
+      $('save').parentNode.appendChild(keep);
+      keep.addEventListener('click', function () {
+        if (busy) return;
+        busy = true; keep.disabled = true;
+        S.point('kept').then(function (p) { if (p) toast(S.T.autoSaved); }, function () { saveState('error'); })
+          .then(function () { busy = false; keep.disabled = false; });
+      });
+    }
 
     if (S.auto) {
       $('save').hidden = true;

@@ -3,8 +3,9 @@
 Studio.register('draw', {
   tool: 'brush',   // the tool that is on when this capability comes first in the activity
   strings: {
-    he: { brush: 'מכחול', size: 'גודל', eraser: 'מחק', thin: 'דק', medium: 'בינוני', thick: 'עבה', sizes: 'עובי' },
-    en: { brush: 'Brush', size: 'Size', eraser: 'Eraser', thin: 'Thin', medium: 'Medium', thick: 'Thick', sizes: 'Thickness' }
+    /* lineWidth, not size: the line width has its own word (Repeat's size is another thing; the tools share one table) */
+    he: { brush: 'מכחול', lineWidth: 'עובי קו', eraser: 'מחק', thin: 'דק', medium: 'בינוני', thick: 'עבה', sizes: 'עובי' },
+    en: { brush: 'Brush', lineWidth: 'Size', eraser: 'Eraser', thin: 'Thin', medium: 'Medium', thick: 'Thick', sizes: 'Thickness' }
   },
   init: function (S) {
     'use strict';
@@ -83,7 +84,7 @@ Studio.register('draw', {
       icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.5l4 4L8 20H4v-4z"/><path d="M14 6l4 4"/></svg>',
       onClick: function () { st.tool = 'brush'; S.closePanels(); S.updateUi(); },
       update: function (b) { b.setAttribute('aria-pressed', String(st.tool === 'brush')); } });
-    S.item({ id: 'size', order: 30, label: 'size', panel: 'sizePanel',
+    S.item({ id: 'size', order: 30, label: 'lineWidth', panel: 'sizePanel',
       icon: '<span class="size-dot" aria-hidden="true"><i id="sizeDot"></i></span>',
       onClick: function () { S.togglePanel('sizePanel', 'size'); },
       update: function () { var d = [8, 13, 20][st.size], dot = S.$('sizeDot'); dot.style.width = dot.style.height = d + 'px'; } });

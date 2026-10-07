@@ -80,6 +80,10 @@ canvas{display:block;background:var(--sheet);border-radius:6px;box-shadow:0 0 0 
 .vary-row span[aria-hidden]{font-size:1.4rem;line-height:1}
 .vary input{flex:1;min-width:0;height:var(--tap);accent-color:var(--ink);margin:0}
 .vary output{display:block;font-size:.85rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+/* several Repeat controls (app prototype): small tabs, one control shown */
+.vary-tabs{display:flex;justify-content:center;gap:6px;margin:0 0 2px}
+.vary-tabs button{min-height:40px;padding:0 14px;border:1.5px solid var(--rule);border-radius:999px;background:none;cursor:pointer;font:inherit;font-size:.9rem;color:var(--ink-2)}
+.vary-tabs button[aria-selected=true]{border-color:var(--ink);color:var(--ink);font-weight:600}
 .tool[hidden]{display:none}   /* undo and redo, not offered there */
 .sz span{font-size:.85rem;color:var(--ink-2)}
 .sz[aria-pressed=true]{background:rgba(43,42,40,.08)}

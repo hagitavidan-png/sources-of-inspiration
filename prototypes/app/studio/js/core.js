@@ -236,6 +236,7 @@ window.Studio = (function () {
   function point(kind, once) {
     if (!autosaves()) return Promise.resolve(null);
     return flush().then(function () {
+      if (dirty()) throw new Error('not written');   // the work on screen is not written: no point of an older state
       if (!once) return window.Artworks.addPoint(ART, kind);
       return window.Artworks.get(ART).then(function (w) {
         var now = w && JSON.stringify([w.canvas, w.ops, w.settings]);
@@ -352,7 +353,9 @@ window.Studio = (function () {
     items.sort(function (a, b) { return a.order - b.order; });
 
     Studio.shell.build({ T: T, items: items, undo: undo, redo: redo, clearAll: clearAll, hasDrawing: hasDrawing,
-                         save: save, dirty: dirty, back: function () { return BACK; }, auto: autosaves(), flush: flush });
+                         save: save, dirty: dirty, back: function () { return BACK; }, auto: autosaves(), flush: flush,
+                         clear: activity.clear !== false, point: point,
+                         keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null });
     tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
     fit();
     updateUi();

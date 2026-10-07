@@ -5,7 +5,10 @@
    back       where "Back to the lesson" goes (a path inside this site); ?back= can override it
    params     settings for a tool, under its name (repeat: see js/repeat.js)
    content    what the activity provides to work on (fill: the areas, see js/fill.js; arrange: the elements, js/arrange.js)
-   title      optional; the default is "My artwork" */
+   title      optional; the default is "My artwork"
+   clear      false: no "Clear" (app prototype)
+   keep       app prototype, an artwork that saves itself (?art=): one button that keeps the work as it is now as a
+              development point ('kept'); keep.label is its label in each language (none in a language: no button) */
 window.STUDIO_ACTIVITIES = {
   drawing: {
     id: 'drawing',
@@ -97,3 +100,26 @@ window.STUDIO_ACTIVITIES = {
     back: '../../lesson-pages/lesson-2-1-learner.html'
   }
 };
+
+/* the app prototype's lesson 2.1, the new flow: one artwork through the lesson, opened in the Studio again and again
+   (?art=; the Lesson Player says where "Back" goes, ?back=). Only configuration: the tools are the same everywhere.
+     2-1-begin            screen 10: the work begins; drawing, colour, line width, eraser, undo, redo; no Repeat
+     2-1-repeat           screen 11: Repeat enters the work (a 'before-repeat' point first), in a grid; no control yet
+     2-1-change-<kind>    screen 14: one Repeat setting to change (size, rotation or spacing), drawing as before,
+                          and "keep this possibility"
+     2-1-continue         screen 16: all three settings, one at a time (tabs); the first shown: ?control=
+   None has "Clear"; none can let Repeat enter a second time. keep.label is working copy, not final (Hebrew only:
+   the new flow is Hebrew only until its English is approved) */
+(function (A) {
+  var KEEP = { label: { he: 'אני רוצה לשמור את האפשרות הזאת' } };
+  function lesson21(id, repeat, more) {
+    var a = { id: id, lesson: '2.1-app', tools: repeat ? ['draw', 'color', 'repeat'] : ['draw', 'color'], canvas: { aspect: '4:3' },
+              clear: false, back: '../index.html#/lesson/2-1' };
+    if (repeat) a.params = { repeat: Object.assign({ modes: ['grid'], step: 250, asStep: true }, repeat) };
+    A[id] = Object.assign(a, more || {});
+  }
+  lesson21('2-1-begin', null);
+  lesson21('2-1-repeat', { enter: true });
+  ['size', 'rotation', 'spacing'].forEach(function (k) { lesson21('2-1-change-' + k, { control: k }, { keep: KEEP }); });
+  lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
+})(window.STUDIO_ACTIVITIES);

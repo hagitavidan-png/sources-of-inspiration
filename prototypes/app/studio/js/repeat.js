@@ -18,8 +18,9 @@
    history. Everything before it is the source that repeats (in a grid); what is drawn or erased after it stays
    where it is, once, over the repeated composition, also when size, rotation or spacing change. Those changes are
    operations too, { t:'rset', k:'size'|'rotation'|'spacing', v }, one when the control is let go, so undo and redo
-   take them back like any step. params.repeat.control ('size', 'rotation' or 'spacing') offers that one control.
-   No choice of kind of repeat, no "clear", no second Repeat. */
+   take them back like any step. params.repeat.control ('size', 'rotation' or 'spacing') offers that one control;
+   params.repeat.controls (a list of them) offers them all, one shown at a time, chosen by small tabs; the first shown
+   is ?control=, else params.repeat.control. No choice of kind of repeat, no "clear", no second Repeat. */
 Studio.register('repeat', {
   strings: {
     he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
@@ -158,19 +159,42 @@ Studio.register('repeat', {
         }
         return S.point('before-repeat', true).then(go, go);
       }
-      var ctl = { size: 'size', rotation: 'direction', spacing: 'spacing' }[cfg.control] || null, input = null, out = null, bar = null;
+      /* the controls: one (params.repeat.control), or several (params.repeat.controls) of which one is shown, chosen
+         by small tabs (choosing one is not a step). The one shown first: ?control= (the lesson can say which), else
+         params.repeat.control, else the first */
+      var KIND = { size: 'size', rotation: 'direction', spacing: 'spacing' };
+      var list = (Array.isArray(cfg.controls) ? cfg.controls : cfg.control ? [cfg.control] : []).filter(function (k) { return KIND[k]; });
+      var asked = new URLSearchParams(location.search).get('control');
+      var first = list.indexOf(asked) >= 0 ? asked : list.indexOf(cfg.control) >= 0 ? cfg.control : list[0];
+      var ctl = first ? KIND[first] : null, input = null, out = null, bar = null;
+      var ENDS = { size: ['smaller', 'larger'], direction: ['turnLeft', 'turnRight'], spacing: ['closer', 'apart'] };
+      function showValue() { if (out) out.textContent = ctl === 'direction' ? Math.round(amount(ctl)) + '°' : ''; }
+      /* the one control shown: its range, its two ends, its name */
+      function show(kind) {
+        ctl = kind;
+        var V = VARY[kind], lo = bar.querySelector('.lo'), hi = bar.querySelector('.hi'), turn = kind === 'direction';
+        input.min = V.min; input.max = V.max; input.step = V.step; input.value = amount(kind);
+        input.setAttribute('aria-label', S.T[kind]); bar.setAttribute('aria-label', S.T[kind]);
+        lo.textContent = turn ? '↺' : S.T[ENDS[kind][0]]; hi.textContent = turn ? '↻' : S.T[ENDS[kind][1]];
+        [lo, hi].forEach(function (e) { if (turn) e.setAttribute('aria-hidden', 'true'); else e.removeAttribute('aria-hidden'); });
+        out.hidden = !turn;
+        var name = bar.querySelector('b'); if (name) name.textContent = S.T[kind];
+        bar.querySelectorAll('[role=tab]').forEach(function (t) { t.setAttribute('aria-selected', String(KIND[t.getAttribute('data-k')] === kind)); });
+        showValue();
+      }
       if (ctl) {
-        var V = VARY[ctl], ends = { size: ['smaller', 'larger'], direction: ['turnLeft', 'turnRight'], spacing: ['closer', 'apart'] }[ctl];
         bar = document.createElement('div');
-        bar.className = 'vary'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', S.T[ctl]);
-        bar.innerHTML = '<b>' + S.T[ctl] + '</b><div class="vary-row">' +
-          (ctl === 'direction' ? '<span aria-hidden="true">↺</span>' : '<span>' + S.T[ends[0]] + '</span>') +
-          '<input type="range" id="vary" min="' + V.min + '" max="' + V.max + '" step="' + V.step + '" value="' + V.none + '" aria-label="' + S.T[ctl] + '">' +
-          (ctl === 'direction' ? '<span aria-hidden="true">↻</span>' : '<span>' + S.T[ends[1]] + '</span>') + '</div>' +
-          (ctl === 'direction' ? '<output id="varyOut"></output>' : '');
+        bar.className = 'vary'; bar.setAttribute('role', 'group');
+        bar.innerHTML = (list.length > 1
+            ? '<div class="vary-tabs" role="tablist">' + list.map(function (k) { return '<button type="button" role="tab" data-k="' + k + '">' + S.T[KIND[k]] + '</button>'; }).join('') + '</div>'
+            : '<b></b>') +
+          '<div class="vary-row"><span class="lo"></span><input type="range" id="vary"><span class="hi"></span></div><output id="varyOut"></output>';
         S.$('tools').parentNode.insertBefore(bar, S.$('tools'));
         input = bar.querySelector('input'); out = bar.querySelector('output');
-        var showValue = function () { if (out) out.textContent = Math.round(amount(ctl)) + '°'; };
+        bar.querySelectorAll('[role=tab]').forEach(function (t) {
+          t.addEventListener('click', function () { if (!live) show(KIND[t.getAttribute('data-k')]); });
+        });
+        show(ctl);
         /* moving: shown at once, not a step yet; let go: one step, if the value changed */
         input.addEventListener('input', function () { live = { k: NAME[ctl], v: clamp(ctl, +input.value) }; showValue(); S.redraw(); });
         input.addEventListener('change', function () {
@@ -187,7 +211,7 @@ Studio.register('repeat', {
       }
       this.ready = function () {
         var clear = S.$('clear'); if (clear) clear.hidden = true;
-        if (bar) { bar.hidden = !S.split().marker; input.value = amount(ctl); if (out) out.textContent = Math.round(amount(ctl)) + '°'; }
+        if (bar) { bar.hidden = !S.split().marker; show(ctl); }
         if (cfg.enter) enter();
       };
       return;
