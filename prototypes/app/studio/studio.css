@@ -200,3 +200,32 @@ dialog .btn{min-width:0;flex:1 1 auto}
   .compact .app > div.chrome > .tools{flex:1 1 340px;max-width:460px;margin:0;padding-bottom:4px}
   .compact .app > div.chrome > .actions{flex:0 0 auto;padding:2px 8px 4px}
 }
+/* narrow phones held upright (2.1): the 4:3 paper is as wide as the screen, so the stage is never taller than the
+   paper (100vw: its width; +10px above for the quiet "Saved", +4px for fit()): the bar, the paper, the ranges, the
+   tools and the actions follow one another, with no empty band between the paper and the ranges; the height left
+   over stays below them. A shorter screen still shrinks the stage, and the paper with it */
+@media (max-width:600px) and (orientation:portrait){
+  .compact .stage{flex:0 1 auto;height:calc((100vw - 4px) * .75 + 14px);padding:10px 2px 0}
+  .compact .prompt + .stage{height:calc((100vw - 4px) * .75 + 6px);padding-top:2px}
+  .compact .vary-all{padding-top:4px}
+}
+/* …with room to spare (a tall phone): a little more for the fingers */
+@media (max-width:600px) and (orientation:portrait) and (min-height:700px){
+  .compact .vary-line,.compact .vary-line input{min-height:44px;height:44px}
+  .compact .vary-line{grid-template-rows:44px}
+  .compact .tool{min-height:54px}
+  .compact .tool svg{width:24px;height:24px}
+  .compact .tool span{font-size:.8rem}
+  .compact .actions{padding-top:6px}
+}
+/* the narrowest screens: the bar's three things side by side without crowding */
+@media (max-width:420px){
+  .compact .top{gap:4px;padding:2px 4px}
+  .compact .back{gap:4px;padding:0 6px;font-size:.88rem}
+  .compact .back svg{width:16px;height:16px}
+  .compact .rp-switch{gap:8px;padding:0 10px 0 8px;font-size:.85rem}
+  .compact .rp-switch i{width:32px;height:20px}
+  .compact .rp-switch i::after{width:14px;height:14px}
+  .compact .rp-switch[aria-checked=true] i::after{inset-inline-start:15px}
+  .compact .works{width:40px}
+}
