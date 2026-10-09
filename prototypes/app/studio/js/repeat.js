@@ -32,7 +32,10 @@
    "Repeat off" (settings.repeatOff, not a step): off shows the unit as it is, to go on with it; the controls rest and
    keep their values.
    "Start over" (activity.restart) keeps Repeat, its centre and its values ({ t:'clear', rep }). Works whose Repeat
-   entered before live repeat (a marker without live) are shown and continued exactly as before. */
+   entered before live repeat (a marker without live) are shown and continued exactly as before.
+   params.repeat.offer (lesson 2.1, a work continued from My artworks): a work with a drawing and no Repeat yet shows
+   the same switch, off; switched on, Repeat enters as on the lesson's screen (the same enter(): a 'before-repeat'
+   point, then the live marker), and from then on the switch is as above. */
 Studio.register('repeat', {
   strings: {
     he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
@@ -342,7 +345,8 @@ Studio.register('repeat', {
         S.$('tools').parentNode.insertBefore(bar, S.$('tools'));
         var inputs = [].slice.call(bar.querySelectorAll('input'));
         /* live repeat: the switch, in the top bar beside "Back" (it takes no room from the work; on a narrow screen it
-           stands in the place of the title); only once Repeat entered, and only for a live Repeat */
+           stands in the place of the title); only once Repeat entered, and only for a live Repeat (cfg.offer: also
+           before, off, on a work with a drawing; switched on, Repeat enters) */
         var head = null, sw = null, top = document.querySelector('.top');
         if (livemode && top) {
           head = sw = document.createElement('button');
@@ -350,6 +354,14 @@ Studio.register('repeat', {
           sw.innerHTML = '<i aria-hidden="true"></i><span></span>';
           top.insertBefore(sw, top.querySelector('.title'));
           sw.addEventListener('click', function () {   // a choice about how the work is shown, not a step
+            if (!S.split().marker) {   // cfg.offer: Repeat enters, with its short appearing
+              if (cfg.offer) enter().then(function (did) {
+                if (!did) return;
+                S.stage.classList.add('rp-reveal');
+                setTimeout(function () { S.stage.classList.remove('rp-reveal'); }, 1400);
+              });
+              return;
+            }
             if (S.doc.settings.repeatOff) delete S.doc.settings.repeatOff; else S.doc.settings.repeatOff = true;
             S.changed(); S.redraw();
           });
@@ -358,7 +370,8 @@ Studio.register('repeat', {
           inputs.forEach(function (i) { var k = i.getAttribute('data-kind'); if (!live || live.k !== NAME[k]) i.value = amount(k); });
           var o = bar.querySelector('output'); if (o) o.textContent = Math.round(amount('direction')) + '°';
           if (!head) return;
-          var on = !S.doc.settings.repeatOff, shown = isLive(S.split().marker), off = shown && !on;
+          var sp = S.split(), offer = !!cfg.offer && !sp.marker && drawing(sp.source);
+          var on = !!sp.marker && !S.doc.settings.repeatOff, shown = isLive(sp.marker) || offer, off = shown && !on;
           head.hidden = !shown; top.classList.toggle('has-switch', shown);
           sw.setAttribute('aria-checked', String(on)); sw.querySelector('span').textContent = on ? S.T.repeatOn : S.T.repeatOff;
           inputs.forEach(function (i) { i.disabled = off; });

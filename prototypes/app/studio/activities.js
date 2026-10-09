@@ -140,7 +140,7 @@ window.STUDIO_ACTIVITIES = {
     prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
     next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
   lesson21('2-1-develop', { controls: ALL, together: true, live: true }, { restart: true, next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
-  lesson21('2-1-free', { controls: ALL, together: true, live: true }, { restart: true });
+  lesson21('2-1-free', { controls: ALL, together: true, live: true, offer: true }, { restart: true });   // offer: Repeat by the switch (js/repeat.js)
   /* compact (studio.css): the work the centre of the screen, the controls as small as a finger allows; works: My
      artworks in the top bar of the lesson's Studio screens (10, 12), back to the same screen */
   ['2-1-begin', '2-1-play', '2-1-develop', '2-1-free'].forEach(function (id) { A[id].compact = true; });
