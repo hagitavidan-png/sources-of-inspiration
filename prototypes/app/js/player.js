@@ -171,7 +171,8 @@ window.Player = (function () {
   function figure(img, label) {
     return '<figure class="pl-version"><img src="' + img + '" alt="">' + (label ? '<figcaption>' + esc(label) + '</figcaption>' : '') + '</figure>';
   }
-  function lines(t) { return ((t && t[I.lang()]) || []).map(function (v) { return '<p class="pl-text">' + v + '</p>'; }).join(''); }
+  /* a screen's words, a paragraph each; a guidance for the looking (the whole line <span class="pl-hint">) is quieter */
+  function lines(t) { return ((t && t[I.lang()]) || []).map(function (v) { return '<p class="pl-text' + (/^<span class="pl-hint">/.test(v) ? ' pl-hint' : '') + '">' + v + '</p>'; }).join(''); }
 
   /* ── one screen ── */
   /* a screen: the run and its artwork first (the store answers later), then the screen; a newer screen asked for
