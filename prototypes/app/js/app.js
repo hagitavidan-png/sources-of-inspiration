@@ -98,6 +98,7 @@
   function lessonIntro(id) {
     withLesson(id, function (L) {
       var A = window.AppAdapters[L.adapter](window.LESSON_PAGE), d = A.lesson;
+      if (L.intro) return opening(id, L, d);
       frame(esc(I.ui('lesson')) + ' ' + esc(d.number), '#/unit/' + d.unitNum, '<div class="sh-lesson">' +
         '<p class="sh-kicker">' + esc(I.ui('unit')) + ' ' + esc(d.unitNum) + ' · ' + esc(I.tx(d.unit)) + '</p>' +
         '<h2 class="sh-h big">' + esc(I.tx(d.title)) + '</h2>' +
@@ -114,6 +115,36 @@
         b.type = 'button'; b.className = 'sh-secondary'; b.textContent = I.ui('newArtwork');
         b.addEventListener('click', function () { b.disabled = true; window.Artworks.newRun(id).then(function () { go('#/lesson/' + id + '/play/1'); }); });
         box.appendChild(b);
+      });
+    });
+  }
+
+  /* a lesson's own opening screen (L.intro; 2.1): its title, subtitle and what it holds. "Start" begins the lesson
+     anew from screen 1: a new run (its artwork made on screen 8, as always) once the current one has something in it
+     (an artwork, or a screen past 1); the earlier run and its artwork stay as they are, in My artworks. A run with
+     nothing in it yet is used as it is, so pressing again makes no empty runs; one press makes one run. "Resume"
+     (only once the learner has gone past screen 1): the current run, at the screen where they stopped, and its
+     artwork. The run is read before the screen is drawn, so nothing moves once it is shown */
+  function opening(id, L, d) {
+    var o = L.intro, here = location.hash;
+    window.Player.run(id).catch(function () { return {}; }).then(function (r) {
+      if (location.hash !== here) return;   // the learner went elsewhere meanwhile
+      var at = Math.min(L.screens.length, r.screen | 0);
+      frame(esc(I.ui('lesson')) + ' ' + esc(d.number), '#/unit/' + d.unitNum, '<div class="sh-lesson sh-open">' +
+        '<p class="sh-kicker">' + esc(I.ui('unit')) + ' ' + esc(d.unitNum) + ' · ' + esc(I.tx(d.unit)) + '</p>' +
+        '<h2 class="sh-h big">' + esc(I.tx(d.title)) + '</h2>' +
+        '<p class="sh-sub">' + esc(I.tx(o.subtitle)) + '</p>' +
+        '<p class="sh-time">' + esc(I.tx(o.info).replace('{n}', L.screens.length)) + '</p>' +
+        '<a class="sh-primary" href="#/lesson/' + id + '/play/1">' + esc(I.tx(o.start)) + '</a>' +
+        (at > 1 ? '<a class="sh-secondary" href="#/lesson/' + id + '/play/' + at + '">' + esc(I.tx(o.resume)) + '</a>' : '') + '</div>');
+      var start = root.querySelector('.sh-open .sh-primary'), busy = false, W = window.Artworks;
+      start.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (busy) return;
+        busy = true; start.setAttribute('aria-disabled', 'true');
+        W.currentRun(id).then(function (c) { return c && (c.artwork || (c.screen | 0) > 1) ? W.newRun(id) : null; })
+          .then(function () { go('#/lesson/' + id + '/play/1'); },
+                function () { busy = false; start.removeAttribute('aria-disabled'); });
       });
     });
   }

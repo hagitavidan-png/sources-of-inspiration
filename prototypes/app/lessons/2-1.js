@@ -19,6 +19,16 @@ window.APP_LESSONS['2-1'] = {
   langs: ['he', 'en'],
   artworkActivity: '2-1-free',   // the Studio activity "My artworks" opens an artwork of this lesson in (never its last one)
   wordsFirst: true,              // a screen with images: its words (its question) first, then the images (js/player.js)
+  /* the lesson's own opening screen (js/app.js), under its title: a subtitle and what the lesson holds ({n}: its
+     number of screens); "start" begins anew from screen 1 (a new run and, on screen 8, a new artwork; the earlier
+     ones stay, in My artworks), "resume" (only once the learner has gone past screen 1) the current run at the
+     screen where they stopped, with its artwork. Nothing is deleted */
+  intro: {
+    subtitle: { he: 'מסע של התבוננות, גילוי ויצירה', en: 'A journey of looking, discovering and creating' },
+    info: { he: 'כ־50 דקות · {n} שלבים', en: 'About 50 minutes · {n} steps' },
+    start: { he: 'מתחילים את השיעור', en: 'Start the lesson' },
+    resume: { he: 'ממשיכים מהמקום שעצרתי', en: 'Continue where I left off' }
+  },
   /* the three galleries (one large image at a time; js/player.js): an image of the site (images/editorial/<name>) or
      of the app (images/2-1/<name>), with img null a placeholder where an image not cleared for use will be.
      Where each image comes from and its licence: images/2-1/SOURCES.md. Artists whose works may not be shown here

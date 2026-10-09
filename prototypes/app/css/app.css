@@ -222,6 +222,15 @@ a.sh-item:hover{border-color:var(--ink)}
 /* home and lesson: a second, quieter way */
 .sh-secondary{align-self:center;min-height:var(--tap);padding:0 12px;border:0;background:none;font:inherit;font-size:1.02rem;font-weight:600;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .sh-lesson .sh-secondary{margin-top:10px}
+/* a lesson's own opening screen (2.1): the title, a subtitle, what the lesson holds; one clear way in ("start") and,
+   when there is where to come back to, a quieter one under it ("resume": an outlined button, the same width) */
+.sh-open .sh-h.big{font-size:clamp(1.9rem,7.4vw,2.6rem);text-wrap:balance}
+.sh-sub{margin:0 0 14px;font-size:clamp(1.12rem,4.4vw,1.3rem);line-height:1.45;color:var(--ink-2);text-wrap:balance}
+.sh-open .sh-time{margin-bottom:28px;font-size:1rem}
+.sh-open .sh-primary{font-size:1.15rem;min-height:56px;padding:0 20px;text-align:center}
+.sh-open .sh-secondary{align-self:stretch;margin-top:12px;min-height:52px;padding:0 20px;border:2px solid #d3cbbd;border-radius:999px;background:var(--card);color:var(--ink);font-size:1.05rem;text-decoration:none;text-align:center}
+.sh-open .sh-secondary:hover{border-color:var(--ink-2)}
+.sh-open .sh-primary:focus-visible,.sh-open .sh-secondary:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
 
 /* my artworks: one card per artwork, its picture first; one visible action */
 .ga-empty{margin:24px 0;display:flex;flex-direction:column;gap:20px}
@@ -266,6 +275,10 @@ a.sh-item:hover{border-color:var(--ink)}
   .pl-media{aspect-ratio:16/7}
   .pl-choice{min-height:96px}
   .sh-home,.sh-lesson{min-height:0}
+  .sh-open .sh-h.big{font-size:1.8rem}
+  .sh-open .sh-time{margin-bottom:18px}
+  .sh-open .sh-primary{min-height:48px}
+  .sh-open .sh-secondary{min-height:46px;margin-top:10px}
 }
 /* 2.1, a gallery's image to look at large: the button is the image's own size (whole, at its proportions) */
 .pl-gal-frame .pl-gal-zoom{width:min(100%,calc(var(--gal-h) * var(--r)))}
