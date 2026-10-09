@@ -2,6 +2,7 @@
 :root{
   --bg:#F7F5F0; --ink:#242424; --ink-2:#4a4844; --muted:#7a766f; --rule:#e4dfd5;
   --terracotta:#C96B4B; --sage:#8FA58F; --ochre:#D6A84F; --card:#fffdf9;
+  --credit:#6b675f;   /* small credits: quieter than the text, still 5:1 on the page */
   --tap:48px; --pad:clamp(16px,4.5vw,32px); --col:640px;
   --f:"Assistant",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Hebrew","Arial Hebrew",Arial,sans-serif;
 }
@@ -13,7 +14,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 [dir=ltr] .pl-back svg{transform:scaleX(-1)}
 
 /* one screen: top, content (scrolls inside only if it must), one action at the bottom */
-.app{height:100vh;height:100dvh;max-width:860px;margin:0 auto;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
+.app{height:100vh;height:100dvh;max-width:860px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;overflow:hidden}   /* the column never wider than the screen (a long lesson title in the header is cut with …, not the page) */
 .app.shell{grid-template-rows:auto 1fr}
 
 /* ── top ── */
@@ -21,7 +22,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .pl-back{flex:none;display:inline-flex;align-items:center;justify-content:center;width:var(--tap);height:var(--tap);border:0;background:none;border-radius:50%;cursor:pointer;text-decoration:none}
 .pl-back:hover{background:rgba(36,36,36,.06)}
 .pl-back svg{width:24px;height:24px}
-.pl-id{flex:1;min-width:0;font-size:.92rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-id{flex:1;min-width:0;font-size:.92rem;line-height:1.3;color:var(--muted)}   /* a long lesson title takes a second line, never cut */
 .pl-id span{color:var(--ink);font-weight:600}
 .pl-count{flex:none;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-inline:8px}
 .pl-progress{position:absolute;inset-inline:var(--pad);bottom:0;height:3px;background:var(--rule);border-radius:3px;overflow:hidden}
@@ -59,6 +60,64 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .pl-audio audio{display:block;width:100%}
 .pl-linkcard-box.pl-placeholder{flex-direction:column;gap:8px;font-size:.86rem;color:var(--ink-2)}
 .pl-quiet{color:var(--muted);letter-spacing:.01em}
+.pl-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* a gallery (2.1): one large image at a time, whole (never cropped); previous / next and a small counter */
+.pl-gallery{margin:0 0 14px;--gal-h:clamp(200px,50vh,560px)}
+.pl-gal-fig{margin:0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+/* the image whole, at its own proportions (--r): as wide as the column, never taller than --gal-h; no frame around it */
+.pl-gal-frame{display:flex;justify-content:center}
+.pl-gal-frame img{display:block;width:min(100%,calc(var(--gal-h) * var(--r)));height:auto;aspect-ratio:var(--r);border-radius:10px;box-shadow:0 0 0 1px rgba(36,36,36,.06),0 4px 14px rgba(36,36,36,.07);-webkit-user-drag:none}
+.pl-gal-frame.pl-placeholder,.pl-duo-img.pl-placeholder{flex-direction:column;align-items:center;justify-content:center;gap:8px;aspect-ratio:4/3;border-radius:14px;background:var(--card);font-size:.86rem;padding:12px;text-align:center}
+/* the caption: the artist, then the title and year smaller, then the credit */
+.pl-gal-fig figcaption,.pl-duo figcaption{margin:8px 0 0;line-height:1.35;color:var(--muted)}
+.pl-gal-fig figcaption{text-align:center;max-width:36em;margin-inline:auto}
+.pl-cap-artist{display:block;color:var(--ink);font-weight:600;font-size:.98rem}
+.pl-cap-work{display:block;font-size:.9rem;color:var(--ink-2);overflow-wrap:break-word}
+/* the photographer and licence a photograph asks to be named with: small, under the caption */
+.pl-credit{display:block;margin-top:3px;font-size:.78rem;line-height:1.3}
+.pl-credit a{color:var(--credit);text-decoration:none;border-bottom:1px solid var(--rule)}
+.pl-credit a:hover{color:var(--ink-2)}
+.pl-credit a:focus-visible,.pl-more a:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px;border-radius:4px}
+/* "Want to discover more?": a quiet box of links that open in a new tab */
+.pl-more{margin:18px 0 6px;padding:12px 14px 14px;border:1px solid var(--rule);border-radius:14px;background:var(--card)}
+.pl-more h3{margin:0 0 8px;font-size:.95rem;font-weight:600;color:var(--ink-2)}
+.pl-more ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pl-more a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--rule);background:var(--bg);text-decoration:none;font-size:.95rem;max-width:100%}
+.pl-more a b{font-weight:600}
+.pl-more-site{color:var(--muted);font-size:.82rem}
+.pl-more svg{width:16px;height:16px;flex:none;color:var(--muted)}
+.pl-gal-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin:4px 0 0}
+.pl-gal-btn{display:inline-flex;align-items:center;justify-content:center;width:var(--tap);height:var(--tap);border-radius:50%;border:1.5px solid var(--rule);background:var(--card);color:var(--ink);cursor:pointer}
+.pl-gal-btn svg{width:22px;height:22px}
+.pl-gal-btn:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+[dir=ltr] .pl-gal-btn svg{transform:scaleX(-1)}
+.pl-gal-count{min-width:3.2em;text-align:center;font-size:.95rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.pl-focus{margin:0 0 14px;--gal-h:clamp(200px,50vh,560px)}
+/* two images side by side (2.1 screen 6): each whole, at its own proportions, both from the top of the comparison,
+   each caption right under its image */
+.pl-duo{display:grid;grid-template-columns:1fr 1fr;align-items:start;column-gap:14px;margin:0 0 16px;--duo-h:clamp(140px,32vh,340px)}
+.pl-duo-fig{margin:0;min-width:0}
+.pl-duo-img{width:min(100%,calc(var(--duo-h) * var(--r)))}
+.pl-duo-img img{display:block;width:100%;height:auto;aspect-ratio:var(--r);border-radius:8px;box-shadow:0 0 0 1px rgba(36,36,36,.06),0 3px 10px rgba(36,36,36,.07)}
+.pl-duo figcaption{margin-top:6px}
+.pl-duo .pl-cap-artist{font-size:.88rem}
+.pl-duo .pl-cap-work{font-size:.8rem}
+.pl-duo .pl-credit{font-size:.72rem}
+.pl-duo .pl-licence{white-space:nowrap}   /* "CC BY-SA 4.0" on one line: the whole of it moves down if it must */
+/* an image to look at large: a plain button around it; on the comparison a small sign in its corner */
+.pl-zoom{display:block;position:relative;padding:0;margin:0;border:0;background:none;color:inherit;font:inherit;cursor:zoom-in;border-radius:10px;-webkit-tap-highlight-color:transparent}
+.pl-zoom:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+.pl-zoom-badge{position:absolute;inset-block-end:6px;inset-inline-end:6px;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(255,253,249,.92);color:var(--ink);box-shadow:0 1px 4px rgba(36,36,36,.2);pointer-events:none}
+.pl-zoom-badge svg{width:16px;height:16px}
+/* small images to look at again */
+.pl-thumbs{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;--th:76px}
+.pl-thumbs li{display:block;flex:none}
+.pl-thumb{display:block;height:var(--th);width:calc(var(--th) * var(--r));border-radius:10px;overflow:hidden;background:var(--card);box-shadow:0 0 0 1px rgba(36,36,36,.06),0 2px 8px rgba(36,36,36,.07)}
+.pl-thumb img{display:block;width:100%;height:100%;object-fit:contain}
+.pl-thumb.pl-placeholder{width:var(--th);display:flex;align-items:center;justify-content:center}
+@media (min-width:600px){.pl-thumbs{--th:96px;gap:12px}}
+.pl-thumb.pl-placeholder{border-width:1px}
+.pl-thumb.pl-placeholder svg{width:24px;height:24px}
 .pl-work{margin:0 0 12px}
 .pl-work img{display:block;width:100%;max-height:52vh;object-fit:contain;background:var(--card);border-radius:14px}
 .pl-work figcaption{margin:8px 0 0;font-size:.9rem;color:var(--muted)}
@@ -182,10 +241,13 @@ a.sh-item:hover{border-color:var(--ink)}
 .ga-action:hover{background:rgba(36,36,36,.06)}.ga-action.main:hover{background:#000}
 .ga-action:focus-visible,.ga-close:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
 /* an earlier work, large; only to look at */
-.ga-view{border:0;border-radius:18px;padding:12px;width:min(960px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(43,42,40,.25)}
-.ga-view[open]{display:flex;flex-direction:column;gap:12px}
-.ga-view::backdrop{background:rgba(36,36,36,.45)}
-.ga-view img{display:block;width:100%;min-height:0;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:12px;background:#fffdf9}
+.ga-view{border:0;border-radius:18px;padding:12px;width:fit-content;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(43,42,40,.25)}
+.ga-view[open]{display:flex;flex-direction:column;align-items:center;gap:12px}
+.ga-view::backdrop{background:rgba(36,36,36,.55)}
+.ga-view img{display:block;width:min(calc(100vw - 56px),calc((100dvh - 136px) * var(--r,1.3333)));height:auto;aspect-ratio:var(--r,auto);border-radius:12px;background:#fffdf9}
+.ga-view.has-cap img{width:min(calc(100vw - 56px),calc((100dvh - 236px) * var(--r,1.3333)))}
+.ga-view-cap{contain:inline-size;align-self:stretch;text-align:center;line-height:1.35;color:var(--ink-2)}
+.ga-view-cap[hidden]{display:none}
 .ga-close{align-self:center;min-height:var(--tap);min-width:140px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink);background:none;font-weight:700;cursor:pointer}
 @media (min-width:560px){ .ga-list{grid-template-columns:1fr 1fr} }
 @media (min-width:700px){ .sh-main > .ga{max-width:none} }

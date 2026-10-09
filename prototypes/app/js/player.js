@@ -78,6 +78,90 @@ window.Player = (function () {
     }).join('');
   }
 
+  /* the lesson's galleries (L.galleries: { <name>: [item] }): one large image at a time, previous / next and a small
+     counter. An item: { img, size, alt, artist?, workTitle?, credit? }; img an image of the site
+     (images/editorial/<img>.jpg) or of the app (a path, '<dir>/<img>.jpg'), or null: a placeholder in its place (an
+     image not cleared for use yet); size [width, height]: the image is shown whole, at its own proportions, its place
+     kept before it loads; credit { who, licence?, href }: the photographer (and licence) a photograph is to be named
+     with, a small line under the caption, linked to the photograph's page. The
+     image of a gallery the learner is at is kept in the run (run.seen), so later screens show the image looked at last
+     (a placeholder passed over): focus (it, large), pair (two galleries' side by side), thumbs (small, to look at again) */
+  var PIC = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 3-3 5 5"/></svg>';
+  var PREV = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>', NEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+  function src(img) { return img.indexOf('/') >= 0 ? esc(img) + '.jpg' : IMG + esc(img) + '.jpg'; }
+  function seenOf(run, L, g) { var n = L.galleries[g].length, i = (run.seen && run.seen[g]) | 0; return ((i % n) + n) % n; }
+  /* the image of a gallery looked at last, for the later screens: a placeholder is passed over (the one before it) */
+  function lastShown(run, L, g) {
+    var items = L.galleries[g], n = items.length, i = seenOf(run, L, g);
+    for (var k = 0; k < n && !items[(i - k + n) % n].img; k++);
+    return items[(i - k + n) % n];
+  }
+  var EXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v6H4V6h6"/></svg>';
+  function outLink(href, inner) { return '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + inner + '<span class="pl-sr"> ' + esc(I.ui('newTab')) + '</span></a>'; }
+  /* the caption: the artist, then the work's title and year, smaller, then the credit. short: a long title is cut at a
+     word, with its year (the full title stays for screen readers and as the element's title) */
+  var SHORT = 28;
+  function shortTitle(t) {
+    var m = /^(.*), (\d{4})$/.exec(t), name = m ? m[1] : t, year = m ? ', ' + m[2] : '';
+    if (name.length <= SHORT) return t;
+    var cut = name.slice(0, SHORT), sp = cut.lastIndexOf(' ');
+    return (sp > 10 ? cut.slice(0, sp) : cut).replace(/[,;:]$/, '') + '…' + year;
+  }
+  function caption(it, short) { return '<figcaption>' + captionText(it, short) + '</figcaption>'; }
+  function captionText(it, short) {
+    var c = it.credit, t = it.workTitle ? I.tx(it.workTitle) : '', v = short ? shortTitle(t) : t;
+    return (it.artist ? '<b class="pl-cap-artist">' + esc(I.tx(it.artist)) + '</b>' +
+        (v === t ? '<span class="pl-cap-work"><bdi>' + esc(t) + '</bdi></span>'
+                 : '<span class="pl-cap-work" title="' + esc(t) + '"><bdi aria-hidden="true">' + esc(v) + '</bdi><span class="pl-sr">' + esc(t) + '</span></span>') : '') +
+      (c ? '<small class="pl-credit">' + outLink(c.href, esc(I.ui('photoBy', { who: '' })) + '<bdi>' + esc(c.who) + (c.licence ? ' · <span class="pl-licence">' + esc(c.licence) + '</span>' : '') + '</bdi>') + '</small>' : '');
+  }
+  /* the image at its own proportions (--r, from size): never cropped, as large as the space allows */
+  function ratio(it) { return it.size ? (it.size[0] / it.size[1]).toFixed(4) : '1.3333'; }
+  function imgTag(it, alt) {
+    return '<img src="' + src(it.img) + '" alt="' + esc(alt) + '" style="--r:' + ratio(it) + '"' + (it.size ? ' width="' + it.size[0] + '" height="' + it.size[1] + '"' : '') + '>';
+  }
+  function picture(it, cls) {
+    return it.img ? '<div class="' + cls + '">' + imgTag(it, I.tx(it.alt)) + '</div>'
+      : '<div class="' + cls + ' pl-placeholder" role="img" aria-label="' + esc(I.ui('protoImage') + (it.artist ? ' ' + I.tx(it.artist) + ', ' + I.tx(it.workTitle) : '')) + '">' + PIC + '<span aria-hidden="true">' + esc(I.ui('protoImage')) + '</span></div>';
+  }
+  function counterOf(i, n) { return '<span aria-hidden="true">' + (i + 1) + '/' + n + '</span><span class="pl-sr">' + esc(I.ui('galleryCount', { n: i + 1, total: n })) + '</span>'; }
+  function gallery(L, run, g) {
+    var items = L.galleries[g], i = seenOf(run, L, g);
+    return '<section class="pl-gallery" data-gallery="' + esc(g) + '" aria-label="' + esc(I.ui('images')) + '">' +
+      '<figure class="pl-gal-fig">' + picture(items[i], 'pl-gal-frame') + caption(items[i]) + '</figure>' +
+      '<div class="pl-gal-nav"><button type="button" class="pl-gal-btn" data-step="-1" aria-label="' + esc(I.ui('galleryPrev')) + '">' + PREV + '</button>' +
+      '<span class="pl-gal-count" aria-live="polite">' + counterOf(i, items.length) + '</span>' +
+      '<button type="button" class="pl-gal-btn" data-step="1" aria-label="' + esc(I.ui('galleryNext')) + '">' + NEXT + '</button></div></section>';
+  }
+  function focusOn(L, run, g) { var it = lastShown(run, L, g); return '<figure class="pl-gal-fig pl-focus">' + picture(it, 'pl-gal-frame') + caption(it) + '</figure>'; }
+  /* an image to look at large (js/viewer.js): a button around it, named for what it shows; only to look at, it changes
+     nothing. zooms: this screen's items, by number */
+  var zooms = [], ZOOM = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h5v5"/><path d="M20 4l-6 6"/><path d="M9 20H4v-5"/><path d="M4 20l6-6"/></svg>';
+  function zoomable(it, cls, badge) {
+    if (!it.img) return picture(it, cls);
+    return '<button type="button" class="pl-zoom ' + cls + '" style="--r:' + ratio(it) + '" data-zoom="' + (zooms.push(it) - 1) + '" aria-label="' + esc(I.ui('enlarge', { what: I.tx(it.alt) })) + '">' +
+      imgTag(it, '') + (badge ? '<span class="pl-zoom-badge">' + ZOOM + '</span>' : '') + '</button>';
+  }
+  function pair(L, run, gs) {
+    return '<div class="pl-duo">' + gs.map(function (g) { var it = lastShown(run, L, g); return '<figure class="pl-duo-fig">' + zoomable(it, 'pl-duo-img', true) + caption(it, true) + '</figure>'; }).join('') + '</div>';
+  }
+  function thumbs(L, run, t) {
+    var list = [];
+    (t.all || []).forEach(function (g) { list = list.concat(L.galleries[g]); });
+    (t.seen || []).forEach(function (g) { list.push(lastShown(run, L, g)); });
+    return '<ul class="pl-thumbs">' + list.map(function (it) {
+      return '<li>' + (it.img ? zoomable(it, 'pl-thumb') : '<span class="pl-thumb pl-placeholder" aria-hidden="true">' + PIC + '</span>') + '</li>';
+    }).join('') + '</ul>';
+  }
+
+  /* "Want to discover more?": a few artists to look at outside the lesson, on their own or a museum's site (a new tab;
+     no image of theirs is copied here). An item: { name, site (what the page is), href } */
+  function more(list) {
+    return '<section class="pl-more" aria-label="' + esc(I.ui('exploreMore')) + '"><h3>' + esc(I.ui('exploreMore')) + '</h3><ul>' + list.map(function (m) {
+      return '<li>' + outLink(m.href, '<b>' + esc(I.tx(m.name)) + '</b><span class="pl-more-site">' + esc(I.tx(m.site)) + '</span>' + EXT) + '</li>';
+    }).join('') + '</ul></section>';
+  }
+
   /* the work of an artwork, if the Studio made any (its preview and operations) */
   function made(w) { return w && w.ops && w.ops.length ? w : null; }
   function hasRepeat(w) { return !!(w && (w.ops || []).some(function (o) { return o.t === 'repeat'; })); }
@@ -97,6 +181,7 @@ window.Player = (function () {
       .then(function (r) { if (my === asked) show(root, id, n, nav, r[0], r[1]); });
   }
   function show(root, id, n, nav, run, art) {
+    zooms = [];
     var L = window.APP_LESSONS[id], A = window.AppAdapters[L.adapter](window.LESSON_PAGE), count = L.screens.length;
     var s = L.screens[n - 1], studio = run.medium === 'studio';
     var side = (studio ? s.studio : s.paper) || {};   // from screen 11, the words and actions of the learner's way
@@ -112,7 +197,8 @@ window.Player = (function () {
       });
     }
     var few = !studio || kept(art).length < 2;   // screen 15 only with two or more kept possibilities (never on paper)
-    var free = L.screens.map(function (x) { return x.step; }).indexOf('free') + 1;   // the screen of free making (2.1: 16)
+    var free = 0;   // the last screen of free making (3.1: 14; the Studio's own screen in 2.1: 12)
+    L.screens.forEach(function (x, i) { if (x.step === 'free' || x.step === 'studio') free = i + 1; });
     if (s.step === 'choose' && few) return nav.go(n + 1);
 
     var blocks = (s.src || []).map(A.block);
@@ -125,13 +211,15 @@ window.Player = (function () {
       if (s.only && s.only.indexOf(r.k) < 0) return;
       rows.push(own[r.k] && own[r.k][I.lang()] != null ? { k: r.k, parts: [{ text: own[r.k] }] } : r);
     }); });
-    var body = (s.media ? media(s.media, L) : '') +
+    var body = (s.gallery ? gallery(L, run, s.gallery) : '') + (s.focus ? focusOn(L, run, s.focus) : '') +
+      (s.pair ? pair(L, run, s.pair) : '') + (s.thumbs ? thumbs(L, run, s.thumbs) : '') +
+      (s.media ? media(s.media, L) : '') +
       (s.compare ? '<div class="pl-pair">' + s.compare.map(function (r) { return works(A.block(r), true); }).join('') + '</div>'
                  : blocks.filter(function (b) { return b.works; }).map(function (b) { return works(b, false); }).join('')) +
       (s.gap ? proto(I.ui(s.gap)) : '') +
       rows.filter(function (r) { return r.k === 'do'; }).map(row).join('') +
       rows.filter(function (r) { return r.k !== 'do'; }).map(row).join('') +
-      lines(side.text || s.text);
+      lines(side.text || s.text) + (s.more ? more(s.more) : '');
     var action = { label: I.ui('continue'), go: function () { go(n + 1); } }, extra = null;
     var work = studio && made(art), preview = work ? '<figure class="pl-studio-work"><img src="' + work.preview + '" alt=""></figure>' : '';
 
@@ -151,7 +239,23 @@ window.Player = (function () {
           '<span>' + esc(I.tx(s.choices[m])) + '</span></button>';
       }).join('') + '</div>';
       action = run.medium ? action : null;
+      if (studio && s.studio && made(art)) extra = { label: I.ui('reopen'), go: function () { openStudio(s.studio.activity, s.studio.back); } };
     }
+    /* the question before Repeat (2.1 screen 9): Studio, once there is a drawing; paper, its own words */
+    if (s.step === 'ask') {
+      if (studio) { body += preview; action = { label: ACT('seeWhat'), off: !work, go: function () { if (work) go(n + 1); } }; }
+      else action.go = function () { run.begun = true; go(n + 1); };
+    }
+    /* the Studio's own screen (2.1: 10, 12): arriving, the artwork opens there; on paper, the paper's words */
+    if (s.step === 'studio' && studio) {
+      run.screen = n;
+      root.innerHTML = '<main class="pl-main pl-step-studio" data-screen="' + n + '"></main>';
+      openStudio(side.activity, side.back);
+      return;
+    }
+    if (s.step === 'studio' && !studio && side.action) action.label = ACT(side.action);
+    /* looking at what emerged (2.1: 11): then straight back to the making */
+    if (s.step === 'notice' && studio) { body += preview; action = { label: ACT('keepCreating'), go: function () { go(n + 1); } }; }
     /* 10: the work begins (Studio: the drawing tools only) */
     if (s.step === 'begin') {
       var begun = function () { run.begun = true; go(n + 1); };
@@ -240,7 +344,7 @@ window.Player = (function () {
     root.querySelector('.pl-back').addEventListener('click', function () {
       if (n === 1) return nav.exit();
       var prev = L.screens[n - 2];
-      go(prev && prev.step === 'choose' && few ? n - 2 : n - 1);   // a choice skipped on the way is skipped on the way back
+      go(prev && ((prev.step === 'choose' && few) || (prev.step === 'studio' && studio)) ? n - 2 : n - 1);   // a choice skipped on the way, or the Studio's own screen, is passed over going back
     });
     if (action) root.querySelector('.pl-primary').addEventListener('click', function () { if (!action.off) action.go(); });
     if (extra) root.querySelector('.pl-secondary').addEventListener('click', extra.go);
@@ -249,7 +353,42 @@ window.Player = (function () {
         if (b.disabled) return;
         run.medium = b.getAttribute('data-medium');
         keep().then(function () { return W.artworkFor(run.id, run.medium === 'studio' ? 'digital' : 'paper'); })
-          .then(function (w) { run.artwork = w.id; return keep(); }).then(function () { nav.go(n + 1); });
+          .then(function (w) { run.artwork = w.id; return keep(); }).then(function () {
+            if (run.medium === 'studio' && s.studio && s.studio.activity) openStudio(s.studio.activity, s.studio.back);   // 2.1: begin at once
+            else nav.go(n + 1);
+          });
+      });
+    });
+    /* a gallery: previous / next (buttons, arrow keys, a swipe); only its image and counter change */
+    root.querySelectorAll('.pl-gallery').forEach(function (box) {
+      var g = box.getAttribute('data-gallery'), items = L.galleries[g], rtl = I.dir() === 'rtl';
+      function preload(i) { var it = items[((i % items.length) + items.length) % items.length]; if (it.img) new Image().src = src(it.img); }
+      function move(d) {
+        run.seen = run.seen || {};
+        var i = ((seenOf(run, L, g) + d) % items.length + items.length) % items.length;
+        run.seen[g] = i;
+        box.querySelector('.pl-gal-fig').innerHTML = picture(items[i], 'pl-gal-frame') + caption(items[i]);
+        box.querySelector('.pl-gal-count').innerHTML = counterOf(i, items.length);
+        preload(i + d); keep();
+      }
+      box.querySelectorAll('.pl-gal-btn').forEach(function (b) { b.addEventListener('click', function () { move(+b.getAttribute('data-step')); }); });
+      box.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault(); move((e.key === 'ArrowRight') !== rtl ? 1 : -1);
+      });
+      var x0 = null, fig = box.querySelector('.pl-gal-fig');
+      fig.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+      fig.addEventListener('pointerup', function (e) {
+        if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
+        if (Math.abs(dx) > 40) move((dx < 0) !== rtl ? 1 : -1);   // towards the next one: left in LTR, right in RTL
+      });
+      preload(seenOf(run, L, g) + 1); preload(seenOf(run, L, g) - 1);
+    });
+    /* an image of screens 6 and 7, large: the whole image, its caption; closing comes back here, where it was */
+    root.querySelectorAll('.pl-zoom').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var it = zooms[+b.getAttribute('data-zoom')];
+        window.Viewer.open({ src: b.querySelector('img').getAttribute('src'), alt: I.tx(it.alt), ratio: ratio(it), caption: it.artist ? captionText(it) : '', from: b });
       });
     });
     root.querySelectorAll('.pl-change').forEach(function (b) {

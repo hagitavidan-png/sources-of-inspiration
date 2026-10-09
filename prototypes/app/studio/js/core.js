@@ -129,7 +129,9 @@ window.Studio = (function () {
     /* the base layer lies exactly under the learner layer */
     base.style.width = canvas.style.width; base.style.height = canvas.style.height;
     var c = canvas.getBoundingClientRect();   // exact, also at half pixels (offsetLeft rounds)
-    base.style.left = (c.left - r.left - stage.clientLeft) + 'px'; base.style.top = (c.top - r.top - stage.clientTop) + 'px';
+    /* from its centre: Repeat's reveal scales the canvas for a moment (around its centre), the paper stays as it is */
+    var left = c.left + c.width / 2 - cw / 2, top = c.top + c.height / 2 - ch / 2;
+    base.style.left = (left - r.left - stage.clientLeft) + 'px'; base.style.top = (top - r.top - stage.clientTop) + 'px';
     base.width = canvas.width; base.height = canvas.height;
     bctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0);
     redraw();
@@ -367,13 +369,21 @@ window.Studio = (function () {
                          clear: activity.clear !== false, point: point,
                          keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null,
                          next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
-                         source: !!activity.source });
+                         source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null });
     tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
     fit();
     updateUi();
     if (reopened && !autosaves()) Studio.shell.toast(T.opened);   // an artwork that saves itself just opens, without a word about it
     var rt;
     window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 80); });
+    /* the stage also changes without a resize (Repeat's controls appearing under it): fit again */
+    if (window.ResizeObserver) {
+      var sw = 0, sh = 0;
+      new ResizeObserver(function (e) {
+        var b = e[0].contentRect; if (Math.round(b.width) === sw && Math.round(b.height) === sh) return;
+        sw = Math.round(b.width); sh = Math.round(b.height); clearTimeout(rt); rt = setTimeout(fit, 30);
+      }).observe(stage);
+    }
 
     /* for the prototype tests only: a read-only view of the state */
     window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools,

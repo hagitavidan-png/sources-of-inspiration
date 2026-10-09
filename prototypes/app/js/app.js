@@ -184,19 +184,14 @@
         if (c.kind === 'earlier') action = '<button type="button" class="ga-action" data-view="' + i + '" aria-describedby="' + about + '">' + esc(I.ui('viewArtwork')) + '</button>';
         var pic = c.kind === 'paper' ? '<div class="ga-pic ga-blank">' + PAPER + '</div>' : '<figure class="ga-pic"><img src="' + w.preview + '" alt="' + esc(alt) + '"></figure>';
         return '<li><article class="ga-card ga-' + c.kind + '" aria-labelledby="' + ids.join(' ') + '">' + pic + '<div class="ga-text">' + head + '</div>' + action + '</article></li>';
-      }).join('') + '</ol>' +
-        '<dialog class="ga-view"><img alt=""><button type="button" class="ga-close">' + esc(I.ui('close')) + '</button></dialog>';
-      /* an earlier work: its picture, large; only to look at */
-      var dlg = box.querySelector('.ga-view'), opener = null;
+      }).join('') + '</ol>';
+      /* an earlier work: its picture, large; only to look at (js/viewer.js) */
       box.querySelectorAll('[data-view]').forEach(function (b) {
         b.addEventListener('click', function () {
-          var img = b.closest('.ga-card').querySelector('.ga-pic img'), big = dlg.querySelector('img');
-          big.src = img.src; big.alt = img.alt; dlg.setAttribute('aria-label', img.alt);
-          opener = b; dlg.showModal(); dlg.querySelector('.ga-close').focus();
+          var img = b.closest('.ga-card').querySelector('.ga-pic img');
+          window.Viewer.open({ src: img.src, alt: img.alt, ratio: img.naturalWidth && img.naturalHeight ? (img.naturalWidth / img.naturalHeight).toFixed(4) : null, from: b });
         });
       });
-      dlg.querySelector('.ga-close').addEventListener('click', function () { dlg.close(); });
-      dlg.addEventListener('close', function () { if (opener) opener.focus(); });
     });
   }
 

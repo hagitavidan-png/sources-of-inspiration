@@ -21,6 +21,8 @@ window.I18N = (function () {
       onPaper: 'יצירה על נייר', backToLesson: 'חזרה לשיעור', lastWorked: 'עבדתם עליה לאחרונה: {date}',
       viewArtwork: 'לצפות ביצירה', close: 'סגירה', artworkAlt: 'היצירה שלך · {lesson}',
       proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.', protoAudio: 'מקום למוזיקה. תתווסף בהמשך.', oneOpenOnly: 'שיעור אחד פתוח',
+      images: 'תמונות', galleryPrev: 'התמונה הקודמת', galleryNext: 'התמונה הבאה', galleryCount: 'תמונה {n} מתוך {total}',
+      photoBy: 'צילום: {who}', exploreMore: 'רוצים לגלות עוד?', newTab: '(נפתח בלשונית חדשה)', enlarge: 'הגדלת התמונה: {what}',
       protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
       protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
     },
@@ -35,6 +37,8 @@ window.I18N = (function () {
       onPaper: 'Artwork on paper', backToLesson: 'Back to lesson', lastWorked: 'Last worked on: {date}',
       viewArtwork: 'View artwork', close: 'Close', artworkAlt: 'Your artwork · {lesson}',
       proto: 'Prototype', protoImage: 'Image placeholder. To be added.', protoAudio: 'Music placeholder. To be added.', oneOpenOnly: '1 lesson open',
+      images: 'Images', galleryPrev: 'Previous image', galleryNext: 'Next image', galleryCount: 'Image {n} of {total}',
+      photoBy: 'Photo: {who}', exploreMore: 'Want to discover more?', newTab: '(opens in a new tab)', enlarge: 'Enlarge image: {what}',
       protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
       protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'
     }

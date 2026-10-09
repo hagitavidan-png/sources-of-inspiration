@@ -20,7 +20,10 @@
    operations too, { t:'rset', k:'size'|'rotation'|'spacing', v }, one when the control is let go, so undo and redo
    take them back like any step. params.repeat.control ('size', 'rotation' or 'spacing') offers that one control;
    params.repeat.controls (a list of them) offers them all, one shown at a time, chosen by small tabs; the first shown
-   is ?control=, else params.repeat.control. No choice of kind of repeat, no "clear", no second Repeat. */
+   is ?control=, else params.repeat.control. No choice of kind of repeat, no "clear", no second Repeat.
+   params.repeat.together (lesson 2.1, rebuilt): the controls all shown at once, one line each (no tabs), to change
+   and combine freely. params.repeat.reveal: Repeat enters a moment after the Studio opens, so the learner first sees
+   their drawing and then sees it begin to repeat (a short appearing; none with reduced motion). */
 Studio.register('repeat', {
   strings: {
     he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
@@ -182,7 +185,36 @@ Studio.register('repeat', {
         bar.querySelectorAll('[role=tab]').forEach(function (t) { t.setAttribute('aria-selected', String(KIND[t.getAttribute('data-k')] === kind)); });
         showValue();
       }
-      if (ctl) {
+      /* all the controls at once: one line each, its name, its two ends, its range */
+      if (cfg.together && list.length) {
+        bar = document.createElement('div');
+        bar.className = 'vary vary-all'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', S.T.repeat);
+        bar.innerHTML = list.map(function (k) {
+          var kind = KIND[k], turn = kind === 'direction', h = turn ? ' aria-hidden="true"' : '';
+          return '<div class="vary-line"><b>' + S.T[kind] + '</b><span class="lo"' + h + '>' + (turn ? '↺' : S.T[ENDS[kind][0]]) + '</span>' +
+            '<input type="range" data-kind="' + kind + '" aria-label="' + S.T[kind] + '"><span class="hi"' + h + '>' + (turn ? '↻' : S.T[ENDS[kind][1]]) + '</span>' +
+            (turn ? '<output></output>' : '') + '</div>';
+        }).join('');
+        S.$('tools').parentNode.insertBefore(bar, S.$('tools'));
+        var inputs = [].slice.call(bar.querySelectorAll('input'));
+        var sync = function () {
+          inputs.forEach(function (i) { var k = i.getAttribute('data-kind'); if (!live || live.k !== NAME[k]) i.value = amount(k); });
+          var o = bar.querySelector('output'); if (o) o.textContent = Math.round(amount('direction')) + '°';
+        };
+        inputs.forEach(function (i) {
+          var kind = i.getAttribute('data-kind'), V = VARY[kind];
+          i.min = V.min; i.max = V.max; i.step = V.step; i.value = amount(kind);
+          /* moving: shown at once, not a step yet; let go: one step, if the value changed */
+          i.addEventListener('input', function () { live = { k: NAME[kind], v: clamp(kind, +i.value) }; sync(); S.redraw(); });
+          i.addEventListener('change', function () {
+            var v = clamp(kind, +i.value); live = null;
+            if (S.split().marker && v !== amount(kind)) S.commit({ t: 'rset', k: NAME[kind], v: v });
+            S.redraw();
+          });
+        });
+        S.watch(function () { bar.hidden = !S.split().marker; sync(); });
+      }
+      if (ctl && !bar) {
         bar = document.createElement('div');
         bar.className = 'vary'; bar.setAttribute('role', 'group');
         bar.innerHTML = (list.length > 1
@@ -211,8 +243,17 @@ Studio.register('repeat', {
       }
       this.ready = function () {
         var clear = S.$('clear'); if (clear) clear.hidden = true;
-        if (bar) { bar.hidden = !S.split().marker; show(ctl); }
-        if (cfg.enter) enter();
+        if (bar) { bar.hidden = !S.split().marker; if (!cfg.together) show(ctl); }
+        if (!cfg.enter) return;
+        if (!cfg.reveal || S.split().marker || !drawing(S.split().source)) return enter();
+        /* the moment: the drawing alone first, then it begins to repeat */
+        setTimeout(function () {
+          enter().then(function (did) {
+            if (!did) return;
+            S.stage.classList.add('rp-reveal');
+            setTimeout(function () { S.stage.classList.remove('rp-reveal'); }, 1400);
+          });
+        }, 900);
       };
       return;
     }

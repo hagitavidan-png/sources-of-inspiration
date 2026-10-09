@@ -39,6 +39,9 @@ Studio.shell = (function () {
       nav.appendChild(b);
     });
 
+    /* a short line from the lesson, above the work (activity.prompt), in the current language */
+    if (S.prompt) { var pr = document.createElement('p'); pr.className = 'prompt'; pr.textContent = S.prompt; $('stage').parentNode.insertBefore(pr, $('stage')); }
+
     /* every text in the current language */
     document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = S.T[el.getAttribute('data-t')]; });
 

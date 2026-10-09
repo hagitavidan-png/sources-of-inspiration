@@ -125,6 +125,14 @@ window.STUDIO_ACTIVITIES = {
   ['size', 'rotation', 'spacing'].forEach(function (k) { lesson21('2-1-change-' + k, { control: k }, { keep: KEEP }); });
   lesson21('2-1-source', {}, { source: true, next: { label: { he: 'לראות שוב בחזרה', en: 'See it repeated again' } } });
   lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
+  /* 2.1 rebuilt: Repeat appears by itself (a moment after the Studio opens), then Size, Direction and Spacing all at
+     once, with the drawing tools; then the same without a new Repeat; "Keep creating" and My artworks the same */
+  var ALL = ['size', 'rotation', 'spacing'];
+  lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true }, {
+    prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
+    next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
+  lesson21('2-1-develop', { controls: ALL, together: true }, { next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
+  lesson21('2-1-free', { controls: ALL, together: true });
 })(window.STUDIO_ACTIVITIES);
 
 /* the app prototype's lesson 3.1: one artwork, drawn from the music and developed after it; drawing, colour, line
