@@ -105,7 +105,8 @@ window.STUDIO_ACTIVITIES = {
 
 /* the app prototype's lesson 2.1, the new flow: one artwork through the lesson, opened in the Studio again and again
    (?art=; the Lesson Player says where "Back" goes, ?back=). Only configuration: the tools are the same everywhere.
-     2-1-begin            screen 10: the work begins; drawing, colour, line width, eraser, undo, redo; no Repeat
+     2-1-begin            screen 10: the work begins; drawing, colour, line width, eraser, undo, redo; no Repeat (the
+                          rebuilt flow below: the unit alone once Repeat is in the work)
      2-1-repeat           screen 11: Repeat enters the work (a 'before-repeat' point first), in a grid; no control yet
      2-1-change-<kind>    screen 14: one Repeat setting to change (size, rotation or spacing), drawing as before,
                           and "keep this possibility"
@@ -132,10 +133,11 @@ window.STUDIO_ACTIVITIES = {
      Live repeat (live): once Repeat entered, every new line repeats as it is drawn, and Repeat can be switched off and
      on. "Start over" (restart) on every screen of the rebuilt flow, the first one (2-1-begin) too */
   var ALL = ['size', 'rotation', 'spacing'];
-  A['2-1-begin'].restart = true;
   /* the first drawing's way on: the work written, then the lesson's next screen (9: the question, and the learner's own
-     "See what happens" before Repeat appears); never Repeat itself. "Start over" stays the quieter button */
-  A['2-1-begin'].next = { label: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' } };
+     "See what happens" before Repeat appears); never Repeat itself. "Start over" stays the quieter button.
+     unit: back on the first drawing once Repeat is in the work (screen 8 again), the unit alone, and a new line is a line
+     of the unit, so the next Repeat takes it (js/repeat.js); Repeat neither shown nor entering here, no controls */
+  lesson21('2-1-begin', { live: true, unit: true }, { restart: true, next: { label: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' } } });
   lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true, live: true }, { restart: true,
     prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
     next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });

@@ -35,15 +35,23 @@
    entered before live repeat (a marker without live) are shown and continued exactly as before.
    params.repeat.offer (lesson 2.1, a work continued from My artworks): a work with a drawing and no Repeat yet shows
    the same switch, off; switched on, Repeat enters as on the lesson's screen (the same enter(): a 'before-repeat'
-   point, then the live marker), and from then on the switch is as above. */
+   point, then the live marker), and from then on the switch is as above.
+   "Back to drawing the unit" (live repeat, with the switch): a button beside the lesson's next step that turns Repeat
+   off, the same setting as the switch (one way of drawing the unit, not another): the unit alone, its new lines lines
+   of the unit, the controls resting with their values; it then reads "See it repeated again" and turns Repeat on.
+   params.repeat.reveal, coming back to that screen with Repeat off (the learner went back to the unit): it begins to
+   repeat again, as the first time.
+   params.repeat.unit (lesson 2.1, the first drawing, 2-1-begin): Repeat never enters and is not shown; once it is in
+   the work (the learner came back to the first drawing), the screen shows the unit alone and a new line is a line of
+   the unit, as with Repeat off, without changing the switch; the saved preview stays the whole work. */
 Studio.register('repeat', {
   strings: {
     he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
           size: 'גודל', direction: 'כיוון', spacing: 'מרווח', smaller: 'קטן יותר', larger: 'גדול יותר', closer: 'צפוף יותר', apart: 'מרווח יותר', turnLeft: 'סיבוב נגד כיוון השעון', turnRight: 'סיבוב עם כיוון השעון',
-          repeatOn: 'חזרתיות פעילה', repeatOff: 'חזרתיות כבויה' },
+          repeatOn: 'חזרתיות פעילה', repeatOff: 'חזרתיות כבויה', unitDraw: 'חזרה לציור היחידה', unitBack: 'לראות שוב בחזרה' },
     en: { repeat: 'Repeat', grid: 'Grid', offset: 'Offset', repeats: 'Kind of repeat',
           size: 'Size', direction: 'Direction', spacing: 'Spacing', smaller: 'Smaller', larger: 'Larger', closer: 'Closer', apart: 'Further apart', turnLeft: 'Turn anticlockwise', turnRight: 'Turn clockwise',
-          repeatOn: 'Repeat on', repeatOff: 'Repeat off' }
+          repeatOn: 'Repeat on', repeatOff: 'Repeat off', unitDraw: 'Back to drawing the unit', unitBack: 'See it repeated again' }
   },
   init: function (S) {
     'use strict';
@@ -98,6 +106,7 @@ Studio.register('repeat', {
     /* the learner's drawing is painted once, then placed at every repeat: the same size and direction everywhere */
     var unit = document.createElement('canvas'), big = document.createElement('canvas');
     S.present(function (c, paint, info) {   // as a step: paint paints the unit, and only once Repeat entered
+      if (develop && info && cfg.unit && info.screen) return unitOnly(c, info);   // the first drawing again: the unit alone
       if (develop && info && isLive(info.marker)) return liveRender(c, info);
       var m = c.getTransform(), W = c.canvas.width, H = c.canvas.height;
       if (amount('size') !== 1) return sized(c, paint, m, W, H);
@@ -214,8 +223,9 @@ Studio.register('repeat', {
     }
     function place(g, m, k, ctr, u) { g.setTransform(m.a * k, 0, 0, m.d * k, m.a * ctr[0] * (1 - k) + m.e - u.ox, m.d * ctr[1] * (1 - k) + m.f - u.oy); }
     /* the unit (and the line being drawn) at every repeat: the same size and direction everywhere */
+    function unitOnly(c, info) { S.paintOps(info.unit, c); if (info.pending) S.paintOps([info.pending], c); }
     function liveRender(c, info) {
-      if (S.doc.settings.repeatOff) { S.paintOps(info.unit, c); if (info.pending) S.paintOps([info.pending], c); return; }
+      if (S.doc.settings.repeatOff) return unitOnly(c, info);
       var m = c.getTransform(), W = c.canvas.width, H = c.canvas.height, ctr = centreOf(info.marker);
       var k = amount('size'), turn = amount('direction') * Math.PI / 180, gap = amount('spacing'), sx = step[0] * gap, sy = step[1] * gap;
       var b = scaledBox(info.pending ? info.unit.concat([info.pending]) : info.unit, k, ctr);
@@ -268,7 +278,7 @@ Studio.register('repeat', {
     if (livemode) S.live(function (p) {
       var mk = S.split().marker;
       if (!isLive(mk)) return null;
-      if (S.doc.settings.repeatOff) return { map: null };
+      if (S.doc.settings.repeatOff || cfg.unit) return { map: null };
       var k = amount('size'), turn = amount('direction') * Math.PI / 180, gap = amount('spacing'), ctr = centreOf(mk);
       var sx = step[0] * gap, sy = step[1] * gap, j = Math.round((p[1] - ctr[1]) / sy);
       var shift = st.mode === 'offset' && Math.abs(j) % 2 ? sx / 2 : 0, i = Math.round((p[0] - ctr[0] - shift) / sx);
@@ -347,7 +357,7 @@ Studio.register('repeat', {
         /* live repeat: the switch, in the top bar beside "Back" (it takes no room from the work; on a narrow screen it
            stands in the place of the title); only once Repeat entered, and only for a live Repeat (cfg.offer: also
            before, off, on a work with a drawing; switched on, Repeat enters) */
-        var head = null, sw = null, top = document.querySelector('.top');
+        var head = null, sw = null, unitBtn = null, top = document.querySelector('.top');
         if (livemode && top) {
           head = sw = document.createElement('button');
           sw.type = 'button'; sw.className = 'rp-switch'; sw.setAttribute('role', 'switch'); sw.hidden = true;
@@ -362,9 +372,18 @@ Studio.register('repeat', {
               });
               return;
             }
-            if (S.doc.settings.repeatOff) delete S.doc.settings.repeatOff; else S.doc.settings.repeatOff = true;
-            S.changed(); S.redraw();
+            turn();
           });
+          /* back to drawing the unit: the switch's own setting, as a button beside the lesson's next step (the next step
+             is added after it, js/shell.js) */
+          unitBtn = document.createElement('button');
+          unitBtn.type = 'button'; unitBtn.className = 'btn rp-unit'; unitBtn.hidden = true;
+          S.$('save').parentNode.insertBefore(unitBtn, S.$('save'));
+          unitBtn.addEventListener('click', function () { if (isLive(S.split().marker)) turn(); });
+        }
+        function turn() {   // Repeat on / off: how the work is shown, not a step
+          if (S.doc.settings.repeatOff) delete S.doc.settings.repeatOff; else S.doc.settings.repeatOff = true;
+          S.changed(); S.redraw();
         }
         var sync = function () {
           inputs.forEach(function (i) { var k = i.getAttribute('data-kind'); if (!live || live.k !== NAME[k]) i.value = amount(k); });
@@ -376,6 +395,10 @@ Studio.register('repeat', {
           sw.setAttribute('aria-checked', String(on)); sw.querySelector('span').textContent = on ? S.T.repeatOn : S.T.repeatOff;
           inputs.forEach(function (i) { i.disabled = off; });
           bar.classList.toggle('off', off);
+          if (unitBtn) {
+            unitBtn.hidden = !isLive(sp.marker);
+            unitBtn.textContent = on ? S.T.unitDraw : S.T.unitBack;
+          }
         };
         inputs.forEach(function (i) {
           var kind = i.getAttribute('data-kind'), V = VARY[kind];
@@ -421,14 +444,20 @@ Studio.register('repeat', {
         var clear = S.$('clear'); if (clear && !S.restart) clear.hidden = true;   // "Start over" stays where it is offered
         if (bar) { bar.hidden = !S.split().marker; if (!cfg.together) show(ctl); }
         if (!cfg.enter) return;
+        function reveal() { S.stage.classList.add('rp-reveal'); setTimeout(function () { S.stage.classList.remove('rp-reveal'); }, 1400); }
+        /* back on this screen with Repeat in the work and off (the learner went back to the unit): the unit alone first,
+           then it repeats again, with its values */
+        if (cfg.reveal && livemode && isLive(S.split().marker) && S.doc.settings.repeatOff) {
+          setTimeout(function () {
+            if (!S.doc.settings.repeatOff || !isLive(S.split().marker)) return;
+            delete S.doc.settings.repeatOff; S.changed(); S.redraw(); reveal();
+          }, 900);
+          return;
+        }
         if (!cfg.reveal || S.split().marker || !drawing(S.split().source)) return enter();
         /* the moment: the drawing alone first, then it begins to repeat */
         setTimeout(function () {
-          enter().then(function (did) {
-            if (!did) return;
-            S.stage.classList.add('rp-reveal');
-            setTimeout(function () { S.stage.classList.remove('rp-reveal'); }, 1400);
-          });
+          enter().then(function (did) { if (did) reveal(); });
         }, 900);
       };
       return;

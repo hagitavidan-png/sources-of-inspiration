@@ -118,14 +118,15 @@ window.Studio = (function () {
   }
   function unitOf(op) { return op.u === 1; }
   /* the unit is the source and the lines of the unit drawn after Repeat; the rest after Repeat is painted once, over it.
-     info for the presenter: the unit's operations, the line being drawn (live repeat, the screen only), the marker */
+     info for the presenter: the unit's operations, the line being drawn (live repeat, the screen only), the marker, and
+     whether it paints the screen (not a preview) */
   function paintLearner(c) {
     if (!presenter) return paint(c);
     if (!asStep) return presenter(c, paint);
     var sp = split();
     if (!sp.marker) return paintOps(sp.source, c);
     var unit = sp.source.concat(sp.after.filter(unitOf)), over = sp.after.filter(function (op) { return !unitOf(op); });
-    presenter(c, function (x) { paintOps(unit, x); }, { unit: unit, marker: sp.marker, pending: c === ctx && pending && pending.u ? pending : null });
+    presenter(c, function (x) { paintOps(unit, x); }, { unit: unit, marker: sp.marker, pending: c === ctx && pending && pending.u ? pending : null, screen: c === ctx });
     paintOps(over, c);
   }
   /* live repeat: the line being drawn (null: none), shown at the next frame on the learner layer */

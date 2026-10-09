@@ -85,7 +85,8 @@ window.APP_LESSONS['2-1'] = {
     seeWhat: { he: 'לראות מה קורה', en: 'See what happens' },
     keepCreating: { he: 'להמשיך ליצור', en: 'Keep creating' },
     doneForNow: { he: 'סיימתי לעכשיו', en: "I'm done for now" },
-    anotherTime: { he: 'להמשיך בפעם אחרת', en: 'Come back to it later' }
+    anotherTime: { he: 'להמשיך בפעם אחרת', en: 'Come back to it later' },
+    toPattern: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' }   // the first drawing's way on (as in the Studio)
   },
   screens: [
     /* 1–5: the screen's question, and where it helps a short guidance for the looking (<span class="pl-hint">: quieter,
@@ -116,6 +117,8 @@ window.APP_LESSONS['2-1'] = {
                       en: ['Look again at the images and the artworks.<br>Which shape, movement or repetition would you like to take as the starting point for your drawing?'] } },
     /* 8 */ { step: 'medium', title: { he: 'עכשיו מתחילים ליצור.', en: "Now it's time to create." }, text: { he: ['איפה תרצו ליצור?'], en: ['Where would you like to create?'] },
               choices: { paper: { he: 'על נייר', en: 'On paper' }, studio: { he: 'Studio', en: 'Studio' } },
+              /* on paper, the first drawing first (as the Studio's 2-1-begin): its words, then "toPattern" */
+              paper: { first: { he: ['ציירו על הדף את היחידה הראשונה.'], en: ['Draw the first unit on your paper.'] } },
               studio: { activity: '2-1-begin', back: 9 } },
     /* 9 */ { step: 'ask', title: { he: 'ומה יקרה אם מה שיצרתם יתחיל לחזור?', en: "What will happen if what you've created begins to repeat?" },
               paper: { text: { he: ['הסתכלו על מה שכבר יצרתם.<br>בחרו משהו מתוכו שמעניין אתכם וחזרו עליו במקום נוסף בדף.', 'הוא לא חייב לחזור בדיוק אותו דבר.<br>אפשר לשנות אותו תוך כדי.'],

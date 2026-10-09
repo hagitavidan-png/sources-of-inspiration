@@ -245,6 +245,12 @@ window.Player = (function () {
           '<span>' + esc(I.tx(s.choices[m])) + '</span></button>';
       }).join('') + '</div>';
       action = run.medium ? action : null;
+      /* on paper, the first drawing (2.1, paper.first): its words under the choice, then on (the way stays, as a drawing
+         in the Studio keeps it) */
+      if (!studio && run.medium === 'paper' && side.first) {
+        body += lines(side.first);
+        action = { label: ACT('toPattern'), go: function () { run.begun = true; go(n + 1); } };
+      }
       if (studio && s.studio && made(art)) extra = { label: I.ui('reopen'), go: function () { openStudio(s.studio.activity, s.studio.back); } };
     }
     /* the question before Repeat (2.1 screen 9): Studio, once there is a drawing; paper, its own words */
@@ -366,6 +372,7 @@ window.Player = (function () {
         keep().then(function () { return W.artworkFor(run.id, run.medium === 'studio' ? 'digital' : 'paper'); })
           .then(function (w) { run.artwork = w.id; return keep(); }).then(function () {
             if (run.medium === 'studio' && s.studio && s.studio.activity) openStudio(s.studio.activity, s.studio.back);   // 2.1: begin at once
+            else if (s.paper && s.paper.first) show(root, id, n, nav, run, art);   // 2.1 on paper: the first drawing's words here
             else nav.go(n + 1);
           });
       });
