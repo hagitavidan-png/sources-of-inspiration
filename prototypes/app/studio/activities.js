@@ -7,6 +7,8 @@
    content    what the activity provides to work on (fill: the areas, see js/fill.js; arrange: the elements, js/arrange.js)
    title      optional; the default is "My artwork"
    clear      false: no "Clear" (app prototype)
+   restart    app prototype: "Start over" in the place of "Clear" (its own words and question; with Repeat in the work,
+              Repeat stays: js/core.js, js/repeat.js)
    keep       app prototype, an artwork that saves itself (?art=): one button that keeps the work as it is now as a
               development point ('kept'); keep.label is its label in each language (none in a language: no button) */
 window.STUDIO_ACTIVITIES = {
@@ -126,13 +128,16 @@ window.STUDIO_ACTIVITIES = {
   lesson21('2-1-source', {}, { source: true, next: { label: { he: 'לראות שוב בחזרה', en: 'See it repeated again' } } });
   lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
   /* 2.1 rebuilt: Repeat appears by itself (a moment after the Studio opens), then Size, Direction and Spacing all at
-     once, with the drawing tools; then the same without a new Repeat; "Keep creating" and My artworks the same */
+     once, with the drawing tools; then the same without a new Repeat; "Keep creating" and My artworks the same.
+     Live repeat (live): once Repeat entered, every new line repeats as it is drawn, and Repeat can be switched off and
+     on. "Start over" (restart) on every screen of the rebuilt flow, the first one (2-1-begin) too */
   var ALL = ['size', 'rotation', 'spacing'];
-  lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true }, {
+  A['2-1-begin'].restart = true;
+  lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true, live: true }, { restart: true,
     prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
     next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
-  lesson21('2-1-develop', { controls: ALL, together: true }, { next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
-  lesson21('2-1-free', { controls: ALL, together: true });
+  lesson21('2-1-develop', { controls: ALL, together: true, live: true }, { restart: true, next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
+  lesson21('2-1-free', { controls: ALL, together: true, live: true }, { restart: true });
 })(window.STUDIO_ACTIVITIES);
 
 /* the app prototype's lesson 3.1: one artwork, drawn from the music and developed after it; drawing, colour, line

@@ -1,5 +1,7 @@
 /* Tool: draw. Brush, three line widths and an eraser, with finger, stylus, mouse or trackpad.
-   Adds the operation { t:'stroke', tool:'brush'|'eraser', color, w, pts:[x,y,…] } (artwork units). */
+   Adds the operation { t:'stroke', tool:'brush'|'eraser', color, w, pts:[x,y,…] } (artwork units).
+   Live repeat (js/repeat.js): a line of the unit has u:1; while Repeat is on, its points are kept in the unit's own
+   place (S.liveStart → map) and the line is shown in every repeat as it is drawn (S.pend), not piece by piece. */
 Studio.register('draw', {
   tool: 'brush',   // the tool that is on when this capability comes first in the activity
   strings: {
@@ -52,27 +54,34 @@ Studio.register('draw', {
       }
       ctx.stroke();
     }
-    var cur = null;
+    var cur = null, map = null, last = null;   // map: live repeat, where the points go; last: the last point on screen
     var stroke = {
       down: function (e) {
-        var px = SIZES[st.size].px * (st.tool === 'eraser' ? ERASER_FACTOR : 1);
-        cur = { t: 'stroke', tool: st.tool, color: st.color, w: Math.round(px / S.scale() * 100) / 100, pts: S.pt(e) };
-        drawTail(cur);
+        var px = SIZES[st.size].px * (st.tool === 'eraser' ? ERASER_FACTOR : 1), p = S.pt(e), lv = S.liveStart(p);
+        map = lv && lv.map; last = p;
+        cur = { t: 'stroke', tool: st.tool, color: st.color, w: Math.round(px / S.scale() * 100) / 100, pts: map ? map(p) : p };
+        if (lv) cur.u = 1;
+        if (map) S.pend(cur); else drawTail(cur);
       },
       move: function (events) {
         if (!cur) return;
-        var min = 0.6 / S.scale();   // ignore movements under 0.6 screen pixels
+        var min = 0.6 / S.scale(), more = false;   // ignore movements under 0.6 screen pixels
         events.forEach(function (ev) {
-          var q = S.pt(ev), p = cur.pts, l = p.length;
-          if (Math.abs(q[0] - p[l - 2]) + Math.abs(q[1] - p[l - 1]) < min) return;
-          p.push(q[0], q[1]); drawTail(cur);
+          var q = S.pt(ev);
+          if (Math.abs(q[0] - last[0]) + Math.abs(q[1] - last[1]) < min) return;
+          last = q;
+          if (map) { q = map(q); more = true; }
+          cur.pts.push(q[0], q[1]);
+          if (!map) drawTail(cur);
         });
+        if (more) S.pend(cur);
       },
       up: function () {
         if (!cur) return;
         var p = cur.pts;
         if (p.length >= 4) p.push(p[p.length - 2], p[p.length - 1]);   // finish the last curve
-        S.commit(cur); cur = null;
+        if (map) S.pend(null);
+        S.commit(cur); cur = null; map = null;
         S.redraw();
       }
     };

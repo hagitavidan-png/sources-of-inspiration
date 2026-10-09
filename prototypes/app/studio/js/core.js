@@ -13,7 +13,12 @@
    (they paint nothing). Without a { t:'repeat' } operation the learner layer is painted as it is.
    activity.source (app prototype, lesson 2.1 "back to the drawing"): only the source is worked on. Repeat and what
    came after it are set aside (tail) while the Studio is open, and put back after the source in every save and
-   preview: the artwork stays whole, repeated, with the source as the learner changed it. */
+   preview: the artwork stays whole, repeated, with the source as the learner changed it.
+   Live repeat (lesson 2.1, params.repeat.live): a line drawn after Repeat entered can belong to the unit itself
+   ({ u:1 } on its operation, its points in the unit's own place): it is painted with the source, in every repeat.
+   Lines after Repeat without u (works made before live repeat) stay as they were: once, over the composition.
+   "Start over" (activity.restart) is the operation { t:'clear' }; with Repeat in the work it carries Repeat with it,
+   { t:'clear', rep: { c, size, rotation, spacing } }: the page is empty and the next line repeats at once. */
 window.Studio = (function () {
   'use strict';
 
@@ -24,11 +29,11 @@ window.Studio = (function () {
     he: { back: 'חזרה לשיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
           exit: 'צא', clearQ: 'לנקות את כל היצירה?', unsaved: 'יש שינויים שלא נשמרו.', saved: 'היצירה נשמרה',
           saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי',
-          autoSaved: 'נשמר', kept: 'נשמר' },
+          autoSaved: 'נשמר', kept: 'נשמר', restart: 'להתחיל מחדש', restartQ: 'לנקות את הדף ולהתחיל מחדש?', restartCancel: 'לבטל' },
     en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
           exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
           saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks',
-          autoSaved: 'Saved', kept: 'Kept' }
+          autoSaved: 'Saved', kept: 'Kept', restart: 'Start over', restartQ: 'Clear the page and start over?', restartCancel: 'Cancel' }
   };
 
   var caps = {};          // registered tools: id → { strings, init(api) }
@@ -37,6 +42,9 @@ window.Studio = (function () {
   var presenter = null;   // function (context, paint) that shows the learner layer, or null: as it is
   var asStep = false;     // the presenter shows only the source before a { t:'repeat' } operation, and only once there is one
   var watchers = [];      // the tools' functions called when the history changes (undo, redo, a new step)
+  var clearers = [];      // the tools' functions that add to a { t:'clear' } what it carries (Repeat: rep)
+  var liveFn = null;      // live repeat: where a new line's points go (js/repeat.js), or null
+  var pending = null, raf = 0;   // live repeat: the line being drawn, shown in every repeat at the next frame
   var pointers = {};      // active tool id → { down(e), move(events), up(e) }
   var items = [];         // toolbar buttons from the activity's tools
 
@@ -96,18 +104,35 @@ window.Studio = (function () {
   }
   function paint(c) { paintOps(visibleOps(), c); }
   /* the visible operations around the (last) { t:'repeat' }: the source before it, the operations after it */
+  function lastClear() {
+    for (var i = doc.ops.length - 1; i >= 0; i--) if (doc.ops[i].t === 'clear') return doc.ops[i];
+    return null;
+  }
+  /* "Start over" with Repeat in the work: the { t:'clear', rep } is Repeat's marker, with nothing before it */
   function split() {
     var ops = visibleOps(), at = -1;
     for (var i = ops.length - 1; i >= 0; i--) if (ops[i].t === 'repeat') { at = i; break; }
-    return at < 0 ? { source: ops, marker: null, after: [] } : { source: ops.slice(0, at), marker: ops[at], after: ops.slice(at + 1) };
+    if (at >= 0) return { source: ops.slice(0, at), marker: ops[at], after: ops.slice(at + 1) };
+    var lc = lastClear();
+    return lc && lc.rep ? { source: [], marker: lc, after: ops } : { source: ops, marker: null, after: [] };
   }
+  function unitOf(op) { return op.u === 1; }
+  /* the unit is the source and the lines of the unit drawn after Repeat; the rest after Repeat is painted once, over it.
+     info for the presenter: the unit's operations, the line being drawn (live repeat, the screen only), the marker */
   function paintLearner(c) {
     if (!presenter) return paint(c);
     if (!asStep) return presenter(c, paint);
     var sp = split();
     if (!sp.marker) return paintOps(sp.source, c);
-    presenter(c, function (x) { paintOps(sp.source, x); });
-    paintOps(sp.after, c);
+    var unit = sp.source.concat(sp.after.filter(unitOf)), over = sp.after.filter(function (op) { return !unitOf(op); });
+    presenter(c, function (x) { paintOps(unit, x); }, { unit: unit, marker: sp.marker, pending: c === ctx && pending && pending.u ? pending : null });
+    paintOps(over, c);
+  }
+  /* live repeat: the line being drawn (null: none), shown at the next frame on the learner layer */
+  function pend(op) {
+    pending = op;
+    if (!op) { if (raf) cancelAnimationFrame(raf); raf = 0; return; }
+    if (!raf) raf = requestAnimationFrame(function () { raf = 0; wipe(ctx, canvas); paintLearner(ctx); });
   }
   function paintBase(c) {
     basePainters.forEach(function (fn) { c.save(); fn(c); c.restore(); });
@@ -140,14 +165,20 @@ window.Studio = (function () {
   /* ── history ── */
   function commit(op) { doc.ops.push(op); redoStack = []; changed(); }
   function changed() { version++; updateUi(); schedule(); }
-  function undo() { if (!doc.ops.length) return; redoStack.push(doc.ops.pop()); changed(); redraw(); }
+  /* a work saved after "Start over" with Repeat begins with that { t:'clear', rep }: it is the work's start, not a step */
+  function canUndo() { return doc.ops.length > (doc.ops[0] && doc.ops[0].t === 'clear' && doc.ops[0].rep ? 1 : 0); }
+  function undo() { if (!canUndo()) return; redoStack.push(doc.ops.pop()); changed(); redraw(); }
   function redo() { if (!redoStack.length) return; doc.ops.push(redoStack.pop()); changed(); redraw(); }
-  function clearAll() { commit({ t: 'clear' }); redraw(); }
+  function clearAll() {
+    var op = { t: 'clear' };
+    clearers.forEach(function (fn) { var x = fn(); if (x) Object.assign(op, x); });
+    commit(op); redraw();
+  }
   function hasDrawing() { return visibleOps().length > 0; }
   function dirty() { return version !== savedVersion; }
 
   function updateUi() {
-    $('undo').disabled = !doc.ops.length;
+    $('undo').disabled = !canUndo();
     $('redo').disabled = !redoStack.length;
     $('clear').disabled = !hasDrawing();
     items.forEach(function (it) { if (it.update) it.update($(it.id)); });
@@ -200,10 +231,12 @@ window.Studio = (function () {
     x.drawImage(ink, 0, 0);
     return c.toDataURL('image/png');
   }
+  /* what the visible operations stand on: a "Start over" that carries Repeat is kept with them */
+  function startOps() { var lc = lastClear(); return lc && lc.rep ? [lc] : []; }
   function record() {
     var data = { v: 2, activity: { id: activity.id, lesson: activity.lesson }, lang: LANG, back: BACK,
                  savedAt: new Date().toISOString(), canvas: { aspect: activity.canvas.aspect, w: doc.w, h: doc.h },
-                 ops: visibleOps().concat(tail), preview: preview() };
+                 ops: startOps().concat(visibleOps(), tail), preview: preview() };
     if (Object.keys(doc.settings).length) data.settings = doc.settings;
     return data;
   }
@@ -311,6 +344,7 @@ window.Studio = (function () {
     T = Object.assign({}, TEXT[LANG]);
     tools.forEach(function (t) { Object.assign(T, (caps[t].strings || {})[LANG]); });
     if (activity.title && activity.title[LANG]) T.title = activity.title[LANG];
+    if (activity.restart) { T.clear = T.restart; T.clearQ = T.restartQ; T.cancel = T.restartCancel; }   // "Start over"
     document.documentElement.lang = LANG;
     document.documentElement.dir = LANG === 'he' ? 'rtl' : 'ltr';
 
@@ -344,7 +378,12 @@ window.Studio = (function () {
     var api = {
       T: T, lang: LANG, state: state, doc: doc, $: $, stage: stage, activity: info,
       ctx: function () { return ctx; }, scale: function () { return scale; }, pt: pt,
-      commit: commit, redraw: redraw, updateUi: updateUi,
+      commit: commit, redraw: redraw, updateUi: updateUi, paintOps: paintOps,
+      restart: !!activity.restart,                      // the activity offers "Start over"
+      clearWith: function (fn) { clearers.push(fn); },  // fn() → what a { t:'clear' } carries, or null
+      live: function (fn) { liveFn = fn; },             // live repeat: fn(point) → null, or { map } for a new line
+      liveStart: function (p) { return liveFn ? liveFn(p) : null; },
+      pend: pend,                                       // live repeat: the line being drawn, shown at the next frame
       has: function (t) { return tools.indexOf(t) >= 0; },
       renderer: function (type, fn) { renderers[type] = fn; },
       base: function (fn) { basePainters.push(fn); },   // paint on the base layer (artwork units)
@@ -366,7 +405,7 @@ window.Studio = (function () {
 
     Studio.shell.build({ T: T, items: items, undo: undo, redo: redo, clearAll: clearAll, hasDrawing: hasDrawing,
                          save: save, dirty: dirty, back: function () { return BACK; }, auto: autosaves(), flush: flush,
-                         clear: activity.clear !== false, point: point,
+                         clear: activity.clear !== false || !!activity.restart, point: point,
                          keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null,
                          next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
                          source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null });
@@ -387,7 +426,7 @@ window.Studio = (function () {
 
     /* for the prototype tests only: a read-only view of the state */
     window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools,
-                        flush: flush, point: point, auto: autosaves() };
+                        flush: flush, point: point, auto: autosaves(), split: split, scale: function () { return scale; } };
   }
 
   return { register: register, boot: boot, safeBack: safeBack, point: point };
