@@ -65,6 +65,19 @@ Studio.shell = (function () {
       if (S.source) $('back').style.visibility = 'hidden';   // working on the source: its one way back is this button
     }
 
+    /* My artworks, in the top bar where the lesson's screens have it: the work written first, then the gallery (its
+       back returns to this screen of the lesson, which opens this Studio again on the same work) */
+    if (S.works) {
+      var works = document.createElement('a');
+      works.className = 'works'; works.href = S.works; works.setAttribute('aria-label', S.T.works); works.title = S.T.works;
+      works.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>';
+      document.querySelector('.top').appendChild(works);
+      works.addEventListener('click', function (e) {
+        e.preventDefault();
+        S.flush().then(function () { if (!S.dirty()) { allowUnload = true; location.href = S.works; } });
+      });
+    }
+
     /* keep this possibility: written first, then kept; one press, one point (a press while it is being kept is not
        another); said in the same quiet way as saving, in its own word (T.kept: the learner's choice, not the autosave) */
     if (S.keep) {

@@ -141,6 +141,10 @@ window.STUDIO_ACTIVITIES = {
     next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
   lesson21('2-1-develop', { controls: ALL, together: true, live: true }, { restart: true, next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
   lesson21('2-1-free', { controls: ALL, together: true, live: true }, { restart: true });
+  /* compact (studio.css): the work the centre of the screen, the controls as small as a finger allows; works: My
+     artworks in the top bar of the lesson's Studio screens (10, 12), back to the same screen */
+  ['2-1-begin', '2-1-play', '2-1-develop', '2-1-free'].forEach(function (id) { A[id].compact = true; });
+  A['2-1-play'].works = A['2-1-develop'].works = '2-1';
 })(window.STUDIO_ACTIVITIES);
 
 /* the app prototype's lesson 3.1: one artwork, drawn from the music and developed after it; drawing, colour, line

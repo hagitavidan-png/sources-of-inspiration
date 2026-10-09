@@ -194,7 +194,7 @@ window.Player = (function () {
     function openStudio(activity, back, more) {
       (run.artwork ? Promise.resolve() : W.artworkFor(run.id, 'digital').then(function (w) { run.artwork = w.id; })).then(function () {
         var href = 'studio/index.html?activity=' + encodeURIComponent(activity) + '&art=' + encodeURIComponent(run.artwork) +
-          '&back=' + encodeURIComponent('../index.html#/lesson/' + id + '/play/' + (back || n)) + (more || '');
+          '&back=' + encodeURIComponent('../index.html#/lesson/' + id + '/play/' + (back || n)) + (L.works ? '&at=' + n : '') + (more || '');
         return keep().then(function () { nav.studio(href); });
       });
     }

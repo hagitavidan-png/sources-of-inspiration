@@ -28,11 +28,11 @@ window.Studio = (function () {
   var TEXT = {
     he: { back: 'חזרה לשיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
           exit: 'צא', clearQ: 'לנקות את כל היצירה?', unsaved: 'יש שינויים שלא נשמרו.', saved: 'היצירה נשמרה',
-          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי',
+          saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי', works: 'היצירות שלי',
           autoSaved: 'נשמר', kept: 'נשמר', restart: 'להתחיל מחדש', restartQ: 'לנקות את הדף ולהתחיל מחדש?', restartCancel: 'לבטל' },
     en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
           exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
-          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks',
+          saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks', works: 'My artworks',
           autoSaved: 'Saved', kept: 'Kept', restart: 'Start over', restartQ: 'Clear the page and start over?', restartCancel: 'Cancel' }
   };
 
@@ -347,6 +347,7 @@ window.Studio = (function () {
     if (activity.restart) { T.clear = T.restart; T.clearQ = T.restartQ; T.cancel = T.restartCancel; }   // "Start over"
     document.documentElement.lang = LANG;
     document.documentElement.dir = LANG === 'he' ? 'rtl' : 'ltr';
+    if (activity.compact) document.documentElement.classList.add('compact');   // the work first, the controls small (studio.css)
 
     BACK = safeBack(Q.get('back')) || safeBack(activity.back) || '../../index.html';
     if (Q.get('ctx') === 'gallery') T.back = T.backGallery;   // opened from the app's "My artworks"
@@ -408,7 +409,9 @@ window.Studio = (function () {
                          clear: activity.clear !== false || !!activity.restart, point: point,
                          keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null,
                          next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
-                         source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null });
+                         source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null,
+                         /* My artworks from the lesson's Studio screen (activity.works: the lesson; ?at=: its screen) */
+                         works: autosaves() && activity.works && /^\d+$/.test(Q.get('at') || '') ? '../index.html#/gallery/' + activity.works + '/' + Q.get('at') : null });
     tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
     fit();
     updateUi();
