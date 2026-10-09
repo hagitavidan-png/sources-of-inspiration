@@ -95,13 +95,13 @@ window.APP_LESSONS['2-1'] = {
                       en: ['<span class="pl-hint">Look at the shapes, the lines and the colours.<br>Sometimes what repeats only shows when you look closely.</span>'] },
               gallery: 'nature' },
     /* 2 */ { focus: 'nature',   // the image of screen 1 looked at last, large
-              text: { he: ['מה בדיוק חוזר?', '<span class="pl-hint">בחרו פרט אחד ועקבו אחריו בעיניים.</span>', 'מה נשאר דומה בכל חזרה, ומה משתנה?'],
-                      en: ['What exactly repeats?', '<span class="pl-hint">Choose one detail and follow it with your eyes.</span>', 'What stays the same each time it repeats, and what changes?'] } },
+              text: { he: ['מה בדיוק חוזר?', '<span class="pl-hint">בחרו פרט אחד ועקבו אחריו בעיניים.<br>מה נשאר דומה בכל חזרה, ומה משתנה?</span>'],
+                      en: ['What exactly repeats?', '<span class="pl-hint">Choose one detail and follow it with your eyes.<br>What stays the same each time it repeats, and what changes?</span>'] } },
     /* 3 */ { text: { he: ['החלק שחוזר נקרא יחידה.<br>הדרך שבה הוא חוזר יוצרת את הדפוס.', 'מה הייתה היחידה בתמונה שבה התבוננתם עכשיו?'],
                       en: ['The part that repeats is called a unit.<br>The way it repeats creates the pattern.', 'What was the unit in the image you just looked at?'] } },
     /* 4 */ { gallery: 'morris',
               text: { he: ['מה חוזר כאן?', '<span class="pl-hint">נסו לזהות צורה או פרט שמופיעים שוב ושוב.</span>', 'ומה קורה להם כשהם חוזרים שוב ושוב?'],
-                      en: ['What repeats here?', '<span class="pl-hint">Try to spot a shape or a detail that appears again and again.</span>', 'And what happens to them as they repeat again and again?'] } },
+                      en: ['What repeats here?', '<span class="pl-hint">Try to spot a shape or a detail that appears again and again.</span>', 'What happens to the pattern as the shape repeats?'] } },
     /* 5 */ { gallery: 'taeuber', text: { he: ['איזו חוקיות אתם מגלים?', '<span class="pl-hint">חוקיות היא סדר שמאפשר לנחש מה יבוא אחר כך.<br>מצאו את הסדר, ואחר כך חפשו את המקום שבו הוא משתנה.</span>'],
                                           en: ['What rule can you find?', '<span class="pl-hint">A rule is an order that lets you guess what comes next.<br>Find the order, then look for the place where it changes.</span>'] } },
     /* 6 */ { pair: ['morris', 'taeuber'],   // the Morris and the Taeuber-Arp looked at last
