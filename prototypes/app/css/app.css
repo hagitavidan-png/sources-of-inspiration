@@ -267,4 +267,36 @@ a.sh-item:hover{border-color:var(--ink)}
   .pl-choice{min-height:96px}
   .sh-home,.sh-lesson{min-height:0}
 }
+/* 2.1, a gallery's image to look at large: the button is the image's own size (whole, at its proportions) */
+.pl-gal-frame .pl-gal-zoom{width:min(100%,calc(var(--gal-h) * var(--r)))}
+.pl-gal-frame .pl-gal-zoom img{width:100%}
+/* a gallery's caption: the artist, then the work (smaller, its long title in balanced lines), then the credit (smallest) */
+.pl-gal-fig figcaption{margin-top:10px;max-width:30em;text-wrap:balance}
+.pl-gal-fig .pl-cap-artist{font-size:.95rem}
+.pl-gal-fig .pl-cap-work{margin-top:1px;font-size:.875rem;line-height:1.35;text-wrap:balance}   /* 14px: the readable minimum agreed for screen 5 */
+.pl-gal-fig .pl-credit{margin-top:4px;font-size:.75rem}   /* 12px: the same for the credit */
+
+/* the bottom of a screen: room under the last words; when more goes on below, a soft edge over "Continue" */
+.pl-foot{position:relative}
+.pl-foot::before{content:'';position:absolute;inset-inline:0;bottom:calc(100% + 1px);height:30px;background:linear-gradient(to bottom,rgba(247,245,240,0),var(--bg) 85%);pointer-events:none;opacity:0;transition:opacity .2s}
+.pl-foot.pl-lift::before{opacity:1}
+/* the device's own edges (a notch, rounded corners, the home bar): never under them */
+.pl-inner,.pl-foot{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* phones: smaller headings and words, images that leave room for them */
+@media (max-width:599px){
+  .pl-inner{padding-top:14px;padding-bottom:32px}
+  .pl-title{margin-bottom:12px;font-size:clamp(1.3rem,5.6vw,1.6rem)}
+  .pl-text{margin-bottom:12px;font-size:1.06rem !important;line-height:1.5 !important}
+  .pl-gallery,.pl-focus{--gal-h:clamp(170px,40vh,420px)}
+}
+/* phones held sideways: the words first and small, the images low enough to see with them */
+@media (max-height:500px) and (orientation:landscape){
+  .pl-inner{padding-top:10px;padding-bottom:28px}
+  .pl-title{margin-bottom:8px;font-size:1.3rem}
+  .pl-text{margin-bottom:8px;font-size:1.02rem !important;line-height:1.45 !important}
+  .pl-gallery,.pl-focus{--gal-h:clamp(120px,52vh,230px)}
+  .pl-duo{--duo-h:clamp(100px,46vh,220px)}
+  .pl-thumbs{--th:64px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

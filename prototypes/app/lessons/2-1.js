@@ -18,6 +18,7 @@ window.APP_LESSONS['2-1'] = {
   unit: 'unit02',
   langs: ['he', 'en'],
   artworkActivity: '2-1-free',   // the Studio activity "My artworks" opens an artwork of this lesson in (never its last one)
+  wordsFirst: true,              // a screen with images: its words (its question) first, then the images (js/player.js)
   /* the three galleries (one large image at a time; js/player.js): an image of the site (images/editorial/<name>) or
      of the app (images/2-1/<name>), with img null a placeholder where an image not cleared for use will be.
      Where each image comes from and its licence: images/2-1/SOURCES.md. Artists whose works may not be shown here
@@ -85,15 +86,15 @@ window.APP_LESSONS['2-1'] = {
               text: { he: ['מה חוזר כאן?<br>ומה קורה לחלק כשהוא חוזר שוב ושוב?'], en: ['What repeats here?<br>What happens to the part when it repeats again and again?'] } },
     /* 5 */ { gallery: 'taeuber', text: { he: ['איזו חוקיות אתם מגלים?<br>ואיפה היא משתנה?'], en: ['What rule can you find?<br>And where does it change?'] } },
     /* 6 */ { pair: ['morris', 'taeuber'],   // the Morris and the Taeuber-Arp looked at last
-              text: { he: ['מה קורה כשמשחקים עם החוקיות?', 'שינוי בגודל, בכיוון או במרווח יוצר דפוס אחר.', 'מה מכל מה שראיתם תפס אתכם?'],
-                      en: ['What happens when you play with the rule?', 'Changing the size, direction or spacing creates a different pattern.', "What caught your attention in what you've seen?"] },
+              text: { he: ['אותה צורה יכולה ליצור דפוסים שונים.', 'מה משתנה כשמשנים את הגודל, הכיוון או המרווח?'],
+                      en: ['The same shape can create different patterns.', 'What changes when you change the size, the direction or the spacing?'] },
               /* more artists to look at, on their own or a museum's site (a new tab; none of their images is copied here) */
               more: [{ name: { he: 'יאיוי קוסמה', en: 'Yayoi Kusama' }, site: { he: 'האתר הרשמי של האמנית', en: 'Official artist website' }, href: 'https://yayoi-kusama.jp/gallery/' },
                      { name: { he: 'סוניה דלונה', en: 'Sonia Delaunay' }, site: { he: 'יצירות באוסף MoMA', en: 'MoMA collection' }, href: 'https://www.moma.org/collection/artists/1480' }] },
-    /* 7 */ { title: { he: 'התעכבו רגע על מה שתפס אתכם.', en: 'Take a moment with what caught your attention.' },
+    /* 7 */ { title: { he: 'מה מסקרן אתכם?', en: 'What are you curious about?' },
               thumbs: { all: ['nature'], seen: ['morris', 'taeuber'] },
-              text: { he: ['מה מעניין אתכם בו?<br>מה הייתם רוצים לבדוק דרך ציור?', 'קחו את זה כנקודת התחלה.<br>אתם לא צריכים לדעת עדיין לאן היצירה תגיע.'],
-                      en: ['What interests you about it?<br>What would you like to explore through drawing?', "Let that be your starting point.<br>You don't need to know yet where your artwork will lead."] } },
+              text: { he: ['הסתכלו שוב על התמונות והיצירות.<br>איזו צורה, תנועה או חזרתיות הייתם רוצים לקחת כנקודת מוצא לציור שלכם?'],
+                      en: ['Look again at the images and the artworks.<br>Which shape, movement or repetition would you like to take as the starting point for your drawing?'] } },
     /* 8 */ { step: 'medium', title: { he: 'עכשיו מתחילים ליצור.', en: "Now it's time to create." }, text: { he: ['איפה תרצו ליצור?'], en: ['Where would you like to create?'] },
               choices: { paper: { he: 'על נייר', en: 'On paper' }, studio: { he: 'Studio', en: 'Studio' } },
               studio: { activity: '2-1-begin', back: 9 } },

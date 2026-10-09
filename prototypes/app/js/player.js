@@ -125,15 +125,17 @@ window.Player = (function () {
       : '<div class="' + cls + ' pl-placeholder" role="img" aria-label="' + esc(I.ui('protoImage') + (it.artist ? ' ' + I.tx(it.artist) + ', ' + I.tx(it.workTitle) : '')) + '">' + PIC + '<span aria-hidden="true">' + esc(I.ui('protoImage')) + '</span></div>';
   }
   function counterOf(i, n) { return '<span aria-hidden="true">' + (i + 1) + '/' + n + '</span><span class="pl-sr">' + esc(I.ui('galleryCount', { n: i + 1, total: n })) + '</span>'; }
+  /* a gallery's image, whole, in its frame; it can be looked at large (js/viewer.js) */
+  function galPicture(it) { return it.img ? '<div class="pl-gal-frame">' + zoomable(it, 'pl-gal-zoom', true) + '</div>' : picture(it, 'pl-gal-frame'); }
   function gallery(L, run, g) {
     var items = L.galleries[g], i = seenOf(run, L, g);
     return '<section class="pl-gallery" data-gallery="' + esc(g) + '" aria-label="' + esc(I.ui('images')) + '">' +
-      '<figure class="pl-gal-fig">' + picture(items[i], 'pl-gal-frame') + caption(items[i]) + '</figure>' +
+      '<figure class="pl-gal-fig">' + galPicture(items[i]) + caption(items[i]) + '</figure>' +
       '<div class="pl-gal-nav"><button type="button" class="pl-gal-btn" data-step="-1" aria-label="' + esc(I.ui('galleryPrev')) + '">' + PREV + '</button>' +
       '<span class="pl-gal-count" aria-live="polite">' + counterOf(i, items.length) + '</span>' +
       '<button type="button" class="pl-gal-btn" data-step="1" aria-label="' + esc(I.ui('galleryNext')) + '">' + NEXT + '</button></div></section>';
   }
-  function focusOn(L, run, g) { var it = lastShown(run, L, g); return '<figure class="pl-gal-fig pl-focus">' + picture(it, 'pl-gal-frame') + caption(it) + '</figure>'; }
+  function focusOn(L, run, g) { var it = lastShown(run, L, g); return '<figure class="pl-gal-fig pl-focus">' + galPicture(it) + caption(it) + '</figure>'; }
   /* an image to look at large (js/viewer.js): a button around it, named for what it shows; only to look at, it changes
      nothing. zooms: this screen's items, by number */
   var zooms = [], ZOOM = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h5v5"/><path d="M20 4l-6 6"/><path d="M9 20H4v-5"/><path d="M4 20l6-6"/></svg>';
@@ -211,7 +213,10 @@ window.Player = (function () {
       if (s.only && s.only.indexOf(r.k) < 0) return;
       rows.push(own[r.k] && own[r.k][I.lang()] != null ? { k: r.k, parts: [{ text: own[r.k] }] } : r);
     }); });
-    var body = (s.gallery ? gallery(L, run, s.gallery) : '') + (s.focus ? focusOn(L, run, s.focus) : '') +
+    /* L.wordsFirst (2.1): on a screen with images the screen's words come first, the images after them, so its question
+       is never under the images, cut off by the bottom of a small screen */
+    var images = s.gallery || s.focus || s.pair || s.thumbs, first = L.wordsFirst && images ? lines(side.text || s.text) : '';
+    var body = first + (s.gallery ? gallery(L, run, s.gallery) : '') + (s.focus ? focusOn(L, run, s.focus) : '') +
       (s.pair ? pair(L, run, s.pair) : '') + (s.thumbs ? thumbs(L, run, s.thumbs) : '') +
       (s.media ? media(s.media, L) : '') +
       (s.compare ? '<div class="pl-pair">' + s.compare.map(function (r) { return works(A.block(r), true); }).join('') + '</div>'
@@ -219,7 +224,7 @@ window.Player = (function () {
       (s.gap ? proto(I.ui(s.gap)) : '') +
       rows.filter(function (r) { return r.k === 'do'; }).map(row).join('') +
       rows.filter(function (r) { return r.k !== 'do'; }).map(row).join('') +
-      lines(side.text || s.text) + (s.more ? more(s.more) : '');
+      (first ? '' : lines(side.text || s.text)) + (s.more ? more(s.more) : '');
     var action = { label: I.ui('continue'), go: function () { go(n + 1); } }, extra = null;
     var work = studio && made(art), preview = work ? '<figure class="pl-studio-work"><img src="' + work.preview + '" alt=""></figure>' : '';
 
@@ -360,6 +365,14 @@ window.Player = (function () {
       });
     });
     /* a gallery: previous / next (buttons, arrow keys, a swipe); only its image and counter change */
+    var swiped = 0;
+    function zoomOn(b) {
+      b.addEventListener('click', function () {
+        if (Date.now() - swiped < 500) return;
+        var it = zooms[+b.getAttribute('data-zoom')];
+        window.Viewer.open({ src: b.querySelector('img').getAttribute('src'), alt: I.tx(it.alt), ratio: ratio(it), caption: it.artist ? captionText(it) : '', from: b });
+      });
+    }
     root.querySelectorAll('.pl-gallery').forEach(function (box) {
       var g = box.getAttribute('data-gallery'), items = L.galleries[g], rtl = I.dir() === 'rtl';
       function preload(i) { var it = items[((i % items.length) + items.length) % items.length]; if (it.img) new Image().src = src(it.img); }
@@ -367,9 +380,11 @@ window.Player = (function () {
         run.seen = run.seen || {};
         var i = ((seenOf(run, L, g) + d) % items.length + items.length) % items.length;
         run.seen[g] = i;
-        box.querySelector('.pl-gal-fig').innerHTML = picture(items[i], 'pl-gal-frame') + caption(items[i]);
+        box.querySelector('.pl-gal-fig').innerHTML = galPicture(items[i]) + caption(items[i]);
         box.querySelector('.pl-gal-count').innerHTML = counterOf(i, items.length);
-        preload(i + d); keep();
+        box.querySelectorAll('.pl-zoom').forEach(zoomOn);
+        box.querySelectorAll('.pl-gal-fig img').forEach(function (im) { if (!im.complete) im.addEventListener('load', cue); });
+        preload(i + d); keep(); cue();
       }
       box.querySelectorAll('.pl-gal-btn').forEach(function (b) { b.addEventListener('click', function () { move(+b.getAttribute('data-step')); }); });
       box.addEventListener('keydown', function (e) {
@@ -380,17 +395,21 @@ window.Player = (function () {
       fig.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
       fig.addEventListener('pointerup', function (e) {
         if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
-        if (Math.abs(dx) > 40) move((dx < 0) !== rtl ? 1 : -1);   // towards the next one: left in LTR, right in RTL
+        if (Math.abs(dx) > 40) { swiped = Date.now(); move((dx < 0) !== rtl ? 1 : -1); }   // towards the next one: left in LTR, right in RTL
       });
       preload(seenOf(run, L, g) + 1); preload(seenOf(run, L, g) - 1);
     });
-    /* an image of screens 6 and 7, large: the whole image, its caption; closing comes back here, where it was */
-    root.querySelectorAll('.pl-zoom').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var it = zooms[+b.getAttribute('data-zoom')];
-        window.Viewer.open({ src: b.querySelector('img').getAttribute('src'), alt: I.tx(it.alt), ratio: ratio(it), caption: it.artist ? captionText(it) : '', from: b });
-      });
-    });
+    /* an image, large: the whole image, its caption; closing comes back here, where it was (a swipe is not a tap) */
+    root.querySelectorAll('.pl-zoom').forEach(zoomOn);
+    /* the bottom of the screen: when the words or images go on below it, a soft edge over "Continue" says so */
+    var main = root.querySelector('.pl-main'), foot = root.querySelector('.pl-foot');
+    function cue() { if (foot && main) foot.classList.toggle('pl-lift', main.scrollHeight - main.scrollTop - main.clientHeight > 6); }
+    if (main) {
+      main.addEventListener('scroll', cue, { passive: true });
+      main.querySelectorAll('img').forEach(function (im) { if (!im.complete) im.addEventListener('load', cue); });
+      if (window.ResizeObserver) new ResizeObserver(cue).observe(main);
+      cue();
+    }
     root.querySelectorAll('.pl-change').forEach(function (b) {
       b.addEventListener('click', function () { run.change = b.getAttribute('data-change'); keep().then(function () { show(root, id, n, nav, run, art); }); });
     });
