@@ -115,7 +115,7 @@ window.APP_LESSONS['2-1'] = {
               thumbs: { all: ['nature'], seen: ['morris', 'taeuber'] },
               text: { he: ['הסתכלו שוב על התמונות והיצירות.<br>איזו צורה, תנועה או חזרתיות הייתם רוצים לקחת כנקודת מוצא לציור שלכם?'],
                       en: ['Look again at the images and the artworks.<br>Which shape, movement or repetition would you like to take as the starting point for your drawing?'] } },
-    /* 8 */ { step: 'medium', title: { he: 'עכשיו מתחילים ליצור.', en: "Now it's time to create." }, text: { he: ['איפה תרצו ליצור?'], en: ['Where would you like to create?'] },
+    /* 8 */ { step: 'medium', switchable: true, title: { he: 'עכשיו מתחילים ליצור.', en: "Now it's time to create." }, text: { he: ['איפה תרצו ליצור?'], en: ['Where would you like to create?'] },
               choices: { paper: { he: 'על נייר', en: 'On paper' }, studio: { he: 'Studio', en: 'Studio' } },
               /* on paper, the first drawing first (as the Studio's 2-1-begin): its words, then "toPattern" */
               paper: { first: { he: ['ציירו על הדף את היחידה הראשונה.'], en: ['Draw the first unit on your paper.'] } },

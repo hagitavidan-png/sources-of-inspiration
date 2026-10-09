@@ -235,9 +235,11 @@ window.Player = (function () {
       if (shown) body += '<p class="pl-reveal">' + esc(I.tx(s.reveal)) + '</p>';
       else action.go = function () { revealed[id + ':' + n] = true; show(root, id, n, nav, run, art); };
     }
-    /* 9: paper or Studio; once the work has begun, that way stays (another way is a new artwork) */
+    /* 9: paper or Studio; once the work has begun, that way stays (another way is a new artwork). s.switchable (2.1): the
+       learner may change it at any time; the run keeps its one artwork (Artworks.artworkFor: an empty paper one becomes
+       the Studio's, a Studio work with something in it stays as it is, and the Studio opens on it again) */
     if (s.step === 'medium') {
-      var locked = !!(run.begun || made(art));
+      var locked = !s.switchable && !!(run.begun || made(art));
       body += '<div class="pl-choices">' + ['paper', 'studio'].map(function (m) {
         return '<button type="button" class="pl-choice" data-medium="' + m + '" aria-pressed="' + (run.medium === m) + '"' + (locked && run.medium !== m ? ' disabled' : '') + '>' +
           (m === 'paper' ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>'
