@@ -86,7 +86,8 @@ window.APP_LESSONS['2-1'] = {
     keepCreating: { he: 'להמשיך ליצור', en: 'Keep creating' },
     doneForNow: { he: 'סיימתי לעכשיו', en: "I'm done for now" },
     anotherTime: { he: 'להמשיך בפעם אחרת', en: 'Come back to it later' },
-    toPattern: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' }   // the first drawing's way on (as in the Studio)
+    toPattern: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' },   // the first drawing's way on (as in the Studio)
+    toChoice: { he: 'חזרה לבחירה', en: 'Back to the choice' }   // from the paper's screen to paper or Studio (screen 8)
   },
   screens: [
     /* 1–5: the screen's question, and where it helps a short guidance for the looking (<span class="pl-hint">: quieter,
@@ -117,8 +118,10 @@ window.APP_LESSONS['2-1'] = {
                       en: ['Look again at the images and the artworks.<br>Which shape, movement or repetition would you like to take as the starting point for your drawing?'] } },
     /* 8 */ { step: 'medium', switchable: true, title: { he: 'עכשיו מתחילים ליצור.', en: "Now it's time to create." }, text: { he: ['איפה תרצו ליצור?'], en: ['Where would you like to create?'] },
               choices: { paper: { he: 'על נייר', en: 'On paper' }, studio: { he: 'Studio', en: 'Studio' } },
-              /* on paper, the first drawing first (as the Studio's 2-1-begin): its words, then "toPattern" */
-              paper: { first: { he: ['ציירו על הדף את היחידה הראשונה.'], en: ['Draw the first unit on your paper.'] } },
+              /* on paper, the first drawing first (as the Studio's 2-1-begin), on a screen of its own in the place of the
+                 choice: its title and words, then "toPattern"; "toChoice" back to the choice */
+              paper: { title: { he: 'מתחילים לצייר על נייר', en: "Let's start drawing on paper" },
+                       first: { he: ['ציירו על הדף את היחידה הראשונה.'], en: ['Draw the first unit on your paper.'] } },
               studio: { activity: '2-1-begin', back: 9 } },
     /* 9 */ { step: 'ask', title: { he: 'ומה יקרה אם מה שיצרתם יתחיל לחזור?', en: "What will happen if what you've created begins to repeat?" },
               paper: { text: { he: ['הסתכלו על מה שכבר יצרתם.<br>בחרו משהו מתוכו שמעניין אתכם וחזרו עליו במקום נוסף בדף.', 'הוא לא חייב לחזור בדיוק אותו דבר.<br>אפשר לשנות אותו תוך כדי.'],

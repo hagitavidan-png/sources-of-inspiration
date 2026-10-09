@@ -178,6 +178,7 @@ window.Player = (function () {
   /* a screen: the run and its artwork first (the store answers later), then the screen; a newer screen asked for
      meanwhile wins */
   var asked = 0, revealed = {};
+  var choosing = null;   // 2.1 screen 8: the choice shown again from the paper's screen ('<lesson>:<screen>'), for that one showing
   function render(root, id, n, nav) {
     var my = ++asked;
     runOf(id).then(function (run) { return Promise.all([run, run.artwork ? W.get(run.artwork) : null]); })
@@ -239,21 +240,26 @@ window.Player = (function () {
        learner may change it at any time; the run keeps its one artwork (Artworks.artworkFor: an empty paper one becomes
        the Studio's, a Studio work with something in it stays as it is, and the Studio opens on it again) */
     if (s.step === 'medium') {
-      var locked = !s.switchable && !!(run.begun || made(art));
-      body += '<div class="pl-choices">' + ['paper', 'studio'].map(function (m) {
-        return '<button type="button" class="pl-choice" data-medium="' + m + '" aria-pressed="' + (run.medium === m) + '"' + (locked && run.medium !== m ? ' disabled' : '') + '>' +
-          (m === 'paper' ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>'
-                         : '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/><path d="M8 13l3-3 2 2 3-3"/></svg>') +
-          '<span>' + esc(I.tx(s.choices[m])) + '</span></button>';
-      }).join('') + '</div>';
-      action = run.medium ? action : null;
-      /* on paper, the first drawing (2.1, paper.first): its words under the choice, then on (the way stays, as a drawing
-         in the Studio keeps it) */
-      if (!studio && run.medium === 'paper' && side.first) {
-        body += lines(side.first);
+      var again = choosing === id + ':' + n; choosing = null;
+      var paperWork = !studio && run.medium === 'paper' && side.first;
+      if (paperWork && !again) {
+        /* on paper (2.1, s.paper): the work on paper has a screen of its own in the place of the choice (the same step,
+           not a numbered one): its title, the first unit's words, on to the pattern; and back to the choice */
+        title = I.tx(side.title); body = lines(side.first);
         action = { label: ACT('toPattern'), go: function () { run.begun = true; go(n + 1); } };
+        extra = { label: ACT('toChoice'), go: function () { choosing = id + ':' + n; show(root, id, n, nav, run, art); } };
+      } else {
+        var locked = !s.switchable && !!(run.begun || made(art));
+        body += '<div class="pl-choices">' + ['paper', 'studio'].map(function (m) {
+          return '<button type="button" class="pl-choice" data-medium="' + m + '" aria-pressed="' + (run.medium === m) + '"' + (locked && run.medium !== m ? ' disabled' : '') + '>' +
+            (m === 'paper' ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>'
+                           : '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/><path d="M8 13l3-3 2 2 3-3"/></svg>') +
+            '<span>' + esc(I.tx(s.choices[m])) + '</span></button>';
+        }).join('') + '</div>';
+        action = run.medium ? action : null;
+        if (paperWork) action.go = function () { show(root, id, n, nav, run, art); };   // the choice again, paper kept: its screen
+        if (studio && s.studio && made(art)) extra = { label: I.ui('reopen'), go: function () { openStudio(s.studio.activity, s.studio.back); } };
       }
-      if (studio && s.studio && made(art)) extra = { label: I.ui('reopen'), go: function () { openStudio(s.studio.activity, s.studio.back); } };
     }
     /* the question before Repeat (2.1 screen 9): Studio, once there is a drawing; paper, its own words */
     if (s.step === 'ask') {
@@ -374,7 +380,7 @@ window.Player = (function () {
         keep().then(function () { return W.artworkFor(run.id, run.medium === 'studio' ? 'digital' : 'paper'); })
           .then(function (w) { run.artwork = w.id; return keep(); }).then(function () {
             if (run.medium === 'studio' && s.studio && s.studio.activity) openStudio(s.studio.activity, s.studio.back);   // 2.1: begin at once
-            else if (s.paper && s.paper.first) show(root, id, n, nav, run, art);   // 2.1 on paper: the first drawing's words here
+            else if (s.paper && s.paper.first) show(root, id, n, nav, run, art);   // 2.1 on paper: the paper's own screen
             else nav.go(n + 1);
           });
       });
