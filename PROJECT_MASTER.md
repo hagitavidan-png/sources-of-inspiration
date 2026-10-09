@@ -3,10 +3,21 @@
 מסמך-האב הקבוע של הפרויקט *מקורות השראה באמנות / Sources of Inspiration in Art*.
 
 - **כלל עבודה:** מעתה, בכל שינוי מהותי בפרויקט, מעדכנים גם את PROJECT_MASTER.md (החלטת המחברת, 9 באוקטובר 2026).
-- **עדכון אחרון:** 9 באוקטובר 2026.
+- **עדכון אחרון:** 9 באוקטובר 2026, בערב (מעבר לשיחה חדשה).
 - **מקורות המסמך:** רק מה שמתועד: קבצי המאגר (מצוין בכל סעיף), היסטוריית git, והחלטות שהמחברת אישרה בסבבי העבודה.
   מידע שלא נמצא בהם מסומן **[דורש השלמה]**. שום דבר כאן אינו החלטה חדשה.
 - **לתשומת לב:** הקובץ נמצא בשורש המאגר, והוא גלוי לציבור במאגר ובאתר (‎/PROJECT_MASTER.md) מאז הפרסום של 9 באוקטובר 2026.
+
+## מצב נוכחי בקצרה (נקודת ההמשך)
+
+- **שיעור 2.1 – הושלם ופורסם**, ומשמש מודל פדגוגי ועיצובי לשיעורים הבאים (ראו "שיעור 2.1 כמודל לשיעורים הבאים").
+  האתר החי: https://hagitavidan-png.github.io/sources-of-inspiration/prototypes/app/#/lesson/2-1 (gh-pages, d36378f).
+- **שיעור 2.2 "מקרוב מאוד – עולם שלם בתוך פרט קטן" – התכנון של 13 המסכים אושר.** עוד לא נכתב קוד.
+- **איפה עצרנו:** התמונות המועמדות לשיעור 2.2 נמצאו ונבדקו (רישיון ומקור), והנוסחים בעברית ובאנגלית הוכנו. **שניהם ממתינים
+  לבחירה ולאישור של המחברת. אף תמונה עוד לא אושרה.** פירוט: "שיעור 2.2 – מקרוב מאוד: תכנון ושלבים הבאים".
+- **המשימה הבאה:** אישור התמונות והנוסחים, ואחריו הורדת התמונות, `images/2-2/SOURCES.md` ופיתוח השיעור.
+- **הקובץ הזה ב-GitHub:** בענף app-artwork-2-1 (ענף ברירת המחדל של המאגר הוא main, ושם הקובץ לא קיים):
+  https://github.com/hagitavidan-png/sources-of-inspiration/blob/app-artwork-2-1/PROJECT_MASTER.md
 
 מסמכים קשורים:
 - `prototypes/app/images/2-1/SOURCES.md` – מקורות, רישיונות ובדיקת הזכויות של תמונות שיעור 2.1.
@@ -167,6 +178,8 @@
   כל התיקיות של הענף, כולל `prototypes`, `content` ו-`tools`, נגישות שם.
 - **פיתוח האפליקציה:** הענף app-artwork-2-1. הוא ו-gh-pages עומדים על אותו commit. הפרסום נעשה כ-fast-forward של gh-pages
   לענף הזה, בלי force.
+- **עדכון התיעוד של מעבר השיחה (9 באוקטובר 2026, בערב):** נשמר בענף app-artwork-2-1 בלבד, לבקשת המחברת ("לא לשנות את
+  האתר"). gh-pages נשאר על d36378f; הפרסום הבא (fast-forward) יכלול גם אותו.
 - **[דורש השלמה]** תפקיד הענף main (ה-commit האחרון בו: 1 באוקטובר 2026) והקשר שלו ל-gh-pages, ותפקיד שאר הענפים
   (app-gallery-attempts, archive, fix/mobile-homepage-layout, claude/website-work-start-ps96mx).
 - **בגרסה המפורסמת של האפליקציה:** שיעור 2.1 ב-13 מסכים (עם מסך הפתיחה החדש, החזרתיות החיה, המתג, "להתחיל מחדש" ותיקוני
@@ -211,6 +224,283 @@ commit: 4c0e816, בענף app-artwork-2-1. פורסם ב-9 באוקטובר 2026
 - **פיתוח יצירה אישית** בלי תוצאה אחת נכונה.
 - **ממשק פשוט ונגיש במובייל**, גם בטלפון צר ובטקסט מוגדל.
 - **שמירה אוטומטית** ואפשרות לחזור ליצירות ולפתח אותן ("היצירות שלי").
+
+---
+
+## שיעור 2.2 – מקרוב מאוד: תכנון ושלבים הבאים
+
+**שם:** "מקרוב מאוד – עולם שלם בתוך פרט קטן" (באתר: "מקרוב מאוד" / "Up Close", הקובץ `lesson-2-3.html`; התוכן המאושר:
+`content/lessons/lesson-2-3.json`). 13 מסכים, כ-50 דקות. **התכנון אושר על ידי המחברת (9 באוקטובר 2026). עוד לא נכתב קוד.**
+
+**הרעיון שאושר:** התלמיד בוחר מקור השראה אישי מהטבע או מסביבתו: תמונה מגלריה מוצעת או צילום משלו. בכלי אינטראקטיבי של חלון
+בחירה והגדלה ("חלון הגילוי") הוא חוקר אזורים שונים בתמונה, בוחר פרט ומפתח ממנו ציור אישי וחופשי. נשמרים הרעיונות המאושרים של
+2.2: "כמה קטן זה קטן?", "משהו שמצאתם, לא שקטפתם", אוקיף ובלוספלדט, "הצורה נשארת", "ציירו רק את מה שבתוך החלון, גדול מאוד",
+ההשוואה בין השלם לפרט, "זו החלטה שלכם". שיעור 2.1 הוא המודל, אבל התרגילים לא מועתקים.
+
+### החלטות המחברת
+
+1. ציור אישי אחד בלבד (בלי ציור קטן של האובייקט השלם; התמונה השלמה משמשת ל"שלם" בהשוואה).
+2. ארנסט הקל הוא האמן השלישי (בכפוף לתמונות עם זכויות מתאימות).
+3. דף הציור ב-Studio: 4:5 לאורך.
+4. מסך 9: שאלה פתוחה, בלי שדה כתיבה.
+5. גלריית השראה של כ-12 תמונות עשירות בפרטים, ברישיונות מתאימים ומתועדים.
+6. מסך אוקיף: פתרון חזותי שלא מפר זכויות יוצרים, **עם גישה ברורה ליצירה המקורית באתר המוזיאון**.
+7. חלון הגילוי **פשוט, משחקי ואינטואיטיבי, במיוחד בטלפון**: בטלפון צר תמונה אחת עם מסגרת נגררת, ואפשרות להציג את הפרט בהגדלה
+   על המסך (לא שתי תמונות גדולות זו מעל זו).
+8. אחרי בחירת הפרט אפשר לחזור, לבחור אזור אחר ולהמשיך **את אותה יצירה**: **לא נפתחת יצירה חדשה ושום דבר לא נמחק.**
+
+### 13 המסכים (התכנון המאושר)
+
+| # | מסך | תוכן |
+|---|---|---|
+| 1 | כמה קטן זה קטן? | תקריב קיצוני מתמונה בגלריה מתרחק בלחיצה ("להתרחק") עד שהחפץ כולו מתגלה. "מה חשבתם שזה, לפני שראיתם את כולו?" |
+| 2 | עולמות קטנים | 6 מתמונות הגלריה, שלמות. שאלה והנחיה. |
+| 3 | בלוספלדט – צילום | 2–3 צילומים (לא השרך שב-2.1). השאלה המאושרת. |
+| 4 | אוקיף – ציור | בלי תמונה של היצירה: צילום דטורה מתקרב (עם כיתוב "זה לא הציור של אוקיף"), תרשים קנה מידה ("יותר ממטר"), כפתור בולט ליצירה באתר Crystal Bridges, השאלה המאושרת. |
+| 5 | הקל – רישום | 2–3 לוחות מ"צורות אמנות בטבע". "ציור, צילום, רישום: שלוש דרכים להתקרב." |
+| 6 | הצורה נשארת | איור "שלם · מוגדל · חתוך" על תמונה מהגלריה. השאלה המאושרת. |
+| 7 | בחרו מקור השראה | אחת מ-12 תמונות הגלריה, או צילום/העלאה של תמונה משלכם. "משהו שמצאתם, לא שקטפתם." פרטיות. |
+| 8 | חלון הגילוי | חקירה, הגדלה ושמירה של עד שלושה "עולמות". |
+| 9 | בחרו עולם אחד | הפרט לבד וגדול. שאלה פתוחה, בלי שדה כתיבה. |
+| 10 | עכשיו מציירים | נייר או Studio. "ציירו רק את מה שבתוך החלון… גדול מאוד." |
+| 11 | הציור | Studio 4:5 עם "הפרט שלי", או נייר עם הפרט על המסך. |
+| 12 | עצרו | "האם זה עדיין נראה כמו האובייקט?" (שלוש תשובות מאושרות). "להמשיך לצייר" · "לבחור אזור אחר". |
+| 13 | השוואה וסיום | התמונה השלמה עם סימון האזורים לצד הציור. השאלה והסיום המאושרים. "היצירות שלי" · "להמשיך ליצור" · "להמשיך בפעם אחרת". |
+
+### חלון הגילוי והמעבר ל-Studio (החלטות)
+
+- **חלון הגילוי (מסך 8):** התמונה ממלאת כמעט את כל המסך, ועליה מסגרת ריבועית נגררת (מחוץ לה מעומעם קלות). סליידר "רחוק ↔ קרוב"
+  או צביטה (פי 2 עד פי 8; ככל שמתקרבים המסגרת קטנה). "להגדיל" מציג את הפרט על כל המסך, ושם גוררים כדי לזוז; "חזרה לתמונה".
+  "הפתיעו אותי" קופץ למקום אקראי. "שמרו את העולם הזה" שומר עד שלושה, כתמונות ממוזערות קטנות. במסך רחב: התמונה והפרט זה לצד זה.
+  כלי הסתכלות בלבד: בלי עריכה ובלי העתקה מעל התמונה.
+- **ה-Studio של 2.2:** פעילות חדשה, דף 4:5 לאורך; ציור, צבע, עובי קו, מחק, ביטול; בלי Repeat. כפתור "הפרט שלי" בפס העליון פותח
+  חלונית עם הפרט בגדול ("סגירה"), ובה "לבחור אזור אחר": העבודה נשמרת, נפתח חלון הגילוי על אותה תמונה במקום האחרון, ואחרי
+  הבחירה "חזרה לציור" פותח את **אותה יצירה** עם כל מה שצויר. הפרט מוצג רק בהצצה, לא כשכבה מתחת לציור. גם מ"היצירות שלי".
+- **מה נשמר (אותו מנגנון של 2.1, במכשיר בלבד):** בריצה – מקור ההשראה, עד שלושה עולמות, ורשימת האזורים שנבחרו לפי הסדר (האחרון
+  הוא הנוכחי; כולם מוצגים במסך 13). ביצירה – הציור, עם קישור למקור ולאזור הנוכחי.
+- **פרטיות התמונות האישיות:** נשמרות רק במכשיר (IndexedDB), לא נשלחות לשום שרת; מוקטנות ומקודדות מחדש לפני השמירה (נמחק המידע
+  הנלווה, כולל מיקום GPS); הנחיה "צלמו דברים, לא אנשים"; אפשר להסיר את התמונה בלי לפגוע בציור.
+- **זכויות:** רק CC0 או נחלת הכלל, עם מקור ורישיון מתועדים; אוקיף – קישור בלבד (מוגן); בלוספלדט – רק מ-Urformen der Kunst (1928),
+  לא Wundergarten der Natur (1932, מוגן בארה"ב עד 2028).
+
+### תמונות מועמדות – **לבדיקה ולבחירה של המחברת, לא אושרו**
+
+הוצגו למחברת כגלריה ממוספרת. כולן מ-Wikimedia Commons, נבדקו שם אחת-אחת (רישיון, תבנית רישיון, יוצר, הגבלות) ב-9 באוקטובר 2026;
+אתרי המוזיאונים חסומים מסביבת העבודה, ולכן נבדק רישום ה-Commons ולא דף המוזיאון. **המלצות בלבד (לא החלטות):** גלריית הטבע N1–N12;
+בלוספלדט B1 ו-B4 (מעמד בארה"ב מפורש; B2–B3 – לבדוק את מועד הפרסום הראשון); הקל H1–H3; דטורה D1; מסך 1 – N1; מסך 6 – N2
+("אותו צמח, שלוש דרכי הסתכלות"). הערה: תקריב חרקים (N9) עלול להרתיע חלק מהילדים.
+
+#### Nature gallery, proposed
+
+| Code | What | Commons file | Author | Licence | Date | Size | Notes |
+|---|---|---|---|---|---|---|---|
+| N1 | Romanesco | [Chou romanesco - Boucheries André (Rillieux-la-Pape) - 1.jpg](https://commons.wikimedia.org/wiki/File%3AChou_romanesco_-_Boucheries_Andr%C3%A9_%28Rillieux-la-Pape%29_-_1.jpg) | Benoît Prieur | CC0 (Cc-zero) | 2020-10-20 19:01:05 | 4032×3024 |  |
+| N2 | Spiral aloe from above | [Spiral aloe spirals from top.jpg](https://commons.wikimedia.org/wiki/File%3ASpiral_aloe_spirals_from_top.jpg) | Pseudopanax at English Wikipedia | Public domain (PD-self) | 2024-01-01 | 3264×4896 |  |
+| N3 | Orange lichen on concrete | [Orange lichen (Xanthoria parietina) on concrete.jpg](https://commons.wikimedia.org/wiki/File%3AOrange_lichen_%28Xanthoria_parietina%29_on_concrete.jpg) | Pseudopanax at English Wikipedia | Public domain (PD-self) | 2014-03-30 | 4896×3264 |  |
+| N4 | Frozen bubble, ice crystals | [Frozen snowflake bubble (Unsplash).jpg](https://commons.wikimedia.org/wiki/File%3AFrozen_snowflake_bubble_%28Unsplash%29.jpg) | Aaron Burden aaronburden | CC0 (Cc-zero, Unsplash) | 7 January 2017 (accord | 4230×3096 | Unsplash photo on Commons under CC0 (Unsplash photos published before June 2017 were CC0). |
+| N5 | Dandelion seed head | [Taraxacum obovatum seedhead.jpg](https://commons.wikimedia.org/wiki/File%3ATaraxacum_obovatum_seedhead.jpg) | Jebulon | CC0 | 2011-08-10 | 2543×2036 |  |
+| N6 | Dahlia, close up | [DSC 2800.jpg](https://commons.wikimedia.org/wiki/File%3ADSC_2800.jpg) | Konatom1 | CC0 (Cc-zero) | 2009-09-09 | 4304×2852 |  |
+| N7 | Barrel cactus, thorns and flowers | [Close up of a flowering barrel cactus with its thorns.jpg](https://commons.wikimedia.org/wiki/File%3AClose_up_of_a_flowering_barrel_cactus_with_its_thorns.jpg) | Gentry George, U.S. Fish and Wildlife Service | Public domain | Not given | 4256×2832 | U.S. Fish and Wildlife Service photographer: a US government work. |
+| N8 | Dragonfly fossil (Zacallites cockerelli) | [Zacallites cockerelli FOBU.jpg](https://commons.wikimedia.org/wiki/File%3AZacallites_cockerelli_FOBU.jpg) | NPS photo | Public domain (PD-USGov-NPS) | Taken on 6 July 2018 | 6000×5252 | National Park Service (Fossil Butte National Monument): a US government work. |
+| N9 | Mason bee (Osmia trevoris), from above | [Osmia trevoris, F, back - Park Co., Wyoming - 2015-11-20-23.38 - USGS Bee Inventory and Monitoring Laboratory.jpg](https://commons.wikimedia.org/wiki/File%3AOsmia_trevoris%2C_F%2C_back_-_Park_Co.%2C_Wyoming_-_2015-11-20-23.38_-_USGS_Bee_Inventory_and_Monitoring_Laboratory.jpg) | USGS Bee Inventory and Monitoring Lab from Beltsville, Maryl | Public domain (PD-USGov-USGS) | 2015-12-01 21:26 | 4143×3190 | USGS Bee Inventory and Monitoring Lab: a US government work. Some children may find insect close-ups unpleasant. |
+| N10 | Red onion, cut | [Red onion cut.jpg](https://commons.wikimedia.org/wiki/File%3ARed_onion_cut.jpg) | Amada44 | Public domain (PD-self) |  | 1580×2596 |  |
+| N11 | Peeling paint | [Painted conrete.jpg](https://commons.wikimedia.org/wiki/File%3APainted_conrete.jpg) | Georges Grondin | Public domain (PD-author) | Not given | 3264×2448 |  |
+| N12 | Sand ripples | [Line6809 (27662155890).jpg](https://commons.wikimedia.org/wiki/File%3ALine6809_%2827662155890%29.jpg) | NOAA Photo Library | Public domain | 2015-04-11 17:25 | 4608×3456 | NOAA Photo Library: PD-USGov-NOAA on Commons (also marked CC BY 2.0 on Flickr); credit "NOAA Photo Library". |
+
+#### Nature gallery, alternates
+
+| Code | What | Commons file | Author | Licence | Date | Size | Notes |
+|---|---|---|---|---|---|---|---|
+| A1 | Lichen on bark | [Lichen of the world (20902148882).jpg](https://commons.wikimedia.org/wiki/File%3ALichen_of_the_world_%2820902148882%29.jpg) | GlacierNPS | Public domain (PD-USGov-NPS) | Taken on 28 May 2012,  | 5519×3942 | Glacier National Park (NPS): a US government work. |
+| A2 | Tree stump fibres and moss | [Morscher Baumstumpf - Fasern (Makro).JPG](https://commons.wikimedia.org/wiki/File%3AMorscher_Baumstumpf_-_Fasern_%28Makro%29.JPG) | User:Mattes | Public domain (PD-self) | Taken on 27 February 2 | 3072×2304 |  |
+| A3 | Pomegranate seeds | [Pomegranate pearls.jpg](https://commons.wikimedia.org/wiki/File%3APomegranate_pearls.jpg) | Fumikas Sagisavas | CC0 (Cc-zero) | 2024-08-27 18:04:00 | 3000×3000 |  |
+| A4 | Rust on metal | [Rust on metal.jpg](https://commons.wikimedia.org/wiki/File%3ARust_on_metal.jpg) | Georges Grondin | Public domain | Not given | 3264×2448 |  |
+| A5 | Old stone wall | [Stone church wall texture limerick ireland.jpg](https://commons.wikimedia.org/wiki/File%3AStone_church_wall_texture_limerick_ireland.jpg) | Gaz Davidson | Public domain (PD-self) | 2007-10-11 | 2592×1944 |  |
+| A6 | Rainbow scarab beetle | [Rainbow Scarab, face1, silver spring, md 2013-12-31-14.48.26 ZS PMax Panorama2 (11678975526).jpg](https://commons.wikimedia.org/wiki/File%3ARainbow_Scarab%2C_face1%2C_silver_spring%2C_md_2013-12-31-14.48.26_ZS_PMax_Panorama2_%2811678975526%29.jpg) | USGS Bee Inventory and Monitoring Lab from Beltsville, USA | Public domain | 2013-12-31 21:13 | 4789×7160 | USGS Bee Inventory and Monitoring Lab: a US government work. |
+| A7 | Fern fiddlehead | [Fern frond. (9572140631).jpg](https://commons.wikimedia.org/wiki/File%3AFern_frond._%289572140631%29.jpg) | Bernard Spragg. NZ from Christchurch, New Zealand | CC0 (Cc-zero) | 2010-11-27 15:11 | 2131×1429 |  |
+
+#### Karl Blossfeldt (1865-1932)
+
+| Code | What | Commons file | Author | Licence | Date | Size | Notes |
+|---|---|---|---|---|---|---|---|
+| B1 | Cucurbita, 1928 | [Karl Blossfeldt. Cucurbita, 1928.jpg](https://commons.wikimedia.org/wiki/File%3AKarl_Blossfeldt._Cucurbita%2C_1928.jpg) | Karl Blosfeldt | Public domain (PD-old-70-expired, PD-old-X-expired) | 1928 | 4874×6203 | Getty Open Content print. Urformen der Kunst (1928): public domain in the US (published before 1929) and in the EU and Israel (author died 1932). |
+| B2 | Dipsacus laciniatus | [Blossfeldt - Dipsacus laciniatus, 84.XM.142.3.jpg](https://commons.wikimedia.org/wiki/File%3ABlossfeldt_-_Dipsacus_laciniatus%2C_84.XM.142.3.jpg) | Karl Blosfeldt | Public domain (PD-Art, PD-art, PD-old) |  | 4767×6224 | Getty Open Content print (84.XM.142.3); Commons: PD-old, PD-Art. Public domain in the EU and Israel; US status depends on first publication (1928 or earlier: public domain; Wundergarten der Natur, 1932: protected in the US until 2028). To check before use. |
+| B3 | Impatiens glandulifera | [Blossfeldt - Impatiens glandulifera, 84.XM.142.4.jpg](https://commons.wikimedia.org/wiki/File%3ABlossfeldt_-_Impatiens_glandulifera%2C_84.XM.142.4.jpg) | Karl Blosfeldt | Public domain (PD-Art, PD-art, PD-old) |  | 4801×6218 | Getty Open Content print (84.XM.142.4). As B2: US status to check before use. |
+| B4 | Acanthus mollis, 1928 | [Karl Blossfeldt. Acanthus mollis, 1928.jpg](https://commons.wikimedia.org/wiki/File%3AKarl_Blossfeldt._Acanthus_mollis%2C_1928.jpg) | Karl Blosfeldt | Public domain (PD-old-70-expired, PD-old-X-expired) | 1928 | 4798×6220 | Getty Open Content print. Urformen der Kunst (1928): as B1. |
+
+#### Ernst Haeckel (1834-1919), Kunstformen der Natur (1899-1904)
+
+| Code | What | Commons file | Author | Licence | Date | Size | Notes |
+|---|---|---|---|---|---|---|---|
+| H1 | Diatomea | [Haeckel Diatomea.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Diatomea.jpg) | Ernst Haeckel | Public domain (PD-old) | 1904 | 2327×3276 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+| H2 | Desmidiea | [Haeckel Desmidiea.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Desmidiea.jpg) | Ernst Haeckel | Public domain (PD-old) | 1904 | 2332×3267 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+| H3 | Spumellaria | [Haeckel Spumellaria.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Spumellaria.jpg) | Ernst Haeckel | Public domain (PD-old) | 1904 | 2344×3324 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+| H4 | Polycyttaria | [Haeckel Polycyttaria.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Polycyttaria.jpg) | Ernst Haeckel | Public domain (PD-old) | 1904 | 2364×3285 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+| H5 | Echinidea | [Haeckel Echinidea.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Echinidea.jpg) | Ernst Haeckel | Public domain | 1904 | 2323×3248 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+| H6 | Discomedusae | [Haeckel Discomedusae 8.jpg](https://commons.wikimedia.org/wiki/File%3AHaeckel_Discomedusae_8.jpg) | Original: Ernst Haeckel. Scan: Ragesoss. Cleanup: Ilmari Kar | Public domain (PD-old) | 1904 | 2300×3300 | Plate from Kunstformen der Natur (1904): public domain everywhere (author died 1919; published before 1929). A faithful reproduction of a 2D public-domain work adds no new rights (PD-Art). |
+
+#### Datura, for the O'Keeffe screen (a photograph of the flower, never her painting)
+
+| Code | What | Commons file | Author | Licence | Date | Size | Notes |
+|---|---|---|---|---|---|---|---|
+| D1 | Datura wrightii, face on | [Datura wrightii flower2.jpg](https://commons.wikimedia.org/wiki/File%3ADatura_wrightii_flower2.jpg) | Dlarsen | Public domain (PD-self) | 2006-07 | 1914×1914 | Released into the public domain by its author (PD-self). |
+| D2 | Sacred datura, three flowers | [Sacred datura (5825335864).jpg](https://commons.wikimedia.org/wiki/File%3ASacred_datura_%285825335864%29.jpg) | Zion National Park | Public domain (PD-USGov-NPS) | 2010-07-10 19:45 | 4000×3000 | Zion National Park (NPS): a US government work (also CC BY 2.0 on Flickr); credit "Zion National Park". |
+| D3 | Sacred datura | [SACRED DATURA (Datura wrightii) (6-4-11) santa cruz river, scc, az -01 (5801997514).jpg](https://commons.wikimedia.org/wiki/File%3ASACRED_DATURA_%28Datura_wrightii%29_%286-4-11%29_santa_cruz_river%2C_scc%2C_az_-01_%285801997514%29.jpg) | ALAN SCHMIERER | CC0 (Cc-zero) | 2011-06-04 07:49:08 | 2222×1481 |  |
+
+### נוסחים בעברית ובאנגלית – **טיוטה, ממתינה לאישור**
+
+[מאושר] – מתוך התוכן המאושר של 2.2 באתר (`content/lessons/lesson-2-3.json`), בעברית ובאנגלית. [חדש] – הצעה, לאישור המחברת;
+כל האנגלית החדשה היא תרגום ההצעה. **לאימות:** מידות הבד של אוקיף (122×102 ס"מ; אתר המוזיאון חסום) – בתרשים יופיע רק "יותר ממטר".
+
+#### מסך הפתיחה
+
+| | עברית | English |
+|---|---|---|
+| כותרת | מקרוב מאוד [מאושר] | Up Close [מאושר] |
+| כותרת משנה | עולם שלם בתוך פרט קטן [חדש] | A whole world in a small detail [חדש] |
+| מידע | כ־50 דקות · 13 שלבים | About 50 minutes · 13 steps |
+| כפתורים | מתחילים את השיעור · ממשיכים מהמקום שעצרתי (כמו ב-2.1) | Start the lesson · Continue where I left off |
+
+#### 1 · כמה קטן זה קטן?
+
+| | עברית | English |
+|---|---|---|
+| כותרת | כמה קטן זה קטן? [מאושר] | How small is small? [מאושר] |
+| משפט | הכל משתנה כשמתקרבים. [מאושר] | Everything changes when you move closer. [מאושר] |
+| כפתור | להתרחק [חדש] | Move back [חדש] |
+| שאלה | מה חשבתם שזה, לפני שראיתם את כולו? [חדש] | What did you think it was, before you saw all of it? [חדש] |
+
+#### 2 · עולמות קטנים
+
+| | עברית | English |
+|---|---|---|
+| כותרת | עולמות קטנים [חדש] | Small worlds [חדש] |
+| שאלה | איפה בתמונה מסתתר עולם קטן? [חדש] | Where is a small world hiding in the picture? [חדש] |
+| הנחיה | בחרו מקום אחד שהייתם רוצים להיכנס לתוכו. [חדש] | Choose one place you would like to step into. [חדש] |
+
+#### 3 · קרל בלוספלדט
+
+| | עברית | English |
+|---|---|---|
+| הסבר | בלוספלדט יצר תצלומי תקריב של צמחים, והשתמש בהם גם ככלי הוראה כדי לחשוף בפני תלמידיו את הצורות והדפוסים שבטבע. [מאושר] | Blossfeldt made close-up photographs of plants, and also used them as a teaching tool, to show his students the forms and patterns found in nature. [מאושר] |
+| שאלה | מה בצילום של בלוספלדט נראה כמו משהו שאדם בנה? [מאושר] | What in Blossfeldt's photograph looks like something built by a person? [מאושר] |
+| כיתובים | שם הצמח והשנה, מתוך המקור של כל תמונה (אחרי בחירת התמונות) | |
+
+#### 4 · ג׳ורג׳יה אוקיף
+
+| | עברית | English |
+|---|---|---|
+| יצירה | ג׳ימסון ויד / פרח לבן מס׳ 1, 1932 [מאושר] | Jimson Weed/White Flower No. 1, 1932 [מאושר] |
+| הסבר | אוקיף ציירה פרח דטורה בקנה מידה ענק, וחתכה את הציור צמוד סביבו. הבד גבוה מיותר ממטר. [מאושר] | O'Keeffe painted a jimson weed flower at a huge scale, and cropped the painting tightly around it. The canvas is more than a metre tall. [מאושר] |
+| כפתור ההדגמה | להתקרב כמו אוקיף [חדש] | Get close like O'Keeffe [חדש] |
+| כיתוב לצילום | צילום של פרח דטורה. זה לא הציור של אוקיף. [חדש] | A photograph of a datura flower, not O'Keeffe's painting. [חדש] |
+| קנה מידה | פרח · הבד של אוקיף: יותר ממטר · ילד/ה [חדש] | A flower · O'Keeffe's canvas: over a metre · A child [חדש] |
+| קישור (כפתור בולט) | פתחו את היצירה באתר Crystal Bridges ↗ [מאושר] | Open the work on the Crystal Bridges website ↗ [מאושר] |
+| שאלה | איפה הפרח של אוקיף נחתך בקצה הבד? [מאושר] | Where is O'Keeffe's flower cut off at the edge of the canvas? [מאושר] |
+
+**לאימות:** מידות הבד (122×102 ס״מ) ושאלת הזכויות. אתר המוזיאון חסום מסביבת העבודה, ולכן לא בדקתי אותו. בתרשים קנה המידה יופיע רק "יותר ממטר", כמו בנוסח המאושר.
+
+#### 5 · ארנסט הקל
+
+| | עברית | English |
+|---|---|---|
+| יצירה | צורות אמנות בטבע, 1899–1904 [חדש] | Art Forms in Nature (Kunstformen der Natur), 1899–1904 [חדש] |
+| הסבר | הקל היה מדען ואמן. הוא רשם יצורים זעירים כפי שנראו דרך מיקרוסקופ, וגילה בהם צורות מדויקות ומפתיעות. [חדש] | Haeckel was a scientist and an artist. He drew tiny creatures as he saw them through a microscope, and found precise, surprising forms in them. [חדש] |
+| שאלה | מה מתגלה כשמתקרבים יותר ממה שהעין רואה? [חדש] | What do you discover when you get closer than the eye can see? [חדש] |
+| הנחיה | ציור, צילום, רישום: שלוש דרכים להתקרב. [חדש, מבוסס על "שתי דרכים להתקרב" המאושר] | Painting, photography, drawing: three ways to get close. [חדש] |
+
+#### 6 · הצורה נשארת
+
+| | עברית | English |
+|---|---|---|
+| כותרת | כשמגדילים מספיק, האובייקט מתחיל להיעלם. [מאושר] | When you enlarge enough, the object begins to disappear. [מאושר] |
+| משפט | הצורה נשארת. [מאושר] | The shape remains. [מאושר] |
+| איור | שלם · מוגדל · חתוך [מאושר] | Whole · Enlarged · Cropped [מאושר] |
+| כיתוב לאיור | אותו ___, שלוש דרכי הסתכלות (המאושר: "אותו עלה"; המילה תתאים לתמונה שתיבחר) | The same ___, three ways of looking |
+| שאלה | מה נעלם כשמתקרבים, ומה מופיע? [מאושר] | What disappears when you get close, and what appears? [מאושר] |
+
+#### 7 · בחרו מקור השראה
+
+| | עברית | English |
+|---|---|---|
+| כותרת | בחרו מקור השראה [חדש] | Choose a source of inspiration [חדש] |
+| משפט | תמונה מהגלריה, או צילום משלכם: משהו מהטבע או מהסביבה שלכם. [חדש] | A picture from the gallery, or a photo of your own: something from nature or from around you. [חדש] |
+| הנחיה | משהו שנשר או שמצאתם, לא שקטפתם. [מאושר] | Something that fell or that you found, not something you picked. [מאושר] |
+| שורה קטנה | צלמו דברים, לא אנשים. התמונה נשמרת רק במכשיר שלכם. [חדש] | Photograph things, not people. Your photo stays only on your device. [חדש] |
+| כפתורים | צלמו או העלו תמונה · להסיר את התמונה שלי [חדש] | Take or upload a photo · Remove my photo [חדש] |
+
+#### 8 · חלון הגילוי
+
+| | עברית | English |
+|---|---|---|
+| כותרת | חלון הגילוי [חדש] | The discovery window [חדש] |
+| שאלה | מה אתם רואים עכשיו, שלא ראיתם קודם? [מאושר] | What do you see now, that you didn't see before? [מאושר] |
+| הנחיה | הזיזו את החלון לאט. שמרו עד שלושה עולמות. [חדש] | Move the window slowly. Keep up to three worlds. [חדש] |
+| פקדים | רחוק · קרוב · להגדיל · חזרה לתמונה · הפתיעו אותי · שמרו את העולם הזה [חדש] | Far · Close · Enlarge · Back to the picture · Surprise me · Keep this world [חדש] |
+| כשבאים מהציור | חזרה לציור [חדש] | Back to my drawing [חדש] |
+
+#### 9 · בחרו עולם אחד
+
+| | עברית | English |
+|---|---|---|
+| כותרת | בחרו עולם אחד [חדש] | Choose one world [חדש] |
+| שאלה | אם לא הייתם יודעים מה זה, מה הייתם חושבים שזה? [מאושר] | If you didn't know what it was, what would you think it is? [מאושר] |
+| הנחיה | הצופה לא צריך לזהות מה זה, רק להיכנס לתוך הצורה. [מאושר] | The viewer doesn't need to recognize what it is, only to enter the shape. [מאושר] |
+
+#### 10 · עכשיו מציירים
+
+| | עברית | English |
+|---|---|---|
+| כותרת | עכשיו מציירים. [חדש] | Now it's time to draw. [חדש] |
+| שאלה | איפה תרצו לצייר? [חדש] | Where would you like to draw? [חדש] |
+| בחירה | על נייר · Studio | On paper · Studio |
+| הנחיה | ציירו רק את מה שבתוך החלון, על דף שלם. גדול מאוד. תנו לקצוות לצאת מחוץ לדף. [מאושר] | Draw only what is inside the window, on a whole page. Very large. Let the edges go beyond the page. [מאושר] |
+
+#### 11 · הציור
+
+| | עברית | English |
+|---|---|---|
+| Studio: כפתור הפרט | הפרט שלי [חדש] | My detail [חדש] |
+| בחלונית הפרט | לבחור אזור אחר · סגירה [חדש] | Choose another area · Close [חדש] |
+| הכפתור הראשי | לעצור ולהסתכל [חדש] | Stop and look [חדש] |
+| נייר | הפרט שלכם, לציור על הדף. (וההנחיה של מסך 10) [חדש] | Your detail, to draw on paper. [חדש] |
+
+#### 12 · עצרו
+
+| | עברית | English |
+|---|---|---|
+| שאלה | עצרו. האם זה עדיין נראה כמו האובייקט? [מאושר] | Stop. Does it still look like the object? [מאושר] |
+| בחירה | עדיין מזוהה · הפך למשהו אחר · משהו באמצע [מאושר] | Still recognizable · Became something else · Something in between [מאושר] |
+| כפתורים | להמשיך לצייר · לבחור אזור אחר [חדש] | Keep drawing · Choose another area [חדש] |
+
+#### 13 · השוואה וסיום
+
+| | עברית | English |
+|---|---|---|
+| כיתובים | מקור ההשראה · הציור שלכם [חדש] | Your source · Your drawing [חדש] |
+| שאלה | מה השתנה בדרך שבה אתם רואים אותו? [מאושר] | What changed in the way you see it? [מאושר] |
+| סיום | כשהתקרבתם, ראיתם משהו אחר. זה לא קרה במקרה. זו החלטה שלכם. [מאושר] | When you moved closer, you saw something else. That didn't happen by chance. It was your decision. [מאושר] |
+| כפתורים | היצירות שלי · להמשיך ליצור · להמשיך בפעם אחרת (כמו ב-2.1) | My artworks · Keep creating · Come back to it later |
+
+### מה הושלם ומה ממתין
+
+- **הושלם:** התכנון של 13 המסכים וההחלטות (מאושר); איתור התמונות המועמדות ובדיקת הרישיונות שלהן (טיוטה); הנוסחים בעברית
+  ובאנגלית (טיוטה).
+- **ממתין לאישור המחברת:** בחירת 12 תמונות הטבע (או חלופות), 2–3 של בלוספלדט, 2–3 של הקל ותמונת הדטורה; הנוסחים החדשים
+  ([חדש]) והאנגלית.
+- **ממתין לבדיקה:** אם ייבחרו B2 או B3 – מועד הפרסום הראשון שלהן (מעמד בארה"ב); מידות הבד של אוקיף.
+
+### המשימות הבאות, לפי הסדר
+
+1. המחברת בוחרת ומאשרת את התמונות.
+2. המחברת מאשרת את הנוסחים (עברית ואנגלית).
+3. הורדת התמונות שנבחרו מ-Commons, הכנה בשני גדלים (גלריה, וגדולה לחלון הגילוי), ו-`prototypes/app/images/2-2/SOURCES.md`
+   עם מקור, יוצר, רישיון וקרדיט לכל תמונה.
+4. פיתוח 2.2 באפליקציה: קובץ השיעור (13 מסכים) ומסך הפתיחה; חלון הגילוי; צילום/העלאה עם פרטיות (קידוד מחדש, במכשיר בלבד, הסרה);
+   פעילות Studio של 2.2 (4:5, "הפרט שלי", "לבחור אזור אחר" באותה יצירה); שמירה; "היצירות שלי". בלי לשנות את 2.1 ואת 3.1.
+5. בדיקות ממוקדות: טלפון צר 360–412 וטקסט מוגדל; חלון הגילוי; מחיקת המידע הנלווה מצילום; בחירת אזור אחר שומרת על אותה יצירה;
+   "היצירות שלי".
+6. פרסום (fast-forward, בלי force) ועדכון קצר של PROJECT_MASTER.
 
 ---
 
@@ -301,6 +591,7 @@ commit: 4c0e816, בענף app-artwork-2-1. פורסם ב-9 באוקטובר 2026
     קודמת (יצירה ב-Studio נפתחת מהכרטיס שלה ב-Studio). נושא נפרד להמשך.
 14. **רגע הגילוי של Repeat:** היום Repeat מופיע מעצמו רגע אחרי שה-Studio נפתח במסך 10, אחרי שהתלמיד לחץ "לראות מה קורה"
     במסך 9. אם רוצים שהתלמיד יפעיל בעצמו את Repeat בתוך ה-Studio, זה שינוי ברגע הגילוי – דורש החלטה.
+15. **שיעור 2.2:** התמונות והנוסחים ממתינים לבחירה ולאישור של המחברת (ראו "שיעור 2.2 – מקרוב מאוד: תכנון ושלבים הבאים").
 
 ---
 
@@ -330,3 +621,4 @@ commit: 4c0e816, בענף app-artwork-2-1. פורסם ב-9 באוקטובר 2026
 | 9 באוקטובר 2026 | 2.1 Studio: "היצירות שלי" במסכים 10 ו-12; פריסה צפופה במובייל (פורסם) | ראו היסטוריית ה-git |
 | 9 באוקטובר 2026 | 2.1: הכוונה להתבוננות במסכים 1–5 (פורסם) | ראו היסטוריית ה-git |
 | 9 באוקטובר 2026 | 2.1: ליטוש מסכים 2 ו-4; 2.1 מתועד כמודל לשיעורים הבאים (פורסם) | ראו היסטוריית ה-git |
+| 9 באוקטובר 2026 | 2.2: תכנון 13 המסכים אושר; תמונות מועמדות ונוסחים לאישור; מצב לנקודת המשך (תיעוד בלבד, ב-app-artwork-2-1) | ראו היסטוריית ה-git |
