@@ -19,6 +19,7 @@ window.APP_LESSONS['2-1'] = {
   langs: ['he', 'en'],
   artworkActivity: '2-1-free',   // the Studio activity "My artworks" opens an artwork of this lesson in (never its last one)
   wordsFirst: true,              // a screen with images: its words (its question) first, then the images (js/player.js)
+  works: true,                   // My artworks from the lesson: an icon in the top bar, and the end screen's main button (js/player.js)
   /* the lesson's own opening screen (js/app.js), under its title: a subtitle and what the lesson holds ({n}: its
      number of screens); "start" begins anew from screen 1 (a new run and, on screen 8, a new artwork; the earlier
      ones stay, in My artworks), "resume" (only once the learner has gone past screen 1) the current run at the
@@ -117,8 +118,8 @@ window.APP_LESSONS['2-1'] = {
     /* 11 */ { step: 'notice', text: { he: ['תסתכלו על מה שנוצר.', 'מה מעניין אתכם עכשיו יותר —<br>הדבר שממנו התחלתם,<br>או משהו חדש שקרה בדרך?', 'תמשיכו מהמקום שמעניין אתכם.'],
                                     en: ['Look at what has emerged.', 'What interests you more now —<br>the thing you started from,<br>or something new that happened along the way?', 'Continue from the part that interests you.'] } },
     /* 12 */ { step: 'studio', studio: { activity: '2-1-develop', back: 13 }, paper: { action: 'doneForNow' } },
-    /* 13 */ { step: 'end', text: { he: ['מאיפה היצירה שלכם התחילה?<br>ומה קרה בה שלא תכננתם מראש?', 'דפוס התחיל את התהליך —<br>אבל היצירה לא הייתה חייבת להישאר דפוס.'],
-                                 en: ["Where did your artwork begin?<br>What happened in it that you didn't plan in advance?", "Pattern began the process —<br>but the artwork didn't have to remain a pattern."] },
+    /* 13 */ { step: 'end', text: { he: ['מאיפה היצירה שלכם התחילה?<br>ומה קרה בה שלא תכננתם מראש?', 'דפוס התחיל את התהליך,<br>אבל היצירה לא הייתה חייבת להישאר דפוס.'],
+                                 en: ["Where did your artwork begin?<br>What happened in it that you didn't plan in advance?", "Pattern began the process,<br>but the artwork didn't have to remain a pattern."] },
               studio: { activity: '2-1-free' } }
   ]
 };

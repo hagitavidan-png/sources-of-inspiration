@@ -189,8 +189,10 @@
     return cards.sort(function (a, b) { return a.at !== b.at ? (a.at < b.at ? 1 : -1) : a.created < b.created ? 1 : a.created > b.created ? -1 : 0; });
   }
   var PAPER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>';
-  function gallery() {
-    frame(esc(I.ui('gallery')), '#/home', '<div class="ga"></div>');
+  /* My artworks; opened from a lesson's screen (#/gallery/<lesson>/<screen>), its back goes to that screen */
+  function gallery(lesson, at) {
+    var from = /^[a-z0-9-]+$/i.test(lesson || '') && /^\d+$/.test(at || '') ? '/' + lesson + '/' + at : '';
+    frame(esc(I.ui('gallery')), from ? '#/lesson/' + lesson + '/play/' + at : '#/home', '<div class="ga"></div>');
     var W = window.Artworks;
     Promise.all([W.list(), W.runs(), W.attempts()]).then(function (r) {
       var box = root.querySelector('.ga');
@@ -200,7 +202,7 @@
         box.innerHTML = '<div class="ga-empty"><p>' + esc(I.ui('artworksEmpty')) + '</p><a class="sh-primary" href="#/units">' + esc(I.ui('artworksStart')) + '</a></div>';
         return;
       }
-      var back = encodeURIComponent('../index.html#/gallery');
+      var back = encodeURIComponent('../index.html#/gallery' + from);
       box.innerHTML = '<ol class="ga-list">' + cards.map(function (c, i) {
         var w = c.w, L = c.lesson && lessonOf(c.lesson), line = L ? I.ui('lesson') + ' ' + L.num + ' · ' + L.title : '';
         var alt = line ? I.ui('artworkAlt', { lesson: line }) : I.ui('artworkAlt', { lesson: '' }).replace(/\s*·\s*$/, '');
@@ -233,7 +235,9 @@
         go: function (k) { go('#/lesson/' + id + '/play/' + k); },
         exit: function () { go('#/lesson/' + id); },
         finish: function () { go('#/unit/' + window.AppAdapters[L.adapter](window.LESSON_PAGE).lesson.unitNum); },
-        studio: function (href) { location.href = href; }
+        studio: function (href) { location.href = href; },
+        works: function (k) { go('#/gallery/' + id + '/' + k); },   // My artworks, and back to this screen
+        worksHref: function (k) { return '#/gallery/' + id + '/' + k; }
       });
     });
   }
@@ -241,7 +245,7 @@
   function route() {
     var h = location.hash.replace(/^#\/?/, '').split('/');
     if (h[0] === 'units') units();
-    else if (h[0] === 'gallery') gallery();
+    else if (h[0] === 'gallery') gallery(h[1], h[2]);
     else if (h[0] === 'unit' && h[1]) unit(h[1]);
     else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], +h[3]);
     else if (h[0] === 'lesson' && h[1]) lessonIntro(h[1]);

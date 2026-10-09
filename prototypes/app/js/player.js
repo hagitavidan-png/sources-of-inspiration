@@ -225,7 +225,7 @@ window.Player = (function () {
       rows.filter(function (r) { return r.k === 'do'; }).map(row).join('') +
       rows.filter(function (r) { return r.k !== 'do'; }).map(row).join('') +
       (first ? '' : lines(side.text || s.text)) + (s.more ? more(s.more) : '');
-    var action = { label: I.ui('continue'), go: function () { go(n + 1); } }, extra = null;
+    var action = { label: I.ui('continue'), go: function () { go(n + 1); } }, extra = null, later = null;
     var work = studio && made(art), preview = work ? '<figure class="pl-studio-work"><img src="' + work.preview + '" alt=""></figure>' : '';
 
     /* 3, 4: what the learner sees first; the word for it only once "Continue" is pressed */
@@ -330,6 +330,8 @@ window.Player = (function () {
       extra = { label: ACT('keepCreating'), go: function () {
         if (studio) openStudio(s.studio.activity, n, '&control=' + encodeURIComponent(run.change || 'size')); else go(free);
       } };
+      /* L.works (2.1): My artworks is the main way out; "another time" stays, quieter */
+      if (L.works) { later = action; action = { label: I.ui('gallery'), go: function () { run.done = true; keep().then(function () { nav.works(n); }); } }; }
     }
     if (s.step === 'repeat' && studio && hasRepeat(art)) action = { label: I.ui('continue'), go: function () { go(n + 1); } };
 
@@ -337,12 +339,14 @@ window.Player = (function () {
       '<header class="pl-top">' +
         '<button type="button" class="pl-back" aria-label="' + esc(I.ui('back')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
         '<div class="pl-id"><span>' + esc(I.ui('lesson')) + ' ' + esc(A.lesson.number) + '</span> · ' + esc(I.tx(A.lesson.title)) + '</div>' +
+        (L.works ? '<a class="pl-works" href="' + nav.worksHref(n) + '" aria-label="' + esc(I.ui('gallery')) + '" title="' + esc(I.ui('gallery')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg></a>' : '') +
         '<span class="pl-count" aria-label="' + n + '/' + count + '">' + n + '/' + count + '</span>' +
         '<div class="pl-progress" aria-hidden="true"><i style="width:' + (n / count * 100).toFixed(2) + '%"></i></div>' +
       '</header>' +
       '<main class="pl-main' + (s.step ? ' pl-step-' + s.step : '') + '" data-screen="' + n + '" tabindex="-1"><div class="pl-inner">' +
         (title ? '<h2 class="pl-title">' + esc(title) + '</h2>' : '') + body + '</div></main>' +
       '<footer class="pl-foot">' + (extra ? '<button type="button" class="pl-secondary">' + esc(extra.label) + '</button>' : '') +
+        (later ? '<button type="button" class="pl-secondary pl-later">' + esc(later.label) + '</button>' : '') +
         (action ? '<button type="button" class="pl-primary"' + (action.off ? ' disabled' : '') + '>' + esc(action.label) + '</button>' : '') + '</footer>';
     root.className = 'app player';
 
@@ -353,6 +357,7 @@ window.Player = (function () {
     });
     if (action) root.querySelector('.pl-primary').addEventListener('click', function () { if (!action.off) action.go(); });
     if (extra) root.querySelector('.pl-secondary').addEventListener('click', extra.go);
+    if (later) root.querySelector('.pl-later').addEventListener('click', later.go);
     root.querySelectorAll('.pl-choice').forEach(function (b) {
       b.addEventListener('click', function () {
         if (b.disabled) return;
