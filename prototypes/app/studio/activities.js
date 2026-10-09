@@ -133,6 +133,9 @@ window.STUDIO_ACTIVITIES = {
      on. "Start over" (restart) on every screen of the rebuilt flow, the first one (2-1-begin) too */
   var ALL = ['size', 'rotation', 'spacing'];
   A['2-1-begin'].restart = true;
+  /* the first drawing's way on: the work written, then the lesson's next screen (9: the question, and the learner's own
+     "See what happens" before Repeat appears); never Repeat itself. "Start over" stays the quieter button */
+  A['2-1-begin'].next = { label: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' } };
   lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true, live: true }, { restart: true,
     prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
     next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
