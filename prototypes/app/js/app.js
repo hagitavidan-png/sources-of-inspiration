@@ -28,9 +28,13 @@ root.querySelectorAll('[data-lang]').forEach(function (b) { b.addEventListener('
 root.querySelector('.sh-main').focus({ preventScroll: true });
 }
 function home() {
+var info = [['teachers.html', 'teachersInfo'], ['privacy.html', 'privacy'], ['terms.html', 'terms']].map(function (x) {
+return '<a href="' + SITE + x[0] + '">' + esc(I.ui(x[1])) + '</a>';
+}).join('');
 frame('', null, '<div class="sh-home"><p class="sh-brand">' + esc(I.ui('site')) + '</p>' +
 '<a class="sh-primary" href="#/units">' + esc(I.ui('units')) + '</a>' +
-'<a class="sh-secondary" href="#/gallery">' + esc(I.ui('gallery')) + '</a></div>');
+'<a class="sh-secondary" href="#/gallery">' + esc(I.ui('gallery')) + '</a>' +
+'<p class="sh-info">' + info + '</p></div>');
 }
 function unitStatus(u) {
 if (STATUS.units.indexOf(u.id) < 0) return I.ui('soon');

@@ -19,7 +19,8 @@ proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בה
 images: 'תמונות', galleryPrev: 'התמונה הקודמת', galleryNext: 'התמונה הבאה', galleryCount: 'תמונה {n} מתוך {total}',
 photoBy: 'צילום: {who}', exploreMore: 'רוצים לגלות עוד?', newTab: '(נפתח בלשונית חדשה)', enlarge: 'הגדלת התמונה: {what}',
 protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
-protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).'
+protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).',
+teachersInfo: 'מידע למורים', privacy: 'מדיניות פרטיות', terms: 'תנאי שימוש'
 },
 en: {
 site: 'Sources of Inspiration in Art', units: 'Units',
@@ -35,7 +36,8 @@ proto: 'Prototype', protoImage: 'Image placeholder. To be added.', protoAudio: '
 images: 'Images', galleryPrev: 'Previous image', galleryNext: 'Next image', galleryCount: 'Image {n} of {total}',
 photoBy: 'Photo: {who}', exploreMore: 'Want to discover more?', newTab: '(opens in a new tab)', enlarge: 'Enlarge image: {what}',
 protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
-protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).'
+protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).',
+teachersInfo: 'Information for teachers', privacy: 'Privacy Policy', terms: 'Terms of Use'
 }
 };
 var lang = (function () { try { return localStorage.getItem('sourcesLang'); } catch (e) { return null; } })();
