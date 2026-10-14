@@ -1,0 +1,22 @@
+Copyright (c) 2026 Hagit Avidan. All rights reserved.
+
+This repository and the website published from it are not open source. No permission is granted to use, copy,
+modify, merge, publish, distribute, sublicense or sell any part of them, except as allowed by applicable law or by
+prior written permission of the copyright holder.
+
+The rights that GitHub's Terms of Service give other GitHub users to view and fork public repositories on GitHub
+do not grant any further right.
+
+See NOTICE.txt and the Terms of Use (terms.html).
+
+---
+
+© 2026 חגית אבידן. כל הזכויות שמורות.
+
+המאגר הזה והאתר שמתפרסם ממנו אינם קוד פתוח. לא ניתנת רשות להשתמש, להעתיק, לשנות, למזג, לפרסם, להפיץ, לתת רישיון
+משנה או למכור חלק כלשהו מהם, אלא כפי שהדין מתיר או באישור מראש ובכתב של בעלת הזכויות.
+
+הזכויות שתנאי השירות של GitHub נותנים למשתמשי GitHub אחרים לצפות במאגרים ציבוריים ב-GitHub ולבצע להם fork אינן
+מעניקות שום זכות נוספת.
+
+ראו את NOTICE.txt ואת תנאי השימוש (terms.html).

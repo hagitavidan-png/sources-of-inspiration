@@ -1,0 +1,297 @@
+/*! Sources of Inspiration in Art | מקורות השראה באמנות. Original code and content (c) 2026 Hagit Avidan | חגית אבידן. All rights reserved | כל הזכויות שמורות. Works and materials by others belong to their owners | יצירות וחומרים של אחרים שייכים לבעליהם. See NOTICE.txt */
+window.LESSON_PAGE = {
+"id": "lesson-2-1",
+"path": "lessons/lesson-2-1.html",
+"slides": null,
+"variant": "v2",
+"layout": {
+"explore": "pattern",
+"sources": "duo",
+"create": "pattern",
+"end": "pattern"
+},
+"number": "2.1",
+"unit": {
+"he": "מבט החוצה",
+"en": "Looking Outward"
+},
+"unitNum": "02",
+"title": {
+"he": "דפוסים בטבע ובאמנות",
+"en": "Patterns in Nature & Art"
+},
+"time": {
+"he": "50 דקות",
+"en": "50 min"
+},
+"intro": {
+"he": "נמצא דפוס אמיתי סביבנו, נזהה את המרכיב שחוזר ואת החוק שלפיו הוא חוזר, ונבדוק מה קורה כשמשנים כלל אחד.",
+"en": "Find a real pattern around you, identify the element that repeats and the rule it follows, and see what happens when one rule changes."
+},
+"materials": {
+"he": "נייר או יומן חזותי, עיפרון וצבעים לבחירה",
+"en": "Paper or a visual journal, a pencil and colours of your choice"
+},
+"hero": null,
+"sections": {
+"explore": {
+"blocks": [
+{
+"big": {
+"he": "הסתכלו סביבכם.<br>האם אתם רואים <em>חזרה</em>?",
+"en": "Look around you.<br>Do you see <em>repetition</em>?"
+},
+"sub": {
+"he": "דפוסים נמצאים בכל מקום. בקליפת העץ, בעורקי העלה, באריח שמתחת לרגליכם.",
+"en": "Patterns are everywhere. In the bark of a tree, the veins of a leaf, the tile beneath your feet."
+},
+"body": {
+"he": "ביחידה הקודמת חיפשנו מה חוזר בעבודות שלנו. עכשיו נחפש מה חוזר בעולם — ואיך.",
+"en": "In the previous unit we looked for what keeps returning in our work. Now we look for what repeats in the world — and how."
+}
+},
+{
+"big": {
+"he": "מצאו דפוס אחד<br>שנמצא לידכם עכשיו.",
+"en": "Find one pattern<br>near you right now."
+},
+"sub": {
+"he": "לא בתמונה, במציאות.<br>הסתכלו על בד, רצפה, קיר, עור, צמח.",
+"en": "Not in an image, in reality.<br>Look at fabric, floor, wall, skin, a plant."
+}
+},
+{
+"big": {
+"he": "התקרבו אליו.<br><em>מה היחידה?</em>",
+"en": "Move closer.<br><em>What is the unit?</em>"
+},
+"sub": {
+"he": "מה הדבר הקטן ביותר שחוזר?",
+"en": "What is the smallest thing that repeats?"
+},
+"chips": {
+"he": [
+"צורה",
+"קו",
+"מרווח",
+"כיוון"
+],
+"en": [
+"Shape",
+"Line",
+"Space",
+"Direction"
+]
+},
+"sketch": "finder"
+},
+{
+"big": {
+"he": "<em>מה החוק?</em>",
+"en": "<em>What is the rule?</em>"
+},
+"sub": {
+"he": "איך היחידה חוזרת?",
+"en": "How does the unit repeat?"
+},
+"chips": {
+"he": [
+"במרווח קבוע",
+"בשורות",
+"בשיקוף",
+"בסיבוב",
+"בלי סדר ברור"
+],
+"en": [
+"At even spacing",
+"In rows",
+"Mirrored",
+"Turning",
+"With no clear order"
+]
+}
+}
+]
+},
+"sources": {
+"blocks": [
+{
+"works": [
+{
+"img": "morris-strawberry-thief-aic",
+"alt": "William Morris, Strawberry Thief, 1883",
+"artist": {
+"he": "ויליאם מוריס",
+"en": "William Morris"
+},
+"workTitle": {
+"he": "גנב התותים, 1883",
+"en": "Strawberry Thief, 1883"
+},
+"note": {
+"he": "לפי המוזיאון, מוריס עיצב את הדוגמה אחרי שראה ציפורים גונבות תותים מהגינה שלו.",
+"en": "According to the museum, Morris designed the pattern after watching birds steal strawberries from his garden."
+},
+"link": {
+"href": "https://www.artic.edu/artworks/149052/strawberry-thief",
+"label": {
+"he": "פתחו את היצירה באתר Art Institute of Chicago ↗",
+"en": "Open the work on the Art Institute of Chicago website ↗"
+}
+}
+}
+]
+},
+{
+"works": [
+{
+"img": null,
+"alt": "Yayoi Kusama, No. F, 1959",
+"artist": {
+"he": "יאיוי קוסמה",
+"en": "Yayoi Kusama"
+},
+"workTitle": {
+"he": "No. F, 1959",
+"en": "No. F, 1959"
+},
+"note": {
+"he": "ב־1958 עברה קוסמה מיפן לניו יורק, ושם החלה בסדרת ״רשתות האינסוף״ (Infinity Nets): משיכות מכחול קטנות ומשתלבות של צבע לבן עבה, שחוזרות על פני כל הבד.",
+"en": "In 1958 Kusama moved from Japan to New York, where she began her Infinity Nets series: small, interlocking brushstrokes of thick white paint, repeated across the whole canvas."
+},
+"link": {
+"href": "https://www.moma.org/collection/works/80176",
+"label": {
+"he": "פתחו את היצירה באתר MoMA ↗",
+"en": "Open the work on the MoMA website ↗"
+}
+}
+}
+]
+}
+]
+},
+"look": {
+"blocks": [
+{
+"big": {
+"he": "שתי דרכים לחזור.",
+"en": "Two ways to repeat."
+},
+"ask": {
+"he": "אחד תוכנן מראש, השני נבנה סימן אחרי סימן. איך רואים את זה?",
+"en": "One was planned in advance, the other was built mark by mark. How can you see that?"
+},
+"lines": {
+"he": [
+"מה היחידה אצל מוריס? איפה היא משתקפת?",
+"אצל קוסמה, האם יש בכלל יחידה? מה חוזר?",
+"איפה הדפוס נגמר?"
+],
+"en": [
+"What is the unit in Morris's work? Where is it mirrored?",
+"In Kusama's work, is there a unit at all? What repeats?",
+"Where does the pattern end?"
+]
+}
+}
+]
+},
+"create": {
+"steps": [
+{
+"big": {
+"he": "קחו דף.<br>ציירו את הדפוס שמצאתם.",
+"en": "Take a page.<br>Draw the pattern you found."
+},
+"sub": {
+"he": "לא את האובייקט, רק את ה<em>חזרה</em>.",
+"en": "Not the object, only the <em>repetition</em>."
+},
+"body": {
+"he": "התחילו מיחידה אחת, וחזרו עליה לפי החוק שמצאתם.",
+"en": "Start from one unit, and repeat it following the rule you found."
+}
+},
+{
+"big": {
+"he": "עצרו.<br>האם החזרה אחידה או משתנה?",
+"en": "Pause.<br>Is the repetition even or changing?"
+},
+"sub": {
+"he": "תנו לקצב להשתנות: האיצו, האטו, הרחיבו.",
+"en": "Let the rhythm change: speed up, slow down, expand."
+},
+"chips": {
+"he": [
+"אחידה",
+"משתנה"
+],
+"en": [
+"Even",
+"Changing"
+]
+}
+},
+{
+"big": {
+"he": "שנו <em>דבר אחד בלבד</em><br>על הדף.",
+"en": "Change <em>only one thing</em><br>on the page."
+},
+"sub": {
+"he": "ראו מה קורה לדפוס כשמשנים כלל אחד.",
+"en": "Notice what happens to the pattern when one rule changes."
+},
+"chips": {
+"he": [
+"גודל",
+"כיוון",
+"מרווח"
+],
+"en": [
+"Size",
+"Direction",
+"Space"
+]
+},
+"sketch": "vary"
+}
+]
+},
+"end": {
+"blocks": [
+{
+"big": {
+"he": "עצרו. התבוננו.",
+"en": "Pause. Look."
+},
+"sub": {
+"he": "הדפוס השתנה,<br>אבל עדיין מזוהה.",
+"en": "The pattern changed,<br>but it is still recognizable."
+}
+},
+{
+"big": {
+"he": "איזה חוק שיניתם,<br>ומה קרה לדפוס?",
+"en": "Which rule did you change,<br>and what happened to the pattern?"
+},
+"prompt": {
+"he": "כששיניתי את ה… הדפוס…",
+"en": "When I changed the… the pattern…"
+}
+},
+{
+"big": {
+"he": "דפוס הוא חוק שאפשר לראות.",
+"en": "A pattern is a rule you can see."
+},
+"sub": {
+"he": "ומרגע שרואים אותו, אפשר לשנות אותו.",
+"en": "And once you see it, you can change it."
+},
+"kind": "close"
+}
+]
+}
+}
+};

@@ -1,0 +1,40 @@
+Sources of Inspiration in Art | מקורות השראה באמנות
+Copyright (c) 2026 Hagit Avidan. All rights reserved.
+
+This website and its app, including the software code (HTML, CSS and JavaScript, the Lesson Player and the
+Studio), the lesson texts, the structure and sequence of the lessons as expressed here, the visual design, and the
+selection and arrangement of the sources, are the work of Hagit Avidan and are protected by copyright.
+
+No licence is granted. You may view the website in a web browser and use the lessons in class as set out in the
+Terms of Use (terms.html). Any other use requires prior written permission, including copying, adapting,
+distributing, publishing or selling the website, the app, its code or its content, in whole or in part, and the
+automated collection of its content, including for training artificial intelligence.
+
+Works by others: the artworks shown in the lessons belong to their creators or are in the public domain. Photographs
+are used under their own licences and are credited where they are shown. This notice does not affect their rights.
+Fonts are loaded from Google Fonts under their own licences.
+
+Artworks that learners make belong to the learners who made them.
+
+Contact: see the Terms of Use (terms.html).
+
+---
+
+מקורות השראה באמנות | Sources of Inspiration in Art
+© 2026 חגית אבידן. כל הזכויות שמורות.
+
+האתר והאפליקציה, כולל קוד התוכנה (HTML,‏ CSS ו-JavaScript, נגן השיעורים וה-Studio), הטקסטים של השיעורים, המבנה
+והרצף של השיעורים כפי שהם מובאים כאן, העיצוב, והבחירה והסידור של המקורות, הם יצירה של חגית אבידן ומוגנים בזכות
+יוצרים.
+
+לא ניתן רישיון שימוש. מותר לצפות באתר בדפדפן ולהשתמש בשיעורים בכיתה, כמפורט בתנאי השימוש (terms.html). כל שימוש
+אחר מחייב אישור מראש ובכתב, ובכלל זה העתקה, עיבוד, הפצה, פרסום או מכירה של האתר, האפליקציה, הקוד או התוכן, כולם
+או חלקם, ואיסוף אוטומטי של התוכן, כולל לצורך אימון בינה מלאכותית.
+
+יצירות של אחרים: יצירות האמנות שמוצגות בשיעורים שייכות ליוצרים שלהן או נמצאות בנחלת הכלל. התצלומים משמשים לפי
+הרישיונות שלהם, והקרדיט מופיע במקום שבו הם מוצגים. ההודעה הזו אינה פוגעת בזכויות שלהם. הגופנים נטענים מ-Google
+Fonts לפי הרישיונות שלהם.
+
+יצירות שהלומדים יוצרים שייכות ללומדים שיצרו אותן.
+
+יצירת קשר: ראו את תנאי השימוש (terms.html).

@@ -1,0 +1,114 @@
+/*! Sources of Inspiration in Art | מקורות השראה באמנות. Original code and content (c) 2026 Hagit Avidan | חגית אבידן. All rights reserved | כל הזכויות שמורות. Works and materials by others belong to their owners | יצירות וחומרים של אחרים שייכים לבעליהם. See NOTICE.txt */
+window.LESSON_PAGES_INDEX = {
+"lessons/lesson-1-1.html": "lesson-pages/lesson-1-1.html",
+"lessons/emotion-drawing.html": "lesson-pages/emotion-drawing.html",
+"lessons/visual-journal.html": "lesson-pages/visual-journal.html",
+"lessons/memory-drawing.html": "lesson-pages/memory-drawing.html",
+"lessons/journal-artwork.html": "lesson-pages/journal-artwork.html",
+"lessons/frida-kahlo.html": "lesson-pages/frida-kahlo.html",
+"lessons/experience-experiments.html": "lesson-pages/experience-experiments.html",
+"lessons/experience-artwork.html": "lesson-pages/experience-artwork.html",
+"lessons/unit-summary.html": "lesson-pages/unit-summary.html",
+"lessons/lesson-2-1.html": "lesson-pages/lesson-2-1.html",
+"lessons/lesson-2-2.html": "lesson-pages/lesson-2-2.html",
+"lessons/lesson-2-3.html": "lesson-pages/lesson-2-3.html",
+"lessons/lesson-2-4.html": "lesson-pages/lesson-2-4.html",
+"lessons/lesson-2-5.html": "lesson-pages/lesson-2-5.html",
+"lessons/lesson-2-6.html": "lesson-pages/lesson-2-6.html",
+"lessons/lesson-4-1.html": "lesson-pages/lesson-4-1.html"
+};
+window.LESSON_TITLES = {
+"lessons/journal-artwork.html": {
+"he": "מה חוזר בעבודות שלי?",
+"en": "What Keeps Returning in My Work?"
+},
+"lessons/experience-experiments.html": {
+"he": "מחוויה ליצירה, חלק א: ניסויים",
+"en": "From Experience to Artwork, Part 1: Experiments"
+},
+"lessons/experience-artwork.html": {
+"he": "מחוויה ליצירה, חלק ב: פיתוח עבודה",
+"en": "From Experience to Artwork, Part 2: Developing a Work"
+},
+"lessons/lesson-2-2.html": {
+"he": "אותו דבר, אור אחר",
+"en": "Same Thing, Different Light"
+},
+"lessons/lesson-2-3.html": {
+"he": "מקרוב מאוד",
+"en": "Up Close"
+},
+"lessons/lesson-2-4.html": {
+"he": "איפה אני במרחב?",
+"en": "Where Am I in the Space?"
+},
+"lessons/lesson-2-5.html": {
+"he": "לתפוס תנועה",
+"en": "Catching Movement"
+},
+"lessons/lesson-2-6.html": {
+"he": "כשהציור עצמו נע",
+"en": "When the Drawing Itself Moves"
+},
+"lessons/lesson-4-1.html": {
+"he": "חפץ וזיכרון",
+"en": "Object and Memory"
+}
+};
+window.LESSON_ORDER = {
+"unit02": [
+"lessons/lesson-2-1.html",
+"lessons/lesson-2-3.html",
+"lessons/lesson-2-2.html",
+"lessons/lesson-2-4.html",
+"lessons/lesson-2-5.html",
+"lessons/lesson-2-6.html"
+]
+};
+window.LESSON_ADDED = {
+"unit02": [
+{
+"path": "lessons/lesson-2-5.html",
+"title": {
+"he": "לתפוס תנועה",
+"en": "Catching Movement"
+}
+},
+{
+"path": "lessons/lesson-2-6.html",
+"title": {
+"he": "כשהציור עצמו נע",
+"en": "When the Drawing Itself Moves"
+}
+}
+]
+};
+window.UNIT_TITLES = {
+"unit02": {
+"he": "מבט החוצה",
+"en": "Looking Outward"
+}
+};
+window.SITE_STATUS = {
+"units": [
+"unit02",
+"unit04"
+],
+"lessons": [
+"lessons/lesson-2-1.html",
+"lessons/lesson-4-1.html"
+]
+};
+(function () {
+var N = window.ART_NAVIGATION, O = window.LESSON_ORDER, A = window.LESSON_ADDED || {}, T = window.UNIT_TITLES || {};
+if (!N || !O) return;
+(N.units || []).forEach(function (u) {
+if (T[u.id]) u.title = T[u.id];
+(A[u.id] || []).forEach(function (l) {
+if (u.lessons && !u.lessons.some(function (x) { return x.path === l.path; })) u.lessons.push(l);
+});
+var o = O[u.id];
+if (!o || !u.lessons) return;
+u.lessons.sort(function (a, b) { return o.indexOf(a.path) - o.indexOf(b.path); });
+});
+})();
