@@ -62,6 +62,10 @@ credit: { who: 'Kunsthaus Zürich', licence: { he: 'נחלת הכלל', en: 'Pub
 { id: 'artists', title: { he: 'עוד אמנים', en: 'More artists' },
 note: { he: 'היצירות של האמנים האלה מוגנות בזכויות יוצרים, ולכן הן נפתחות באתר רשמי, בלשונית חדשה.', en: 'These artists\' works are protected by copyright, so they open on an official website, in a new tab.' },
 links: [
+{ name: { he: 'מ"ק אשר', en: 'M. C. Escher' }, work: { he: 'ריצופים', en: 'Tessellations' },
+text: { he: 'אשר חוזר על דמויות של ציפורים, דגים ולטאות כך שהן משתלבות זו בזו בלי רווח ביניהן.', en: 'Escher repeats birds, fish and lizards so that they fit into each other with no gaps between them.' },
+ask: { he: 'איזו צורה שלכם יכולה להשתלב בעצמה?', en: 'Which of your shapes could fit into itself?' },
+href: 'https://mcescher.com/gallery/symmetry/', site: { he: 'האתר הרשמי של מ"ק אשר', en: 'Official M. C. Escher website' } },
 { name: { he: 'יאיוי קוסמה', en: 'Yayoi Kusama' }, work: { he: 'רשתות אינסוף', en: 'Infinity Nets' },
 text: { he: 'קוסמה מציירת לולאות קטנות שוב ושוב, עד שהן ממלאות בד שלם ונראות כאילו אין להן סוף.', en: 'Kusama paints small loops again and again, until they fill a whole canvas and seem to have no end.' },
 ask: { he: 'מה קורה לצורה קטנה כשהיא חוזרת אלפי פעמים?', en: 'What happens to a small shape when it repeats thousands of times?' },
@@ -75,11 +79,7 @@ go: [{ label: { he: 'צפייה ביצירה', en: 'View the artwork' }, site: {
 text: { he: 'ריילי חוזרת על ריבועים בשחור ולבן ומצרה אותם לאט, והמשטח השטוח נראה כאילו הוא מתקפל.', en: 'Riley repeats black and white squares and slowly makes them narrower, so the flat surface seems to fold.' },
 ask: { he: 'מה קורה כשמשנים את החזרה רק קצת בכל פעם?', en: 'What happens when the repetition changes just a little each time?' },
 go: [{ label: { he: 'צפייה ביצירה', en: 'View the artwork' }, site: { he: 'Yale Center for British Art', en: 'Yale Center for British Art' }, href: 'https://bridget-riley.publications.britishart.yale.edu/catalogue/1/' },
-{ label: { he: 'יצירות נוספות', en: 'Explore more artworks' }, site: { he: 'David Zwirner', en: 'David Zwirner' }, href: 'https://www.davidzwirner.com/artists/bridget-riley' }] },
-{ name: { he: 'מ"ק אשר', en: 'M. C. Escher' }, work: { he: 'ריצופים', en: 'Tessellations' },
-text: { he: 'אשר חוזר על דמויות של ציפורים, דגים ולטאות כך שהן משתלבות זו בזו בלי רווח ביניהן.', en: 'Escher repeats birds, fish and lizards so that they fit into each other with no gaps between them.' },
-ask: { he: 'איזו צורה שלכם יכולה להשתלב בעצמה?', en: 'Which of your shapes could fit into itself?' },
-href: 'https://mcescher.com/gallery/symmetry/', site: { he: 'האתר הרשמי של מ"ק אשר', en: 'Official M. C. Escher website' } }
+{ label: { he: 'יצירות נוספות', en: 'Explore more artworks' }, site: { he: 'David Zwirner', en: 'David Zwirner' }, href: 'https://www.davidzwirner.com/artists/bridget-riley' }] }
 ] }
 ]
 };

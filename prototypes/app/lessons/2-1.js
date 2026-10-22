@@ -76,10 +76,10 @@ en: ['<span class="pl-hint">Prepare a sheet of paper and choose a material you e
 inspire: { label: { he: 'השראה', en: 'Inspiration' } } } },
 { step: 'end', work: true, text: { he: ['מה התחיל כחזרה, ומה קרה בדרך שלא תכננתם?'], en: ["What began as repetition, and what happened along the way that you didn't plan?"] },
 studio: { activity: '2-1-free' },
-more: [{ name: { he: 'יאיוי קוסמה', en: 'Yayoi Kusama' }, site: { he: 'National Gallery of Art', en: 'National Gallery of Art' }, href: 'https://www.nga.gov/artworks/124183-infinity-nets-yellow' },
+more: [{ name: { he: 'מ"ק אשר', en: 'M. C. Escher' }, site: { he: 'האתר הרשמי של מ"ק אשר', en: 'Official M. C. Escher website' }, href: 'https://mcescher.com/gallery/symmetry/' },
+{ name: { he: 'יאיוי קוסמה', en: 'Yayoi Kusama' }, site: { he: 'National Gallery of Art', en: 'National Gallery of Art' }, href: 'https://www.nga.gov/artworks/124183-infinity-nets-yellow' },
 { name: { he: 'סוניה דלונה', en: 'Sonia Delaunay' }, site: { he: 'The Metropolitan Museum of Art', en: 'The Metropolitan Museum of Art' }, href: 'https://www.metmuseum.org/art/collection/search/485826' },
-{ name: { he: 'ברידג\'ט ריילי', en: 'Bridget Riley' }, site: { he: 'Yale Center for British Art', en: 'Yale Center for British Art' }, href: 'https://bridget-riley.publications.britishart.yale.edu/catalogue/1/' },
-{ name: { he: 'מ"ק אשר', en: 'M. C. Escher' }, site: { he: 'האתר הרשמי של מ"ק אשר', en: 'Official M. C. Escher website' }, href: 'https://mcescher.com/gallery/symmetry/' }] }
+{ name: { he: 'ברידג\'ט ריילי', en: 'Bridget Riley' }, site: { he: 'Yale Center for British Art', en: 'Yale Center for British Art' }, href: 'https://bridget-riley.publications.britishart.yale.edu/catalogue/1/' }] }
 ]
 };
 })();
