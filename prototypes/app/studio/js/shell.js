@@ -149,7 +149,7 @@ var hinted = false;
 function expand(on, first) {
 document.documentElement.classList.toggle('expanded', on);
 document.documentElement.classList.remove('vary-open'); vt.setAttribute('aria-expanded', 'false');
-if (on && !vt.parentNode && document.querySelector('.app > div.chrome > .vary')) $('tools').insertBefore(vt, $('restartTool') ? $('restartTool').previousElementSibling : null);
+if (on) addVaryToggle();
 ex.setAttribute('aria-pressed', String(on));
 ex.querySelector('span').textContent = on ? S.T.showAll : S.T.expand;
 ex.setAttribute('aria-label', on ? S.T.showAllLong : S.T.expandLong); ex.title = on ? S.T.showAllLong : S.T.expandLong;
@@ -187,6 +187,10 @@ var q = el.getBoundingClientRect(); return q.width > 0 && (q.left < lo || q.righ
 function refit() { syncMore(); if (!fitting) fitting = requestAnimationFrame(function () { fitting = 0; fitBar(); }); }
 window.addEventListener('resize', refit);
 if (window.MutationObserver) new MutationObserver(refit).observe(top, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });
+function addVaryToggle(strip) {
+if (strip && !(window.matchMedia && matchMedia('(orientation:landscape) and (min-width:640px) and (min-height:521px)').matches)) return;
+if (!vt.parentNode && document.querySelector('.app > div.chrome > .vary')) $('tools').insertBefore(vt, $('restartTool') ? $('restartTool').previousElementSibling : null);
+}
 expand(false, true);
 var pt = document.createElement('button');
 pt.type = 'button'; pt.id = 'panelToggle'; pt.className = 'panel-toggle';
@@ -197,6 +201,8 @@ document.documentElement.classList.toggle('panel-closed', !open);
 pt.setAttribute('aria-expanded', String(open));
 pt.setAttribute('aria-label', open ? S.T.panelClose : S.T.panelOpen); pt.title = open ? S.T.panelClose : S.T.panelOpen;
 if (first) return;
+if (!open) addVaryToggle(true);
+document.documentElement.classList.remove('vary-open'); vt.setAttribute('aria-expanded', 'false');
 try { localStorage.setItem('studioPanel', open ? 'open' : 'closed'); } catch (e) {}
 closePanels(true); fitBar();
 if (S.layout) S.layout();
@@ -206,6 +212,11 @@ var closedBefore = false;
 try { closedBefore = localStorage.getItem('studioPanel') === 'closed'; } catch (e) {}
 panel(!closedBefore, true);
 pt.addEventListener('click', function () { panel(document.documentElement.classList.contains('panel-closed')); });
+setTimeout(function () { if (document.documentElement.classList.contains('panel-closed')) addVaryToggle(true); }, 0);
+document.addEventListener('pointerdown', function (e) {
+var r = document.documentElement;
+if (r.classList.contains('panel-closed') && r.classList.contains('vary-open') && !e.target.closest('.vary-all, #varyToggle')) { r.classList.remove('vary-open'); vt.setAttribute('aria-expanded', 'false'); }
+});
 if (S.keep) {
 var keep = document.createElement('button'), busy = false;
 keep.className = 'btn primary main'; keep.id = 'keep'; keep.type = 'button'; keep.textContent = S.keep;
