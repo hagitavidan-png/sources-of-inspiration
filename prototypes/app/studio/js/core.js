@@ -127,7 +127,8 @@ var root = document.documentElement, was = root.classList.contains('side');
 stage.style.setProperty('--page-h', String(doc.h / doc.w));
 if (!(innerWidth >= 640 && innerWidth > innerHeight)) { root.classList.remove('side'); return; }
 var app = stage.parentNode, compact = root.classList.contains('compact'), expanded = root.classList.contains('expanded');
-if (compact && !expanded && innerHeight > 520 && root.classList.contains('panel-closed')) app.style.setProperty('--side', '64px');
+var strip = compact && !expanded && innerHeight > 520 && root.classList.contains('panel-closed');
+if (strip) app.style.setProperty('--side', '64px');
 else if (innerHeight <= 520 || (expanded && !compact) || (compact && matchMedia('(min-width:1500px) and (orientation:landscape)').matches)) app.style.removeProperty('--side');
 else if (expanded) app.style.setProperty('--side', Math.round(Math.max(176, Math.min(240, innerWidth - (innerHeight - 4) * doc.w / doc.h - 6))) + 'px');
 else app.style.setProperty('--side', Math.round(Math.max(176, Math.min(300, innerWidth - (innerHeight - 20) * doc.w / doc.h - 17))) + 'px');
@@ -137,7 +138,7 @@ var r = stage.getBoundingClientRect(), cs = getComputedStyle(stage);
 return Math.min((r.width - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) / doc.w, (r.height - 4) / doc.h);
 }
 var under = room(false), beside = room(true);
-root.classList.toggle('side', beside > under * 1.04);
+root.classList.toggle('side', strip || beside > under * 1.04);
 if (root.classList.contains('side') !== was) Studio.shell.closePanels(true);
 }
 function room() {
@@ -266,13 +267,17 @@ if ($('restartTool')) $('restartTool').disabled = !hasDrawing();
 items.forEach(function (it) { if (it.update) it.update($(it.id)); });
 watchers.forEach(function (fn) { fn(); });
 }
-var activeId = null, handler = null;
+var activeId = null, activeType = null, handler = null;
 function pt(e) {
 var r = canvas.getBoundingClientRect();
 var k = scale * view.z;
 return [Math.round((e.clientX - r.left) / k * 10) / 10, Math.round((e.clientY - r.top) / k * 10) / 10];
 }
 function onDown(e) {
+if (e.isPrimary) {
+if (e.pointerType === 'touch') { if (gesture) endGesture(); touches = {}; }
+if (activeId !== null && activeType === e.pointerType) { var stale = handler; activeId = null; handler = null; app.classList.remove('drawing'); if (stale) stale.up({ type: 'pointerup' }); }
+}
 if (e.pointerType === 'touch') {
 touches[e.pointerId] = [e.clientX, e.clientY];
 try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
@@ -287,7 +292,7 @@ if (e.pointerType === 'mouse' && e.button !== 0) return;
 Studio.shell.closePanels(true);
 handler = pointers[state.tool];
 if (!handler) return;
-activeId = e.pointerId; downAt = performance.now(); from = [e.clientX, e.clientY]; went = 0;
+activeId = e.pointerId; activeType = e.pointerType; downAt = performance.now(); from = [e.clientX, e.clientY]; went = 0;
 try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
 app.classList.add('drawing');
 handler.down(e);
@@ -478,6 +483,7 @@ canvas.addEventListener('pointerdown', onDown);
 canvas.addEventListener('pointermove', onMove);
 canvas.addEventListener('pointerup', onUp);
 canvas.addEventListener('pointercancel', onUp);
+canvas.addEventListener('lostpointercapture', onUp);
 canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 if (!window.Artworks) ART = null;
 if (ART) loadArt().then(start); else start(load());
