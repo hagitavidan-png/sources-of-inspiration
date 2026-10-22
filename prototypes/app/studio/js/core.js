@@ -141,11 +141,12 @@ var under = room(false), beside = room(true);
 root.classList.toggle('side', strip || beside > under * 1.04);
 if (root.classList.contains('side') !== was) Studio.shell.closePanels(true);
 }
+function PHONE_UP() { return document.documentElement.classList.contains('compact') && window.matchMedia && matchMedia('(max-width:600px) and (orientation:portrait)').matches; }
 function room() {
 var r = stage.getBoundingClientRect(), cs = getComputedStyle(stage), root = document.documentElement;
 var pl = parseFloat(cs.paddingLeft) || 0;
 return { r: r, W: r.width, H: r.height, aw: r.width - pl * 2, ah: r.height - 4, pl: pl, pt: parseFloat(cs.paddingTop) || 0,
-centre: root.classList.contains('side') || root.classList.contains('expanded') };
+centre: root.classList.contains('side') || root.classList.contains('expanded') || PHONE_UP() };
 }
 function place(b, z, x, y) {
 var pw = Math.floor(doc.w * scale * z), ph = Math.floor(doc.h * scale * z);
