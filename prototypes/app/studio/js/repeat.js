@@ -307,7 +307,7 @@ var o = bar.querySelector('output'); if (o) o.textContent = Math.round(amount('d
 if (!head) return;
 var sp = S.split(), offer = !!cfg.offer && !sp.marker && drawing(sp.source);
 var on = !!sp.marker && !S.doc.settings.repeatOff, shown = isLive(sp.marker) || (offer && !cfg.seeIt), off = shown && !on;
-var seeOffer = !!cfg.offer && !!cfg.seeIt && !sp.marker;
+var seeOffer = !!cfg.offer && !sp.marker;
 head.hidden = !(shown || seeOffer); top.classList.toggle('has-switch', shown);
 sw.classList.toggle('rp-offer', seeOffer && !shown); sw.disabled = seeOffer && !shown && !drawing(sp.source);
 sw.setAttribute('aria-checked', String(on)); sw.querySelector('span').textContent = on ? S.T.repeatOn : S.T.repeatOff;
