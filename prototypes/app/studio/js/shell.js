@@ -82,7 +82,9 @@ if (!S.clear) $('clear').hidden = true;
 $('save').classList.add('main');
 if (S.next) {
 var next = document.createElement('button');
-next.className = 'btn primary main'; next.id = 'next'; next.type = 'button'; next.textContent = S.next;
+next.className = 'btn primary main'; next.id = 'next'; next.type = 'button';
+next.innerHTML = '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span></span>';
+next.querySelector('span').textContent = S.next; next.setAttribute('aria-label', S.next); next.title = S.next;
 $('save').parentNode.appendChild(next);
 next.addEventListener('click', function () {
 if (next.disabled) return;
@@ -97,7 +99,8 @@ if (S.source) $('back').style.visibility = 'hidden';
 if (S.works) {
 var works = document.createElement('a');
 works.className = 'works'; works.href = S.works; works.setAttribute('aria-label', S.T.works); works.title = S.T.works;
-works.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>';
+works.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><span class="works-t"></span>';
+works.querySelector('.works-t').textContent = S.T.works;
 top.insertBefore(works, $('moreWrap'));
 var worksItem = document.createElement('a');
 worksItem.className = 'menu-item menu-works'; worksItem.href = S.works; worksItem.textContent = S.T.works;
@@ -185,6 +188,24 @@ function refit() { syncMore(); if (!fitting) fitting = requestAnimationFrame(fun
 window.addEventListener('resize', refit);
 if (window.MutationObserver) new MutationObserver(refit).observe(top, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });
 expand(false, true);
+var pt = document.createElement('button');
+pt.type = 'button'; pt.id = 'panelToggle'; pt.className = 'panel-toggle';
+pt.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path class="pt-in" d="M15 10l-2 2 2 2"/><path class="pt-out" d="M13 10l2 2-2 2"/></svg>';
+top.insertBefore(pt, top.firstChild);
+function panel(open, first) {
+document.documentElement.classList.toggle('panel-closed', !open);
+pt.setAttribute('aria-expanded', String(open));
+pt.setAttribute('aria-label', open ? S.T.panelClose : S.T.panelOpen); pt.title = open ? S.T.panelClose : S.T.panelOpen;
+if (first) return;
+try { localStorage.setItem('studioPanel', open ? 'open' : 'closed'); } catch (e) {}
+closePanels(true); fitBar();
+if (S.layout) S.layout();
+S.setView('fit');
+}
+var closedBefore = false;
+try { closedBefore = localStorage.getItem('studioPanel') === 'closed'; } catch (e) {}
+panel(!closedBefore, true);
+pt.addEventListener('click', function () { panel(document.documentElement.classList.contains('panel-closed')); });
 if (S.keep) {
 var keep = document.createElement('button'), busy = false;
 keep.className = 'btn primary main'; keep.id = 'keep'; keep.type = 'button'; keep.textContent = S.keep;

@@ -113,6 +113,8 @@ A['2-1-create'].tools.push('refs');
 A['2-1-free'].tools.push('refs'); A['2-1-free'].content = { inspiration: '2-1' };
 ['2-1-begin', '2-1-play', '2-1-develop', '2-1-free', '2-1-create'].forEach(function (id) { A[id].compact = true; });
 A['2-1-play'].works = A['2-1-develop'].works = A['2-1-create'].works = '2-1';
+A['2-1-free'].next = { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } };
+A['2-1-free'].works = '2-1';
 })(window.STUDIO_ACTIVITIES);
 window.STUDIO_ACTIVITIES['3-1-draw'] = { id: '3-1-draw', lesson: '3.1-app', tools: ['draw', 'color'], canvas: { aspect: '4:3' },
 clear: false, back: '../index.html#/lesson/3-1' };

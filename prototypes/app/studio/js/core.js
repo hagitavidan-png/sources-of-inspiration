@@ -11,7 +11,7 @@ expand: 'הגדלה', expandLong: 'הגדלת אזור הציור', showAll: 'ה
 more: 'עוד', whole: 'כל הדף', wholeLong: 'הצגת כל הדף', fill: 'מילוי המסך', fillLong: 'הדף ממלא את המסך',
 moveHint: 'אפשר להזיז את הדף בשתי אצבעות',
 saveNow: 'שמירת הציור', savedNow: 'הציור נשמר', saveNowFailed: 'השמירה נכשלה. הציור עדיין פתוח – נסו שוב.',
-varyToggle: 'הגדרות דפוס' },
+varyToggle: 'הגדרות דפוס', panelOpen: 'הצגת כל הכלים וההגדרות', panelClose: 'סרגל כלים מצומצם' },
 en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
 exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
 saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks', works: 'My artworks',
@@ -20,7 +20,7 @@ expand: 'Expand', expandLong: 'Make the drawing space bigger', showAll: 'Show al
 more: 'More', whole: 'Whole page', wholeLong: 'Show the whole page', fill: 'Fill the screen', fillLong: 'Let the page fill the screen',
 moveHint: 'Move the page with two fingers',
 saveNow: 'Save artwork', savedNow: 'Artwork saved', saveNowFailed: "Couldn't save. Your drawing is still open – try again.",
-varyToggle: 'Pattern settings' }
+varyToggle: 'Pattern settings', panelOpen: 'Show all tools and settings', panelClose: 'Compact toolbar' }
 };
 var caps = {};
 var renderers = {};
@@ -126,9 +126,10 @@ function layout() {
 var root = document.documentElement, was = root.classList.contains('side');
 stage.style.setProperty('--page-h', String(doc.h / doc.w));
 if (!(innerWidth >= 640 && innerWidth > innerHeight)) { root.classList.remove('side'); return; }
-var app = stage.parentNode;
-if (root.classList.contains('expanded') || innerHeight <= 520 ||
-(root.classList.contains('compact') && matchMedia('(min-width:1500px) and (orientation:landscape)').matches)) app.style.removeProperty('--side');
+var app = stage.parentNode, compact = root.classList.contains('compact'), expanded = root.classList.contains('expanded');
+if (compact && !expanded && innerHeight > 520 && root.classList.contains('panel-closed')) app.style.setProperty('--side', '64px');
+else if (innerHeight <= 520 || (expanded && !compact) || (compact && matchMedia('(min-width:1500px) and (orientation:landscape)').matches)) app.style.removeProperty('--side');
+else if (expanded) app.style.setProperty('--side', Math.round(Math.max(176, Math.min(240, innerWidth - (innerHeight - 4) * doc.w / doc.h - 6))) + 'px');
 else app.style.setProperty('--side', Math.round(Math.max(176, Math.min(300, innerWidth - (innerHeight - 20) * doc.w / doc.h - 17))) + 'px');
 function room(side) {
 root.classList.toggle('side', side);
@@ -523,7 +524,8 @@ keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label
 next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
 source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null,
 paper: autosaves() && activity.paper && safeBack(activity.paper.href) ? { href: safeBack(activity.paper.href), label: activity.paper.label[LANG] || activity.paper.label.he } : null,
-works: autosaves() && activity.works && /^\d+$/.test(Q.get('at') || '') ? '../index.html#/gallery/' + activity.works + '/' + Q.get('at') : null });
+works: !autosaves() || !activity.works ? null : /^\d+$/.test(Q.get('at') || '') ? '../index.html#/gallery/' + activity.works + '/' + Q.get('at') :
+Q.get('ctx') === 'gallery' ? BACK : null });
 tools.forEach(function (t) { if (caps[t].ready) caps[t].ready(); });
 layout();
 fit();
