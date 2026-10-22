@@ -533,7 +533,12 @@ updateUi();
 requestAnimationFrame(function () { requestAnimationFrame(fitPortrait); });
 if (reopened && !autosaves()) Studio.shell.toast(T.opened);
 var rt;
-window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { layout(); if (view.fill) setView('fill'); else fit(); }, 80); });
+function refit() { clearTimeout(rt); rt = setTimeout(function () { if (window.scrollX || window.scrollY) window.scrollTo(0, 0); layout(); if (view.fill) setView('fill'); else fit(); }, 80); }
+window.addEventListener('resize', refit);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', refit);
+window.addEventListener('orientationchange', refit);
+window.addEventListener('pageshow', refit);
+setTimeout(refit, 500);
 stage.addEventListener('wheel', onWheel, { passive: false });
 if (window.ResizeObserver) {
 var sw = 0, sh = 0;
