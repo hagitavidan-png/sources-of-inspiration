@@ -107,7 +107,7 @@ lesson21('2-1-create', { offer: true, seeIt: true, controls: ALL, together: true
 prompt: { he: 'ציירו יחידה באופן חופשי', en: 'Draw a unit freely' },
 promptAfter: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
 next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } }, content: { inspiration: '2-1' } });
-['2-1-create', '2-1-free'].forEach(function (id) { A[id].canvas = { aspect: '4:3', portrait: '4:5' }; });
+['2-1-create', '2-1-free'].forEach(function (id) { A[id].canvas = { aspect: '4:3', portrait: '4:5', landscape: '16:10' }; });
 A['2-1-create'].paper = { href: '../index.html#/lesson/2-1/play/6/paper', label: { he: 'יוצרים על נייר', en: 'Creating on paper' } };
 A['2-1-create'].tools.push('refs');
 A['2-1-free'].tools.push('refs'); A['2-1-free'].content = { inspiration: '2-1' };

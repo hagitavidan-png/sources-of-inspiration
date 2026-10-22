@@ -467,6 +467,7 @@ if (Q.get('ctx') === 'gallery') T.back = T.backGallery;
 ENTRY = id;
 KEY = 'studio-v2:' + activity.lesson + ':' + activity.id;
 if (activity.canvas.portrait && innerHeight > innerWidth) activity.canvas.aspect = activity.canvas.portrait;
+else if (activity.canvas.landscape && innerWidth > innerHeight && innerHeight > 520 && window.matchMedia && matchMedia('(any-pointer: coarse)').matches) activity.canvas.aspect = activity.canvas.landscape;
 doc.w = LOGICAL_W; doc.h = Math.round(LOGICAL_W * aspect(activity.canvas.aspect));
 app = $('app'); stage = $('stage'); canvas = $('canvas'); ctx = canvas.getContext('2d');
 base = document.createElement('canvas'); base.id = 'base'; base.setAttribute('aria-hidden', 'true');
