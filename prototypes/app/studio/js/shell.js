@@ -213,10 +213,19 @@ try { closedBefore = localStorage.getItem('studioPanel') === 'closed'; } catch (
 panel(!closedBefore, true);
 pt.addEventListener('click', function () { panel(document.documentElement.classList.contains('panel-closed')); });
 setTimeout(function () { if (document.documentElement.classList.contains('panel-closed')) addVaryToggle(true); }, 0);
+var swTap = -Infinity;
 document.addEventListener('pointerdown', function (e) {
 var r = document.documentElement;
+if (e.target.closest('.rp-switch')) swTap = performance.now();
 if (r.classList.contains('panel-closed') && r.classList.contains('vary-open') && !e.target.closest('.vary-all, #varyToggle')) { r.classList.remove('vary-open'); vt.setAttribute('aria-expanded', 'false'); }
 });
+if (window.MutationObserver) new MutationObserver(function (list) {
+var r = document.documentElement, sw = list[0].target;
+if (sw.getAttribute('aria-checked') !== 'true' || list[0].oldValue === 'true' || performance.now() - swTap > 4000) return;
+if (!r.classList.contains('panel-closed') || r.classList.contains('expanded')) return;
+addVaryToggle(true);
+setTimeout(function () { if (vt.parentNode && getComputedStyle(vt).display !== 'none') { r.classList.add('vary-open'); vt.setAttribute('aria-expanded', 'true'); } }, 0);
+}).observe(top, { subtree: true, attributes: true, attributeFilter: ['aria-checked'], attributeOldValue: true });
 if (S.keep) {
 var keep = document.createElement('button'), busy = false;
 keep.className = 'btn primary main'; keep.id = 'keep'; keep.type = 'button'; keep.textContent = S.keep;
