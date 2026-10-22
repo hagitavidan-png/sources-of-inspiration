@@ -7,7 +7,7 @@ var NAME = { he: 'עברית', en: 'English' };
 var UI = {
 he: {
 site: 'מקורות השראה באמנות', units: 'יחידות',
-'do': 'מה עושים', why: 'הסבר', check: 'בדיקה עצמית', checklist: 'רשימה לבדיקה', materials: 'חומרים', unit: 'יחידה', lesson: 'שיעור', soon: 'בקרוב', oneOpen: 'שיעור אחד פתוח · {n} בקרוב',
+'do': 'מה עושים', why: 'הסבר', check: 'בדיקה עצמית', checklist: 'רשימה לבדיקה', materials: 'חומרים', unit: 'יחידה', lesson: 'שיעור', soon: 'בקרוב', oneOpen: 'שיעור אחד פתוח · {n} בקרוב', someOpen: '{k} שיעורים פתוחים · {n} בקרוב', allOpen: '{k} שיעורים פתוחים',
 'continue': 'המשך', back: 'חזרה', done: 'סיימתי', how: 'איך תרצה/י ליצור?', paper: 'על נייר', studio: 'Studio',
 reopen: 'פתח/י שוב ב-Studio', v1: 'גרסה 1', v2: 'גרסה 2', v2missing: 'גרסה 2 עדיין לא נוצרה',
 changeOne: 'שנה/י דבר אחד בלבד', size: 'גודל', direction: 'כיוון', spacing: 'מרווח', openStudio: 'פתח/י ב-Studio',
@@ -17,14 +17,16 @@ onPaper: 'יצירה על נייר', backToLesson: 'חזרה לשיעור', last
 viewArtwork: 'לצפות ביצירה', close: 'סגירה', artworkAlt: 'היצירה שלך · {lesson}',
 proto: 'אב־טיפוס', protoImage: 'מקום לתמונה. תתווסף בהמשך.', protoAudio: 'מקום למוזיקה. תתווסף בהמשך.', oneOpenOnly: 'שיעור אחד פתוח',
 images: 'תמונות', galleryPrev: 'התמונה הקודמת', galleryNext: 'התמונה הבאה', galleryCount: 'תמונה {n} מתוך {total}',
-photoBy: 'צילום: {who}', exploreMore: 'רוצים לגלות עוד?', newTab: '(נפתח בלשונית חדשה)', enlarge: 'הגדלת התמונה: {what}',
+protoLinks: 'מקום לקישורים. יתווספו בהמשך.', inspiration: 'השראה', inspirationTitle: 'מקורות ההשראה', allImages: 'כל התמונות', artworkWindow: 'חלון יצירה',
+artworkWindowWhy: 'את היצירה הזאת אפשר לראות באתר המוזיאון.',
+sourceRights: 'מקור וזכויות', photoBy: 'צילום: {who}', exploreMore: 'רוצים לגלות עוד?', newTab: '(נפתח בלשונית חדשה)', enlarge: 'הגדלת התמונה: {what}', pick: 'בחירה: {what}',
 protoKusama: 'חסר פתרון חזותי ליצירה: אין לנו זכות להציג את התמונה.',
 protoS3: 'ב-Studio יש כרגע חזרה ברשת ובמדורג בלבד. שיקוף, סיבוב ושינוי הדרגתי עדיין חסרים (S3).',
 teachersInfo: 'מידע למורים', privacy: 'מדיניות פרטיות', terms: 'תנאי שימוש'
 },
 en: {
 site: 'Sources of Inspiration in Art', units: 'Units',
-'do': 'What to do', why: 'Explanation', check: 'Self-check', checklist: 'Checklist', materials: 'Materials', unit: 'Unit', lesson: 'Lesson', soon: 'Coming Soon', oneOpen: '1 lesson open · {n} coming soon',
+'do': 'What to do', why: 'Explanation', check: 'Self-check', checklist: 'Checklist', materials: 'Materials', unit: 'Unit', lesson: 'Lesson', soon: 'Coming Soon', oneOpen: '1 lesson open · {n} coming soon', someOpen: '{k} lessons open · {n} coming soon', allOpen: '{k} lessons open',
 'continue': 'Continue', back: 'Back', done: "I'm done", how: 'How would you like to create?', paper: 'On paper', studio: 'Studio',
 reopen: 'Open in Studio again', v1: 'Version 1', v2: 'Version 2', v2missing: 'Version 2 has not been created yet',
 changeOne: 'Change one thing only', size: 'Size', direction: 'Rotation', spacing: 'Spacing', openStudio: 'Open in Studio',
@@ -34,7 +36,9 @@ onPaper: 'Artwork on paper', backToLesson: 'Back to lesson', lastWorked: 'Last w
 viewArtwork: 'View artwork', close: 'Close', artworkAlt: 'Your artwork · {lesson}',
 proto: 'Prototype', protoImage: 'Image placeholder. To be added.', protoAudio: 'Music placeholder. To be added.', oneOpenOnly: '1 lesson open',
 images: 'Images', galleryPrev: 'Previous image', galleryNext: 'Next image', galleryCount: 'Image {n} of {total}',
-photoBy: 'Photo: {who}', exploreMore: 'Want to discover more?', newTab: '(opens in a new tab)', enlarge: 'Enlarge image: {what}',
+protoLinks: 'Links placeholder. To be added.', inspiration: 'Inspiration', inspirationTitle: 'Sources of inspiration', allImages: 'All the images', artworkWindow: 'Artwork window',
+artworkWindowWhy: "You can see this work on the museum's website.",
+sourceRights: 'Source and rights', photoBy: 'Photo: {who}', exploreMore: 'Want to discover more?', newTab: '(opens in a new tab)', enlarge: 'Enlarge image: {what}', pick: 'Choose: {what}',
 protoKusama: 'A visual solution for the work is missing: we have no right to show the image.',
 protoS3: 'The Studio repeats in a grid or offset only. Mirroring, rotation and gradual change are missing (S3).',
 teachersInfo: 'Information for teachers', privacy: 'Privacy Policy', terms: 'Terms of Use'

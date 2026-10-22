@@ -3,10 +3,10 @@ Studio.register('repeat', {
 strings: {
 he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
 size: 'גודל', direction: 'כיוון', spacing: 'מרווח', smaller: 'קטן יותר', larger: 'גדול יותר', closer: 'צפוף יותר', apart: 'מרווח יותר', turnLeft: 'סיבוב נגד כיוון השעון', turnRight: 'סיבוב עם כיוון השעון',
-repeatOn: 'חזרתיות פעילה', repeatOff: 'חזרתיות כבויה', unitDraw: 'חזרה לציור היחידה', unitBack: 'לראות שוב בחזרה' },
+repeatOn: 'חזרתיות פעילה', repeatOff: 'חזרתיות כבויה', unitDraw: 'חזרה לציור היחידה', unitBack: 'לראות שוב בחזרה', seeIt: 'ממשיכים ליצירת דפוס' },
 en: { repeat: 'Repeat', grid: 'Grid', offset: 'Offset', repeats: 'Kind of repeat',
 size: 'Size', direction: 'Direction', spacing: 'Spacing', smaller: 'Smaller', larger: 'Larger', closer: 'Closer', apart: 'Further apart', turnLeft: 'Turn anticlockwise', turnRight: 'Turn clockwise',
-repeatOn: 'Repeat on', repeatOff: 'Repeat off', unitDraw: 'Back to drawing the unit', unitBack: 'See it repeated again' }
+repeatOn: 'Repeat on', repeatOff: 'Repeat off', unitDraw: 'Back to drawing the unit', unitBack: 'See it repeated again', seeIt: 'Continue to create a pattern' }
 },
 init: function (S) {
 'use strict';
@@ -293,8 +293,8 @@ return;
 turn();
 });
 unitBtn = document.createElement('button');
-unitBtn.type = 'button'; unitBtn.className = 'btn rp-unit'; unitBtn.hidden = true;
-S.$('save').parentNode.insertBefore(unitBtn, S.$('save'));
+unitBtn.type = 'button'; unitBtn.className = 'menu-item rp-unit'; unitBtn.hidden = true;
+S.$('menu').appendChild(unitBtn);
 unitBtn.addEventListener('click', function () { if (isLive(S.split().marker)) turn(); });
 }
 function turn() {
@@ -306,7 +306,7 @@ inputs.forEach(function (i) { var k = i.getAttribute('data-kind'); if (!live || 
 var o = bar.querySelector('output'); if (o) o.textContent = Math.round(amount('direction')) + '°';
 if (!head) return;
 var sp = S.split(), offer = !!cfg.offer && !sp.marker && drawing(sp.source);
-var on = !!sp.marker && !S.doc.settings.repeatOff, shown = isLive(sp.marker) || offer, off = shown && !on;
+var on = !!sp.marker && !S.doc.settings.repeatOff, shown = isLive(sp.marker) || (offer && !cfg.seeIt), off = shown && !on;
 head.hidden = !shown; top.classList.toggle('has-switch', shown);
 sw.setAttribute('aria-checked', String(on)); sw.querySelector('span').textContent = on ? S.T.repeatOn : S.T.repeatOff;
 inputs.forEach(function (i) { i.disabled = off; });
@@ -327,6 +327,29 @@ S.redraw();
 });
 });
 S.watch(function () { bar.hidden = !S.split().marker; sync(); });
+}
+if (cfg.seeIt) {
+var after = S.activity.promptAfter && (S.activity.promptAfter[S.lang] || S.activity.promptAfter.he), before = '', txt = null;
+var see = document.createElement('button');
+see.type = 'button'; see.className = 'btn rp-see'; see.textContent = S.T.seeIt;
+see.addEventListener('click', function () {
+enter().then(function (did) {
+if (!did) return;
+S.stage.classList.add('rp-reveal');
+setTimeout(function () { S.stage.classList.remove('rp-reveal'); }, 1400);
+});
+});
+var seeSync = function () {
+var sp = S.split();
+see.hidden = !!sp.marker; see.disabled = !sp.marker && !drawing(sp.source);
+if (txt) txt.textContent = sp.marker && after ? after : before;
+};
+S.watch(seeSync);
+Promise.resolve().then(function () {
+var pr = document.querySelector('.prompt');
+if (pr) { before = pr.textContent; txt = document.createElement('span'); txt.className = 'prompt-text'; pr.textContent = ''; pr.appendChild(txt); pr.appendChild(see); }
+seeSync();
+});
 }
 if (ctl && !bar) {
 bar = document.createElement('div');

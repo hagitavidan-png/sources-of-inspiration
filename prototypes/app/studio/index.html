@@ -17,8 +17,20 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       <span data-t="back"></span>
     </button>
+    <span class="bar-gap" aria-hidden="true"></span>
     <h1 class="title" data-t="title"></h1>
     <span class="savestate" id="saveState" role="status" aria-live="polite"></span>
+    
+    <div class="more" id="moreWrap">
+      <button class="morebtn" id="more" type="button" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>
+      </button>
+      <div class="menu" id="menu" hidden>
+        <button class="menu-item" id="clear" type="button" data-t="clear"></button>
+      </div>
+    </div>
+    
+    <button class="btn primary" id="save" type="button" data-t="save"></button>
   </header>
 
   <main class="stage" id="stage">
@@ -29,10 +41,6 @@
   <div class="chrome">
     
     <nav class="tools" id="tools"></nav>
-    <div class="actions">
-      <button class="btn" id="clear" type="button" data-t="clear"></button>
-      <button class="btn primary" id="save" type="button" data-t="save"></button>
-    </div>
   </div>
 </div>
 
@@ -41,6 +49,13 @@
   <div class="row">
     <button class="btn" type="button" value="cancel" data-t="cancel"></button>
     <button class="btn danger" type="button" value="clear" data-t="clear"></button>
+  </div>
+</dialog>
+<dialog id="confirmNew">
+  <p data-t="newQ"></p>
+  <div class="row">
+    <button class="btn" type="button" value="cancel" data-t="newNo"></button>
+    <button class="btn primary" type="button" value="new" data-t="newYes"></button>
   </div>
 </dialog>
 <dialog id="confirmExit">
@@ -54,6 +69,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="../js/artworks.js"></script>
+<script src="../js/crop.js"></script>
 <script src="activities.js"></script>
 <script src="js/core.js"></script>
 <script src="js/shell.js"></script>
@@ -62,6 +78,9 @@
 <script src="js/repeat.js"></script>
 <script src="js/fill.js"></script>
 <script src="js/arrange.js"></script>
+<script src="js/refs.js"></script>
+<script src="../js/inspiration.js"></script>
+<script src="../lessons/2-1-inspiration.js"></script>
 <script>Studio.boot();
 </script>
 </body>

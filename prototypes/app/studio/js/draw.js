@@ -74,6 +74,12 @@ if (p.length >= 4) p.push(p[p.length - 2], p[p.length - 1]);
 if (map) S.pend(null);
 S.commit(cur); cur = null; map = null;
 S.redraw();
+},
+cancel: function () {
+if (!cur) return;
+if (map) S.pend(null);
+cur = null; map = null;
+S.redraw();
 }
 };
 S.pointer('brush', stroke);

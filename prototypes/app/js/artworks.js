@@ -150,7 +150,7 @@ w.updatedAt = w.savedAt = now();
 return put('artworks', w);
 });
 }
-function newRun(lesson) { var t = now(); return put('runs', { id: newId(), lesson: lesson, artwork: null, createdAt: t, updatedAt: t }); }
+function newRun(lesson) { try { sessionStorage.removeItem('run:' + lesson); } catch (e) {} var t = now(); return put('runs', { id: newId(), lesson: lesson, artwork: null, createdAt: t, updatedAt: t }); }
 function putRun(r) { r.createdAt = r.createdAt || now(); r.updatedAt = now(); return put('runs', r); }
 function artworkFor(runId, medium) {
 function decide(r, w) {

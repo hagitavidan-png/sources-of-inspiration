@@ -95,14 +95,24 @@ lesson21('2-1-repeat', { enter: true });
 lesson21('2-1-source', {}, { source: true, next: { label: { he: 'לראות שוב בחזרה', en: 'See it repeated again' } } });
 lesson21('2-1-continue', { controls: ['size', 'rotation', 'spacing'] });
 var ALL = ['size', 'rotation', 'spacing'];
-lesson21('2-1-begin', { live: true, unit: true }, { restart: true, next: { label: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' } } });
+lesson21('2-1-begin', { live: true, unit: true }, { restart: true,
+prompt: { he: 'ציירו את היחידה הראשונה שלכם. אפשר להתנסות, לשנות ולהתחיל מחדש.', en: 'Draw your first unit. You can experiment, change things and start over.' },
+next: { label: { he: 'ממשיכים ליצירת דפוס', en: 'Next: make a pattern' } } });
 lesson21('2-1-play', { enter: true, reveal: true, controls: ALL, together: true, live: true }, { restart: true,
 prompt: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
 next: { label: { he: 'לגלות מה נוצר', en: 'Discover what emerged' } } });
 lesson21('2-1-develop', { controls: ALL, together: true, live: true }, { restart: true, next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } } });
 lesson21('2-1-free', { controls: ALL, together: true, live: true, offer: true }, { restart: true });
-['2-1-begin', '2-1-play', '2-1-develop', '2-1-free'].forEach(function (id) { A[id].compact = true; });
-A['2-1-play'].works = A['2-1-develop'].works = '2-1';
+lesson21('2-1-create', { offer: true, seeIt: true, controls: ALL, together: true, live: true }, { restart: true,
+prompt: { he: 'ציירו יחידה באופן חופשי', en: 'Draw a unit freely' },
+promptAfter: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
+next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } }, content: { inspiration: '2-1' } });
+['2-1-create', '2-1-free'].forEach(function (id) { A[id].canvas = { aspect: '4:3', portrait: '4:5' }; });
+A['2-1-create'].paper = { href: '../index.html#/lesson/2-1/play/6/paper', label: { he: 'יוצרים על נייר', en: 'Creating on paper' } };
+A['2-1-create'].tools.push('refs');
+A['2-1-free'].tools.push('refs'); A['2-1-free'].content = { inspiration: '2-1' };
+['2-1-begin', '2-1-play', '2-1-develop', '2-1-free', '2-1-create'].forEach(function (id) { A[id].compact = true; });
+A['2-1-play'].works = A['2-1-develop'].works = A['2-1-create'].works = '2-1';
 })(window.STUDIO_ACTIVITIES);
 window.STUDIO_ACTIVITIES['3-1-draw'] = { id: '3-1-draw', lesson: '3.1-app', tools: ['draw', 'color'], canvas: { aspect: '4:3' },
 clear: false, back: '../index.html#/lesson/3-1' };

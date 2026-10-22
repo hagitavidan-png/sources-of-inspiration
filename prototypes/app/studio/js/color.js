@@ -11,7 +11,7 @@ var st = S.state;
 st.color = COLORS[0];
 if (!S.has('draw') && !S.has('fill')) console.warn('Studio: the colour tool needs the draw or fill tool in the same activity');
 S.item({ id: 'color', order: 20, label: 'color', panel: 'colorPanel',
-icon: '<i class="swatch-dot" id="colorDot" aria-hidden="true"></i>',
+icon: '<span class="color-wheel" aria-hidden="true"><i id="colorDot"></i></span>',
 onClick: function () { S.togglePanel('colorPanel', 'color'); },
 update: function () { S.$('colorDot').style.background = st.color; } });
 var cp = document.createElement('div');
@@ -26,7 +26,7 @@ var custom = document.createElement('label');
 custom.className = 'sw custom'; custom.title = S.T.custom;
 custom.innerHTML = '<input type="color" aria-label="' + S.T.custom + '" value="#8a9a7b">';
 custom.querySelector('input').addEventListener('input', function (e) { pick(e.target.value); });
-custom.querySelector('input').addEventListener('change', function () { S.closePanels(); });
+custom.querySelector('input').addEventListener('change', function (e) { pick(e.target.value); });
 cp.appendChild(custom);
 S.stage.appendChild(cp);
 function pick(c) {

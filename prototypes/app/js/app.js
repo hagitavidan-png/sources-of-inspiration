@@ -6,15 +6,18 @@ var root = document.getElementById('app');
 var SITE = '../../';
 Object.keys(window.APP_LESSONS || {}).forEach(function (id) {
 var n = window.APP_LESSONS[id].nav, u = n && NAV.units.filter(function (x) { return x.id === n.unit; })[0];
-if (!u || u.lessons.some(function (l) { return l.path === n.path; })) return;
-u.lessons.push({ path: n.path, title: n.title });
+if (!u) return;
+if (!u.lessons.some(function (l) { return l.path === n.path; })) u.lessons.push({ path: n.path, title: n.title });
 if (STATUS.units.indexOf(u.id) < 0) STATUS.units.push(u.id);
 if (STATUS.lessons.indexOf(n.path) < 0) STATUS.lessons.push(n.path);
 });
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
 function unitNum(u) { return u.id.replace('unit', ''); }
-function lessonId(path) { return (path.match(/lesson-(\d+)-(\d+)\.html$/) || []).slice(1).join('-'); }
+function lessonId(path) {
+var ids = Object.keys(window.APP_LESSONS || {}).filter(function (k) { var n = window.APP_LESSONS[k].nav; return n && n.path === path; });
+return ids[0] || (path.match(/lesson-(\d+)-(\d+)\.html$/) || []).slice(1).join('-');
+}
 function inApp(id) { var L = window.APP_LESSONS[id]; return !!L && (!L.langs || L.langs.indexOf(I.lang()) >= 0); }
 var BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
 function frame(title, back, body) {
@@ -40,6 +43,7 @@ function unitStatus(u) {
 if (STATUS.units.indexOf(u.id) < 0) return I.ui('soon');
 var open = u.lessons.filter(function (l) { return STATUS.lessons.indexOf(l.path) >= 0; }).length;
 if (open === 1 && u.lessons.length === 1) return I.ui('oneOpenOnly');
+if (open > 1) return I.ui(open < u.lessons.length ? 'someOpen' : 'allOpen', { k: open, n: u.lessons.length - open });
 return open === 1 ? I.ui('oneOpen', { n: u.lessons.length - 1 }) : I.ui('soon');
 }
 function units() {
@@ -108,10 +112,16 @@ var o = L.intro, here = location.hash;
 window.Player.run(id).catch(function () { return {}; }).then(function (r) {
 if (location.hash !== here) return;
 var at = Math.min(L.screens.length, r.screen | 0);
+if (L.directStart && at <= 1) {
+var W0 = window.Artworks;
+return W0.currentRun(id).then(function (c) { return c && (c.artwork || (c.screen | 0) > 1) ? W0.newRun(id) : null; })
+.then(function () { if (location.hash === here) location.replace('#/lesson/' + id + '/play/1'); });
+}
 frame(esc(I.ui('lesson')) + ' ' + esc(d.number), '#/unit/' + d.unitNum, '<div class="sh-lesson sh-open">' +
 '<p class="sh-kicker">' + esc(I.ui('unit')) + ' ' + esc(d.unitNum) + ' · ' + esc(I.tx(d.unit)) + '</p>' +
 '<h2 class="sh-h big">' + esc(I.tx(d.title)) + '</h2>' +
-'<p class="sh-sub">' + esc(I.tx(o.subtitle)) + '</p>' +
+(o.subtitle ? '<p class="sh-sub">' + esc(I.tx(o.subtitle)) + '</p>' : '') +
+(o.question ? '<p class="sh-sub sh-question">' + esc(I.tx(o.question)) + '</p>' : '') +
 '<p class="sh-time">' + esc(I.tx(o.info).replace('{n}', L.screens.length)) + '</p>' +
 '<a class="sh-primary" href="#/lesson/' + id + '/play/1">' + esc(I.tx(o.start)) + '</a>' +
 (at > 1 ? '<a class="sh-secondary" href="#/lesson/' + id + '/play/' + at + '">' + esc(I.tx(o.resume)) + '</a>' : '') + '</div>');
@@ -156,6 +166,10 @@ cards.forEach(function (c) { c.at = c.at || c.w.updatedAt || ''; c.created = c.c
 return cards.sort(function (a, b) { return a.at !== b.at ? (a.at < b.at ? 1 : -1) : a.created < b.created ? 1 : a.created > b.created ? -1 : 0; });
 }
 var PAPER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13l6-6"/></svg>';
+function shape(w) {
+var c = w && w.canvas;
+return c && c.w > 0 && c.h > 0 ? ' style="aspect-ratio:' + (+c.w).toFixed(0) + '/' + (+c.h).toFixed(0) + '"' : '';
+}
 function gallery(lesson, at) {
 var from = /^[a-z0-9-]+$/i.test(lesson || '') && /^\d+$/.test(at || '') ? '/' + lesson + '/' + at : '';
 frame(esc(I.ui('gallery')), from ? '#/lesson/' + lesson + '/play/' + at : '#/home', '<div class="ga"></div>');
@@ -178,12 +192,18 @@ if (line) { head += '<h2 class="ga-h" id="ga-h' + i + '">' + esc(line) + '</h2>'
 head += '<p class="ga-date" id="ga-d' + i + '">' + esc(I.ui('lastWorked', { date: day(c.at) })) + '</p>';
 if (!ids.length) ids.push('ga-d' + i);
 var about = ids.concat(ids.indexOf('ga-d' + i) < 0 ? ['ga-d' + i] : []).join(' ');
-if (act) action = '<a class="ga-action main" href="studio/index.html?activity=' + encodeURIComponent(act) + '&amp;art=' + encodeURIComponent(w.id) + '&amp;ctx=gallery&amp;back=' + back + '" aria-describedby="' + about + '">' + esc(I.ui('continueDeveloping')) + '</a>';
+if (act) action = '<a class="ga-action main" href="studio/index.html#activity=' + encodeURIComponent(act) + '&amp;art=' + encodeURIComponent(w.id) + '&amp;ctx=gallery&amp;back=' + back + '" aria-describedby="' + about + '">' + esc(I.ui('continueDeveloping')) + '</a>';
 if (c.kind === 'paper' && c.lesson && window.APP_LESSONS[c.lesson]) action = '<a class="ga-action" href="#/lesson/' + esc(c.lesson) + '" aria-describedby="' + about + '">' + esc(I.ui('backToLesson')) + '</a>';
 if (c.kind === 'earlier') action = '<button type="button" class="ga-action" data-view="' + i + '" aria-describedby="' + about + '">' + esc(I.ui('viewArtwork')) + '</button>';
-var pic = c.kind === 'paper' ? '<div class="ga-pic ga-blank">' + PAPER + '</div>' : '<figure class="ga-pic"><img src="' + w.preview + '" alt="' + esc(alt) + '"></figure>';
+var pic = c.kind === 'paper' ? '<div class="ga-pic ga-blank">' + PAPER + '</div>' : '<figure class="ga-pic"' + shape(w) + '><img src="' + w.preview + '" alt="' + esc(alt) + '"></figure>';
 return '<li><article class="ga-card ga-' + c.kind + '" aria-labelledby="' + ids.join(' ') + '">' + pic + '<div class="ga-text">' + head + '</div>' + action + '</article></li>';
 }).join('') + '</ol>';
+var runOfArt = {};
+r[1].forEach(function (run) { if (run.artwork) runOfArt[run.artwork] = run.id; });
+box.querySelectorAll('.ga-card').forEach(function (card, i) {
+var c = cards[i], a = card.querySelector('a.ga-action');
+if (a && c.lesson && c.w && runOfArt[c.w.id]) a.addEventListener('click', function () { window.Player.pin(c.lesson, runOfArt[c.w.id]); });
+});
 box.querySelectorAll('[data-view]').forEach(function (b) {
 b.addEventListener('click', function () {
 var img = b.closest('.ga-card').querySelector('.ga-pic img');
@@ -192,14 +212,15 @@ window.Viewer.open({ src: img.src, alt: img.alt, ratio: img.naturalWidth && img.
 });
 });
 }
-function play(id, n) {
+function play(id, n, medium) {
 withLesson(id, function (L) {
 n = Math.max(1, Math.min(L.screens.length, n | 0 || 1));
 window.Player.render(root, id, n, {
+medium: medium === 'paper' ? 'paper' : null,
 go: function (k) { go('#/lesson/' + id + '/play/' + k); },
-exit: function () { go('#/lesson/' + id); },
+exit: function () { go(L.directStart ? '#/unit/' + window.AppAdapters[L.adapter](window.LESSON_PAGE).lesson.unitNum : '#/lesson/' + id); },
 finish: function () { go('#/unit/' + window.AppAdapters[L.adapter](window.LESSON_PAGE).lesson.unitNum); },
-studio: function (href) { location.href = href; },
+studio: function (href) { toStudio(href); location.href = href; },
 works: function (k) { go('#/gallery/' + id + '/' + k); },
 worksHref: function (k) { return '#/gallery/' + id + '/' + k; }
 });
@@ -210,10 +231,15 @@ var h = location.hash.replace(/^#\/?/, '').split('/');
 if (h[0] === 'units') units();
 else if (h[0] === 'gallery') gallery(h[1], h[2]);
 else if (h[0] === 'unit' && h[1]) unit(h[1]);
-else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], +h[3]);
+else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], +h[3], h[4]);
 else if (h[0] === 'lesson' && h[1]) lessonIntro(h[1]);
 else home();
 }
+function toStudio(href) { try { sessionStorage.setItem('studio-open', href.split('#')[1] || ''); } catch (e) {} }
+root.addEventListener('click', function (e) {
+var a = e.target.closest && e.target.closest('a[href^="studio/index.html#"]');
+if (a) toStudio(a.getAttribute('href'));
+});
 window.addEventListener('hashchange', route);
 route();
 })();
