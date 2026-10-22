@@ -126,6 +126,10 @@ function layout() {
 var root = document.documentElement, was = root.classList.contains('side');
 stage.style.setProperty('--page-h', String(doc.h / doc.w));
 if (!(innerWidth >= 640 && innerWidth > innerHeight)) { root.classList.remove('side'); return; }
+var app = stage.parentNode;
+if (root.classList.contains('expanded') || innerHeight <= 520 ||
+(root.classList.contains('compact') && matchMedia('(min-width:1500px) and (orientation:landscape)').matches)) app.style.removeProperty('--side');
+else app.style.setProperty('--side', Math.round(Math.max(176, Math.min(300, innerWidth - (innerHeight - 20) * doc.w / doc.h - 17))) + 'px');
 function room(side) {
 root.classList.toggle('side', side);
 var r = stage.getBoundingClientRect(), cs = getComputedStyle(stage);
