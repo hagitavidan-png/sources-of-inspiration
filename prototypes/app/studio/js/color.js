@@ -47,6 +47,7 @@ S.updateUi();
 }
 this.ready = function () { pick(st.color); };
 var dlg = null, cur = '#000000', tab = 'grid';
+try { tab = { grid: 1, spectrum: 1, sliders: 1 }[localStorage.getItem('studioColorTab')] ? localStorage.getItem('studioColorTab') : 'grid'; } catch (e) {}
 function hex(r, g, b) { return '#' + [r, g, b].map(function (v) { return ('0' + Math.round(Math.max(0, Math.min(255, v))).toString(16)).slice(-2); }).join(''); }
 function rgb(h) { var n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
 function hsl(h, s, l) {
@@ -107,7 +108,7 @@ y.addColorStop(0, '#ffffff'); y.addColorStop(0.5, 'rgba(255,255,255,0)'); y.addC
 g.fillStyle = y; g.fillRect(0, 0, c.width, c.height);
 }
 function setTab(t) {
-tab = t;
+tab = t; try { localStorage.setItem('studioColorTab', t); } catch (e) {}
 dlg.querySelectorAll('.cpk-tab').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.t === t)); });
 dlg.querySelectorAll('.cpk-pane').forEach(function (p) { p.hidden = p.dataset.t !== t; });
 if (t === 'spectrum') requestAnimationFrame(paintSpec);
