@@ -1,9 +1,9 @@
 /*! Sources of Inspiration in Art | מקורות השראה באמנות. Original code and content (c) 2026 Hagit Avidan | חגית אבידן. All rights reserved | כל הזכויות שמורות. Works and materials by others belong to their owners | יצירות וחומרים של אחרים שייכים לבעליהם. See NOTICE.txt */
 Studio.register('color', {
 strings: {
-he: { color: 'צבע', custom: 'צבע נוסף', colors: 'צבעים', cpGrid: 'רשת', cpSpectrum: 'ספקטרום', cpSliders: 'מחוונים',
+he: { help_color: 'בוחרים צבע',  color: 'צבע', custom: 'צבע נוסף', colors: 'צבעים', cpGrid: 'רשת', cpSpectrum: 'ספקטרום', cpSliders: 'מחוונים',
 cpRed: 'אדום', cpGreen: 'ירוק', cpBlue: 'כחול', cpNow: 'הצבע הנוכחי', cpNew: 'הצבע החדש', cpOk: 'בחירה', cpCancel: 'ביטול' },
-en: { color: 'Colour', custom: 'Another colour', colors: 'Colours', cpGrid: 'Grid', cpSpectrum: 'Spectrum', cpSliders: 'Sliders',
+en: { help_color: 'Choose a colour',  color: 'Colour', custom: 'Another colour', colors: 'Colours', cpGrid: 'Grid', cpSpectrum: 'Spectrum', cpSliders: 'Sliders',
 cpRed: 'Red', cpGreen: 'Green', cpBlue: 'Blue', cpNow: 'Current colour', cpNew: 'New colour', cpOk: 'Choose', cpCancel: 'Cancel' }
 },
 init: function (S) {

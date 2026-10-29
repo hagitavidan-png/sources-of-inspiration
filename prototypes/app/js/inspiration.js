@@ -18,7 +18,7 @@ var CSS = '' +
 '.insp-wrap{display:grid;grid-template-rows:auto auto 1fr;height:100%}' +
 '.insp-top{display:flex;align-items:center;gap:12px;padding:10px max(16px,env(safe-area-inset-left,0px)) 6px;padding-inline-end:max(16px,env(safe-area-inset-right,0px))}' +
 '.insp-top h2{margin:0;font-size:clamp(1.15rem,1rem + .8vw,1.8rem);flex:1}' +
-'.insp-btn{font:inherit;font-weight:600;border-radius:999px;border:1px solid var(--i-ink);background:var(--i-ink);color:var(--i-bg);padding:8px 18px;min-height:44px;cursor:pointer}' +
+'.insp-btn{font:inherit;font-weight:600;border-radius:999px;border:1px solid var(--i-ink);background:var(--i-ink);color:var(--i-bg);padding:8px 18px;min-height:44px;cursor:pointer}.insp-x{margin-inline-end:8px;font-size:.95em}' +
 '.insp-btn.quiet{background:transparent;color:var(--i-ink)}' +
 '.insp-note summary:focus-visible,.insp-btn:focus-visible,.insp-pickbtn:focus-visible,.insp-opt:focus-visible,.insp-tile:focus-visible,.insp-card a:focus-visible,.insp-step:focus-visible,.insp-src a:focus-visible{outline:3px solid var(--i-accent);outline-offset:2px}' +
 '.insp-pick{position:relative;z-index:2;padding:2px max(16px,env(safe-area-inset-left,0px)) 10px;padding-inline-end:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--i-rule)}' +
@@ -32,6 +32,7 @@ var CSS = '' +
 '.insp-body{overflow-y:auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 28px;padding-inline-end:max(16px,env(safe-area-inset-right,0px))}' +
 '.insp-sec{padding:6px 0 18px}.insp-sec h3{margin:8px 0 10px;font-size:clamp(1.05rem,.95rem + .6vw,1.5rem)}' +
 '.insp-intro{margin:-4px 0 12px;color:var(--i-soft);max-width:70ch}' +
+'.insp-text{margin:6px 0 0;font-weight:400}' +
 '.insp-note{margin-top:12px;font-size:.86rem;color:var(--i-soft)}.insp-note summary{display:inline-block;cursor:pointer;min-height:32px;padding:4px 2px;text-decoration:underline;text-underline-offset:3px}.insp-note p{margin:4px 0 0;max-width:70ch}' +
 '.insp-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px;align-items:start}' +
 '@media (min-width:700px){.insp-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 20px}}' +
@@ -71,7 +72,7 @@ var flat = [];
 var d = document.createElement('dialog');
 d.className = 'insp'; d.setAttribute('dir', rtl ? 'rtl' : 'ltr'); d.setAttribute('lang', lang); d.setAttribute('aria-label', T.title);
 d.innerHTML = '<div class="insp-wrap">' +
-'<div class="insp-top"><h2>' + esc(T.title) + '</h2><button type="button" class="insp-btn insp-close">' + esc(o.close || T.close) + '</button></div>' +
+'<div class="insp-top"><h2>' + esc(T.title) + '</h2><button type="button" class="insp-btn insp-close">' + (o.x ? '<span class="insp-x" aria-hidden="true">✕</span>' : '') + esc(o.close || T.close) + '</button></div>' +
 '<nav class="insp-pick" aria-label="' + esc(T.sections) + '"><button type="button" class="insp-pickbtn" aria-expanded="false" aria-controls="insp-menu">' + esc(T.pick) +
 CHEV + '<path d="M6 9l6 6 6-6"/></svg></button><ul class="insp-menu" id="insp-menu" hidden>' + data.sections.map(function (s) {
 return '<li><button type="button" class="insp-opt" data-sec="' + esc(s.id) + '">' + esc(tx(s.title)) + '</button></li>';
@@ -138,6 +139,7 @@ function show(i) {
 var list = inSec(i), k = list.indexOf(i), it = flat[i].it, c = it.credit;
 at = i; big.src = url(it.img); big.alt = tx(it.alt);
 cap.innerHTML = (it.artist ? '<b>' + esc(tx(it.artist)) + '</b><bdi>' + esc(tx(it.work)) + '</bdi>' : esc(tx(it.alt))) +
+(it.text ? '<p class="insp-text">' + esc(tx(it.text)) + '</p>' : '') +
 (c ? '<div class="insp-src">' + esc(T.source) + ': ' + out(c.href, '<bdi>' + esc(c.who) + '</bdi>') + ' · ' +
 (c.licenceHref ? out(c.licenceHref, esc(tx(c.licence))) : esc(tx(c.licence))) + (c.changes ? ' · ' + esc(tx(c.changes)) : '') + '</div>' : '');
 d.querySelector('.insp-count').innerHTML = '<span aria-hidden="true">' + (k + 1) + '/' + list.length + '</span><span class="insp-sr">' + esc(fill(T.count, { n: k + 1, total: list.length })) + '</span>';

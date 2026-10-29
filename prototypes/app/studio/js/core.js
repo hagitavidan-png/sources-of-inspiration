@@ -3,7 +3,7 @@ window.Studio = (function () {
 'use strict';
 var LOGICAL_W = 1000;
 var TEXT = {
-he: { back: 'חזרה לשיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
+he: { back: 'חזרה לשיעור', backEnd: 'לסיום השיעור', title: 'היצירה שלי', undo: 'בטל', redo: 'בצע שוב', clear: 'נקה', save: 'שמור', cancel: 'ביטול',
 exit: 'צא', clearQ: 'לנקות את כל היצירה?', unsaved: 'יש שינויים שלא נשמרו.', saved: 'היצירה נשמרה',
 saveFailed: 'השמירה נכשלה', opened: 'העבודה השמורה נפתחה', canvas: 'משטח הציור', backGallery: 'חזרה ליצירות שלי', works: 'היצירות שלי',
 autoSaved: 'נשמר', kept: 'נשמר', doneSaved: 'היצירה נשמרה', restart: 'להתחיל מחדש', restartQ: 'לנקות את הדף ולהתחיל מחדש?', newQ: 'רוצים להתחיל ציור חדש? הציור הנוכחי יישמר בגלריה ותוכלו לחזור אליו בכל זמן.', newYes: 'ציור חדש', newNo: 'ביטול', restartCancel: 'לבטל',
@@ -11,8 +11,9 @@ expand: 'הגדלה', expandLong: 'הגדלת אזור הציור', showAll: 'ה
 more: 'עוד', whole: 'כל הדף', wholeLong: 'הצגת כל הדף', fill: 'מילוי המסך', fillLong: 'הדף ממלא את המסך',
 moveHint: 'אפשר להזיז את הדף בשתי אצבעות',
 saveNow: 'שמירת הציור', savedNow: 'הציור נשמר', saveNowFailed: 'השמירה נכשלה. הציור עדיין פתוח – נסו שוב.',
-varyToggle: 'הגדרות דפוס', panelOpen: 'הצגת כל הכלים וההגדרות', panelClose: 'סרגל כלים מצומצם' },
-en: { back: 'Back to the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
+varyToggle: 'הגדרות דפוס', panelOpen: 'הצגת כל הכלים וההגדרות', panelClose: 'סרגל כלים מצומצם',
+howTo: 'איך משתמשים?', soon: 'ההדרכה בהכנה', helpBack: 'חזרה ליצירה', help_undo: 'צעד אחורה', help_redo: 'צעד קדימה, אחרי ״בטל״', help_fingers: 'שתי אצבעות: מגדילים ומזיזים את הדף', toolsFold: 'פחות כלים', toolsShow: 'הצגת כל הכלים', toolsOpen: 'פתיחת הכלים (גוררים כדי להזיז)', toolsHide: 'הסתרת הכלים (גוררים כדי להזיז)' },
+en: { back: 'Back to the lesson', backEnd: 'To the end of the lesson', title: 'My artwork', undo: 'Undo', redo: 'Redo', clear: 'Clear', save: 'Save', cancel: 'Cancel',
 exit: 'Leave', clearQ: 'Clear the whole artwork?', unsaved: 'There are unsaved changes.', saved: 'Artwork saved',
 saveFailed: 'Could not save', opened: 'Your saved work is open', canvas: 'Drawing area', backGallery: 'Back to my artworks', works: 'My artworks',
 autoSaved: 'Saved', kept: 'Kept', doneSaved: 'Your artwork is saved', restart: 'Start over', restartQ: 'Clear the page and start over?', newQ: "Start a new drawing? Your current artwork will stay in My Artworks, so you can return to it anytime.", newYes: 'New drawing', newNo: 'Cancel', restartCancel: 'Cancel',
@@ -20,12 +21,15 @@ expand: 'Expand', expandLong: 'Make the drawing space bigger', showAll: 'Show al
 more: 'More', whole: 'Whole page', wholeLong: 'Show the whole page', fill: 'Fill the screen', fillLong: 'Let the page fill the screen',
 moveHint: 'Move the page with two fingers',
 saveNow: 'Save artwork', savedNow: 'Artwork saved', saveNowFailed: "Couldn't save. Your drawing is still open – try again.",
-varyToggle: 'Pattern settings', panelOpen: 'Show all tools and settings', panelClose: 'Compact toolbar' }
+varyToggle: 'Pattern settings', panelOpen: 'Show all tools and settings', panelClose: 'Compact toolbar',
+howTo: 'How to use?', soon: 'The guide is being prepared', helpBack: 'Back to my artwork', help_undo: 'One step back', help_redo: 'One step forward, after Undo', help_fingers: 'Two fingers: make the page bigger and move it', toolsFold: 'Fewer tools', toolsShow: 'Show all tools', toolsOpen: 'Open the tools (drag to move)', toolsHide: 'Hide the tools (drag to move)' }
 };
 var caps = {};
 var renderers = {};
 var basePainters = [];
 var presenter = null;
+var aside = null;
+var ASIDE_GAP = 8;
 var asStep = false;
 var watchers = [];
 var clearers = [];
@@ -125,6 +129,17 @@ wipe(ctx, canvas); paintLearner(ctx);
 function layout() {
 var root = document.documentElement, was = root.classList.contains('side');
 stage.style.setProperty('--page-h', String(doc.h / doc.w));
+var ar = aside && !(innerWidth >= 640 && innerWidth > innerHeight) ? aside.size(innerWidth, innerHeight) : 0;
+if (ar) stage.style.setProperty('--aside-h', (ar + ASIDE_GAP) + 'px'); else stage.style.removeProperty('--aside-h');
+if (root.classList.contains('pagefirst')) {
+root.classList.remove('side');
+var wide = innerWidth > innerHeight;
+if (root.classList.contains('pf-wide') !== wide) Studio.shell.closePanels(true);
+root.classList.toggle('pf-wide', wide); root.classList.toggle('pf-tall', !wide);
+root.classList.toggle('floatbar', activity.toolbar === 'float');
+root.classList.toggle('tools-row', !wide && activity.toolbar === 'float');
+return;
+}
 if (!(innerWidth >= 640 && innerWidth > innerHeight)) { root.classList.remove('side'); return; }
 var app = stage.parentNode, compact = root.classList.contains('compact'), expanded = root.classList.contains('expanded');
 var strip = compact && !expanded && innerHeight > 520 && root.classList.contains('panel-closed');
@@ -145,8 +160,17 @@ function PHONE_UP() { return document.documentElement.classList.contains('compac
 function room() {
 var r = stage.getBoundingClientRect(), cs = getComputedStyle(stage), root = document.documentElement;
 var pl = parseFloat(cs.paddingLeft) || 0;
-return { r: r, W: r.width, H: r.height, aw: r.width - pl * 2, ah: r.height - 4, pl: pl, pt: parseFloat(cs.paddingTop) || 0,
-centre: root.classList.contains('side') || root.classList.contains('expanded') || PHONE_UP() };
+var b = { r: r, W: r.width, H: r.height, aw: r.width - pl * 2, ah: r.height - 4, pl: pl, pt: parseFloat(cs.paddingTop) || 0,
+centre: root.classList.contains('side') || root.classList.contains('expanded') || root.classList.contains('pf-wide') || PHONE_UP() };
+var R = aside ? aside.size(b.W, b.H) : 0;
+b.aside = null;
+if (R) {
+var cut = R + ASIDE_GAP, side = Math.min((b.aw - cut) / doc.w, b.ah / doc.h), under = Math.min(b.aw / doc.w, (b.ah - cut) / doc.h);
+if (side >= under) { b.W -= cut; b.aw -= cut; b.aside = { side: true, R: R }; }
+else { b.H -= cut; b.ah -= cut; b.aside = { side: false, R: R }; }
+b.aside.W = r.width; b.aside.H = r.height;
+}
+return b;
 }
 function place(b, z, x, y) {
 var pw = Math.floor(doc.w * scale * z), ph = Math.floor(doc.h * scale * z);
@@ -156,7 +180,8 @@ x: pw <= b.aw ? b.pl + (b.aw - pw) / 2 : clamp(x, b.W - pw),
 y: ph <= b.ah ? (b.centre ? (b.H - ph) / 2 : b.pt) : clamp(y, b.H - ph) };
 }
 function cover(b) {
-var t = $('tray'), extra = t && !document.documentElement.classList.contains('side') ? t.getBoundingClientRect().height : 0;
+var t = $('tray'), under = t && !document.documentElement.classList.contains('side') && t.getBoundingClientRect().top >= stage.getBoundingClientRect().bottom - 1;
+var tp = $('tablePanel'), extra = under && !(tp && !tp.hidden) ? t.getBoundingClientRect().height : 0;
 return Math.min(ZMAX, Math.max(b.aw / (doc.w * scale), (b.H + extra) / (doc.h * scale)));
 }
 function fit() {
@@ -180,6 +205,8 @@ var u = view.z > 1 ? canvas.width / doc.w : dpr * scale;
 ctx.setTransform(u, 0, 0, u, 0, 0);
 bctx.setTransform(u, 0, 0, u, 0, 0);
 redraw();
+if (aside && b.aside) aside.place({ side: b.aside.side, R: b.aside.R, W: b.aside.W, H: b.aside.H, pl: b.pl, gap: ASIDE_GAP, page: { x: q.x, y: q.y, w: cw, h: ch } });
+else if (aside) aside.place(null);
 if (Studio.shell.view) Studio.shell.view({ z: view.z, fill: view.fill, cover: view.cover });
 }
 function setView(mode) {
@@ -199,24 +226,37 @@ var f = z / view.z;
 view.x = ax - (ax - view.x) * f; view.y = ay - (ay - view.y) * f; view.z = z < 1.01 ? 1 : z; view.fill = false;
 fit();
 }
-var touches = {}, gesture = null, downAt = 0, from = null, went = 0, YOUNG_MS = 300, YOUNG_PX = 12;
-function young() { return performance.now() - downAt < YOUNG_MS || went < YOUNG_PX; }
-function pair() {
-var k = Object.keys(touches), a = touches[k[0]], c = touches[k[1]];
+var touches = {}, gesture = null, downAt = 0, from = null, went = 0, YOUNG_MS = 300, YOUNG_PX = 12, REST_MS = 600, REST_PX = 12, PINCH_PX = 8;
+function young() { var age = performance.now() - downAt; return age < YOUNG_MS || (went < YOUNG_PX && age < REST_MS); }
+function resting(t) { return performance.now() - t.tm > REST_MS; }
+function live() { return Object.keys(touches).filter(function (k) { return !resting(touches[k]); }); }
+function pair(k) {
+var a = touches[k[0]], c = touches[k[1]];
 return { c: [(a[0] + c[0]) / 2, (a[1] + c[1]) / 2], d: Math.max(1, Math.hypot(a[0] - c[0], a[1] - c[1])) };
+}
+function touch(e, t) {
+var now = performance.now();
+if (!t) return { 0: e.clientX, 1: e.clientY, tm: now, mx: e.clientX, my: e.clientY };
+t[0] = e.clientX; t[1] = e.clientY;
+if (Math.abs(e.clientX - t.mx) + Math.abs(e.clientY - t.my) >= REST_PX) { t.tm = now; t.mx = e.clientX; t.my = e.clientY; }
+return t;
 }
 function cancelStroke() {
 var h = handler; activeId = null; handler = null; app.classList.remove('drawing');
 if (!h) return;
 if (h.cancel) h.cancel(); else h.up({ type: 'pointercancel', clientX: NaN, clientY: NaN });
 }
-function startGesture() {
-var p = pair(), b = room();
-gesture = { c0: p.c, d0: p.d, z0: view.z, x0: view.x, y0: view.y, b: b, z: view.z, x: view.x, y: view.y };
+function startGesture(pending) {
+var k = live(), p = pair(k), b = room();
+gesture = { ids: k, c0: p.c, d0: p.d, z0: view.z, x0: view.x, y0: view.y, b: b, z: view.z, x: view.x, y: view.y, pending: !!pending };
 Studio.shell.closePanels(true);
 }
 function moveGesture() {
-var g = gesture, p = pair(), r = g.b.r;
+var g = gesture, p = pair(g.ids), r = g.b.r;
+if (g.pending) {
+if (Math.abs(p.d - g.d0) < PINCH_PX && Math.hypot(p.c[0] - g.c0[0], p.c[1] - g.c0[1]) < PINCH_PX) return;
+g.pending = false; if (activeId !== null) cancelStroke();
+}
 var z = Math.min(ZMAX, Math.max(1, g.z0 * p.d / g.d0)), f = z / g.z0;
 var x = (p.c[0] - r.left) - (g.c0[0] - r.left - g.x0) * f, y = (p.c[1] - r.top) - (g.c0[1] - r.top - g.y0) * f;
 var q = place(g.b, z, x, y), s = q.pw / Math.floor(doc.w * scale * g.z0);
@@ -280,13 +320,17 @@ if (e.pointerType === 'touch') { if (gesture) endGesture(); touches = {}; }
 if (activeId !== null && activeType === e.pointerType) { var stale = handler; activeId = null; handler = null; app.classList.remove('drawing'); if (stale) stale.up({ type: 'pointerup' }); }
 }
 if (e.pointerType === 'touch') {
-touches[e.pointerId] = [e.clientX, e.clientY];
+touches[e.pointerId] = touch(e);
 try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
 if (gesture) return e.preventDefault();
-if (Object.keys(touches).length === 2 && (activeId === null || young())) {
-if (activeId !== null) cancelStroke();
-startGesture(); e.preventDefault(); return;
+var others = live().filter(function (k) { return +k !== e.pointerId; });
+if (others.length >= 2) return e.preventDefault();
+if (others.length === 1 && (activeId === null || young())) {
+if (activeId !== null && !young()) cancelStroke();
+startGesture(activeId !== null); e.preventDefault();
+if (!gesture.pending) return;
 }
+if (!gesture && activeId !== null && touches[activeId] && resting(touches[activeId])) cancelStroke();
 }
 if (activeId !== null) return;
 if (e.pointerType === 'mouse' && e.button !== 0) return;
@@ -300,8 +344,8 @@ handler.down(e);
 e.preventDefault();
 }
 function onMove(e) {
-if (touches[e.pointerId]) touches[e.pointerId] = [e.clientX, e.clientY];
-if (gesture) { if (touches[e.pointerId]) { moveGesture(); e.preventDefault(); } return; }
+if (touches[e.pointerId]) touch(e, touches[e.pointerId]);
+if (gesture) { if (gesture.ids.indexOf(String(e.pointerId)) >= 0) { moveGesture(); e.preventDefault(); } if (!gesture.pending) return; }
 if (e.pointerId !== activeId || !handler) return;
 if (from) went = Math.max(went, Math.abs(e.clientX - from[0]) + Math.abs(e.clientY - from[1]));
 var list = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
@@ -309,9 +353,13 @@ handler.move(list.length ? list : [e]);
 e.preventDefault();
 }
 function onUp(e) {
-var finger = !!touches[e.pointerId];
+var finger = !!touches[e.pointerId], ofGesture = gesture && gesture.ids.indexOf(String(e.pointerId)) >= 0;
 delete touches[e.pointerId];
-if (finger && gesture) return endGesture();
+if (finger && gesture && !ofGesture) return;
+if (finger && gesture) {
+if (!gesture.pending) return endGesture();
+gesture = null;
+}
 if (e.pointerId !== activeId) return;
 activeId = null; app.classList.remove('drawing');
 var h = handler; handler = null;
@@ -455,6 +503,8 @@ var id = Q.get('activity') || 'drawing';
 if (!list[id]) { console.warn('Studio: no activity "' + id + '", using "drawing"'); id = 'drawing'; }
 activity = Object.assign({ canvas: {} }, list[id]);
 activity.canvas = Object.assign({ aspect: '4:3' }, activity.canvas);
+activity.workspace = activity.workspace === 'classic' ? 'classic' : 'floating';
+if (activity.workspace === 'floating') { activity.pageFirst = true; activity.toolbar = 'float'; }
 LANG = Q.get('lang') || (function () { try { return localStorage.getItem('sourcesLang'); } catch (e) { return null; } })() || 'he';
 if (!TEXT[LANG]) LANG = 'he';
 tools = (activity.tools || []).filter(function (t) {
@@ -468,7 +518,9 @@ if (activity.restart) { T.clear = T.restart; T.clearQ = T.restartQ; T.cancel = T
 document.documentElement.lang = LANG;
 document.documentElement.dir = LANG === 'he' ? 'rtl' : 'ltr';
 if (activity.compact) document.documentElement.classList.add('compact');
+if (activity.pageFirst) document.documentElement.classList.add('pagefirst');
 BACK = safeBack(Q.get('back')) || safeBack(activity.back) || '../../index.html';
+if (activity.backEnd) T.back = T.backEnd;
 if (Q.get('ctx') === 'gallery') T.back = T.backGallery;
 ENTRY = id;
 KEY = 'studio-v2:' + activity.lesson + ':' + activity.id;
@@ -500,6 +552,9 @@ promptAfter: activity.promptAfter || null })));
 var api = {
 T: T, lang: LANG, state: state, doc: doc, $: $, stage: stage, activity: info,
 art: ART,
+gallery: Q.get('ctx') === 'gallery' ? BACK : null,
+pageFirst: !!activity.pageFirst,
+floatbar: activity.toolbar === 'float',
 leaveTo: function (href) { return flush().then(function () { if (!dirty()) Studio.shell.leaveTo(href); }); },
 ctx: function () { return ctx; }, scale: function () { return scale; }, pt: pt,
 sheet: SHEET,
@@ -520,7 +575,9 @@ point: point,
 pointer: function (toolId, h) { pointers[toolId] = h; },
 item: function (it) { items.push(it); },
 closePanels: function (keep) { Studio.shell.closePanels(keep); },
-togglePanel: function (panel, btn) { Studio.shell.togglePanel(panel, btn); }
+togglePanel: function (panel, btn) { Studio.shell.togglePanel(panel, btn); },
+aside: function (a) { aside = a; },
+refit: function () { layout(); if (view.fill) setView('fill'); else fit(); }
 };
 tools.forEach(function (t) { caps[t].init(api); });
 if (!state.tool) tools.some(function (t) { return (state.tool = caps[t].tool || null); });
@@ -531,6 +588,9 @@ clear: activity.clear !== false || !!activity.restart, point: point,
 keep: autosaves() && activity.keep && activity.keep.label && activity.keep.label[LANG] || null,
 next: autosaves() && activity.next && activity.next.label && activity.next.label[LANG] || null,
 source: !!activity.source, prompt: activity.prompt && activity.prompt[LANG] || null,
+promptLine: !!activity.promptLine,
+pageFirst: !!activity.pageFirst, floatbar: activity.toolbar === 'float',
+primary: Array.isArray(activity.primaryTools) ? activity.primaryTools.filter(function (t) { return typeof t === 'string' && /^[A-Za-z][\w-]*$/.test(t); }) : null,
 paper: autosaves() && activity.paper && safeBack(activity.paper.href) ? { href: safeBack(activity.paper.href), label: activity.paper.label[LANG] || activity.paper.label.he } : null,
 works: !autosaves() || !activity.works ? null : /^\d+$/.test(Q.get('at') || '') ? '../index.html#/gallery/' + activity.works + '/' + Q.get('at') :
 Q.get('ctx') === 'gallery' ? BACK : null });
@@ -549,10 +609,10 @@ window.addEventListener('pageshow', refit);
 setTimeout(refit, 500);
 stage.addEventListener('wheel', onWheel, { passive: false });
 if (window.ResizeObserver) {
-var sw = 0, sh = 0;
+var sw = 0, sh = 0, ft;
 new ResizeObserver(function (e) {
 var b = e[0].contentRect; if (Math.round(b.width) === sw && Math.round(b.height) === sh) return;
-sw = Math.round(b.width); sh = Math.round(b.height); clearTimeout(rt); rt = setTimeout(fit, 30);
+sw = Math.round(b.width); sh = Math.round(b.height); clearTimeout(ft); ft = setTimeout(fit, 30);
 }).observe(stage);
 }
 window.__studio = { doc: doc, state: state, dirty: dirty, key: KEY, art: ART, lang: LANG, activity: activity, back: BACK, tools: tools,

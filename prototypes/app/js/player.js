@@ -6,6 +6,12 @@ var IMG = '../../images/editorial/';
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 var W = window.Artworks;
 function pin(lesson, runId) { try { sessionStorage.setItem('run:' + lesson, runId); } catch (e) {} }
+function galleryWay(lesson, art) {
+try {
+var k = 'studio-ctx:' + lesson, v = JSON.parse(sessionStorage.getItem(k) || 'null'); sessionStorage.removeItem(k);
+return v && v.art === art && /^\.\.\/index\.html#\/gallery(\/|$)/.test(v.back || '') ? v.back : null;
+} catch (e) { return null; }
+}
 function pinned(id) { try { return sessionStorage.getItem('run:' + id); } catch (e) { return null; } }
 function runOf(id) {
 var p = pinned(id);
@@ -249,8 +255,9 @@ function keep() { return W.putRun(run); }
 function go(k) { return keep().then(function () { nav.go(k); }); }
 function openStudio(activity, back, more) {
 (run.artwork ? Promise.resolve() : W.artworkFor(run.id, 'digital').then(function (w) { run.artwork = w.id; })).then(function () {
+var g = galleryWay(id, run.artwork);
 var href = 'studio/index.html#activity=' + encodeURIComponent(activity) + '&art=' + encodeURIComponent(run.artwork) +
-'&back=' + encodeURIComponent('../index.html#/lesson/' + id + '/play/' + (back || n)) + (L.works ? '&at=' + n : '') + (more || '');
+(g ? '&ctx=gallery&back=' + encodeURIComponent(g) : '&back=' + encodeURIComponent('../index.html#/lesson/' + id + '/play/' + (back || n)) + (L.works ? '&at=' + n : '')) + (more || '');
 return keep().then(function () { nav.studio(href); });
 });
 }
@@ -335,9 +342,12 @@ openStudio(side.activity, side.back);
 return;
 }
 if (s.step === 'studio' && !studio && side.stages) {
-body = '<ol class="pl-stages pl-stages-all">' + (side.stages[I.lang()] || []).map(function (v) { return '<li>' + v + '</li>'; }).join('') + '</ol>' + body;
+body = (kd && kd.lead || '') + '<ol class="pl-stages pl-stages-all">' + (side.stages[I.lang()] || []).map(function (v) { return '<li>' + v + '</li>'; }).join('') + '</ol>' + body;
 action = { label: ACT('finishedCreating'), go: function () { run.begun = true; go(n + 1); } };
-if (s.studio && s.studio.activity) extra = { label: ACT('toStudio'), button: true, go: function () {
+if (s.studio && s.studio.activity) extra = toStudio();
+}
+function toStudio() {
+return { label: ACT('toStudio'), button: true, go: function () {
 run.medium = 'studio';
 keep().then(function () { return W.artworkFor(run.id, 'digital'); })
 .then(function (w) { run.artwork = w.id; openStudio(s.studio.activity, s.studio.back); });
@@ -345,6 +355,7 @@ keep().then(function () { return W.artworkFor(run.id, 'digital'); })
 }
 if (side.inspire && !(s.step === 'studio' && studio)) body += inspireBtn(side.inspire);
 if (s.step === 'studio' && !studio && side.action) action.label = ACT(side.action);
+if (s.step === 'studio' && !studio && side.toStudio && !extra && s.studio && s.studio.activity) extra = toStudio();
 if (s.step === 'studio' && !studio && side.refs) body += '<button type="button" class="pl-refs">' + REFS + '<span>' + esc(I.ui('inspiration')) + '</span></button>';
 if (s.step === 'notice' && studio) { body += preview; action = { label: ACT('keepCreating'), go: function () { go(n + 1); } }; }
 if (s.step === 'begin') {
@@ -416,6 +427,9 @@ if (s.inspireFoot) extra = { label: I.tx(s.inspireFoot.label), go: function () {
 if (kd && kd.action !== undefined) action = kd.action;
 if (kd && kd.extra !== undefined) extra = kd.extra;
 if (kd && kd.later !== undefined) later = kd.later;
+var main2 = null;
+if (s.step === 'end' && s.mains && extra && later) { main2 = later; later = action; action = extra; extra = null; }
+if (s.step === 'end' && s.keepMain && extra) { var k0 = action; action = extra; extra = k0; }
 root.innerHTML =
 '<header class="pl-top">' +
 '<button type="button" class="pl-back" aria-label="' + esc(I.ui('back')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
@@ -426,10 +440,14 @@ root.innerHTML =
 '</header>' +
 '<main class="pl-main' + (s.step ? ' pl-step-' + s.step : '') + '" data-screen="' + n + '" tabindex="-1"><div class="pl-inner">' +
 (title ? '<h2 class="pl-title">' + esc(title) + '</h2>' : '') + body + '@@INLINE@@</div></main>' +
-'<footer class="pl-foot' + (s.step === 'end' ? ' pl-foot-end' : '') + '">' + (extra ? '<button type="button" class="pl-secondary' + (extra.button ? ' pl-alt' : '') + '">' + esc(extra.label) + '</button>' : '') +
+'<footer class="pl-foot' + (s.step === 'end' ? ' pl-foot-end' + (s.keepMain ? ' pl-foot-keep' : '') : '') + '">' + (extra ? '<button type="button" class="pl-secondary' + (extra.button ? ' pl-alt' : '') + '">' + esc(extra.label) + '</button>' : '') +
 (later ? '<button type="button" class="pl-secondary pl-later">' + esc(later.label) + '</button>' : '') +
 (again ? '<button type="button" class="pl-secondary pl-again">' + esc(again.label) + '</button>' : '') +
 (action ? '<button type="button" class="pl-primary"' + (action.off ? ' disabled' : '') + '>' + esc(action.label) + '</button>' : '') + '</footer>';
+if (main2) root.innerHTML = root.innerHTML.replace(/<footer class="pl-foot pl-foot-end">[\s\S]*<\/footer>/, '<footer class="pl-foot pl-foot-end pl-foot-mains"><div class="pl-mains">' +
+'<button type="button" class="pl-primary">' + esc(action.label) + '</button><button type="button" class="pl-primary pl-main2">' + esc(main2.label) + '</button></div>' +
+'<div class="pl-quiet">' + (again ? '<button type="button" class="pl-secondary pl-again">' + esc(again.label) + '</button>' : '') +
+'<button type="button" class="pl-secondary pl-later">' + esc(later.label) + '</button></div></footer>');
 var html = root.innerHTML;
 if (kd && kd.inline) {
 var m = html.match(/<footer class="pl-foot[^>]*>[\s\S]*<\/footer>$/);
@@ -445,6 +463,7 @@ if (action) root.querySelector('.pl-primary').addEventListener('click', function
 if (extra) root.querySelector('.pl-secondary').addEventListener('click', extra.go);
 if (later) root.querySelector('.pl-later').addEventListener('click', later.go);
 if (again) root.querySelector('.pl-again').addEventListener('click', again.go);
+if (main2) root.querySelector('.pl-main2').addEventListener('click', main2.go);
 root.querySelectorAll('.pl-choice').forEach(function (b) {
 b.addEventListener('click', function () {
 if (b.disabled) return;

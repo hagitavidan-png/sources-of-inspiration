@@ -107,6 +107,7 @@ lesson21('2-1-create', { offer: true, seeIt: true, controls: ALL, together: true
 prompt: { he: 'ציירו יחידה באופן חופשי', en: 'Draw a unit freely' },
 promptAfter: { he: 'מה יקרה אם תשנו רק דבר אחד? ומה יקרה אם תשנו כמה דברים יחד?', en: 'What happens if you change just one thing? And what if you change several things together?' },
 next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } }, content: { inspiration: '2-1' } });
+A['2-1-create'].backEnd = A['2-1-free'].backEnd = true;
 ['2-1-create', '2-1-free'].forEach(function (id) { A[id].canvas = { aspect: '4:3', portrait: '4:5', landscape: '16:10' }; });
 A['2-1-create'].paper = { href: '../index.html#/lesson/2-1/play/6/paper', label: { he: 'יוצרים על נייר', en: 'Creating on paper' } };
 A['2-1-create'].tools.push('refs');
@@ -118,3 +119,33 @@ A['2-1-free'].works = '2-1';
 })(window.STUDIO_ACTIVITIES);
 window.STUDIO_ACTIVITIES['3-1-draw'] = { id: '3-1-draw', lesson: '3.1-app', tools: ['draw', 'color'], canvas: { aspect: '4:3' },
 clear: false, back: '../index.html#/lesson/3-1' };
+window.STUDIO_ACTIVITIES['2-3-light'] = { id: '2-3-light', lesson: '2.3-app', tools: ['draw', 'color', 'light', 'refs'], canvas: { aspect: '4:5' },
+workspace: 'floating', primaryTools: ['brush', 'eraser', 'color', 'size', 'tone', 'undo'], promptLine: true,
+clear: false, restart: true, works: '2-2', back: '../index.html#/lesson/2-2', backEnd: true,
+prompt: { he: 'איך אור וצל יכולים לשנות את הציור שלכם?', en: 'How can light and shadow transform your artwork?' },
+next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } },
+content: {
+refs: [
+{ src: '../images/2-3/vase-strong-light.png', alt: { he: 'האגרטל באור חזק', en: 'The vase in strong light' } },
+{ src: '../images/2-3/vase-soft-light.png', alt: { he: 'האגרטל באור רך', en: 'The vase in soft light' } },
+{ src: '../images/2-3/vase-shadow.png', alt: { he: 'האגרטל בצל', en: 'The vase in shadow' } },
+{ src: '../images/2-3/light-water-pebbles.jpg', alt: { he: 'קווי אור על חלוקי אבן במים רדודים', en: 'Lines of light on pebbles in shallow water' } },
+{ src: '../images/2-3/light-leaf-shadow.jpg', alt: { he: 'עלה אדום והצל שלו על מדרכה', en: 'A red leaf and its shadow on a pavement' } },
+{ src: '../images/2-3/light-window-room.jpg', alt: { he: 'אור מחלון חוצה חדר ונוחת על רצפת לבנים', en: 'Light from a window crossing a room onto a brick floor' } },
+{ src: '../images/2-3/monet-rouen-west-facade-1894.jpg', alt: { he: 'קלוד מונה, הקתדרלה ברואן, החזית המערבית, 1894', en: 'Claude Monet, Rouen Cathedral, West Façade, 1894' } },
+{ src: '../images/2-3/monet-rouen-west-facade-sunlight-1894.jpg', alt: { he: 'קלוד מונה, הקתדרלה ברואן, החזית המערבית באור שמש, 1894', en: 'Claude Monet, Rouen Cathedral, West Façade, Sunlight, 1894' } },
+{ src: '../images/2-3/sorolla-sewing-the-sail-1896.jpg', alt: { he: 'חואקין סורויה, תפירת המפרש, 1896', en: 'Joaquín Sorolla, Sewing the Sail, 1896' } },
+{ src: '../images/2-3/sargent-simplon-pass-1911.jpg', alt: { he: "ג'ון סינגר סרג'נט, מעבר סימפלון, 1911", en: 'John Singer Sargent, Simplon Pass, 1911' } },
+{ src: '../images/2-3/heade-cattleya-orchid-hummingbirds-1871.jpg', alt: { he: "מרטין ג'ונסון היד, סחלב קטליה ושלושה יונקי דבש, 1871", en: 'Martin Johnson Heade, Cattleya Orchid and Three Hummingbirds, 1871' } }
+] } };
+window.STUDIO_ACTIVITIES['2-2-close-draw'] = { id: '2-2-close-draw', lesson: '2.2-app', tools: ['draw', 'color', 'table', 'detail', 'refs'], canvas: { aspect: '4:5' },
+workspace: 'floating',
+primaryTools: ['brush', 'eraser', 'color', 'size', 'table', 'undo'],
+clear: false, restart: true, works: '2-2-close', back: '../index.html#/lesson/2-2-close/play/end', backEnd: true,
+prompt: { he: 'צרו מהפרט שבחרתם משהו חדש.', en: 'Create something new from the detail you chose.' },
+next: { label: { he: 'סיימתי לעכשיו', en: "I'm done for now" } },
+paper: { href: '../index.html#/lesson/2-2-close/play/7/paper', label: { he: 'יוצרים על נייר', en: 'Creating on paper' } },
+content: { lesson: '2-2-close', inspiration: '2-2-close' } };
+['drawing', 'pattern', 'pattern-2-1', 'pattern-2-1-app', 'pattern-2-1-app-v2-size', 'pattern-2-1-app-v2-direction', 'pattern-2-1-app-v2-spacing',
+'color', 'composition', '2-1-begin', '2-1-repeat', '2-1-change-size', '2-1-change-rotation', '2-1-change-spacing', '2-1-source', '2-1-continue',
+'2-1-play', '2-1-develop', '2-1-free', '2-1-create', '3-1-draw'].forEach(function (id) { window.STUDIO_ACTIVITIES[id].workspace = 'classic'; });

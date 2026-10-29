@@ -10,7 +10,7 @@ return { cx: Math.max(w / 2, Math.min(1 - w / 2, isNaN(+f.cx) ? 0.5 : +f.cx)), c
 function same(a, b) { return !!a && !!b && Math.abs(a.cx - b.cx) < 0.005 && Math.abs(a.cy - b.cy) < 0.005 && Math.abs(a.z - b.z) < 0.05; }
 function draw(canvas, im, f, px) {
 var dpr = Math.min(2, window.devicePixelRatio || 1), n = Math.round(px * dpr);
-if (canvas.width !== n) { canvas.width = n; canvas.height = n; }
+if (canvas.width !== n || canvas.height !== n) { canvas.width = n; canvas.height = n; }
 var nw = im.naturalWidth || im.width, nh = im.naturalHeight || im.height, sd = Math.min(nw, nh) / f.z;
 var sx = Math.max(0, Math.min(nw - sd, f.cx * nw - sd / 2)), sy = Math.max(0, Math.min(nh - sd, f.cy * nh - sd / 2));
 var c = canvas.getContext('2d'); c.imageSmoothingQuality = 'high';

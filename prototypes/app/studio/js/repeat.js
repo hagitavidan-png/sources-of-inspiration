@@ -1,10 +1,10 @@
 /*! Sources of Inspiration in Art | מקורות השראה באמנות. Original code and content (c) 2026 Hagit Avidan | חגית אבידן. All rights reserved | כל הזכויות שמורות. Works and materials by others belong to their owners | יצירות וחומרים של אחרים שייכים לבעליהם. See NOTICE.txt */
 Studio.register('repeat', {
 strings: {
-he: { repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
+he: { help_repeat: 'רואים את הציור חוזר',  repeat: 'חזרה', grid: 'רשת', offset: 'מדורג', repeats: 'סוג החזרה',
 size: 'גודל', direction: 'כיוון', spacing: 'מרווח', smaller: 'קטן יותר', larger: 'גדול יותר', closer: 'צפוף יותר', apart: 'מרווח יותר', turnLeft: 'סיבוב נגד כיוון השעון', turnRight: 'סיבוב עם כיוון השעון',
 repeatOn: 'חזרתיות פעילה', repeatOff: 'חזרתיות כבויה', unitDraw: 'חזרה לציור היחידה', unitBack: 'לראות שוב בחזרה', seeIt: 'ממשיכים ליצירת דפוס' },
-en: { repeat: 'Repeat', grid: 'Grid', offset: 'Offset', repeats: 'Kind of repeat',
+en: { help_repeat: 'See the drawing repeat',  repeat: 'Repeat', grid: 'Grid', offset: 'Offset', repeats: 'Kind of repeat',
 size: 'Size', direction: 'Direction', spacing: 'Spacing', smaller: 'Smaller', larger: 'Larger', closer: 'Closer', apart: 'Further apart', turnLeft: 'Turn anticlockwise', turnRight: 'Turn clockwise',
 repeatOn: 'Repeat on', repeatOff: 'Repeat off', unitDraw: 'Back to drawing the unit', unitBack: 'See it repeated again', seeIt: 'Continue to create a pattern' }
 },

@@ -212,9 +212,26 @@ window.Viewer.open({ src: img.src, alt: img.alt, ratio: img.naturalWidth && img.
 });
 });
 }
-function play(id, n, medium) {
+function stage(L, at) {
+if (/^\d+$/.test(at || '')) return +at;
+if (!at) return 1;
+var k = L.screens.findIndex(function (s) { return s.step === at || s.kind === at; });
+return k < 0 ? 1 : k + 1;
+}
+function fromOldStudio(id, L, n) {
+if (!L.studioReturn || !L.studioReturn[n]) return n;
+try {
+var back = new URLSearchParams(sessionStorage.getItem('studio-open') || '').get('back') || '';
+if (new RegExp('/lesson/' + id + '/play/' + (L.studioReturn.from || 6) + '(/|$)').test(back)) return L.studioReturn[n];
+} catch (e) {}
+return n;
+}
+function play(id, at, medium, landing) {
 withLesson(id, function (L) {
+var n = stage(L, at);
+if (landing) n = fromOldStudio(id, L, n);
 n = Math.max(1, Math.min(L.screens.length, n | 0 || 1));
+if (medium === 'paper' && L.paperScreen) n = L.paperScreen;
 window.Player.render(root, id, n, {
 medium: medium === 'paper' ? 'paper' : null,
 go: function (k) { go('#/lesson/' + id + '/play/' + k); },
@@ -226,12 +243,13 @@ worksHref: function (k) { return '#/gallery/' + id + '/' + k; }
 });
 });
 }
+var landing = true;
 function route() {
-var h = location.hash.replace(/^#\/?/, '').split('/');
+var h = location.hash.replace(/^#\/?/, '').split('/'), first = landing; landing = false;
 if (h[0] === 'units') units();
 else if (h[0] === 'gallery') gallery(h[1], h[2]);
 else if (h[0] === 'unit' && h[1]) unit(h[1]);
-else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], +h[3], h[4]);
+else if (h[0] === 'lesson' && h[1] && h[2] === 'play') play(h[1], h[3], h[4], first);
 else if (h[0] === 'lesson' && h[1]) lessonIntro(h[1]);
 else home();
 }
